@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sr" data-v="2">
+<html lang="sr" data-v="3">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIVE GALAXY â€” Osvoji Galaksiju</title>
+<title>HIVE GALAXY - Osvoji Galaksiju</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -24,7 +24,6 @@
 html { scroll-behavior: smooth; }
 body { background: var(--bg); font-family: 'Rajdhani', sans-serif; color: var(--text); overflow-x: hidden; }
 
-/* STARFIELD */
 #stars {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
@@ -38,14 +37,8 @@ body { background: var(--bg); font-family: 'Rajdhani', sans-serif; color: var(--
     radial-gradient(1px 1px at 74% 18%, rgba(255,255,255,0.3) 0%, transparent 100%),
     radial-gradient(1px 1px at 83% 78%, rgba(255,255,255,0.5) 0%, transparent 100%),
     radial-gradient(1px 1px at 91% 48%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 12% 92%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 44% 58%, rgba(255,255,255,0.35) 0%, transparent 100%),
-    radial-gradient(1px 1px at 72% 94%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 32% 48%, rgba(255,255,255,0.25) 0%, transparent 100%),
     radial-gradient(1px 1px at 88% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 8%,  rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 22% 62%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 95% 70%, rgba(255,255,255,0.45) 0%, transparent 100%);
+    radial-gradient(1px 1px at 60% 8%,  rgba(255,255,255,0.4) 0%, transparent 100%);
 }
 #nebula {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -54,10 +47,8 @@ body { background: var(--bg); font-family: 'Rajdhani', sans-serif; color: var(--
     radial-gradient(ellipse 50% 60% at 80% 30%, rgba(100,0,200,0.05) 0%, transparent 70%),
     radial-gradient(ellipse 40% 30% at 50% 80%, rgba(0,200,100,0.04) 0%, transparent 70%);
 }
-
 main { position: relative; z-index: 1; }
 
-/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -73,7 +64,6 @@ nav {
 .nav-cta { background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(0,229,255,0.06)); border: 1px solid rgba(0,229,255,0.35); color: var(--cyan); padding: 8px 22px; border-radius: 4px; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 0.78rem; cursor: pointer; letter-spacing: 1px; transition: all 0.2s; }
 .nav-cta:hover { background: rgba(0,229,255,0.18); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
 
-/* HERO */
 #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; }
 .hero-inner { max-width: 800px; }
 .hero-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 4px; color: var(--cyan2); border: 1px solid rgba(0,229,255,0.2); padding: 6px 18px; border-radius: 2px; margin-bottom: 32px; animation: fadeUp 0.8s ease both; }
@@ -92,16 +82,13 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .scroll-down { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: var(--text2); letter-spacing: 4px; animation: bob 2s infinite; }
 @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)} }
 
-/* GLOW LINE */
 .gl { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent); }
 
-/* SECTIONS */
 .sec { max-width: 1200px; margin: 0 auto; padding: 96px 24px; }
 .sec-lbl { font-family: 'Share Tech Mono', monospace; font-size: 0.67rem; letter-spacing: 5px; color: var(--cyan2); display: block; margin-bottom: 14px; }
 .sec-title { font-family: 'Orbitron', monospace; font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
 .sec-desc { font-size: 0.95rem; color: var(--text2); max-width: 540px; line-height: 1.7; }
 
-/* FEATURES */
 .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin-top: 52px; }
 .feat { background: rgba(6,12,24,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 26px; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
 .feat::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--ac, var(--cyan)), transparent); opacity: 0; transition: opacity 0.3s; }
@@ -111,7 +98,6 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .feat-ttl { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700; color: white; margin-bottom: 8px; letter-spacing: 1px; }
 .feat-dsc { font-size: 0.82rem; color: var(--text2); line-height: 1.65; }
 
-/* SHIPS */
 .ships-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 48px; }
 @media(max-width:700px) { .ships-grid { grid-template-columns: repeat(3,1fr); } }
 .ship { background: rgba(6,12,24,0.85); border: 1px solid var(--border); border-radius: 8px; padding: 18px 10px; text-align: center; transition: all 0.25s; }
@@ -122,7 +108,6 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .ship-bar { height: 3px; background: rgba(0,229,255,0.08); border-radius: 2px; margin-top: 10px; }
 .ship-fill { height: 100%; border-radius: 2px; }
 
-/* TOKENS */
 .tok-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; margin-top: 48px; }
 .tok { border-radius: 12px; padding: 30px; position: relative; overflow: hidden; transition: transform 0.3s; }
 .tok:hover { transform: translateY(-4px); }
@@ -135,13 +120,12 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .tok-price { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 1rem; color: var(--gold); background: rgba(255,204,51,0.08); border: 1px solid rgba(255,204,51,0.2); padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; }
 .tok-list { list-style: none; }
 .tok-list li { font-size: 0.8rem; color: var(--text2); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-.tok-list li::before { content: 'â–¸ '; color: var(--cyan2); }
+.tok-list li::before { content: '> '; color: var(--cyan2); }
 .tok-badge { position: absolute; top: 18px; right: 18px; font-size: 0.58rem; letter-spacing: 2px; font-family: 'Share Tech Mono', monospace; padding: 3px 8px; border-radius: 3px; }
 .tok.bcm .tok-badge { background: rgba(0,140,255,0.12); color: #44aaff; border: 1px solid rgba(0,140,255,0.3); }
 .tok.boc .tok-badge { background: rgba(255,90,0,0.12); color: #ff6633; border: 1px solid rgba(255,90,0,0.3); }
 .tok.bpw .tok-badge { background: rgba(140,0,255,0.12); color: #aa44ff; border: 1px solid rgba(140,0,255,0.3); }
 
-/* STEPS */
 .steps-wrap { max-width: 900px; margin: 0 auto; padding: 96px 24px; text-align: center; }
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; margin-top: 52px; position: relative; }
 .steps::before { content: ''; position: absolute; top: 35px; left: 15%; right: 15%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); }
@@ -151,7 +135,6 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .step-t { font-family: 'Orbitron', monospace; font-size: 0.72rem; color: white; margin-bottom: 8px; letter-spacing: 1px; }
 .step-d { font-size: 0.78rem; color: var(--text2); line-height: 1.6; }
 
-/* LOGIN */
 #login-sec { max-width: 1100px; margin: 0 auto; padding: 96px 24px; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; align-items: start; }
 @media(max-width:900px) { #login-sec { grid-template-columns: 1fr; } }
 @media(max-width:600px){nav{padding:14px 20px;}.nav-links{display:none;}}
@@ -189,7 +172,6 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .reg-btn { width: 100%; background: linear-gradient(135deg, rgba(255,204,51,0.14), rgba(255,204,51,0.07)); border: 1px solid rgba(255,204,51,0.4); color: var(--gold); font-family: 'Orbitron', monospace; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; padding: 14px; border-radius: 8px; cursor: pointer; transition: all 0.25s; }
 .reg-btn:hover { background: rgba(255,204,51,0.18); transform: translateY(-2px); }
 
-/* FAQ */
 .faq-wrap { max-width: 780px; margin: 0 auto; padding: 96px 24px; }
 .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 9px; overflow: hidden; transition: border-color 0.2s; }
 .faq-item:hover { border-color: rgba(0,229,255,0.28); }
@@ -200,7 +182,6 @@ h1 .g { color: var(--gold); text-shadow: 0 0 50px rgba(255,204,51,0.3); }
 .faq-item.open .faq-a { max-height: 220px; }
 .faq-ai { padding: 0 20px 17px; font-size: 0.8rem; color: var(--text2); line-height: 1.7; }
 
-/* FOOTER */
 footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; position: relative; z-index: 1; }
 .ft-logo { font-family: 'Orbitron', monospace; font-size: 0.88rem; color: var(--cyan); letter-spacing: 4px; }
 .ft-links { display: flex; gap: 18px; }
@@ -208,12 +189,10 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 .ft-links a:hover { color: var(--cyan); }
 .ft-copy { font-size: 0.67rem; color: var(--text2); font-family: 'Share Tech Mono', monospace; }
 
-/* ANIM */
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)} }
 .rev { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease,transform 0.65s ease; }
 .rev.vis { opacity:1; transform:translateY(0); }
 
-/* MODAL */
 .ov { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.82); z-index:200; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
 .ov.on { display:flex; }
 .mod { background:#060c18; border:1px solid rgba(0,229,255,0.3); border-radius:14px; padding:34px; max-width:440px; width:92%; box-shadow:0 0 60px rgba(0,229,255,0.1); animation:fadeUp 0.22s ease; }
@@ -233,10 +212,9 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 <div id="stars"></div>
 <div id="nebula"></div>
 
-<!-- MODAL -->
 <div class="ov" id="ov">
   <div class="mod">
-    <button class="mod-x" onclick="closeMod()">âś•</button>
+    <button class="mod-x" onclick="closeMod()">&#x2715;</button>
     <h3 id="modTtl"></h3>
     <p id="modTxt"></p>
     <div class="mod-acts" id="modActs"></div>
@@ -245,9 +223,8 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 
 <main>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">â¬ˇ HIVE GALAXY</div>
+  <div class="nav-logo">&#x2B27; HIVE GALAXY</div>
   <div class="nav-links">
     <a href="#feat-sec">Funkcije</a>
     <a href="#ships-sec">Brodovi</a>
@@ -255,18 +232,17 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
     <a href="#how-sec">Kako igrati</a>
     <a href="#faq-wrap">FAQ</a>
   </div>
-  <button class="nav-cta" onclick="goLogin()">â–¶ Igraj Sada</button>
+  <button class="nav-cta" onclick="goLogin()">&#x25B6; Igraj Sada</button>
 </nav>
 
-<!-- HERO -->
 <section id="hero" style="position:relative">
   <div class="hero-inner">
-    <div class="hero-badge">â¬ˇ GalaktiÄŤka MMO Strategija Â· Blockchain Powered</div>
+    <div class="hero-badge">&#x2B27; Galakticka MMO Strategija &middot; Blockchain Powered</div>
     <h1><span class="c">HIVE</span><br><span class="g">GALAXY</span></h1>
-    <p class="hero-sub">Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igraÄŤ. Svaka odluka. Svaka bitka â€” na lancu.</p>
+    <p class="hero-sub">Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igrac. Svaka odluka. Svaka bitka &mdash; na lancu.</p>
     <div class="hero-ctas">
-      <button class="btn-p" onclick="location.href='game.html'">â–¶ IGRAJ BESPLATNO</button>
-      <button class="btn-s" onclick="goLogin()">â­ PREMIUM â€” 10â‚¬</button>
+      <button class="btn-p" onclick="location.href='game.html'">&#x25B6; IGRAJ BESPLATNO</button>
+      <button class="btn-s" onclick="goLogin()">&#x2605; PREMIUM &mdash; 10&euro;</button>
     </div>
     <div class="hero-stats">
       <div class="hstat"><span class="v">715+</span><span class="l">BLUEPRINTA</span></div>
@@ -275,58 +251,55 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
       <div class="hstat"><span class="v">3</span><span class="l">BCM TOKENA</span></div>
     </div>
   </div>
-  <div class="scroll-down">â–Ľ SCROLL â–Ľ</div>
+  <div class="scroll-down">&#x25BC; SCROLL &#x25BC;</div>
 </section>
 
 <div class="gl"></div>
 
-<!-- FEATURES -->
 <div class="sec rev" id="feat-sec">
-  <span class="sec-lbl">// KljuÄŤne funkcije</span>
-  <h2 class="sec-title">Sve Ĺˇto trebaĹˇ za<br>galaktiÄŤku dominaciju</h2>
+  <span class="sec-lbl">// Kljucne funkcije</span>
+  <h2 class="sec-title">Sve sto trebas za<br>galakticku dominaciju</h2>
   <div class="feat-grid">
-    <div class="feat rev" style="--ac:rgba(0,229,255,0.5)"><div class="feat-ico">đźŹ°</div><div class="feat-ttl">Izgradnja Baze</div><div class="feat-dsc">Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je kljuÄŤno za efikasnu produkciju.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,51,85,0.5)"><div class="feat-ico">âš”ď¸Ź</div><div class="feat-ttl">PvP Borba</div><div class="feat-dsc">Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima Ĺˇtete, oklop otpornoĹˇÄ‡u i Shieldâ†’Armorâ†’Structure slojevima.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,204,51,0.5)"><div class="feat-ico">đź”§</div><div class="feat-ttl">Dizajner Brodova</div><div class="feat-dsc">Dizajniraj vlastite brodove. Odaberi Ĺˇasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija.</div></div>
-    <div class="feat rev" style="--ac:rgba(0,255,153,0.5)"><div class="feat-ico">âšˇ</div><div class="feat-ttl">Instance Dungeoni</div><div class="feat-dsc">30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas â€” strateĹˇka borba s ekskluzivnim nagradama.</div></div>
-    <div class="feat rev" style="--ac:rgba(153,51,255,0.5)"><div class="feat-ico">đźŚŚ</div><div class="feat-ttl">Galaksijska Mapa</div><div class="feat-dsc">Osvajaj zvjezdane sisteme, Ĺˇiri imperiju i napadaj protivniÄŤke baze. Svaka galaksija je Ĺľivi ratni teatar.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,136,0,0.5)"><div class="feat-ico">đź”—</div><div class="feat-ttl">Blockchain Ekonomija</div><div class="feat-dsc">BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave â€” razmjenljive i vrijedne.</div></div>
+    <div class="feat rev" style="--ac:rgba(0,229,255,0.5)"><div class="feat-ico">&#x1F3F0;</div><div class="feat-ttl">Izgradnja Baze</div><div class="feat-dsc">Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je kljucno za efikasnu produkciju.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,51,85,0.5)"><div class="feat-ico">&#x2694;&#xFE0F;</div><div class="feat-ttl">PvP Borba</div><div class="feat-dsc">Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima stete, oklop otpornoscu i Shield-Armor-Structure slojevima.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,204,51,0.5)"><div class="feat-ico">&#x1F527;</div><div class="feat-ttl">Dizajner Brodova</div><div class="feat-dsc">Dizajniraj vlastite brodove. Odaberi sasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija.</div></div>
+    <div class="feat rev" style="--ac:rgba(0,255,153,0.5)"><div class="feat-ico">&#x26A1;</div><div class="feat-ttl">Instance Dungeoni</div><div class="feat-dsc">30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas &mdash; strateska borba s ekskluzivnim nagradama.</div></div>
+    <div class="feat rev" style="--ac:rgba(153,51,255,0.5)"><div class="feat-ico">&#x1F30C;</div><div class="feat-ttl">Galaksijska Mapa</div><div class="feat-dsc">Osvajaj zvjezdane sisteme, siri imperiju i napadaj protivnicke baze. Svaka galaksija je zivi ratni teatar.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,136,0,0.5)"><div class="feat-ico">&#x1F517;</div><div class="feat-ttl">Blockchain Ekonomija</div><div class="feat-dsc">BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave &mdash; razmjenljive i vrijedne.</div></div>
   </div>
 </div>
 
 <div class="gl"></div>
 
-<!-- SHIPS -->
 <div class="sec rev" id="ships-sec">
   <span class="sec-lbl">// Klase brodova</span>
-  <h2 class="sec-title">6 klasa. Stotine konfiguracija.<br>Jedna strategija pobjeÄ‘uje.</h2>
-  <p class="sec-desc">Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. MjeĹˇana flota uvijek pobjeÄ‘uje mono flotu istog troĹˇka.</p>
+  <h2 class="sec-title">6 klasa. Stotine konfiguracija.<br>Jedna strategija pobjeduje.</h2>
+  <p class="sec-desc">Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Mjesana flota uvijek pobjeduje mono flotu istog troska.</p>
   <div class="ships-grid">
-    <div class="ship rev"><span class="ship-ico">đź›¸</span><div class="ship-nm">IZVIÄAÄŚ</div><div class="ship-rl">Stealth Â· Detection</div><div class="ship-bar"><div class="ship-fill" style="width:95%;background:var(--cyan)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">âš”ď¸Ź</span><div class="ship-nm">LOVAC</div><div class="ship-rl">Agility Â· Crit</div><div class="ship-bar"><div class="ship-fill" style="width:72%;background:var(--red)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">đź›ˇď¸Ź</span><div class="ship-nm">KRSTARICA</div><div class="ship-rl">Shield Â· Cover</div><div class="ship-bar"><div class="ship-fill" style="width:65%;background:var(--green)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">đź’Ą</span><div class="ship-nm">BOJNI BROD</div><div class="ship-rl">Power Â· Barrage</div><div class="ship-bar"><div class="ship-fill" style="width:85%;background:var(--gold)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">đźŚŚ</span><div class="ship-nm">NOSAÄŚ</div><div class="ship-rl">Strategic Â· Launch</div><div class="ship-bar"><div class="ship-fill" style="width:68%;background:var(--purple)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">đź‘‘</span><div class="ship-nm">FLAGSHIP</div><div class="ship-rl">Command Â· +100 Stack</div><div class="ship-bar"><div class="ship-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--cyan))"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F6F8;</span><div class="ship-nm">IZVIDJAC</div><div class="ship-rl">Stealth &middot; Detection</div><div class="ship-bar"><div class="ship-fill" style="width:95%;background:var(--cyan)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x2694;&#xFE0F;</span><div class="ship-nm">LOVAC</div><div class="ship-rl">Agility &middot; Crit</div><div class="ship-bar"><div class="ship-fill" style="width:72%;background:var(--red)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F6E1;&#xFE0F;</span><div class="ship-nm">KRSTARICA</div><div class="ship-rl">Shield &middot; Cover</div><div class="ship-bar"><div class="ship-fill" style="width:65%;background:var(--green)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F4A5;</span><div class="ship-nm">BOJNI BROD</div><div class="ship-rl">Power &middot; Barrage</div><div class="ship-bar"><div class="ship-fill" style="width:85%;background:var(--gold)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F30C;</span><div class="ship-nm">NOSAC</div><div class="ship-rl">Strategic &middot; Launch</div><div class="ship-bar"><div class="ship-fill" style="width:68%;background:var(--purple)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F451;</span><div class="ship-nm">FLAGSHIP</div><div class="ship-rl">Command &middot; +100 Stack</div><div class="ship-bar"><div class="ship-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--cyan))"></div></div></div>
   </div>
 </div>
 
 <div class="gl"></div>
 
-<!-- TOKENS -->
 <div class="sec rev" id="tok-sec">
   <span class="sec-lbl">// HIVE Blockchain Ekonomija</span>
   <h2 class="sec-title">Tri tokena. Jedan ekosistem.<br>Beskrajna vrijednost.</h2>
-  <p class="sec-desc">Svaki token ima specifiÄŤnu ulogu. Igraj, gledaj stream, drĹľi tokene â€” sve se nagraÄ‘uje na blockchainu.</p>
+  <p class="sec-desc">Svaki token ima specificnu ulogu. Igraj, gledaj stream, drzi tokene &mdash; sve se nagraduje na blockchainu.</p>
   <div class="tok-grid">
     <div class="tok bcm rev">
       <div class="tok-badge">HIVE-ENGINE</div>
       <div class="tok-sym">BCM</div>
       <div class="tok-lbl">BO CRYPTO MINER</div>
-      <div class="tok-price">1 BCM = 10â‚¬ STABLE</div>
+      <div class="tok-price">1 BCM = 10&euro; STABLE</div>
       <ul class="tok-list">
         <li>Gaming licenca (1 BCM)</li>
-        <li>Premium blueprinti i sadrĹľaj</li>
+        <li>Premium blueprinti i sadrzaj</li>
         <li>Klanski i sezonski pristup</li>
         <li>Pasivni prihod: 144 BoCrypto/dan po mineru</li>
         <li>In-game premium kupovine</li>
@@ -336,10 +309,10 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
       <div class="tok-badge">TWITCH REWARD</div>
       <div class="tok-sym">BoCrypto</div>
       <div class="tok-lbl">BOCRYPTO TOKEN</div>
-      <div class="tok-price">0.001 min Â· 3 decimale</div>
+      <div class="tok-price">0.001 min &middot; 3 decimale</div>
       <ul class="tok-list">
         <li>Twitch: 1 token / 10 min gledanja</li>
-        <li>Subscribers: 3Ă— bonus tokena</li>
+        <li>Subscribers: 3x bonus tokena</li>
         <li>In-game resursi i kozmetika brodova</li>
         <li>Instance retry i daily boost</li>
         <li>SP Card zamjena u igri</li>
@@ -349,11 +322,11 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
       <div class="tok-badge">MICRO REWARDS</div>
       <div class="tok-sym">BPW</div>
       <div class="tok-lbl">BPW TOKEN</div>
-      <div class="tok-price">0.00000001 min Â· 8 decimala</div>
+      <div class="tok-price">0.00000001 min &middot; 8 decimala</div>
       <ul class="tok-list">
         <li>Dnevni login: +5 satoshi</li>
-        <li>ZavrĹˇena misija: 10â€“50 satoshi</li>
-        <li>Instance nagrada: 100â€“500 satoshi</li>
+        <li>Zavrsena misija: 10-50 satoshi</li>
+        <li>Instance nagrada: 100-500 satoshi</li>
         <li>PvP pobjeda i rang lista nagrade</li>
         <li>Faucet: x5 satoshi / 24h</li>
       </ul>
@@ -363,52 +336,48 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 
 <div class="gl"></div>
 
-<!-- HOW -->
 <div class="steps-wrap rev" id="how-sec">
-  <span class="sec-lbl" style="display:block;margin-bottom:14px">// Kako poÄŤeti</span>
+  <span class="sec-lbl" style="display:block;margin-bottom:14px">// Kako poceti</span>
   <h2 class="sec-title" style="font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700">Od nule do admirala<br>za 5 minuta</h2>
   <div class="steps" style="margin-top:52px">
-    <div class="step rev"><div class="step-n">01</div><div class="step-t">Registruj se</div><div class="step-d">Email registracija â€” besplatno, bez kreditne kartice. Odmah igraĹˇ.</div></div>
-    <div class="step rev"><div class="step-n">02</div><div class="step-t">Dobij galaksiju</div><div class="step-d">Server te smjeĹˇta u galaksiju. Tvoja baza ÄŤeka â€” poÄŤni graditi odmah.</div></div>
-    <div class="step rev"><div class="step-n">03</div><div class="step-t">Osvajaj</div><div class="step-d">Gradi flotu, bijeĹˇ instance, farmaj blueprinte, PvP dominacija.</div></div>
-    <div class="step rev"><div class="step-n">04</div><div class="step-t">Postani Premium</div><div class="step-d">HIVE Keychain ili crypto â€” otkljuÄŤaj blockchain zarade i ekskluzivni sadrĹľaj.</div></div>
+    <div class="step rev"><div class="step-n">01</div><div class="step-t">Registruj se</div><div class="step-d">Email registracija &mdash; besplatno, bez kreditne kartice. Odmah igraas.</div></div>
+    <div class="step rev"><div class="step-n">02</div><div class="step-t">Dobij galaksiju</div><div class="step-d">Server te smjesta u galaksiju. Tvoja baza ceka &mdash; pocni graditi odmah.</div></div>
+    <div class="step rev"><div class="step-n">03</div><div class="step-t">Osvajaj</div><div class="step-d">Gradi flotu, biji instance, farmaj blueprinte, PvP dominacija.</div></div>
+    <div class="step rev"><div class="step-n">04</div><div class="step-t">Postani Premium</div><div class="step-d">HIVE Keychain ili crypto &mdash; otkljucaj blockchain zarade i ekskluzivni sadrzaj.</div></div>
   </div>
 </div>
 
 <div class="gl"></div>
 
-<!-- LOGIN -->
 <div id="login-sec" style="max-width:1100px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start">
 
-  <!-- OPCIJA 1: BESPLATNO -->
   <div class="lbox rev" style="--lc:var(--green);border:1px solid rgba(0,255,153,0.25)">
     <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--green);background:rgba(0,255,153,0.08);border:1px solid rgba(0,255,153,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">BESPLATNO</div>
-    <div class="lbox-ttl">đźŽ® PLAY 2 FREE</div>
-    <div class="lbox-sub">Registruj se emailom i igraj odmah. Bez plaÄ‡anja, bez kreditne kartice.</div>
+    <div class="lbox-ttl">&#x1F3AE; PLAY 2 FREE</div>
+    <div class="lbox-sub">Registruj se emailom i igraj odmah. Bez placanja, bez kreditne kartice.</div>
     <label class="flbl">EMAIL ADRESA</label>
     <input type="email" class="finp" id="rEmail" placeholder="tvoj@email.com">
     <label class="flbl">LOZINKA</label>
     <input type="password" class="finp" id="rPass" placeholder="Minimalno 8 znakova">
-    <button class="reg-btn" style="background:linear-gradient(135deg,rgba(0,255,153,0.14),rgba(0,255,153,0.07));border-color:rgba(0,255,153,0.4);color:var(--green)" onclick="emailReg()">â–¶ REGISTRUJ SE BESPLATNO</button>
+    <button class="reg-btn" style="background:linear-gradient(135deg,rgba(0,255,153,0.14),rgba(0,255,153,0.07));border-color:rgba(0,255,153,0.4);color:var(--green)" onclick="emailReg()">&#x25B6; REGISTRUJ SE BESPLATNO</button>
     <p style="margin-top:12px;font-size:0.7rem;color:var(--text2);text-align:center">
-      VeÄ‡ imaĹˇ nalog? <a href="#" onclick="emailLog(event)" style="color:var(--green);text-decoration:none">Prijavi se â†’</a>
+      Vec imas nalog? <a href="#" onclick="emailLog(event)" style="color:var(--green);text-decoration:none">Prijavi se &rarr;</a>
     </p>
     <div style="margin-top:16px;padding:10px;background:rgba(0,255,153,0.04);border-radius:6px;border:1px solid rgba(0,255,153,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">âś“ Sve instance i sadrĹľaj<br>âś“ 300 komandira<br>âś“ PvP i galaksija<br>âś— Blockchain zarade</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve instance i sadrzaj<br>&#x2713; 300 komandira<br>&#x2713; PvP i galaksija<br>&#x2717; Blockchain zarade</div>
     </div>
   </div>
 
-  <!-- OPCIJA 2: HIVE KEYCHAIN -->
   <div class="lbox hive lbox-border-hive rev">
     <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:#e31337;background:rgba(227,19,55,0.08);border:1px solid rgba(227,19,55,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">INSTANT PREMIUM</div>
-    <div class="lbox-ttl">â›“ď¸Ź HIVE KEYCHAIN</div>
-    <div class="lbox-sub">ImaĹˇ HIVE nalog? Prijavi se putem Keychaina â€” automatski dobijaĹˇ Premium status.</div>
+    <div class="lbox-ttl">&#x26D3;&#xFE0F; HIVE KEYCHAIN</div>
+    <div class="lbox-sub">Imas HIVE nalog? Prijavi se putem Keychaina &mdash; automatski dobijas Premium status.</div>
     <button class="hive-btn" onclick="hiveLogin()">
-      <span style="font-size:1.3rem">â›“ď¸Ź</span>
+      <span style="font-size:1.3rem">&#x26D3;&#xFE0F;</span>
       CONNECTUJ HIVE KEYCHAIN
     </button>
     <div class="hive-info" style="margin-top:14px">
-      <p>Premium plaÄ‡anje (odaberi):</p>
+      <p>Premium placanje (odaberi):</p>
       <div class="ptags">
         <span class="ptag h">HIVE</span>
         <span class="ptag d">HBD (~10 HBD)</span>
@@ -416,29 +385,28 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
       </div>
     </div>
     <div style="margin-top:14px;padding:10px;background:rgba(227,19,55,0.04);border-radius:6px;border:1px solid rgba(227,19,55,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">âś“ Sve Free opcije<br>âś“ BPW token zarade<br>âś“ BCM i BoCrypto<br>âś“ Ekskluzivni sadrĹľaj</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve Free opcije<br>&#x2713; BPW token zarade<br>&#x2713; BCM i BoCrypto<br>&#x2713; Ekskluzivni sadrzaj</div>
     </div>
-    <div style="margin-top:12px;font-size:0.68rem;color:var(--text2)">NemaĹˇ HIVE nalog? <a href="https://signup.hive.io" target="_blank" style="color:var(--cyan);text-decoration:none">Registruj se besplatno â†’</a></div>
+    <div style="margin-top:12px;font-size:0.68rem;color:var(--text2)">Nemas HIVE nalog? <a href="https://signup.hive.io" target="_blank" style="color:var(--cyan);text-decoration:none">Registruj se besplatno &rarr;</a></div>
   </div>
 
-  <!-- OPCIJA 3: CRYPTO PREMIUM -->
   <div class="lbox email lbox-border-email rev">
-    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--gold);background:rgba(255,204,51,0.08);border:1px solid rgba(255,204,51,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">PREMIUM Â· 10â‚¬</div>
-    <div class="lbox-ttl">đź’Ž CRYPTO PREMIUM</div>
-    <div class="lbox-sub">VeÄ‡ imaĹˇ Free nalog? Nadogradi na Premium plaÄ‡anjem kriptovalutom.</div>
+    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--gold);background:rgba(255,204,51,0.08);border:1px solid rgba(255,204,51,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">PREMIUM &middot; 10&euro;</div>
+    <div class="lbox-ttl">&#x1F48E; CRYPTO PREMIUM</div>
+    <div class="lbox-sub">Vec imas Free nalog? Nadogradi na Premium placanjem kriptovalutom.</div>
     <div class="pgrid">
-      <div class="popt sel" onclick="selPay(this)"><span class="pi">â‚ż</span>Bitcoin</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">đź’µ</span>USDT</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">Ĺ</span>Litecoin</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">đźźˇ</span>HBD</div>
+      <div class="popt sel" onclick="selPay(this)"><span class="pi">&#x20BF;</span>Bitcoin</div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1F4B5;</span>USDT</div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">L</span>Litecoin</div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1FAB7;</span>HBD</div>
     </div>
     <div class="lic-info">
-      <span>Cijena:</span><span class="price">10â‚¬</span>
-      <span>Â· Jednokratno Â· DoĹľivotni pristup</span>
+      <span>Cijena:</span><span class="price">10&euro;</span>
+      <span>&middot; Jednokratno &middot; Dozivotni pristup</span>
     </div>
-    <button class="reg-btn" onclick="emailReg()">â–¶ KUPI PREMIUM</button>
+    <button class="reg-btn" onclick="emailReg()">&#x25B6; KUPI PREMIUM</button>
     <div style="margin-top:16px;padding:10px;background:rgba(255,204,51,0.04);border-radius:6px;border:1px solid rgba(255,204,51,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">âś“ Sve Free opcije<br>âś“ BPW token zarade<br>âś“ BCM i BoCrypto<br>âś“ Ekskluzivni sadrĹľaj</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve Free opcije<br>&#x2713; BPW token zarade<br>&#x2713; BCM i BoCrypto<br>&#x2713; Ekskluzivni sadrzaj</div>
     </div>
   </div>
 
@@ -446,39 +414,37 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 
 <div class="gl"></div>
 
-<!-- FAQ -->
 <div class="faq-wrap rev" id="faq-wrap">
   <div style="text-align:center;margin-bottom:40px">
-    <span class="sec-lbl" style="display:block;margin-bottom:12px">// ÄŚesta pitanja</span>
+    <span class="sec-lbl" style="display:block;margin-bottom:12px">// Cesta pitanja</span>
     <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700">FAQ</h2>
   </div>
   <div class="faq-item rev">
     <div class="faq-q" onclick="togFaq(this)">Je li igra besplatna? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Da â€” igra je besplatna za sve. Registruj se emailom i igraĹˇ odmah. Premium status (10â‚¬ jednokratno) otkljuÄŤava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadrĹľaj. Nema pretplate, nema skrivenih troĹˇkova.</div></div>
+    <div class="faq-a"><div class="faq-ai">Da &mdash; igra je besplatna za sve. Registruj se emailom i igraas odmah. Premium status (10&euro; jednokratno) otkljucava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadrzaj. Nema pretplate, nema skrivenih troskova.</div></div>
   </div>
   <div class="faq-item rev">
     <div class="faq-q" onclick="togFaq(this)">Je li igra pay-to-win? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci â€” novac ih ne moĹľe kupiti. VjeĹˇtina i vrijeme uvijek pobjeÄ‘uju.</div></div>
+    <div class="faq-a"><div class="faq-ai">Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci &mdash; novac ih ne moze kupiti. Vjestina i vrijeme uvijek pobjeduju.</div></div>
   </div>
   <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Ĺ ta je HIVE Keychain i kako ga instaliram? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako imaĹˇ HIVE nalog, automatski dobijaĹˇ Premium status â€” bez dodatnog plaÄ‡anja. Instaliraj na hive-keychain.com.</div></div>
+    <div class="faq-q" onclick="togFaq(this)">Sta je HIVE Keychain i kako ga instaliram? <span class="faq-tog">+</span></div>
+    <div class="faq-a"><div class="faq-ai">HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako imas HIVE nalog, automatski dobijas Premium status &mdash; bez dodatnog placanja. Instaliraj na hive-keychain.com.</div></div>
   </div>
   <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Kako zaraditi prave tokene igrajuÄ‡i? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Premium igraÄŤi zaraÄ‘uju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.</div></div>
+    <div class="faq-q" onclick="togFaq(this)">Kako zaraditi prave tokene igrajuci? <span class="faq-tog">+</span></div>
+    <div class="faq-a"><div class="faq-ai">Premium igraci zaraduju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.</div></div>
   </div>
   <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Da li postoji zaĹˇtita za nove igraÄŤe? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Da â€” prvih 72 sata od registracije igraĹˇ pod mirovnim Ĺˇtitom. Nitko te ne moĹľe napasti dok se ne etabliraĹˇ. Nakon toga postaje pravi PvP.</div></div>
+    <div class="faq-q" onclick="togFaq(this)">Da li postoji zastita za nove igrace? <span class="faq-tog">+</span></div>
+    <div class="faq-a"><div class="faq-ai">Da &mdash; prvih 72 sata od registracije igraas pod mirovnim stitom. Nitko te ne moze napasti dok se ne etabliras. Nakon toga postaje pravi PvP.</div></div>
   </div>
 </div>
 
-<!-- PAYPAL DONATION -->
 <div style="text-align:center;padding:48px 24px;background:rgba(6,12,24,0.6);border-top:1px solid rgba(255,255,255,0.04)">
-  <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:4px;color:#6a90b8;margin-bottom:10px">// PODRĹ˝I RAZVOJ</div>
-  <div style="font-family:'Orbitron',monospace;font-size:0.85rem;color:white;margin-bottom:6px">SviÄ‘a ti se igra?</div>
-  <div style="font-size:0.8rem;color:#5a7a9a;margin-bottom:18px">Svaka donacija pomaĹľe razvoju novih sadrĹľaja i servera.</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:4px;color:#6a90b8;margin-bottom:10px">// PODRZI RAZVOJ</div>
+  <div style="font-family:'Orbitron',monospace;font-size:0.85rem;color:white;margin-bottom:6px">Svidja ti se igra?</div>
+  <div style="font-size:0.8rem;color:#5a7a9a;margin-bottom:18px">Svaka donacija pomaze razvoju novih sadrzaja i servera.</div>
   <a href="https://paypal.me/bokica80ttv" target="_blank"
     style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#003087,#009cde);
     color:white;font-family:'Orbitron',monospace;font-weight:700;font-size:0.75rem;letter-spacing:1px;
@@ -486,14 +452,13 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
     box-shadow:0 0 20px rgba(0,156,222,0.2)"
     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 36px rgba(0,156,222,0.4)'"
     onmouseout="this.style.transform='';this.style.boxShadow='0 0 20px rgba(0,156,222,0.2)'">
-    đź’ł DONIRAJ PUTEM PAYPALA
+    &#x1F4B3; DONIRAJ PUTEM PAYPALA
   </a>
 </div>
 
-<!-- FOOTER -->
 <div class="gl"></div>
 <footer>
-  <div class="ft-logo">â¬ˇ HIVE GALAXY</div>
+  <div class="ft-logo">&#x2B27; HIVE GALAXY</div>
   <div class="ft-links">
     <a href="https://discord.gg/X5x9xu9A" target="_blank">Discord</a>
     <a href="https://twitch.tv/bokipw" target="_blank">Twitch</a>
@@ -501,17 +466,17 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
     <a href="https://github.com/bokipw" target="_blank">GitHub</a>
   </div>
   <div style="text-align:center">
-    <div class="ft-copy">Â© 2026 HIVE GALAXY Â· Powered by HIVE Blockchain</div>
+    <div class="ft-copy">&copy; 2026 HIVE GALAXY &middot; Powered by HIVE Blockchain</div>
     <div style="margin-top:8px;font-size:0.72rem;color:var(--text2)">
-      Developed by 
+      Developed by
       <a href="https://hive.blog/@bokica80" target="_blank" style="color:var(--cyan);text-decoration:none;font-family:'Share Tech Mono',monospace">@bokica80</a>
-      &nbsp;Â·&nbsp;
+      &nbsp;&middot;&nbsp;
       <a href="https://twitch.tv/bokipw" target="_blank" style="color:var(--purple);text-decoration:none;font-family:'Share Tech Mono',monospace">twitch/bokipw</a>
-      &nbsp;Â·&nbsp;
+      &nbsp;&middot;&nbsp;
       <a href="https://hive-engine.com/trade/BCM" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BCM</a>
-      &nbsp;Â·&nbsp;
+      &nbsp;&middot;&nbsp;
       <a href="https://hive-engine.com/trade/BOCRYPTO" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BoCrypto</a>
-      &nbsp;Â·&nbsp;
+      &nbsp;&middot;&nbsp;
       <a href="https://hive-engine.com/trade/BPW" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BPW</a>
     </div>
   </div>
@@ -520,25 +485,18 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 </main>
 
 <script>
-// SCROLL REVEAL
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.rev').forEach(el => obs.observe(el));
 
-// NAV
 function goLogin() { document.getElementById('login-sec').scrollIntoView({behavior:'smooth'}); }
-
-// FAQ
 function togFaq(el) { el.parentElement.classList.toggle('open'); }
-
-// PAYMENT SELECT
 function selPay(el) {
   document.querySelectorAll('.popt').forEach(o => o.classList.remove('sel'));
   el.classList.add('sel');
 }
 
-// MODAL
 function openMod(title, text, actions=[]) {
   document.getElementById('modTtl').textContent = title;
   document.getElementById('modTxt').textContent = text;
@@ -555,100 +513,66 @@ function openMod(title, text, actions=[]) {
 function closeMod() { document.getElementById('ov').classList.remove('on'); }
 document.getElementById('ov').onclick = e => { if(e.target===document.getElementById('ov')) closeMod(); };
 
-// â”€â”€ SUPABASE INIT â”€â”€
 const _supa = supabase.createClient(
   'https://kjgfouzyqcnlwbsyipxp.supabase.co',
   'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
 );
 
-// HIVE LOGIN
 function hiveLogin() {
   if(typeof window.hive_keychain === 'undefined') {
     openMod(
-      'đź”‘ Keychain nije instaliran',
-      'TrebaĹˇ instalirati HIVE Keychain ekstenziju za browser da bi se mogao prijaviti HIVE nalogom. Besplatno je i traje 1 minutu.',
+      'Keychain nije instaliran',
+      'Trebas instalirati HIVE Keychain ekstenziju za browser da bi se mogao prijaviti HIVE nalogom. Besplatno je i traje 1 minutu.',
       [
-        { label:'Instaliraj Keychain â†’', fn: () => { window.open('https://hive-keychain.com','_blank'); closeMod(); } },
-        { label:'OtkaĹľi', sec:true, fn: closeMod }
+        { label:'Instaliraj Keychain', fn: () => { window.open('https://hive-keychain.com','_blank'); closeMod(); } },
+        { label:'Otkazi', sec:true, fn: closeMod }
       ]
     );
     return;
   }
-  const username = prompt('Unesi tvoje HIVE korisniÄŤko ime (@bez oznake):');
+  const username = prompt('Unesi tvoje HIVE korisnicko ime (@bez oznake):');
   if(!username || !username.trim()) return;
   const uname = username.trim().replace('@','');
   window.hive_keychain.requestSignBuffer(uname, 'GalaxyCommand_Login_' + Date.now(), 'Posting', async (response) => {
     if(response.success) {
-      openMod('âŹł Prijava...', 'Verifikacija HIVE naloga...', []);
-
-      // Prijavi se u Supabase kao anonimni, pa spremi hive_user u localStorage
-      // (Pravi HIVEâ†’Supabase flow ide kroz custom JWT â€” za sada koristimo localStorage)
+      openMod('Prijava...', 'Verifikacija HIVE naloga...', []);
       localStorage.setItem('hg_hive_user', uname);
       localStorage.setItem('hg_login_type', 'hive');
-
-      openMod('âś… UspjeĹˇna prijava!', `DobrodoĹˇao, @${uname}! Preusmjeravamo te na igru...`, []);
+      openMod('Uspjesna prijava!', 'Dobrodosao, @' + uname + '! Preusmjeravamo te na igru...', []);
       setTimeout(() => { window.location.href = 'game.html'; }, 1500);
     } else {
-      openMod('âťŚ Prijava neuspjeĹˇna', 'Keychain je odbio zahtjev. Provjeri da si na ispravnom nalogu i pokuĹˇaj ponovo.', [{label:'PokuĹˇaj ponovo', fn:()=>{closeMod();hiveLogin();}},{label:'OtkaĹľi',sec:true,fn:closeMod}]);
+      openMod('Prijava neuspjesna', 'Keychain je odbio zahtjev. Provjeri da si na ispravnom nalogu i pokusaj ponovo.',
+        [{label:'Pokusaj ponovo', fn:()=>{closeMod();hiveLogin();}},{label:'Otkazi',sec:true,fn:closeMod}]);
     }
   });
 }
 
-// EMAIL REGISTER
 async function emailReg() {
   const email = document.getElementById('rEmail').value.trim();
   const pass  = document.getElementById('rPass').value;
-  const pass2 = document.getElementById('rPass2') ? document.getElementById('rPass2').value : pass;
-  if(!email || !email.includes('@')) { openMod('âš ď¸Ź GreĹˇka', 'Unesi ispravnu email adresu.', [{label:'OK',fn:closeMod}]); return; }
-  if(pass.length < 8) { openMod('âš ď¸Ź GreĹˇka', 'Lozinka mora imati minimalno 8 znakova.', [{label:'OK',fn:closeMod}]); return; }
-  if(pass !== pass2) { openMod('âš ď¸Ź GreĹˇka', 'Lozinke se ne podudaraju. Provjeri unos.', [{label:'OK',fn:closeMod}]); return; }
-
-  openMod('âŹł Registracija...', 'Molimo priÄŤekaj...', []);
-
+  if(!email || !email.includes('@')) { openMod('Greska', 'Unesi ispravnu email adresu.', [{label:'OK',fn:closeMod}]); return; }
+  if(pass.length < 8) { openMod('Greska', 'Lozinka mora imati minimalno 8 znakova.', [{label:'OK',fn:closeMod}]); return; }
+  openMod('Registracija...', 'Molimo pricekaj...', []);
   const { data, error } = await _supa.auth.signUp({
-    email,
-    password: pass,
+    email, password: pass,
     options: { data: { username: email.split('@')[0] } }
   });
-
-  if(error) {
-    openMod('âťŚ GreĹˇka', error.message, [{label:'OK',fn:closeMod}]);
-    return;
-  }
-
-  openMod(
-    'âś… Registracija uspjeĹˇna!',
-    `Potvrdi email adresu ${email} â€” poslaili smo ti link. Nakon potvrde moĹľeĹˇ se prijaviti i igrati.`,
-    [{label:'OK',fn:closeMod}]
-  );
+  if(error) { openMod('Greska', error.message, [{label:'OK',fn:closeMod}]); return; }
+  openMod('Registracija uspjesna!', 'Potvrdi email adresu ' + email + ' - poslali smo ti link. Nakon potvrde mozes se prijaviti i igrati.', [{label:'OK',fn:closeMod}]);
 }
 
-// EMAIL LOGIN
 async function emailLog(e) {
   if(e) e.preventDefault();
-
   const email = document.getElementById('rEmail').value.trim();
   const pass  = document.getElementById('rPass').value;
-
-  if(!email || !pass) {
-    openMod('âš ď¸Ź GreĹˇka', 'Unesi email i lozinku.', [{label:'OK',fn:closeMod}]);
-    return;
-  }
-
-  openMod('âŹł Prijava...', 'Molimo priÄŤekaj...', []);
-
+  if(!email || !pass) { openMod('Greska', 'Unesi email i lozinku.', [{label:'OK',fn:closeMod}]); return; }
+  openMod('Prijava...', 'Molimo pricekaj...', []);
   const { data, error } = await _supa.auth.signInWithPassword({ email, password: pass });
-
-  if(error) {
-    openMod('âťŚ GreĹˇka', error.message, [{label:'OK',fn:closeMod}]);
-    return;
-  }
-
-  openMod('âś… UspjeĹˇna prijava!', `DobrodoĹˇao! Preusmjeravamo te na igru...`, []);
+  if(error) { openMod('Greska', error.message, [{label:'OK',fn:closeMod}]); return; }
+  openMod('Uspjesna prijava!', 'Dobrodosao! Preusmjeravamo te na igru...', []);
   setTimeout(() => { window.location.href = 'game.html'; }, 1500);
 }
 
-// SMOOTH NAV LINKS
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
@@ -658,4 +582,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </script>
 </body>
 </html>
-
