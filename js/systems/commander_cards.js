@@ -627,17 +627,6 @@ function setActiveCommander(cmdId) {
     || (window.ownedCommanders || []).find(o => String(o.id).toLowerCase() === String(cmdId).toLowerCase());
   if (!owned) { toast('❌ Nemaš ovog komandira!', 'err'); return; }
 
-  // Auto-deploy ako nije deployovan (zamijeni prvog ako je formacija puna)
-  if (!window._deployedCommanders) window._deployedCommanders = [];
-  if (!window._deployedCommanders.includes(cmdId)) {
-    const max = typeof getMaxDeployedCommanders === 'function' ? getMaxDeployedCommanders() : 1;
-    if (window._deployedCommanders.length >= max) {
-      // Ukloni prvog deployovanog da napravimo mjesto
-      window._deployedCommanders.shift();
-    }
-    window._deployedCommanders.push(cmdId);
-  }
-
   window._activeCommander = cmdId;
 
   const allCmds = [
