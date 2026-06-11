@@ -12,10 +12,35 @@
     'https://kjgfouzyqcnlwbsyipxp.supabase.co',
     'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
   );
+  window._supa = _sb;
+
   const hiveUser = localStorage.getItem('hg_hive_user');
-  if(hiveUser) { window._hiveUser = hiveUser; window._loginType = 'hive'; window._supa = _sb; return; }
+  if(hiveUser) {
+    window._hiveUser = hiveUser;
+    window._loginType = 'hive';
+
+    // Kreiraj ili dohvati HIVE profil u Supabase (anon key — koristi hive_user kolonu)
+    _sb.from('hive_profiles').upsert({
+      hive_user:  hiveUser,
+      last_seen:  new Date().toISOString()
+    }, { onConflict: 'hive_user' }).then(async () => {
+      // Dohvati profil — premium status, ključevi
+      const { data } = await _sb.from('hive_profiles')
+        .select('is_premium, keys, ikeys, boosters')
+        .eq('hive_user', hiveUser)
+        .single();
+      if(data) {
+        window._hiveProfile    = data;
+        window._playerPremium  = data.is_premium || false;
+        window._cloudKeys      = data.keys  || 0;
+        window._cloudIKeys     = data.ikeys || 0;
+      }
+    });
+    return;
+  }
+
   _sb.auth.getSession().then(({ data }) => {
-    if(data.session) { window._supaSession = data.session; window._loginType = 'email'; window._supa = _sb; }
+    if(data.session) { window._supaSession = data.session; window._loginType = 'email'; }
     else { window.location.href = 'index.html'; }
   });
 })();
