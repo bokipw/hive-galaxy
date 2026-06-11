@@ -459,7 +459,10 @@ function showCardDetail(cmdId) {
   ];
   const def = allCmds.find(c => c.id === cmdId);
   if (!def) return;
-  const owned = (window.ownedCommanders || []).find(o => o.id === cmdId);
+  // Pokusaj pronaci owned entry — provjeri i lowercase/trim varijante
+  let owned = (window.ownedCommanders || []).find(o => o.id === cmdId);
+  if (!owned) owned = (window.ownedCommanders || []).find(o => String(o.id).trim() === String(cmdId).trim());
+  if (!owned) owned = (window.ownedCommanders || []).find(o => String(o.id).toLowerCase() === String(cmdId).toLowerCase());
   const rc = rarityColor(def.rarity);
   const rg = rarityGlow(def.rarity);
   const isActive = window._activeCommander === cmdId;
@@ -620,8 +623,21 @@ function showCardDetail(cmdId) {
 
 // ── POSTAVI AKTIVNOG ──
 function setActiveCommander(cmdId) {
-  const owned = (window.ownedCommanders || []).find(o => o.id === cmdId);
+  const owned = (window.ownedCommanders || []).find(o => o.id === cmdId)
+    || (window.ownedCommanders || []).find(o => String(o.id).toLowerCase() === String(cmdId).toLowerCase());
   if (!owned) { toast('❌ Nemaš ovog komandira!', 'err'); return; }
+
+  // Auto-deploy ako nije deployovan (zamijeni prvog ako je formacija puna)
+  if (!window._deployedCommanders) window._deployedCommanders = [];
+  if (!window._deployedCommanders.includes(cmdId)) {
+    const max = typeof getMaxDeployedCommanders === 'function' ? getMaxDeployedCommanders() : 1;
+    if (window._deployedCommanders.length >= max) {
+      // Ukloni prvog deployovanog da napravimo mjesto
+      window._deployedCommanders.shift();
+    }
+    window._deployedCommanders.push(cmdId);
+  }
+
   window._activeCommander = cmdId;
 
   const allCmds = [
