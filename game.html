@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIVE GALAXY</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── AUTH GUARD ──
+(function() {
+  const SUPA_URL = 'https://9ylfo4ik2sv0p8llabqegw.supabase.co';
+  const SUPA_KEY = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
+  const _sb = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+  // HIVE igrač — provjeri localStorage
+  const hiveUser = localStorage.getItem('hg_hive_user');
+  if(hiveUser) {
+    window._hiveUser = hiveUser;
+    window._loginType = 'hive';
+    return; // OK
+  }
+
+  // Email igrač — provjeri Supabase sesiju
+  _sb.auth.getSession().then(({ data }) => {
+    if(data.session) {
+      window._supaSession = data.session;
+      window._loginType = 'email';
+    } else {
+      // Nije ulogovan — redirect na index
+      window.location.href = 'index.html';
+    }
+  });
+
+  window._supa = _sb;
+})();
+</script>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ── HEADER ── -->
+  <div id="header">
+    <h1>⬡ HIVE GALAXY</h1>
+    <div class="res-bar">
+      <div class="res-item">🔩 <span class="rval" id="rMetal">0</span><span class="rprod" id="rMetalProd"></span></div>
+      <div class="res-item">💎 <span class="rval" id="rCrystal">0</span><span class="rprod" id="rCrystalProd"></span></div>
+      <div class="res-item">⛽ <span class="rval" id="rHe3">0</span><span class="rprod" id="rHe3Prod"></span></div>
+      <div class="res-item">⚡ <span class="rval" id="rEnergy">0</span></div>
+      <div class="res-item">🗝️ <span class="rval" id="rKeys">0</span></div>
+      <div class="res-item">🃏 <span class="rval" id="rCardKeys">0</span></div>
+      <div class="res-item">⭐ <span class="rval" id="rScore">0</span></div>
+    </div>
+    <div id="activeEventBadge" style="display:none;font-size:0.65rem;padding:2px 10px;
+      background:rgba(255,204,68,0.1);border-bottom:1px solid rgba(255,204,68,0.2);
+      text-align:center"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>
+      <button onclick="addTestResources()" class="btn-gold">➕ Test</button>
+      <button onclick="resetGame()" class="btn-red">🗑️ Reset</button>
+    </div>
+  </div>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div id="main-layout">
+
+    <!-- ── LEFT NAV ── -->
+    <div id="nav">
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-baza')" data-grp="grp-baza">
+        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> BAZA
+      </div>
+      <div class="nav-group" id="grp-baza">
+        <button class="nav-btn active" onclick="showPanel('base')" data-panel="base">
+          <span class="icon">🏰</span> Baza
+        </button>
+        <button class="nav-btn" onclick="showPanel('shipfactory')" data-panel="shipfactory">
+          <span class="icon">🏭</span> Ship Factory
+        </button>
+        <button class="nav-btn" onclick="showPanel('depot')" data-panel="depot">
+          <span class="icon">📦</span> Depot
+        </button>
+        <button class="nav-btn" onclick="showPanel('recycler')" data-panel="recycler">
+          <span class="icon">♻️</span> Recycler
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-flota')" data-grp="grp-flota">
+        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> FLOTA
+      </div>
+      <div class="nav-group" id="grp-flota">
+        <button class="nav-btn" onclick="showPanel('designer')" data-panel="designer">
+          <span class="icon">🔧</span> Designer
+        </button>
+        <button class="nav-btn" onclick="showPanel('hangar')" data-panel="hangar">
+          <span class="icon">🏠</span> Hangar
+        </button>
+        <button class="nav-btn" onclick="showPanel('fleet')" data-panel="fleet">
+          <span class="icon">🚀</span> Flota
+        </button>
+        <button class="nav-btn" onclick="showPanel('formations')" data-panel="formations">
+          <span class="icon">⬛</span> Formacije
+        </button>
+        <button class="nav-btn" onclick="showPanel('blueprints')" data-panel="blueprints">
+          <span class="icon">📋</span> Blueprinti
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-galaksija')" data-grp="grp-galaksija">
+        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> GALAKSIJA
+      </div>
+      <div class="nav-group" id="grp-galaksija">
+        <button class="nav-btn" onclick="showPanel('galaxy')" data-panel="galaxy">
+          <span class="icon">🗺️</span> Galaksija
+        </button>
+        <button class="nav-btn" onclick="showPanel('instances')" data-panel="instances">
+          <span class="icon">🌌</span> Instance
+        </button>
+        <button class="nav-btn" onclick="showPanel('colonies')" data-panel="colonies">
+          <span class="icon">🪐</span> Kolonije
+        </button>
+        <button class="nav-btn" onclick="showPanel('pvp')" data-panel="pvp">
+          <span class="icon">⚔️</span> PvP
+        </button>
+        <button class="nav-btn" onclick="showPanel('espionage')" data-panel="espionage">
+          <span class="icon">🕵️</span> Špijunaža
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-napredak')" data-grp="grp-napredak">
+        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> NAPREDAK
+      </div>
+      <div class="nav-group" id="grp-napredak">
+        <button class="nav-btn" onclick="showPanel('research')" data-panel="research">
+          <span class="icon">🔬</span> Istraživanje
+        </button>
+        <button class="nav-btn" onclick="showPanel('missions')" data-panel="missions" style="position:relative">
+          <span class="icon">📡</span> Misije
+          <span id="missionsBadge" style="display:none;position:absolute;top:4px;right:4px;
+            background:#ff3355;color:white;font-size:0.55rem;font-weight:700;
+            padding:1px 5px;border-radius:8px;min-width:16px;text-align:center;
+            line-height:1.4;pointer-events:none"></span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('artifacts')" data-panel="artifacts">
+          <span class="icon">💠</span> Artefakti
+        </button>
+        <button class="nav-btn" onclick="showPanel('achievements')" data-panel="achievements">
+          <span class="icon">🏆</span> Dostignuća
+        </button>
+        <button class="nav-btn" onclick="showPanel('commander')" data-panel="commander">
+          <span class="icon">🎖️</span> Komandir
+        </button>
+        <button class="nav-btn" onclick="showPanel('commander-cards')" data-panel="commander-cards">
+          <span class="icon">🃏</span> Karte
+        </button>
+        <button class="nav-btn" onclick="showPanel('shop')" data-panel="shop">
+          <span class="icon">💎</span> Shop
+        </button>
+      </div>
+    </div>
+
+    <!-- ── CONTENT ── -->
+    <div id="content">
+
+      <!-- BAZA -->
+      <div id="panel-base" class="panel active">
+        <div class="page-title">🏰 KOMANDNI CENTAR BAZE</div>
+        <div class="grid-3" id="baseGrid"></div>
+        <div class="page-title">⚡ ENERGETSKA MREŽA</div>
+        <div class="grid-4" id="energyGrid"></div>
+        <div class="page-title">🛡️ ODBRANA BAZE</div>
+        <div class="grid-4" id="defenseGrid"></div>
+        <div class="page-title">⚡ ENERGETSKI BILANS</div>
+        <div class="card" id="energyBalanceCard"></div>
+        <div class="page-title">🔧 SPECIJALNE ZGRADE</div>
+        <div class="grid-3" id="specialGrid"></div>
+      </div>
+
+      <!-- SHIP FACTORY -->
+      <div id="panel-shipfactory" class="panel">
+        <div class="page-title">🏭 SHIP FACTORY</div>
+        <div id="shipFactoryCard"></div>
+        <div class="page-title" style="margin-top:20px">🚀 GRADNJA PO DIZAJNU</div>
+        <div id="shipBuildGrid"></div>
+      </div>
+
+      <!-- DEPOT -->
+      <div id="panel-depot" class="panel">
+        <div class="page-title">📦 DEPOT</div>
+        <div id="depotCard"></div>
+      </div>
+
+      <!-- RECYCLER -->
+      <div id="panel-recycler" class="panel">
+        <div class="page-title">♻️ RECYCLER</div>
+        <div id="recyclerContent"></div>
+      </div>
+
+      <!-- DESIGNER -->
+      <div id="panel-designer" class="panel">
+        <div class="page-title">🔧 SHIP DESIGNER</div>
+        <div id="designerContent"></div>
+      </div>
+
+      <!-- HANGAR -->
+      <div id="panel-hangar" class="panel">
+        <div class="page-title">🏠 HANGAR</div>
+        <div id="hangarContent"></div>
+      </div>
+
+      <!-- FLOTA -->
+      <div id="panel-fleet" class="panel">
+        <div class="page-title">🚀 FLOTA</div>
+        <div id="fleetGrid"></div>
+      </div>
+
+      <!-- FORMACIJE -->
+      <div id="panel-formations" class="panel">
+        <div class="page-title">⬛ FORMACIJE FLOTE</div>
+        <div id="formationsContent"></div>
+      </div>
+
+      <!-- BLUEPRINTI -->
+      <div id="panel-blueprints" class="panel">
+        <div class="page-title">📋 BLUEPRINTI</div>
+        <div id="blueprintGrid"></div>
+      </div>
+
+      <!-- GALAKSIJA -->
+      <div id="panel-galaxy" class="panel">
+        <div class="page-title">🗺️ GALAKSIJA</div>
+        <div id="galaxyContent"></div>
+      </div>
+
+      <!-- INSTANCE -->
+      <div id="panel-instances" class="panel">
+        <div class="page-title">🌌 INSTANCE</div>
+        <div id="instanceContent"></div>
+      </div>
+
+      <!-- MISIJE -->
+      <div id="panel-missions" class="panel">
+        <div class="page-title">📡 MISIJE</div>
+        <div id="missionsContent"></div>
+      </div>
+
+      <!-- PVP -->
+      <div id="panel-pvp" class="panel">
+        <div class="page-title">⚔️ PvP ARENA</div>
+        <div id="pvpContent"></div>
+      </div>
+
+      <!-- ŠPIJUNAŽA -->
+      <div id="panel-espionage" class="panel">
+        <div class="page-title">🕵️ ŠPIJUNAŽA</div>
+        <div id="espionageContent"></div>
+      </div>
+
+      <!-- ISTRAŽIVANJE -->
+      <div id="panel-research" class="panel">
+        <div class="page-title">🔬 ISTRAŽIVANJE</div>
+        <div id="researchContent"></div>
+      </div>
+
+      <!-- KOLONIJE -->
+      <div id="panel-colonies" class="panel">
+        <div class="page-title">🪐 KOLONIJE</div>
+        <div id="coloniesContent"></div>
+      </div>
+
+      <!-- ARTEFAKTI -->
+      <div id="panel-artifacts" class="panel">
+        <div class="page-title">💠 ARTEFAKTI</div>
+        <div id="artifactsContent"></div>
+      </div>
+
+      <!-- DOSTIGNUĆA -->
+      <div id="panel-achievements" class="panel">
+        <div class="page-title">🏆 DOSTIGNUĆA</div>
+        <div id="achievementsContent"></div>
+      </div>
+
+      <!-- KOMANDIR -->
+      <div id="panel-commander" class="panel">
+        <div class="page-title">🎖️ KOMANDIR</div>
+        <div id="commanderContent"></div>
+      </div>
+
+      <!-- KARTE KOMANDIRA -->
+      <div id="panel-commander-cards" class="panel">
+        <div class="page-title">🃏 KARTE KOMANDIRA</div>
+        <!-- Tab navigacija -->
+        <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid rgba(0,212,255,0.15);padding-bottom:12px" id="cardTabNav"></div>
+        <!-- Tab sadržaj -->
+        <div id="cardTabBody"></div>
+        <!-- Skriveni divovi za svaki tab -->
+        <div id="commanderCardsContent" style="display:none"></div>
+        <div id="cmdFleetContent" style="display:none"></div>
+      </div>
+
+      <!-- SHOP -->
+      <div id="panel-shop" class="panel">
+        <div class="page-title">💎 SHOP</div>
+        <div id="shopContent"></div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT PANEL ── -->
+    <div id="rightPanel">
+      <div class="rp-section">
+        <div class="rp-title">KOMANDIR</div>
+        <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
+        <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>
+        <div style="font-size:0.65rem;color:#6a90b8;margin-top:4px">
+          <span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP
+        </div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">HIVE TOKENI</div>
+        <div style="font-size:0.72rem;font-family:'Share Tech Mono',monospace;line-height:2">
+          <div>💰 BCM: <span id="hBCM" style="color:white">0</span></div>
+          <div>💰 BoCrypto: <span id="hBoCrypto" style="color:white">0</span></div>
+          <div>💰 BPW: <span id="hBPW" style="color:#ffcc44">0</span> <span style="color:#6a90b8;font-size:0.6rem">sat</span></div>
+        </div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">FLOTA MOĆ</div>
+        <div id="fleetPowerDisplay" style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#00d4ff">0</div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">FORMACIJA</div>
+        <div id="formationStatus"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">DEPOT STATUS</div>
+        <div id="depotStatus"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">HANGAR</div>
+        <div id="hangarStatus"></div>
+      </div>
+      <div class="rp-section" style="flex:1;display:flex;flex-direction:column;min-height:0">
+        <!-- Tab header -->
+        <div style="display:flex;gap:0;margin-bottom:8px;border-bottom:1px solid rgba(0,212,255,0.15)">
+          <button id="tab-log" onclick="switchRightTab('log')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid #00d4ff;
+              color:#00d4ff;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">LOG</button>
+          <button id="tab-events" onclick="switchRightTab('events')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;
+              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">EVENTI</button>
+          <button id="tab-pvp" onclick="switchRightTab('pvp')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;
+              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">PVP</button>
+        </div>
+        <!-- Log panel -->
+        <div id="logPanel" style="font-size:0.7rem;color:#6a90b8;overflow-y:auto;flex:1"></div>
+        <!-- Events panel -->
+        <div id="eventsPanel" style="display:none;overflow-y:auto;flex:1"></div>
+        <!-- PvP panel -->
+        <div id="pvpPanel" style="display:none;overflow-y:auto;flex:1"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center">
+  <div style="background:#0c1428;border:1px solid #00d4ff33;border-radius:10px;padding:24px;max-width:520px;width:90%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden">
+    <div id="mTitle" style="font-family:'Orbitron',monospace;font-size:1rem;color:#00d4ff;margin-bottom:16px;flex-shrink:0"></div>
+    <div id="mBody" style="overflow-y:hidden;flex:1;min-height:0"></div>
+    <div id="mActions" style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-shrink:0;border-top:1px solid rgba(0,212,255,0.1);padding-top:14px"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast-area" style="position:fixed;bottom:20px;right:20px;z-index:1000"></div>
+
+<!-- EVENT BANNER -->
+<div id="eventBanner" style="
+  display:none;
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:0;
+  pointer-events:none;
+">
+  <div id="eventBannerInner" style="
+    margin:12px auto;max-width:520px;
+    border-radius:10px;padding:16px 24px;
+    display:flex;align-items:center;gap:16px;
+    box-shadow:0 4px 32px rgba(0,0,0,0.6);
+    animation:eventBannerIn 0.35s cubic-bezier(.22,1,.36,1);
+  ">
+    <div id="eventBannerIcon" style="font-size:2.2rem;flex-shrink:0"></div>
+    <div style="flex:1;min-width:0">
+      <div id="eventBannerLabel" style="font-size:0.6rem;font-weight:700;
+        letter-spacing:3px;opacity:0.8;margin-bottom:3px;font-family:'Orbitron',monospace"></div>
+      <div id="eventBannerName" style="font-size:1rem;font-weight:700;
+        font-family:'Orbitron',monospace;letter-spacing:1px"></div>
+      <div id="eventBannerDesc" style="font-size:0.68rem;opacity:0.75;margin-top:3px"></div>
+    </div>
+    <div id="eventBannerCountdown" style="
+      font-size:2rem;font-family:'Orbitron',monospace;font-weight:700;
+      min-width:36px;text-align:center;flex-shrink:0;
+    "></div>
+  </div>
+</div>
+<style>
+@keyframes eventBannerIn {
+  from { opacity:0; transform:translateY(-24px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0)     scale(1);    }
+}
+@keyframes eventBannerOut {
+  from { opacity:1; transform:translateY(0)     scale(1);    }
+  to   { opacity:0; transform:translateY(-16px) scale(0.97); }
+}
+</style>
+
+<!-- ── SCRIPTS — redoslijed je bitan ── -->
+
+<!-- 1. DATA fajlovi — samo podaci, nula logike -->
+<script src="data/buildings.js"></script>
+<script src="data/ships.js"></script>
+<script src="data/weapons.js"></script>
+<script src="data/shields.js"></script>
+<script src="data/engines.js"></script>
+<script src="data/recon.js"></script>
+<script src="data/special.js"></script>
+<script src="data/modules.js"></script>
+<script src="data/blueprints.js"></script>
+<script src="data/instances_easy.js"></script>
+<script src="data/instances_normal.js"></script>
+<script src="data/instances_nightmare.js"></script>
+<script src="data/instances_hell.js"></script>
+<script src="data/instances.js"></script>
+<script src="data/commanders.js"></script>
+<script src="data/commanders_xenos.js"></script>
+<script src="data/commanders_undead.js"></script>
+<script src="data/passive_bonuses.js"></script>
+
+<!-- 2. STATE -->
+<script src="js/state.js"></script>
+
+<!-- 3. SAVE/LOAD -->
+<script src="js/save.js"></script>
+
+<!-- 4. UI -->
+<script src="js/ui/toast.js"></script>
+<script src="js/ui/render.js"></script>
+<script src="js/ui/modal.js"></script>
+<script src="js/ui/battle-anim.js"></script>
+
+<!-- 5. SYSTEMS -->
+<script src="js/systems/economy.js"></script>
+<script src="js/systems/buildings.js"></script>
+<script src="js/systems/fleet.js"></script>
+<script src="js/systems/designer.js"></script>
+<script src="js/systems/combat.js"></script>
+<script src="js/systems/instances.js"></script>
+<script src="js/systems/blueprints.js"></script>
+<script src="js/systems/research.js"></script>
+<script src="js/systems/colonies.js"></script>
+<script src="js/systems/missions.js"></script>
+<script src="js/systems/pvp.js"></script>
+<script src="js/systems/espionage.js"></script>
+<script src="js/systems/artifacts.js"></script>
+<script src="js/systems/achievements.js"></script>
+<script src="js/systems/commander.js"></script>
+<script src="js/systems/commander_cards.js"></script>
+<script src="js/systems/shop.js"></script>
+<script src="js/systems/galaxy.js"></script>
+<script src="js/systems/formations.js"></script>
+<script src="js/systems/events.js"></script>
+
+<!-- 6. MAIN — zadnji -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

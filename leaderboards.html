@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIVE GALAXY — Leaderboards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #010814;
+      color: #c0d8f0;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Stars background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, #fff8 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 60%, #fff6 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 10%, #fff8 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 40%, #fff4 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, #fff6 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 90%, #fff8 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 70%, #fff4 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 15%, #fff6 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #00d4ff;
+      text-shadow: 0 0 20px #00d4ff88;
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+    }
+    .header p {
+      font-size: 0.85rem;
+      color: #6a90b8;
+      letter-spacing: 2px;
+    }
+
+    /* Division tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    .tab {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(255,255,255,0.03);
+    }
+    .tab:hover { filter: brightness(1.2); }
+    .tab.active { filter: brightness(1.3); }
+
+    /* Division config */
+    .div-PERFECT_MASTER { --c: #ff3355; --g: #ff335566; }
+    .div-GRAND_MASTER   { --c: #ffaa00; --g: #ffaa0066; }
+    .div-MASTER         { --c: #aa44ff; --g: #aa44ff66; }
+    .div-DIAMOND        { --c: #00d4ff; --g: #00d4ff66; }
+    .div-GOLD           { --c: #ffcc44; --g: #ffcc4466; }
+    .div-SILVER         { --c: #aaaaaa; --g: #aaaaaa44; }
+    .div-BRONZE         { --c: #cd7f32; --g: #cd7f3244; }
+
+    .tab { border-color: var(--c); color: var(--c); }
+    .tab.active { background: var(--g); box-shadow: 0 0 12px var(--c); }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 10px 10px 0 0;
+      margin-bottom: 0;
+      border: 1px solid var(--c);
+      border-bottom: none;
+    }
+    .section-icon { font-size: 2rem; filter: drop-shadow(0 0 8px var(--c)); }
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c);
+      text-shadow: 0 0 10px var(--c);
+    }
+    .section-sub { font-size: 0.7rem; color: #6a90b8; margin-top: 2px; }
+    .section-count {
+      margin-left: auto;
+      background: var(--g);
+      border: 1px solid var(--c);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.65rem;
+      color: var(--c);
+      font-family: 'Orbitron', monospace;
+    }
+
+    /* Table */
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--c);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .leaderboard-table thead tr {
+      background: var(--g);
+    }
+    .leaderboard-table th {
+      padding: 10px 16px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.58rem;
+      color: var(--c);
+      letter-spacing: 2px;
+      text-align: left;
+      border-bottom: 1px solid var(--c);
+    }
+    .leaderboard-table td {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .leaderboard-table tr:last-child td { border-bottom: none; }
+    .leaderboard-table tbody tr {
+      transition: background 0.15s;
+    }
+    .leaderboard-table tbody tr:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Top 3 special */
+    .rank-1 td { background: rgba(255,215,0,0.06); }
+    .rank-2 td { background: rgba(192,192,192,0.04); }
+    .rank-3 td { background: rgba(205,127,50,0.04); }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .rank-1 .rank-badge { background: rgba(255,215,0,0.2); border: 1px solid #ffd700; color: #ffd700; }
+    .rank-2 .rank-badge { background: rgba(192,192,192,0.2); border: 1px solid #c0c0c0; color: #c0c0c0; }
+    .rank-3 .rank-badge { background: rgba(205,127,50,0.2); border: 1px solid #cd7f32; color: #cd7f32; }
+    .rank-other .rank-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #6a90b8; }
+
+    .player-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #e0f0ff;
+    }
+    .player-name.top1 { color: #ffd700; text-shadow: 0 0 8px #ffd70088; }
+    .player-name.top2 { color: #c0c0c0; }
+    .player-name.top3 { color: #cd7f32; }
+
+    .player-level {
+      font-size: 0.72rem;
+      color: #6a90b8;
+      margin-top: 1px;
+    }
+
+    .rating-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--c);
+    }
+
+    .win-rate {
+      font-size: 0.8rem;
+    }
+    .win-rate.high { color: #00ff88; }
+    .win-rate.mid  { color: #ffcc44; }
+    .win-rate.low  { color: #ff4444; }
+
+    .faction-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .trophy { font-size: 1.1rem; }
+
+    /* Search bar */
+    .search-wrap {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #c0d8f0;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input::placeholder { color: #3a5070; }
+    .search-input:focus { border-color: #00d4ff88; }
+
+    .refresh-btn {
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #00d4ff;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 1px;
+    }
+    .refresh-btn:hover { background: rgba(0,212,255,0.2); }
+
+    /* Season info */
+    .season-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.1);
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .season-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      color: #00d4ff;
+      letter-spacing: 2px;
+    }
+    .season-timer {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.75rem;
+      color: #ffcc44;
+    }
+    .season-note {
+      font-size: 0.7rem;
+      color: #6a90b8;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: -20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 5px 12px;
+      color: #6a90b8;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: rgba(0,212,255,0.1);
+      border-color: rgba(0,212,255,0.4);
+      color: #00d4ff;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>⚔️ LEADERBOARDS</h1>
+    <p>HIVE GALAXY — PVP RANG LISTA — SEZONA 1</p>
+  </div>
+
+  <!-- Season bar -->
+  <div class="season-bar">
+    <div class="season-label">🏆 SEZONA 1</div>
+    <div class="season-timer" id="seasonTimer">--d --h --m</div>
+    <div class="season-note">Top igrači na kraju sezone dobijaju ekskluzivne nagrade</div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <input class="search-input" id="searchInput" type="text" placeholder="🔍 Pretraži igrača...">
+    <button class="refresh-btn" onclick="generateAndRender()">↻ REFRESH</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs" id="tabs"></div>
+
+  <!-- Leaderboard content -->
+  <div id="leaderboardContent"></div>
+
+</div>
+
+<script>
+// ── DIVISIÓN CONFIG ──
+const DIVISIONS = [
+  {
+    id: 'PERFECT_MASTER',
+    name: 'Perfect Master',
+    icon: '🔱',
+    color: '#ff3355',
+    positions: [1, 10],
+    ratingMin: 5000,
+    ratingMax: 9999,
+    factions: ['Galaktički Osvajač', 'Kosmički Tiranin'],
+  },
+  {
+    id: 'GRAND_MASTER',
+    name: 'Grand Master',
+    icon: '👑',
+    color: '#ffaa00',
+    positions: [11, 100],
+    ratingMin: 3500,
+    ratingMax: 4999,
+    factions: ['Zvjezdani Strateg', 'Nebulski Komandant'],
+  },
+  {
+    id: 'MASTER',
+    name: 'Master',
+    icon: '💫',
+    color: '#aa44ff',
+    positions: [101, 200],
+    ratingMin: 2800,
+    ratingMax: 3499,
+    factions: ['Vanguard', 'Sentinel'],
+  },
+  {
+    id: 'DIAMOND',
+    name: 'Diamond',
+    icon: '💎',
+    color: '#00d4ff',
+    positions: [201, 400],
+    ratingMin: 2200,
+    ratingMax: 2799,
+    factions: ['Technocrat', 'Shadow'],
+  },
+  {
+    id: 'GOLD',
+    name: 'Gold',
+    icon: '🥇',
+    color: '#ffcc44',
+    positions: [401, 650],
+    ratingMin: 1600,
+    ratingMax: 2199,
+    factions: ['Solar', 'Krall'],
+  },
+  {
+    id: 'SILVER',
+    name: 'Silver',
+    icon: '🥈',
+    color: '#aaaaaa',
+    positions: [651, 1000],
+    ratingMin: 1000,
+    ratingMax: 1599,
+    factions: ['Ethereal', 'Synth'],
+  },
+  {
+    id: 'BRONZE',
+    name: 'Bronze',
+    icon: '🥉',
+    color: '#cd7f32',
+    positions: [1001, 9999],
+    ratingMin: 0,
+    ratingMax: 999,
+    factions: ['Hive', 'Ancient', 'Nerazvrstani'],
+  },
+];
+
+// ── SUPABASE ──
+const _supa = supabase.createClient(
+  'https://9ylfo4ik2sv0p8llabqegw.supabase.co',
+  'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+);
+
+let allPlayers = [];
+
+function getDivForScore(score) {
+  for (const div of DIVISIONS) {
+    if (score >= div.ratingMin) return div.id;
+  }
+  return 'BRONZE';
+}
+
+async function generatePlayers() {
+  const { data, error } = await _supa
+    .from('leaderboard')
+    .select('username, score, level, is_premium')
+    .order('score', { ascending: false })
+    .limit(500);
+
+  if (error || !data || data.length === 0) {
+    // Nema podataka još
+    allPlayers = [];
+    return;
+  }
+
+  allPlayers = data.map((row, i) => ({
+    rank:      i + 1,
+    name:      row.username,
+    rating:    row.score || 0,
+    level:     row.level || 1,
+    isPremium: row.is_premium || false,
+    divId:     getDivForScore(row.score || 0),
+  }));
+}
+
+// ── RENDER ──
+let activeTab = 'ALL';
+let currentPage = 1;
+const PAGE_SIZE = 25;
+
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  const all = `<div class="tab div-DIAMOND ${activeTab === 'ALL' ? 'active' : ''}"
+    onclick="setTab('ALL')" style="--c:#00d4ff;--g:rgba(0,212,255,0.2)">🌌 SVI</div>`;
+  const divTabs = DIVISIONS.map(d =>
+    `<div class="tab div-${d.id} ${activeTab === d.id ? 'active' : ''}"
+      onclick="setTab('${d.id}')">${d.icon} ${d.name.toUpperCase()}</div>`
+  ).join('');
+  el.innerHTML = all + divTabs;
+}
+
+function setTab(id) {
+  activeTab = id;
+  currentPage = 1;
+  renderTabs();
+  renderTable();
+}
+
+function getFilteredPlayers() {
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  let players = activeTab === 'ALL' ? allPlayers : allPlayers.filter(p => p.divId === activeTab);
+  if (search) players = players.filter(p => p.name.toLowerCase().includes(search));
+  return players;
+}
+
+function renderTable() {
+  const el = document.getElementById('leaderboardContent');
+  const players = getFilteredPlayers();
+  const totalPages = Math.ceil(players.length / PAGE_SIZE);
+  const pagePlayers = players.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  if (players.length === 0) {
+    el.innerHTML = `<div style="text-align:center;padding:40px;color:#6a90b8;font-size:0.85rem">
+      Nema rezultata za pretragu.</div>`;
+    return;
+  }
+
+  // Group by division for ALL view
+  let html = '';
+
+  if (activeTab !== 'ALL') {
+    const div = DIVISIONS.find(d => d.id === activeTab);
+    html += renderDivisionSection(div, pagePlayers, false);
+  } else {
+    // Show all divisions
+    DIVISIONS.forEach(div => {
+      const divPlayers = pagePlayers.filter(p => p.divId === div.id);
+      if (divPlayers.length > 0) {
+        html += renderDivisionSection(div, divPlayers, true);
+      }
+    });
+  }
+
+  // Pagination
+  if (totalPages > 1) {
+    html += `<div class="pagination">`;
+    for (let p = 1; p <= Math.min(totalPages, 10); p++) {
+      html += `<div class="page-btn ${p === currentPage ? 'active' : ''}" onclick="goPage(${p})">${p}</div>`;
+    }
+    if (totalPages > 10) html += `<div class="page-btn">... ${totalPages}</div>`;
+    html += `</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function renderDivisionSection(div, players, compact) {
+  const totalInDiv = allPlayers.filter(p => p.divId === div.id).length;
+  const style = `--c:${div.color};--g:${div.color}22`;
+
+  let html = `
+    <div class="div-${div.id}" style="${style}">
+      <div class="section-header" style="background:${div.color}11">
+        <div class="section-icon">${div.icon}</div>
+        <div>
+          <div class="section-title">${div.name.toUpperCase()}</div>
+          <div class="section-sub">Pozicije ${div.positions[0]}–${div.positions[1] === 9999 ? '∞' : div.positions[1]}</div>
+        </div>
+        <div class="section-count">${totalInDiv} IGRAČA</div>
+      </div>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th style="width:60px">RANK</th>
+            <th>IGRAČ</th>
+            <th>LEVEL</th>
+            <th>SCORE</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+  players.forEach(p => {
+    const rankClass = p.rank === 1 ? 'rank-1' : p.rank === 2 ? 'rank-2' : p.rank === 3 ? 'rank-3' : 'rank-other';
+    const nameClass = p.rank === 1 ? 'top1' : p.rank === 2 ? 'top2' : p.rank === 3 ? 'top3' : '';
+    const trophy = p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : p.rank === 3 ? '🥉' : '';
+
+    html += `
+      <tr class="${rankClass}">
+        <td><div class="rank-badge">${trophy || '#' + p.rank}</div></td>
+        <td>
+          <div class="player-name ${nameClass}">${p.name}</div>
+          <div class="player-level">Admiral</div>
+        </td>
+        <td style="font-family:'Orbitron',monospace;font-size:0.8rem;color:#c0d8f0">Lv.${p.level}</td>
+        <td><span class="rating-val">${(p.rating||0).toLocaleString()}</span></td>
+        <td>${p.isPremium
+          ? '<span style="font-size:0.65rem;color:#ffcc44;font-family:Orbitron,monospace;border:1px solid #ffcc4444;padding:2px 8px;border-radius:3px">⭐ PREMIUM</span>'
+          : '<span style="font-size:0.65rem;color:#6a90b8">FREE</span>'
+        }</td>
+      </tr>`;
+  });
+
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+function goPage(p) {
+  currentPage = p;
+  renderTable();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function generateAndRender() {
+  document.getElementById('leaderboardContent').innerHTML =
+    `<div style="text-align:center;padding:60px;color:#6a90b8;font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:2px">
+      ⏳ UČITAVANJE...
+    </div>`;
+  await generatePlayers();
+  currentPage = 1;
+  renderTabs();
+  if (allPlayers.length === 0) {
+    document.getElementById('leaderboardContent').innerHTML =
+      `<div style="text-align:center;padding:60px;color:#6a90b8;font-size:0.85rem">
+        Još nema igrača na leaderboardu. Budi prvi! 🚀
+      </div>`;
+    return;
+  }
+  renderTable();
+}
+
+// Season timer (mock — 14 dana od danas)
+function updateTimer() {
+  const end = new Date();
+  end.setDate(end.getDate() + 14);
+  const now = new Date();
+  const diff = end - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('seasonTimer').textContent = `⏱ ${d}d ${h}h ${m}m do kraja sezone`;
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', () => {
+  currentPage = 1;
+  renderTable();
+});
+
+// Init
+generateAndRender();
+updateTimer();
+setInterval(updateTimer, 60000);
+</script>
+</body>
+</html>
