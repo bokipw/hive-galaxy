@@ -353,6 +353,7 @@ function renderFleet() {
   const allCmds = [
     ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
     ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
+    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
   ];
   const getCmd = id => allCmds.find(c => c.id === id) || null;
   const getOwned = id => (window.ownedCommanders || []).find(o => o.id === id) || null;
