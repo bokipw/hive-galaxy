@@ -30,10 +30,27 @@
         .eq('hive_user', hiveUser)
         .single();
       if(data) {
-        window._hiveProfile    = data;
-        window._playerPremium  = data.is_premium || false;
-        window._cloudKeys      = data.keys  || 0;
-        window._cloudIKeys     = data.ikeys || 0;
+        window._hiveProfile   = data;
+        window._playerPremium = data.is_premium || false;
+
+        // Primijeni ključeve na igru — dodaj cloud ključeve na lokalne
+        const cloudKeys  = data.keys  || 0;
+        const cloudIKeys = data.ikeys || 0;
+
+        // Čekaj da se igra inicijalizira pa primijeni
+        const applyKeys = () => {
+          if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
+          if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  }
+          if(cloudIKeys > 0) { R.instanceKeys  = (R.instanceKeys  || 0) + cloudIKeys; }
+          // Resetuj u Supabase da se ne dodaju opet sljedeći put
+          if(cloudKeys > 0 || cloudIKeys > 0) {
+            _sb.from('hive_profiles').update({ keys: 0, ikeys: 0 })
+              .eq('hive_user', hiveUser);
+            if(typeof updateResUI === 'function') updateResUI();
+            if(typeof toast === 'function') toast(`+${cloudKeys} 🗝️ +${cloudIKeys} 🔑 primljeno!`, 'ok');
+          }
+        };
+        applyKeys();
       }
     });
     return;
