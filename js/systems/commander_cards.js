@@ -604,7 +604,7 @@ function showCardDetail(cmdId) {
         </div>
       </div>
       <div class="card" style="padding:12px;margin-bottom:16px;border-color:${rc}22">
-        <div style="font-size:0.7rem;color:#aaa;line-height:1.6;font-style:italic">"${def.desc}"</div>
+        <div style="font-size:0.7rem;color:#aaa;line-height:1.6;font-style:italic">"${def.desc || def.lore || '???'}"</div>
       </div>
       ${masteryHtml}
       <div style="display:grid;gap:8px;margin-bottom:16px">${abilities}</div>
