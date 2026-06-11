@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sr">
 <head>
 <meta charset="UTF-8">
@@ -7,32 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// â”€â”€ AUTH GUARD â”€â”€
 (function() {
-  const SUPA_URL = 'https://kjgfouzyqcnlwbsyipxp.supabase.co';
-  const SUPA_KEY = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
-  const _sb = supabase.createClient(SUPA_URL, SUPA_KEY);
-
-  // HIVE igraÄŤ â€” provjeri localStorage
+  const _sb = supabase.createClient(
+    'https://kjgfouzyqcnlwbsyipxp.supabase.co',
+    'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+  );
   const hiveUser = localStorage.getItem('hg_hive_user');
-  if(hiveUser) {
-    window._hiveUser = hiveUser;
-    window._loginType = 'hive';
-    return; // OK
-  }
-
-  // Email igraÄŤ â€” provjeri Supabase sesiju
+  if(hiveUser) { window._hiveUser = hiveUser; window._loginType = 'hive'; window._supa = _sb; return; }
   _sb.auth.getSession().then(({ data }) => {
-    if(data.session) {
-      window._supaSession = data.session;
-      window._loginType = 'email';
-    } else {
-      // Nije ulogovan â€” redirect na index
-      window.location.href = 'index.html';
-    }
+    if(data.session) { window._supaSession = data.session; window._loginType = 'email'; window._supa = _sb; }
+    else { window.location.href = 'index.html'; }
   });
-
-  window._supa = _sb;
 })();
 </script>
 <link rel="stylesheet" href="css/base.css">
@@ -43,258 +28,258 @@
 <body>
 <div id="app">
 
-  <!-- â”€â”€ HEADER â”€â”€ -->
+  <!-- ── HEADER ── -->
   <div id="header">
-    <h1>â¬ˇ HIVE GALAXY</h1>
+    <h1>⬡ HIVE GALAXY</h1>
     <div class="res-bar">
-      <div class="res-item">đź”© <span class="rval" id="rMetal">0</span><span class="rprod" id="rMetalProd"></span></div>
-      <div class="res-item">đź’Ž <span class="rval" id="rCrystal">0</span><span class="rprod" id="rCrystalProd"></span></div>
-      <div class="res-item">â›˝ <span class="rval" id="rHe3">0</span><span class="rprod" id="rHe3Prod"></span></div>
-      <div class="res-item">âšˇ <span class="rval" id="rEnergy">0</span></div>
-      <div class="res-item">đź—ťď¸Ź <span class="rval" id="rKeys">0</span></div>
-      <div class="res-item">đźŹ <span class="rval" id="rCardKeys">0</span></div>
-      <div class="res-item">â­ <span class="rval" id="rScore">0</span></div>
+      <div class="res-item">🔩 <span class="rval" id="rMetal">0</span><span class="rprod" id="rMetalProd"></span></div>
+      <div class="res-item">💎 <span class="rval" id="rCrystal">0</span><span class="rprod" id="rCrystalProd"></span></div>
+      <div class="res-item">⛽ <span class="rval" id="rHe3">0</span><span class="rprod" id="rHe3Prod"></span></div>
+      <div class="res-item">⚡ <span class="rval" id="rEnergy">0</span></div>
+      <div class="res-item">🗝️ <span class="rval" id="rKeys">0</span></div>
+      <div class="res-item">🃏 <span class="rval" id="rCardKeys">0</span></div>
+      <div class="res-item">⭐ <span class="rval" id="rScore">0</span></div>
     </div>
     <div id="activeEventBadge" style="display:none;font-size:0.65rem;padding:2px 10px;
       background:rgba(255,204,68,0.1);border-bottom:1px solid rgba(255,204,68,0.2);
       text-align:center"></div>
     <div style="display:flex;gap:8px;align-items:center">
-      <button id="saveBtn" onclick="saveGame()">đź’ľ SaÄŤuvaj</button>
-      <button onclick="addTestResources()" class="btn-gold">âž• Test</button>
-      <button onclick="resetGame()" class="btn-red">đź—‘ď¸Ź Reset</button>
+      <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>
+      <button onclick="addTestResources()" class="btn-gold">➕ Test</button>
+      <button onclick="resetGame()" class="btn-red">🗑️ Reset</button>
     </div>
   </div>
 
-  <!-- â”€â”€ MAIN LAYOUT â”€â”€ -->
+  <!-- ── MAIN LAYOUT ── -->
   <div id="main-layout">
 
-    <!-- â”€â”€ LEFT NAV â”€â”€ -->
+    <!-- ── LEFT NAV ── -->
     <div id="nav">
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-baza')" data-grp="grp-baza">
-        <span class="nav-grp-icon" id="icon-grp-baza">â–ľ</span> BAZA
+        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> BAZA
       </div>
       <div class="nav-group" id="grp-baza">
         <button class="nav-btn active" onclick="showPanel('base')" data-panel="base">
-          <span class="icon">đźŹ°</span> Baza
+          <span class="icon">🏰</span> Baza
         </button>
         <button class="nav-btn" onclick="showPanel('shipfactory')" data-panel="shipfactory">
-          <span class="icon">đźŹ­</span> Ship Factory
+          <span class="icon">🏭</span> Ship Factory
         </button>
         <button class="nav-btn" onclick="showPanel('depot')" data-panel="depot">
-          <span class="icon">đź“¦</span> Depot
+          <span class="icon">📦</span> Depot
         </button>
         <button class="nav-btn" onclick="showPanel('recycler')" data-panel="recycler">
-          <span class="icon">â™»ď¸Ź</span> Recycler
+          <span class="icon">♻️</span> Recycler
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-flota')" data-grp="grp-flota">
-        <span class="nav-grp-icon" id="icon-grp-flota">â–ľ</span> FLOTA
+        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> FLOTA
       </div>
       <div class="nav-group" id="grp-flota">
         <button class="nav-btn" onclick="showPanel('designer')" data-panel="designer">
-          <span class="icon">đź”§</span> Designer
+          <span class="icon">🔧</span> Designer
         </button>
         <button class="nav-btn" onclick="showPanel('hangar')" data-panel="hangar">
-          <span class="icon">đźŹ </span> Hangar
+          <span class="icon">🏠</span> Hangar
         </button>
         <button class="nav-btn" onclick="showPanel('fleet')" data-panel="fleet">
-          <span class="icon">đźš€</span> Flota
+          <span class="icon">🚀</span> Flota
         </button>
         <button class="nav-btn" onclick="showPanel('formations')" data-panel="formations">
-          <span class="icon">â¬›</span> Formacije
+          <span class="icon">⬛</span> Formacije
         </button>
         <button class="nav-btn" onclick="showPanel('blueprints')" data-panel="blueprints">
-          <span class="icon">đź“‹</span> Blueprinti
+          <span class="icon">📋</span> Blueprinti
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-galaksija')" data-grp="grp-galaksija">
-        <span class="nav-grp-icon" id="icon-grp-galaksija">â–ľ</span> GALAKSIJA
+        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> GALAKSIJA
       </div>
       <div class="nav-group" id="grp-galaksija">
         <button class="nav-btn" onclick="showPanel('galaxy')" data-panel="galaxy">
-          <span class="icon">đź—şď¸Ź</span> Galaksija
+          <span class="icon">🗺️</span> Galaksija
         </button>
         <button class="nav-btn" onclick="showPanel('instances')" data-panel="instances">
-          <span class="icon">đźŚŚ</span> Instance
+          <span class="icon">🌌</span> Instance
         </button>
         <button class="nav-btn" onclick="showPanel('colonies')" data-panel="colonies">
-          <span class="icon">đźŞ</span> Kolonije
+          <span class="icon">🪐</span> Kolonije
         </button>
         <button class="nav-btn" onclick="showPanel('pvp')" data-panel="pvp">
-          <span class="icon">âš”ď¸Ź</span> PvP
+          <span class="icon">⚔️</span> PvP
         </button>
         <button class="nav-btn" onclick="showPanel('espionage')" data-panel="espionage">
-          <span class="icon">đź•µď¸Ź</span> Ĺ pijunaĹľa
+          <span class="icon">🕵️</span> Špijunaža
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-napredak')" data-grp="grp-napredak">
-        <span class="nav-grp-icon" id="icon-grp-napredak">â–ľ</span> NAPREDAK
+        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> NAPREDAK
       </div>
       <div class="nav-group" id="grp-napredak">
         <button class="nav-btn" onclick="showPanel('research')" data-panel="research">
-          <span class="icon">đź”¬</span> IstraĹľivanje
+          <span class="icon">🔬</span> Istraživanje
         </button>
         <button class="nav-btn" onclick="showPanel('missions')" data-panel="missions" style="position:relative">
-          <span class="icon">đź“ˇ</span> Misije
+          <span class="icon">📡</span> Misije
           <span id="missionsBadge" style="display:none;position:absolute;top:4px;right:4px;
             background:#ff3355;color:white;font-size:0.55rem;font-weight:700;
             padding:1px 5px;border-radius:8px;min-width:16px;text-align:center;
             line-height:1.4;pointer-events:none"></span>
         </button>
         <button class="nav-btn" onclick="showPanel('artifacts')" data-panel="artifacts">
-          <span class="icon">đź’ </span> Artefakti
+          <span class="icon">💠</span> Artefakti
         </button>
         <button class="nav-btn" onclick="showPanel('achievements')" data-panel="achievements">
-          <span class="icon">đźŹ†</span> DostignuÄ‡a
+          <span class="icon">🏆</span> Dostignuća
         </button>
         <button class="nav-btn" onclick="showPanel('commander')" data-panel="commander">
-          <span class="icon">đźŽ–ď¸Ź</span> Komandir
+          <span class="icon">🎖️</span> Komandir
         </button>
         <button class="nav-btn" onclick="showPanel('commander-cards')" data-panel="commander-cards">
-          <span class="icon">đźŹ</span> Karte
+          <span class="icon">🃏</span> Karte
         </button>
         <button class="nav-btn" onclick="showPanel('shop')" data-panel="shop">
-          <span class="icon">đź’Ž</span> Shop
+          <span class="icon">💎</span> Shop
         </button>
       </div>
     </div>
 
-    <!-- â”€â”€ CONTENT â”€â”€ -->
+    <!-- ── CONTENT ── -->
     <div id="content">
 
       <!-- BAZA -->
       <div id="panel-base" class="panel active">
-        <div class="page-title">đźŹ° KOMANDNI CENTAR BAZE</div>
+        <div class="page-title">🏰 KOMANDNI CENTAR BAZE</div>
         <div class="grid-3" id="baseGrid"></div>
-        <div class="page-title">âšˇ ENERGETSKA MREĹ˝A</div>
+        <div class="page-title">⚡ ENERGETSKA MREŽA</div>
         <div class="grid-4" id="energyGrid"></div>
-        <div class="page-title">đź›ˇď¸Ź ODBRANA BAZE</div>
+        <div class="page-title">🛡️ ODBRANA BAZE</div>
         <div class="grid-4" id="defenseGrid"></div>
-        <div class="page-title">âšˇ ENERGETSKI BILANS</div>
+        <div class="page-title">⚡ ENERGETSKI BILANS</div>
         <div class="card" id="energyBalanceCard"></div>
-        <div class="page-title">đź”§ SPECIJALNE ZGRADE</div>
+        <div class="page-title">🔧 SPECIJALNE ZGRADE</div>
         <div class="grid-3" id="specialGrid"></div>
       </div>
 
       <!-- SHIP FACTORY -->
       <div id="panel-shipfactory" class="panel">
-        <div class="page-title">đźŹ­ SHIP FACTORY</div>
+        <div class="page-title">🏭 SHIP FACTORY</div>
         <div id="shipFactoryCard"></div>
-        <div class="page-title" style="margin-top:20px">đźš€ GRADNJA PO DIZAJNU</div>
+        <div class="page-title" style="margin-top:20px">🚀 GRADNJA PO DIZAJNU</div>
         <div id="shipBuildGrid"></div>
       </div>
 
       <!-- DEPOT -->
       <div id="panel-depot" class="panel">
-        <div class="page-title">đź“¦ DEPOT</div>
+        <div class="page-title">📦 DEPOT</div>
         <div id="depotCard"></div>
       </div>
 
       <!-- RECYCLER -->
       <div id="panel-recycler" class="panel">
-        <div class="page-title">â™»ď¸Ź RECYCLER</div>
+        <div class="page-title">♻️ RECYCLER</div>
         <div id="recyclerContent"></div>
       </div>
 
       <!-- DESIGNER -->
       <div id="panel-designer" class="panel">
-        <div class="page-title">đź”§ SHIP DESIGNER</div>
+        <div class="page-title">🔧 SHIP DESIGNER</div>
         <div id="designerContent"></div>
       </div>
 
       <!-- HANGAR -->
       <div id="panel-hangar" class="panel">
-        <div class="page-title">đźŹ  HANGAR</div>
+        <div class="page-title">🏠 HANGAR</div>
         <div id="hangarContent"></div>
       </div>
 
       <!-- FLOTA -->
       <div id="panel-fleet" class="panel">
-        <div class="page-title">đźš€ FLOTA</div>
+        <div class="page-title">🚀 FLOTA</div>
         <div id="fleetGrid"></div>
       </div>
 
       <!-- FORMACIJE -->
       <div id="panel-formations" class="panel">
-        <div class="page-title">â¬› FORMACIJE FLOTE</div>
+        <div class="page-title">⬛ FORMACIJE FLOTE</div>
         <div id="formationsContent"></div>
       </div>
 
       <!-- BLUEPRINTI -->
       <div id="panel-blueprints" class="panel">
-        <div class="page-title">đź“‹ BLUEPRINTI</div>
+        <div class="page-title">📋 BLUEPRINTI</div>
         <div id="blueprintGrid"></div>
       </div>
 
       <!-- GALAKSIJA -->
       <div id="panel-galaxy" class="panel">
-        <div class="page-title">đź—şď¸Ź GALAKSIJA</div>
+        <div class="page-title">🗺️ GALAKSIJA</div>
         <div id="galaxyContent"></div>
       </div>
 
       <!-- INSTANCE -->
       <div id="panel-instances" class="panel">
-        <div class="page-title">đźŚŚ INSTANCE</div>
+        <div class="page-title">🌌 INSTANCE</div>
         <div id="instanceContent"></div>
       </div>
 
       <!-- MISIJE -->
       <div id="panel-missions" class="panel">
-        <div class="page-title">đź“ˇ MISIJE</div>
+        <div class="page-title">📡 MISIJE</div>
         <div id="missionsContent"></div>
       </div>
 
       <!-- PVP -->
       <div id="panel-pvp" class="panel">
-        <div class="page-title">âš”ď¸Ź PvP ARENA</div>
+        <div class="page-title">⚔️ PvP ARENA</div>
         <div id="pvpContent"></div>
       </div>
 
-      <!-- Ĺ PIJUNAĹ˝A -->
+      <!-- ŠPIJUNAŽA -->
       <div id="panel-espionage" class="panel">
-        <div class="page-title">đź•µď¸Ź Ĺ PIJUNAĹ˝A</div>
+        <div class="page-title">🕵️ ŠPIJUNAŽA</div>
         <div id="espionageContent"></div>
       </div>
 
-      <!-- ISTRAĹ˝IVANJE -->
+      <!-- ISTRAŽIVANJE -->
       <div id="panel-research" class="panel">
-        <div class="page-title">đź”¬ ISTRAĹ˝IVANJE</div>
+        <div class="page-title">🔬 ISTRAŽIVANJE</div>
         <div id="researchContent"></div>
       </div>
 
       <!-- KOLONIJE -->
       <div id="panel-colonies" class="panel">
-        <div class="page-title">đźŞ KOLONIJE</div>
+        <div class="page-title">🪐 KOLONIJE</div>
         <div id="coloniesContent"></div>
       </div>
 
       <!-- ARTEFAKTI -->
       <div id="panel-artifacts" class="panel">
-        <div class="page-title">đź’  ARTEFAKTI</div>
+        <div class="page-title">💠 ARTEFAKTI</div>
         <div id="artifactsContent"></div>
       </div>
 
-      <!-- DOSTIGNUÄ†A -->
+      <!-- DOSTIGNUĆA -->
       <div id="panel-achievements" class="panel">
-        <div class="page-title">đźŹ† DOSTIGNUÄ†A</div>
+        <div class="page-title">🏆 DOSTIGNUĆA</div>
         <div id="achievementsContent"></div>
       </div>
 
       <!-- KOMANDIR -->
       <div id="panel-commander" class="panel">
-        <div class="page-title">đźŽ–ď¸Ź KOMANDIR</div>
+        <div class="page-title">🎖️ KOMANDIR</div>
         <div id="commanderContent"></div>
       </div>
 
       <!-- KARTE KOMANDIRA -->
       <div id="panel-commander-cards" class="panel">
-        <div class="page-title">đźŹ KARTE KOMANDIRA</div>
+        <div class="page-title">🃏 KARTE KOMANDIRA</div>
         <!-- Tab navigacija -->
         <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid rgba(0,212,255,0.15);padding-bottom:12px" id="cardTabNav"></div>
-        <!-- Tab sadrĹľaj -->
+        <!-- Tab sadržaj -->
         <div id="cardTabBody"></div>
         <!-- Skriveni divovi za svaki tab -->
         <div id="commanderCardsContent" style="display:none"></div>
@@ -303,17 +288,17 @@
 
       <!-- SHOP -->
       <div id="panel-shop" class="panel">
-        <div class="page-title">đź’Ž SHOP</div>
+        <div class="page-title">💎 SHOP</div>
         <div id="shopContent"></div>
       </div>
 
     </div>
 
-    <!-- â”€â”€ RIGHT PANEL â”€â”€ -->
+    <!-- ── RIGHT PANEL ── -->
     <div id="rightPanel">
       <div class="rp-section">
         <div class="rp-title">KOMANDIR</div>
-        <div class="stat-row">Level <span id="cmdLevel">1</span> Â· <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
+        <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
         <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>
         <div style="font-size:0.65rem;color:#6a90b8;margin-top:4px">
           <span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP
@@ -322,13 +307,13 @@
       <div class="rp-section">
         <div class="rp-title">HIVE TOKENI</div>
         <div style="font-size:0.72rem;font-family:'Share Tech Mono',monospace;line-height:2">
-          <div>đź’° BCM: <span id="hBCM" style="color:white">0</span></div>
-          <div>đź’° BoCrypto: <span id="hBoCrypto" style="color:white">0</span></div>
-          <div>đź’° BPW: <span id="hBPW" style="color:#ffcc44">0</span> <span style="color:#6a90b8;font-size:0.6rem">sat</span></div>
+          <div>💰 BCM: <span id="hBCM" style="color:white">0</span></div>
+          <div>💰 BoCrypto: <span id="hBoCrypto" style="color:white">0</span></div>
+          <div>💰 BPW: <span id="hBPW" style="color:#ffcc44">0</span> <span style="color:#6a90b8;font-size:0.6rem">sat</span></div>
         </div>
       </div>
       <div class="rp-section">
-        <div class="rp-title">FLOTA MOÄ†</div>
+        <div class="rp-title">FLOTA MOĆ</div>
         <div id="fleetPowerDisplay" style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#00d4ff">0</div>
       </div>
       <div class="rp-section">
@@ -422,9 +407,9 @@
 }
 </style>
 
-<!-- â”€â”€ SCRIPTS â€” redoslijed je bitan â”€â”€ -->
+<!-- ── SCRIPTS — redoslijed je bitan ── -->
 
-<!-- 1. DATA fajlovi â€” samo podaci, nula logike -->
+<!-- 1. DATA fajlovi — samo podaci, nula logike -->
 <script src="data/buildings.js"></script>
 <script src="data/ships.js"></script>
 <script src="data/weapons.js"></script>
@@ -478,7 +463,7 @@
 <script src="js/systems/formations.js"></script>
 <script src="js/systems/events.js"></script>
 
-<!-- 6. MAIN â€” zadnji -->
+<!-- 6. MAIN — zadnji -->
 <script src="js/main.js"></script>
 
 </body>
