@@ -590,6 +590,13 @@ function showCardDetail(cmdId) {
       transition:all 0.2s">★</span>`;
   }).join('') : '';
 
+  const modalActions = owned
+    ? [
+        { label: isActive ? '✓ Aktivan Komandir' : '★ Postavi kao Aktivnog', cls: isActive ? 'btn-g' : 'btn-gold', fn: () => { setActiveCommander(cmdId); closeModal(); } },
+        { label: 'Zatvori', cls: '', fn: closeModal }
+      ]
+    : [{ label: 'Zatvori', cls: '', fn: closeModal }];
+
   openModal(
     `${def.icon} ${def.name}`,
     `
@@ -609,16 +616,11 @@ function showCardDetail(cmdId) {
       </div>
       ${masteryHtml}
       <div style="display:grid;gap:8px;margin-bottom:16px">${abilities}</div>
-      ${owned ? `
-        <button class="btn ${isActive?'btn-g':''}" style="width:100%;margin-top:4px"
-          onclick="setActiveCommander('${cmdId}');closeModal()">
-          ${isActive ? '✓ Aktivan Komandir' : '▶ Postavi kao Aktivnog'}
-        </button>
-      ` : `<div class="card" style="text-align:center;color:#6a90b8;font-size:0.7rem;padding:12px">
-        🔒 Nije u kolekciji — otvori paket da dobiješ ovog komandira
-      </div>`}
+      ${!owned ? `<div class="card" style="text-align:center;color:#6a90b8;font-size:0.7rem;padding:12px">
+        🔒 Nije u kolekciji — otvori paket da dobijes ovog komandira
+      </div>` : ''}
     `,
-    []
+    modalActions
   );
 }
 
