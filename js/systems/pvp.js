@@ -234,17 +234,54 @@ function renderPvP() {
 
 window._currentOpponents = window._currentOpponents || [];
 
-function refreshOpponents() {
+async function refreshOpponents() {
   const playerPower = calcFleetTotalPower();
-  window._currentOpponents = Array.from({ length: 5 }, () => generateAIOpponent(playerPower, pvp.rating));
   const el = document.getElementById('opponentList');
+  if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">⏳ Tražim protivnike...</div>';
+
+  let realPlayers = [];
+  if (window._supa) {
+    const myId = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
+    const { data } = await window._supa.from('pvp_snapshots')
+      .select('*')
+      .neq('id', myId || '')
+      .order('rating', { ascending: false })
+      .limit(20);
+    if (data && data.length > 0) {
+      // Uzmi bliske po ratingu
+      const sorted = data.sort((a, b) => Math.abs(a.rating - pvp.rating) - Math.abs(b.rating - pvp.rating));
+      realPlayers = sorted.slice(0, 5).map(row => ({
+        id:          row.id,
+        name:        row.username,
+        avatar:      '👾',
+        rating:      row.rating,
+        level:       row.level,
+        power:       row.power || 0,
+        fleet:       Array.isArray(row.fleet) ? row.fleet : [],
+        commanders:  Array.isArray(row.commanders) ? row.commanders : [],
+        isPremium:   row.is_premium || false,
+        isReal:      true,
+        titleIcon:   getTitleByRating(row.rating).icon,
+        cmdRarity:   row.is_premium ? 'E' : 'C',
+        resources:   { metal: row.power * 10 || 50000, crystal: row.power * 8 || 40000, he3: row.power * 5 || 25000 },
+      }));
+    }
+  }
+
+  // Dopuni AI botovima ako nema dovoljno pravih igrača
+  const needed = 5 - realPlayers.length;
+  const aiBots = Array.from({ length: needed }, () => generateAIOpponent(playerPower, pvp.rating));
+  window._currentOpponents = [...realPlayers, ...aiBots];
+
   if (el) el.innerHTML = renderOpponentList(playerPower);
   toast('🔄 Lista protivnika osvježena!', 'inf');
 }
 
 function renderOpponentList(playerPower) {
   if (window._currentOpponents.length === 0) {
-    window._currentOpponents = Array.from({ length: 5 }, () => generateAIOpponent(playerPower, pvp.rating));
+    // Inicijalni load — pokreni async fetch, vrati placeholder
+    refreshOpponents();
+    return '<div style="color:#6a90b8;padding:20px;text-align:center">⏳ Učitavam protivnike...</div>';
   }
 
   const rarColors = { L: '#ffaa00', E: '#aa44ff', R: '#4488ff', C: '#aaaaaa' };

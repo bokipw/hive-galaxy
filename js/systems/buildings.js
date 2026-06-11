@@ -153,18 +153,38 @@ function upgradeBuilding(key) {
 function boostBuilding(key) {
   const item = buildQueue.find(q => q.key === key);
   if (!item) return;
+  const cost    = item.boostCost || getBuildingBoostCost(key);
+  const bName   = buildingsData[key]?.name || key;
+  const hasBPW  = (R.spCard || 0) >= cost;
+  const timeLeft = Math.max(0, Math.ceil((item.finishAt - Date.now()) / 1000));
+
   openModal('⚡ Ubrzaj Izgradnju', `
     <div style="text-align:center;padding:20px">
       <div style="font-size:2rem;margin-bottom:12px">⚡</div>
-      <div style="font-size:0.9rem;color:white;margin-bottom:8px">
-        Ubrzaj izgradnju ${buildingsData[key]?.name}
+      <div style="font-size:0.9rem;color:white;margin-bottom:8px">Ubrzaj izgradnju <strong>${bName}</strong></div>
+      <div style="font-size:1.2rem;color:#ffcc44;font-family:'Orbitron',monospace;margin-bottom:6px">${cost} BPW</div>
+      <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:16px">
+        Imaš: <strong style="color:${hasBPW?'#00ff88':'#ff3355'}">${R.spCard||0} BPW</strong>
+        · Preostalo: ${formatTimer(timeLeft)}
       </div>
-      <div style="font-size:1.2rem;color:#ffcc44;font-family:'Orbitron',monospace;margin-bottom:16px">
-        ${item.boostCost} satoshi BPW
-      </div>
-      <div style="font-size:0.72rem;color:#6a90b8">BPW token integracija — uskoro dostupno.</div>
     </div>
-  `, [{ label: 'Zatvori', fn: closeModal }]);
+  `, [
+    {
+      label: hasBPW ? '⚡ Ubrzaj odmah' : '❌ Nema dovoljno BPW',
+      fn: () => {
+        if (!hasBPW) return;
+        R.spCard = (R.spCard || 0) - cost;
+        item.finishAt = Date.now() - 1;
+        closeModal();
+        tickBuildQueue();
+        updateResUI();
+        toast(`⚡ ${bName} završena!`, 'ok');
+        addLog(`⚡ Gradnja ${bName} ubrzana za ${cost} BPW.`);
+        saveGame();
+      }
+    },
+    { label: 'Odustani', fn: closeModal }
+  ]);
 }
 
 // ── STARTER BLUEPRINTI ──

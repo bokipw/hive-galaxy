@@ -11,25 +11,55 @@ function _getSaveId() {
 }
 
 async function _cloudSave(saveData) {
-  if(!window._supa || !window._supaSession) return;
-  const uid = window._supaSession.user.id;
+  if(!window._supa) return;
+
+  const isEmail = !!window._supaSession;
+  const isHive  = !!window._hiveUser;
+  if(!isEmail && !isHive) return;
+
+  const uid      = isEmail ? window._supaSession.user.id : 'hive_' + window._hiveUser;
+  const username = isEmail
+    ? (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown')
+    : window._hiveUser;
   const score = (saveData.commander && saveData.commander.score) || 0;
-  const level  = (saveData.commander && saveData.commander.level) || 1;
+  const level = (saveData.commander && saveData.commander.level) || 1;
 
-  // Upsert save
-  await window._supa.from('saves').upsert({
-    id: uid,
-    data: saveData,
-    version: (saveData._version || 0) + 1,
-    saved_at: new Date().toISOString()
-  });
+  // Upsert save (samo email igrači)
+  if(isEmail) {
+    await window._supa.from('saves').upsert({
+      id: uid,
+      data: saveData,
+      version: (saveData._version || 0) + 1,
+      saved_at: new Date().toISOString()
+    });
+  }
 
-  // Upsert leaderboard
-  await window._supa.from('leaderboard').upsert({
-    id: uid,
-    username: window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown',
-    score,
+  // Upsert leaderboard (samo email igrači jer leaderboard.id = auth.users uuid)
+  if (isEmail) {
+    await window._supa.from('leaderboard').upsert({
+      id: window._supaSession.user.id,
+      username,
+      score,
+      level,
+      is_premium: window._playerPremium || false,
+      updated_at: new Date().toISOString()
+    });
+  }
+
+  // Upsert PvP snapshot
+  const deployedFleet = typeof getAllDeployedSlots === 'function' ? getAllDeployedSlots() : [];
+  const commanders    = (saveData.deployedCommanders || []).map(c => ({
+    id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
+  }));
+
+  await window._supa.from('pvp_snapshots').upsert({
+    id:         uid,
+    username,
+    rating:     (saveData.pvp && saveData.pvp.rating) || 1000,
     level,
+    power:      typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
+    fleet:      deployedFleet,
+    commanders,
     is_premium: window._playerPremium || false,
     updated_at: new Date().toISOString()
   });
