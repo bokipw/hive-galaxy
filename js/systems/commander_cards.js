@@ -463,6 +463,7 @@ function showCardDetail(cmdId) {
   let owned = (window.ownedCommanders || []).find(o => o.id === cmdId);
   if (!owned) owned = (window.ownedCommanders || []).find(o => String(o.id).trim() === String(cmdId).trim());
   if (!owned) owned = (window.ownedCommanders || []).find(o => String(o.id).toLowerCase() === String(cmdId).toLowerCase());
+  console.log('[showCardDetail] cmdId=', cmdId, 'owned=', owned, 'ownedCommanders=', (window.ownedCommanders||[]).map(o=>o.id));
   const rc = rarityColor(def.rarity);
   const rg = rarityGlow(def.rarity);
   const isActive = window._activeCommander === cmdId;
