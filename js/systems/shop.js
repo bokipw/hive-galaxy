@@ -534,6 +534,12 @@ function showCryptoPayment(itemId, symbol) {
   const item = SHOP_ITEMS.find(i => i.id === itemId);
   if (!item) return;
 
+  // BCM + premium = automatski Keychain flow
+  if (symbol === 'BCM' && item.action === 'buyPremium') {
+    buyPremiumWithBCM();
+    return;
+  }
+
   const addresses = {
     BTC:  'bc1q_TVOJA_BTC_ADRESA',
     USDT: '0x_TVOJA_USDT_ADRESA',
@@ -571,5 +577,66 @@ function showCryptoPayment(itemId, symbol) {
     </div>`,
     [{ label: '✓ Poslao sam uplatu', cls: 'btn-g', fn: () => { closeModal(); toast('Hvala! Nalog će biti ažuriran čim se transakcija potvrdi.', 'ok'); } },
      { label: 'Otkaži', cls: '', fn: closeModal }]
+  );
+}
+
+async function buyPremiumWithBCM() {
+  if (!window._hiveUser) {
+    openModal('⚠️ Greška', '<p>Moraš biti prijavljen sa HIVE Keychain nalogom!</p>', [{ label: 'OK', cls: '', fn: closeModal }]);
+    return;
+  }
+  if (window._playerPremium) {
+    openModal('⭐ Već Premium', '<p>Već imaš Premium status!</p>', [{ label: 'OK', cls: 'btn-g', fn: closeModal }]);
+    return;
+  }
+  if (!window.hive_keychain) {
+    openModal('⚠️ Greška', '<p>HIVE Keychain nije instaliran!</p>', [{ label: 'OK', cls: '', fn: closeModal }]);
+    return;
+  }
+
+  closeModal();
+  toast('⏳ Čeka se potvrda u Keychain...', 'info');
+
+  window.hive_keychain.requestSendToken(
+    window._hiveUser,
+    'bokica80',
+    '1.000',
+    'HIVEGALAXY_premium',
+    'BCM',
+    async function(resp) {
+      if (!resp.success) {
+        toast('❌ Transakcija odbijena: ' + (resp.message || 'Greška'), 'err');
+        return;
+      }
+
+      const txid = resp.result?.id || resp.result?.tx_id || '';
+      toast('⏳ Transakcija poslana, verifikujem...', 'info');
+
+      try {
+        const supaUrl = window._supa?.supabaseUrl || '';
+        const fnUrl = supaUrl.replace('/rest/v1', '') + '/functions/v1/verify-premium';
+        const res = await fetch(fnUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
+          body: JSON.stringify({ username: window._hiveUser, txid })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          window._playerPremium = true;
+          if (typeof updateResUI === 'function') updateResUI();
+          if (typeof renderShop === 'function') renderShop();
+          openModal('⭐ Premium aktiviran!',
+            '<p style="color:#ffcc44;font-size:1rem;text-align:center">Čestitamo! Premium status je aktiviran.</p>' +
+            '<p style="color:#6a90b8;font-size:0.75rem;text-align:center">Sada imaš pristup svim premium funkcijama i blockchain zaradama.</p>',
+            [{ label: '🚀 Super!', cls: 'btn-gold', fn: closeModal }]
+          );
+        } else {
+          toast('⚠️ ' + (data.error || 'Verifikacija nije uspjela. Kontaktuj admina.'), 'err');
+        }
+      } catch(e) {
+        toast('⚠️ Verifikacija nije uspjela. Kontaktuj admina sa txid: ' + txid, 'err');
+      }
+    }
   );
 }
