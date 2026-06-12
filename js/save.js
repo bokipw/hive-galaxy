@@ -46,8 +46,26 @@ async function _cloudSave(saveData) {
     });
   }
 
-  // Upsert PvP snapshot
-  const deployedFleet = typeof getAllDeployedSlots === 'function' ? getAllDeployedSlots() : [];
+  // Upsert PvP snapshot — snimamo izračunate stats za simulateBattle
+  const rawFleet = typeof getAllDeployedSlots === 'function' ? getAllDeployedSlots() : [];
+  const deployedFleet = rawFleet.map(slot => {
+    const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
+    const ship   = typeof getShipById  === 'function' ? getShipById(slot.ship_id) : null;
+    return {
+      ship_id:  slot.ship_id,
+      count:    slot.count || 1,
+      name:     ship ? ship.name : (slot.ship_id || 'Brod'),
+      hp:       stats ? stats.hp      : 0,
+      dps:      stats ? stats.dps     : 0,
+      shield:   stats ? stats.shield  : 0,
+      agility:  stats ? stats.agility : 0,
+      speed:    stats ? stats.speed   : 1,
+      armor:    ship  ? (ship.armor   || 'Light') : 'Light',
+      row:      slot.row || null,
+      col:      slot.col || null,
+    };
+  }).filter(s => s.hp > 0 && s.dps > 0);
+
   const commanders    = (saveData.deployedCommanders || []).map(c => ({
     id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
   }));

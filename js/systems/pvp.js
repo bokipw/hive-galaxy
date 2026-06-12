@@ -403,10 +403,10 @@ function startPvpBattle(opponentIdx) {
   setTimeout(() => {
     // Espionage Lv100 → +10% krit u PvP
     const espLv100 = typeof getEspionageLevel === 'function' && getEspionageLevel() >= 100;
-    // Pravi igrači imaju fleet iz baze bez hp/dps — generišemo ekvivalentnu AI flotu po poweru
+    // Fleet iz baze ima hp/dps/shield/agility/speed — sve što simulateBattle treba
     let enemyFleet = opp.fleet || [];
-    const fleetHasStats = enemyFleet.length > 0 && enemyFleet[0].hp && enemyFleet[0].dps;
-    if (!fleetHasStats) {
+    // Fallback na AI flotu ako je stari snapshot bez stats
+    if (enemyFleet.length === 0 || !enemyFleet[0].hp) {
       const oppPower = opp.power || 10000;
       const difficulty = oppPower / Math.max(1, calcFleetTotalPower());
       enemyFleet = generateAIFleet(calcFleetTotalPower(), Math.min(1.5, Math.max(0.3, difficulty)));
