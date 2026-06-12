@@ -46,25 +46,59 @@ async function _cloudSave(saveData) {
     });
   }
 
-  // Upsert PvP snapshot — snimamo izračunate stats za simulateBattle
+  // Upsert PvP snapshot — snimamo battle-ready stats sa research bonusima
   const rawFleet = typeof getAllDeployedSlots === 'function' ? getAllDeployedSlots() : [];
+
+  // Research bonusi igrača
+  const resDpsBonus    = typeof getWeaponsDpsBonus  === 'function' ? (1 + getWeaponsDpsBonus()  / 100) : 1;
+  const resShieldBonus = typeof getShieldBonus      === 'function' ? (1 + getShieldBonus()      / 100) : 1;
+  const sfLv           = buildings.ship_factory?.level || 0;
+  const sfMult         = sfLv >= 100 ? 1.05 : 1.0;
+
   const deployedFleet = rawFleet.map(slot => {
     const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
-    const ship   = typeof getShipById  === 'function' ? getShipById(slot.ship_id) : null;
+    const ship  = typeof getShipById   === 'function' ? getShipById(slot.ship_id) : null;
+    if (!stats || !ship) return null;
+
+    // Engine specijal
+    const engId  = slot.engine_1 || null;
+    const eng    = (engId && typeof getEngineById === 'function') ? getEngineById(engId) : null;
+    const engSpec = eng?.special || null;
+
+    // Shield regen + specijal
+    let shieldRegen = 0;
+    let shieldSpec  = null;
+    for (let si = 1; si <= 3; si++) {
+      const sh = (slot[`shield_${si}`] && typeof getShieldById === 'function') ? getShieldById(slot[`shield_${si}`]) : null;
+      if (!sh) continue;
+      shieldRegen += sh.regen || 0;
+      if (!shieldSpec && sh.special) shieldSpec = sh.special;
+    }
+
+    let finalShield = stats.shield * resShieldBonus * sfMult;
+    if (shieldSpec?.type === 'max_shield_boost') finalShield *= (1 + shieldSpec.bonus / 100);
+
+    const finalShieldRegen = typeof getShieldRegenBonus === 'function'
+      ? Math.floor(shieldRegen * (1 + getShieldRegenBonus() / 100))
+      : shieldRegen;
+
     return {
-      ship_id:  slot.ship_id,
-      count:    slot.count || 1,
-      name:     ship ? ship.name : (slot.ship_id || 'Brod'),
-      hp:       stats ? stats.hp      : 0,
-      dps:      stats ? stats.dps     : 0,
-      shield:   stats ? stats.shield  : 0,
-      agility:  stats ? stats.agility : 0,
-      speed:    stats ? stats.speed   : 1,
-      armor:    ship  ? (ship.armor   || 'Light') : 'Light',
-      row:      slot.row || null,
-      col:      slot.col || null,
+      ship_id:      slot.ship_id,
+      count:        slot.count || 1,
+      name:         ship.name || slot.ship_id,
+      hp:           Math.floor(stats.hp  * sfMult),
+      dps:          Math.floor(stats.dps * resDpsBonus * sfMult),
+      shield:       Math.floor(finalShield),
+      maxShield:    Math.floor(finalShield),
+      shieldRegen:  finalShieldRegen,
+      agility:      stats.agility + (eng?.agility_bonus || 0),
+      speed:        stats.speed   + (eng?.speed > 1 ? eng.speed - 1 : 0),
+      armor:        ship.armor || 'Light',
+      engineSpecial: engSpec || null,
+      row:          slot.row || null,
+      col:          slot.col || null,
     };
-  }).filter(s => s.hp > 0 && s.dps > 0);
+  }).filter(s => s && s.hp > 0 && s.dps > 0);
 
   const commanders    = (saveData.deployedCommanders || []).map(c => ({
     id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
