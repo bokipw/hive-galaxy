@@ -366,8 +366,9 @@
         </div>
         <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
         <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>
-        <div style="font-size:0.65rem;color:#6a90b8;margin-top:4px">
-          <span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
+          <span style="font-size:0.65rem;color:#6a90b8"><span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP</span>
+          <button onclick="logoutGame()" style="font-size:0.5rem;padding:2px 7px;background:rgba(255,51,85,0.08);border:1px solid rgba(255,51,85,0.25);color:#ff3355;border-radius:3px;cursor:pointer;letter-spacing:1px">⏻ LOGOUT</button>
         </div>
       </div>
       <!-- HIVE WALLET dugme -->
@@ -561,6 +562,14 @@
 <script src="js/systems/events.js"></script>
 
 <script>
+function logoutGame() {
+  if (!confirm('Sigurno se želiš odjaviti?')) return;
+  saveGame();
+  localStorage.removeItem('hg_hive_user');
+  if (window._supa) window._supa.auth.signOut();
+  window.location.href = 'index.html';
+}
+
 function updateHiveTokenUI() {
   const unEl = document.getElementById('rpUsername');
   const badgeEl = document.getElementById('rpPremiumBadge');
