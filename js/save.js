@@ -88,6 +88,12 @@ async function _cloudLoad() {
   return data.data;
 }
 
+function _saveKey() {
+  if (window._hiveUser)    return 'hive_save_' + window._hiveUser;
+  if (window._supaSession) return 'hive_save_' + window._supaSession.user.id;
+  return 'hive_save';
+}
+
 function saveGame() {
   try {
     const saveData = {
@@ -150,7 +156,7 @@ function saveGame() {
       cardAbilityCooldowns: Object.keys(window).filter(k=>k.startsWith('_cardAbility_'))
         .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
     };
-    localStorage.setItem('hive_save', JSON.stringify(saveData));
+    localStorage.setItem(_saveKey(), JSON.stringify(saveData));
     _cloudSave(saveData); // async, ne blokira
     const btn = document.getElementById('saveBtn');
     if (btn) { btn.textContent = '✅ Sačuvano'; setTimeout(() => btn.textContent = '💾 Sačuvaj', 1500); }
@@ -168,7 +174,7 @@ async function loadGameCloud() {
 }
 
 function loadGame() {
-  const raw = localStorage.getItem('hive_save');
+  const raw = localStorage.getItem(_saveKey()) || localStorage.getItem('hive_save');
   if (!raw) return false;
   try {
     const s = JSON.parse(raw);
@@ -252,6 +258,7 @@ function loadGame() {
 
 function resetGame() {
   if (confirm('⚠️ SIGURNO? Ovo će obrisati SAV napredak!')) {
+    localStorage.removeItem(_saveKey());
     localStorage.removeItem('hive_save');
     location.reload();
   }
