@@ -175,115 +175,87 @@ function buildPvpFleetFromSnapshot(snapshotFleet) {
 
 // ── PvP simulacija ──
 function simulatePvpBattle(fleetA, fleetB) {
+  const clone = u => JSON.parse(JSON.stringify(u));
+  const units = [...fleetA.map(clone), ...fleetB.map(clone)];
+
   const log = [];
+  const armorMod = { Light: 1, Medium: 0.9, Heavy: 0.8, Nano: 1.1 };
+  const alive = side => units.filter(u => u.side === side && u.alive);
   let round = 0;
-
-  const allUnits = [...fleetA, ...fleetB];
-  if (allUnits.length === 0) return { status: 'draw', round: 0, log };
-
-  const alive = side => allUnits.filter(u => u.alive && u.side === side);
 
   while (round < PVP_MAX_ROUNDS) {
     round++;
     log.push({ type: 'round', msg: `━━━ RUNDA ${round} ━━━` });
 
-    const active = allUnits.filter(u => u.alive);
-    // Sortiramo po brzini — brži idu prvi
-    active.sort((a, b) => b.speed - a.speed);
+    const attackers = units.filter(u => u.alive).sort((a, b) => b.speed - a.speed);
 
-    for (const attacker of active) {
-      if (!attacker.alive) continue;
-
-      // Shield regen na početku poteza
-      if (attacker.shieldRegen > 0 && attacker.shield < attacker.maxShield) {
-        attacker.shield = Math.min(attacker.maxShield, attacker.shield + attacker.shieldRegen);
-      }
-
-      // Odaberi metu — nasumični živi neprijatelj
-      const enemies = allUnits.filter(u => u.alive && u.side !== attacker.side);
+    for (const att of attackers) {
+      if (!att.alive) continue;
+      const enemies = alive(att.side === 'player' ? 'enemy' : 'player');
       if (enemies.length === 0) break;
+
       const target = enemies[Math.floor(Math.random() * enemies.length)];
 
-      // Dodge provjera
-      if (target.agility > 0 && Math.random() * 100 < target.agility) {
-        log.push({ type: 'miss', msg: `💨 ${target.name} izbjegao napad od ${attacker.name}` });
-        continue;
-      }
-
-      // Kritični udarac
-      const critChance = 5 + (attacker.critBonus || 0);
-      const isCrit = Math.random() * 100 < critChance;
-      const critMult = isCrit ? 1.5 : 1.0;
-
-      // Damage kalkulacija
-      const armorRed = PVP_ARMOR_REDUCTION[target.armor] || 0;
-      const dmgRed   = (target.dmgReduction || 0) / 100;
-      let dmg = Math.floor(attacker.dps * critMult * (1 - armorRed) * (1 - dmgRed));
-      dmg = Math.max(1, dmg);
-
-      // Engine specijal — void phase (dodge sve)
+      // void_phase
       if (target.engineSpecial?.type === 'void_phase') {
-        const voidChance = target.engineSpecial.chance || 0;
-        if (Math.random() * 100 < voidChance) {
-          log.push({ type: 'effect', msg: `🕳️ ${target.name} ušao u void — imun na štetu!` });
+        if (Math.random() * 100 < (target.engineSpecial.chance || 0)) {
+          log.push({ type: 'effect', msg: `🕳️ ${target.name} fazira u void — imun!`, attackerId: att.id, targetId: target.id });
           continue;
         }
       }
 
-      // Primijeni štetu — shield prvi, pa hp
-      let shieldDmg = 0;
-      let hpDmg = 0;
-      if (target.shield > 0) {
-        shieldDmg = Math.min(target.shield, dmg);
-        target.shield -= shieldDmg;
-        hpDmg = dmg - shieldDmg;
-      } else {
-        hpDmg = dmg;
+      // dodge
+      if (Math.random() * 100 < (target.agility || 0)) {
+        log.push({ type: 'miss', msg: `💨 ${att.name} promašuje ${target.name}`, attackerId: att.id, targetId: target.id });
+        continue;
       }
-      target.hp -= hpDmg;
 
-      const critTxt = isCrit ? ' 💥KRIT' : '';
+      // damage
+      let dmg = att.dps;
+      const critChance = 5 + (att.critBonus || 0);
+      const isCrit = Math.random() * 100 < critChance;
+      if (isCrit) dmg *= 1.5;
+      dmg *= armorMod[target.armor] || 1;
+      dmg *= 1 - ((target.dmgReduction || 0) / 100);
+      dmg = Math.max(1, Math.round(dmg));
+
+      // shield pa hp
+      const shieldDmg = Math.min(target.shield, dmg);
+      target.shield -= shieldDmg;
+      target.hp = Math.max(0, target.hp - (dmg - shieldDmg));
+
       log.push({
-        type:        'attack',
-        msg:         `⚔️ ${attacker.name} → ${target.name}: ${fmt(dmg)} dmg${critTxt}${shieldDmg > 0 ? ` (${fmt(shieldDmg)} shield)` : ''}`,
-        attackerId:  attacker.id,
-        targetId:    target.id,
-        damage:      dmg,
-        isCrit,
-        shieldDmg,
-        hpAfter:     Math.max(0, target.hp),
-        hpMax:       target.maxHp,
-        shieldAfter: Math.max(0, target.shield),
-        shieldMax:   target.maxShield,
+        type: 'attack',
+        msg:  `⚔️ ${att.name} → ${target.name}: ${fmt(dmg)} dmg${isCrit ? ' 💥KRIT' : ''}${shieldDmg > 0 ? ` (${fmt(shieldDmg)} 🛡)` : ''}`,
+        attackerId: att.id, targetId: target.id,
+        damage: dmg, isCrit, shieldDmg,
+        hpAfter: target.hp, hpMax: target.maxHp,
+        shieldAfter: target.shield, shieldMax: target.maxShield,
       });
 
-      if (target.hp <= 0) {
-        target.hp = 0;
+      if (target.hp <= 0 && target.alive) {
         target.alive = false;
         log.push({ type: 'destroy', msg: `💀 ${target.name} uništen!`, targetId: target.id });
       }
     }
 
-    // Provjeri završetak
-    const aAlive = alive('player').length;
-    const bAlive = alive('enemy').length;
+    // Shield regen na kraju runde
+    units.filter(u => u.alive && u.shieldRegen > 0).forEach(u => {
+      const before = u.shield;
+      u.shield = Math.min(u.maxShield, u.shield + u.shieldRegen);
+      if (u.shield > before)
+        log.push({ type: 'effect', msg: `🔵 ${u.name} +${fmt(u.shield - before)} shield`, targetId: u.id });
+    });
 
-    if (aAlive === 0 && bAlive === 0) {
-      log.push({ type: 'info', msg: '⚖️ Obje flote uništene — neriješeno!' });
-      return { status: 'draw', round, log };
-    }
-    if (bAlive === 0) {
-      log.push({ type: 'info', msg: '🏆 Pobjeda!' });
-      return { status: 'victory', round, log };
-    }
-    if (aAlive === 0) {
-      log.push({ type: 'info', msg: '💀 Poraz!' });
-      return { status: 'defeat', round, log };
-    }
+    const pAlive = alive('player').length > 0;
+    const eAlive = alive('enemy').length > 0;
+    if (!eAlive && !pAlive) { log.push({ type: 'info', msg: '⚖️ Neriješeno!' }); return { status: 'draw', round, log }; }
+    if (!eAlive) { log.push({ type: 'info', msg: '🏆 Pobjeda!' }); return { status: 'victory', round, log }; }
+    if (!pAlive) { log.push({ type: 'info', msg: '💀 Poraz!' });   return { status: 'defeat',  round, log }; }
   }
 
-  log.push({ type: 'info', msg: '⏱️ Maksimalan broj rundi — neriješeno.' });
-  return { status: 'draw', round, log };
+  log.push({ type: 'info', msg: '⏱️ Maks. rundi — neriješeno.' });
+  return { status: 'draw', round: PVP_MAX_ROUNDS, log };
 }
 
 // ── Vizuelna PvP bitka ──
