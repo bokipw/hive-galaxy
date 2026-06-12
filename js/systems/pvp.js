@@ -270,84 +270,284 @@ let _pvpProjectiles = [];
 let _pvpShipStates = {};
 let _pvpFloats = [];
 let _pvpStars = [];
+let _pvpNebulas = [];
+let _pvpTime = 0;
 
-const SHIP_EMOJIS = {
-  fighter:    '🚀',
-  scout:      '🛸',
-  cruiser:    '🛡️',
-  battleship: '⚔️',
-  carrier:    '🛳️',
-  special:    '💫',
-};
+// Draw ship shape by class
+function _pvpDrawShip(ctx, x, y, cls, side, scale, alpha, glowColor) {
+  ctx.save();
+  ctx.translate(x, y);
+  if (side === 'enemy') ctx.scale(-1, 1);
+  ctx.scale(scale, scale);
+  ctx.globalAlpha = alpha;
 
-function _pvpGetEmoji(shipId) {
-  const cls = (shipId || '').split('_')[0];
-  return SHIP_EMOJIS[cls] || '🚀';
+  const col  = side === 'player' ? '#00d4ff' : '#ff4466';
+  const col2 = side === 'player' ? '#0088cc' : '#cc2244';
+  const eng  = side === 'player' ? '#00ffcc' : '#ff8844';
+
+  ctx.shadowBlur = 18;
+  ctx.shadowColor = glowColor || col;
+
+  if (cls === 'fighter' || cls === 'scout') {
+    // Sleek fighter
+    ctx.beginPath();
+    ctx.moveTo(28, 0);
+    ctx.lineTo(-14, -10);
+    ctx.lineTo(-8, 0);
+    ctx.lineTo(-14, 10);
+    ctx.closePath();
+    ctx.fillStyle = col2;
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Wing fins
+    ctx.beginPath();
+    ctx.moveTo(0, -6);
+    ctx.lineTo(-12, -20);
+    ctx.lineTo(-16, -8);
+    ctx.closePath();
+    ctx.fillStyle = col + '99';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(0, 6);
+    ctx.lineTo(-12, 20);
+    ctx.lineTo(-16, 8);
+    ctx.closePath();
+    ctx.fillStyle = col + '99';
+    ctx.fill();
+    // Cockpit
+    ctx.beginPath();
+    ctx.ellipse(10, 0, 6, 4, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#aaeeff';
+    ctx.shadowBlur = 8; ctx.shadowColor = '#aaeeff';
+    ctx.fill();
+    // Engine
+    ctx.beginPath();
+    ctx.ellipse(-12, 0, 4, 3, 0, 0, Math.PI * 2);
+    ctx.fillStyle = eng;
+    ctx.shadowBlur = 14; ctx.shadowColor = eng;
+    ctx.fill();
+
+  } else if (cls === 'cruiser') {
+    // Heavy cruiser
+    ctx.beginPath();
+    ctx.moveTo(30, 0);
+    ctx.lineTo(10, -14);
+    ctx.lineTo(-20, -14);
+    ctx.lineTo(-30, -6);
+    ctx.lineTo(-30, 6);
+    ctx.lineTo(-20, 14);
+    ctx.lineTo(10, 14);
+    ctx.closePath();
+    ctx.fillStyle = col2;
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Turrets
+    [[10, -10], [10, 10], [-5, -10], [-5, 10]].forEach(([tx, ty]) => {
+      ctx.beginPath();
+      ctx.arc(tx, ty, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = col;
+      ctx.shadowBlur = 6; ctx.shadowColor = col;
+      ctx.fill();
+    });
+    // Bridge
+    ctx.beginPath();
+    ctx.rect(0, -5, 16, 10);
+    ctx.fillStyle = '#aaeeff33';
+    ctx.fill();
+    ctx.strokeStyle = '#aaeeff';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+    // Engines
+    [[-26, -4], [-26, 4]].forEach(([ex, ey]) => {
+      ctx.beginPath();
+      ctx.ellipse(ex, ey, 5, 3, 0, 0, Math.PI*2);
+      ctx.fillStyle = eng;
+      ctx.shadowBlur = 16; ctx.shadowColor = eng;
+      ctx.fill();
+    });
+
+  } else if (cls === 'battleship') {
+    // Massive battleship
+    ctx.beginPath();
+    ctx.moveTo(36, 0);
+    ctx.lineTo(16, -18);
+    ctx.lineTo(-10, -20);
+    ctx.lineTo(-34, -10);
+    ctx.lineTo(-34, 10);
+    ctx.lineTo(-10, 20);
+    ctx.lineTo(16, 18);
+    ctx.closePath();
+    ctx.fillStyle = col2;
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Heavy cannons
+    [[22, -14], [22, 14]].forEach(([cx, cy]) => {
+      ctx.beginPath();
+      ctx.rect(cx, cy - 3, 18, 6);
+      ctx.fillStyle = col;
+      ctx.shadowBlur = 8; ctx.shadowColor = col;
+      ctx.fill();
+    });
+    // Center cannon
+    ctx.beginPath();
+    ctx.rect(20, -2, 22, 4);
+    ctx.fillStyle = col;
+    ctx.shadowBlur = 10; ctx.shadowColor = col;
+    ctx.fill();
+    // Armor plates detail
+    ctx.strokeStyle = col + '55';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, -18); ctx.lineTo(0, 18); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-16, -18); ctx.lineTo(-16, 18); ctx.stroke();
+    // Engines
+    [[-30, -7], [-30, 0], [-30, 7]].forEach(([ex, ey]) => {
+      ctx.beginPath();
+      ctx.ellipse(ex, ey, 5, 3.5, 0, 0, Math.PI*2);
+      ctx.fillStyle = eng;
+      ctx.shadowBlur = 18; ctx.shadowColor = eng;
+      ctx.fill();
+    });
+
+  } else if (cls === 'carrier') {
+    // Carrier — wide flat ship
+    ctx.beginPath();
+    ctx.moveTo(30, -4);
+    ctx.lineTo(20, -18);
+    ctx.lineTo(-30, -18);
+    ctx.lineTo(-36, -6);
+    ctx.lineTo(-36, 6);
+    ctx.lineTo(-30, 18);
+    ctx.lineTo(20, 18);
+    ctx.lineTo(30, 4);
+    ctx.closePath();
+    ctx.fillStyle = col2;
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Hangar bay
+    ctx.beginPath();
+    ctx.rect(-20, -12, 40, 24);
+    ctx.fillStyle = '#000a1488';
+    ctx.fill();
+    ctx.strokeStyle = col + '66';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+    // Small fighters on deck
+    [-8, 0, 8].forEach(fy => {
+      ctx.beginPath();
+      ctx.moveTo(10, fy); ctx.lineTo(-2, fy-4); ctx.lineTo(-2, fy+4);
+      ctx.fillStyle = col + 'cc';
+      ctx.fill();
+    });
+    // Engines
+    [[-32, -12], [-32, 12]].forEach(([ex, ey]) => {
+      ctx.beginPath();
+      ctx.ellipse(ex, ey, 6, 4, 0, 0, Math.PI*2);
+      ctx.fillStyle = eng;
+      ctx.shadowBlur = 16; ctx.shadowColor = eng;
+      ctx.fill();
+    });
+
+  } else {
+    // Default — generic ship
+    ctx.beginPath();
+    ctx.moveTo(26, 0);
+    ctx.lineTo(-14, -12);
+    ctx.lineTo(-20, 0);
+    ctx.lineTo(-14, 12);
+    ctx.closePath();
+    ctx.fillStyle = col2;
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(-16, 0, 5, 3, 0, 0, Math.PI*2);
+    ctx.fillStyle = eng;
+    ctx.shadowBlur = 14; ctx.shadowColor = eng;
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function _pvpGetShipClass(shipId) {
+  return (shipId || 'fighter').split('_')[0];
 }
 
 function openPvpBattleVisual(myFleet, oppFleet, opp) {
   const result = simulatePvpBattle(myFleet, oppFleet);
 
-  // Modal
   const modalEl = document.createElement('div');
   modalEl.id = 'pvpBattleModal';
   modalEl.style.cssText = `
-    position:fixed;inset:0;z-index:9999;background:#000a14;
+    position:fixed;inset:0;z-index:9999;background:#00050e;
     display:flex;flex-direction:column;overflow:hidden;
     font-family:'Share Tech Mono',monospace;
   `;
 
   modalEl.innerHTML = `
-    <div id="pvpHeader" style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid rgba(0,212,255,0.15);flex-shrink:0;z-index:2">
-      <div style="font-family:'Orbitron',monospace;font-size:0.8rem;color:#00d4ff">⚔️ PvP BITKA</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;
+      background:rgba(0,5,15,0.9);border-bottom:1px solid rgba(0,212,255,0.12);flex-shrink:0;z-index:2">
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-family:'Orbitron',monospace;font-size:0.85rem;color:#00d4ff;letter-spacing:2px">PvP BITKA</span>
+        <span style="font-size:0.65rem;color:#00d4ff88">${window._hiveUser||'TI'}</span>
+        <span style="font-size:0.6rem;color:#ffffff44">vs</span>
+        <span style="font-size:0.65rem;color:#ff446688">${opp.name}</span>
+      </div>
       <div style="display:flex;gap:6px;align-items:center">
-        <span id="pvpRoundLabel" style="font-size:0.7rem;color:#ffcc44;font-family:'Orbitron',monospace">●</span>
-        <button onclick="togglePvpPause()" id="pvpPauseBtn" style="font-size:0.6rem;padding:3px 10px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:4px;cursor:pointer">⏸</button>
-        <button onclick="setPvpSpeed(400)" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">2×</button>
-        <button onclick="setPvpSpeed(150)" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">5×</button>
-        <button onclick="skipPvpAnim()" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">⏭</button>
+        <span id="pvpRoundLabel" style="font-size:0.65rem;color:#ffcc44;font-family:'Orbitron',monospace;min-width:80px;text-align:right"></span>
+        <button onclick="togglePvpPause()" id="pvpPauseBtn" style="font-size:0.6rem;padding:4px 12px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;border-radius:4px;cursor:pointer;letter-spacing:1px">⏸ PAUZA</button>
+        <button onclick="setPvpSpeed(400)" style="font-size:0.6rem;padding:4px 10px;background:rgba(255,204,68,0.08);border:1px solid rgba(255,204,68,0.25);color:#ffcc44;border-radius:4px;cursor:pointer">2×</button>
+        <button onclick="setPvpSpeed(120)" style="font-size:0.6rem;padding:4px 10px;background:rgba(255,204,68,0.08);border:1px solid rgba(255,204,68,0.25);color:#ffcc44;border-radius:4px;cursor:pointer">5×</button>
+        <button onclick="skipPvpAnim()" style="font-size:0.6rem;padding:4px 10px;background:rgba(255,51,85,0.08);border:1px solid rgba(255,51,85,0.25);color:#ff3355;border-radius:4px;cursor:pointer">⏭ SKIP</button>
       </div>
     </div>
     <div style="flex:1;display:flex;overflow:hidden">
-      <!-- Canvas arena -->
       <div style="flex:1;position:relative;overflow:hidden">
         <canvas id="pvpCanvas" style="width:100%;height:100%;display:block"></canvas>
       </div>
-      <!-- Battle log -->
-      <div id="pvpBattleLog" style="width:240px;flex-shrink:0;padding:8px;overflow-y:auto;border-left:1px solid rgba(255,255,255,0.05);font-size:0.52rem;">
-        <div style="color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:1px;margin-bottom:6px;font-size:0.5rem;text-align:center">LOG</div>
+      <div id="pvpBattleLog" style="width:230px;flex-shrink:0;padding:10px 8px;overflow-y:auto;
+        background:rgba(0,5,15,0.95);border-left:1px solid rgba(0,212,255,0.08);">
+        <div style="color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:8px;font-size:0.48rem;text-align:center;opacity:0.7">BATTLE LOG</div>
       </div>
     </div>
   `;
 
   document.body.appendChild(modalEl);
 
-  // Init canvas
   const canvas = document.getElementById('pvpCanvas');
   _pvpCanvas = canvas;
   _pvpCtx = canvas.getContext('2d');
   _pvpParticles = [];
   _pvpProjectiles = [];
   _pvpFloats = [];
+  _pvpTime = 0;
+  _pvpStars = [];
+  _pvpNebulas = [];
 
   const resizeCanvas = () => {
     const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width  = rect.width;
-    canvas.height = rect.height;
+    canvas.width  = Math.floor(rect.width);
+    canvas.height = Math.floor(rect.height);
+    _pvpStars = [];
+    _pvpNebulas = [];
     _pvpLayoutShips(myFleet, oppFleet, canvas.width, canvas.height);
   };
 
-  // Layout brodova na canvasu
-  _pvpLayoutShips(myFleet, oppFleet, canvas.offsetWidth || 600, canvas.offsetHeight || 400);
-
-  setTimeout(resizeCanvas, 50);
+  setTimeout(resizeCanvas, 30);
   window._pvpResizeFn = resizeCanvas;
   window.addEventListener('resize', resizeCanvas);
 
-  // Start render loop
   _pvpStartRenderLoop();
 
-  // Start log playback
   _pvpAnimSpeed  = 700;
   _pvpAnimPaused = false;
   window._pvpBattleResult = result;
@@ -357,50 +557,45 @@ function openPvpBattleVisual(myFleet, oppFleet, opp) {
 
 function _pvpLayoutShips(myFleet, oppFleet, W, H) {
   _pvpShipStates = {};
-
   const placeFleet = (fleet, xCenter, side) => {
     const n = fleet.length;
-    const colW = 90, rowH = 80;
-    const cols = Math.ceil(Math.sqrt(n));
+    const cols = n <= 2 ? 1 : n <= 6 ? 2 : 3;
     const rows = Math.ceil(n / cols);
+    const colW = 110, rowH = 100;
     const startX = xCenter - (cols - 1) * colW * 0.5;
     const startY = H * 0.5 - (rows - 1) * rowH * 0.5;
-
     fleet.forEach((u, i) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
       _pvpShipStates[u.id] = {
         x: startX + col * colW,
         y: startY + row * rowH,
-        baseX: startX + col * colW,
-        baseY: startY + row * rowH,
         hp: u.maxHp, maxHp: u.maxHp,
         shield: u.maxShield, maxShield: u.maxShield,
         alive: true,
-        shake: 0, shakeTime: 0,
+        shake: 0,
         flashColor: null, flashTime: 0,
-        destroyAnim: 0,
-        emoji: _pvpGetEmoji(u.ship_id),
+        destroyAnim: 1,
+        cls: _pvpGetShipClass(u.ship_id),
         name: u.name,
         side,
+        engineFlicker: Math.random(),
+        bob: Math.random() * Math.PI * 2,
       };
     });
   };
-
-  placeFleet(myFleet,   W * 0.22, 'player');
-  placeFleet(oppFleet,  W * 0.78, 'enemy');
+  placeFleet(myFleet,  W * 0.23, 'player');
+  placeFleet(oppFleet, W * 0.77, 'enemy');
 }
 
 function _pvpStartRenderLoop() {
   if (_pvpRafId) cancelAnimationFrame(_pvpRafId);
   let last = 0;
-  const loop = (ts) => {
-    if (!document.getElementById('pvpBattleModal')) {
-      _pvpRafId = null;
-      return;
-    }
-    const dt = Math.min((ts - last) / 1000, 0.1);
+  const loop = ts => {
+    if (!document.getElementById('pvpBattleModal')) { _pvpRafId = null; return; }
+    const dt = Math.min((ts - last) / 1000, 0.08);
     last = ts;
+    _pvpTime += dt;
     _pvpRender(dt);
     _pvpRafId = requestAnimationFrame(loop);
   };
@@ -408,208 +603,235 @@ function _pvpStartRenderLoop() {
 }
 
 function _pvpRender(dt) {
-  const cv = _pvpCanvas;
-  const ctx = _pvpCtx;
-  if (!cv || !ctx) return;
+  const cv = _pvpCanvas, ctx = _pvpCtx;
+  if (!cv || !ctx || cv.width === 0) return;
   const W = cv.width, H = cv.height;
 
-  // Background — deep space
-  ctx.fillStyle = '#000a14';
+  // ── Background ──
+  const bg = ctx.createRadialGradient(W*0.5, H*0.5, 0, W*0.5, H*0.5, W*0.7);
+  bg.addColorStop(0, '#001428');
+  bg.addColorStop(1, '#00050e');
+  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
-  // Stars
-  if (!_pvpStars || _pvpStars.length === 0 || _pvpStars._W !== W) {
-    _pvpStars = [];
-    _pvpStars._W = W;
-    for (let i = 0; i < 120; i++) {
-      _pvpStars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.7 + 0.3 });
-    }
+  // ── Stars ──
+  if (_pvpStars.length === 0) {
+    for (let i = 0; i < 200; i++)
+      _pvpStars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+0.2, a: Math.random()*0.8+0.2, twinkle: Math.random()*Math.PI*2 });
   }
   _pvpStars.forEach(s => {
+    s.twinkle += dt * (0.5 + Math.random()*0.5);
+    const alpha = s.a * (0.7 + 0.3 * Math.sin(s.twinkle));
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
     ctx.fill();
   });
 
-  // Center divider
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  // ── Nebulas ──
+  if (_pvpNebulas.length === 0) {
+    const cols = ['#0033aa', '#220044', '#003322', '#440011'];
+    for (let i = 0; i < 4; i++)
+      _pvpNebulas.push({ x: Math.random()*W, y: Math.random()*H, rx: 80+Math.random()*120, ry: 60+Math.random()*80, color: cols[i%cols.length] });
+  }
+  _pvpNebulas.forEach(n => {
+    const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, Math.max(n.rx, n.ry));
+    g.addColorStop(0, n.color + '22');
+    g.addColorStop(1, 'transparent');
+    ctx.save();
+    ctx.scale(n.rx / Math.max(n.rx, n.ry), n.ry / Math.max(n.rx, n.ry));
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(n.x * (Math.max(n.rx,n.ry)/n.rx), n.y * (Math.max(n.rx,n.ry)/n.ry), Math.max(n.rx,n.ry), 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // ── Center line ──
+  const cg = ctx.createLinearGradient(W*0.5, 0, W*0.5, H);
+  cg.addColorStop(0, 'transparent');
+  cg.addColorStop(0.3, 'rgba(255,255,255,0.06)');
+  cg.addColorStop(0.7, 'rgba(255,255,255,0.06)');
+  cg.addColorStop(1, 'transparent');
+  ctx.strokeStyle = cg;
   ctx.lineWidth = 1;
-  ctx.setLineDash([6, 8]);
-  ctx.beginPath();
-  ctx.moveTo(W * 0.5, 20);
-  ctx.lineTo(W * 0.5, H - 20);
-  ctx.stroke();
+  ctx.setLineDash([4, 10]);
+  ctx.beginPath(); ctx.moveTo(W*0.5, 0); ctx.lineTo(W*0.5, H); ctx.stroke();
   ctx.setLineDash([]);
 
-  // Update + draw projectiles
+  // ── Projectiles ──
   _pvpProjectiles = _pvpProjectiles.filter(p => p.t < 1);
   _pvpProjectiles.forEach(p => {
     p.t += dt * p.speed;
-    if (p.t > 1) p.t = 1;
-    const x = p.x1 + (p.x2 - p.x1) * p.t;
-    const y = p.y1 + (p.y2 - p.y1) * p.t;
+    const t = Math.min(p.t, 1);
+    const cx = p.x1 + (p.x2 - p.x1) * t;
+    const cy = p.y1 + (p.y2 - p.y1) * t;
 
-    // Trail
-    const grad = ctx.createLinearGradient(p.x1, p.y1, x, y);
-    grad.addColorStop(0, 'rgba(0,0,0,0)');
-    grad.addColorStop(1, p.color + 'cc');
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = p.isCrit ? 3 : 1.5;
-    ctx.beginPath();
-    ctx.moveTo(p.x1, p.y1);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-
-    // Head glow
-    ctx.beginPath();
-    ctx.arc(x, y, p.isCrit ? 5 : 3, 0, Math.PI * 2);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(x, y, p.isCrit ? 9 : 5, 0, Math.PI * 2);
-    ctx.fillStyle = p.color + '44';
-    ctx.fill();
+    // Laser beam glow (drawn from origin to current pos)
+    ctx.save();
+    ctx.shadowBlur = p.isCrit ? 24 : 14;
+    ctx.shadowColor = p.color;
+    const lg = ctx.createLinearGradient(p.x1, p.y1, cx, cy);
+    lg.addColorStop(0, 'transparent');
+    lg.addColorStop(0.6, p.color + '88');
+    lg.addColorStop(1, p.color);
+    ctx.strokeStyle = lg;
+    ctx.lineWidth = p.isCrit ? 3.5 : 2;
+    ctx.beginPath(); ctx.moveTo(p.x1, p.y1); ctx.lineTo(cx, cy); ctx.stroke();
+    ctx.lineWidth = p.isCrit ? 1.5 : 0.8;
+    ctx.strokeStyle = '#ffffff99';
+    ctx.beginPath(); ctx.moveTo(p.x1, p.y1); ctx.lineTo(cx, cy); ctx.stroke();
+    // Head
+    ctx.beginPath(); ctx.arc(cx, cy, p.isCrit ? 6 : 4, 0, Math.PI*2);
+    ctx.fillStyle = '#ffffff'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, p.isCrit ? 12 : 7, 0, Math.PI*2);
+    ctx.fillStyle = p.color + '66'; ctx.fill();
+    ctx.restore();
   });
 
-  // Update + draw particles
+  // ── Particles ──
   _pvpParticles = _pvpParticles.filter(p => p.life > 0);
   _pvpParticles.forEach(p => {
-    p.x  += p.vx * dt;
-    p.y  += p.vy * dt;
-    p.vy += 30 * dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    p.vx *= 0.97; p.vy *= 0.97;
     p.life -= dt;
     const a = Math.max(0, p.life / p.maxLife);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r * a, 0, Math.PI * 2);
-    ctx.fillStyle = p.color + Math.floor(a * 255).toString(16).padStart(2,'0');
+    ctx.arc(p.x, p.y, p.r * (p.grow ? 1 + (1-a)*3 : a), 0, Math.PI*2);
+    if (p.grow) {
+      ctx.fillStyle = p.color + Math.floor((1-a) * 0.5 * 255).toString(16).padStart(2,'0');
+    } else {
+      ctx.fillStyle = p.color + Math.floor(a * 255).toString(16).padStart(2,'0');
+    }
     ctx.fill();
   });
 
-  // Draw ships
-  ctx.font = '28px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-
+  // ── Ships ──
   for (const id in _pvpShipStates) {
     const s = _pvpShipStates[id];
     if (!s.alive && s.destroyAnim <= 0) continue;
 
-    // Shake
-    let dx = 0, dy = 0;
+    s.bob += dt * 0.8;
+    let dx = 0, dy = Math.sin(s.bob) * 2.5;
     if (s.shake > 0) {
-      s.shake -= dt * 8;
+      s.shake -= dt * 10;
       if (s.shake < 0) s.shake = 0;
-      dx = (Math.random() - 0.5) * s.shake * 12;
-      dy = (Math.random() - 0.5) * s.shake * 12;
+      dx += (Math.random()-0.5) * s.shake * 14;
+      dy += (Math.random()-0.5) * s.shake * 8;
     }
-    const x = s.x + dx;
-    const y = s.y + dy;
 
-    const alpha = s.alive ? 1.0 : Math.max(0, s.destroyAnim);
-    if (!s.alive) s.destroyAnim -= dt * 2;
+    const x = s.x + dx, y = s.y + dy;
+    const alpha = s.alive ? 1 : Math.max(0, s.destroyAnim);
+    if (!s.alive) s.destroyAnim -= dt * 1.5;
 
-    ctx.globalAlpha = alpha;
-
-    // Flash glow
+    // Flash overlay
+    let glowOverride = null;
     if (s.flashColor && s.flashTime > 0) {
-      s.flashTime -= dt * 3;
+      s.flashTime -= dt * 4;
       if (s.flashTime < 0) { s.flashTime = 0; s.flashColor = null; }
-      if (s.flashColor) {
-        ctx.beginPath();
-        ctx.arc(x, y, 30, 0, Math.PI * 2);
-        ctx.fillStyle = s.flashColor + Math.floor(s.flashTime * 0.6 * 255).toString(16).padStart(2,'0');
-        ctx.fill();
-      }
+      else glowOverride = s.flashColor;
     }
 
-    // Side color ring
-    const ringColor = s.side === 'player' ? '#00d4ff' : '#ff3355';
-    ctx.beginPath();
-    ctx.arc(x, y, 24, 0, Math.PI * 2);
-    ctx.strokeStyle = ringColor + '66';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
+    // Engine flicker
+    s.engineFlicker += dt * 6;
 
-    // Ship emoji
-    ctx.fillStyle = 'white';
-    ctx.fillText(s.emoji, x, y);
+    // Draw ship
+    _pvpDrawShip(ctx, x, y, s.cls, s.side, 1, alpha, glowOverride);
 
-    // HP bar (below ship)
-    const barW = 52, barH = 5;
-    const bx = x - barW * 0.5;
-    const by = y + 30;
-    ctx.fillStyle = 'rgba(0,0,0,0.6)';
-    ctx.fillRect(bx, by, barW, barH);
-    const hpPct = s.maxHp > 0 ? Math.max(0, s.hp / s.maxHp) : 0;
-    const hpColor = hpPct > 0.5 ? '#00ff88' : hpPct > 0.25 ? '#ffcc44' : '#ff3355';
-    ctx.fillStyle = hpColor;
-    ctx.fillRect(bx, by, barW * hpPct, barH);
+    // HP bar
+    const bW = 60, bH = 6, bx = x - bW*0.5, by = y + 44;
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.beginPath(); ctx.roundRect(bx-1, by-1, bW+2, bH+2, 3); ctx.fill();
+    const hpP = s.maxHp > 0 ? Math.max(0, s.hp / s.maxHp) : 0;
+    const hpCol = hpP > 0.5 ? '#00ff88' : hpP > 0.25 ? '#ffcc44' : '#ff3355';
+    if (hpP > 0) {
+      ctx.save();
+      ctx.shadowBlur = 6; ctx.shadowColor = hpCol;
+      ctx.fillStyle = hpCol;
+      ctx.beginPath(); ctx.roundRect(bx, by, bW * hpP, bH, 2); ctx.fill();
+      ctx.restore();
+    }
 
     // Shield bar
     if (s.maxShield > 0) {
-      const shPct = Math.max(0, s.shield / s.maxShield);
-      ctx.fillStyle = 'rgba(0,0,0,0.4)';
-      ctx.fillRect(bx, by + barH + 2, barW, 3);
-      ctx.fillStyle = '#00aaff';
-      ctx.fillRect(bx, by + barH + 2, barW * shPct, 3);
+      const shP = Math.max(0, s.shield / s.maxShield);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.beginPath(); ctx.roundRect(bx-1, by+bH+3, bW+2, 4, 2); ctx.fill();
+      if (shP > 0) {
+        ctx.save();
+        ctx.shadowBlur = 8; ctx.shadowColor = '#00aaff';
+        ctx.fillStyle = '#00aaff';
+        ctx.beginPath(); ctx.roundRect(bx, by+bH+4, bW*shP, 3, 1); ctx.fill();
+        ctx.restore();
+      }
     }
 
-    // Name
+    // Name label
+    ctx.save();
+    ctx.globalAlpha = alpha * 0.85;
     ctx.font = '9px "Share Tech Mono", monospace';
-    ctx.fillStyle = 'rgba(176,204,232,0.8)';
-    ctx.fillText(s.name, x, by + barH + 8 + (s.maxShield > 0 ? 3 : 0));
-
-    ctx.globalAlpha = 1;
+    ctx.fillStyle = s.side === 'player' ? '#00d4ff' : '#ff4466';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.name, x, by + bH + (s.maxShield > 0 ? 18 : 12));
+    ctx.restore();
   }
 
-  // Floating damage numbers
+  // ── Floating damage numbers ──
   _pvpFloats = _pvpFloats.filter(f => f.life > 0);
   _pvpFloats.forEach(f => {
-    f.y -= 40 * dt;
+    f.y -= 50 * dt;
     f.life -= dt;
     const a = Math.max(0, f.life / f.maxLife);
+    ctx.save();
     ctx.globalAlpha = a;
-    ctx.font = `bold ${f.isCrit ? 16 : 12}px "Orbitron", monospace`;
-    ctx.fillStyle = f.isCrit ? '#ff6600' : '#ff3355';
+    ctx.shadowBlur = f.isCrit ? 16 : 6;
+    ctx.shadowColor = f.isCrit ? '#ff8800' : '#ff3355';
+    ctx.font = `bold ${f.isCrit ? 18 : 13}px "Orbitron", monospace`;
+    ctx.fillStyle = f.isCrit ? '#ffaa00' : '#ff5566';
     ctx.textAlign = 'center';
     ctx.fillText(f.text, f.x, f.y);
-    ctx.globalAlpha = 1;
+    ctx.restore();
   });
-
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'alphabetic';
 }
 
 function _pvpSpawnExplosion(x, y, isBig) {
-  const count = isBig ? 40 : 16;
-  for (let i = 0; i < count; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * (isBig ? 180 : 100) + 30;
-    const colors = ['#ff6600', '#ff3300', '#ffcc44', '#ffffff', '#ff9900'];
+  const n = isBig ? 55 : 20;
+  const cols = ['#ff6600','#ff3300','#ffcc44','#ffffff','#ff9900','#ffee88'];
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const spd = Math.random() * (isBig ? 220 : 120) + 40;
     _pvpParticles.push({
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
+      x, y, vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
       r: Math.random() * (isBig ? 5 : 3) + 1,
-      life: Math.random() * 0.8 + 0.3,
-      maxLife: 1.1,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      life: Math.random() * 1.0 + 0.4, maxLife: 1.4,
+      color: cols[Math.floor(Math.random() * cols.length)],
+    });
+  }
+  // Shockwave ring
+  _pvpParticles.push({
+    x, y, vx: 0, vy: 0,
+    r: isBig ? 60 : 30,
+    life: 0.5, maxLife: 0.5,
+    color: '#ff8800', grow: true,
+  });
+  if (isBig) {
+    _pvpParticles.push({
+      x, y, vx: 0, vy: 0,
+      r: 80,
+      life: 0.4, maxLife: 0.4,
+      color: '#ffffff', grow: true,
     });
   }
 }
 
 function _pvpSpawnHitSparks(x, y, color) {
-  for (let i = 0; i < 8; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 80 + 20;
+  for (let i = 0; i < 12; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const spd = Math.random() * 120 + 30;
     _pvpParticles.push({
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      r: Math.random() * 2 + 0.5,
-      life: 0.3 + Math.random() * 0.2,
-      maxLife: 0.5,
+      x, y, vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
+      r: Math.random() * 2.5 + 0.5,
+      life: 0.35 + Math.random()*0.2, maxLife: 0.55,
       color,
     });
   }
