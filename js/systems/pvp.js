@@ -268,10 +268,7 @@ async function refreshOpponents() {
     }
   }
 
-  // Dopuni AI botovima ako nema dovoljno pravih igrača
-  const needed = 5 - realPlayers.length;
-  const aiBots = Array.from({ length: needed }, () => generateAIOpponent(playerPower, pvp.rating));
-  window._currentOpponents = [...realPlayers, ...aiBots];
+  window._currentOpponents = realPlayers;
 
   if (el) el.innerHTML = renderOpponentList(playerPower);
   toast('🔄 Lista protivnika osvježena!', 'inf');
