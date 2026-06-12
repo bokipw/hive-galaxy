@@ -1,572 +1,587 @@
 // ============================================================
 // HIVE GALAXY — js/systems/pvp.js
-// PvP sistem — matchmaking, borba, rating, shield, plijen
+// Čist PvP sistem — odvojeno od instanci
 // ============================================================
 
 if (!window.pvpShield) window.pvpShield = { active: false, expiresAt: null };
 
-// ── AI TITULE po ratingu ──
-const AI_TITLES = [
-  { min: 0,    max: 299,  title: 'Regrut',    icon: '🪖' },
-  { min: 300,  max: 599,  title: 'Vojnik',    icon: '⚔️' },
-  { min: 600,  max: 999,  title: 'Kapetan',   icon: '🎖️' },
-  { min: 1000, max: 1499, title: 'Komandant', icon: '🌟' },
-  { min: 1500, max: 1999, title: 'General',   icon: '💫' },
-  { min: 2000, max: 9999, title: 'Admiral',   icon: '👑' },
-];
-
-function getAiTitle(rating) {
-  return AI_TITLES.find(t => rating >= t.min && rating <= t.max) || AI_TITLES[0];
-}
-
-// ── Uzmi random komandira iz svih dostupnih ──
-function pickRandomCommander() {
-  const pool = [];
-  if (typeof COMMANDERS_DATA !== 'undefined') pool.push(...COMMANDERS_DATA);
-  if (typeof COMMANDERS_XENOS !== 'undefined') pool.push(...COMMANDERS_XENOS);
-  if (pool.length === 0) return null;
-  return pool[Math.floor(Math.random() * pool.length)];
-}
-
-// ── Generiši AI flotu od PRAVIH brodova iz SHIPS_DATA ──
-function generateAIFleet(playerPower, difficulty) {
-  if (typeof SHIPS_DATA === 'undefined' || SHIPS_DATA.length === 0) return [];
-
-  // Odaberi klase brodova na osnovu težine / ratinga
-  // difficulty: 0.3 = slab, 1.0 = jednak, 1.5 = jak
-  const tierVariant = difficulty < 0.5 ? 'I' : difficulty < 0.9 ? 'II' : 'III';
-
-  // Filtruj brodove po varijanti (I/II/III u id-u)
-  const tierFilter = `_${tierVariant}`;
-  let pool = SHIPS_DATA.filter(s => s.id.endsWith(tierFilter));
-  if (pool.length === 0) pool = SHIPS_DATA; // fallback na sve
-
-  // Odaberi 2-4 različite klase brodova
-  const numGroups  = Math.floor(2 + Math.random() * 3); // 2, 3 ili 4
-  const used       = new Set();
-  const selected   = [];
-
-  // Prioritizuj raznolikost klasa (scout, fighter, cruiser, battleship...)
-  const classes = ['scout', 'fighter', 'cruiser', 'battleship', 'carrier', 'special'];
-  // Miješaj klase
-  const shuffledClasses = classes.sort(() => Math.random() - 0.5);
-
-  for (const cls of shuffledClasses) {
-    if (selected.length >= numGroups) break;
-    const clsShips = pool.filter(s => s.id.startsWith(cls) && !used.has(s.id));
-    if (clsShips.length === 0) continue;
-    const ship = clsShips[Math.floor(Math.random() * clsShips.length)];
-    used.add(ship.id);
-    selected.push(ship);
-  }
-
-  // Ako nismo popunili, uzmi random
-  while (selected.length < numGroups) {
-    const remaining = pool.filter(s => !used.has(s.id));
-    if (remaining.length === 0) break;
-    const ship = remaining[Math.floor(Math.random() * remaining.length)];
-    used.add(ship.id);
-    selected.push(ship);
-  }
-
-  // Izračunaj DPS per ship na osnovu klase (aproksimacija jer AI nema equip)
-  // HP = structure per ship, shield = shield per ship, DPS ≈ klasa-based
-  const classBaseDps = {
-    scout:      { dps: 120, mult: 1.0 },
-    fighter:    { dps: 200, mult: 1.0 },
-    cruiser:    { dps: 350, mult: 1.0 },
-    battleship: { dps: 600, mult: 1.0 },
-    carrier:    { dps: 250, mult: 1.0 },
-    special:    { dps: 450, mult: 1.0 },
-  };
-
-  const varMult = tierVariant === 'I' ? 1.0 : tierVariant === 'II' ? 1.8 : 3.2;
-
-  return selected.map((ship, idx) => {
-    const cls     = ship.id.split('_')[0]; // scout, fighter, etc.
-    const baseDps = (classBaseDps[cls]?.dps || 200) * varMult * difficulty;
-
-    // Broj brodova: skalira sa powerom igrača
-    const baseCount = Math.floor(10 + Math.random() * 40);
-    const count     = Math.max(5, baseCount);
-
-    const hpPer     = (ship.structure || 100) * varMult * difficulty;
-    const shieldPer = (ship.shield    || 0)   * varMult * difficulty;
-
-    return {
-      id:        `ai_${idx}`,
-      side:      'enemy',
-      ship_id:   ship.id,
-      name:      `${ship.name} ×${count}`,
-      count,
-      hp:        Math.floor(hpPer    * count),
-      maxHp:     Math.floor(hpPer    * count),
-      shield:    Math.floor(shieldPer * count),
-      maxShield: Math.floor(shieldPer * count),
-      dps:       Math.floor(baseDps  * count),
-      agility:   ship.agility    || 10,
-      speed:     ship.movement   || 1,
-      armor:     ship.armor      || 'Nano',
-      effects:   [],
-      alive:     true,
-    };
-  });
-}
-
-// ── Generiši AI protivnika sa pravim komandirima i brodovima ──
-function generateAIOpponent(playerPower, playerRating) {
-  // Titula po ratingu
-  const titleData = getAiTitle(playerRating);
-
-  // Random komandir
-  const cmd = pickRandomCommander();
-  const cmdName   = cmd ? cmd.name  : '???';
-  const cmdIcon   = cmd ? cmd.icon  : '👤';
-  const cmdRarity = cmd ? cmd.rarity : 'C';
-
-  // Naziv: titula + ime komandira
-  const name   = `${titleData.title} ${cmdName}`;
-  const avatar = cmdIcon;
-
-  // Power i rating — lagan protivnik (50-85% snage igrača)
-  const powerVar  = 0.5 + Math.random() * 0.35;
-  const difficulty = powerVar; // koristi se i za skaliranje flote
-  const aiPower   = Math.max(500, Math.floor(playerPower * powerVar));
-  const ratingVar = Math.floor((Math.random() - 0.5) * 200);
-  const aiRating  = Math.max(100, playerRating + ratingVar);
-
-  const aiResources = {
-    metal:   Math.floor(aiPower * 0.25 + Math.random() * aiPower * 0.25),
-    crystal: Math.floor(aiPower * 0.18 + Math.random() * aiPower * 0.18),
-    he3:     Math.floor(aiPower * 0.07 + Math.random() * aiPower * 0.08),
-  };
-
-  const aiFleet = generateAIFleet(playerPower, difficulty);
-
-  return {
-    name, avatar, power: aiPower, rating: aiRating,
-    resources: aiResources, fleet: aiFleet,
-    commander: cmd,    // puni objekat za prikaz
-    titleIcon: titleData.icon,
-    cmdRarity,
-  };
-}
-
-function isPvpShieldActive() {
-  if (!window.pvpShield?.active) return false;
-  if (Date.now() > window.pvpShield.expiresAt) {
-    window.pvpShield.active = false;
-    return false;
-  }
-  return true;
-}
-
-function getPvpShieldTimeLeft() {
-  if (!isPvpShieldActive()) return 0;
-  return Math.max(0, window.pvpShield.expiresAt - Date.now());
-}
-
-function activatePvpShield(hours) {
-  const ms = hours * 60 * 60 * 1000;
-  window.pvpShield = {
-    active:    true,
-    expiresAt: Date.now() + ms,
-  };
-  saveGame();
-}
-
-function formatShieldTime(ms) {
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor((ms % 3600000) / 60000);
-  const s = Math.floor((ms % 60000) / 1000);
-  if (h > 0) return `${h}h ${m}m`;
-  if (m > 0) return `${m}m ${s}s`;
-  return `${s}s`;
-}
-
-function renderPvP() {
-  const el = document.getElementById('pvpContent');
-  if (!el) return;
-
-  const shieldActive   = isPvpShieldActive();
-  const shieldTimeLeft = getPvpShieldTimeLeft();
-  const playerPower    = calcFleetTotalPower();
-
-  el.innerHTML = `
-    <div class="card" style="margin-bottom:16px">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center">
-        <div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">RATING</div><div style="font-size:1.3rem;font-family:'Orbitron',monospace;color:#ffcc44">${pvp.rating}</div></div>
-        <div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">POBJEDE</div><div style="font-size:1.3rem;font-family:'Orbitron',monospace;color:#00ff88">${pvp.wins}</div></div>
-        <div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">PORAZI</div><div style="font-size:1.3rem;font-family:'Orbitron',monospace;color:#ff3355">${pvp.losses}</div></div>
-        <div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">WIN RATE</div><div style="font-size:1.3rem;font-family:'Orbitron',monospace;color:#00d4ff">${pvp.wins + pvp.losses > 0 ? Math.round(pvp.wins / (pvp.wins + pvp.losses) * 100) : 0}%</div></div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:16px;border-color:${shieldActive ? 'rgba(0,212,255,0.4)' : 'rgba(255,255,255,0.1)'}">
-      <div style="display:flex;align-items:center;gap:16px">
-        <div style="font-size:2rem">${shieldActive ? '🛡️' : '⚠️'}</div>
-        <div style="flex:1">
-          <div style="font-size:0.85rem;font-weight:700;color:${shieldActive ? '#00d4ff' : '#ff3355'}">${shieldActive ? 'SHIELD AKTIVAN' : 'SHIELD NEAKTIVAN'}</div>
-          <div style="font-size:0.72rem;color:#6a90b8;margin-top:2px">${shieldActive ? `Zaštita ističe za: <strong style="color:#00d4ff">${formatShieldTime(shieldTimeLeft)}</strong>` : 'Tvoja baza je dostupna za napad!'}</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">KUPI SHIELD (BPW)</div>
-          <div style="display:flex;gap:4px">
-            ${[{h:1,sat:100},{h:4,sat:400},{h:12,sat:1080},{h:24,sat:1920}].map(s => `<button class="btn btn-gold" style="font-size:0.62rem;padding:3px 8px" onclick="buyShield(${s.h})">${s.h}h<br><span style="font-size:0.52rem">${s.sat} sat</span></button>`).join('')}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-      <div>
-        <div class="page-title" style="font-size:0.85rem">⚔️ NAPADNI</div>
-        <div id="opponentList">${renderOpponentList(playerPower)}</div>
-        <button class="btn btn-g" style="width:100%;margin-top:10px" onclick="refreshOpponents()">🔄 Osvježi listu</button>
-      </div>
-      <div>
-        <div class="page-title" style="font-size:0.85rem">📋 HISTORIJA</div>
-        <div id="pvpLog">${renderPvpLog()}</div>
-      </div>
-    </div>
-  `;
-}
-
 window._currentOpponents = window._currentOpponents || [];
 
+// ── Armor damage reduction (defender armor type) ──
+const PVP_ARMOR_REDUCTION = { Light: 0, Medium: 0.10, Heavy: 0.20, Nano: -0.10 };
+const PVP_MAX_ROUNDS = 60;
+
+// ── Izgradi battle-ready fleet od snimljenih slotova ──
+// Koristi se za LOKALNOG igrača (A) koji ima sve podatke
+function buildPvpFleetLocal() {
+  const rawSlots = typeof getAllDeployedSlots === 'function' ? getAllDeployedSlots() : [];
+  if (rawSlots.length === 0) return [];
+
+  // Research bonusi
+  const resDps    = typeof getWeaponsDpsBonus  === 'function' ? (1 + getWeaponsDpsBonus()  / 100) : 1;
+  const resShield = typeof getShieldBonus      === 'function' ? (1 + getShieldBonus()      / 100) : 1;
+  const resRegen  = typeof getShieldRegenBonus === 'function' ? (1 + getShieldRegenBonus() / 100) : 1;
+  const resCrit   = typeof getWeaponsCritBonus === 'function' ? getWeaponsCritBonus() : 0;
+  const resDmgRed = typeof getArmorDmgReduction === 'function' ? getArmorDmgReduction() : 0;
+  const sfMult    = (buildings.ship_factory?.level || 0) >= 100 ? 1.05 : 1.0;
+
+  // Artifact bonusi
+  const ab = typeof getArtifactBonuses === 'function' ? getArtifactBonuses() : {};
+  const artAtk  = (ab.attack || 0) + (ab.fleet || 0);
+  const artHp   = (ab.hp    || 0) + (ab.fleet || 0);
+  const artDef  = (ab.defense || 0) + (ab.resist || 0);
+  const artCrit = ab.crit || 0;
+
+  // Commander bonusi
+  const deployed = window._deployedCommanders || [];
+  const cb = (typeof getAggregatedCommanderBonuses === 'function' && deployed.length > 0)
+    ? getAggregatedCommanderBonuses(deployed)
+    : {};
+
+  return rawSlots.map((slot, idx) => {
+    const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
+    const ship  = typeof getShipById   === 'function' ? getShipById(slot.ship_id) : null;
+    if (!stats || !ship) return null;
+
+    const cls = slot.ship_id.split('_')[0];
+
+    // Shield specijal i regen
+    let shieldRegen = 0;
+    let shieldSpec  = null;
+    for (let si = 1; si <= 3; si++) {
+      const sh = (slot[`shield_${si}`] && typeof getShieldById === 'function')
+        ? getShieldById(slot[`shield_${si}`]) : null;
+      if (!sh) continue;
+      shieldRegen += sh.regen || 0;
+      if (!shieldSpec && sh.special) shieldSpec = sh.special;
+    }
+
+    // Engine specijal
+    const engId   = slot.engine_1 || null;
+    const eng     = (engId && typeof getEngineById === 'function') ? getEngineById(engId) : null;
+    const engSpec = eng?.special || null;
+
+    // Baza
+    let dps     = stats.dps    * resDps    * sfMult;
+    let hp      = stats.hp                 * sfMult;
+    let shield  = stats.shield * resShield * sfMult;
+    let regen   = shieldRegen  * resRegen;
+    let agility = stats.agility + (eng?.agility_bonus || 0);
+    let speed   = stats.speed   + (eng?.speed > 1 ? eng.speed - 1 : 0);
+    let dmgRed  = resDmgRed;
+    let critBonus = resCrit;
+
+    // Shield specijal
+    if (shieldSpec?.type === 'max_shield_boost') shield *= (1 + shieldSpec.bonus / 100);
+    if (shieldSpec?.type === 'extra_regen')       regen  *= (1 + shieldSpec.bonus / 100);
+
+    // Artifact bonusi
+    dps    *= (1 + artAtk  / 100);
+    hp     *= (1 + artHp   / 100);
+    shield *= (1 + artHp   / 100);
+    dmgRed += artDef;
+    critBonus += artCrit;
+
+    // Commander bonusi — flat
+    if (cb.atk)    dps     *= (1 + cb.atk    / 100);
+    if (cb.hp)     { hp *= (1 + cb.hp / 100); shield *= (1 + cb.hp / 100); }
+    if (cb.shield) shield  *= (1 + cb.shield / 100);
+    if (cb.shield_regen) regen *= (1 + cb.shield_regen / 100);
+    if (cb.evasion) agility = Math.min(90, agility + cb.evasion);
+    if (cb.speed)   speed  += cb.speed;
+    if (cb.crit)    critBonus += cb.crit;
+    if (cb.dmg_reduction) dmgRed += cb.dmg_reduction;
+
+    // Commander bonusi — klasa-specifični
+    if (cls === 'battleship') {
+      if (cb.battleship_atk) dps *= (1 + cb.battleship_atk / 100);
+      if (cb.battleship_hp)  { hp *= (1 + cb.battleship_hp / 100); }
+    }
+    if (cls === 'fighter') {
+      if (cb.fighter_atk)    dps     *= (1 + cb.fighter_atk    / 100);
+      if (cb.fighter_hp)     hp      *= (1 + cb.fighter_hp     / 100);
+      if (cb.fighter_evasion) agility = Math.min(90, agility + cb.fighter_evasion);
+      if (cb.fighter_speed)  speed   += cb.fighter_speed;
+    }
+    if (cls === 'cruiser') {
+      if (cb.cruiser_atk)    dps    *= (1 + cb.cruiser_atk    / 100);
+      if (cb.cruiser_hp)     hp     *= (1 + cb.cruiser_hp     / 100);
+      if (cb.cruiser_shield) shield *= (1 + cb.cruiser_shield / 100);
+    }
+    if (cls === 'scout') {
+      if (cb.scout_atk)    dps     *= (1 + cb.scout_atk    / 100);
+      if (cb.scout_evasion) agility = Math.min(90, agility + cb.scout_evasion);
+      if (cb.scout_speed)  speed   += cb.scout_speed;
+    }
+    if (cls === 'carrier') {
+      if (cb.carrier_atk) dps *= (1 + cb.carrier_atk / 100);
+      if (cb.carrier_hp)  hp  *= (1 + cb.carrier_hp  / 100);
+    }
+    if (cls === 'special') {
+      if (cb.special_atk) dps *= (1 + cb.special_atk / 100);
+      if (cb.special_hp)  hp  *= (1 + cb.special_hp  / 100);
+    }
+
+    const finalShield = Math.floor(shield);
+    return {
+      id:           `a_${idx}`,
+      ship_id:      slot.ship_id,
+      name:         ship.name || slot.ship_id,
+      count:        slot.count || 1,
+      hp:           Math.floor(hp),
+      maxHp:        Math.floor(hp),
+      shield:       finalShield,
+      maxShield:    finalShield,
+      shieldRegen:  Math.floor(regen),
+      dps:          Math.floor(dps),
+      agility:      Math.min(90, agility),
+      speed:        Math.max(1, speed),
+      armor:        ship.armor || 'Light',
+      dmgReduction: Math.min(60, dmgRed),
+      critBonus,
+      engineSpecial: engSpec || null,
+      effects:      [],
+      alive:        true,
+      side:         'player',
+    };
+  }).filter(Boolean);
+}
+
+// ── Izgradi battle-ready fleet od snapshota (igrač B iz baze) ──
+// Snapshot već ima sve stats snimljene — samo inicijalizujemo
+function buildPvpFleetFromSnapshot(snapshotFleet) {
+  return (snapshotFleet || []).map((s, idx) => ({
+    id:           `b_${idx}`,
+    ship_id:      s.ship_id,
+    name:         s.name || s.ship_id,
+    count:        s.count || 1,
+    hp:           s.hp,
+    maxHp:        s.hp,
+    shield:       s.shield  || 0,
+    maxShield:    s.shield  || 0,
+    shieldRegen:  s.shield_regen || 0,
+    dps:          s.dps,
+    agility:      s.agility || 0,
+    speed:        s.speed   || 1,
+    armor:        s.armor   || 'Light',
+    dmgReduction: s.dmg_reduction || 0,
+    critBonus:    s.crit_bonus    || 0,
+    engineSpecial: s.engine_special || null,
+    effects:      [],
+    alive:        true,
+    side:         'enemy',
+  })).filter(s => s.hp > 0 && s.dps > 0);
+}
+
+// ── PvP simulacija ──
+function simulatePvpBattle(fleetA, fleetB) {
+  const log = [];
+  let round = 0;
+
+  const allUnits = [...fleetA, ...fleetB];
+  if (allUnits.length === 0) return { status: 'draw', round: 0, log };
+
+  const alive = side => allUnits.filter(u => u.alive && u.side === side);
+
+  while (round < PVP_MAX_ROUNDS) {
+    round++;
+    log.push({ type: 'round', msg: `━━━ RUNDA ${round} ━━━` });
+
+    const active = allUnits.filter(u => u.alive);
+    // Sortiramo po brzini — brži idu prvi
+    active.sort((a, b) => b.speed - a.speed);
+
+    for (const attacker of active) {
+      if (!attacker.alive) continue;
+
+      // Shield regen na početku poteza
+      if (attacker.shieldRegen > 0 && attacker.shield < attacker.maxShield) {
+        attacker.shield = Math.min(attacker.maxShield, attacker.shield + attacker.shieldRegen);
+      }
+
+      // Odaberi metu — nasumični živi neprijatelj
+      const enemies = allUnits.filter(u => u.alive && u.side !== attacker.side);
+      if (enemies.length === 0) break;
+      const target = enemies[Math.floor(Math.random() * enemies.length)];
+
+      // Dodge provjera
+      if (target.agility > 0 && Math.random() * 100 < target.agility) {
+        log.push({ type: 'miss', msg: `💨 ${target.name} izbjegao napad od ${attacker.name}` });
+        continue;
+      }
+
+      // Kritični udarac
+      const critChance = 5 + (attacker.critBonus || 0);
+      const isCrit = Math.random() * 100 < critChance;
+      const critMult = isCrit ? 1.5 : 1.0;
+
+      // Damage kalkulacija
+      const armorRed = PVP_ARMOR_REDUCTION[target.armor] || 0;
+      const dmgRed   = (target.dmgReduction || 0) / 100;
+      let dmg = Math.floor(attacker.dps * critMult * (1 - armorRed) * (1 - dmgRed));
+      dmg = Math.max(1, dmg);
+
+      // Engine specijal — void phase (dodge sve)
+      if (target.engineSpecial?.type === 'void_phase') {
+        const voidChance = target.engineSpecial.chance || 0;
+        if (Math.random() * 100 < voidChance) {
+          log.push({ type: 'effect', msg: `🕳️ ${target.name} ušao u void — imun na štetu!` });
+          continue;
+        }
+      }
+
+      // Primijeni štetu — shield prvi, pa hp
+      let shieldDmg = 0;
+      let hpDmg = 0;
+      if (target.shield > 0) {
+        shieldDmg = Math.min(target.shield, dmg);
+        target.shield -= shieldDmg;
+        hpDmg = dmg - shieldDmg;
+      } else {
+        hpDmg = dmg;
+      }
+      target.hp -= hpDmg;
+
+      const critTxt = isCrit ? ' 💥KRIT' : '';
+      log.push({
+        type: 'attack',
+        msg: `⚔️ ${attacker.name} → ${target.name}: ${fmt(dmg)} dmg${critTxt}${shieldDmg > 0 ? ` (${fmt(shieldDmg)} shield)` : ''}`
+      });
+
+      if (target.hp <= 0) {
+        target.hp = 0;
+        target.alive = false;
+        log.push({ type: 'destroy', msg: `💀 ${target.name} uništen!` });
+      }
+    }
+
+    // Provjeri završetak
+    const aAlive = alive('player').length;
+    const bAlive = alive('enemy').length;
+
+    if (aAlive === 0 && bAlive === 0) {
+      log.push({ type: 'info', msg: '⚖️ Obje flote uništene — neriješeno!' });
+      return { status: 'draw', round, log };
+    }
+    if (bAlive === 0) {
+      log.push({ type: 'info', msg: '🏆 Pobjeda!' });
+      return { status: 'victory', round, log };
+    }
+    if (aAlive === 0) {
+      log.push({ type: 'info', msg: '💀 Poraz!' });
+      return { status: 'defeat', round, log };
+    }
+  }
+
+  log.push({ type: 'info', msg: '⏱️ Maksimalan broj rundi — neriješeno.' });
+  return { status: 'draw', round, log };
+}
+
+// ── ELO rating promjena ──
+function calcRatingChange(myRating, oppRating, won) {
+  const K = 32;
+  const expected = 1 / (1 + Math.pow(10, (oppRating - myRating) / 400));
+  const actual = won ? 1 : 0;
+  return Math.round(K * (actual - expected));
+}
+
+// ── Dohvati protivnike iz Supabase ──
 async function refreshOpponents() {
-  const playerPower = calcFleetTotalPower();
   const el = document.getElementById('opponentList');
   if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">⏳ Tražim protivnike...</div>';
 
-  let realPlayers = [];
-  if (window._supa) {
-    const myId = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
-    const { data } = await window._supa.from('pvp_snapshots')
-      .select('*')
-      .neq('id', myId || '')
-      .order('rating', { ascending: false })
-      .limit(20);
-    if (data && data.length > 0) {
-      // Uzmi bliske po ratingu
-      const sorted = data.sort((a, b) => Math.abs(a.rating - pvp.rating) - Math.abs(b.rating - pvp.rating));
-      realPlayers = sorted.slice(0, 5).map(row => ({
-        id:          row.id,
-        name:        row.username,
-        avatar:      '👾',
-        rating:      row.rating,
-        level:       row.level,
-        power:       row.power || 0,
-        fleet:       Array.isArray(row.fleet) ? row.fleet : [],
-        commanders:  Array.isArray(row.commanders) ? row.commanders : [],
-        isPremium:   row.is_premium || false,
-        isReal:      true,
-        titleIcon:   getAiTitle(row.rating).icon,
-        cmdRarity:   row.is_premium ? 'E' : 'C',
-        resources:   { metal: row.power * 10 || 50000, crystal: row.power * 8 || 40000, he3: row.power * 5 || 25000 },
-      }));
-    }
-  }
-
-  window._currentOpponents = realPlayers;
-
-  if (el) el.innerHTML = renderOpponentList(playerPower);
-  toast('🔄 Lista protivnika osvježena!', 'inf');
-}
-
-function renderOpponentList(playerPower) {
-  if (window._currentOpponents.length === 0) {
-    // Inicijalni load — pokreni async fetch, vrati placeholder
-    refreshOpponents();
-    return '<div style="color:#6a90b8;padding:20px;text-align:center">⏳ Učitavam protivnike...</div>';
-  }
-
-  const rarColors = { L: '#ffaa00', E: '#aa44ff', R: '#4488ff', C: '#aaaaaa' };
-
-  return window._currentOpponents.map((opp, idx) => {
-    const powerDiff = opp.power - playerPower;
-    const diffColor = powerDiff > 0 ? '#ff3355' : '#00ff88';
-    const diffText  = powerDiff > 0 ? `▲ ${fmt(powerDiff)}` : `▼ ${fmt(Math.abs(powerDiff))}`;
-    const rc        = rarColors[opp.cmdRarity] || '#aaa';
-
-    // Prikaz flote — liste tipova brodova
-    const fleetSummary = (opp.fleet || []).map(g =>
-      `<span style="font-size:0.52rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-        border-radius:3px;padding:1px 5px;color:#b0cce8">${g.name}</span>`
-    ).join(' ');
-
-    return `
-      <div class="card" style="margin-bottom:10px;border-color:rgba(255,51,85,0.25)">
-        <!-- Komandir header -->
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <div style="font-size:1.8rem;filter:drop-shadow(0 0 6px ${rc}88)">${opp.avatar}</div>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:0.8rem;font-weight:700;color:white;
-              white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${opp.name}</div>
-            <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
-              <span style="font-size:0.55rem;font-weight:700;color:${rc};
-                background:${rc}18;border-radius:3px;padding:0 5px;
-                font-family:'Orbitron',monospace">${opp.titleIcon} ${opp.cmdRarity}</span>
-              <span style="font-size:0.6rem;color:#6a90b8">Rating: <strong style="color:#ffcc44">${opp.rating}</strong></span>
-            </div>
-          </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-size:0.72rem;font-family:'Orbitron',monospace;color:#00d4ff">${fmt(opp.power)}</div>
-            <div style="font-size:0.6rem;color:${diffColor}">${diffText}</div>
-          </div>
-        </div>
-
-        <!-- Flota brodova -->
-        <div style="margin-bottom:6px">
-          <div style="font-size:0.55rem;color:#6a90b8;margin-bottom:3px">🚀 FLOTA (${opp.fleet.length} grupe)</div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px">${fleetSummary || '<span style="font-size:0.52rem;color:#444">prazna flota</span>'}</div>
-        </div>
-
-        <!-- Plijen -->
-        <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:8px;
-          background:rgba(255,204,68,0.05);border-radius:4px;padding:4px 6px">
-          🎁 Plijen: 🔩${fmt(Math.floor(opp.resources.metal*0.1))}
-                     💎${fmt(Math.floor(opp.resources.crystal*0.1))}
-                     ⛽${fmt(Math.floor(opp.resources.he3*0.1))}
-        </div>
-
-        <button class="btn btn-r" style="width:100%;font-size:0.72rem"
-          onclick="startPvpBattle(${idx})">⚔️ Napadni ${opp.avatar} ${opp.name}</button>
-      </div>`;
-  }).join('');
-}
-
-function renderPvpLog() {
-  if (!pvp.history || pvp.history.length === 0) {
-    return '<div style="text-align:center;color:#6a90b8;padding:20px;font-size:0.72rem">Nema historije borbi.</div>';
-  }
-  const rarColors = { L: '#ffaa00', E: '#aa44ff', R: '#4488ff', C: '#aaaaaa' };
-  return pvp.history.slice(0, 10).map(entry => {
-    const isWin = entry.result === 'victory';
-    const rc    = rarColors[entry.oppRarity] || '#aaa';
-    const fleetTags = (entry.oppFleet || []).slice(0, 3).map(n =>
-      `<span style="font-size:0.48rem;color:#6a90b8">${n}</span>`
-    ).join(' · ');
-    return `
-      <div style="padding:8px 10px;margin-bottom:6px;border-radius:6px;
-        background:${isWin ? 'rgba(0,255,136,0.04)' : 'rgba(255,51,85,0.04)'};
-        border:1px solid ${isWin ? 'rgba(0,255,136,0.18)' : 'rgba(255,51,85,0.18)'}">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <div style="display:flex;align-items:center;gap:6px">
-            <span style="font-size:1rem">${entry.oppAvatar || '👤'}</span>
-            <span style="font-size:0.7rem;color:${isWin ? '#00ff88' : '#ff3355'};font-weight:700">
-              ${isWin ? '🏆 POBJEDA' : '💀 PORAZ'}
-            </span>
-          </div>
-          <span style="font-size:0.62rem;color:${entry.ratingChange > 0 ? '#00ff88' : '#ff3355'}">
-            ${entry.ratingChange > 0 ? '+' : ''}${entry.ratingChange} RP
-          </span>
-        </div>
-        <div style="font-size:0.62rem;color:#b0cce8;margin-bottom:2px">vs <strong>${entry.opponent}</strong> · ${entry.rounds} rundi</div>
-        ${fleetTags ? `<div style="margin-bottom:2px">${fleetTags}</div>` : ''}
-        ${isWin && entry.loot ? `<div style="font-size:0.58rem;color:#ffcc44;margin-bottom:2px">
-          🎁 +🔩${fmt(entry.loot.metal)} +💎${fmt(entry.loot.crystal)} +⛽${fmt(entry.loot.he3)}</div>` : ''}
-        <div style="font-size:0.55rem;color:#6a90b8">${entry.date}</div>
-      </div>`;
-  }).join('');
-}
-
-function startPvpBattle(opponentIdx) {
-  const opp = window._currentOpponents[opponentIdx];
-  if (!opp) return;
-
-  const fleetSlots = getAllDeployedSlots();
-  if (fleetSlots.length === 0) {
-    toast('⚠️ Flota je prazna! Deploy komandira i rasporedi brodove.', 'warn');
+  if (!window._supa) {
+    if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Nije moguće učitati protivnike.</div>';
     return;
   }
 
-  // ── He3 potrošnja za PvP misiju ──
-  const he3NeededPvp = fleetSlots.reduce((sum, ship) => {
-    let cost = 0.005;
-    if (ship && ship.engine) {
-      const engDef = (typeof ENGINES !== 'undefined' ? ENGINES : [])
-        .find(e => e.id === ship.engine);
-      if (engDef && engDef.he3_cost != null) cost = engDef.he3_cost;
-    }
-    return sum + cost;
-  }, 0);
-  if (R.he3 < he3NeededPvp) {
-    toast(`⚠️ He3 kritično nizak! (${R.he3.toFixed(2)} / ${he3NeededPvp.toFixed(3)})`, 'warn');
-  }
-  R.he3 = Math.max(0, R.he3 - he3NeededPvp);
-  if (typeof updateResUI === 'function') updateResUI();
-  // ─────────────────────────────────
+  const myId = window._supaSession
+    ? window._supaSession.user.id
+    : (window._hiveUser ? 'hive_' + window._hiveUser : null);
 
-  toast(`⚔️ Pokretanje PvP bitke vs ${opp.name}...`, 'inf');
+  const { data, error } = await window._supa
+    .from('pvp_snapshots')
+    .select('*')
+    .neq('id', myId || '')
+    .order('rating', { ascending: false })
+    .limit(20);
+
+  if (error || !data || data.length === 0) {
+    window._currentOpponents = [];
+    if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Nema dostupnih protivnika.</div>';
+    return;
+  }
+
+  // Sortiraj po blizini ratinga
+  const sorted = data.sort((a, b) =>
+    Math.abs(a.rating - (pvp.rating || 1000)) - Math.abs(b.rating - (pvp.rating || 1000))
+  );
+
+  window._currentOpponents = sorted.slice(0, 8).map(row => ({
+    id:       row.id,
+    name:     row.username,
+    rating:   row.rating  || 1000,
+    level:    row.level   || 1,
+    power:    row.power   || 0,
+    fleet:    Array.isArray(row.fleet) ? row.fleet : [],
+    isPremium: row.is_premium || false,
+    updatedAt: row.updated_at,
+  }));
+
+  if (el) el.innerHTML = renderOpponentListHTML();
+  toast('🔄 Protivnici učitani!', 'inf');
+}
+
+// ── Render liste protivnika ──
+function renderOpponentListHTML() {
+  if (window._currentOpponents.length === 0) {
+    return '<div style="color:#6a90b8;padding:20px;text-align:center">Nema dostupnih protivnika.</div>';
+  }
+
+  const myRating = pvp.rating || 1000;
+
+  return window._currentOpponents.map((opp, idx) => {
+    const ratingDiff = opp.rating - myRating;
+    const diffColor  = ratingDiff > 0 ? '#ff3355' : '#00ff88';
+    const diffText   = (ratingDiff > 0 ? '+' : '') + ratingDiff;
+    const fleetCount = opp.fleet ? opp.fleet.length : 0;
+    const premBadge  = opp.isPremium ? '<span style="font-size:0.5rem;color:#ffcc44;border:1px solid #ffcc4444;padding:1px 5px;border-radius:3px;margin-left:5px">★ PREMIUM</span>' : '';
+
+    return `
+      <div class="card" style="margin-bottom:10px;border-color:rgba(255,51,85,0.2)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div>
+            <div style="font-size:0.8rem;font-weight:700;color:white">${opp.name}${premBadge}</div>
+            <div style="font-size:0.6rem;color:#6a90b8;margin-top:2px">
+              Level ${opp.level} · Rating <span style="color:#ffcc44">${opp.rating}</span>
+              <span style="color:${diffColor};margin-left:6px">(${diffText})</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.65rem;color:#00d4ff;font-family:'Orbitron',monospace">${fmt(opp.power)}</div>
+            <div style="font-size:0.55rem;color:#6a90b8">${fleetCount} brodova</div>
+          </div>
+        </div>
+        <button class="btn btn-danger" style="width:100%;font-size:0.68rem"
+          onclick="startPvpBattle(${idx})">
+          ⚔️ NAPADNI
+        </button>
+      </div>`;
+  }).join('');
+}
+
+// ── Pokretanje PvP bitke ──
+function startPvpBattle(oppIdx) {
+  const opp = window._currentOpponents[oppIdx];
+  if (!opp) return;
+
+  // Provjeri shield
+  if (window.pvpShield?.active && Date.now() < new Date(window.pvpShield.expiresAt).getTime()) {
+    toast('🛡️ Tvoj shield je aktivan — ne možeš napadati!', 'warn');
+    return;
+  }
+
+  // He3 trošak
+  const he3Cost = 10;
+  if (R.he3 < he3Cost) {
+    toast(`⛽ Nedovoljno He3! Treba ${he3Cost}`, 'warn');
+    return;
+  }
+  R.he3 -= he3Cost;
+  if (typeof updateResUI === 'function') updateResUI();
+
+  // Provjeri da li protivnik ima fleet
+  if (!opp.fleet || opp.fleet.length === 0) {
+    toast('⚠️ Protivnik nema raspoređenu flotu!', 'warn');
+    return;
+  }
+
+  toast(`⚔️ Napadam ${opp.name}...`, 'inf');
 
   setTimeout(() => {
-    // Espionage Lv100 → +10% krit u PvP
-    const espLv100 = typeof getEspionageLevel === 'function' && getEspionageLevel() >= 100;
-    // Fleet iz baze ima hp/dps/shield/agility/speed — sve što simulateBattle treba
-    let enemyFleet = opp.fleet || [];
-    // Fallback na AI flotu ako je stari snapshot bez stats
-    if (enemyFleet.length === 0 || !enemyFleet[0].hp) {
-      const oppPower = opp.power || 10000;
-      const difficulty = oppPower / Math.max(1, calcFleetTotalPower());
-      enemyFleet = generateAIFleet(calcFleetTotalPower(), Math.min(1.5, Math.max(0.3, difficulty)));
+    const myFleet  = buildPvpFleetLocal();
+    const oppFleet = buildPvpFleetFromSnapshot(opp.fleet);
+
+    if (myFleet.length === 0) {
+      toast('⚠️ Nemaš brodova u floti!', 'warn');
+      return;
+    }
+    if (oppFleet.length === 0) {
+      toast('⚠️ Protivnik nema validnu flotu!', 'warn');
+      return;
     }
 
-    const battle = simulateBattle(fleetSlots, enemyFleet, {
-      name:       `⚔️ PvP — ${opp.avatar} ${opp.name}`,
-      difficulty: Math.min(10, Math.ceil(opp.power / 10000)),
-      resources:  { metal: [0,0], crystal: [0,0], he3: [0,0] },
-      drops:      {},
-      type:       'pvp',
-      pvpCritBonus: espLv100 ? 10 : 0,
-    });
+    const result = simulatePvpBattle(myFleet, oppFleet);
+    const isVictory = result.status === 'victory';
 
-    const isVictory    = battle.status === 'victory';
-    const ratingChange = isVictory ? 25 : -15;
-    pvp.rating = Math.max(0, pvp.rating + ratingChange);
+    // Rating promjena
+    const ratingChange = calcRatingChange(pvp.rating || 1000, opp.rating, isVictory);
+    pvp.rating = Math.max(0, (pvp.rating || 1000) + ratingChange);
 
+    // PvP dnevni broj
+    window._dailyPvpCount = (window._dailyPvpCount || 0) + 1;
+
+    // Plijen ako pobjeda
+    let loot = { metal: 0, crystal: 0, he3: 0 };
     if (isVictory) {
-      pvp.wins++;
-      if (typeof trackWeeklyPvp  === 'function') trackWeeklyPvp();
-      if (typeof addExp === 'function') addExp(80);
-    } else {
-      pvp.losses++;
-    }
-    if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
-
-    let loot = null;
-    if (isVictory) {
-      loot = {
-        metal:   Math.floor(opp.resources.metal   * 0.1),
-        crystal: Math.floor(opp.resources.crystal * 0.1),
-        he3:     Math.floor(opp.resources.he3     * 0.1),
-      };
+      loot.metal   = Math.floor((opp.power || 10000) * 5);
+      loot.crystal = Math.floor((opp.power || 10000) * 4);
+      loot.he3     = Math.floor((opp.power || 10000) * 2);
       R.metal   += loot.metal;
       R.crystal += loot.crystal;
       R.he3     += loot.he3;
     }
 
-    pvp.history.unshift({
-      opponent:   opp.name,
-      oppAvatar:  opp.avatar,
-      oppRarity:  opp.cmdRarity,
-      oppFleet:   (opp.fleet || []).map(g => g.name),
-      result:     battle.status,
-      rounds:     battle.round,
+    // Snimamo u PvP log
+    if (!pvp.log) pvp.log = [];
+    pvp.log.unshift({
+      time:     Date.now(),
+      opponent: opp.name,
+      rating:   opp.rating,
+      result:   result.status,
+      rounds:   result.round,
       ratingChange,
       loot,
-      date: new Date().toLocaleString('sr'),
     });
-    if (pvp.history.length > 50) pvp.history.pop();
+    if (pvp.log.length > 20) pvp.log = pvp.log.slice(0, 20);
 
-    window._currentOpponents.splice(opponentIdx, 1);
-    updateResUI();
+    if (typeof updateResUI === 'function') updateResUI();
     saveGame();
 
-    // ── Vizuelna animacija bitke, kao kod instanci ──
-    if (typeof startBattleAnim === 'function' && battle.log && battle.log.length > 0) {
-      startBattleAnim(battle, () => renderPvpBattleResult(battle, opp, loot, ratingChange));
-    } else {
-      renderPvpBattleResult(battle, opp, loot, ratingChange);
-    }
-  }, 150);
+    renderPvpResult(result, opp, loot, ratingChange);
+  }, 200);
 }
 
-function renderPvpBattleResult(battle, opp, loot, ratingChange) {
-  const isVictory = battle.status === 'victory';
-  const statusColor = isVictory ? '#00ff88' : '#ff3355';
-  const statusIcon = isVictory ? '🏆' : '💀';
-  const statusText = isVictory ? 'POBJEDA' : 'PORAZ';
+// ── Prikaz rezultata bitke ──
+function renderPvpResult(result, opp, loot, ratingChange) {
+  const isVictory = result.status === 'victory';
+  const isDraw    = result.status === 'draw';
 
-  const rarColors = { L: '#ffaa00', E: '#aa44ff', R: '#4488ff', C: '#aaaaaa' };
-  const rc = rarColors[opp.cmdRarity] || '#aaa';
-  const cmd = opp.commander;
+  const statusColor = isVictory ? '#00ff88' : isDraw ? '#ffcc44' : '#ff3355';
+  const statusText  = isVictory ? '🏆 POBJEDA!' : isDraw ? '⚖️ NERIJEŠENO' : '💀 PORAZ';
 
-  const cmdBlock = cmd ? `
-    <div style="display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.3);
-      border:1px solid ${rc}33;border-radius:8px;padding:10px;margin-bottom:14px">
-      <div style="font-size:2rem">${cmd.icon}</div>
-      <div style="flex:1">
-        <div style="font-size:0.75rem;font-weight:700;color:${rc}">${cmd.name}</div>
-        <div style="font-size:0.6rem;color:#6a90b8;margin-top:2px">
-          ${cmd.passive ? `🛡️ ${cmd.passive.name}` : ''}
-        </div>
-        <div style="font-size:0.55rem;color:#6a90b8;margin-top:1px">
-          ${cmd.faction ? `Frakcija: ${cmd.faction}` : ''} · ${opp.titleIcon} ${opp.name}
-        </div>
-      </div>
-      <div style="font-size:0.6rem;font-weight:700;color:${rc};font-family:'Orbitron',monospace;
-        background:${rc}18;border-radius:4px;padding:3px 8px">${opp.cmdRarity}</div>
-    </div>` : '';
-
-  const fleetBlock = opp.fleet && opp.fleet.length > 0 ? `
-    <div style="margin-bottom:14px">
-      <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:4px">⚔️ Neprijateljska flota:</div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">
-        ${opp.fleet.map(g => `
-          <span style="font-size:0.55rem;background:rgba(255,51,85,0.08);
-            border:1px solid rgba(255,51,85,0.2);border-radius:3px;padding:2px 6px;color:#ff8888">
-            ${g.name}
-          </span>`).join('')}
+  const lootHtml = isVictory ? `
+    <div style="margin:12px 0;padding:10px;background:rgba(0,255,136,0.06);border-radius:6px;border:1px solid rgba(0,255,136,0.15)">
+      <div style="font-size:0.6rem;color:#00ff88;font-family:'Orbitron',monospace;margin-bottom:6px">PLIJEN</div>
+      <div style="font-size:0.7rem;color:#c0d8f0">
+        🔩 ${fmt(loot.metal)} · 💎 ${fmt(loot.crystal)} · ⛽ ${fmt(loot.he3)}
       </div>
     </div>` : '';
 
-  const body = `
-    <div style="text-align:center;margin-bottom:16px">
-      <div style="font-size:2.5rem;margin-bottom:6px">${statusIcon}</div>
-      <div style="font-family:'Orbitron',monospace;font-size:1.3rem;color:${statusColor}">${statusText}</div>
-      <div style="font-size:0.7rem;color:#6a90b8;margin-top:3px">${battle.round} rundi borbe</div>
+  const logHtml = result.log.slice(-30).map(e => `
+    <div style="font-size:0.6rem;padding:1px 0;color:${
+      e.type === 'round'   ? '#ffcc44' :
+      e.type === 'destroy' ? '#ff3355' :
+      e.type === 'miss'    ? '#6a90b8' :
+      e.type === 'effect'  ? '#aa44ff' :
+      e.type === 'info'    ? '#00ff88' :
+      '#b0cce8'
+    }">${e.msg}</div>`).join('');
+
+  openModal(
+    `⚔️ PvP — ${opp.name}`,
+    `<div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:1.4rem;font-weight:700;color:${statusColor};font-family:'Orbitron',monospace">${statusText}</div>
+      <div style="font-size:0.7rem;color:#6a90b8;margin-top:4px">${result.round} rundi · Rating: <span style="color:${ratingChange >= 0 ? '#00ff88' : '#ff3355'}">${ratingChange >= 0 ? '+' : ''}${ratingChange}</span></div>
     </div>
+    ${lootHtml}
+    <div style="max-height:220px;overflow-y:auto;background:rgba(0,0,0,0.3);border-radius:6px;padding:10px;font-family:'Share Tech Mono',monospace">
+      ${logHtml}
+    </div>`,
+    [{ label: 'Zatvori', cls: 'btn-g', fn: () => { closeModal(); renderPvp(); } }]
+  );
+}
 
-    ${cmdBlock}
-    ${fleetBlock}
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;text-align:center">
-      <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:6px">
-        <div style="font-size:0.62rem;color:#6a90b8">RATING PROMJENA</div>
-        <div style="font-size:1.2rem;font-family:'Orbitron',monospace;color:${ratingChange > 0 ? '#00ff88' : '#ff3355'}">
-          ${ratingChange > 0 ? '+' : ''}${ratingChange}
+// ── PvP log ──
+function renderPvpLogHTML() {
+  if (!pvp.log || pvp.log.length === 0) {
+    return '<div style="color:#6a90b8;font-size:0.7rem;text-align:center;padding:20px">Nema borbi još.</div>';
+  }
+  return pvp.log.map(e => {
+    const color  = e.result === 'victory' ? '#00ff88' : e.result === 'draw' ? '#ffcc44' : '#ff3355';
+    const icon   = e.result === 'victory' ? '🏆' : e.result === 'draw' ? '⚖️' : '💀';
+    const d      = new Date(e.time);
+    const timeStr = `${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+    return `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+        <div>
+          <span style="color:${color};font-size:0.75rem">${icon} ${e.opponent}</span>
+          <span style="color:#6a90b8;font-size:0.6rem;margin-left:8px">${e.rounds} rundi</span>
         </div>
+        <div style="text-align:right">
+          <span style="color:${e.ratingChange >= 0 ? '#00ff88' : '#ff3355'};font-size:0.7rem">${e.ratingChange >= 0 ? '+' : ''}${e.ratingChange}</span>
+          <span style="color:#6a90b8;font-size:0.55rem;margin-left:6px">${timeStr}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── Glavni render PvP panela ──
+function renderPvp() {
+  const el = document.getElementById('pvpContent');
+  if (!el) return;
+
+  const shield    = window.pvpShield || { active: false };
+  const shieldActive = shield.active && shield.expiresAt && Date.now() < new Date(shield.expiresAt).getTime();
+  const shieldLeft   = shieldActive ? Math.ceil((new Date(shield.expiresAt).getTime() - Date.now()) / 60000) : 0;
+
+  el.innerHTML = `
+    <!-- Header stats -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+      <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,204,68,0.15)">
+        <div style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#ffcc44">${pvp.rating || 1000}</div>
+        <div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">RATING</div>
       </div>
-      <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:6px">
-        <div style="font-size:0.62rem;color:#6a90b8">NOVI RATING</div>
-        <div style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#ffcc44">${pvp.rating}</div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(0,212,255,0.15)">
+        <div style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#00d4ff">${pvp.wins || 0}</div>
+        <div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">POBJEDE</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,51,85,0.15)">
+        <div style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#ff3355">${pvp.losses || 0}</div>
+        <div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">PORAZI</div>
       </div>
     </div>
 
-    ${loot ? `
-    <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);
-      border-radius:8px;padding:10px;margin-bottom:14px">
-      <div style="font-size:0.7rem;color:#00ff88;font-weight:700;margin-bottom:8px">🎁 PLIJEN</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
-        <div><div style="font-size:0.6rem;color:#6a90b8">METAL</div>
-          <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(loot.metal)}</div></div>
-        <div><div style="font-size:0.6rem;color:#6a90b8">CRYSTAL</div>
-          <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(loot.crystal)}</div></div>
-        <div><div style="font-size:0.6rem;color:#6a90b8">HE3</div>
-          <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(loot.he3)}</div></div>
-      </div>
-    </div>` : ''}
+    <!-- Shield status -->
+    ${shieldActive ? `
+    <div style="padding:10px 14px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:0.7rem;color:#00d4ff">🛡️ Shield aktivan — ${shieldLeft} min</span>
+      <button onclick="deactivatePvpShield()" style="font-size:0.6rem;padding:3px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">Deaktiviraj</button>
+    </div>` : `
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <button onclick="activatePvpShield(4)" class="btn" style="flex:1;font-size:0.62rem">🛡️ Shield 4h (${fmt(50000)} metal)</button>
+      <button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.62rem">🔄 Osvježi</button>
+    </div>`}
 
-    <div style="background:rgba(0,0,0,0.4);border-radius:8px;padding:10px;
-      max-height:160px;overflow-y:auto;font-size:0.6rem;font-family:'Share Tech Mono',monospace">
-      <div style="color:#6a90b8;margin-bottom:4px">BATTLE LOG:</div>
-      ${battle.log.map(e => `<div style="color:${
-        e.type === 'round'   ? '#00d4ff' :
-        e.type === 'attack'  ? '#b0cce8' :
-        e.type === 'destroy' ? '#ff3355' :
-        e.type === 'effect'  ? '#ffcc44' :
-        e.type === 'result'  ? '#00ff88' : '#6a90b8'
-      };margin-bottom:2px">${e.msg}</div>`).join('')}
+    <!-- Protivnici -->
+    <div style="font-size:0.6rem;color:#ff3355;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:10px">⚔️ PROTIVNICI</div>
+    <div id="opponentList">
+      ${window._currentOpponents.length > 0 ? renderOpponentListHTML() : '<div style="color:#6a90b8;padding:20px;text-align:center">⏳ Učitavam...</div>'}
     </div>
+
+    <!-- Log -->
+    <div style="font-size:0.6rem;color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:2px;margin:20px 0 10px">📋 ISTORIJA BORBI</div>
+    ${renderPvpLogHTML()}
   `;
 
-  openModal(`${statusIcon} PvP: ${opp.name}`, body, [{ label: 'Zatvori', fn: () => { closeModal(); renderPvP(); } }]);
+  // Učitaj protivnike ako lista prazna
+  if (window._currentOpponents.length === 0) refreshOpponents();
 }
 
-const SHIELD_PRICES = { 1: { satoshi: 100 }, 4: { satoshi: 400 }, 12: { satoshi: 1080 }, 24: { satoshi: 1920 } };
+// ── Shield funkcije ──
+function activatePvpShield(hours) {
+  const metalCost = 50000;
+  if (R.metal < metalCost) { toast(`Nedovoljno metala (${fmt(metalCost)})`, 'warn'); return; }
+  R.metal -= metalCost;
+  window.pvpShield = { active: true, expiresAt: new Date(Date.now() + hours * 3600000).toISOString() };
+  if (typeof updateResUI === 'function') updateResUI();
+  saveGame();
+  renderPvp();
+  toast(`🛡️ Shield aktivan ${hours}h!`, 'ok');
+}
 
-function buyShield(hours) {
-  const price = SHIELD_PRICES[hours] || { satoshi: hours * 100 };
-  openModal('🛡️ Kupi Shield', `<div style="text-align:center;padding:20px"><div style="font-size:2.5rem;margin-bottom:12px">🛡️</div><div style="font-size:1rem;font-weight:700;color:white;margin-bottom:4px">${hours}h zaštita</div><div style="font-size:1.4rem;color:#ffcc44;font-family:'Orbitron',monospace;margin-bottom:16px">${price.satoshi} satoshi BPW</div><div style="font-size:0.72rem;color:#6a90b8;background:rgba(0,0,0,0.3);padding:10px;border-radius:6px">HIVE blockchain plaćanje — uskoro dostupno.<br>BPW token integracija u razvoju.</div></div>`, [{ label: 'Zatvori', fn: closeModal }]);
+function deactivatePvpShield() {
+  window.pvpShield = { active: false, expiresAt: null };
+  saveGame();
+  renderPvp();
 }
