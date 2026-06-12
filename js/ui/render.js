@@ -84,6 +84,7 @@ function updateResUI() {
   updateDepotStatus();
   updateFormationStatus();
   if (typeof updateHangarStatus === 'function') updateHangarStatus();
+  if (typeof updateHiveTokenUI === 'function') updateHiveTokenUI();
 }
 
 // ── DEPOT STATUS (desni panel) ──

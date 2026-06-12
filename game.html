@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sr">
 <head>
 <meta charset="UTF-8">
@@ -339,18 +339,34 @@
     <div id="rightPanel">
       <div class="rp-section">
         <div class="rp-title">KOMANDIR</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span id="rpUsername" style="font-size:0.7rem;color:#00d4ff;font-family:'Share Tech Mono',monospace;font-weight:700"></span>
+          <span id="rpPremiumBadge" style="display:none;font-size:0.55rem;font-weight:700;letter-spacing:1px;padding:2px 6px;background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);color:#000;border-radius:3px">&#x2605; PREMIUM</span>
+        </div>
         <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
         <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>
         <div style="font-size:0.65rem;color:#6a90b8;margin-top:4px">
           <span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP
         </div>
       </div>
-      <div class="rp-section">
+      <div class="rp-section" id="hiveTokenSection">
         <div class="rp-title">HIVE TOKENI</div>
-        <div style="font-size:0.72rem;font-family:'Share Tech Mono',monospace;line-height:2">
-          <div>💰 BCM: <span id="hBCM" style="color:white">0</span></div>
-          <div>💰 BoCrypto: <span id="hBoCrypto" style="color:white">0</span></div>
-          <div>💰 BPW: <span id="hBPW" style="color:#ffcc44">0</span> <span style="color:#6a90b8;font-size:0.6rem">sat</span></div>
+        <div style="font-size:0.7rem;font-family:'Share Tech Mono',monospace">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+            <span>&#x1F4B0; BCM: <span id="hBCM" style="color:white">0</span></span>
+            <div id="hBCM-btns" style="display:flex;gap:3px"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+            <span>&#x1F4B0; BoCrypto: <span id="hBoCrypto" style="color:white">0</span></span>
+            <div id="hBoCrypto-btns" style="display:flex;gap:3px"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span>&#x1F4B0; BPW: <span id="hBPW" style="color:#ffcc44">0</span> <span style="color:#6a90b8;font-size:0.6rem">sat</span></span>
+            <div id="hBPW-btns" style="display:flex;gap:3px"></div>
+          </div>
+          <div id="hiveTokenLock" style="display:none;margin-top:8px;text-align:center;color:#6a90b8;font-size:0.65rem">
+            &#x1F512; Zaklju&#269;ano &mdash; potreban <span style="color:#ffcc44">Premium</span>
+          </div>
         </div>
       </div>
       <div class="rp-section">
@@ -504,6 +520,114 @@
 <script src="js/systems/formations.js"></script>
 <script src="js/systems/events.js"></script>
 
+<script>
+function updateHiveTokenUI() {
+  const isPremium = window._playerPremium || false;
+  // Username + premium badge
+  const unEl = document.getElementById('rpUsername');
+  const badgeEl = document.getElementById('rpPremiumBadge');
+  if (unEl) {
+    const name = window._hiveUser || (window._supaSession && (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0])) || '';
+    unEl.textContent = name ? '@' + name : '';
+  }
+  if (badgeEl) badgeEl.style.display = isPremium ? '' : 'none';
+  const lock = document.getElementById('hiveTokenLock');
+  const tokens = ['BCM', 'BoCrypto', 'BPW'];
+  tokens.forEach(function(t) {
+    const container = document.getElementById('h' + t + '-btns');
+    if (!container) return;
+    if (isPremium) {
+      const sym = t === 'BoCrypto' ? 'BOCRYPTO' : t;
+      container.innerHTML =
+        '<button onclick="hiveTokenAction(\'' + sym + '\',\'deposit\')" style="font-size:0.48rem;padding:2px 5px;background:rgba(0,255,136,0.12);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:3px;cursor:pointer">&#x2B07; DEP</button>' +
+        '<button onclick="hiveTokenAction(\'' + sym + '\',\'withdraw\')" style="font-size:0.48rem;padding:2px 5px;background:rgba(255,100,0,0.12);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:3px;cursor:pointer">&#x2B06; WIT</button>';
+    } else {
+      container.innerHTML = '<span style="color:#444;font-size:1rem">&#x1F512;</span>';
+    }
+  });
+  if (lock) lock.style.display = isPremium ? 'none' : 'block';
+}
+
+function hiveTokenAction(token, action) {
+  if (!window._hiveUser) {
+    alert('Ova funkcija je samo za HIVE korisnike!');
+    return;
+  }
+  const tokenConfig = {
+    'BCM':      { symbol: 'BCM',      precision: 3, gameKey: 'bcm' },
+    'BoCrypto': { symbol: 'BOCRYPTO', precision: 3, gameKey: 'bocrypto' },
+    'BPW':      { symbol: 'BPW',      precision: 3, gameKey: 'spCard', divisor: 100000000 }
+  };
+  const cfg = tokenConfig[token];
+  if (!cfg) return;
+
+  const gameAccount = 'bokica80';
+
+  if (action === 'deposit') {
+    const amtStr = prompt('Koliko ' + token + ' tokena zelis da depositiras u igru?', '1');
+    if (!amtStr) return;
+    const amt = parseFloat(amtStr);
+    if (isNaN(amt) || amt <= 0) { alert('Neispravan iznos!'); return; }
+    const amtFormatted = amt.toFixed(cfg.precision) + ' ' + cfg.symbol;
+    const memo = 'HIVEGALAXY_deposit_' + token + '_' + window._hiveUser;
+
+    if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
+    window.hive_keychain.requestTransfer(
+      window._hiveUser,
+      gameAccount,
+      amt.toFixed(cfg.precision),
+      memo,
+      cfg.symbol,
+      function(resp) {
+        if (resp.success) {
+          // Privremeno dodaj u igru odmah (server ce potvrditi)
+          if (cfg.divisor) {
+            R[cfg.gameKey] = (R[cfg.gameKey] || 0) + Math.round(amt * cfg.divisor);
+          } else {
+            R[cfg.gameKey] = (R[cfg.gameKey] || 0) + amt;
+          }
+          if (typeof updateResUI === 'function') updateResUI();
+          if (typeof toast === 'function') toast('✅ Deposit ' + amtFormatted + ' uspešan! Čeka potvrdu na lancu.', 'ok');
+          saveGame();
+        } else {
+          alert('Transakcija odbijena: ' + (resp.message || 'Greška'));
+        }
+      }
+    );
+  } else if (action === 'withdraw') {
+    let currentAmt;
+    if (cfg.divisor) {
+      currentAmt = ((R[cfg.gameKey] || 0) / cfg.divisor).toFixed(cfg.precision);
+    } else {
+      currentAmt = (R[cfg.gameKey] || 0).toFixed(cfg.precision);
+    }
+    const amtStr = prompt('Koliko ' + token + ' tokena zelis da povučes iz igre?\n(Imaš: ' + currentAmt + ' ' + token + ')', '1');
+    if (!amtStr) return;
+    const amt = parseFloat(amtStr);
+    if (isNaN(amt) || amt <= 0) { alert('Neispravan iznos!'); return; }
+
+    let gameAmt;
+    if (cfg.divisor) {
+      gameAmt = Math.round(amt * cfg.divisor);
+      if (gameAmt > (R[cfg.gameKey] || 0)) { alert('Nemate dovoljno ' + token + ' u igri!'); return; }
+      R[cfg.gameKey] = (R[cfg.gameKey] || 0) - gameAmt;
+    } else {
+      if (amt > (R[cfg.gameKey] || 0)) { alert('Nemate dovoljno ' + token + ' u igri!'); return; }
+      R[cfg.gameKey] = (R[cfg.gameKey] || 0) - amt;
+    }
+
+    if (typeof updateResUI === 'function') updateResUI();
+    saveGame();
+
+    openModal('⬆ Withdraw ' + token,
+      '<p>Zahtev za isplatu <b>' + amt.toFixed(cfg.precision) + ' ' + token + '</b> primljen.</p>' +
+      '<p style="color:#aaa;font-size:0.85em">Isplata se procesira ručno u roku od 24h na HIVE račun: <b>' + window._hiveUser + '</b></p>' +
+      '<p style="color:#f90;font-size:0.85em">Tokeni su oduzeti iz igre. Ako isplata ne stigne za 24h, kontaktuj admina.</p>',
+      [{ label: 'OK', cls: 'btn-g', fn: closeModal }]
+    );
+  }
+}
+</script>
 <!-- 6. MAIN — zadnji -->
 <script src="js/main.js"></script>
 
