@@ -172,7 +172,7 @@ function showPanel(panelId) {
     case 'blueprints':   renderBlueprints();        break;
     case 'galaxy':       renderGalaxy();            break;
     case 'instances':    renderInstances();         break;
-    case 'pvp':          renderPvP();               break;
+    case 'pvp':          renderPvp();               break;
     case 'research':     renderResearch();          break;
     case 'missions':     renderMissions();          break;
     case 'espionage':    renderEspionage();         break;
