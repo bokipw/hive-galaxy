@@ -54,7 +54,7 @@
         applyKeys();
       }
 
-      // Fetch Hive-Engine token balances
+      // Fetch chain balances samo za wallet modal (ne diraj R.*)
       fetch('https://api.hive-engine.com/rpc/contracts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -68,17 +68,10 @@
         })
       }).then(r => r.json()).then(res => {
         const rows = res.result || [];
-        const waitR = () => {
-          if (typeof R === 'undefined') { setTimeout(waitR, 200); return; }
-          rows.forEach(row => {
-            const bal = parseFloat(row.balance) || 0;
-            if (row.symbol === 'BCM')      R.bcm      = bal;
-            if (row.symbol === 'BOCRYPTO') R.bocrypto = bal;
-            if (row.symbol === 'BPW')      R.spCard   = Math.round(bal * 100000000);
-          });
-          if (typeof updateResUI === 'function') updateResUI();
-        };
-        waitR();
+        const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.'+'0'.repeat(dec)); };
+        window._chainBCM = get('BCM', 0);
+        window._chainBOC = get('BOCRYPTO', 3);
+        window._chainBPW = get('BPW', 8);
       }).catch(() => {});
     });
     return;

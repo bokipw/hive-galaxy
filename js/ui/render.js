@@ -22,10 +22,10 @@ function updateResUI() {
   set('rScore',   fmt(R.score));
   set('rKeys',    R.instanceKeys || 0);
   set('rCardKeys', R.keys || 0);
-  // HIVE tokeni
-  set('hBCM',     R.bcm     || 0);
-  set('hBoCrypto',R.bocrypto|| 0);
-  set('hBPW',     R.spCard  || 0);
+  // HIVE tokeni (in-game balans)
+  set('hBCM',      Math.floor(R.bcm || 0));
+  set('hBoCrypto', (R.bocrypto || 0).toFixed(3));
+  set('hBPW',      ((R.spCard || 0) / 100000000).toFixed(8));
 
   const prod = getProd();
   const now  = Math.floor(Date.now() / 1000);
