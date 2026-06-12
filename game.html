@@ -573,7 +573,10 @@ function hiveTokenAction(token, action) {
     const memo = 'HIVEGALAXY_deposit_' + token + '_' + window._hiveUser;
 
     if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
-    window.hive_keychain.requestTransfer(
+    // BCM i BoCrypto su Hive-Engine tokeni — koristi requestSendToken, ne requestTransfer
+    const keychainMethod = (cfg.symbol === 'BCM' || cfg.symbol === 'BOCRYPTO')
+      ? 'requestSendToken' : 'requestTransfer';
+    window.hive_keychain[keychainMethod](
       window._hiveUser,
       gameAccount,
       amt.toFixed(cfg.precision),
