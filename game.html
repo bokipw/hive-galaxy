@@ -53,6 +53,33 @@
         };
         applyKeys();
       }
+
+      // Fetch Hive-Engine token balances
+      fetch('https://api.hive-engine.com/rpc/contracts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0', id: 1, method: 'find',
+          params: {
+            contract: 'tokens', table: 'balances',
+            query: { account: hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } },
+            limit: 10
+          }
+        })
+      }).then(r => r.json()).then(res => {
+        const rows = res.result || [];
+        const waitR = () => {
+          if (typeof R === 'undefined') { setTimeout(waitR, 200); return; }
+          rows.forEach(row => {
+            const bal = parseFloat(row.balance) || 0;
+            if (row.symbol === 'BCM')      R.bcm      = bal;
+            if (row.symbol === 'BOCRYPTO') R.bocrypto = bal;
+            if (row.symbol === 'BPW')      R.spCard   = Math.round(bal * 100000000);
+          });
+          if (typeof updateResUI === 'function') updateResUI();
+        };
+        waitR();
+      }).catch(() => {});
     });
     return;
   }
