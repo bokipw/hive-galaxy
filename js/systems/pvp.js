@@ -261,7 +261,7 @@ async function refreshOpponents() {
         commanders:  Array.isArray(row.commanders) ? row.commanders : [],
         isPremium:   row.is_premium || false,
         isReal:      true,
-        titleIcon:   getTitleByRating(row.rating).icon,
+        titleIcon:   getAiTitle(row.rating).icon,
         cmdRarity:   row.is_premium ? 'E' : 'C',
         resources:   { metal: row.power * 10 || 50000, crystal: row.power * 8 || 40000, he3: row.power * 5 || 25000 },
       }));
