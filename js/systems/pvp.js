@@ -244,14 +244,23 @@ function simulatePvpBattle(fleetA, fleetB) {
 
       const critTxt = isCrit ? ' 💥KRIT' : '';
       log.push({
-        type: 'attack',
-        msg: `⚔️ ${attacker.name} → ${target.name}: ${fmt(dmg)} dmg${critTxt}${shieldDmg > 0 ? ` (${fmt(shieldDmg)} shield)` : ''}`
+        type:        'attack',
+        msg:         `⚔️ ${attacker.name} → ${target.name}: ${fmt(dmg)} dmg${critTxt}${shieldDmg > 0 ? ` (${fmt(shieldDmg)} shield)` : ''}`,
+        attackerId:  attacker.id,
+        targetId:    target.id,
+        damage:      dmg,
+        isCrit,
+        shieldDmg,
+        hpAfter:     Math.max(0, target.hp),
+        hpMax:       target.maxHp,
+        shieldAfter: Math.max(0, target.shield),
+        shieldMax:   target.maxShield,
       });
 
       if (target.hp <= 0) {
         target.hp = 0;
         target.alive = false;
-        log.push({ type: 'destroy', msg: `💀 ${target.name} uništen!` });
+        log.push({ type: 'destroy', msg: `💀 ${target.name} uništen!`, targetId: target.id });
       }
     }
 
@@ -275,6 +284,336 @@ function simulatePvpBattle(fleetA, fleetB) {
 
   log.push({ type: 'info', msg: '⏱️ Maksimalan broj rundi — neriješeno.' });
   return { status: 'draw', round, log };
+}
+
+// ── Vizuelna PvP bitka ──
+let _pvpAnimSpeed = 600; // ms između akcija
+let _pvpAnimTimer = null;
+let _pvpAnimPaused = false;
+
+function openPvpBattleVisual(myFleet, oppFleet, opp) {
+  const result = simulatePvpBattle(myFleet, oppFleet);
+
+  // Snapshot stanja svih jedinica za vizualizaciju
+  const units = {};
+  [...myFleet, ...oppFleet].forEach(u => {
+    units[u.id] = {
+      id: u.id, name: u.name, side: u.side,
+      hp: u.maxHp, maxHp: u.maxHp,
+      shield: u.maxShield, maxShield: u.maxShield,
+      alive: true,
+    };
+  });
+
+  // Grupišemo po strani
+  const playerUnits = myFleet.map(u => ({ ...units[u.id] }));
+  const enemyUnits  = oppFleet.map(u => ({ ...units[u.id] }));
+
+  // Reset stanja
+  [...myFleet, ...oppFleet].forEach(u => {
+    u.hp = u.maxHp; u.shield = u.maxShield; u.alive = true;
+  });
+
+  const modalEl = document.createElement('div');
+  modalEl.id = 'pvpBattleModal';
+  modalEl.style.cssText = `
+    position:fixed;inset:0;z-index:9999;background:rgba(0,5,15,0.97);
+    display:flex;flex-direction:column;overflow:hidden;
+    font-family:'Share Tech Mono',monospace;
+  `;
+
+  modalEl.innerHTML = `
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid rgba(0,212,255,0.15);flex-shrink:0">
+      <div style="font-family:'Orbitron',monospace;font-size:0.8rem;color:#00d4ff">⚔️ PvP BITKA</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span id="pvpRoundLabel" style="font-size:0.7rem;color:#ffcc44">Runda 0</span>
+        <button onclick="togglePvpPause()" id="pvpPauseBtn" style="font-size:0.65rem;padding:4px 12px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:4px;cursor:pointer">⏸ Pauza</button>
+        <button onclick="setPvpSpeed(300)" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">2×</button>
+        <button onclick="setPvpSpeed(100)" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">5×</button>
+        <button onclick="skipPvpAnim()" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">⏭ Skip</button>
+      </div>
+    </div>
+
+    <!-- Bojna mapa -->
+    <div style="flex:1;display:flex;gap:0;overflow:hidden;position:relative">
+      <!-- SVG overlay za projektile -->
+      <svg id="pvpProjectileSvg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10"></svg>
+
+      <!-- Lijeva strana (player) -->
+      <div id="pvpSideA" style="flex:1;padding:12px;overflow-y:auto;border-right:1px solid rgba(0,212,255,0.1)">
+        <div style="font-size:0.55rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:10px;text-align:center">
+          ${window._hiveUser || 'TI'}
+        </div>
+        <div id="pvpUnitsA" style="display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+
+      <!-- Sredina — log -->
+      <div style="width:260px;flex-shrink:0;padding:10px;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.05)" id="pvpBattleLog">
+        <div style="font-size:0.55rem;color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:1px;margin-bottom:8px;text-align:center">LOG</div>
+      </div>
+
+      <!-- Desna strana (enemy) -->
+      <div id="pvpSideB" style="flex:1;padding:12px;overflow-y:auto">
+        <div style="font-size:0.55rem;color:#ff3355;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:10px;text-align:center">
+          ${opp.name}
+        </div>
+        <div id="pvpUnitsB" style="display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modalEl);
+
+  // Render početnih jedinica
+  renderPvpUnits(myFleet, 'pvpUnitsA', 'player');
+  renderPvpUnits(oppFleet, 'pvpUnitsB', 'enemy');
+
+  // Pokreni animaciju
+  _pvpAnimSpeed  = 600;
+  _pvpAnimPaused = false;
+  window._pvpBattleResult = result;
+  window._pvpBattleOpp    = opp;
+  playPvpLog(result.log, 0, myFleet, oppFleet);
+}
+
+function renderPvpUnits(fleet, containerId, side) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const color = side === 'player' ? '#00d4ff' : '#ff3355';
+  el.innerHTML = fleet.map(u => `
+    <div id="pvpUnit_${u.id}" style="
+      background:rgba(0,0,0,0.4);border:1px solid ${color}33;border-radius:6px;
+      padding:8px 10px;transition:border-color 0.2s,box-shadow 0.2s;position:relative;overflow:hidden
+    ">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="font-size:0.65rem;color:white;font-weight:700">${u.name}</span>
+        <span style="font-size:0.55rem;color:#6a90b8">×${u.count}</span>
+      </div>
+      <!-- HP bar -->
+      <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:3px">
+        <div id="pvpHp_${u.id}" style="height:100%;width:100%;background:#00ff88;border-radius:2px;transition:width 0.3s,background 0.3s"></div>
+      </div>
+      <!-- Shield bar -->
+      <div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px">
+        <div id="pvpShield_${u.id}" style="height:100%;width:${u.maxShield > 0 ? '100' : '0'}%;background:#00aaff;border-radius:2px;transition:width 0.3s"></div>
+      </div>
+      <!-- HP text -->
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span id="pvpHpTxt_${u.id}" style="font-size:0.5rem;color:#6a90b8">${fmt(u.maxHp)} HP</span>
+        ${u.maxShield > 0 ? `<span id="pvpShieldTxt_${u.id}" style="font-size:0.5rem;color:#00aaff">${fmt(u.maxShield)} 🛡</span>` : ''}
+      </div>
+      <!-- Damage float container -->
+      <div id="pvpDmg_${u.id}" style="position:absolute;top:4px;right:8px;pointer-events:none"></div>
+    </div>
+  `).join('');
+}
+
+function updatePvpUnit(unitId, hpAfter, hpMax, shieldAfter, shieldMax) {
+  const hpPct     = hpMax > 0 ? Math.max(0, (hpAfter / hpMax) * 100) : 0;
+  const shieldPct = shieldMax > 0 ? Math.max(0, (shieldAfter / shieldMax) * 100) : 0;
+  const hpColor   = hpPct > 50 ? '#00ff88' : hpPct > 25 ? '#ffcc44' : '#ff3355';
+
+  const hpBar     = document.getElementById(`pvpHp_${unitId}`);
+  const shieldBar = document.getElementById(`pvpShield_${unitId}`);
+  const hpTxt     = document.getElementById(`pvpHpTxt_${unitId}`);
+  const shTxt     = document.getElementById(`pvpShieldTxt_${unitId}`);
+
+  if (hpBar)     { hpBar.style.width = hpPct + '%'; hpBar.style.background = hpColor; }
+  if (shieldBar) shieldBar.style.width = shieldPct + '%';
+  if (hpTxt)     hpTxt.textContent = fmt(Math.max(0, hpAfter)) + ' HP';
+  if (shTxt)     shTxt.textContent = fmt(Math.max(0, shieldAfter)) + ' 🛡';
+}
+
+function flashPvpUnit(unitId, isAttacker, isCrit) {
+  const el = document.getElementById(`pvpUnit_${unitId}`);
+  if (!el) return;
+  const col = isAttacker ? (isCrit ? '#ffcc44' : '#00d4ff') : (isCrit ? '#ff6600' : '#ff3355');
+  el.style.borderColor  = col;
+  el.style.boxShadow    = `0 0 12px ${col}66`;
+  setTimeout(() => {
+    if (el) { el.style.borderColor = ''; el.style.boxShadow = ''; }
+  }, 400);
+}
+
+function destroyPvpUnit(unitId) {
+  const el = document.getElementById(`pvpUnit_${unitId}`);
+  if (!el) return;
+  el.style.transition = 'opacity 0.5s, transform 0.5s';
+  el.style.opacity    = '0.15';
+  el.style.filter     = 'grayscale(1)';
+  const hpBar = document.getElementById(`pvpHp_${unitId}`);
+  if (hpBar) { hpBar.style.width = '0%'; hpBar.style.background = '#ff3355'; }
+}
+
+function showDamageFloat(unitId, dmg, isCrit) {
+  const el = document.getElementById(`pvpDmg_${unitId}`);
+  if (!el) return;
+  const span = document.createElement('span');
+  span.style.cssText = `
+    position:absolute;right:0;top:0;font-size:${isCrit ? '0.75' : '0.6'}rem;
+    font-weight:700;color:${isCrit ? '#ff6600' : '#ff3355'};
+    font-family:'Orbitron',monospace;pointer-events:none;
+    animation:pvpDmgFloat 0.8s ease-out forwards;
+  `;
+  span.textContent = '-' + fmt(dmg) + (isCrit ? '!' : '');
+  el.appendChild(span);
+  setTimeout(() => { if (span.parentNode) span.parentNode.removeChild(span); }, 900);
+}
+
+function shootPvpProjectile(attackerId, targetId, isCrit) {
+  const svg = document.getElementById('pvpProjectileSvg');
+  const aEl = document.getElementById(`pvpUnit_${attackerId}`);
+  const tEl = document.getElementById(`pvpUnit_${targetId}`);
+  if (!svg || !aEl || !tEl) return;
+
+  const aRect = aEl.getBoundingClientRect();
+  const tRect = tEl.getBoundingClientRect();
+  const svgRect = svg.getBoundingClientRect();
+
+  const x1 = aRect.left + aRect.width / 2 - svgRect.left;
+  const y1 = aRect.top  + aRect.height / 2 - svgRect.top;
+  const x2 = tRect.left + tRect.width  / 2 - svgRect.left;
+  const y2 = tRect.top  + tRect.height / 2 - svgRect.top;
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+  line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+  line.setAttribute('stroke', isCrit ? '#ff6600' : '#00d4ff');
+  line.setAttribute('stroke-width', isCrit ? '2' : '1');
+  line.setAttribute('opacity', '0.8');
+  line.setAttribute('stroke-dasharray', '4 3');
+  svg.appendChild(line);
+
+  // Animiraj nestajanje
+  let op = 0.8;
+  const fade = setInterval(() => {
+    op -= 0.15;
+    if (op <= 0) { clearInterval(fade); if (line.parentNode) line.parentNode.removeChild(line); }
+    else line.setAttribute('opacity', op);
+  }, 50);
+}
+
+function addPvpLog(msg, type) {
+  const el = document.getElementById('pvpBattleLog');
+  if (!el) return;
+  const color = type === 'round' ? '#ffcc44' : type === 'destroy' ? '#ff3355' : type === 'miss' ? '#6a90b8' : type === 'effect' ? '#aa44ff' : type === 'info' ? '#00ff88' : '#b0cce8';
+  const div = document.createElement('div');
+  div.style.cssText = `font-size:0.55rem;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.03);color:${color}`;
+  div.textContent = msg;
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+}
+
+function playPvpLog(log, idx, myFleet, oppFleet) {
+  if (!document.getElementById('pvpBattleModal')) return;
+  if (idx >= log.length) {
+    finishPvpBattle();
+    return;
+  }
+
+  if (_pvpAnimPaused) {
+    setTimeout(() => playPvpLog(log, idx, myFleet, oppFleet), 100);
+    return;
+  }
+
+  const entry = log[idx];
+
+  if (entry.type === 'round') {
+    const lbl = document.getElementById('pvpRoundLabel');
+    if (lbl) lbl.textContent = entry.msg.replace('━━━ ', '').replace(' ━━━', '');
+  }
+
+  addPvpLog(entry.msg, entry.type);
+
+  if (entry.type === 'attack') {
+    shootPvpProjectile(entry.attackerId, entry.targetId, entry.isCrit);
+    flashPvpUnit(entry.attackerId, true, entry.isCrit);
+    flashPvpUnit(entry.targetId, false, entry.isCrit);
+    showDamageFloat(entry.targetId, entry.damage, entry.isCrit);
+    updatePvpUnit(entry.targetId, entry.hpAfter, entry.hpMax, entry.shieldAfter, entry.shieldMax);
+  }
+
+  if (entry.type === 'destroy') {
+    destroyPvpUnit(entry.targetId);
+  }
+
+  _pvpAnimTimer = setTimeout(() => playPvpLog(log, idx + 1, myFleet, oppFleet), _pvpAnimSpeed);
+}
+
+function finishPvpBattle() {
+  const result = window._pvpBattleResult;
+  const opp    = window._pvpBattleOpp;
+  if (!result || !opp) return;
+
+  // Izračunaj rezultat
+  const isVictory = result.status === 'victory';
+  const ratingChange = calcRatingChange(pvp.rating || 1000, opp.rating, isVictory);
+  pvp.rating = Math.max(0, (pvp.rating || 1000) + ratingChange);
+  if (isVictory) pvp.wins = (pvp.wins || 0) + 1;
+  else if (result.status === 'defeat') pvp.losses = (pvp.losses || 0) + 1;
+
+  window._dailyPvpCount = (window._dailyPvpCount || 0) + 1;
+
+  let loot = { metal: 0, crystal: 0, he3: 0 };
+  if (isVictory) {
+    loot.metal   = Math.floor((opp.power || 10000) * 5);
+    loot.crystal = Math.floor((opp.power || 10000) * 4);
+    loot.he3     = Math.floor((opp.power || 10000) * 2);
+    R.metal   += loot.metal;
+    R.crystal += loot.crystal;
+    R.he3     += loot.he3;
+  }
+
+  if (!pvp.log) pvp.log = [];
+  pvp.log.unshift({ time: Date.now(), opponent: opp.name, rating: opp.rating, result: result.status, rounds: result.round, ratingChange, loot });
+  if (pvp.log.length > 20) pvp.log = pvp.log.slice(0, 20);
+
+  if (typeof updateResUI === 'function') updateResUI();
+  saveGame();
+
+  // Prikaži rezultat overlay unutar modal-a
+  const modal = document.getElementById('pvpBattleModal');
+  if (!modal) return;
+
+  const statusColor = isVictory ? '#00ff88' : result.status === 'draw' ? '#ffcc44' : '#ff3355';
+  const statusText  = isVictory ? '🏆 POBJEDA!' : result.status === 'draw' ? '⚖️ NERIJEŠENO' : '💀 PORAZ';
+
+  const overlay = document.createElement('div');
+  overlay.style.cssText = `
+    position:absolute;inset:0;z-index:20;background:rgba(0,0,0,0.85);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  `;
+  overlay.innerHTML = `
+    <div style="font-size:2rem;font-family:'Orbitron',monospace;font-weight:900;color:${statusColor}">${statusText}</div>
+    <div style="font-size:0.8rem;color:#6a90b8">${result.round} rundi · Rating: <span style="color:${ratingChange >= 0 ? '#00ff88' : '#ff3355'}">${ratingChange >= 0 ? '+' : ''}${ratingChange}</span></div>
+    ${isVictory ? `<div style="font-size:0.75rem;color:#00ff88">🔩 ${fmt(loot.metal)} · 💎 ${fmt(loot.crystal)} · ⛽ ${fmt(loot.he3)}</div>` : ''}
+    <button onclick="closePvpBattleModal()" style="margin-top:10px;padding:10px 32px;font-family:'Orbitron',monospace;font-size:0.75rem;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(0,212,255,0.05));border:1px solid #00d4ff;color:#00d4ff;border-radius:6px;cursor:pointer">ZATVORI</button>
+  `;
+  modal.style.position = 'relative';
+  modal.appendChild(overlay);
+}
+
+function closePvpBattleModal() {
+  if (_pvpAnimTimer) clearTimeout(_pvpAnimTimer);
+  const el = document.getElementById('pvpBattleModal');
+  if (el) el.remove();
+  renderPvp();
+}
+
+function togglePvpPause() {
+  _pvpAnimPaused = !_pvpAnimPaused;
+  const btn = document.getElementById('pvpPauseBtn');
+  if (btn) btn.textContent = _pvpAnimPaused ? '▶ Nastavi' : '⏸ Pauza';
+}
+
+function setPvpSpeed(ms) {
+  _pvpAnimSpeed = ms;
+}
+
+function skipPvpAnim() {
+  _pvpAnimSpeed = 0;
+  _pvpAnimPaused = false;
 }
 
 // ── ELO rating promjena ──
@@ -411,44 +750,8 @@ function startPvpBattle(oppIdx) {
       return;
     }
 
-    const result = simulatePvpBattle(myFleet, oppFleet);
-    const isVictory = result.status === 'victory';
-
-    // Rating promjena
-    const ratingChange = calcRatingChange(pvp.rating || 1000, opp.rating, isVictory);
-    pvp.rating = Math.max(0, (pvp.rating || 1000) + ratingChange);
-
-    // PvP dnevni broj
-    window._dailyPvpCount = (window._dailyPvpCount || 0) + 1;
-
-    // Plijen ako pobjeda
-    let loot = { metal: 0, crystal: 0, he3: 0 };
-    if (isVictory) {
-      loot.metal   = Math.floor((opp.power || 10000) * 5);
-      loot.crystal = Math.floor((opp.power || 10000) * 4);
-      loot.he3     = Math.floor((opp.power || 10000) * 2);
-      R.metal   += loot.metal;
-      R.crystal += loot.crystal;
-      R.he3     += loot.he3;
-    }
-
-    // Snimamo u PvP log
-    if (!pvp.log) pvp.log = [];
-    pvp.log.unshift({
-      time:     Date.now(),
-      opponent: opp.name,
-      rating:   opp.rating,
-      result:   result.status,
-      rounds:   result.round,
-      ratingChange,
-      loot,
-    });
-    if (pvp.log.length > 20) pvp.log = pvp.log.slice(0, 20);
-
-    if (typeof updateResUI === 'function') updateResUI();
-    saveGame();
-
-    renderPvpResult(result, opp, loot, ratingChange);
+    // Otvori vizuelnu bitku — rezultat se obrađuje unutar finishPvpBattle()
+    openPvpBattleVisual(myFleet, oppFleet, opp);
   }, 200);
 }
 
