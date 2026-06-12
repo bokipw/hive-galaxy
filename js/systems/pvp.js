@@ -258,212 +258,361 @@ function simulatePvpBattle(fleetA, fleetB) {
   return { status: 'draw', round: PVP_MAX_ROUNDS, log };
 }
 
-// ── Vizuelna PvP bitka ──
-let _pvpAnimSpeed = 600; // ms između akcija
+// ── Canvas PvP vizualna bitka ──
+let _pvpAnimSpeed = 700;
 let _pvpAnimTimer = null;
 let _pvpAnimPaused = false;
+let _pvpCanvas = null;
+let _pvpCtx = null;
+let _pvpRafId = null;
+let _pvpParticles = [];
+let _pvpProjectiles = [];
+let _pvpShipStates = {};
+let _pvpFloats = [];
+let _pvpStars = [];
+
+const SHIP_EMOJIS = {
+  fighter:    '🚀',
+  scout:      '🛸',
+  cruiser:    '🛡️',
+  battleship: '⚔️',
+  carrier:    '🛳️',
+  special:    '💫',
+};
+
+function _pvpGetEmoji(shipId) {
+  const cls = (shipId || '').split('_')[0];
+  return SHIP_EMOJIS[cls] || '🚀';
+}
 
 function openPvpBattleVisual(myFleet, oppFleet, opp) {
   const result = simulatePvpBattle(myFleet, oppFleet);
 
-  // Snapshot stanja svih jedinica za vizualizaciju
-  const units = {};
-  [...myFleet, ...oppFleet].forEach(u => {
-    units[u.id] = {
-      id: u.id, name: u.name, side: u.side,
-      hp: u.maxHp, maxHp: u.maxHp,
-      shield: u.maxShield, maxShield: u.maxShield,
-      alive: true,
-    };
-  });
-
-  // Grupišemo po strani
-  const playerUnits = myFleet.map(u => ({ ...units[u.id] }));
-  const enemyUnits  = oppFleet.map(u => ({ ...units[u.id] }));
-
-  // Reset stanja
-  [...myFleet, ...oppFleet].forEach(u => {
-    u.hp = u.maxHp; u.shield = u.maxShield; u.alive = true;
-  });
-
+  // Modal
   const modalEl = document.createElement('div');
   modalEl.id = 'pvpBattleModal';
   modalEl.style.cssText = `
-    position:fixed;inset:0;z-index:9999;background:rgba(0,5,15,0.97);
+    position:fixed;inset:0;z-index:9999;background:#000a14;
     display:flex;flex-direction:column;overflow:hidden;
     font-family:'Share Tech Mono',monospace;
   `;
 
   modalEl.innerHTML = `
-    <!-- Header -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid rgba(0,212,255,0.15);flex-shrink:0">
+    <div id="pvpHeader" style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid rgba(0,212,255,0.15);flex-shrink:0;z-index:2">
       <div style="font-family:'Orbitron',monospace;font-size:0.8rem;color:#00d4ff">⚔️ PvP BITKA</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span id="pvpRoundLabel" style="font-size:0.7rem;color:#ffcc44">Runda 0</span>
-        <button onclick="togglePvpPause()" id="pvpPauseBtn" style="font-size:0.65rem;padding:4px 12px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:4px;cursor:pointer">⏸ Pauza</button>
-        <button onclick="setPvpSpeed(300)" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">2×</button>
-        <button onclick="setPvpSpeed(100)" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">5×</button>
-        <button onclick="skipPvpAnim()" style="font-size:0.65rem;padding:4px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">⏭ Skip</button>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span id="pvpRoundLabel" style="font-size:0.7rem;color:#ffcc44;font-family:'Orbitron',monospace">●</span>
+        <button onclick="togglePvpPause()" id="pvpPauseBtn" style="font-size:0.6rem;padding:3px 10px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:4px;cursor:pointer">⏸</button>
+        <button onclick="setPvpSpeed(400)" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">2×</button>
+        <button onclick="setPvpSpeed(150)" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;border-radius:4px;cursor:pointer">5×</button>
+        <button onclick="skipPvpAnim()" style="font-size:0.6rem;padding:3px 9px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">⏭</button>
       </div>
     </div>
-
-    <!-- Bojna mapa -->
-    <div style="flex:1;display:flex;gap:0;overflow:hidden;position:relative">
-      <!-- SVG overlay za projektile -->
-      <svg id="pvpProjectileSvg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10"></svg>
-
-      <!-- Lijeva strana (player) -->
-      <div id="pvpSideA" style="flex:1;padding:12px;overflow-y:auto;border-right:1px solid rgba(0,212,255,0.1)">
-        <div style="font-size:0.55rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:10px;text-align:center">
-          ${window._hiveUser || 'TI'}
-        </div>
-        <div id="pvpUnitsA" style="display:flex;flex-direction:column;gap:6px"></div>
+    <div style="flex:1;display:flex;overflow:hidden">
+      <!-- Canvas arena -->
+      <div style="flex:1;position:relative;overflow:hidden">
+        <canvas id="pvpCanvas" style="width:100%;height:100%;display:block"></canvas>
       </div>
-
-      <!-- Sredina — log -->
-      <div style="width:260px;flex-shrink:0;padding:10px;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.05)" id="pvpBattleLog">
-        <div style="font-size:0.55rem;color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:1px;margin-bottom:8px;text-align:center">LOG</div>
-      </div>
-
-      <!-- Desna strana (enemy) -->
-      <div id="pvpSideB" style="flex:1;padding:12px;overflow-y:auto">
-        <div style="font-size:0.55rem;color:#ff3355;font-family:'Orbitron',monospace;letter-spacing:2px;margin-bottom:10px;text-align:center">
-          ${opp.name}
-        </div>
-        <div id="pvpUnitsB" style="display:flex;flex-direction:column;gap:6px"></div>
+      <!-- Battle log -->
+      <div id="pvpBattleLog" style="width:240px;flex-shrink:0;padding:8px;overflow-y:auto;border-left:1px solid rgba(255,255,255,0.05);font-size:0.52rem;">
+        <div style="color:#6a90b8;font-family:'Orbitron',monospace;letter-spacing:1px;margin-bottom:6px;font-size:0.5rem;text-align:center">LOG</div>
       </div>
     </div>
   `;
 
   document.body.appendChild(modalEl);
 
-  // Render početnih jedinica
-  renderPvpUnits(myFleet, 'pvpUnitsA', 'player');
-  renderPvpUnits(oppFleet, 'pvpUnitsB', 'enemy');
+  // Init canvas
+  const canvas = document.getElementById('pvpCanvas');
+  _pvpCanvas = canvas;
+  _pvpCtx = canvas.getContext('2d');
+  _pvpParticles = [];
+  _pvpProjectiles = [];
+  _pvpFloats = [];
 
-  // Pokreni animaciju
-  _pvpAnimSpeed  = 600;
+  const resizeCanvas = () => {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width  = rect.width;
+    canvas.height = rect.height;
+    _pvpLayoutShips(myFleet, oppFleet, canvas.width, canvas.height);
+  };
+
+  // Layout brodova na canvasu
+  _pvpLayoutShips(myFleet, oppFleet, canvas.offsetWidth || 600, canvas.offsetHeight || 400);
+
+  setTimeout(resizeCanvas, 50);
+  window._pvpResizeFn = resizeCanvas;
+  window.addEventListener('resize', resizeCanvas);
+
+  // Start render loop
+  _pvpStartRenderLoop();
+
+  // Start log playback
+  _pvpAnimSpeed  = 700;
   _pvpAnimPaused = false;
   window._pvpBattleResult = result;
   window._pvpBattleOpp    = opp;
   playPvpLog(result.log, 0, myFleet, oppFleet);
 }
 
-function renderPvpUnits(fleet, containerId, side) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  const color = side === 'player' ? '#00d4ff' : '#ff3355';
-  el.innerHTML = fleet.map(u => `
-    <div id="pvpUnit_${u.id}" style="
-      background:rgba(0,0,0,0.4);border:1px solid ${color}33;border-radius:6px;
-      padding:8px 10px;transition:border-color 0.2s,box-shadow 0.2s;position:relative;overflow:hidden
-    ">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
-        <span style="font-size:0.65rem;color:white;font-weight:700">${u.name}</span>
-        <span style="font-size:0.55rem;color:#6a90b8">×${u.count}</span>
-      </div>
-      <!-- HP bar -->
-      <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:3px">
-        <div id="pvpHp_${u.id}" style="height:100%;width:100%;background:#00ff88;border-radius:2px;transition:width 0.3s,background 0.3s"></div>
-      </div>
-      <!-- Shield bar -->
-      <div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px">
-        <div id="pvpShield_${u.id}" style="height:100%;width:${u.maxShield > 0 ? '100' : '0'}%;background:#00aaff;border-radius:2px;transition:width 0.3s"></div>
-      </div>
-      <!-- HP text -->
-      <div style="display:flex;justify-content:space-between;margin-top:3px">
-        <span id="pvpHpTxt_${u.id}" style="font-size:0.5rem;color:#6a90b8">${fmt(u.maxHp)} HP</span>
-        ${u.maxShield > 0 ? `<span id="pvpShieldTxt_${u.id}" style="font-size:0.5rem;color:#00aaff">${fmt(u.maxShield)} 🛡</span>` : ''}
-      </div>
-      <!-- Damage float container -->
-      <div id="pvpDmg_${u.id}" style="position:absolute;top:4px;right:8px;pointer-events:none"></div>
-    </div>
-  `).join('');
+function _pvpLayoutShips(myFleet, oppFleet, W, H) {
+  _pvpShipStates = {};
+
+  const placeFleet = (fleet, xCenter, side) => {
+    const n = fleet.length;
+    const colW = 90, rowH = 80;
+    const cols = Math.ceil(Math.sqrt(n));
+    const rows = Math.ceil(n / cols);
+    const startX = xCenter - (cols - 1) * colW * 0.5;
+    const startY = H * 0.5 - (rows - 1) * rowH * 0.5;
+
+    fleet.forEach((u, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      _pvpShipStates[u.id] = {
+        x: startX + col * colW,
+        y: startY + row * rowH,
+        baseX: startX + col * colW,
+        baseY: startY + row * rowH,
+        hp: u.maxHp, maxHp: u.maxHp,
+        shield: u.maxShield, maxShield: u.maxShield,
+        alive: true,
+        shake: 0, shakeTime: 0,
+        flashColor: null, flashTime: 0,
+        destroyAnim: 0,
+        emoji: _pvpGetEmoji(u.ship_id),
+        name: u.name,
+        side,
+      };
+    });
+  };
+
+  placeFleet(myFleet,   W * 0.22, 'player');
+  placeFleet(oppFleet,  W * 0.78, 'enemy');
 }
 
-function updatePvpUnit(unitId, hpAfter, hpMax, shieldAfter, shieldMax) {
-  const hpPct     = hpMax > 0 ? Math.max(0, (hpAfter / hpMax) * 100) : 0;
-  const shieldPct = shieldMax > 0 ? Math.max(0, (shieldAfter / shieldMax) * 100) : 0;
-  const hpColor   = hpPct > 50 ? '#00ff88' : hpPct > 25 ? '#ffcc44' : '#ff3355';
-
-  const hpBar     = document.getElementById(`pvpHp_${unitId}`);
-  const shieldBar = document.getElementById(`pvpShield_${unitId}`);
-  const hpTxt     = document.getElementById(`pvpHpTxt_${unitId}`);
-  const shTxt     = document.getElementById(`pvpShieldTxt_${unitId}`);
-
-  if (hpBar)     { hpBar.style.width = hpPct + '%'; hpBar.style.background = hpColor; }
-  if (shieldBar) shieldBar.style.width = shieldPct + '%';
-  if (hpTxt)     hpTxt.textContent = fmt(Math.max(0, hpAfter)) + ' HP';
-  if (shTxt)     shTxt.textContent = fmt(Math.max(0, shieldAfter)) + ' 🛡';
+function _pvpStartRenderLoop() {
+  if (_pvpRafId) cancelAnimationFrame(_pvpRafId);
+  let last = 0;
+  const loop = (ts) => {
+    if (!document.getElementById('pvpBattleModal')) {
+      _pvpRafId = null;
+      return;
+    }
+    const dt = Math.min((ts - last) / 1000, 0.1);
+    last = ts;
+    _pvpRender(dt);
+    _pvpRafId = requestAnimationFrame(loop);
+  };
+  _pvpRafId = requestAnimationFrame(loop);
 }
 
-function flashPvpUnit(unitId, isAttacker, isCrit) {
-  const el = document.getElementById(`pvpUnit_${unitId}`);
-  if (!el) return;
-  const col = isAttacker ? (isCrit ? '#ffcc44' : '#00d4ff') : (isCrit ? '#ff6600' : '#ff3355');
-  el.style.borderColor  = col;
-  el.style.boxShadow    = `0 0 12px ${col}66`;
-  setTimeout(() => {
-    if (el) { el.style.borderColor = ''; el.style.boxShadow = ''; }
-  }, 400);
+function _pvpRender(dt) {
+  const cv = _pvpCanvas;
+  const ctx = _pvpCtx;
+  if (!cv || !ctx) return;
+  const W = cv.width, H = cv.height;
+
+  // Background — deep space
+  ctx.fillStyle = '#000a14';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  if (!_pvpStars || _pvpStars.length === 0 || _pvpStars._W !== W) {
+    _pvpStars = [];
+    _pvpStars._W = W;
+    for (let i = 0; i < 120; i++) {
+      _pvpStars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.7 + 0.3 });
+    }
+  }
+  _pvpStars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+    ctx.fill();
+  });
+
+  // Center divider
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([6, 8]);
+  ctx.beginPath();
+  ctx.moveTo(W * 0.5, 20);
+  ctx.lineTo(W * 0.5, H - 20);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Update + draw projectiles
+  _pvpProjectiles = _pvpProjectiles.filter(p => p.t < 1);
+  _pvpProjectiles.forEach(p => {
+    p.t += dt * p.speed;
+    if (p.t > 1) p.t = 1;
+    const x = p.x1 + (p.x2 - p.x1) * p.t;
+    const y = p.y1 + (p.y2 - p.y1) * p.t;
+
+    // Trail
+    const grad = ctx.createLinearGradient(p.x1, p.y1, x, y);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, p.color + 'cc');
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = p.isCrit ? 3 : 1.5;
+    ctx.beginPath();
+    ctx.moveTo(p.x1, p.y1);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    // Head glow
+    ctx.beginPath();
+    ctx.arc(x, y, p.isCrit ? 5 : 3, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x, y, p.isCrit ? 9 : 5, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + '44';
+    ctx.fill();
+  });
+
+  // Update + draw particles
+  _pvpParticles = _pvpParticles.filter(p => p.life > 0);
+  _pvpParticles.forEach(p => {
+    p.x  += p.vx * dt;
+    p.y  += p.vy * dt;
+    p.vy += 30 * dt;
+    p.life -= dt;
+    const a = Math.max(0, p.life / p.maxLife);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r * a, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + Math.floor(a * 255).toString(16).padStart(2,'0');
+    ctx.fill();
+  });
+
+  // Draw ships
+  ctx.font = '28px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  for (const id in _pvpShipStates) {
+    const s = _pvpShipStates[id];
+    if (!s.alive && s.destroyAnim <= 0) continue;
+
+    // Shake
+    let dx = 0, dy = 0;
+    if (s.shake > 0) {
+      s.shake -= dt * 8;
+      if (s.shake < 0) s.shake = 0;
+      dx = (Math.random() - 0.5) * s.shake * 12;
+      dy = (Math.random() - 0.5) * s.shake * 12;
+    }
+    const x = s.x + dx;
+    const y = s.y + dy;
+
+    const alpha = s.alive ? 1.0 : Math.max(0, s.destroyAnim);
+    if (!s.alive) s.destroyAnim -= dt * 2;
+
+    ctx.globalAlpha = alpha;
+
+    // Flash glow
+    if (s.flashColor && s.flashTime > 0) {
+      s.flashTime -= dt * 3;
+      if (s.flashTime < 0) { s.flashTime = 0; s.flashColor = null; }
+      if (s.flashColor) {
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI * 2);
+        ctx.fillStyle = s.flashColor + Math.floor(s.flashTime * 0.6 * 255).toString(16).padStart(2,'0');
+        ctx.fill();
+      }
+    }
+
+    // Side color ring
+    const ringColor = s.side === 'player' ? '#00d4ff' : '#ff3355';
+    ctx.beginPath();
+    ctx.arc(x, y, 24, 0, Math.PI * 2);
+    ctx.strokeStyle = ringColor + '66';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Ship emoji
+    ctx.fillStyle = 'white';
+    ctx.fillText(s.emoji, x, y);
+
+    // HP bar (below ship)
+    const barW = 52, barH = 5;
+    const bx = x - barW * 0.5;
+    const by = y + 30;
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(bx, by, barW, barH);
+    const hpPct = s.maxHp > 0 ? Math.max(0, s.hp / s.maxHp) : 0;
+    const hpColor = hpPct > 0.5 ? '#00ff88' : hpPct > 0.25 ? '#ffcc44' : '#ff3355';
+    ctx.fillStyle = hpColor;
+    ctx.fillRect(bx, by, barW * hpPct, barH);
+
+    // Shield bar
+    if (s.maxShield > 0) {
+      const shPct = Math.max(0, s.shield / s.maxShield);
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.fillRect(bx, by + barH + 2, barW, 3);
+      ctx.fillStyle = '#00aaff';
+      ctx.fillRect(bx, by + barH + 2, barW * shPct, 3);
+    }
+
+    // Name
+    ctx.font = '9px "Share Tech Mono", monospace';
+    ctx.fillStyle = 'rgba(176,204,232,0.8)';
+    ctx.fillText(s.name, x, by + barH + 8 + (s.maxShield > 0 ? 3 : 0));
+
+    ctx.globalAlpha = 1;
+  }
+
+  // Floating damage numbers
+  _pvpFloats = _pvpFloats.filter(f => f.life > 0);
+  _pvpFloats.forEach(f => {
+    f.y -= 40 * dt;
+    f.life -= dt;
+    const a = Math.max(0, f.life / f.maxLife);
+    ctx.globalAlpha = a;
+    ctx.font = `bold ${f.isCrit ? 16 : 12}px "Orbitron", monospace`;
+    ctx.fillStyle = f.isCrit ? '#ff6600' : '#ff3355';
+    ctx.textAlign = 'center';
+    ctx.fillText(f.text, f.x, f.y);
+    ctx.globalAlpha = 1;
+  });
+
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
 }
 
-function destroyPvpUnit(unitId) {
-  const el = document.getElementById(`pvpUnit_${unitId}`);
-  if (!el) return;
-  el.style.transition = 'opacity 0.5s, transform 0.5s';
-  el.style.opacity    = '0.15';
-  el.style.filter     = 'grayscale(1)';
-  const hpBar = document.getElementById(`pvpHp_${unitId}`);
-  if (hpBar) { hpBar.style.width = '0%'; hpBar.style.background = '#ff3355'; }
+function _pvpSpawnExplosion(x, y, isBig) {
+  const count = isBig ? 40 : 16;
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * (isBig ? 180 : 100) + 30;
+    const colors = ['#ff6600', '#ff3300', '#ffcc44', '#ffffff', '#ff9900'];
+    _pvpParticles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      r: Math.random() * (isBig ? 5 : 3) + 1,
+      life: Math.random() * 0.8 + 0.3,
+      maxLife: 1.1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    });
+  }
 }
 
-function showDamageFloat(unitId, dmg, isCrit) {
-  const el = document.getElementById(`pvpDmg_${unitId}`);
-  if (!el) return;
-  const span = document.createElement('span');
-  span.style.cssText = `
-    position:absolute;right:0;top:0;font-size:${isCrit ? '0.75' : '0.6'}rem;
-    font-weight:700;color:${isCrit ? '#ff6600' : '#ff3355'};
-    font-family:'Orbitron',monospace;pointer-events:none;
-    animation:pvpDmgFloat 0.8s ease-out forwards;
-  `;
-  span.textContent = '-' + fmt(dmg) + (isCrit ? '!' : '');
-  el.appendChild(span);
-  setTimeout(() => { if (span.parentNode) span.parentNode.removeChild(span); }, 900);
-}
-
-function shootPvpProjectile(attackerId, targetId, isCrit) {
-  const svg = document.getElementById('pvpProjectileSvg');
-  const aEl = document.getElementById(`pvpUnit_${attackerId}`);
-  const tEl = document.getElementById(`pvpUnit_${targetId}`);
-  if (!svg || !aEl || !tEl) return;
-
-  const aRect = aEl.getBoundingClientRect();
-  const tRect = tEl.getBoundingClientRect();
-  const svgRect = svg.getBoundingClientRect();
-
-  const x1 = aRect.left + aRect.width / 2 - svgRect.left;
-  const y1 = aRect.top  + aRect.height / 2 - svgRect.top;
-  const x2 = tRect.left + tRect.width  / 2 - svgRect.left;
-  const y2 = tRect.top  + tRect.height / 2 - svgRect.top;
-
-  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-  line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-  line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-  line.setAttribute('stroke', isCrit ? '#ff6600' : '#00d4ff');
-  line.setAttribute('stroke-width', isCrit ? '2' : '1');
-  line.setAttribute('opacity', '0.8');
-  line.setAttribute('stroke-dasharray', '4 3');
-  svg.appendChild(line);
-
-  // Animiraj nestajanje
-  let op = 0.8;
-  const fade = setInterval(() => {
-    op -= 0.15;
-    if (op <= 0) { clearInterval(fade); if (line.parentNode) line.parentNode.removeChild(line); }
-    else line.setAttribute('opacity', op);
-  }, 50);
+function _pvpSpawnHitSparks(x, y, color) {
+  for (let i = 0; i < 8; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 80 + 20;
+    _pvpParticles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      r: Math.random() * 2 + 0.5,
+      life: 0.3 + Math.random() * 0.2,
+      maxLife: 0.5,
+      color,
+    });
+  }
 }
 
 function addPvpLog(msg, type) {
@@ -471,7 +620,7 @@ function addPvpLog(msg, type) {
   if (!el) return;
   const color = type === 'round' ? '#ffcc44' : type === 'destroy' ? '#ff3355' : type === 'miss' ? '#6a90b8' : type === 'effect' ? '#aa44ff' : type === 'info' ? '#00ff88' : '#b0cce8';
   const div = document.createElement('div');
-  div.style.cssText = `font-size:0.55rem;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.03);color:${color}`;
+  div.style.cssText = `font-size:0.52rem;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.03);color:${color}`;
   div.textContent = msg;
   el.appendChild(div);
   el.scrollTop = el.scrollHeight;
@@ -480,7 +629,7 @@ function addPvpLog(msg, type) {
 function playPvpLog(log, idx, myFleet, oppFleet) {
   if (!document.getElementById('pvpBattleModal')) return;
   if (idx >= log.length) {
-    finishPvpBattle();
+    setTimeout(finishPvpBattle, 800);
     return;
   }
 
@@ -493,21 +642,75 @@ function playPvpLog(log, idx, myFleet, oppFleet) {
 
   if (entry.type === 'round') {
     const lbl = document.getElementById('pvpRoundLabel');
-    if (lbl) lbl.textContent = entry.msg.replace('━━━ ', '').replace(' ━━━', '');
+    if (lbl) lbl.textContent = 'RUNDA ' + entry.msg.replace(/━/g, '').trim().split(' ')[1];
   }
 
   addPvpLog(entry.msg, entry.type);
 
   if (entry.type === 'attack') {
-    shootPvpProjectile(entry.attackerId, entry.targetId, entry.isCrit);
-    flashPvpUnit(entry.attackerId, true, entry.isCrit);
-    flashPvpUnit(entry.targetId, false, entry.isCrit);
-    showDamageFloat(entry.targetId, entry.damage, entry.isCrit);
-    updatePvpUnit(entry.targetId, entry.hpAfter, entry.hpMax, entry.shieldAfter, entry.shieldMax);
+    const att = _pvpShipStates[entry.attackerId];
+    const tgt = _pvpShipStates[entry.targetId];
+    if (att && tgt) {
+      // Projectile
+      _pvpProjectiles.push({
+        x1: att.x, y1: att.y,
+        x2: tgt.x, y2: tgt.y,
+        t: 0, speed: 2.5,
+        color: entry.isCrit ? '#ff6600' : (att.side === 'player' ? '#00d4ff' : '#ff3355'),
+        isCrit: entry.isCrit,
+      });
+
+      // Hit effects after projectile arrives
+      const delay = 400;
+      setTimeout(() => {
+        if (!_pvpShipStates[entry.targetId]) return;
+        const t2 = _pvpShipStates[entry.targetId];
+        t2.hp     = entry.hpAfter;
+        t2.shield = entry.shieldAfter;
+        t2.shake  = 1;
+        t2.shakeTime = 1;
+        t2.flashColor = entry.isCrit ? '#ff6600' : '#ff3355';
+        t2.flashTime  = 1;
+        _pvpSpawnHitSparks(t2.x, t2.y, entry.isCrit ? '#ff6600' : '#ffffff');
+
+        // Flash attacker
+        const a2 = _pvpShipStates[entry.attackerId];
+        if (a2) { a2.flashColor = entry.isCrit ? '#ffcc44' : '#00d4ff'; a2.flashTime = 0.5; }
+
+        // Floating damage
+        _pvpFloats.push({
+          x: t2.x + (Math.random() - 0.5) * 20,
+          y: t2.y - 20,
+          text: '-' + fmt(entry.damage) + (entry.isCrit ? '!' : ''),
+          isCrit: entry.isCrit,
+          life: 1.0, maxLife: 1.0,
+        });
+      }, delay);
+    }
   }
 
   if (entry.type === 'destroy') {
-    destroyPvpUnit(entry.targetId);
+    const s = _pvpShipStates[entry.targetId];
+    if (s) {
+      setTimeout(() => {
+        s.alive = false;
+        s.destroyAnim = 1.0;
+        _pvpSpawnExplosion(s.x, s.y, true);
+      }, 300);
+    }
+  }
+
+  if (entry.type === 'effect' && entry.targetId) {
+    const s = _pvpShipStates[entry.targetId];
+    if (s && s.alive) {
+      s.flashColor = '#00aaff'; s.flashTime = 0.6;
+      // Update shield if regen
+      const shieldMatch = entry.msg.match(/\+([0-9,]+) shield/);
+      if (shieldMatch) {
+        const reg = parseInt(shieldMatch[1].replace(',', ''));
+        s.shield = Math.min(s.maxShield, s.shield + reg);
+      }
+    }
   }
 
   _pvpAnimTimer = setTimeout(() => playPvpLog(log, idx + 1, myFleet, oppFleet), _pvpAnimSpeed);
@@ -518,7 +721,6 @@ function finishPvpBattle() {
   const opp    = window._pvpBattleOpp;
   if (!result || !opp) return;
 
-  // Izračunaj rezultat
   const isVictory = result.status === 'victory';
   const ratingChange = calcRatingChange(pvp.rating || 1000, opp.rating, isVictory);
   pvp.rating = Math.max(0, (pvp.rating || 1000) + ratingChange);
@@ -544,7 +746,6 @@ function finishPvpBattle() {
   if (typeof updateResUI === 'function') updateResUI();
   saveGame();
 
-  // Prikaži rezultat overlay unutar modal-a
   const modal = document.getElementById('pvpBattleModal');
   if (!modal) return;
 
@@ -553,14 +754,14 @@ function finishPvpBattle() {
 
   const overlay = document.createElement('div');
   overlay.style.cssText = `
-    position:absolute;inset:0;z-index:20;background:rgba(0,0,0,0.85);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    position:absolute;inset:0;z-index:20;background:rgba(0,5,15,0.88);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   `;
   overlay.innerHTML = `
-    <div style="font-size:2rem;font-family:'Orbitron',monospace;font-weight:900;color:${statusColor}">${statusText}</div>
+    <div style="font-size:2.2rem;font-family:'Orbitron',monospace;font-weight:900;color:${statusColor};text-shadow:0 0 30px ${statusColor}">${statusText}</div>
     <div style="font-size:0.8rem;color:#6a90b8">${result.round} rundi · Rating: <span style="color:${ratingChange >= 0 ? '#00ff88' : '#ff3355'}">${ratingChange >= 0 ? '+' : ''}${ratingChange}</span></div>
     ${isVictory ? `<div style="font-size:0.75rem;color:#00ff88">🔩 ${fmt(loot.metal)} · 💎 ${fmt(loot.crystal)} · ⛽ ${fmt(loot.he3)}</div>` : ''}
-    <button onclick="closePvpBattleModal()" style="margin-top:10px;padding:10px 32px;font-family:'Orbitron',monospace;font-size:0.75rem;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(0,212,255,0.05));border:1px solid #00d4ff;color:#00d4ff;border-radius:6px;cursor:pointer">ZATVORI</button>
+    <button onclick="closePvpBattleModal()" style="margin-top:8px;padding:10px 32px;font-family:'Orbitron',monospace;font-size:0.75rem;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(0,212,255,0.05));border:1px solid #00d4ff;color:#00d4ff;border-radius:6px;cursor:pointer;letter-spacing:1px">ZATVORI</button>
   `;
   modal.style.position = 'relative';
   modal.appendChild(overlay);
@@ -568,6 +769,9 @@ function finishPvpBattle() {
 
 function closePvpBattleModal() {
   if (_pvpAnimTimer) clearTimeout(_pvpAnimTimer);
+  if (_pvpRafId) { cancelAnimationFrame(_pvpRafId); _pvpRafId = null; }
+  if (window._pvpResizeFn) { window.removeEventListener('resize', window._pvpResizeFn); window._pvpResizeFn = null; }
+  _pvpParticles = []; _pvpProjectiles = []; _pvpFloats = []; _pvpShipStates = {};
   const el = document.getElementById('pvpBattleModal');
   if (el) el.remove();
   renderPvp();
@@ -576,7 +780,7 @@ function closePvpBattleModal() {
 function togglePvpPause() {
   _pvpAnimPaused = !_pvpAnimPaused;
   const btn = document.getElementById('pvpPauseBtn');
-  if (btn) btn.textContent = _pvpAnimPaused ? '▶ Nastavi' : '⏸ Pauza';
+  if (btn) btn.textContent = _pvpAnimPaused ? '▶' : '⏸';
 }
 
 function setPvpSpeed(ms) {
