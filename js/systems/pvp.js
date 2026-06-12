@@ -403,15 +403,16 @@ function startPvpBattle(opponentIdx) {
   setTimeout(() => {
     // Espionage Lv100 → +10% krit u PvP
     const espLv100 = typeof getEspionageLevel === 'function' && getEspionageLevel() >= 100;
-    // Konvertuj fleet pravog igrača — slotovi iz baze nemaju hp/dps, treba calcSlotStats
-    const enemyFleet = (opp.fleet || []).map(slot => {
-      if (slot.hp && slot.dps) return slot; // već izračunato (AI bot)
-      const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
-      if (!stats) return slot;
-      return { ...slot, hp: stats.hp, dps: stats.dps, shield: stats.shield, agility: stats.agility, speed: stats.speed, armor: 'Light', name: slot.ship_id || 'Brod' };
-    }).filter(s => s.hp && s.dps);
+    // Pravi igrači imaju fleet iz baze bez hp/dps — generišemo ekvivalentnu AI flotu po poweru
+    let enemyFleet = opp.fleet || [];
+    const fleetHasStats = enemyFleet.length > 0 && enemyFleet[0].hp && enemyFleet[0].dps;
+    if (!fleetHasStats) {
+      const oppPower = opp.power || 10000;
+      const difficulty = oppPower / Math.max(1, calcFleetTotalPower());
+      enemyFleet = generateAIFleet(calcFleetTotalPower(), Math.min(1.5, Math.max(0.3, difficulty)));
+    }
 
-    const battle = simulateBattle(fleetSlots, enemyFleet.length > 0 ? enemyFleet : opp.fleet, {
+    const battle = simulateBattle(fleetSlots, enemyFleet, {
       name:       `⚔️ PvP — ${opp.avatar} ${opp.name}`,
       difficulty: Math.min(10, Math.ceil(opp.power / 10000)),
       resources:  { metal: [0,0], crystal: [0,0], he3: [0,0] },
