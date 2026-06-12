@@ -519,7 +519,6 @@ function renderPvpLogHTML() {
 // ── Glavni render PvP panela ──
 function renderPvp() {
   const el = document.getElementById('pvpContent');
-  console.log('renderPvp called, el:', el);
   if (!el) return;
 
   const shield    = window.pvpShield || { active: false };
