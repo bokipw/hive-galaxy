@@ -403,7 +403,15 @@ function startPvpBattle(opponentIdx) {
   setTimeout(() => {
     // Espionage Lv100 → +10% krit u PvP
     const espLv100 = typeof getEspionageLevel === 'function' && getEspionageLevel() >= 100;
-    const battle = simulateBattle(fleetSlots, opp.fleet, {
+    // Konvertuj fleet pravog igrača — slotovi iz baze nemaju hp/dps, treba calcSlotStats
+    const enemyFleet = (opp.fleet || []).map(slot => {
+      if (slot.hp && slot.dps) return slot; // već izračunato (AI bot)
+      const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
+      if (!stats) return slot;
+      return { ...slot, hp: stats.hp, dps: stats.dps, shield: stats.shield, agility: stats.agility, speed: stats.speed, armor: 'Light', name: slot.ship_id || 'Brod' };
+    }).filter(s => s.hp && s.dps);
+
+    const battle = simulateBattle(fleetSlots, enemyFleet.length > 0 ? enemyFleet : opp.fleet, {
       name:       `⚔️ PvP — ${opp.avatar} ${opp.name}`,
       difficulty: Math.min(10, Math.ceil(opp.power / 10000)),
       resources:  { metal: [0,0], crystal: [0,0], he3: [0,0] },
