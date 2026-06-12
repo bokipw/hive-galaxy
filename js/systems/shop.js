@@ -609,18 +609,18 @@ async function buyPremiumWithBCM() {
         return;
       }
 
-      const txid = resp.result?.id || resp.result?.tx_id || '';
-      toast('⏳ Transakcija poslana, verifikujem...', 'info');
+      const txid = resp.result?.trx_id || resp.result?.id || resp.result?.tx_id || resp.trx_id || '';
+      toast('⏳ Transakcija poslana, verifikujem... txid: ' + (txid || 'NEMA'), 'info');
 
       try {
-        const supaUrl = window._supa?.supabaseUrl || '';
-        const fnUrl = supaUrl.replace('/rest/v1', '') + '/functions/v1/verify-premium';
+        const fnUrl = 'https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/verify-premium';
         const res = await fetch(fnUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
           body: JSON.stringify({ username: window._hiveUser, txid })
         });
         const data = await res.json();
+        console.log('verify-premium response:', data);
 
         if (data.success) {
           window._playerPremium = true;
