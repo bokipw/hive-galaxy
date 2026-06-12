@@ -597,42 +597,42 @@ async function openHiveWalletModal() {
   modal.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,5,15,0.92);display:flex;align-items:center;justify-content:center';
 
   const renderModal = (bcm, boc, bpw) => {
-    const gameBCM = (R.bcm || 0).toFixed(3);
+    const gameBCM = Math.floor(R.bcm || 0).toString();
     const gameBOC = (R.bocrypto || 0).toFixed(3);
-    const gameBPW = ((R.spCard || 0) / 100000000).toFixed(3);
+    const gameBPW = ((R.spCard || 0) / 100000000).toFixed(8);
 
-    const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)';
-    const labelStyle = 'font-size:0.75rem;color:#6a90b8;font-family:"Share Tech Mono",monospace';
-    const valStyle = 'font-size:0.85rem;font-family:"Orbitron",monospace;color:white';
+    const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)';
+    const labelStyle = 'font-size:0.85rem;color:#6a90b8;font-family:"Share Tech Mono",monospace';
+    const valStyle = 'font-size:1rem;font-family:"Orbitron",monospace;color:white';
     const depBtn = (sym) => isPremium
-      ? `<button onclick="walletDeposit('${sym}')" style="font-size:0.6rem;padding:4px 10px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`
-      : `<span style="color:#444;font-size:0.7rem">🔒</span>`;
+      ? `<button onclick="walletDeposit('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`
+      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
     const witBtn = (sym) => isPremium
-      ? `<button onclick="walletWithdraw('${sym}')" style="font-size:0.6rem;padding:4px 10px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`
-      : `<span style="color:#444;font-size:0.7rem">🔒</span>`;
+      ? `<button onclick="walletWithdraw('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`
+      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
 
     modal.innerHTML = `
-      <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,204,0,0.2);border-radius:12px;
-        width:min(700px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column;
-        box-shadow:0 0 60px rgba(255,204,0,0.08)">
+      <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,204,0,0.2);border-radius:14px;
+        width:min(860px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;
+        box-shadow:0 0 80px rgba(255,204,0,0.1)">
         <!-- Header -->
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,204,0,0.15);flex-shrink:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid rgba(255,204,0,0.15);flex-shrink:0">
           <div>
-            <div style="font-family:'Orbitron',monospace;font-size:0.9rem;color:#ffcc44;letter-spacing:2px">💰 HIVE WALLET</div>
-            <div style="font-size:0.6rem;color:#6a90b8;margin-top:2px">@${window._hiveUser}</div>
+            <div style="font-family:'Orbitron',monospace;font-size:1.1rem;color:#ffcc44;letter-spacing:2px">💰 HIVE WALLET</div>
+            <div style="font-size:0.7rem;color:#6a90b8;margin-top:4px">@${window._hiveUser}</div>
           </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button onclick="refreshHiveWallet()" style="font-size:0.6rem;padding:4px 10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;border-radius:4px;cursor:pointer">🔄 Refresh</button>
-            <button onclick="document.getElementById('hiveWalletModal').remove()" style="font-size:0.7rem;padding:4px 12px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">✕</button>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button onclick="refreshHiveWallet()" style="font-size:0.7rem;padding:6px 14px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;border-radius:5px;cursor:pointer">🔄 Refresh</button>
+            <button onclick="document.getElementById('hiveWalletModal').remove()" style="font-size:0.8rem;padding:6px 14px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:5px;cursor:pointer">✕ Zatvori</button>
           </div>
         </div>
         <!-- Body -->
-        <div style="flex:1;overflow-y:auto;padding:0 20px 20px">
+        <div style="flex:1;overflow-y:auto;padding:0 28px 24px">
           <!-- Column headers -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:14px 0 6px;text-align:center">
-            <div style="font-family:'Orbitron',monospace;font-size:0.55rem;color:#6a90b8;letter-spacing:2px">TOKEN</div>
-            <div style="font-family:'Orbitron',monospace;font-size:0.55rem;color:#00d4ff;letter-spacing:2px">⛓ BLOCKCHAIN WALLET</div>
-            <div style="font-family:'Orbitron',monospace;font-size:0.55rem;color:#00ff88;letter-spacing:2px">🎮 U IGRICI</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:18px 0 8px;text-align:center">
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#6a90b8;letter-spacing:2px">TOKEN</div>
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00d4ff;letter-spacing:2px">⛓ BLOCKCHAIN WALLET</div>
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00ff88;letter-spacing:2px">🎮 U IGRICI</div>
           </div>
           <!-- BCM -->
           <div style="${rowStyle}">
@@ -706,10 +706,10 @@ async function openHiveWalletModal() {
     });
     const data = await res.json();
     const rows = data.result || [];
-    const get = sym => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(3) : '0.000'; };
-    window._walletChainBCM = get('BCM');
-    window._walletChainBOC = get('BOCRYPTO');
-    window._walletChainBPW = get('BPW');
+    const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.' + '0'.repeat(dec)); };
+    window._walletChainBCM = get('BCM', 0);
+    window._walletChainBOC = get('BOCRYPTO', 3);
+    window._walletChainBPW = get('BPW', 8);
     renderModal(window._walletChainBCM, window._walletChainBOC, window._walletChainBPW);
   } catch(e) {
     renderModal('greška', 'greška', 'greška');
