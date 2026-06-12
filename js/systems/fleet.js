@@ -518,8 +518,8 @@ function renderFleet() {
           <span style="font-size:0.65rem">Idi na 🃏 Karte → Deploy komandira</span>
         </div>
         <button class="btn" style="font-size:0.72rem"
-          onclick="showPanel('commander-cards')">
-          🃏 Otvori Karte Komandira
+          onclick="window._cardTab='fleet';showPanel('commander-cards')">
+          🚀 Deploy Komandira
         </button>
       </div>`;
   }
