@@ -230,7 +230,7 @@ function finishPvpBattle() {
     loot.metal    = 100000;
     loot.crystal  = 100000;
     loot.he3      = 100000;
-    loot.bocrypto = 1250;
+    loot.bocrypto = 1100;
     R.metal    += loot.metal;
     R.crystal  += loot.crystal;
     R.he3      += loot.he3;
