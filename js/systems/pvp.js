@@ -208,8 +208,10 @@ function finishPvpBattle() {
 // 4. ELO RATING
 // ============================================================
 function calcRatingChange(myRating, oppRating, won) {
-  var K = 32, expected = 1 / (1 + Math.pow(10, (oppRating-myRating)/400));
-  return Math.round(K * ((won?1:0) - expected));
+  var my = myRating  || 1000;
+  var op = oppRating || 1000;
+  var K = 32, expected = 1 / (1 + Math.pow(10, (op - my) / 400));
+  return Math.round(K * ((won ? 1 : 0) - expected));
 }
 
 // ============================================================

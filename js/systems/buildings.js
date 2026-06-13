@@ -13,6 +13,7 @@ function tickBuildQueue() {
   buildQueue = buildQueue.filter(item => {
     if (now < item.finishAt) return true;
 
+    if (!buildings[item.key]) return true;
     const prevLevel = buildings[item.key].level;
     buildings[item.key].level = item.targetLevel;
     const b = buildingsData[item.key];
