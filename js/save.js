@@ -222,8 +222,7 @@ async function loadGameCloud() {
     const { data, error } = await window._supa.from('saves').select('data').eq('id', uid).single();
     if (error || !data || !data.data) return false;
     const s = data.data;
-    // Odbaci ako je stara sezona
-    if ((s._season || 1) < serverSeason) return false;
+    // Ne odbacujemo save zbog stare sezone — season reset resetuje samo rank/leaderboard
     return _applyGameState(s);
   } catch(e) {
     console.error('loadGameCloud error:', e);
