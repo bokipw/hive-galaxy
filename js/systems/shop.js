@@ -315,6 +315,54 @@ const SHOP_ITEMS = [
     amount: 1000,
   },
 
+  // ── BOCRYPTO SHOP ──
+  {
+    id: 'ikeys_100_boc',
+    category: 'ikeys',
+    tab: 'both',
+    name: '100 INSTANCE KLJUČEVA',
+    icon: '🔑',
+    color: '#ff6633',
+    badge: 'BOCRYPTO',
+    badgeColor: '#ff6633',
+    desc: 'Kupi 100 instance ključeva direktno sa tvojim BoCrypto tokenima — bez vanjske uplate.',
+    price: '100.000 BoCrypto',
+    priceLabel: '1.000 BoCrypto po ključu · In-game valuta',
+    perks: [
+      '100× ulaz u instance',
+      'Plaćanje BoCrypto tokenima',
+      'Trenutna isporuka — bez čekanja',
+      'Dostupno svim igračima',
+    ],
+    cryptosHive: [], cryptosEmail: [],
+    action: 'buyWithBoCrypto',
+    bocCost: 100000,
+    reward: { type: 'ikeys', amount: 100 },
+  },
+  {
+    id: 'keys_10_boc',
+    category: 'keys',
+    tab: 'both',
+    name: '10 KAPETAN KLJUČEVA',
+    icon: '🗝️',
+    color: '#ff6633',
+    badge: 'BOCRYPTO',
+    badgeColor: '#ff6633',
+    desc: 'Kupi 10 ključeva komandira direktno sa tvojim BoCrypto tokenima — bez vanjske uplate.',
+    price: '250.000 BoCrypto',
+    priceLabel: '25.000 BoCrypto po ključu · In-game valuta',
+    perks: [
+      '10× otvaranje paketa komandira',
+      'Plaćanje BoCrypto tokenima',
+      'Trenutna isporuka — bez čekanja',
+      'Dostupno svim igračima',
+    ],
+    cryptosHive: [], cryptosEmail: [],
+    action: 'buyWithBoCrypto',
+    bocCost: 250000,
+    reward: { type: 'keys', amount: 10 },
+  },
+
   // ── OSTALO ──
   {
     id: 'rename',
@@ -508,6 +556,11 @@ function renderShopCard(item, activeTab) {
 
 function openShopPurchase(itemId) {
   const item = SHOP_ITEMS.find(i => i.id === itemId);
+  if (item && item.action === 'buyWithBoCrypto') {
+    buyWithBoCrypto(item);
+    return;
+  }
+  const item = SHOP_ITEMS.find(i => i.id === itemId);
   if (!item) return;
 
   const cryptos = _shopTab === 'hive'
@@ -578,6 +631,45 @@ function showCryptoPayment(itemId, symbol) {
     [{ label: '✓ Poslao sam uplatu', cls: 'btn-g', fn: () => { closeModal(); toast('Hvala! Nalog će biti ažuriran čim se transakcija potvrdi.', 'ok'); } },
      { label: 'Otkaži', cls: '', fn: closeModal }]
   );
+}
+
+function buyWithBoCrypto(item) {
+  const cur = R.bocrypto || 0;
+  const cost = item.bocCost;
+  const has = cur >= cost;
+  openModal(
+    `${item.icon} ${item.name}`,
+    `<div style="font-size:0.75rem;color:#6a90b8;margin-bottom:16px">${item.desc}</div>
+    <div style="margin-bottom:12px;padding:12px;background:rgba(255,102,51,0.08);border:1px solid rgba(255,102,51,0.25);border-radius:8px">
+      <div style="font-size:0.65rem;color:#ff6633;margin-bottom:4px">CIJENA</div>
+      <div style="font-size:1rem;color:#ff6633;font-family:'Orbitron',monospace;font-weight:700">${cost.toLocaleString()} BoCrypto</div>
+    </div>
+    <div style="font-size:0.72rem;color:${has ? '#00ff99' : '#ff5555'}">
+      Imaš: <strong>${cur.toLocaleString()} BoCrypto</strong>
+      ${has ? '✓' : '⚠️ Nedovoljno BoCrypto!'}
+    </div>`,
+    has ? [
+      { label: '✓ Kupi', cls: 'btn-g', fn: () => { closeModal(); _executeBoCryptoBuy(item); } },
+      { label: 'Otkaži', cls: '', fn: closeModal }
+    ] : [
+      { label: 'Zatvori', cls: '', fn: closeModal }
+    ]
+  );
+}
+
+function _executeBoCryptoBuy(item) {
+  R.bocrypto = (R.bocrypto || 0) - item.bocCost;
+  if (item.reward.type === 'ikeys') {
+    R.instanceKeys = (R.instanceKeys || 0) + item.reward.amount;
+    toast(`✅ Kupljeno ${item.reward.amount} instance ključeva!`, 'ok');
+    addLog(`🛒 Kupljeno ${item.reward.amount} instance ključeva za ${item.bocCost.toLocaleString()} BoCrypto.`);
+  } else if (item.reward.type === 'keys') {
+    R.keys = (R.keys || 0) + item.reward.amount;
+    toast(`✅ Kupljeno ${item.reward.amount} ključeva komandira!`, 'ok');
+    addLog(`🛒 Kupljeno ${item.reward.amount} ključeva komandira za ${item.bocCost.toLocaleString()} BoCrypto.`);
+  }
+  saveGame();
+  renderShop();
 }
 
 async function buyPremiumWithBCM() {
