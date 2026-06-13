@@ -52,7 +52,7 @@
         const pending    = data.boosters || {};
 
         // Čekaj da se igra inicijalizira pa primijeni
-        const applyKeys = () => {
+        const applyKeys = async () => {
           if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
           var msgs = [];
           if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  msgs.push('+' + cloudKeys + ' 🗝️'); }
