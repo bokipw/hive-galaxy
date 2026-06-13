@@ -45,11 +45,14 @@ async function _cloudSave(saveData) {
   } catch(e) { console.error('cloudSave leaderboard:', e); }
 
   try {
-    await window._supa.from('hive_profiles').update({
-      bcm:      typeof R !== 'undefined' ? (R.bcm      || 0) : 0,
-      bocrypto: typeof R !== 'undefined' ? (R.bocrypto || 0) : 0,
-      spcard:   typeof R !== 'undefined' ? (R.spCard   || 0) : 0,
-    }).eq('hive_user', username);
+    if (window._hiveUser) {
+      await window._supa.from('hive_profiles').upsert({
+        hive_user: window._hiveUser,
+        bcm:      typeof R !== 'undefined' ? (R.bcm      || 0) : 0,
+        bocrypto: typeof R !== 'undefined' ? (R.bocrypto || 0) : 0,
+        spcard:   typeof R !== 'undefined' ? (R.spCard   || 0) : 0,
+      }, { onConflict: 'hive_user' });
+    }
   } catch(e) { console.error('cloudSave tokens:', e); }
 
   try {
