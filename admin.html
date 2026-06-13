@@ -516,6 +516,45 @@
       </table>
     </div>
     <div id="masterRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
+
+    <!-- DIAMOND NAGRADE -->
+    <div class="section-title" style="color:#00d4ff;margin-top:32px">💎 DIAMOND — SEZONA NAGRADE</div>
+    <div style="background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.2);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+      <div style="font-size:.72rem;color:#88ddff;margin-bottom:12px">
+        Nagrade za top 10 Diamond igrača (rating 2200–2799). BCM i BOCRYPTO se isplaćuju automatski.
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:14px">
+        <thead><tr>
+          <th style="color:#00d4ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(0,212,255,.2)">MJESTO</th>
+          <th style="color:#00d4ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(0,212,255,.2)">BCM</th>
+          <th style="color:#00d4ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(0,212,255,.2)">BOCRYPTO</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 10px;color:#ffd700">🥇 1.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#00d4ff">10 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#c0c0c0">🥈 2.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#00d4ff">5 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#cd7f32">🥉 3.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#00d4ff">2 500</td></tr>
+          <tr><td style="padding:5px 10px;color:#88ddff">4–10.</td><td style="padding:5px 10px;color:#4a6a8a">—</td><td style="padding:5px 10px;color:#00d4ff">10 000</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-blue" style="padding:9px 18px" onclick="loadDiamondTop10()">↻ UČITAJ TOP 10 DIAMOND</button>
+        <button class="btn" id="distributeDiamondBtn" style="padding:9px 18px;background:rgba(0,212,255,.2);border-color:rgba(0,212,255,.5);color:#00d4ff;display:none" onclick="distributeDiamondRewards()">💎 ISPLATI DIAMOND NAGRADE</button>
+      </div>
+    </div>
+
+    <div class="section-title" style="color:#88ddff;font-size:.7rem">TOP 10 DIAMOND IGRAČA</div>
+    <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Username</th><th>Rating</th><th>Level</th>
+          <th style="color:#ffcc44">+BCM</th>
+          <th style="color:#00d4ff">+BOCRYPTO</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody id="diamondTop10Tbl"><tr><td colspan="7" class="loading">Klikni Učitaj Top 10 Diamond.</td></tr></tbody>
+      </table>
+    </div>
+    <div id="diamondRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
   </div><!-- /content -->
@@ -1550,6 +1589,100 @@ async function distributeMasterRewards() {
   btn.disabled = false;
   btn.textContent = '💫 ISPLATI MASTER NAGRADE';
   showToast('Master isplata završena: ' + ok + ' igrača nagrađeno.');
+}
+
+// ============================================================
+// DIAMOND NAGRADE
+// ============================================================
+const DIAMOND_REWARDS = [
+  { bcm: 1, bocrypto: 10000 },
+  { bcm: 1, bocrypto: 5000 },
+  { bcm: 1, bocrypto: 2500 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+  { bcm: 0, bocrypto: 10000 },
+];
+
+let _diamondTop10 = [];
+
+async function loadDiamondTop10() {
+  const tbody = document.getElementById('diamondTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="7" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeDiamondBtn').style.display = 'none';
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 2200).lt('rating', 2800)
+      .order('rating', { ascending: false }).limit(10);
+    if (error) throw error;
+    _diamondTop10 = data || [];
+    if (_diamondTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Nema igrača u Diamond diviziji (2200–2799).</td></tr>';
+      return;
+    }
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _diamondTop10.map((p, i) => {
+      const r = DIAMOND_REWARDS[i] || { bcm: 0, bocrypto: 0 };
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      return '<tr>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + (medals[i] || (i+1)+'.') + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username||'-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: '+hiveUser+'</div>' : '') + '</td>' +
+        '<td style="color:#00d4ff;font-family:monospace">' + (p.rating||0).toLocaleString() + '</td>' +
+        '<td>' + (p.level||1) + '</td>' +
+        '<td style="color:#ffcc44;font-weight:600">' + (r.bcm ? '+'+r.bcm : '—') + '</td>' +
+        '<td style="color:#00d4ff;font-weight:600">+' + r.bocrypto.toLocaleString() + '</td>' +
+        '<td id="diamond-status-'+i+'" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+    document.getElementById('distributeDiamondBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Greška: '+e.message+'</td></tr>';
+  }
+}
+
+async function distributeDiamondRewards() {
+  if (!confirm('SIGURNO? Šalje BCM i BOCRYPTO top 10 Diamond igračima.')) return;
+  const btn = document.getElementById('distributeDiamondBtn');
+  btn.disabled = true; btn.textContent = '⏳ Isplata u toku...';
+  const log = document.getElementById('diamondRewardLog');
+  log.innerHTML = '<div style="color:#00d4ff;margin-bottom:8px">► Početak Diamond isplate — ' + new Date().toLocaleString() + '</div>';
+  let ok = 0, fail = 0;
+  for (let i = 0; i < _diamondTop10.length; i++) {
+    const p = _diamondTop10[i];
+    const r = DIAMOND_REWARDS[i] || { bcm: 0, bocrypto: 0 };
+    const statusEl = document.getElementById('diamond-status-'+i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ '+(p.username||p.id)+' — nije HIVE igrač.</div>';
+      fail++; continue;
+    }
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('bcm, bocrypto').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: '+hiveUser);
+      const { error: e2 } = await _supa.from('hive_profiles').update({
+        bcm:      (prof.bcm      || 0) + r.bcm,
+        bocrypto: (prof.bocrypto || 0) + r.bocrypto,
+      }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #'+(i+1)+' '+hiveUser+
+        (r.bcm ? ' — +'+r.bcm+' BCM' : '')+' — +'+r.bocrypto.toLocaleString()+' BOCRYPTO</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #'+(i+1)+' '+hiveUser+' — '+e.message+'</div>';
+      fail++;
+    }
+  }
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: '+ok+' isplaćeno, '+fail+' greški.</div>';
+  btn.disabled = false; btn.textContent = '💎 ISPLATI DIAMOND NAGRADE';
+  showToast('Diamond isplata završena: '+ok+' igrača nagrađeno.');
 }
 
 // ============================================================
