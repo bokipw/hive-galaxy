@@ -252,7 +252,20 @@
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Username</th><th>Metal</th><th>Crystal</th><th>He3</th><th>Energija</th><th>BOCRYPTO</th><th>BCM</th><th>BPW</th><th>🗝️ Kljucevi</th><th>🔑 iKljucevi</th><th>Score</th><th>Level</th></tr></thead>
+          <thead><tr>
+            <th onclick="sortEcon('name')" style="cursor:pointer">Username ⇅</th>
+            <th onclick="sortEcon('metal')" style="cursor:pointer">Metal ⇅</th>
+            <th onclick="sortEcon('crystal')" style="cursor:pointer">Crystal ⇅</th>
+            <th onclick="sortEcon('he3')" style="cursor:pointer">He3 ⇅</th>
+            <th onclick="sortEcon('energy')" style="cursor:pointer">Energija ⇅</th>
+            <th onclick="sortEcon('bocrypto')" style="cursor:pointer">BOCRYPTO ⇅</th>
+            <th onclick="sortEcon('bcm')" style="cursor:pointer">BCM ⇅</th>
+            <th onclick="sortEcon('bpw')" style="cursor:pointer">BPW ⇅</th>
+            <th onclick="sortEcon('keys')" style="cursor:pointer">🗝️ Kljucevi ⇅</th>
+            <th onclick="sortEcon('ikeys')" style="cursor:pointer">🔑 iKljucevi ⇅</th>
+            <th onclick="sortEcon('score')" style="cursor:pointer">Score ⇅</th>
+            <th onclick="sortEcon('level')" style="cursor:pointer">Level ⇅</th>
+          </tr></thead>
           <tbody id="econTbl"><tr><td colspan="12" class="loading">Klikni Ucitaj</td></tr></tbody>
         </table>
       </div>
@@ -721,6 +734,43 @@ async function fullFill() {
   await sendResources();
 }
 
+let _econData = [];
+let _econSortCol = null;
+let _econSortAsc = false;
+
+function sortEcon(col) {
+  if (_econSortCol === col) { _econSortAsc = !_econSortAsc; }
+  else { _econSortCol = col; _econSortAsc = false; }
+  _econData.sort((a, b) => {
+    let va = a[col], vb = b[col];
+    if (typeof va === 'string') return _econSortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return _econSortAsc ? va - vb : vb - va;
+  });
+  renderEconTable();
+}
+
+function renderEconTable() {
+  const tbody = document.getElementById('econTbl');
+  if (!_econData.length) { tbody.innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
+  tbody.innerHTML = _econData.map(p => {
+    const bpw = (p.bpw / 100000000).toFixed(8);
+    return '<tr>' +
+      '<td style="color:#fff;font-weight:600">' + p.name + '</td>' +
+      '<td style="color:#aaa">' + fmt(p.metal) + '</td>' +
+      '<td style="color:#88aaff">' + fmt(p.crystal) + '</td>' +
+      '<td style="color:#aaffaa">' + fmt(p.he3) + '</td>' +
+      '<td style="color:#00d4ff">' + fmt(p.energy) + '</td>' +
+      '<td style="color:#ffcc44;font-weight:600">' + p.bocrypto.toFixed(3) + '</td>' +
+      '<td style="color:#ffcc44;font-weight:600">' + p.bcm + '</td>' +
+      '<td style="color:#ffcc44;font-weight:600">' + bpw + '</td>' +
+      '<td style="color:#aa44ff">' + p.keys + '</td>' +
+      '<td style="color:#aa44ff">' + p.ikeys + '</td>' +
+      '<td style="color:#ffcc44">' + fmt(p.score) + '</td>' +
+      '<td>' + p.level + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
 async function loadEconomy() {
   try {
     const { data: profiles } = await _supa.from('hive_profiles').select('hive_user, bcm, bocrypto, spcard, keys, ikeys').neq('hive_user', '__system__').limit(1000);
@@ -728,27 +778,27 @@ async function loadEconomy() {
     const savesMap = {};
     if (saves) saves.forEach(s => savesMap[s.id] = s.data || {});
     const tbody = document.getElementById('econTbl');
-    if (!profiles || profiles.length === 0) { tbody.innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
-    tbody.innerHTML = profiles.map(p => {
+    if (!profiles || profiles.length === 0) { document.getElementById('econTbl').innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
+    _econData = profiles.map(p => {
       const uid = 'hive_' + p.hive_user;
       const gs  = savesMap[uid] || {};
       const R   = gs.R || {};
-      const bpw = ((p.spcard||0) / 100000000).toFixed(8);
-      return '<tr>' +
-        '<td style="color:#fff;font-weight:600">' + p.hive_user + '</td>' +
-        '<td style="color:#aaa">' + fmt(R.metal||0) + '</td>' +
-        '<td style="color:#88aaff">' + fmt(R.crystal||0) + '</td>' +
-        '<td style="color:#aaffaa">' + fmt(R.he3||0) + '</td>' +
-        '<td style="color:#00d4ff">' + fmt(R.energy||0) + '</td>' +
-        '<td style="color:#ffcc44;font-weight:600">' + (p.bocrypto||0).toFixed(3) + '</td>' +
-        '<td style="color:#ffcc44;font-weight:600">' + (p.bcm||0) + '</td>' +
-        '<td style="color:#ffcc44;font-weight:600">' + bpw + '</td>' +
-        '<td style="color:#aa44ff">' + (p.keys||0) + '</td>' +
-        '<td style="color:#aa44ff">' + (p.ikeys||0) + '</td>' +
-        '<td style="color:#ffcc44">' + fmt(gs.commander?.score||0) + '</td>' +
-        '<td>' + (gs.commander?.level||1) + '</td>' +
-        '</tr>';
-    }).join('');
+      return {
+        name:     p.hive_user,
+        metal:    R.metal    || 0,
+        crystal:  R.crystal  || 0,
+        he3:      R.he3      || 0,
+        energy:   R.energy   || 0,
+        bocrypto: p.bocrypto || 0,
+        bcm:      p.bcm      || 0,
+        bpw:      p.spcard   || 0,
+        keys:     p.keys     || 0,
+        ikeys:    p.ikeys    || 0,
+        score:    gs.commander?.score || 0,
+        level:    gs.commander?.level || 1,
+      };
+    });
+    renderEconTable();
   } catch(e) { showToast('Greska: ' + e.message, true); }
 }
 
