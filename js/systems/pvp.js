@@ -249,7 +249,7 @@ function renderOpponentListHTML() {
       '<div style="text-align:right"><div style="font-size:0.65rem;color:#00d4ff;font-family:Orbitron,monospace">'+fmt(opp.power)+'</div>' +
       '<div style="font-size:0.55rem;color:#6a90b8">'+(opp.fleet?opp.fleet.length:0)+' brodova</div></div>' +
       '</div>' +
-      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">⚔️ NAPADNI</button>' +
+      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">⚔️ NAPADNI (1000 ⚡ + 1000 BOCRYPTO)</button>' +
       '</div>';
   }).join('');
 }
@@ -262,9 +262,11 @@ function startPvpBattle(oppIdx) {
   var opp = window._currentOpponents[oppIdx];
   if (!opp) return;
   if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast('Shield je aktivan - ne mozes napadati!','warn'); return; }
-  var energyCost=100;
+  var energyCost=1000, bocCost=1000;
   if (R.energy<energyCost) { toast('Nedovoljno energije! Treba '+energyCost,'warn'); return; }
+  if ((R.bocrypto||0)<bocCost) { toast('Nedovoljno BOCRYPTO! Treba '+bocCost,'warn'); return; }
   R.energy -= energyCost;
+  R.bocrypto = (R.bocrypto||0) - bocCost;
   if (typeof updateResUI==='function') updateResUI();
   if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
   toast('Napadam '+opp.name+'...','inf');
