@@ -225,12 +225,16 @@ function finishPvpBattle() {
   if (isVictory) pvp.wins = (pvp.wins||0)+1;
   else if (result.status==='defeat') pvp.losses = (pvp.losses||0)+1;
   window._dailyPvpCount = (window._dailyPvpCount||0)+1;
-  var loot = { metal:0, crystal:0, he3:0 };
+  var loot = { metal:0, crystal:0, he3:0, bocrypto:0 };
   if (isVictory) {
-    loot.metal   = Math.floor((opp.power||10000)*5);
-    loot.crystal = Math.floor((opp.power||10000)*4);
-    loot.he3     = Math.floor((opp.power||10000)*2);
-    R.metal += loot.metal; R.crystal += loot.crystal; R.he3 += loot.he3;
+    loot.metal    = 100000;
+    loot.crystal  = 100000;
+    loot.he3      = 100000;
+    loot.bocrypto = 1250;
+    R.metal    += loot.metal;
+    R.crystal  += loot.crystal;
+    R.he3      += loot.he3;
+    R.bocrypto  = (R.bocrypto || 0) + loot.bocrypto;
   }
   if (!pvp.log) pvp.log = [];
   pvp.log.unshift({ time:Date.now(), opponent:opp.name, rating:opp.rating, result:result.status, rounds:result.round, ratingChange:ratingChange, loot:loot });
