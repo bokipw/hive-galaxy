@@ -595,6 +595,23 @@
       </table>
     </div>
     <div id="goldRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
+
+    <!-- SILVER NAGRADE -->
+    <div class="section-title" style="color:#aaaaaa;margin-top:32px">🥈 SILVER — SEZONA NAGRADE</div>
+    <div style="background:rgba(170,170,170,.05);border:1px solid rgba(170,170,170,.2);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+      <div style="font-size:.72rem;color:#cccccc;margin-bottom:12px">Nagrade za top 10 Silver igrača (rating 1000–1599). BPW se isplaćuje automatski.</div>
+      <div style="display:flex;gap:10px;margin-bottom:14px">
+        <button class="btn btn-blue" style="padding:9px 18px" onclick="loadSilverTop10()">↻ UČITAJ TOP 10 SILVER</button>
+        <button class="btn" id="distributeSilverBtn" style="padding:9px 18px;background:rgba(170,170,170,.2);border-color:rgba(170,170,170,.4);color:#aaaaaa;display:none" onclick="distributeSilverRewards()">🥈 ISPLATI SILVER NAGRADE</button>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+      <table>
+        <thead><tr><th>#</th><th>Username</th><th>Rating</th><th style="color:#aa44ff">+BPW (sat)</th><th>Status</th></tr></thead>
+        <tbody id="silverTop10Tbl"><tr><td colspan="5" class="loading">Klikni Učitaj Top 10 Silver.</td></tr></tbody>
+      </table>
+    </div>
+    <div id="silverRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
   </div><!-- /content -->
@@ -1812,6 +1829,82 @@ async function distributeGoldRewards() {
   log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: '+ok+' isplaćeno, '+fail+' greški.</div>';
   btn.disabled = false; btn.textContent = '🥇 ISPLATI GOLD NAGRADE';
   showToast('Gold isplata završena: '+ok+' igrača nagrađeno.');
+}
+
+// ============================================================
+// SILVER NAGRADE
+// ============================================================
+const SILVER_REWARDS = [100000,75000,50000,25000,10000,5000,2500,1000,1000,1000];
+let _silverTop10 = [];
+
+async function loadSilverTop10() {
+  const tbody = document.getElementById('silverTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="5" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeSilverBtn').style.display = 'none';
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 1000).lt('rating', 1600)
+      .order('rating', { ascending: false }).limit(10);
+    if (error) throw error;
+    _silverTop10 = data || [];
+    if (_silverTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="loading" style="color:#ff6666">Nema igrača u Silver diviziji (1000–1599).</td></tr>';
+      return;
+    }
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _silverTop10.map((p, i) => {
+      const bpw = SILVER_REWARDS[i] || 0;
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      return '<tr>' +
+        '<td style="color:#aaaaaa;font-family:monospace">' + (medals[i]||(i+1)+'.') + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username||'-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: '+hiveUser+'</div>' : '') + '</td>' +
+        '<td style="color:#aaaaaa;font-family:monospace">' + (p.rating||0).toLocaleString() + '</td>' +
+        '<td style="color:#aa44ff;font-weight:600">+' + bpw.toLocaleString() + '</td>' +
+        '<td id="silver-status-'+i+'" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+    document.getElementById('distributeSilverBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="5" class="loading" style="color:#ff6666">Greška: '+e.message+'</td></tr>';
+  }
+}
+
+async function distributeSilverRewards() {
+  if (!confirm('SIGURNO? Šalje BPW top 10 Silver igračima.')) return;
+  const btn = document.getElementById('distributeSilverBtn');
+  btn.disabled = true; btn.textContent = '⏳ Isplata u toku...';
+  const log = document.getElementById('silverRewardLog');
+  log.innerHTML = '<div style="color:#aaaaaa;margin-bottom:8px">► Početak Silver isplate — ' + new Date().toLocaleString() + '</div>';
+  let ok = 0, fail = 0;
+  for (let i = 0; i < _silverTop10.length; i++) {
+    const p = _silverTop10[i];
+    const bpw = SILVER_REWARDS[i] || 0;
+    const statusEl = document.getElementById('silver-status-'+i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ '+(p.username||p.id)+' — nije HIVE igrač.</div>';
+      fail++; continue;
+    }
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('spcard').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: '+hiveUser);
+      const { error: e2 } = await _supa.from('hive_profiles').update({ spcard: (prof.spcard||0) + bpw }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #'+(i+1)+' '+hiveUser+' — +'+bpw.toLocaleString()+' sat BPW</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #'+(i+1)+' '+hiveUser+' — '+e.message+'</div>';
+      fail++;
+    }
+  }
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: '+ok+' isplaćeno, '+fail+' greški.</div>';
+  btn.disabled = false; btn.textContent = '🥈 ISPLATI SILVER NAGRADE';
+  showToast('Silver isplata završena: '+ok+' igrača nagrađeno.');
 }
 
 // ============================================================
