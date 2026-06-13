@@ -15,7 +15,7 @@ async function init() {
     addLog('🚀 Dobrodošao, Admirale! Izgradi svoju bazu i osvoji galaksiju.');
     toast('🚀 HIVE GALAXY — Dobrodošao!', 'ok');
   } else {
-    toast('Igra ucitana | user=' + window._hiveUser + ' sezona=' + window._serverSeason, 'inf');
+    toast('💾 Igra učitana!', 'inf');
     addLog('💾 Igra učitana.');
   }
 
