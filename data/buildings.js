@@ -540,7 +540,8 @@ function getRecycleResources(ship, count) {
 // ── TIMER — GRADNJA ZGRADA ──
 function getBuildingTimerSec(key) {
   const currentLevel = buildings[key]?.level || 0;
-  let secs           = (currentLevel + 1) * 0;
+  // 30 * 1.12^level → lv1≈34s, lv10≈93s(~1.5m), lv25≈960s(~16m), lv50≈8200s(~2.3h), lv75≈70000s(~19h), lv100≈600000s(~7d)
+  let secs = Math.round(30 * Math.pow(1.12, currentLevel));
   // HQ milestone speedBonus
   const hqLevel = buildings.hq?.level || 0;
   const hqM     = getBuildingMilestones('hq');
