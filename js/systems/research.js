@@ -298,10 +298,7 @@ window._researchTimer      = window._researchTimer      || {};
 window._researchInProgress = window._researchInProgress || null;
 
 function getResearchTimerSeconds(lvl) {
-  if (lvl <= 25) return 10;
-  if (lvl <= 50) return 20;
-  if (lvl <= 75) return 30;
-  return 60;
+  return Math.max(5, Math.round(30 * Math.pow(1.12, lvl - 1)));
 }
 
 function getResearchTimeRemaining(branch) {
