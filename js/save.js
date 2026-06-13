@@ -186,11 +186,14 @@ async function loadGameCloud() {
     } catch(e) { localStorage.removeItem(_saveKey()); }
   }
 
-  // Ucitaj cloud save — ali ignoriši ga ako je iz stare sezone
+  // Ucitaj cloud save — koristi ga samo ako je noviji od lokalnog
   const cloudData = await _cloudLoad();
   if (cloudData) {
-    const cloudSeason = cloudData._season || 1;
-    if (cloudSeason >= serverSeason) {
+    const cloudSeason  = cloudData._season  || 1;
+    const cloudSavedAt = cloudData._savedAt ? new Date(cloudData._savedAt).getTime() : 0;
+    const localRaw2    = localStorage.getItem(_saveKey());
+    const localSavedAt = localRaw2 ? (() => { try { const s = JSON.parse(localRaw2); return s._savedAt ? new Date(s._savedAt).getTime() : 0; } catch(e) { return 0; } })() : 0;
+    if (cloudSeason >= serverSeason && cloudSavedAt >= localSavedAt) {
       localStorage.setItem(_saveKey(), JSON.stringify(cloudData));
     }
   }
