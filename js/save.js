@@ -209,7 +209,27 @@ async function loadGameCloud() {
       localStorage.setItem(_saveKey(), JSON.stringify(cloudData));
     }
   }
-  return loadGame();
+  const loaded = loadGame();
+
+  // Pregazi tokene iz Supabase — source of truth
+  try {
+    const hiveUser = window._hiveUser;
+    if (hiveUser && window._supa) {
+      const { data: prof } = await window._supa.from('hive_profiles')
+        .select('bcm, bocrypto, spcard')
+        .eq('hive_user', hiveUser)
+        .single();
+      if (prof) {
+        if (typeof R !== 'undefined') {
+          R.bcm      = prof.bcm      || 0;
+          R.bocrypto = prof.bocrypto || 0;
+          R.spCard   = prof.spcard   || 0;
+        }
+      }
+    }
+  } catch(e) { console.error('loadGameCloud tokens:', e); }
+
+  return loaded;
 }
 
 function loadGame() {
