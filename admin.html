@@ -771,10 +771,11 @@ async function executeShopAction() {
       pvpUpdate = { is_premium: false };
     } else if (action === 'booster_2x_24h' || action === 'booster_xp_24h') {
       const { data: prof } = await _supa.from('hive_profiles').select('boosters').eq('hive_user', username).single();
-      const boosters = (prof && prof.boosters) ? prof.boosters : [];
+      const existing = (prof && prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
+      const boosterList = Array.isArray(existing._boosters) ? existing._boosters : [];
       const expires  = new Date(Date.now() + 24*3600*1000).toISOString();
-      boosters.push({ type: action, expires_at: expires });
-      update = { boosters };
+      boosterList.push({ type: action, expires_at: expires });
+      update = { boosters: { ...existing, _boosters: boosterList } };
     }
 
     const { error } = await _supa.from('hive_profiles').update(update).eq('hive_user', username);
@@ -887,7 +888,7 @@ async function serverReset() {
   const r3 = await _supa.from('pvp_snapshots').delete().not('id', 'is', null);
   if (r3.error) errors.push('pvp_snapshots: ' + r3.error.message);
 
-  const r4 = await _supa.from('hive_profiles').update({ is_premium: false, keys: 0, ikeys: 0, boosters: [] }).neq('hive_user', '__system__');
+  const r4 = await _supa.from('hive_profiles').update({ is_premium: false, keys: 0, ikeys: 0, boosters: {} }).neq('hive_user', '__system__');
   if (r4.error) errors.push('hive_profiles: ' + r4.error.message);
 
   // Povecaj broj sezone — igra ce odbaciti sve lokalne saveove iz prethodnih sezona
