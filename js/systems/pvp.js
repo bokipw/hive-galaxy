@@ -107,7 +107,7 @@ function simulatePvpBattle(fleetA, fleetB) {
 
   while (round < PVP_MAX_ROUNDS) {
     round++;
-    log.push({ type:'round', msg:'=== RUNDA ' + round + ' ===' });
+    log.push({ type:'round', msg:'⚔️ RUNDA' + round + ' ===' });
     const attackers = units.filter(u => u.alive).sort((a,b) => b.speed - a.speed);
     for (const att of attackers) {
       if (!att.alive) continue;
@@ -116,11 +116,11 @@ function simulatePvpBattle(fleetA, fleetB) {
       const target = enemies[Math.floor(Math.random() * enemies.length)];
       if (target.engineSpecial && target.engineSpecial.type === 'void_phase') {
         if (Math.random() * 100 < (target.engineSpecial.chance || 0)) {
-          log.push({ type:'effect', msg:'[VOID] ' + target.name + ' fazira u void - imun!', attackerId:att.id, targetId:target.id }); continue;
+          log.push({ type:'effect', msg:'🌀 ' + target.name + ' fazira u void - imun!', attackerId:att.id, targetId:target.id }); continue;
         }
       }
       if (Math.random() * 100 < (target.agility || 0)) {
-        log.push({ type:'miss', msg:'[MISS] ' + att.name + ' promasuje ' + target.name, attackerId:att.id, targetId:target.id }); continue;
+        log.push({ type:'miss', msg:'💨 ' + att.name + ' promasuje ' + target.name, attackerId:att.id, targetId:target.id }); continue;
       }
       let dmg = att.dps;
       const critChance = 5 + (att.critBonus || 0);
@@ -134,25 +134,25 @@ function simulatePvpBattle(fleetA, fleetB) {
       target.hp = Math.max(0, target.hp - (dmg - shieldDmg));
       var critTxt = isCrit ? ' KRIT' : '';
       var shieldTxt = shieldDmg > 0 ? ' (' + fmt(shieldDmg) + ' SHD)' : '';
-      log.push({ type:'attack', msg:'[ATK] ' + att.name + ' -> ' + target.name + ': ' + fmt(dmg) + ' dmg' + critTxt + shieldTxt,
+      log.push({ type:'attack', msg:'🔫 ' + att.name + ' -> ' + target.name + ': ' + fmt(dmg) + ' dmg' + critTxt + shieldTxt,
         attackerId:att.id, targetId:target.id, damage:dmg, isCrit:isCrit, shieldDmg:shieldDmg,
         hpAfter:target.hp, hpMax:target.maxHp, shieldAfter:target.shield, shieldMax:target.maxShield });
       if (target.hp <= 0 && target.alive) {
         target.alive = false;
-        log.push({ type:'destroy', msg:'[DEAD] ' + target.name + ' unisten!', targetId:target.id });
+        log.push({ type:'destroy', msg:'💥 ' + target.name + ' unisten!', targetId:target.id });
       }
     }
     units.filter(u => u.alive && u.shieldRegen > 0).forEach(u => {
       const before = u.shield;
       u.shield = Math.min(u.maxShield, u.shield + u.shieldRegen);
-      if (u.shield > before) log.push({ type:'effect', msg:'[REGEN] ' + u.name + ' +' + fmt(u.shield-before) + ' shield', targetId:u.id });
+      if (u.shield > before) log.push({ type:'effect', msg:'🛡️ ' + u.name + ' +' + fmt(u.shield-before) + ' shield', targetId:u.id });
     });
     const pAlive = alive('player').length > 0, eAlive = alive('enemy').length > 0;
-    if (!eAlive && !pAlive) { log.push({ type:'info', msg:'[DRAW] Nerijaseno!' }); return { status:'draw',    round:round, log:log }; }
-    if (!eAlive)            { log.push({ type:'info', msg:'[WIN] Pobjeda!' });     return { status:'victory', round:round, log:log }; }
-    if (!pAlive)            { log.push({ type:'info', msg:'[LOSS] Poraz!' });      return { status:'defeat',  round:round, log:log }; }
+    if (!eAlive && !pAlive) { log.push({ type:'info', msg:'⚖️ Nerijaseno!' }); return { status:'draw',    round:round, log:log }; }
+    if (!eAlive)            { log.push({ type:'info', msg:'🏆 Pobjeda!' });     return { status:'victory', round:round, log:log }; }
+    if (!pAlive)            { log.push({ type:'info', msg:'💀 Poraz!' });      return { status:'defeat',  round:round, log:log }; }
   }
-  log.push({ type:'info', msg:'[TIME] Maks. rundi - nerijaseno.' });
+  log.push({ type:'info', msg:'⏱️ Maks. rundi - nerijaseno.' });
   return { status:'draw', round:PVP_MAX_ROUNDS, log:log };
 }
 
@@ -283,7 +283,7 @@ function renderPvpLogHTML() {
   if (!pvp.log||pvp.log.length===0) return '<div style="color:#6a90b8;font-size:0.7rem;text-align:center;padding:20px">Nema borbi jos.</div>';
   return pvp.log.map(function(e) {
     var col=e.result==='victory'?'#00ff88':e.result==='draw'?'#ffcc44':'#ff3355';
-    var icon=e.result==='victory'?'[WIN]':e.result==='draw'?'[=]':'[LOSS]';
+    var icon=e.result==='victory'?'🏆':e.result==='draw'?'[=]':'💀';
     var d=new Date(e.time), ts=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">' +
       '<div><span style="color:'+col+';font-size:0.75rem">'+icon+' '+e.opponent+'</span><span style="color:#6a90b8;font-size:0.6rem;margin-left:8px">'+e.rounds+' rundi</span></div>' +
@@ -308,6 +308,7 @@ function renderPvp() {
       ? '<div style="padding:10px 14px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:0.7rem;color:#00d4ff">Shield aktivan - '+sl+' min</span><button onclick="deactivatePvpShield()" style="font-size:0.6rem;padding:3px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">Deaktiviraj</button></div>'
       : '<div style="display:flex;gap:8px;margin-bottom:16px"><button onclick="activatePvpShield(4)" class="btn" style="flex:1;font-size:0.62rem">Shield 4h ('+fmt(50000)+' metal)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.62rem">Osvjezi protivnike</button></div>'
     ) +
+    '<div style="padding:8px 12px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px;margin-bottom:14px;font-size:0.65rem;color:#00ff88">⚔️ PvP MATCH DUELS — brodovi se ne gube nakon bitke</div>' +
     '<div style="font-size:0.6rem;color:#ff3355;font-family:Orbitron,monospace;letter-spacing:2px;margin-bottom:10px">PROTIVNICI</div>' +
     '<div id="opponentList">'+(window._currentOpponents.length>0?renderOpponentListHTML():'<div style="color:#6a90b8;padding:20px;text-align:center">Ucitavam...</div>')+'</div>' +
     '<div style="font-size:0.6rem;color:#6a90b8;font-family:Orbitron,monospace;letter-spacing:2px;margin:20px 0 10px">ISTORIJA BORBI</div>' +
