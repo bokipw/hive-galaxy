@@ -687,9 +687,10 @@ async function loadSeasonInfo() {
   } catch(e) {}
   document.getElementById('seasonLabel').textContent = '⚔ SEZONA ' + _currentSeason;
 
-  // Kraj tekućeg meseca
+  // Kraj tekućeg kvartala (mart, jun, sep, dec)
   const now = new Date();
-  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+  const quarterEndMonth = Math.ceil((now.getMonth() + 1) / 3) * 3 - 1; // 2=mar, 5=jun, 8=sep, 11=dec
+  const end = new Date(now.getFullYear(), quarterEndMonth + 1, 0, 23, 59, 59);
   const months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
   document.getElementById('seasonNote').textContent = 'Kraj sezone: ' + end.getDate() + '. ' + months[end.getMonth()] + ' ' + end.getFullYear();
 
