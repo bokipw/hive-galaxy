@@ -63,9 +63,9 @@
           if(pending.energy > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : R.energy + pending.energy); msgs.push('+' + pending.energy + ' energija'); }
           if(pending.keys   > 0) { R.keys    = (R.keys    || 0) + pending.keys;    msgs.push('+' + pending.keys + ' 🗝️'); }
           if(pending.ikeys  > 0) { R.instanceKeys = (R.instanceKeys || 0) + pending.ikeys; msgs.push('+' + pending.ikeys + ' 🔑'); }
-          // Resetuj u Supabase da se ne dodaju opet
+          // Resetuj u Supabase da se ne dodaju opet — await da bi se izvrsilo prije sljedeceg refresha
           if(msgs.length > 0) {
-            _sb.from('hive_profiles').update({ keys: 0, ikeys: 0, boosters: {} }).eq('hive_user', hiveUser);
+            await _sb.from('hive_profiles').update({ keys: 0, ikeys: 0, boosters: {} }).eq('hive_user', hiveUser);
             if(typeof updateResUI === 'function') updateResUI();
             if(typeof saveGame    === 'function') saveGame();
             if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');

@@ -658,18 +658,16 @@ async function sendResources() {
     const { data: prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
     if (!prof) { showToast('Igrac ' + username + ' nije pronadjen.', true); return; }
 
-    // Dohvati trenutne pending resurse i dodaj nove
+    // Resursi (metal/crystal/he3/energy) idu u boosters — igra ih pokupi pri loginu
     const existing = (prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
     const pending = {
       metal:   (existing.metal   || 0) + metal,
       crystal: (existing.crystal || 0) + crystal,
       he3:     (existing.he3     || 0) + he3,
       energy:  (existing.energy  || 0) + energy,
-      keys:    (existing.keys    || 0) + keys,
-      ikeys:   (existing.ikeys   || 0) + ikeys,
     };
 
-    // Sacuvaj u hive_profiles.boosters i azuriraj keys/ikeys
+    // Keys idu direktno u hive_profiles.keys/ikeys — igra ih vec cita odvojeno
     const { error } = await _supa.from('hive_profiles').update({
       boosters: pending,
       keys:  (prof.keys||0)  + keys,
