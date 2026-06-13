@@ -36,35 +36,6 @@ function buildPvpFleetLocal() {
   const cb = (typeof getAggregatedCommanderBonuses === 'function' && deployed.length > 0)
     ? getAggregatedCommanderBonuses(deployed) : {};
 
-  // Defense building milestones → fleet bonuses
-  let bldAtkBonus = 0, bldCritBonus = 0;
-  let bldShieldBonus = 0, bldShieldRegenBonus = 0, bldDmgRedBonus = 0;
-  let bldEvasionBonus = 0, bldSpeedBonus = 0;
-  if (typeof getBuildingMilestones === 'function') {
-    const turretLv    = buildings.turret?.level    || 0;
-    const missileLv   = buildings.missile_bat?.level || 0;
-    const shieldGenLv = buildings.shield_gen?.level  || 0;
-    Object.entries(getBuildingMilestones('turret')).forEach(([mlvl, d]) => {
-      if (turretLv >= parseInt(mlvl)) {
-        if (d.fleetAtkBonus)  bldAtkBonus  = Math.max(bldAtkBonus,  d.fleetAtkBonus);
-        if (d.fleetCritBonus) bldCritBonus = Math.max(bldCritBonus, d.fleetCritBonus);
-      }
-    });
-    Object.entries(getBuildingMilestones('missile_bat')).forEach(([mlvl, d]) => {
-      if (missileLv >= parseInt(mlvl)) {
-        if (d.fleetEvasionBonus) bldEvasionBonus = Math.max(bldEvasionBonus, d.fleetEvasionBonus);
-        if (d.fleetSpeedBonus)   bldSpeedBonus   = Math.max(bldSpeedBonus,   d.fleetSpeedBonus);
-      }
-    });
-    Object.entries(getBuildingMilestones('shield_gen')).forEach(([mlvl, d]) => {
-      if (shieldGenLv >= parseInt(mlvl)) {
-        if (d.fleetShieldBonus)       bldShieldBonus       = Math.max(bldShieldBonus,       d.fleetShieldBonus);
-        if (d.fleetShieldRegenBonus)  bldShieldRegenBonus  = Math.max(bldShieldRegenBonus,  d.fleetShieldRegenBonus);
-        if (d.fleetDmgReductionBonus) bldDmgRedBonus       = Math.max(bldDmgRedBonus,       d.fleetDmgReductionBonus);
-      }
-    });
-  }
-
   return rawSlots.map((slot, idx) => {
     const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
     const ship  = typeof getShipById   === 'function' ? getShipById(slot.ship_id) : null;
@@ -103,14 +74,6 @@ function buildPvpFleetLocal() {
     if (cls === 'scout')     { if (cb.scout_atk) dps *= (1+cb.scout_atk/100); if (cb.scout_evasion) agility = Math.min(90,agility+cb.scout_evasion); if (cb.scout_speed) speed += cb.scout_speed; }
     if (cls === 'carrier')   { if (cb.carrier_atk) dps *= (1+cb.carrier_atk/100); if (cb.carrier_hp) hp *= (1+cb.carrier_hp/100); }
     if (cls === 'special')   { if (cb.special_atk) dps *= (1+cb.special_atk/100); if (cb.special_hp) hp *= (1+cb.special_hp/100); }
-    // Defense buildings
-    if (bldAtkBonus)       dps    *= (1 + bldAtkBonus / 100);
-    if (bldCritBonus)      critBonus += bldCritBonus;
-    if (bldShieldBonus)    shield *= (1 + bldShieldBonus / 100);
-    if (bldShieldRegenBonus) regen *= (1 + bldShieldRegenBonus / 100);
-    if (bldEvasionBonus)   agility = Math.min(90, agility + bldEvasionBonus);
-    if (bldSpeedBonus)     speed  += bldSpeedBonus;
-    if (bldDmgRedBonus)    dmgRed += bldDmgRedBonus;
     const finalShield = Math.floor(shield);
     return { id:'a_'+idx, ship_id:slot.ship_id, name:ship.name||slot.ship_id, count:slot.count||1,
       hp:Math.floor(hp), maxHp:Math.floor(hp), shield:finalShield, maxShield:finalShield,
@@ -144,7 +107,7 @@ function simulatePvpBattle(fleetA, fleetB) {
 
   while (round < PVP_MAX_ROUNDS) {
     round++;
-    log.push({ type:'round', msg:'⚔️ RUNDA' + round + ' ===' });
+    log.push({ type:'round', msg:'=== RUNDA ' + round + ' ===' });
     const attackers = units.filter(u => u.alive).sort((a,b) => b.speed - a.speed);
     for (const att of attackers) {
       if (!att.alive) continue;
@@ -153,11 +116,11 @@ function simulatePvpBattle(fleetA, fleetB) {
       const target = enemies[Math.floor(Math.random() * enemies.length)];
       if (target.engineSpecial && target.engineSpecial.type === 'void_phase') {
         if (Math.random() * 100 < (target.engineSpecial.chance || 0)) {
-          log.push({ type:'effect', msg:'🌀 ' + target.name + ' fazira u void - imun!', attackerId:att.id, targetId:target.id }); continue;
+          log.push({ type:'effect', msg:'[VOID] ' + target.name + ' fazira u void - imun!', attackerId:att.id, targetId:target.id }); continue;
         }
       }
       if (Math.random() * 100 < (target.agility || 0)) {
-        log.push({ type:'miss', msg:'💨 ' + att.name + ' promasuje ' + target.name, attackerId:att.id, targetId:target.id }); continue;
+        log.push({ type:'miss', msg:'[MISS] ' + att.name + ' promasuje ' + target.name, attackerId:att.id, targetId:target.id }); continue;
       }
       let dmg = att.dps;
       const critChance = 5 + (att.critBonus || 0);
@@ -171,25 +134,25 @@ function simulatePvpBattle(fleetA, fleetB) {
       target.hp = Math.max(0, target.hp - (dmg - shieldDmg));
       var critTxt = isCrit ? ' KRIT' : '';
       var shieldTxt = shieldDmg > 0 ? ' (' + fmt(shieldDmg) + ' SHD)' : '';
-      log.push({ type:'attack', msg:'🔫 ' + att.name + ' -> ' + target.name + ': ' + fmt(dmg) + ' dmg' + critTxt + shieldTxt,
+      log.push({ type:'attack', msg:'[ATK] ' + att.name + ' -> ' + target.name + ': ' + fmt(dmg) + ' dmg' + critTxt + shieldTxt,
         attackerId:att.id, targetId:target.id, damage:dmg, isCrit:isCrit, shieldDmg:shieldDmg,
         hpAfter:target.hp, hpMax:target.maxHp, shieldAfter:target.shield, shieldMax:target.maxShield });
       if (target.hp <= 0 && target.alive) {
         target.alive = false;
-        log.push({ type:'destroy', msg:'💥 ' + target.name + ' unisten!', targetId:target.id });
+        log.push({ type:'destroy', msg:'[DEAD] ' + target.name + ' unisten!', targetId:target.id });
       }
     }
     units.filter(u => u.alive && u.shieldRegen > 0).forEach(u => {
       const before = u.shield;
       u.shield = Math.min(u.maxShield, u.shield + u.shieldRegen);
-      if (u.shield > before) log.push({ type:'effect', msg:'🛡️ ' + u.name + ' +' + fmt(u.shield-before) + ' shield', targetId:u.id });
+      if (u.shield > before) log.push({ type:'effect', msg:'[REGEN] ' + u.name + ' +' + fmt(u.shield-before) + ' shield', targetId:u.id });
     });
     const pAlive = alive('player').length > 0, eAlive = alive('enemy').length > 0;
-    if (!eAlive && !pAlive) { log.push({ type:'info', msg:'⚖️ Nerijaseno!' }); return { status:'draw',    round:round, log:log }; }
-    if (!eAlive)            { log.push({ type:'info', msg:'🏆 Pobjeda!' });     return { status:'victory', round:round, log:log }; }
-    if (!pAlive)            { log.push({ type:'info', msg:'💀 Poraz!' });      return { status:'defeat',  round:round, log:log }; }
+    if (!eAlive && !pAlive) { log.push({ type:'info', msg:'[DRAW] Nerijaseno!' }); return { status:'draw',    round:round, log:log }; }
+    if (!eAlive)            { log.push({ type:'info', msg:'[WIN] Pobjeda!' });     return { status:'victory', round:round, log:log }; }
+    if (!pAlive)            { log.push({ type:'info', msg:'[LOSS] Poraz!' });      return { status:'defeat',  round:round, log:log }; }
   }
-  log.push({ type:'info', msg:'⏱️ Maks. rundi - nerijaseno.' });
+  log.push({ type:'info', msg:'[TIME] Maks. rundi - nerijaseno.' });
   return { status:'draw', round:PVP_MAX_ROUNDS, log:log };
 }
 
@@ -245,10 +208,8 @@ function finishPvpBattle() {
 // 4. ELO RATING
 // ============================================================
 function calcRatingChange(myRating, oppRating, won) {
-  var my = myRating  || 1000;
-  var op = oppRating || 1000;
-  var K = 32, expected = 1 / (1 + Math.pow(10, (op - my) / 400));
-  return Math.round(K * ((won ? 1 : 0) - expected));
+  var K = 32, expected = 1 / (1 + Math.pow(10, (oppRating-myRating)/400));
+  return Math.round(K * ((won?1:0) - expected));
 }
 
 // ============================================================
@@ -288,7 +249,7 @@ function renderOpponentListHTML() {
       '<div style="text-align:right"><div style="font-size:0.65rem;color:#00d4ff;font-family:Orbitron,monospace">'+fmt(opp.power)+'</div>' +
       '<div style="font-size:0.55rem;color:#6a90b8">'+(opp.fleet?opp.fleet.length:0)+' brodova</div></div>' +
       '</div>' +
-      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">⚔️ NAPADNI (1000 ⚡ + 1000 BOCRYPTO)</button>' +
+      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">NAPADNI</button>' +
       '</div>';
   }).join('');
 }
@@ -301,19 +262,15 @@ function startPvpBattle(oppIdx) {
   var opp = window._currentOpponents[oppIdx];
   if (!opp) return;
   if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast('Shield je aktivan - ne mozes napadati!','warn'); return; }
-  var energyCost=1000, bocCost=1000;
-  // Provjeri flotu PRIJE oduzimanja resursa
-  var myFleet = buildPvpFleetLocal();
-  if (myFleet.length===0) { toast('Nemas brodova u floti!','warn'); return; }
-  if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
-  if (R.energy<energyCost) { toast('Nedovoljno energije! Treba '+energyCost,'warn'); return; }
-  if ((R.bocrypto||0)<bocCost) { toast('Nedovoljno BOCRYPTO! Treba '+bocCost,'warn'); return; }
-  R.energy -= energyCost;
-  R.bocrypto = (R.bocrypto||0) - bocCost;
+  var he3Cost=10;
+  if (R.he3<he3Cost) { toast('Nedovoljno He3! Treba '+he3Cost,'warn'); return; }
+  R.he3 -= he3Cost;
   if (typeof updateResUI==='function') updateResUI();
+  if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
   toast('Napadam '+opp.name+'...','inf');
   setTimeout(function() {
-    var oppFleet=buildPvpFleetFromSnapshot(opp.fleet);
+    var myFleet=buildPvpFleetLocal(), oppFleet=buildPvpFleetFromSnapshot(opp.fleet);
+    if (myFleet.length===0)  { toast('Nemas brodova u floti!','warn'); return; }
     if (oppFleet.length===0) { toast('Protivnik nema validnu flotu!','warn'); return; }
     openPvpBattleVisual(myFleet, oppFleet, opp);
   }, 200);
@@ -326,7 +283,7 @@ function renderPvpLogHTML() {
   if (!pvp.log||pvp.log.length===0) return '<div style="color:#6a90b8;font-size:0.7rem;text-align:center;padding:20px">Nema borbi jos.</div>';
   return pvp.log.map(function(e) {
     var col=e.result==='victory'?'#00ff88':e.result==='draw'?'#ffcc44':'#ff3355';
-    var icon=e.result==='victory'?'🏆':e.result==='draw'?'[=]':'💀';
+    var icon=e.result==='victory'?'[WIN]':e.result==='draw'?'[=]':'[LOSS]';
     var d=new Date(e.time), ts=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">' +
       '<div><span style="color:'+col+';font-size:0.75rem">'+icon+' '+e.opponent+'</span><span style="color:#6a90b8;font-size:0.6rem;margin-left:8px">'+e.rounds+' rundi</span></div>' +
@@ -349,9 +306,8 @@ function renderPvp() {
     '</div>' +
     (sa
       ? '<div style="padding:10px 14px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:0.7rem;color:#00d4ff">Shield aktivan - '+sl+' min</span><button onclick="deactivatePvpShield()" style="font-size:0.6rem;padding:3px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">Deaktiviraj</button></div>'
-      : '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"><button onclick="activatePvpShield(4,300)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 4h (300 BOCRYPTO)</button><button onclick="activatePvpShield(12,600)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 12h (600 BOCRYPTO)</button><button onclick="activatePvpShield(24,1000)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 24h (1000 BOCRYPTO)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.6rem">Osvjezi</button></div>'
+      : '<div style="display:flex;gap:8px;margin-bottom:16px"><button onclick="activatePvpShield(4)" class="btn" style="flex:1;font-size:0.62rem">Shield 4h ('+fmt(50000)+' metal)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.62rem">Osvjezi protivnike</button></div>'
     ) +
-    '<div style="padding:8px 12px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px;margin-bottom:14px;font-size:0.65rem;color:#00ff88">⚔️ PvP MATCH DUELS — brodovi se ne gube nakon bitke</div>' +
     '<div style="font-size:0.6rem;color:#ff3355;font-family:Orbitron,monospace;letter-spacing:2px;margin-bottom:10px">PROTIVNICI</div>' +
     '<div id="opponentList">'+(window._currentOpponents.length>0?renderOpponentListHTML():'<div style="color:#6a90b8;padding:20px;text-align:center">Ucitavam...</div>')+'</div>' +
     '<div style="font-size:0.6rem;color:#6a90b8;font-family:Orbitron,monospace;letter-spacing:2px;margin:20px 0 10px">ISTORIJA BORBI</div>' +
@@ -362,10 +318,10 @@ function renderPvp() {
 // ============================================================
 // 8. SHIELD
 // ============================================================
-function activatePvpShield(hours, cost) {
-  if (cost === undefined) cost = 300;
-  if ((R.bocrypto||0) < cost) { toast('Nedovoljno BoCrypto! Treba '+cost+' BOCRYPTO','warn'); return; }
-  R.bocrypto = (R.bocrypto||0) - cost;
+function activatePvpShield(hours) {
+  var cost=50000;
+  if (R.metal<cost) { toast('Nedovoljno metala ('+fmt(cost)+')','warn'); return; }
+  R.metal -= cost;
   window.pvpShield = { active:true, expiresAt:new Date(Date.now()+hours*3600000).toISOString() };
   if (typeof updateResUI==='function') updateResUI();
   saveGame(); renderPvp(); toast('Shield aktivan '+hours+'h!','ok');

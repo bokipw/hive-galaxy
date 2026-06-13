@@ -736,6 +736,28 @@ function startBattle(inst, instant = false) {
     return;
   }
 
+  // ── Boss cooldown provjera ──────────────────────────────
+  if (inst.cooldown_hours) {
+    if (!window._bossCooldowns) window._bossCooldowns = {};
+    const lastKill = window._bossCooldowns[inst.id];
+    if (lastKill) {
+      const elapsed = (Date.now() - lastKill) / 3600000;
+      if (elapsed < inst.cooldown_hours) {
+        const remaining = inst.cooldown_hours - elapsed;
+        const days  = Math.floor(remaining / 24);
+        const hours = Math.floor(remaining % 24);
+        const mins  = Math.floor((remaining % 1) * 60);
+        const parts = [];
+        if (days)  parts.push(`${days}d`);
+        if (hours) parts.push(`${hours}h`);
+        if (mins)  parts.push(`${mins}m`);
+        toast(`⏳ Boss na cooldownu još ${parts.join(' ')}`, 'warn');
+        return;
+      }
+    }
+  }
+  // ────────────────────────────────────────────────────────
+
   // ── He3 potrošnja po misiji (računa se ali ne blokira) ────
   const he3Needed = fleetSlots.reduce((sum, ship) => {
     let cost = 0.005;
@@ -814,6 +836,11 @@ function startBattle(inst, instant = false) {
       if (rewards.allFound) {
         prog2.bpCompleted = true;
         toast('⚡ Svi blueprinti iz ove instance su nađeni!', 'ok');
+      }
+      // Postavi boss cooldown
+      if (inst.cooldown_hours) {
+        if (!window._bossCooldowns) window._bossCooldowns = {};
+        window._bossCooldowns[inst.id] = Date.now();
       }
       if (!window._instProgress) window._instProgress = {};
       window._instProgress[progKey] = prog2;
