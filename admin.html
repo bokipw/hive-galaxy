@@ -555,6 +555,46 @@
       </table>
     </div>
     <div id="diamondRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
+
+    <!-- GOLD NAGRADE -->
+    <div class="section-title" style="color:#ffcc44;margin-top:32px">🥇 GOLD — SEZONA NAGRADE</div>
+    <div style="background:rgba(255,204,68,.05);border:1px solid rgba(255,204,68,.2);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+      <div style="font-size:.72rem;color:#ffe888;margin-bottom:12px">
+        Nagrade za top 10 Gold igrača (rating 1600–2199).<br>
+        <span style="color:#ffcc44">⚠ XP Boost (booster_xp_30d) se isplaćuje automatski. BPW za mjesta 1–4 automatski.</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:14px">
+        <thead><tr>
+          <th style="color:#ffcc44;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,204,68,.2)">MJESTO</th>
+          <th style="color:#ffcc44;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,204,68,.2)">XP BOOST</th>
+          <th style="color:#ffcc44;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,204,68,.2)">BPW (satoshi)</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 10px;color:#ffd700">🥇 1.</td><td style="padding:5px 10px;color:#ffcc44">100% XP 30d</td><td style="padding:5px 10px;color:#aa44ff">10 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#c0c0c0">🥈 2.</td><td style="padding:5px 10px;color:#ffcc44">100% XP 30d</td><td style="padding:5px 10px;color:#aa44ff">7 500</td></tr>
+          <tr><td style="padding:5px 10px;color:#cd7f32">🥉 3.</td><td style="padding:5px 10px;color:#ffcc44">100% XP 30d</td><td style="padding:5px 10px;color:#aa44ff">5 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#ffe888">4.</td><td style="padding:5px 10px;color:#ffcc44">100% XP 30d</td><td style="padding:5px 10px;color:#aa44ff">2 500</td></tr>
+          <tr><td style="padding:5px 10px;color:#ffe888">5–10.</td><td style="padding:5px 10px;color:#ffcc44">100% XP 30d</td><td style="padding:5px 10px;color:#4a6a8a">—</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-blue" style="padding:9px 18px" onclick="loadGoldTop10()">↻ UČITAJ TOP 10 GOLD</button>
+        <button class="btn" id="distributeGoldBtn" style="padding:9px 18px;background:rgba(255,204,68,.2);border-color:rgba(255,204,68,.5);color:#ffcc44;display:none" onclick="distributeGoldRewards()">🥇 ISPLATI GOLD NAGRADE</button>
+      </div>
+    </div>
+    <div class="section-title" style="color:#ffe888;font-size:.7rem">TOP 10 GOLD IGRAČA</div>
+    <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Username</th><th>Rating</th><th>Level</th>
+          <th style="color:#ffcc44">XP Boost</th>
+          <th style="color:#aa44ff">+BPW (sat)</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody id="goldTop10Tbl"><tr><td colspan="7" class="loading">Klikni Učitaj Top 10 Gold.</td></tr></tbody>
+      </table>
+    </div>
+    <div id="goldRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
   </div><!-- /content -->
@@ -1683,6 +1723,95 @@ async function distributeDiamondRewards() {
   log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: '+ok+' isplaćeno, '+fail+' greški.</div>';
   btn.disabled = false; btn.textContent = '💎 ISPLATI DIAMOND NAGRADE';
   showToast('Diamond isplata završena: '+ok+' igrača nagrađeno.');
+}
+
+// ============================================================
+// GOLD NAGRADE
+// ============================================================
+const GOLD_REWARDS = [
+  { bpw: 10000 }, { bpw: 7500 }, { bpw: 5000 }, { bpw: 2500 },
+  { bpw: 0 }, { bpw: 0 }, { bpw: 0 }, { bpw: 0 }, { bpw: 0 }, { bpw: 0 },
+];
+let _goldTop10 = [];
+
+async function loadGoldTop10() {
+  const tbody = document.getElementById('goldTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="7" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeGoldBtn').style.display = 'none';
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 1600).lt('rating', 2200)
+      .order('rating', { ascending: false }).limit(10);
+    if (error) throw error;
+    _goldTop10 = data || [];
+    if (_goldTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Nema igrača u Gold diviziji (1600–2199).</td></tr>';
+      return;
+    }
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _goldTop10.map((p, i) => {
+      const r = GOLD_REWARDS[i] || { bpw: 0 };
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      return '<tr>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + (medals[i]||(i+1)+'.') + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username||'-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: '+hiveUser+'</div>' : '') + '</td>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + (p.rating||0).toLocaleString() + '</td>' +
+        '<td>' + (p.level||1) + '</td>' +
+        '<td style="color:#ffcc44">✓ 30d</td>' +
+        '<td style="color:#aa44ff;font-weight:600">' + (r.bpw ? '+'+r.bpw.toLocaleString() : '—') + '</td>' +
+        '<td id="gold-status-'+i+'" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+    document.getElementById('distributeGoldBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Greška: '+e.message+'</td></tr>';
+  }
+}
+
+async function distributeGoldRewards() {
+  if (!confirm('SIGURNO? Šalje XP Boost 30d i BPW top 10 Gold igračima.')) return;
+  const btn = document.getElementById('distributeGoldBtn');
+  btn.disabled = true; btn.textContent = '⏳ Isplata u toku...';
+  const log = document.getElementById('goldRewardLog');
+  log.innerHTML = '<div style="color:#ffcc44;margin-bottom:8px">► Početak Gold isplate — ' + new Date().toLocaleString() + '</div>';
+  let ok = 0, fail = 0;
+  const expires30d = new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString();
+  for (let i = 0; i < _goldTop10.length; i++) {
+    const p = _goldTop10[i];
+    const r = GOLD_REWARDS[i] || { bpw: 0 };
+    const statusEl = document.getElementById('gold-status-'+i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ '+(p.username||p.id)+' — nije HIVE igrač.</div>';
+      fail++; continue;
+    }
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('spcard, boosters').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: '+hiveUser);
+      const existing = (prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
+      const boosterList = Array.isArray(existing._boosters) ? existing._boosters : [];
+      boosterList.push({ type: 'booster_xp_30d', expires_at: expires30d });
+      const { error: e2 } = await _supa.from('hive_profiles').update({
+        spcard:   (prof.spcard || 0) + r.bpw,
+        boosters: { ...existing, _boosters: boosterList },
+      }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #'+(i+1)+' '+hiveUser+' — XP Boost 30d' +
+        (r.bpw ? ' + '+r.bpw.toLocaleString()+' sat BPW' : '') + '</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #'+(i+1)+' '+hiveUser+' — '+e.message+'</div>';
+      fail++;
+    }
+  }
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: '+ok+' isplaćeno, '+fail+' greški.</div>';
+  btn.disabled = false; btn.textContent = '🥇 ISPLATI GOLD NAGRADE';
+  showToast('Gold isplata završena: '+ok+' igrača nagrađeno.');
 }
 
 // ============================================================
