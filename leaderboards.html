@@ -326,16 +326,41 @@
   <!-- Header -->
   <div class="header">
     <h1>⚔️ LEADERBOARDS</h1>
-    <p>HIVE GALAXY — PVP RANG LISTA — SEZONA 1</p>
+    <p>HIVE GALAXY — PVP RANG LISTA</p>
   </div>
 
-  <!-- Search -->
-  <div class="search-wrap">
+  <!-- Season Bar -->
+  <div class="season-bar">
+    <span class="season-label" id="seasonLabel" style="color:#ff9900;font-size:.8rem">⚔ SEZONA ...</span>
+    <span class="season-timer" id="seasonTimer" style="color:#ffcc44"></span>
+    <span class="season-note" id="seasonNote" style="color:#6a90b8"></span>
+  </div>
+
+  <!-- Mode tabs: Current / Seasons -->
+  <div style="display:flex;gap:10px;margin-bottom:16px">
+    <button id="modeCurrentBtn" onclick="setMode('current')"
+      style="flex:1;padding:8px;border-radius:7px;border:1px solid rgba(0,212,255,.4);background:rgba(0,212,255,.15);color:#00d4ff;font-family:Orbitron,monospace;font-size:.65rem;letter-spacing:2px;cursor:pointer">
+      🌌 TRENUTNA SEZONA
+    </button>
+    <button id="modeSeasonsBtn" onclick="setMode('seasons')"
+      style="flex:1;padding:8px;border-radius:7px;border:1px solid rgba(255,153,0,.3);background:rgba(255,153,0,.05);color:#ff9900;font-family:Orbitron,monospace;font-size:.65rem;letter-spacing:2px;cursor:pointer">
+      📜 ARHIVA SEZONA
+    </button>
+  </div>
+
+  <!-- Search (current mode) -->
+  <div class="search-wrap" id="searchWrap">
     <input class="search-input" id="searchInput" type="text" placeholder="🔍 Pretraži igrača...">
     <button class="refresh-btn" onclick="generateAndRender()">↻ REFRESH</button>
   </div>
 
-  <!-- Tabs -->
+  <!-- Season archive selector -->
+  <div id="seasonsArchive" style="display:none;margin-bottom:20px">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap" id="seasonButtons"></div>
+    <div id="archiveContent" style="margin-top:16px"></div>
+  </div>
+
+  <!-- Tabs (current mode) -->
   <div class="tabs" id="tabs"></div>
 
   <!-- Leaderboard content -->
@@ -598,16 +623,87 @@ async function generateAndRender() {
   renderTable();
 }
 
-// Season timer — 14 dana od danas
-function updateTimer() {
-  const end = new Date();
-  end.setDate(end.getDate() + 14);
+// ── MODE: current / seasons ──
+let _mode = 'current';
+
+function setMode(m) {
+  _mode = m;
+  document.getElementById('searchWrap').style.display       = m === 'current' ? '' : 'none';
+  document.getElementById('seasonsArchive').style.display   = m === 'seasons' ? '' : 'none';
+  document.getElementById('tabs').style.display             = m === 'current' ? '' : 'none';
+  document.getElementById('leaderboardContent').style.display = m === 'current' ? '' : 'none';
+  document.getElementById('modeCurrentBtn').style.background = m === 'current' ? 'rgba(0,212,255,.25)' : 'rgba(0,212,255,.05)';
+  document.getElementById('modeSeasonsBtn').style.background  = m === 'seasons' ? 'rgba(255,153,0,.2)'  : 'rgba(255,153,0,.05)';
+  if (m === 'seasons') loadSeasonArchive();
+}
+
+async function loadSeasonArchive() {
+  const { data, error } = await _supa.from('season_archives').select('id, season, month_label, players').order('season', { ascending: false });
+  const btnEl = document.getElementById('seasonButtons');
+  const archEl = document.getElementById('archiveContent');
+  if (error || !data || data.length === 0) {
+    btnEl.innerHTML = '';
+    archEl.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Još nema arhiviranih sezona.</div>';
+    return;
+  }
+  btnEl.innerHTML = data.map(s =>
+    `<button onclick="showArchiveSeason(${s.id})"
+      style="padding:7px 16px;border-radius:6px;border:1px solid rgba(255,153,0,.4);background:rgba(255,153,0,.08);color:#ff9900;font-family:Orbitron,monospace;font-size:.62rem;letter-spacing:1px;cursor:pointer">
+      ⚔ SEZONA ${s.season} — ${s.month_label}
+    </button>`
+  ).join('');
+  // Prikaži prvu
+  showArchiveSeason(data[0].id, data[0]);
+  window._archiveData = data;
+}
+
+function showArchiveSeason(id, obj) {
+  const data = window._archiveData || [];
+  const s = obj || data.find(x => x.id === id);
+  if (!s || !s.players) return;
+  const players = s.players;
+  let html = `<div style="font-family:Orbitron,monospace;font-size:.7rem;color:#ff9900;margin-bottom:12px;letter-spacing:2px">⚔ SEZONA ${s.season} — ${s.month_label}</div>`;
+  html += `<table class="leaderboard-table"><thead><tr>
+    <th>#</th><th>Igrač</th><th>Rating</th><th>Level</th>
+  </tr></thead><tbody>`;
+  players.slice(0, 100).forEach((p, i) => {
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';
+    html += `<tr><td style="color:#ffcc44;font-family:Orbitron,monospace;font-size:.7rem">${medal}</td>
+      <td><div class="player-name">${p.username || p.name}</div></td>
+      <td><span class="rating-val">${(p.rating||1000).toLocaleString()}</span></td>
+      <td style="color:#c0d8f0">Lv.${p.level||1}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('archiveContent').innerHTML = html;
+}
+
+// ── SEASON BAR ──
+let _currentSeason = 1;
+
+async function loadSeasonInfo() {
+  try {
+    const { data } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
+    if (data && data.keys) _currentSeason = data.keys;
+  } catch(e) {}
+  document.getElementById('seasonLabel').textContent = '⚔ SEZONA ' + _currentSeason;
+
+  // Kraj tekućeg meseca
   const now = new Date();
-  const diff = end - now;
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  document.getElementById('seasonTimer').textContent = `⏱ ${d}d ${h}h ${m}m do kraja sezone`;
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+  const months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
+  document.getElementById('seasonNote').textContent = 'Kraj sezone: ' + end.getDate() + '. ' + months[end.getMonth()] + ' ' + end.getFullYear();
+
+  function tick() {
+    const diff = end - new Date();
+    if (diff <= 0) { document.getElementById('seasonTimer').textContent = 'SEZONA ZAVRŠENA'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const sc = Math.floor((diff % 60000) / 1000);
+    document.getElementById('seasonTimer').textContent = `⏱ ${d}d ${h}h ${m}m ${sc}s`;
+  }
+  tick();
+  setInterval(tick, 1000);
 }
 
 document.getElementById('searchInput').addEventListener('input', () => {
@@ -615,9 +711,8 @@ document.getElementById('searchInput').addEventListener('input', () => {
   renderTable();
 });
 
+loadSeasonInfo();
 generateAndRender();
-updateTimer();
-setInterval(updateTimer, 60000);
 </script>
 </body>
 </html>

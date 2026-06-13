@@ -1017,6 +1017,20 @@ async function serverReset() {
   if (el) el.textContent = 'Resetovanje u toku...';
   const errors = [];
 
+  // Dohvati trenutnu sezonu
+  const { data: sysRow } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
+  const currentSeason = (sysRow && sysRow.keys) ? sysRow.keys : 1;
+
+  // Snimi snapshot u season_archives
+  const months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
+  const now = new Date();
+  const monthLabel = months[now.getMonth()] + ' ' + now.getFullYear();
+  const { data: snapPlayers } = await _supa.from('pvp_snapshots').select('username, rating, level, is_premium').order('rating', { ascending: false }).limit(500);
+  if (snapPlayers && snapPlayers.length > 0) {
+    const ra = await _supa.from('season_archives').insert({ season: currentSeason, month_label: monthLabel, players: snapPlayers });
+    if (ra.error) errors.push('arhiva: ' + ra.error.message);
+  }
+
   // Samo rank tabele — saves se NE diraju
   const r2 = await _supa.from('leaderboard').delete().not('id', 'is', null);
   if (r2.error) errors.push('leaderboard: ' + r2.error.message);
@@ -1025,8 +1039,6 @@ async function serverReset() {
   if (r3.error) errors.push('pvp_snapshots: ' + r3.error.message);
 
   // Povecaj broj sezone
-  const { data: sysRow } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
-  const currentSeason = (sysRow && sysRow.keys) ? sysRow.keys : 1;
   const r5 = await _supa.from('hive_profiles').update({ keys: currentSeason + 1 }).eq('hive_user', '__system__');
   if (r5.error) errors.push('sezona: ' + r5.error.message);
 
