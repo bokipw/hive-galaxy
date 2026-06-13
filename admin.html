@@ -573,49 +573,57 @@ function renderPlayers(list) {
 function openPlayerModal(username) {
   const p = _allHiveProfiles.find(x => x.hive_user === username);
   if (!p) return;
+  const bpw = ((p.spcard||0) / 100000000).toFixed(8);
   document.getElementById('modalTitle').textContent = username.toUpperCase();
   document.getElementById('modalBody').innerHTML =
-    '<div style="font-size:.72rem;color:#5a8aaa;margin-bottom:16px">' +
-      'Premium: <b style="color:' + (p.is_premium?'#ffc832':'#ff6666') + '">' + (p.is_premium?'DA':'NE') + '</b> &nbsp;|&nbsp; ' +
-      'Kljucevi: <b style="color:#00aaff">' + (p.keys_cmd||0) + '</b> &nbsp;|&nbsp; ' +
-      'iKljucevi: <b style="color:#aa44ff">' + (p.keys_inst||0) + '</b>' +
-    '</div>' +
-    '<label style="color:#6a8aaa;font-size:.68rem">AKCIJA</label>' +
-    '<select id="modalAction" style="width:100%;background:rgba(0,20,40,.9);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:9px;border-radius:6px;font-size:.8rem;margin-bottom:12px">' +
-      '<option value="premium_on">Daj Premium</option>' +
-      '<option value="premium_off">Oduzmi Premium</option>' +
-      '<option value="add_keys">Dodaj komandirske kljuceve</option>' +
-      '<option value="add_ikeys">Dodaj instance kljuceve</option>' +
-    '</select>' +
-    '<label style="color:#6a8aaa;font-size:.68rem" id="modalQtyLabel" style="display:none">KOLICINA</label>' +
-    '<input type="number" id="modalQty" value="1" min="1" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:8px;border-radius:5px;font-size:.8rem;margin-top:4px" />';
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BCM</label>' +
+        '<input type="number" id="mBcm" value="' + (p.bcm||0) + '" step="0.1" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BOCRYPTO</label>' +
+        '<input type="number" id="mBoc" value="' + (p.bocrypto||0) + '" step="0.001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BPW</label>' +
+        '<input type="number" id="mBpw" value="' + bpw + '" step="0.00000001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">KLJUCEVI (CMD)</label>' +
+        '<input type="number" id="mKeys" value="' + (p.keys_cmd||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">KLJUCEVI (INST)</label>' +
+        '<input type="number" id="mIkeys" value="' + (p.keys_inst||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+      '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">PREMIUM</label>' +
+        '<select id="mPremium" style="width:100%;background:rgba(0,20,40,.9);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem">' +
+          '<option value="1"' + (p.is_premium?' selected':'') + '>DA</option>' +
+          '<option value="0"' + (!p.is_premium?' selected':'') + '>NE</option>' +
+        '</select></div>' +
+    '</div>';
 
   document.getElementById('modalConfirm').onclick = () => execPlayerAction(username);
   document.getElementById('playerModal').classList.add('open');
 }
 
 async function execPlayerAction(username) {
-  const action = document.getElementById('modalAction').value;
-  const qty    = parseInt(document.getElementById('modalQty').value) || 1;
-  const p      = _allHiveProfiles.find(x => x.hive_user === username);
-  let update   = {};
+  const p       = _allHiveProfiles.find(x => x.hive_user === username);
+  const bcm     = parseFloat(document.getElementById('mBcm').value)   || 0;
+  const bocrypto= parseFloat(document.getElementById('mBoc').value)   || 0;
+  const bpw     = parseFloat(document.getElementById('mBpw').value)   || 0;
+  const keys_cmd  = parseInt(document.getElementById('mKeys').value)  || 0;
+  const keys_inst = parseInt(document.getElementById('mIkeys').value) || 0;
+  const isPremium = document.getElementById('mPremium').value === '1';
 
-  if (action === 'premium_on')  update = { is_premium: true, premium_since: new Date().toISOString() };
-  if (action === 'premium_off') update = { is_premium: false };
-  if (action === 'add_keys')    update = { keys_cmd:  (p.keys_cmd||0)  + qty };
-  if (action === 'add_ikeys')   update = { keys_inst: (p.keys_inst||0) + qty };
+  const update = {
+    bcm,
+    bocrypto,
+    spcard:    Math.round(bpw * 100000000),
+    keys_cmd,
+    keys_inst,
+    is_premium: isPremium,
+  };
+  if (isPremium && !p.is_premium) update.premium_since = new Date().toISOString();
 
   try {
     const { error } = await _supa.from('hive_profiles').update(update).eq('hive_user', username);
     if (error) throw error;
-
-    if (action === 'premium_on' || action === 'premium_off') {
-      await _supa.from('pvp_snapshots').update({ is_premium: action === 'premium_on' }).eq('id', username);
-      await _supa.from('leaderboard').update({ is_premium: action === 'premium_on' }).eq('username', username);
-    }
-    showToast('Akcija izvrsena za ' + username);
+    await _supa.from('pvp_snapshots').update({ is_premium: isPremium }).eq('id', 'hive_' + username);
+    showToast('Sacuvano za ' + username);
     closeModal();
-    loadPlayers();
+    loadEconomy();
   } catch(e) { showToast('Greska: ' + e.message, true); }
 }
 
