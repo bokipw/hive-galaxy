@@ -282,7 +282,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_12', name: 'Instanca 12', type: 'standard', number: 12,
     difficulty: 4,
     xp: 574,
-    min_power: 1065000,
+    min_power: 1064800,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Fury_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":3},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":1},{"ship_id":"scout_Swift_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Ravager_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Outlaw_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":3}],
@@ -309,7 +309,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_13', name: 'Instanca 13', type: 'standard', number: 13,
     difficulty: 4,
     xp: 672,
-    min_power: 1065000,
+    min_power: 1064800,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Ravager_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":3},{"ship_id":"scout_Stinger_II","count":200,"row":2,"col":1},{"ship_id":"scout_Glimmer_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Stinger_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Vengeance_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Vengeance_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":3}],
@@ -338,7 +338,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_14', name: 'Instanca 14', type: 'standard', number: 14,
     difficulty: 4,
     xp: 788,
-    min_power: 1065000,
+    min_power: 1064800,
     icon: '🌌',
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
   enemyGroups: [{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":3},{"ship_id":"scout_Glimmer_II","count":200,"row":2,"col":1},{"ship_id":"scout_Wisp_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Glimmer_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Ravager_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":3}],
@@ -364,7 +364,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_15', name: 'Instanca 15', type: 'standard', number: 15,
     difficulty: 4,
     xp: 924,
-    min_power: 1065000,
+    min_power: 1064800,
     icon: '🌌',
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":3},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":1},{"ship_id":"scout_Viper_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":3}],
@@ -395,7 +395,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_16', name: 'Instanca 16', type: 'standard', number: 16,
     difficulty: 5,
     xp: 1083,
-    min_power: 2343000,
+    min_power: 2342560,
     icon: '🌌',
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
   enemyGroups: [{"ship_id":"fighter_Ravager_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":3},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":1},{"ship_id":"scout_Wisp_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Outlaw_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Ravager_II","count":200,"row":3,"col":3}],
@@ -423,7 +423,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_17', name: 'Instanca 17', type: 'standard', number: 17,
     difficulty: 5,
     xp: 1269,
-    min_power: 2343000,
+    min_power: 2342560,
     icon: '🌌',
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Ravager_II","count":200,"row":1,"col":3},{"ship_id":"scout_Wisp_II","count":200,"row":2,"col":1},{"ship_id":"scout_Viper_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Glimmer_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":3}],
@@ -448,7 +448,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_18', name: 'Instanca 18', type: 'standard', number: 18,
     difficulty: 5,
     xp: 1487,
-    min_power: 2343000,
+    min_power: 2342560,
     icon: '🌌',
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
   enemyGroups: [{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":3},{"ship_id":"scout_Stinger_II","count":200,"row":2,"col":1},{"ship_id":"scout_Wisp_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Glimmer_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Outlaw_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":3}],
@@ -474,7 +474,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_19', name: 'Instanca 19', type: 'standard', number: 19,
     difficulty: 6,
     xp: 1743,
-    min_power: 5154000,
+    min_power: 5153632,
     icon: '🌌',
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Shield_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Shield_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Outlaw_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Outlaw_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Talon_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Rampart_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Paladin_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Defender_II","count":300,"row":3,"col":3}],
@@ -496,7 +496,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_20', name: 'Instanca 20', type: 'standard', number: 20,
     difficulty: 6,
     xp: 2043,
-    min_power: 5154000,
+    min_power: 5153632,
     icon: '🌌',
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Paladin_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Guardian_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Talon_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Outlaw_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Talon_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Shield_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Paladin_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":3}],
@@ -519,7 +519,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_21', name: 'Instanca 21', type: 'standard', number: 21,
     difficulty: 6,
     xp: 2395,
-    min_power: 5154000,
+    min_power: 5153632,
     icon: '🌌',
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Rampart_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Guardian_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Outlaw_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Vengeance_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Vengeance_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Defender_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Shield_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Defender_II","count":300,"row":3,"col":3}],
@@ -545,7 +545,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_22', name: 'Instanca 22', type: 'standard', number: 22,
     difficulty: 7,
     xp: 2807,
-    min_power: 11338000,
+    min_power: 11337990,
     icon: '🌌',
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
   enemyGroups: [{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Guardian_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Reaper_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Ravager_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Reaper_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Bulwark_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Bastion_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Rampart_II","count":300,"row":3,"col":3}],
@@ -568,7 +568,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_23', name: 'Instanca 23', type: 'standard', number: 23,
     difficulty: 7,
     xp: 3290,
-    min_power: 11338000,
+    min_power: 11337990,
     icon: '🌌',
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
   enemyGroups: [{"ship_id":"cruiser_Shield_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Reaper_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Talon_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Fury_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Defender_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":3}],
@@ -595,7 +595,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_24', name: 'Instanca 24', type: 'standard', number: 24,
     difficulty: 7,
     xp: 3857,
-    min_power: 11338000,
+    min_power: 11337990,
     icon: '🌌',
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Bulwark_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Rampart_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Vengeance_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Ravager_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Outlaw_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Bastion_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":3}],
@@ -625,7 +625,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_25', name: 'Instanca 25', type: 'standard', number: 25,
     difficulty: 8,
     xp: 4520,
-    min_power: 24944000,
+    min_power: 24943579,
     icon: '🌌',
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Colossus_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Titan_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Guardian_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Bulwark_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Shield_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Obliterator_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Colossus_II","count":400,"row":3,"col":3}],
@@ -655,7 +655,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_26', name: 'Instanca 26', type: 'standard', number: 26,
     difficulty: 8,
     xp: 5298,
-    min_power: 24944000,
+    min_power: 24943579,
     icon: '🌌',
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Imperator_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Imperator_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Rampart_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Bastion_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Defender_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Titan_II","count":400,"row":3,"col":3}],
@@ -689,7 +689,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_27', name: 'Instanca 27', type: 'standard', number: 27,
     difficulty: 8,
     xp: 6210,
-    min_power: 24944000,
+    min_power: 24943579,
     icon: '🌌',
     enemies: ['Omega Carrier II', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Imperator_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Bulwark_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bastion_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":3}],
@@ -719,7 +719,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_28', name: 'Instanca 28', type: 'standard', number: 28,
     difficulty: 9,
     xp: 7279,
-    min_power: 54876000,
+    min_power: 54875874,
     icon: '🌌',
     enemies: ['Void Flagship I', 'Omega Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Colossus_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Titan_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Defender_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Paladin_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Obliterator_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Colossus_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":3}],
@@ -752,7 +752,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_29', name: 'Instanca 29', type: 'standard', number: 29,
     difficulty: 9,
     xp: 8532,
-    min_power: 54876000,
+    min_power: 54875874,
     icon: '🌌',
     enemies: ['Omega Carrier III', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Colossus_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Shield_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Rampart_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bastion_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Titan_II","count":400,"row":3,"col":3}],
@@ -775,7 +775,7 @@ const INSTANCES_NORMAL = [
     id: 'inst_30', name: 'Instanca 30', type: 'standard', number: 30,
     difficulty: 10,
     xp: 10000,
-    min_power: 120727000,
+    min_power: 120726922,
     icon: '🌌',
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Harbinger_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Behemoth_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Titanfall_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Titanfall_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Titanfall_II","count":500,"row":3,"col":3}],
@@ -807,7 +807,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_1', name: 'Restricted 1', type: 'restricted', number: 1,
     difficulty: 5,
-    min_power: 20000,
+    min_power: 3045328,
     icon: '🔒',
     enemies: ['Elite Marauder I', 'Phase Hunter I'],
   enemyGroups: [{"ship_id":"fighter_Ravager_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":3},{"ship_id":"scout_Stinger_II","count":200,"row":2,"col":1},{"ship_id":"scout_Wisp_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Outlaw_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Reaper_II","count":200,"row":3,"col":3}],
@@ -829,7 +829,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_2', name: 'Restricted 2', type: 'restricted', number: 2,
     difficulty: 6,
-    min_power: 30000,
+    min_power: 6699722,
     icon: '🔒',
     enemies: ['Elite Marauder II', 'Quantum Hunter I'],
   enemyGroups: [{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Rampart_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Outlaw_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Vengeance_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Ravager_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Bulwark_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Bastion_II","count":300,"row":3,"col":3}],
@@ -851,7 +851,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_3', name: 'Restricted 3', type: 'restricted', number: 3,
     difficulty: 6,
-    min_power: 40000,
+    min_power: 6699722,
     icon: '🔒',
     enemies: ['Elite Cruiser I', 'Phase Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Paladin_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Bastion_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Shield_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Fury_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Vengeance_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Vengeance_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Guardian_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Shield_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Shield_II","count":300,"row":3,"col":3}],
@@ -873,7 +873,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_4', name: 'Restricted 4', type: 'restricted', number: 4,
     difficulty: 7,
-    min_power: 55000,
+    min_power: 14739388,
     icon: '🔒',
     enemies: ['Elite Battleship I', 'Quantum Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Guardian_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Bulwark_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Reaper_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Talon_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Ravager_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Defender_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Paladin_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Bulwark_II","count":300,"row":3,"col":3}],
@@ -895,7 +895,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_5', name: 'Restricted 5', type: 'restricted', number: 5,
     difficulty: 7,
-    min_power: 70000,
+    min_power: 14739388,
     icon: '🔒',
     enemies: ['Elite Carrier I', 'Phase Dreadnought I'],
   enemyGroups: [{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":1},{"ship_id":"cruiser_Defender_II","count":300,"row":1,"col":2},{"ship_id":"cruiser_Paladin_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Vengeance_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Fury_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Fury_II","count":300,"row":2,"col":3},{"ship_id":"cruiser_Bastion_II","count":300,"row":3,"col":1},{"ship_id":"cruiser_Shield_II","count":300,"row":3,"col":2},{"ship_id":"cruiser_Bastion_II","count":300,"row":3,"col":3}],
@@ -917,7 +917,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_6', name: 'Restricted 6', type: 'restricted', number: 6,
     difficulty: 8,
-    min_power: 90000,
+    min_power: 32426653,
     icon: '🔒',
     enemies: ['Elite Battleship II', 'Void Hunter I'],
   enemyGroups: [{"ship_id":"battleship_Imperator_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Imperator_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Colossus_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Guardian_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Guardian_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Rampart_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":3}],
@@ -939,7 +939,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_7', name: 'Restricted 7', type: 'restricted', number: 7,
     difficulty: 8,
-    min_power: 115000,
+    min_power: 32426653,
     icon: '🔒',
     enemies: ['Elite Carrier II', 'Void Hunter II'],
   enemyGroups: [{"ship_id":"battleship_Titan_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Titan_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Paladin_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Shield_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Shield_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Behemoth_II","count":400,"row":3,"col":3}],
@@ -961,7 +961,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_8', name: 'Restricted 8', type: 'restricted', number: 8,
     difficulty: 9,
-    min_power: 145000,
+    min_power: 71338636,
     icon: '🔒',
     enemies: ['Apex Battleship I', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Bulwark_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Guardian_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Titan_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Titan_II","count":400,"row":3,"col":3}],
@@ -983,7 +983,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_9', name: 'Restricted 9', type: 'restricted', number: 9,
     difficulty: 9,
-    min_power: 185000,
+    min_power: 71338636,
     icon: '🔒',
     enemies: ['Apex Battleship II', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":400,"row":1,"col":1},{"ship_id":"battleship_Colossus_II","count":400,"row":1,"col":2},{"ship_id":"battleship_Behemoth_II","count":400,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_II","count":400,"row":2,"col":1},{"ship_id":"cruiser_Bastion_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bulwark_II","count":400,"row":2,"col":3},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":1},{"ship_id":"battleship_Obliterator_II","count":400,"row":3,"col":2},{"ship_id":"battleship_Imperator_II","count":400,"row":3,"col":3}],
@@ -1005,7 +1005,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'rest_10', name: 'Restricted 10', type: 'restricted', number: 10,
     difficulty: 10,
-    min_power: 240000,
+    min_power: 156944998,
     icon: '🔒',
     enemies: ['Apex Carrier I', 'Omega Flagship I'],
   enemyGroups: [{"ship_id":"carrier_Vanguard_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Vanguard_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Vanguard_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Imperator_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Titan_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Vanguard_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Harbinger_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":3}],
@@ -1032,7 +1032,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_1', name: 'Trial 1', type: 'trial', number: 1,
     difficulty: 6,
-    min_power: 50000,
+    min_power: 8761174,
     icon: '⚔️',
     time_limit_minutes: 30,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1058,7 +1058,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_2', name: 'Trial 2', type: 'trial', number: 2,
     difficulty: 7,
-    min_power: 70000,
+    min_power: 19274584,
     icon: '⚔️',
     time_limit_minutes: 28,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1084,7 +1084,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_3', name: 'Trial 3', type: 'trial', number: 3,
     difficulty: 7,
-    min_power: 90000,
+    min_power: 19274584,
     icon: '⚔️',
     time_limit_minutes: 25,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1110,7 +1110,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_4', name: 'Trial 4', type: 'trial', number: 4,
     difficulty: 8,
-    min_power: 120000,
+    min_power: 42404084,
     icon: '⚔️',
     time_limit_minutes: 22,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1136,7 +1136,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_5', name: 'Trial 5', type: 'trial', number: 5,
     difficulty: 8,
-    min_power: 155000,
+    min_power: 42404084,
     icon: '⚔️',
     time_limit_minutes: 20,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1162,7 +1162,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_6', name: 'Trial 6', type: 'trial', number: 6,
     difficulty: 9,
-    min_power: 200000,
+    min_power: 93288985,
     icon: '⚔️',
     time_limit_minutes: 18,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1188,7 +1188,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_7', name: 'Trial 7', type: 'trial', number: 7,
     difficulty: 9,
-    min_power: 260000,
+    min_power: 93288985,
     icon: '⚔️',
     time_limit_minutes: 15,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1214,7 +1214,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_8', name: 'Trial 8', type: 'trial', number: 8,
     difficulty: 9,
-    min_power: 330000,
+    min_power: 93288985,
     icon: '⚔️',
     time_limit_minutes: 12,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1241,7 +1241,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_9', name: 'Trial 9', type: 'trial', number: 9,
     difficulty: 10,
-    min_power: 420000,
+    min_power: 205235767,
     icon: '⚔️',
     time_limit_minutes: 10,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1269,7 +1269,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'trial_10', name: 'Trial 10', type: 'trial', number: 10,
     difficulty: 10,
-    min_power: 540000,
+    min_power: 205235767,
     icon: '⚔️',
     time_limit_minutes: 8,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
@@ -1301,7 +1301,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_1', name: 'Humanoid 1', type: 'humanoid', number: 1,
-    difficulty: 4, min_power: 15000, icon: '👤',
+    difficulty: 4, min_power: 2129600, icon: '👤',
     enemies: ['Humanoid Militia', 'Humanoid Light Cruiser'],
   enemyGroups: [{"ship_id":"cruiser_Bastion_II","count":200,"row":1,"col":1},{"ship_id":"cruiser_Guardian_II","count":200,"row":1,"col":2},{"ship_id":"cruiser_Shield_II","count":200,"row":1,"col":3},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":1},{"ship_id":"scout_Swift_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":3},{"ship_id":"cruiser_Bastion_II","count":200,"row":3,"col":1},{"ship_id":"cruiser_Guardian_II","count":200,"row":3,"col":2},{"ship_id":"cruiser_Defender_II","count":200,"row":3,"col":3}],
     boss: 'Commander Rook',
@@ -1319,7 +1319,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_2', name: 'Humanoid 2', type: 'humanoid', number: 2,
-    difficulty: 5, min_power: 25000, icon: '👤',
+    difficulty: 5, min_power: 4685120, icon: '👤',
     enemies: ['Humanoid Marine Squad', 'Humanoid Destroyer'],
   enemyGroups: [{"ship_id":"cruiser_Bastion_II","count":200,"row":1,"col":1},{"ship_id":"cruiser_Paladin_II","count":200,"row":1,"col":2},{"ship_id":"cruiser_Bulwark_II","count":200,"row":1,"col":3},{"ship_id":"scout_Wisp_II","count":200,"row":2,"col":1},{"ship_id":"scout_Stinger_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Wisp_II","count":200,"row":2,"col":3},{"ship_id":"cruiser_Rampart_II","count":200,"row":3,"col":1},{"ship_id":"cruiser_Shield_II","count":200,"row":3,"col":2},{"ship_id":"cruiser_Paladin_II","count":200,"row":3,"col":3}],
     boss: 'Admiral Vance',
@@ -1336,7 +1336,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_3', name: 'Humanoid 3', type: 'humanoid', number: 3,
-    difficulty: 6, min_power: 40000, icon: '👤',
+    difficulty: 6, min_power: 10307264, icon: '👤',
     enemies: ['Humanoid Fighter Squadron', 'Humanoid Cruiser Wing'],
   enemyGroups: [{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Imperator_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Imperator_II","count":300,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_II","count":300,"row":2,"col":1},{"ship_id":"cruiser_Defender_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Rampart_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":3}],
     boss: 'Humanoid Admiral Kara',
@@ -1354,7 +1354,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_4', name: 'Humanoid 4', type: 'humanoid', number: 4,
-    difficulty: 6, min_power: 55000, icon: '👤',
+    difficulty: 6, min_power: 10307264, icon: '👤',
     enemies: ['Humanoid Battlegroup', 'Humanoid Carrier Wing'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Colossus_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Titan_II","count":300,"row":1,"col":3},{"ship_id":"cruiser_Defender_II","count":300,"row":2,"col":1},{"ship_id":"cruiser_Rampart_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Guardian_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Titan_II","count":300,"row":3,"col":3}],
     boss: 'Fleet Admiral Seras',
@@ -1372,7 +1372,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_5', name: 'Humanoid 5', type: 'humanoid', number: 5,
-    difficulty: 7, min_power: 65000, icon: '👤',
+    difficulty: 7, min_power: 22675981, icon: '👤',
     enemies: ['Humanoid Battleship Wing', 'Humanoid Carrier'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":3},{"ship_id":"cruiser_Paladin_II","count":300,"row":2,"col":1},{"ship_id":"cruiser_Shield_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bulwark_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":3}],
     boss: 'Humanoid Warlord Vex',
@@ -1390,7 +1390,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_6', name: 'Humanoid 6', type: 'humanoid', number: 6,
-    difficulty: 7, min_power: 90000, icon: '👤',
+    difficulty: 7, min_power: 22675981, icon: '👤',
     enemies: ['Humanoid Heavy Battleship', 'Humanoid Flagship'],
   enemyGroups: [{"ship_id":"battleship_Titan_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Obliterator_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Obliterator_II","count":300,"row":1,"col":3},{"ship_id":"cruiser_Guardian_II","count":300,"row":2,"col":1},{"ship_id":"cruiser_Bulwark_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Paladin_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Behemoth_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Obliterator_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Obliterator_II","count":300,"row":3,"col":3}],
     boss: 'Grand Admiral Kael',
@@ -1407,7 +1407,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_7', name: 'Humanoid 7', type: 'humanoid', number: 7,
-    difficulty: 8, min_power: 140000, icon: '👤',
+    difficulty: 8, min_power: 49887158, icon: '👤',
     enemies: ['Humanoid Apex Carrier', 'Humanoid Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Vanguard_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Harbinger_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Titanfall_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Obliterator_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Obliterator_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":3}],
     boss: 'Supreme Commander Voss',
@@ -1425,7 +1425,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_8', name: 'Humanoid 8', type: 'humanoid', number: 8,
-    difficulty: 9, min_power: 180000, icon: '👤',
+    difficulty: 9, min_power: 109751747, icon: '👤',
     enemies: ['Humanoid Apex Carrier', 'Humanoid Supreme Flagship'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Obliterator_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Colossus_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":3}],
     boss: 'Humanoid Supreme Commander',
@@ -1443,7 +1443,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_9', name: 'Humanoid 9', type: 'humanoid', number: 9,
-    difficulty: 9, min_power: 260000, icon: '👤',
+    difficulty: 9, min_power: 109751747, icon: '👤',
     enemies: ['Humanoid Omega Fleet', 'Humanoid Colossus'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Harbinger_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Titan_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Obliterator_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":3}],
     boss: 'Emperor Valerius',
@@ -1460,7 +1460,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'human_10', name: 'Humanoid 10', type: 'humanoid', number: 10,
-    difficulty: 10, min_power: 400000, icon: '👤',
+    difficulty: 10, min_power: 241453844, icon: '👤',
     enemies: ['Humanoid Ultimate Fleet', 'Humanoid God Flagship'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Titanfall_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Vanguard_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Obliterator_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Vanguard_II","count":500,"row":3,"col":3}],
     boss: 'God-Emperor Hyperion',
@@ -1483,7 +1483,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_1', name: 'Pirate 1', type: 'pirate', number: 1,
-    difficulty: 4, min_power: 15000, icon: '🏴‍☠️',
+    difficulty: 4, min_power: 2662000, icon: '🏴‍☠️',
     enemies: ['Raider Corvette', 'Marauder Frigate'],
   enemyGroups: [{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Vengeance_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":3},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":1},{"ship_id":"scout_Swift_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Vengeance_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":3}],
     boss: 'Captain Scar',
@@ -1501,7 +1501,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_2', name: 'Pirate 2', type: 'pirate', number: 2,
-    difficulty: 5, min_power: 25000, icon: '🏴‍☠️',
+    difficulty: 5, min_power: 5856400, icon: '🏴‍☠️',
     enemies: ['Pirate Destroyer', 'Raider Cruiser'],
   enemyGroups: [{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Outlaw_II","count":200,"row":1,"col":3},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":1},{"ship_id":"scout_Stinger_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Fury_II","count":200,"row":3,"col":3}],
     boss: 'Commodore Blackfang',
@@ -1520,7 +1520,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_3', name: 'Pirate 3', type: 'pirate', number: 3,
-    difficulty: 6, min_power: 40000, icon: '🏴‍☠️',
+    difficulty: 6, min_power: 12884080, icon: '🏴‍☠️',
     enemies: ['Pirate Raider Squadron', 'Pirate Battlecruiser'],
   enemyGroups: [{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Colossus_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Reaper_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Outlaw_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Vengeance_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Colossus_II","count":300,"row":3,"col":3}],
     boss: 'Captain Void',
@@ -1538,7 +1538,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_4', name: 'Pirate 4', type: 'pirate', number: 4,
-    difficulty: 6, min_power: 55000, icon: '🏴‍☠️',
+    difficulty: 6, min_power: 12884080, icon: '🏴‍☠️',
     enemies: ['Pirate Battleship', 'Raider Carrier'],
   enemyGroups: [{"ship_id":"battleship_Colossus_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Behemoth_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Titan_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Talon_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Vengeance_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Ravager_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Obliterator_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Titan_II","count":300,"row":3,"col":3}],
     boss: 'Admiral Bloodmoon',
@@ -1557,7 +1557,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_5', name: 'Pirate 5', type: 'pirate', number: 5,
-    difficulty: 7, min_power: 90000, icon: '🏴‍☠️',
+    difficulty: 7, min_power: 28344976, icon: '🏴‍☠️',
     enemies: ['Pirate Dreadnought', 'Raider Flagship'],
   enemyGroups: [{"ship_id":"battleship_Colossus_II","count":300,"row":1,"col":1},{"ship_id":"battleship_Obliterator_II","count":300,"row":1,"col":2},{"ship_id":"battleship_Titan_II","count":300,"row":1,"col":3},{"ship_id":"fighter_Outlaw_II","count":300,"row":2,"col":1},{"ship_id":"fighter_Vengeance_II","count":360,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Ravager_II","count":300,"row":2,"col":3},{"ship_id":"battleship_Titan_II","count":300,"row":3,"col":1},{"ship_id":"battleship_Imperator_II","count":300,"row":3,"col":2},{"ship_id":"battleship_Behemoth_II","count":300,"row":3,"col":3}],
     boss: 'Warlord Ironhook',
@@ -1575,7 +1575,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_6', name: 'Pirate 6', type: 'pirate', number: 6,
-    difficulty: 8, min_power: 120000, icon: '🏴‍☠️',
+    difficulty: 8, min_power: 62358947, icon: '🏴‍☠️',
     enemies: ['Pirate Elite Carrier', 'Pirate Apex Battleship'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Vanguard_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Titanfall_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Behemoth_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Titan_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Vanguard_II","count":400,"row":3,"col":3}],
     boss: 'Admiral Blackvoid',
@@ -1594,7 +1594,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_7', name: 'Pirate 7', type: 'pirate', number: 7,
-    difficulty: 8, min_power: 180000, icon: '🏴‍☠️',
+    difficulty: 8, min_power: 62358947, icon: '🏴‍☠️',
     enemies: ['Pirate Colossus', 'Raider Titan'],
   enemyGroups: [{"ship_id":"carrier_Vanguard_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Harbinger_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Behemoth_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Obliterator_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":3}],
     boss: 'Overlord Nightwind',
@@ -1612,7 +1612,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_8', name: 'Pirate 8', type: 'pirate', number: 8,
-    difficulty: 9, min_power: 250000, icon: '🏴‍☠️',
+    difficulty: 9, min_power: 137189684, icon: '🏴‍☠️',
     enemies: ['Pirate Omega Fleet', 'Raider Apocalypse'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Atlas_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Titan_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Harbinger_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":3}],
     boss: 'Emperor Blackvoid',
@@ -1631,7 +1631,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_9', name: 'Pirate 9', type: 'pirate', number: 9,
-    difficulty: 10, min_power: 350000, icon: '🏴‍☠️',
+    difficulty: 10, min_power: 301817304, icon: '🏴‍☠️',
     enemies: ['Pirate Supreme Carrier', 'Pirate Omega Flagship'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Vanguard_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Behemoth_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Vanguard_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Titanfall_II","count":500,"row":3,"col":3}],
     boss: 'Supreme Pirate Overlord',
@@ -1649,7 +1649,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'pirate_10', name: 'Pirate 10', type: 'pirate', number: 10,
-    difficulty: 10, min_power: 500000, icon: '🏴‍☠️',
+    difficulty: 10, min_power: 301817304, icon: '🏴‍☠️',
     enemies: ['Pirate Ultimate Fleet', 'Pirate God Emperor'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Harbinger_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Imperator_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Behemoth_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Obliterator_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Harbinger_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Vanguard_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":3}],
     boss: 'The Pirate God-King',
@@ -1674,7 +1674,7 @@ const INSTANCES_NORMAL = [
   // ---- 6 RARE BOSSOVA (R1-R6) ----
   {
     id: 'boss_r1', name: 'Void Scavenger', type: 'boss_rare', number: 1,
-    difficulty: 5, min_power: 30000, icon: '💀',
+    difficulty: 5, min_power: 8198960, icon: '💀',
     xp: 5000,
     cooldown_hours: 4,
     boss_ability: 'scavenger',
@@ -1747,7 +1747,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r2', name: 'Corsair Marauder', type: 'boss_rare', number: 2,
-    difficulty: 5, min_power: 35000, icon: '💀',
+    difficulty: 5, min_power: 8198960, icon: '💀',
     xp: 5000,
     cooldown_hours: 4,
     boss_ability: 'spawn_reinforcements',
@@ -1820,7 +1820,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r3', name: 'Nebula Stalker', type: 'boss_rare', number: 3,
-    difficulty: 6, min_power: 45000, icon: '💀',
+    difficulty: 6, min_power: 18037712, icon: '💀',
     xp: 6000,
     cooldown_hours: 6,
     boss_ability: 'stealth_first_round',
@@ -1893,7 +1893,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r4', name: 'Solar Predator', type: 'boss_rare', number: 4,
-    difficulty: 6, min_power: 50000, icon: '💀',
+    difficulty: 6, min_power: 18037712, icon: '💀',
     xp: 6000,
     cooldown_hours: 6,
     boss_ability: 'aoe_damage',
@@ -1966,7 +1966,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r5', name: 'Frost Reaver', type: 'boss_rare', number: 5,
-    difficulty: 7, min_power: 70000, icon: '💀',
+    difficulty: 7, min_power: 39682966, icon: '💀',
     xp: 7000,
     cooldown_hours: 8,
     boss_ability: 'freeze_slot',
@@ -2039,7 +2039,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r6', name: 'Plasma Wraith', type: 'boss_rare', number: 6,
-    difficulty: 7, min_power: 80000, icon: '💀',
+    difficulty: 7, min_power: 39682966, icon: '💀',
     xp: 7000,
     cooldown_hours: 8,
     boss_ability: 'death_explosion',
@@ -2113,7 +2113,7 @@ const INSTANCES_NORMAL = [
   // ---- 3 EPIC BOSSOVA (E1-E3) ----
   {
     id: 'boss_e1', name: 'Quantum Hydra', type: 'boss_epic', number: 1,
-    difficulty: 8, min_power: 150000, icon: '👹',
+    difficulty: 8, min_power: 112246105, icon: '👹',
     xp: 8000,
     cooldown_hours: 24,
     boss_ability: 'hydra_respawn',
@@ -2216,7 +2216,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_e2', name: 'Chrono Warden', type: 'boss_epic', number: 2,
-    difficulty: 9, min_power: 250000, icon: '👹',
+    difficulty: 9, min_power: 246941431, icon: '👹',
     xp: 9000,
     cooldown_hours: 24,
     boss_ability: 'hp_reset',
@@ -2319,7 +2319,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_e3', name: 'Dreadnought Titan', type: 'boss_epic', number: 3,
-    difficulty: 9, min_power: 350000, icon: '👹',
+    difficulty: 9, min_power: 246941431, icon: '👹',
     xp: 9000,
     cooldown_hours: 48,
     boss_ability: 'titan_rage',
@@ -2423,7 +2423,7 @@ const INSTANCES_NORMAL = [
   // ---- 1 LEGENDARY BOSS (L1) ----
   {
     id: 'boss_l1', name: 'Galaxy Eater', type: 'boss_legendary', number: 1,
-    difficulty: 10, min_power: 700000, icon: '🌑',
+    difficulty: 10, min_power: 724361531, icon: '🌑',
     xp: 10000,
     cooldown_hours: 168,
     boss_ability: 'four_phases',
@@ -2633,7 +2633,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'const_1', name: 'Constellation 1', type: 'constellation', number: 1,
     difficulty: 9,
-    min_power: 500000,
+    min_power: 164627621,
     icon: '⭐',
     enemies: ['Constellation Guardian I', 'Star Dreadnought I'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_II","count":400,"row":1,"col":1},{"ship_id":"carrier_Vanguard_II","count":400,"row":1,"col":2},{"ship_id":"carrier_Harbinger_II","count":400,"row":1,"col":3},{"ship_id":"battleship_Colossus_II","count":400,"row":2,"col":1},{"ship_id":"battleship_Obliterator_II","count":480,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Colossus_II","count":400,"row":2,"col":3},{"ship_id":"carrier_Titanfall_II","count":400,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":2},{"ship_id":"carrier_Atlas_II","count":400,"row":3,"col":3}],
@@ -2656,7 +2656,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'const_2', name: 'Constellation 2', type: 'constellation', number: 2,
     difficulty: 10,
-    min_power: 750000,
+    min_power: 362180765,
     icon: '⭐',
     enemies: ['Constellation Guardian II', 'Star Carrier I'],
   enemyGroups: [{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Atlas_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Titanfall_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Colossus_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Obliterator_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Titanfall_II","count":500,"row":3,"col":3}],
@@ -2679,7 +2679,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'const_3', name: 'Constellation 3', type: 'constellation', number: 3,
     difficulty: 10,
-    min_power: 1000000,
+    min_power: 362180765,
     icon: '⭐',
     enemies: ['Constellation Supreme', 'Star Flagship'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_II","count":500,"row":1,"col":1},{"ship_id":"carrier_Titanfall_II","count":500,"row":1,"col":2},{"ship_id":"carrier_Harbinger_II","count":500,"row":1,"col":3},{"ship_id":"battleship_Imperator_II","count":500,"row":2,"col":1},{"ship_id":"battleship_Obliterator_II","count":600,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_II","count":500,"row":2,"col":3},{"ship_id":"carrier_Harbinger_II","count":500,"row":3,"col":1},{"ship_id":"carrier_Harbinger_II","count":500,"row":3,"col":2},{"ship_id":"carrier_Atlas_II","count":500,"row":3,"col":3}],
@@ -2707,7 +2707,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'boss_master', name: 'THE HIVE GOD', type: 'boss_master', number: 0,
     difficulty: 10,
-    min_power: 1000000,
+    min_power: 965815374,
     icon: '👑',
     xp: 100000,
     cooldown_hours: 168,
@@ -2916,7 +2916,7 @@ const INSTANCES_NORMAL = [
   {
     id: 'boss_event', name: 'Boss Event', type: 'boss', number: null,
     difficulty: 10,
-    min_power: 800000,
+    min_power: 1327996140,
     icon: '👹',
     xp: 1000000,
     enemies: ['Global Boss Phase 1', 'Global Boss Phase 2', 'Global Boss Phase 3'],

@@ -1017,12 +1017,16 @@ function generateEnemies(inst) {
       const ship = allShips.find(s => s.id === eg.ship_id);
       if (!ship) return;
       const count = eg.count;
+      const cls = ship.id.split('_')[0];
+      const weaponSlots = { scout: 2, fighter: 3, cruiser: 3, battleship: 4, carrier: 2, special: 3 }[cls] || 2;
+      const tierM = ship.id.match(/_([IVX]+)$/);
+      const avgDps = { 'I': 95, 'II': 175, 'III': 270 }[tierM ? tierM[1] : 'I'] || 95;
       groups.push({
         name:    ship.name,
         count,
         hp:      (ship.armor_val + (ship.shield || 0) + (ship.structure || 0)) * count,
         shield:  (ship.shield || 0) * count,
-        dps:     (ship.armor_val * 0.3 + (ship.shield || 0) * 0.2) * count,
+        dps:     avgDps * weaponSlots * count,
         agility: ship.agility || 10,
         speed:   ship.movement || 1,
         armor:   ship.armor || 'Light',
