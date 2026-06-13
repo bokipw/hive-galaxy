@@ -657,4 +657,3 @@ function galaxyAttackBase(playerId) {
 
   if (typeof showBattleOutcome === 'function') showBattleOutcome(battle, isVictory ? { metal:50000, crystal:50000, he3:50000, xp:0 } : {}, false);
 }
-}
