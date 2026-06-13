@@ -17,7 +17,7 @@ const INSTANCES_HELL = [
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Alpha Drone',
-  bossShip: {"name":"Alpha Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
+  bossShip: {"name":"Alpha Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -45,7 +45,7 @@ const INSTANCES_HELL = [
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Beta Drone',
-  bossShip: {"name":"Beta Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
+  bossShip: {"name":"Beta Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -74,7 +74,7 @@ const INSTANCES_HELL = [
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Gamma Drone',
-  bossShip: {"name":"Gamma Drone","structure":2560,"shield":840,"armor_val":320,"dps":144,"agility":3,"speed":2},
+  bossShip: {"name":"Gamma Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -108,7 +108,7 @@ const INSTANCES_HELL = [
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Delta Commander',
-  bossShip: {"name":"Delta Commander","structure":3840,"shield":1260,"armor_val":480,"dps":216,"agility":4,"speed":3},
+  bossShip: {"name":"Delta Commander","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -139,7 +139,7 @@ const INSTANCES_HELL = [
     enemies: ['Marauder Fighter I', 'Rogue Drones III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Epsilon Warlord',
-  bossShip: {"name":"Epsilon Warlord","structure":5120,"shield":1680,"armor_val":640,"dps":288,"agility":4,"speed":3},
+  bossShip: {"name":"Epsilon Warlord","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -174,7 +174,7 @@ const INSTANCES_HELL = [
     enemies: ['Marauder Fighter I', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Zeta Commander',
-  bossShip: {"name":"Zeta Commander","structure":6400,"shield":2100,"armor_val":800,"dps":360,"agility":4,"speed":3},
+  bossShip: {"name":"Zeta Commander","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -209,7 +209,7 @@ const INSTANCES_HELL = [
     enemies: ['Marauder Fighter II', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Eta Overlord',
-  bossShip: {"name":"Eta Overlord","structure":8000,"shield":2625,"armor_val":1000,"dps":450,"agility":4,"speed":3},
+  bossShip: {"name":"Eta Overlord","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -239,7 +239,7 @@ const INSTANCES_HELL = [
     enemies: ['Vex Cruiser I', 'Marauder Fighter II'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Theta Admiral',
-  bossShip: {"name":"Theta Admiral","structure":9600,"shield":3150,"armor_val":1200,"dps":540,"agility":5,"speed":3},
+  bossShip: {"name":"Theta Admiral","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -269,7 +269,7 @@ const INSTANCES_HELL = [
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Shadow_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Iota Warlord',
-  bossShip: {"name":"Iota Warlord","structure":11520,"shield":3780,"armor_val":1440,"dps":648,"agility":5,"speed":3},
+  bossShip: {"name":"Iota Warlord","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -304,7 +304,7 @@ const INSTANCES_HELL = [
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Kappa Commander',
-  bossShip: {"name":"Kappa Commander","structure":13440,"shield":4410,"armor_val":1680,"dps":756,"agility":5,"speed":3},
+  bossShip: {"name":"Kappa Commander","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -338,7 +338,7 @@ const INSTANCES_HELL = [
     enemies: ['Khal Battleship I', 'Vex Cruiser III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Lambda Dreadnought',
-  bossShip: {"name":"Lambda Dreadnought","structure":16000,"shield":5250,"armor_val":2000,"dps":900,"agility":5,"speed":3},
+  bossShip: {"name":"Lambda Dreadnought","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -372,7 +372,7 @@ const INSTANCES_HELL = [
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Mu Overlord',
-  bossShip: {"name":"Mu Overlord","structure":19200,"shield":6300,"armor_val":2400,"dps":1080,"agility":6,"speed":4},
+  bossShip: {"name":"Mu Overlord","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -413,7 +413,7 @@ const INSTANCES_HELL = [
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Nu Admiral',
-  bossShip: {"name":"Nu Admiral","structure":22400,"shield":7350,"armor_val":2800,"dps":1260,"agility":6,"speed":4},
+  bossShip: {"name":"Nu Admiral","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -449,7 +449,7 @@ const INSTANCES_HELL = [
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Xi Warlord',
-  bossShip: {"name":"Xi Warlord","structure":25600,"shield":8400,"armor_val":3200,"dps":1440,"agility":6,"speed":4},
+  bossShip: {"name":"Xi Warlord","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -481,7 +481,7 @@ const INSTANCES_HELL = [
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Omicron Dreadnought',
-  bossShip: {"name":"Omicron Dreadnought","structure":30400,"shield":9975,"armor_val":3800,"dps":1710,"agility":6,"speed":4},
+  bossShip: {"name":"Omicron Dreadnought","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -533,7 +533,7 @@ const INSTANCES_HELL = [
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Pi Commander',
-  bossShip: {"name":"Pi Commander","structure":35200,"shield":11550,"armor_val":4400,"dps":1980,"agility":7,"speed":4},
+  bossShip: {"name":"Pi Commander","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -568,7 +568,7 @@ const INSTANCES_HELL = [
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Rho Admiral',
-  bossShip: {"name":"Rho Admiral","structure":41600,"shield":13650,"armor_val":5200,"dps":2340,"agility":7,"speed":4},
+  bossShip: {"name":"Rho Admiral","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -600,7 +600,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
   enemyGroups: [{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Sigma Warlord',
-  bossShip: {"name":"Sigma Warlord","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":7,"speed":4},
+  bossShip: {"name":"Sigma Warlord","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -642,7 +642,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Tau Overlord',
-  bossShip: {"name":"Tau Overlord","structure":57600,"shield":18900,"armor_val":7200,"dps":3240,"agility":7,"speed":5},
+  bossShip: {"name":"Tau Overlord","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -671,7 +671,7 @@ const INSTANCES_HELL = [
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Upsilon Dreadnought',
-  bossShip: {"name":"Upsilon Dreadnought","structure":67200,"shield":22050,"armor_val":8400,"dps":3780,"agility":7,"speed":5},
+  bossShip: {"name":"Upsilon Dreadnought","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -711,7 +711,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":3}],
     boss: 'Phi Commander',
-  bossShip: {"name":"Phi Commander","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":5},
+  bossShip: {"name":"Phi Commander","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -757,7 +757,7 @@ const INSTANCES_HELL = [
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Chi Warlord',
-  bossShip: {"name":"Chi Warlord","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":8,"speed":5},
+  bossShip: {"name":"Chi Warlord","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -792,7 +792,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Psi Admiral',
-  bossShip: {"name":"Psi Admiral","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":8,"speed":5},
+  bossShip: {"name":"Psi Admiral","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -831,7 +831,7 @@ const INSTANCES_HELL = [
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Omega Warlord',
-  bossShip: {"name":"Omega Warlord","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":8,"speed":5},
+  bossShip: {"name":"Omega Warlord","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -881,7 +881,7 @@ const INSTANCES_HELL = [
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Omega Admiral',
-  bossShip: {"name":"Omega Admiral","structure":153600,"shield":50400,"armor_val":19200,"dps":8640,"agility":9,"speed":6},
+  bossShip: {"name":"Omega Admiral","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -926,7 +926,7 @@ const INSTANCES_HELL = [
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Haven_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Titan Warlord',
-  bossShip: {"name":"Titan Warlord","structure":185600,"shield":60900,"armor_val":23200,"dps":10440,"agility":9,"speed":6},
+  bossShip: {"name":"Titan Warlord","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -974,7 +974,7 @@ const INSTANCES_HELL = [
     enemies: ['Omega Carrier II', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Colossus Commander',
-  bossShip: {"name":"Colossus Commander","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":9,"speed":6},
+  bossShip: {"name":"Colossus Commander","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1023,7 +1023,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Flagship I', 'Omega Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Destroyer Prime',
-  bossShip: {"name":"Destroyer Prime","structure":272000,"shield":89250,"armor_val":34000,"dps":15300,"agility":10,"speed":6},
+  bossShip: {"name":"Destroyer Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1072,7 +1072,7 @@ const INSTANCES_HELL = [
     enemies: ['Omega Carrier III', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":3}],
     boss: 'Annihilator Prime',
-  bossShip: {"name":"Annihilator Prime","structure":320000,"shield":105000,"armor_val":40000,"dps":18000,"agility":10,"speed":6},
+  bossShip: {"name":"Annihilator Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1111,7 +1111,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Goliath_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
     boss: 'Omega Supreme',
-  bossShip: {"name":"Omega Supreme","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":10,"speed":7},
+  bossShip: {"name":"Omega Supreme","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1175,7 +1175,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Marauder I', 'Phase Hunter I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Phase Lord I',
-  bossShip: {"name":"Phase Lord I","structure":64000,"shield":21000,"armor_val":8000,"dps":3600,"agility":7,"speed":4},
+  bossShip: {"name":"Phase Lord I","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1212,7 +1212,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Marauder II', 'Quantum Hunter I'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Quantum Lord I',
-  bossShip: {"name":"Quantum Lord I","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":7,"speed":5},
+  bossShip: {"name":"Quantum Lord I","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1249,7 +1249,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Cruiser I', 'Phase Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Phase Lord II',
-  bossShip: {"name":"Phase Lord II","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
+  bossShip: {"name":"Phase Lord II","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1286,7 +1286,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Battleship I', 'Quantum Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Quantum Lord II',
-  bossShip: {"name":"Quantum Lord II","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":8,"speed":5},
+  bossShip: {"name":"Quantum Lord II","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1324,7 +1324,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Carrier I', 'Phase Dreadnought I'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":3}],
     boss: 'Phase Dreadnought Alpha',
-  bossShip: {"name":"Phase Dreadnought Alpha","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
+  bossShip: {"name":"Phase Dreadnought Alpha","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1364,7 +1364,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Battleship II', 'Void Hunter I'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Void Hunter Prime',
-  bossShip: {"name":"Void Hunter Prime","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":9,"speed":6},
+  bossShip: {"name":"Void Hunter Prime","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1405,7 +1405,7 @@ const INSTANCES_HELL = [
     enemies: ['Elite Carrier II', 'Void Hunter II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Void Destroyer',
-  bossShip: {"name":"Void Destroyer","structure":368000,"shield":120750,"armor_val":46000,"dps":20700,"agility":9,"speed":6},
+  bossShip: {"name":"Void Destroyer","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1445,7 +1445,7 @@ const INSTANCES_HELL = [
     enemies: ['Apex Battleship I', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Apex Destroyer I',
-  bossShip: {"name":"Apex Destroyer I","structure":464000,"shield":152250,"armor_val":58000,"dps":26100,"agility":10,"speed":6},
+  bossShip: {"name":"Apex Destroyer I","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1486,7 +1486,7 @@ const INSTANCES_HELL = [
     enemies: ['Apex Battleship II', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Apex Destroyer II',
-  bossShip: {"name":"Apex Destroyer II","structure":592000,"shield":194250,"armor_val":74000,"dps":33300,"agility":10,"speed":6},
+  bossShip: {"name":"Apex Destroyer II","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1527,7 +1527,7 @@ const INSTANCES_HELL = [
     enemies: ['Apex Carrier I', 'Omega Flagship I'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Omega Apex Supreme',
-  bossShip: {"name":"Omega Apex Supreme","structure":768000,"shield":252000,"armor_val":96000,"dps":43200,"agility":10,"speed":7},
+  bossShip: {"name":"Omega Apex Supreme","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1578,7 +1578,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Drone Wave I', 'Trial Cruiser I'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Commander Alpha',
-  bossShip: {"name":"Trial Commander Alpha","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
+  bossShip: {"name":"Trial Commander Alpha","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       rank_S: ['mod_crit_amp_III', 'eng_sprint_III'],
       rank_A: ['mod_shield_booster_III', 'eng_he3_saver_III'],
@@ -1615,7 +1615,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Fighter Wave I', 'Trial Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Admiral Beta',
-  bossShip: {"name":"Trial Admiral Beta","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
+  bossShip: {"name":"Trial Admiral Beta","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       rank_S: ['mod_overload_III', 'eng_berserker_III'],
       rank_A: ['mod_emp_burst_II', 'eng_quantum_II'],
@@ -1651,7 +1651,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Carrier Wave I', 'Trial Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Overlord Gamma',
-  bossShip: {"name":"Trial Overlord Gamma","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
+  bossShip: {"name":"Trial Overlord Gamma","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       rank_S: ['eng_hyperdrive_I', 'mod_annihilator_I'],
       rank_A: ['eng_quantum_III', 'mod_chrono_matrix_I'],
@@ -1689,7 +1689,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Flagship Wave I', 'Trial Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Warlord Delta',
-  bossShip: {"name":"Trial Warlord Delta","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Warlord Delta","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       rank_S: ['mod_annihilator_I', 'eng_voidwarp_II'],
       rank_A: ['eng_hyperdrive_II', 'mod_chrono_matrix_II'],
@@ -1727,7 +1727,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Dreadnought I', 'Trial Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Dreadnought Alpha',
-  bossShip: {"name":"Trial Dreadnought Alpha","structure":496000,"shield":162750,"armor_val":62000,"dps":27900,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Dreadnought Alpha","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       rank_S: ['eng_hyperdrive_II', 'sh_void_field_I'],
       rank_A: ['mod_annihilator_II', 'eng_celestial_I'],
@@ -1771,7 +1771,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Flagship II', 'Trial Dreadnought II'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Flagship Commander',
-  bossShip: {"name":"Trial Flagship Commander","structure":640000,"shield":210000,"armor_val":80000,"dps":36000,"agility":10,"speed":6},
+  bossShip: {"name":"Trial Flagship Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       rank_S: ['eng_hyperdrive_III', 'sh_fortress_II'],
       rank_A: ['mod_chrono_matrix_I', 'eng_voidwarp_II'],
@@ -1812,7 +1812,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Omega Carrier I', 'Trial Flagship III'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Omega Warlord',
-  bossShip: {"name":"Trial Omega Warlord","structure":832000,"shield":273000,"armor_val":104000,"dps":46800,"agility":10,"speed":6},
+  bossShip: {"name":"Trial Omega Warlord","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       rank_S: ['eng_celestial_II', 'mod_fleet_commander_I'],
       rank_A: ['sh_void_field_II', 'eng_hyperdrive_III'],
@@ -1852,7 +1852,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Apex Carrier I', 'Trial Omega Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Apex Commander',
-  bossShip: {"name":"Trial Apex Commander","structure":1056000,"shield":346500,"armor_val":132000,"dps":59400,"agility":10,"speed":6},
+  bossShip: {"name":"Trial Apex Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_chrono_matrix_II', 'eng_voidwarp_III'],
       rank_A: ['mod_fortress_core_III', 'sh_void_field_III'],
@@ -1893,7 +1893,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Apex Flagship I', 'Trial Omega Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'Trial Supreme Alpha',
-  bossShip: {"name":"Trial Supreme Alpha","structure":1344000,"shield":441000,"armor_val":168000,"dps":75600,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Supreme Alpha","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       rank_S: ['eng_celestial_III', 'sh_immortal_III'],
       rank_A: ['mod_chrono_matrix_III', 'eng_hyperdrive_III'],
@@ -1935,7 +1935,7 @@ const INSTANCES_HELL = [
     enemies: ['Trial Supreme Flagship', 'Trial Apex Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
     boss: 'Trial Supreme Omega — Final Boss',
-  bossShip: {"name":"Trial Supreme Omega — Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Supreme Omega — Final Boss","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_fleet_commander_III', 'mod_chrono_matrix_III'],
       rank_A: ['eng_celestial_III', 'sh_void_field_III'],
@@ -1982,7 +1982,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Militia', 'Humanoid Light Cruiser'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":3}],
     boss: 'Commander Rook',
-  bossShip: {"name":"Commander Rook","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":6,"speed":4},
+  bossShip: {"name":"Commander Rook","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2014,7 +2014,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Marine Squad', 'Humanoid Destroyer'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":3}],
     boss: 'Admiral Vance',
-  bossShip: {"name":"Admiral Vance","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":4},
+  bossShip: {"name":"Admiral Vance","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2048,7 +2048,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Fighter Squadron', 'Humanoid Cruiser Wing'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Humanoid Admiral Kara',
-  bossShip: {"name":"Humanoid Admiral Kara","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
+  bossShip: {"name":"Humanoid Admiral Kara","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2079,7 +2079,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Battlegroup', 'Humanoid Carrier Wing'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Fleet Admiral Seras',
-  bossShip: {"name":"Fleet Admiral Seras","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":7,"speed":5},
+  bossShip: {"name":"Fleet Admiral Seras","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2108,7 +2108,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Battleship Wing', 'Humanoid Carrier'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Humanoid Warlord Vex',
-  bossShip: {"name":"Humanoid Warlord Vex","structure":208000,"shield":68250,"armor_val":26000,"dps":11700,"agility":8,"speed":5},
+  bossShip: {"name":"Humanoid Warlord Vex","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2144,7 +2144,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Heavy Battleship', 'Humanoid Flagship'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Grand Admiral Kael',
-  bossShip: {"name":"Grand Admiral Kael","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
+  bossShip: {"name":"Grand Admiral Kael","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2175,7 +2175,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Apex Carrier', 'Humanoid Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":3}],
     boss: 'Supreme Commander Voss',
-  bossShip: {"name":"Supreme Commander Voss","structure":448000,"shield":147000,"armor_val":56000,"dps":25200,"agility":9,"speed":6},
+  bossShip: {"name":"Supreme Commander Voss","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2204,7 +2204,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Apex Carrier', 'Humanoid Supreme Flagship'],
   enemyGroups: [{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":3}],
     boss: 'Humanoid Supreme Commander',
-  bossShip: {"name":"Humanoid Supreme Commander","structure":576000,"shield":189000,"armor_val":72000,"dps":32400,"agility":10,"speed":6},
+  bossShip: {"name":"Humanoid Supreme Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2241,7 +2241,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Omega Fleet', 'Humanoid Colossus'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":3}],
     boss: 'Emperor Valerius',
-  bossShip: {"name":"Emperor Valerius","structure":832000,"shield":273000,"armor_val":104000,"dps":46800,"agility":10,"speed":6},
+  bossShip: {"name":"Emperor Valerius","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2274,7 +2274,7 @@ const INSTANCES_HELL = [
     enemies: ['Humanoid Ultimate Fleet', 'Humanoid God Flagship'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
     boss: 'God-Emperor Hyperion',
-  bossShip: {"name":"God-Emperor Hyperion","structure":1280000,"shield":420000,"armor_val":160000,"dps":72000,"agility":10,"speed":7},
+  bossShip: {"name":"God-Emperor Hyperion","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2298,7 +2298,7 @@ const INSTANCES_HELL = [
     enemies: ['Raider Corvette', 'Marauder Frigate'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Captain Scar',
-  bossShip: {"name":"Captain Scar","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":6,"speed":4},
+  bossShip: {"name":"Captain Scar","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2325,7 +2325,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Destroyer', 'Raider Cruiser'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Commodore Blackfang',
-  bossShip: {"name":"Commodore Blackfang","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":4},
+  bossShip: {"name":"Commodore Blackfang","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2354,7 +2354,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Raider Squadron', 'Pirate Battlecruiser'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Captain Void',
-  bossShip: {"name":"Captain Void","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
+  bossShip: {"name":"Captain Void","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2385,7 +2385,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Battleship', 'Raider Carrier'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Admiral Bloodmoon',
-  bossShip: {"name":"Admiral Bloodmoon","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":7,"speed":5},
+  bossShip: {"name":"Admiral Bloodmoon","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2414,7 +2414,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Dreadnought', 'Raider Flagship'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":3}],
     boss: 'Warlord Ironhook',
-  bossShip: {"name":"Warlord Ironhook","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
+  bossShip: {"name":"Warlord Ironhook","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2445,7 +2445,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Elite Carrier', 'Pirate Apex Battleship'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Goliath_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":3}],
     boss: 'Admiral Blackvoid',
-  bossShip: {"name":"Admiral Blackvoid","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":9,"speed":6},
+  bossShip: {"name":"Admiral Blackvoid","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2477,7 +2477,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Colossus', 'Raider Titan'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Overlord Nightwind',
-  bossShip: {"name":"Overlord Nightwind","structure":576000,"shield":189000,"armor_val":72000,"dps":32400,"agility":9,"speed":6},
+  bossShip: {"name":"Overlord Nightwind","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2509,7 +2509,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Omega Fleet', 'Raider Apocalypse'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Emperor Blackvoid',
-  bossShip: {"name":"Emperor Blackvoid","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
+  bossShip: {"name":"Emperor Blackvoid","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2541,7 +2541,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Supreme Carrier', 'Pirate Omega Flagship'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'Supreme Pirate Overlord',
-  bossShip: {"name":"Supreme Pirate Overlord","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":7},
+  bossShip: {"name":"Supreme Pirate Overlord","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2570,7 +2570,7 @@ const INSTANCES_HELL = [
     enemies: ['Pirate Ultimate Fleet', 'Pirate God Emperor'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":3}],
     boss: 'The Pirate God-King',
-  bossShip: {"name":"The Pirate God-King","structure":1600000,"shield":525000,"armor_val":200000,"dps":90000,"agility":10,"speed":7},
+  bossShip: {"name":"The Pirate God-King","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2615,7 +2615,7 @@ const INSTANCES_HELL = [
     enemies: ['Void Scavenger Drones', 'Scavenger Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":3,"col":3}],
     boss: 'Void Scavenger',
-  bossShip: {"name":"Void Scavenger","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":7,"speed":4},
+  bossShip: {"name":"Void Scavenger","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     boss_stats: { hp: 15000, shield: 5000, dps: 800, agility: 20, speed: 2, armor: 'Light' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -2873,7 +2873,7 @@ const INSTANCES_HELL = [
     enemies: ['Corsair Escort', 'Corsair Marauder Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":10000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":3,"col":3}],
     boss: 'Corsair Marauder',
-  bossShip: {"name":"Corsair Marauder","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":7,"speed":4},
+  bossShip: {"name":"Corsair Marauder","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
     boss_stats: { hp: 18000, shield: 6000, dps: 900, agility: 18, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_gauss_cannon_missile_III', rate: 15 },
@@ -3129,7 +3129,7 @@ const INSTANCES_HELL = [
     enemies: ['Nebula Shadow Drones', 'Nebula Stalker Pack'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Nebula Stalker',
-  bossShip: {"name":"Nebula Stalker","structure":144000,"shield":47250,"armor_val":18000,"dps":8100,"agility":7,"speed":5},
+  bossShip: {"name":"Nebula Stalker","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     boss_stats: { hp: 20000, shield: 8000, dps: 1100, agility: 35, speed: 3, armor: 'Nano' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_mass_driver_missile_III', rate: 15 },
@@ -3383,7 +3383,7 @@ const INSTANCES_HELL = [
     enemies: ['Solar Drone Swarm', 'Solar Predator Pack'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Solar Predator',
-  bossShip: {"name":"Solar Predator","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
+  bossShip: {"name":"Solar Predator","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
     boss_stats: { hp: 22000, shield: 7000, dps: 1200, agility: 15, speed: 2, armor: 'Light' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_shredder_missile_III', rate: 15 },
@@ -3634,7 +3634,7 @@ const INSTANCES_HELL = [
     enemies: ['Frost Drone Pack', 'Frost Reaver Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Frost Reaver',
-  bossShip: {"name":"Frost Reaver","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
+  bossShip: {"name":"Frost Reaver","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     boss_stats: { hp: 28000, shield: 10000, dps: 1400, agility: 20, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_penetrator_missile_III', rate: 15 },
@@ -3884,7 +3884,7 @@ const INSTANCES_HELL = [
     enemies: ['Plasma Ghost Pack', 'Plasma Wraith Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Plasma Wraith',
-  bossShip: {"name":"Plasma Wraith","structure":256000,"shield":84000,"armor_val":32000,"dps":14400,"agility":8,"speed":5},
+  bossShip: {"name":"Plasma Wraith","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
     boss_stats: { hp: 30000, shield: 12000, dps: 1500, agility: 22, speed: 2, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_accelerator_missile_III', rate: 15 },
@@ -4133,7 +4133,7 @@ const INSTANCES_HELL = [
     enemies: ['Hydra Head Alpha', 'Hydra Head Beta', 'Hydra Head Gamma'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Quantum Hydra',
-  bossShip: {"name":"Quantum Hydra","structure":480000,"shield":157500,"armor_val":60000,"dps":27000,"agility":9,"speed":6},
+  bossShip: {"name":"Quantum Hydra","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
     boss_stats: { hp: 80000, shield: 30000, dps: 3000, agility: 15, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -4599,7 +4599,7 @@ const INSTANCES_HELL = [
     enemies: ['Time Guardian I', 'Chrono Sentinel'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Chrono Warden',
-  bossShip: {"name":"Chrono Warden","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
+  bossShip: {"name":"Chrono Warden","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     boss_stats: { hp: 100000, shield: 40000, dps: 4000, agility: 12, speed: 1, armor: 'Regen' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_gauss_cannon_missile_III', rate: 15 },
@@ -5062,7 +5062,7 @@ const INSTANCES_HELL = [
     enemies: ['Titan Escort Fleet', 'Dreadnought Titan'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Dreadnought Titan',
-  bossShip: {"name":"Dreadnought Titan","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":6},
+  bossShip: {"name":"Dreadnought Titan","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     boss_stats: { hp: 150000, shield: 60000, dps: 5000, agility: 5, speed: 1, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_mass_driver_missile_III', rate: 15 },
@@ -5528,7 +5528,7 @@ const INSTANCES_HELL = [
     enemies: ['Galaxy Eater Void Spawn', 'Galaxy Eater Core'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Galaxy Eater',
-  bossShip: {"name":"Galaxy Eater","structure":2240000,"shield":735000,"armor_val":280000,"dps":126000,"agility":10,"speed":7},
+  bossShip: {"name":"Galaxy Eater","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     boss_stats: { hp: 600000, shield: 200000, dps: 8000, agility: 8, speed: 1, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -6809,7 +6809,7 @@ const INSTANCES_HELL = [
     enemies: ['Constellation Guardian I', 'Star Dreadnought I'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Constellation Prime',
-  bossShip: {"name":"Constellation Prime","structure":1600000,"shield":525000,"armor_val":200000,"dps":90000,"agility":10,"speed":6},
+  bossShip: {"name":"Constellation Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -6866,7 +6866,7 @@ const INSTANCES_HELL = [
     enemies: ['Constellation Guardian II', 'Star Carrier I'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":3}],
     boss: 'Constellation Overlord',
-  bossShip: {"name":"Constellation Overlord","structure":2400000,"shield":787500,"armor_val":300000,"dps":135000,"agility":10,"speed":7},
+  bossShip: {"name":"Constellation Overlord","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -6923,7 +6923,7 @@ const INSTANCES_HELL = [
     enemies: ['Constellation Supreme', 'Star Flagship'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Constellation God-Emperor',
-  bossShip: {"name":"Constellation God-Emperor","structure":3200000,"shield":1050000,"armor_val":400000,"dps":180000,"agility":10,"speed":7},
+  bossShip: {"name":"Constellation God-Emperor","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -6991,7 +6991,7 @@ const INSTANCES_HELL = [
     enemies: ['Hive God Spawn Wave 1', 'Hive God Spawn Wave 2', 'Hive God Core'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'THE HIVE GOD',
-  bossShip: {"name":"THE HIVE GOD","structure":3200000,"shield":1050000,"armor_val":400000,"dps":180000,"agility":10,"speed":7},
+  bossShip: {"name":"THE HIVE GOD","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     boss_stats: { hp: 1000000, shield: 400000, dps: 12000, agility: 10, speed: 2, armor: 'Neutralizing' },
     drops: {
       guaranteed: [],
@@ -8276,7 +8276,7 @@ const INSTANCES_HELL = [
     xp: 1000000,
     enemies: ['Global Boss Phase 1', 'Global Boss Phase 2', 'Global Boss Phase 3'],
     boss: 'THE HIVE GOD',
-  bossShip: {"name":"THE HIVE GOD","structure":2560000,"shield":840000,"armor_val":320000,"dps":144000,"agility":10,"speed":7},
+  bossShip: {"name":"THE HIVE GOD","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
     drops: {
       participation: ['sh_divine_I', 'mod_divine_core_I', 'eng_divine_I', 'w_bomber_squadron_III', 'w_elite_squadron_III'],
       note: 'Drop only — ne može se craftati. Max 1 divine komponenta po igraču per event.',
