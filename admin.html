@@ -1012,24 +1012,19 @@ function _runMaintCountdown(targetDate) {
 }
 
 async function serverReset() {
-  if (!confirm('SIGURNO? Ovo brise SVE saveove, leaderboard i PvP podatke. Igraci gube sav progres!')) return;
+  if (!confirm('SIGURNO? Ovo resetuje leaderboard i PvP rankove. Zgrade, istraživanja i resursi se NE brišu.')) return;
   const el = document.getElementById('resetStatus');
-  if (el) el.textContent = 'Brisanje u toku...';
+  if (el) el.textContent = 'Resetovanje u toku...';
   const errors = [];
 
-  const r1 = await _supa.from('saves').delete().not('id', 'is', null);
-  if (r1.error) errors.push('saves: ' + r1.error.message);
-
+  // Samo rank tabele — saves se NE diraju
   const r2 = await _supa.from('leaderboard').delete().not('id', 'is', null);
   if (r2.error) errors.push('leaderboard: ' + r2.error.message);
 
-  const r3 = await _supa.from('pvp_snapshots').delete().not('id', 'is', null);
+  const r3 = await _supa.from('pvp_snapshots').update({ rating: 1000 }).not('id', 'is', null);
   if (r3.error) errors.push('pvp_snapshots: ' + r3.error.message);
 
-  const r4 = await _supa.from('hive_profiles').update({ is_premium: false, keys_cmd: 0, keys_inst: 0, boosters: {} }).neq('hive_user', '__system__');
-  if (r4.error) errors.push('hive_profiles: ' + r4.error.message);
-
-  // Povecaj broj sezone — igra ce odbaciti sve lokalne saveove iz prethodnih sezona
+  // Povecaj broj sezone
   const { data: sysRow } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
   const currentSeason = (sysRow && sysRow.keys) ? sysRow.keys : 1;
   const r5 = await _supa.from('hive_profiles').update({ keys: currentSeason + 1 }).eq('hive_user', '__system__');
