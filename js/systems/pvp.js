@@ -263,16 +263,18 @@ function startPvpBattle(oppIdx) {
   if (!opp) return;
   if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast('Shield je aktivan - ne mozes napadati!','warn'); return; }
   var energyCost=1000, bocCost=1000;
+  // Provjeri flotu PRIJE oduzimanja resursa
+  var myFleet = buildPvpFleetLocal();
+  if (myFleet.length===0) { toast('Nemas brodova u floti!','warn'); return; }
+  if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
   if (R.energy<energyCost) { toast('Nedovoljno energije! Treba '+energyCost,'warn'); return; }
   if ((R.bocrypto||0)<bocCost) { toast('Nedovoljno BOCRYPTO! Treba '+bocCost,'warn'); return; }
   R.energy -= energyCost;
   R.bocrypto = (R.bocrypto||0) - bocCost;
   if (typeof updateResUI==='function') updateResUI();
-  if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
   toast('Napadam '+opp.name+'...','inf');
   setTimeout(function() {
-    var myFleet=buildPvpFleetLocal(), oppFleet=buildPvpFleetFromSnapshot(opp.fleet);
-    if (myFleet.length===0)  { toast('Nemas brodova u floti!','warn'); return; }
+    var oppFleet=buildPvpFleetFromSnapshot(opp.fleet);
     if (oppFleet.length===0) { toast('Protivnik nema validnu flotu!','warn'); return; }
     openPvpBattleVisual(myFleet, oppFleet, opp);
   }, 200);
