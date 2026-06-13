@@ -655,37 +655,29 @@ async function sendResources() {
   const keys    = parseInt(document.getElementById('resKeys').value)    || 0;
 
   try {
-    // Dohvati save igraca (HIVE igraci cuvaju save pod hive_username kao kljuc)
     const { data: prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
     if (!prof) { showToast('Igrac ' + username + ' nije pronadjen.', true); return; }
 
-    // Azuriraj kljuceve u hive_profiles
-    if (keys > 0 || ikeys > 0) {
-      await _supa.from('hive_profiles').update({
-        keys:  (prof.keys||0)  + keys,
-        ikeys: (prof.ikeys||0) + ikeys,
-      }).eq('hive_user', username);
-    }
+    // Dohvati trenutne pending resurse i dodaj nove
+    const existing = (prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
+    const pending = {
+      metal:   (existing.metal   || 0) + metal,
+      crystal: (existing.crystal || 0) + crystal,
+      he3:     (existing.he3     || 0) + he3,
+      energy:  (existing.energy  || 0) + energy,
+      keys:    (existing.keys    || 0) + keys,
+      ikeys:   (existing.ikeys   || 0) + ikeys,
+    };
 
-    // Azuriraj save (resurse)
-    if (metal > 0 || crystal > 0 || he3 > 0 || energy > 0) {
-      const { data: saveRow } = await _supa.from('saves').select('id,data').eq('id', prof.id || username).maybeSingle();
-      if (saveRow && saveRow.data) {
-        const gs = saveRow.data;
-        if (gs.R) {
-          gs.R.metal   = (gs.R.metal   || 0) + metal;
-          gs.R.crystal = (gs.R.crystal || 0) + crystal;
-          gs.R.he3     = (gs.R.he3     || 0) + he3;
-          gs.R.energy  = (gs.R.energy  || 0) + energy;
-          await _supa.from('saves').update({ data: gs, saved_at: new Date().toISOString() }).eq('id', saveRow.id);
-        }
-      } else {
-        showToast('Save igraca nije nadjen u bazi (mozda koristi localStorage).', true);
-        return;
-      }
-    }
+    // Sacuvaj u hive_profiles.boosters i azuriraj keys/ikeys
+    const { error } = await _supa.from('hive_profiles').update({
+      boosters: pending,
+      keys:  (prof.keys||0)  + keys,
+      ikeys: (prof.ikeys||0) + ikeys,
+    }).eq('hive_user', username);
+    if (error) throw error;
 
-    showToast('Resursi poslani igracu ' + username + '!');
+    showToast('Resursi poslani! Igrac ce ih dobiti pri sledecem loginu.');
   } catch(e) { showToast('Greska: ' + e.message, true); }
 }
 

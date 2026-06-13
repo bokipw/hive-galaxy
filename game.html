@@ -46,21 +46,29 @@
         window._hiveProfile   = data;
         window._playerPremium = data.is_premium || false;
 
-        // Primijeni ključeve na igru — dodaj cloud ključeve na lokalne
+        // Primijeni ključeve i resurse od admina
         const cloudKeys  = data.keys  || 0;
         const cloudIKeys = data.ikeys || 0;
+        const pending    = data.boosters || {};
 
         // Čekaj da se igra inicijalizira pa primijeni
         const applyKeys = () => {
           if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
-          if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  }
-          if(cloudIKeys > 0) { R.instanceKeys  = (R.instanceKeys  || 0) + cloudIKeys; }
-          // Resetuj u Supabase da se ne dodaju opet sljedeći put
-          if(cloudKeys > 0 || cloudIKeys > 0) {
-            _sb.from('hive_profiles').update({ keys: 0, ikeys: 0 })
-              .eq('hive_user', hiveUser);
+          var msgs = [];
+          if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  msgs.push('+' + cloudKeys + ' 🗝️'); }
+          if(cloudIKeys > 0) { R.instanceKeys  = (R.instanceKeys  || 0) + cloudIKeys; msgs.push('+' + cloudIKeys + ' 🔑'); }
+          if(pending.metal  > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal  + ' metal'); }
+          if(pending.crystal> 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
+          if(pending.he3    > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3 + ' He3'); }
+          if(pending.energy > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : R.energy + pending.energy); msgs.push('+' + pending.energy + ' energija'); }
+          if(pending.keys   > 0) { R.keys    = (R.keys    || 0) + pending.keys;    msgs.push('+' + pending.keys + ' 🗝️'); }
+          if(pending.ikeys  > 0) { R.instanceKeys = (R.instanceKeys || 0) + pending.ikeys; msgs.push('+' + pending.ikeys + ' 🔑'); }
+          // Resetuj u Supabase da se ne dodaju opet
+          if(msgs.length > 0) {
+            _sb.from('hive_profiles').update({ keys: 0, ikeys: 0, boosters: {} }).eq('hive_user', hiveUser);
             if(typeof updateResUI === 'function') updateResUI();
-            if(typeof toast === 'function') toast(`+${cloudKeys} 🗝️ +${cloudIKeys} 🔑 primljeno!`, 'ok');
+            if(typeof saveGame    === 'function') saveGame();
+            if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
           }
         };
         applyKeys();
