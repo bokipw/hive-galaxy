@@ -180,10 +180,10 @@ const buildingsData = {
     defRate:  80,
     energyDrain: 2,
     milestones: {
-      25:  { label: 'Automatsko ciljanje',    bonus: '+25% odbrana, +10% napad flote', defBonus: 25, fleetAtkBonus: 10 },
-      50:  { label: 'Plazmeni top',           bonus: '+50% odbrana',                  defBonus: 50 },
-      75:  { label: 'Anti-capital oružje',    bonus: '+100% odbrana',                 defBonus: 100 },
-      100: { label: 'ORBITALN KANON',         bonus: '+200% odbrana + razara sve neprijatelje Lv<5', defBonus: 200 },
+      25:  { label: 'Automatsko ciljanje',    bonus: 'Flota: +10% napad',                         fleetAtkBonus: 10 },
+      50:  { label: 'Plazmeni top',           bonus: 'Flota: +20% napad, +5% kritični udarac',    fleetAtkBonus: 20, fleetCritBonus: 5 },
+      75:  { label: 'Anti-capital oružje',    bonus: 'Flota: +35% napad, +10% kritični udarac',   fleetAtkBonus: 35, fleetCritBonus: 10 },
+      100: { label: 'ORBITALNI KANON',        bonus: 'Flota: +50% napad, +20% kritični udarac',   fleetAtkBonus: 50, fleetCritBonus: 20 },
     },
   },
 
@@ -196,10 +196,10 @@ const buildingsData = {
     defRate:  80,
     energyDrain: 3,
     milestones: {
-      25:  { label: 'Višestepene rakete',     bonus: '+25% odbrana, blokira špijunažu',  defBonus: 25, blockEsp: true },
-      50:  { label: 'Nuklearni bojevi',       bonus: '+50% odbrana',                     defBonus: 50 },
-      75:  { label: 'Orbitalni interceptor',  bonus: '+100% odbrana',                    defBonus: 100 },
-      100: { label: 'APOKALIPSA',             bonus: '+200% odbrana + kontranapd pri PvP porazu', defBonus: 200 },
+      25:  { label: 'Višestepene rakete',     bonus: 'Blokira špijunažu na bazu',                              blockEsp: true },
+      50:  { label: 'Nuklearni bojevi',       bonus: 'Blokira špijunažu, flota: +5 izbjegavanje',              blockEsp: true, fleetEvasionBonus: 5 },
+      75:  { label: 'Orbitalni interceptor',  bonus: 'Blokira špijunažu, flota: +10 izbjegavanje, +1 brzina',  blockEsp: true, fleetEvasionBonus: 10, fleetSpeedBonus: 1 },
+      100: { label: 'APOKALIPSA',             bonus: 'Blokira špijunažu, flota: +15 izbjegavanje, +2 brzina',  blockEsp: true, fleetEvasionBonus: 15, fleetSpeedBonus: 2 },
     },
   },
 
@@ -212,10 +212,10 @@ const buildingsData = {
     defRate:  80,
     energyDrain: 4,
     milestones: {
-      25:  { label: 'Fazni štit',             bonus: '+25% odbrana baze, flota +10% shield', defBonus: 25, fleetShieldBonus: 10 },
-      50:  { label: 'Harmonični štit',        bonus: '+50% odbrana',                        defBonus: 50 },
-      75:  { label: 'Kvantni štit',           bonus: '+100% odbrana',                       defBonus: 100 },
-      100: { label: 'NEPROBOJAN ŠTIT',        bonus: '+200% odbrana + baza ne može biti uništena', defBonus: 200 },
+      25:  { label: 'Fazni štit',             bonus: 'Flota: +10% shield',                                       fleetShieldBonus: 10 },
+      50:  { label: 'Harmonični štit',        bonus: 'Flota: +20% shield, +10% regeneracija shielda',            fleetShieldBonus: 20, fleetShieldRegenBonus: 10 },
+      75:  { label: 'Kvantni štit',           bonus: 'Flota: +35% shield, +20% regeneracija shielda',            fleetShieldBonus: 35, fleetShieldRegenBonus: 20 },
+      100: { label: 'NEPROBOJAN ŠTIT',        bonus: 'Flota: +50% shield, +30% regen, +5% redukcija štete',      fleetShieldBonus: 50, fleetShieldRegenBonus: 30, fleetDmgReductionBonus: 5 },
     },
   },
 
@@ -228,10 +228,10 @@ const buildingsData = {
     defRate:  80,
     energyDrain: 1,
     milestones: {
-      25:  { label: 'Dubok sken',             bonus: '+25% odbrana, +25% špijunažna šansa', defBonus: 25, espBonus: 25 },
-      50:  { label: 'Kvantni senzori',        bonus: '+50% odbrana',                        defBonus: 50 },
-      75:  { label: 'Galaktički radar',       bonus: '+100% odbrana + detektuje špijune',   defBonus: 100 },
-      100: { label: 'SVEVIDEĆE OKO',          bonus: '+200% odbrana + znaš sve o neprijatelju', defBonus: 200 },
+      25:  { label: 'Dubok sken',             bonus: '+25% šansa špijunaže',                           espBonus: 25 },
+      50:  { label: 'Kvantni senzori',        bonus: '+50% šansa špijunaže, +1 nivo otkrivanja',       espBonus: 50, espRevealBonus: 1 },
+      75:  { label: 'Galaktički radar',       bonus: '+75% šansa špijunaže, +1 nivo otkrivanja',       espBonus: 75, espRevealBonus: 1 },
+      100: { label: 'SVEVIDEĆE OKO',          bonus: '+100% šansa špijunaže, +2 nivoa otkrivanja',     espBonus: 100, espRevealBonus: 2 },
     },
   },
 

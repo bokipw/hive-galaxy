@@ -29,14 +29,20 @@ function getEspSuccessChance(targetEspLevel, numDrones, targetIsPlayer = false) 
   return Math.min(95, Math.max(5, baseChance + myBonus + droneBonus + sensorBonus - penalty - blockPen));
 }
 
-// ── ŠTA VIDIMO (po research milestonu) ──
+// ── ŠTA VIDIMO (po research milestonu + sensor zgrada) ──
 function getEspionageRevealLevel() {
   const lvl = getEspionageLevel();
-  if (lvl >= 100) return 4;
-  if (lvl >= 75)  return 3;
-  if (lvl >= 50)  return 2;
-  if (lvl >= 25)  return 1;
-  return 0;
+  const base = lvl >= 100 ? 4 : lvl >= 75 ? 3 : lvl >= 50 ? 2 : lvl >= 25 ? 1 : 0;
+  let sensorReveal = 0;
+  if (typeof getBuildingMilestones === 'function') {
+    const sensorM = getBuildingMilestones('sensor');
+    const sensorLv = buildings.sensor?.level || 0;
+    Object.entries(sensorM).forEach(([mlvl, d]) => {
+      if (sensorLv >= parseInt(mlvl) && d.espRevealBonus)
+        sensorReveal = Math.max(sensorReveal, d.espRevealBonus);
+    });
+  }
+  return Math.min(4, base + sensorReveal);
 }
 
 // ── KUPI DRONE ──

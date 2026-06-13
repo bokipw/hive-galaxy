@@ -36,6 +36,35 @@ function buildPvpFleetLocal() {
   const cb = (typeof getAggregatedCommanderBonuses === 'function' && deployed.length > 0)
     ? getAggregatedCommanderBonuses(deployed) : {};
 
+  // Defense building milestones → fleet bonuses
+  let bldAtkBonus = 0, bldCritBonus = 0;
+  let bldShieldBonus = 0, bldShieldRegenBonus = 0, bldDmgRedBonus = 0;
+  let bldEvasionBonus = 0, bldSpeedBonus = 0;
+  if (typeof getBuildingMilestones === 'function') {
+    const turretLv    = buildings.turret?.level    || 0;
+    const missileLv   = buildings.missile_bat?.level || 0;
+    const shieldGenLv = buildings.shield_gen?.level  || 0;
+    Object.entries(getBuildingMilestones('turret')).forEach(([mlvl, d]) => {
+      if (turretLv >= parseInt(mlvl)) {
+        if (d.fleetAtkBonus)  bldAtkBonus  = Math.max(bldAtkBonus,  d.fleetAtkBonus);
+        if (d.fleetCritBonus) bldCritBonus = Math.max(bldCritBonus, d.fleetCritBonus);
+      }
+    });
+    Object.entries(getBuildingMilestones('missile_bat')).forEach(([mlvl, d]) => {
+      if (missileLv >= parseInt(mlvl)) {
+        if (d.fleetEvasionBonus) bldEvasionBonus = Math.max(bldEvasionBonus, d.fleetEvasionBonus);
+        if (d.fleetSpeedBonus)   bldSpeedBonus   = Math.max(bldSpeedBonus,   d.fleetSpeedBonus);
+      }
+    });
+    Object.entries(getBuildingMilestones('shield_gen')).forEach(([mlvl, d]) => {
+      if (shieldGenLv >= parseInt(mlvl)) {
+        if (d.fleetShieldBonus)       bldShieldBonus       = Math.max(bldShieldBonus,       d.fleetShieldBonus);
+        if (d.fleetShieldRegenBonus)  bldShieldRegenBonus  = Math.max(bldShieldRegenBonus,  d.fleetShieldRegenBonus);
+        if (d.fleetDmgReductionBonus) bldDmgRedBonus       = Math.max(bldDmgRedBonus,       d.fleetDmgReductionBonus);
+      }
+    });
+  }
+
   return rawSlots.map((slot, idx) => {
     const stats = typeof calcSlotStats === 'function' ? calcSlotStats(slot) : null;
     const ship  = typeof getShipById   === 'function' ? getShipById(slot.ship_id) : null;
@@ -74,6 +103,14 @@ function buildPvpFleetLocal() {
     if (cls === 'scout')     { if (cb.scout_atk) dps *= (1+cb.scout_atk/100); if (cb.scout_evasion) agility = Math.min(90,agility+cb.scout_evasion); if (cb.scout_speed) speed += cb.scout_speed; }
     if (cls === 'carrier')   { if (cb.carrier_atk) dps *= (1+cb.carrier_atk/100); if (cb.carrier_hp) hp *= (1+cb.carrier_hp/100); }
     if (cls === 'special')   { if (cb.special_atk) dps *= (1+cb.special_atk/100); if (cb.special_hp) hp *= (1+cb.special_hp/100); }
+    // Defense buildings
+    if (bldAtkBonus)       dps    *= (1 + bldAtkBonus / 100);
+    if (bldCritBonus)      critBonus += bldCritBonus;
+    if (bldShieldBonus)    shield *= (1 + bldShieldBonus / 100);
+    if (bldShieldRegenBonus) regen *= (1 + bldShieldRegenBonus / 100);
+    if (bldEvasionBonus)   agility = Math.min(90, agility + bldEvasionBonus);
+    if (bldSpeedBonus)     speed  += bldSpeedBonus;
+    if (bldDmgRedBonus)    dmgRed += bldDmgRedBonus;
     const finalShield = Math.floor(shield);
     return { id:'a_'+idx, ship_id:slot.ship_id, name:ship.name||slot.ship_id, count:slot.count||1,
       hp:Math.floor(hp), maxHp:Math.floor(hp), shield:finalShield, maxShield:finalShield,
