@@ -764,16 +764,17 @@ function walletDeposit(symbol) {
   if (!amtStr) return;
   const amt = parseFloat(amtStr);
   if (isNaN(amt) || amt <= 0) return;
-  const method = (symbol === 'BCM' || symbol === 'BOCRYPTO') ? 'requestSendToken' : 'requestTransfer';
+  const method = 'requestSendToken';
+  const amtFormatted = symbol === 'BPW' ? amt.toFixed(8) : amt.toFixed(3);
   window.hive_keychain[method](
-    window._hiveUser, 'bokica80', amt.toFixed(3),
+    window._hiveUser, 'bokica80', amtFormatted,
     'HIVEGALAXY_deposit_' + symbol + '_' + window._hiveUser, symbol,
     function(resp) {
       if (resp.success) {
         R[cfg.key] = (R[cfg.key] || 0) + (cfg.div > 1 ? Math.round(amt * cfg.div) : amt);
         if (typeof updateResUI === 'function') updateResUI();
         if (typeof saveGame === 'function') saveGame();
-        if (typeof toast === 'function') toast('✅ Deposit ' + amt.toFixed(3) + ' ' + symbol + ' uspešan!', 'ok');
+        if (typeof toast === 'function') toast('✅ Deposit ' + amtFormatted + ' ' + symbol + ' uspešan!', 'ok');
         refreshHiveWallet();
       } else {
         alert('Transakcija odbijena: ' + (resp.message || 'Greška'));
