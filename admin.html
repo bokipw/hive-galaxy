@@ -723,28 +723,28 @@ async function fullFill() {
 
 async function loadEconomy() {
   try {
-    const { data } = await _supa.from('saves').select('id,data').limit(1000);
-    const { data: lb } = await _supa.from('leaderboard').select('id,username').limit(200);
-    const lbMap = {};
-    if (lb) lb.forEach(x => lbMap[x.id] = x.username);
+    const { data: profiles } = await _supa.from('hive_profiles').select('hive_user, bcm, bocrypto, spcard, keys, ikeys').neq('hive_user', '__system__').limit(1000);
+    const { data: saves } = await _supa.from('saves').select('id, data').limit(1000);
+    const savesMap = {};
+    if (saves) saves.forEach(s => savesMap[s.id] = s.data || {});
     const tbody = document.getElementById('econTbl');
-    if (!data || data.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="loading">Nema savova.</td></tr>'; return; }
-    tbody.innerHTML = data.map(row => {
-      const gs = row.data || {};
-      const R  = gs.R || {};
-      const name = lbMap[row.id] || row.id.slice(0,8) + '...';
-      const bpw = ((R.spCard||0) / 100000000).toFixed(8);
+    if (!profiles || profiles.length === 0) { tbody.innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
+    tbody.innerHTML = profiles.map(p => {
+      const uid = 'hive_' + p.hive_user;
+      const gs  = savesMap[uid] || {};
+      const R   = gs.R || {};
+      const bpw = ((p.spcard||0) / 100000000).toFixed(8);
       return '<tr>' +
-        '<td style="color:#fff;font-weight:600">' + name + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + p.hive_user + '</td>' +
         '<td style="color:#aaa">' + fmt(R.metal||0) + '</td>' +
         '<td style="color:#88aaff">' + fmt(R.crystal||0) + '</td>' +
         '<td style="color:#aaffaa">' + fmt(R.he3||0) + '</td>' +
         '<td style="color:#00d4ff">' + fmt(R.energy||0) + '</td>' +
-        '<td style="color:#ffcc44">' + (R.bocrypto||0).toFixed(3) + '</td>' +
-        '<td style="color:#ffcc44">' + (R.bcm||0) + '</td>' +
-        '<td style="color:#ffcc44">' + bpw + '</td>' +
-        '<td style="color:#aa44ff">' + (R.keys||0) + '</td>' +
-        '<td style="color:#aa44ff">' + (R.instanceKeys||0) + '</td>' +
+        '<td style="color:#ffcc44;font-weight:600">' + (p.bocrypto||0).toFixed(3) + '</td>' +
+        '<td style="color:#ffcc44;font-weight:600">' + (p.bcm||0) + '</td>' +
+        '<td style="color:#ffcc44;font-weight:600">' + bpw + '</td>' +
+        '<td style="color:#aa44ff">' + (p.keys||0) + '</td>' +
+        '<td style="color:#aa44ff">' + (p.ikeys||0) + '</td>' +
         '<td style="color:#ffcc44">' + fmt(gs.commander?.score||0) + '</td>' +
         '<td>' + (gs.commander?.level||1) + '</td>' +
         '</tr>';

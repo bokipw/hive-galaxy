@@ -45,6 +45,14 @@ async function _cloudSave(saveData) {
   } catch(e) { console.error('cloudSave leaderboard:', e); }
 
   try {
+    await window._supa.from('hive_profiles').update({
+      bcm:      typeof R !== 'undefined' ? (R.bcm      || 0) : 0,
+      bocrypto: typeof R !== 'undefined' ? (R.bocrypto || 0) : 0,
+      spcard:   typeof R !== 'undefined' ? (R.spCard   || 0) : 0,
+    }).eq('hive_user', username);
+  } catch(e) { console.error('cloudSave tokens:', e); }
+
+  try {
     const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
       ship_id:        u.ship_id,
       name:           u.name,
