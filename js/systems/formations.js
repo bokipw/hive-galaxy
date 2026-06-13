@@ -36,10 +36,10 @@ const FORMATIONS = [
     id:    3,
     name:  'Klinasta',
     icon:  '◆',
-    desc:  '+10% napad, +10% brzina. Agresivna formacija — centralni brod vodi.',
+    desc:  '+15% napad, +5% brzina. Tri kapetana u centralnoj koloni probijaju neprijatelja.',
     color: '#ff8833',
-    bonus: { dps: 10, speed: 10 },
-    pattern: [4], // centralni slot
+    bonus: { dps: 15, speed: 5 },
+    pattern: [1, 4, 7], // vertikalni klin — sredina svakog reda
   },
   {
     id:    4,
