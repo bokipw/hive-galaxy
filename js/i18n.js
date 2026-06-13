@@ -67,7 +67,15 @@ function _applyLangToDOM() {
 
 function setLang(lang) {
   loadLang(lang).then(() => {
-    if (typeof renderCurrentPage === 'function') renderCurrentPage();
+    // Re-render active panel
+    if (window._currentPanel && typeof showPanel === 'function') {
+      showPanel(window._currentPanel);
+    }
+    // Update save button text
+    const saveBtn = document.getElementById('saveBtn');
+    if (saveBtn && saveBtn.textContent.trim() !== t('btn.saved')) {
+      saveBtn.textContent = t('btn.save');
+    }
   });
 }
 
