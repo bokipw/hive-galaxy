@@ -19,7 +19,7 @@ async function _cloudSave(saveData) {
   const username = isEmail
     ? (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown')
     : window._hiveUser;
-  const score = (saveData.commander && saveData.commander.score) || 0;
+  const score = (saveData.R && saveData.R.score) || 0;
   const level = (saveData.commander && saveData.commander.level) || 1;
 
   try {
