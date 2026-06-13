@@ -68,6 +68,11 @@ async function _cloudSave(saveData) {
       level, power: typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
       fleet: deployedFleet, commanders,
       is_premium: window._playerPremium || false,
+      resources: {
+        metal:   typeof R !== 'undefined' ? (R.metal   || 0) : 0,
+        crystal: typeof R !== 'undefined' ? (R.crystal || 0) : 0,
+        he3:     typeof R !== 'undefined' ? (R.he3     || 0) : 0,
+      },
       updated_at: new Date().toISOString()
     });
     if (error) console.error('cloudSave pvp_snapshots:', error);
@@ -142,6 +147,8 @@ function _applyGameState(s) {
     if (!window._jumpGateCooldowns) window._jumpGateCooldowns = {};
     if (s.dropPity)              window._dropPity             = s.dropPity;
     if (!window._dropPity)       window._dropPity             = {};
+    if (s.bossCooldowns)         window._bossCooldowns        = s.bossCooldowns;
+    if (!window._bossCooldowns)  window._bossCooldowns        = {};
     window._fleetPosition = s.fleetPosition || null;
     if (s.dynamicStoryMissions) window._dynamicStoryMissions = s.dynamicStoryMissions;
     if (!window._dynamicStoryMissions) window._dynamicStoryMissions = [];
@@ -188,6 +195,7 @@ function saveGame() {
       conqueredPlanets:   window._conqueredPlanets   || [],
       colonyFleetReward:  window._colonyFleetReward  || {},
       jumpGateCooldowns:  window._jumpGateCooldowns  || {},
+      bossCooldowns:      window._bossCooldowns      || {},
       fleetPosition:      window._fleetPosition      || null,
       dropPity:           window._dropPity           || {},
       dynamicStoryMissions: window._dynamicStoryMissions || [],

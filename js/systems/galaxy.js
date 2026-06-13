@@ -38,7 +38,20 @@ function renderGalaxy(){
     </div>
     <div id="galaxyDetails" style="margin-top:12px"></div>
   `;
-  setTimeout(initGalaxyEngine, 30);
+  loadGalaxyPlayerBases().then(() => setTimeout(initGalaxyEngine, 30));
+}
+
+let _galaxyPlayerBases = [];
+
+async function loadGalaxyPlayerBases() {
+  if (!window._supa) return;
+  const myId = typeof _getSaveId === 'function' ? _getSaveId() : null;
+  const { data } = await window._supa.from('pvp_snapshots')
+    .select('id,username,rating,power,fleet,resources')
+    .neq('id', myId || '')
+    .order('rating', { ascending: false })
+    .limit(25);
+  _galaxyPlayerBases = (data || []).filter(p => p.fleet && p.fleet.length > 0);
 }
 
 function initGalaxyEngine(){
@@ -66,6 +79,19 @@ function initGalaxyEngine(){
     systems.push({...p, id:p.id, name:p.name, icon:PLANET_ICONS[p.type]||'🪐', type:p.type, threat:Math.min(10,(p.distance||1)+1), sector:{name:'Kolonije',color:'#aa44ff'}, x,y,z, owner:owned?'player':'neutral', isBase:false });
   });
 
+  // Igrači — crvene baze u vanjskom prstenu
+  _galaxyPlayerBases.forEach((p, i) => {
+    const a = (i / Math.max(_galaxyPlayerBases.length, 1)) * Math.PI * 2;
+    const r = 420 + (i % 3) * 60;
+    const x = Math.cos(a) * r, y = Math.sin(a) * r * 0.6, z = (i % 5 - 2) * 40;
+    systems.push({
+      id: 'player_' + p.id, name: p.username, icon: '🔴', type: 'enemy',
+      sector: { name: 'Neprijatelj', color: '#ff3355' },
+      x, y, z, owner: 'enemy', isBase: false, isPlayerBase: true,
+      pvpData: p,
+    });
+  });
+
   let rotX=-0.25, rotY=0.6, zoom=1, dragging=false, lx=0, ly=0, hover=null, t=0;
   const project=p=>{ const cy=Math.cos(rotY),sy=Math.sin(rotY); const x1=p.x*cy-p.z*sy, z1=p.x*sy+p.z*cy; const cx=Math.cos(rotX),sx=Math.sin(rotX); const y1=p.y*cx-z1*sx, z2=p.y*sx+z1*cx; const s=800/(800+z2)*zoom; return {x:W/2+x1*s,y:H/2+y1*s,z:z2,s}; };
 
@@ -90,13 +116,17 @@ function initGalaxyEngine(){
     const projs=systems.map(s=>({...s,p:project(s)})).sort((a,b)=>a.p.z-b.p.z);
     projs.forEach(s=>{
       const {x,y,z,s:sc}=s.p; if(z>480)return;
-      const ip=s.owner==='player', col=ip?'#00e5ff':s.sector.color, mult=s.isBase?1.6:1, r=(ip?5.5:3.8)*sc*mult;
-      ctx.beginPath();ctx.arc(x,y,r+9,0,7);ctx.fillStyle=ip?'rgba(0,229,255,0.12)':'rgba(255,255,255,0.04)';ctx.fill();
-      ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=ip?22:12;ctx.fill();ctx.shadowBlur=0;
+      const isEnemy = s.owner==='enemy';
+      const ip=s.owner==='player';
+      const col = isEnemy ? '#ff3355' : (ip?'#00e5ff':s.sector.color);
+      const mult=s.isBase?1.6:1, r=(ip?5.5: isEnemy?5:3.8)*sc*mult;
+      ctx.beginPath();ctx.arc(x,y,r+9,0,7);
+      ctx.fillStyle=isEnemy?'rgba(255,51,85,0.12)':(ip?'rgba(0,229,255,0.12)':'rgba(255,255,255,0.04)');ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=ip?22:(isEnemy?18:12);ctx.fill();ctx.shadowBlur=0;
       if(hover===s.id){ctx.beginPath();ctx.arc(x,y,r+6,0,7);ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();}
       ctx.font=`${Math.max(9,10*sc)}px Orbitron`;
       ctx.textAlign='center';
-      ctx.fillStyle = hover===s.id? '#ffffff' : (ip? '#00e5ff' : '#6a90b8');
+      ctx.fillStyle = hover===s.id? '#ffffff' : (ip? '#00e5ff' : isEnemy? '#ff8899' : '#6a90b8');
       ctx.shadowColor='rgba(0,0,0,0.9)'; ctx.shadowBlur=4;
       ctx.fillText(s.name, x, y + r + 14);
       ctx.shadowBlur=0;
@@ -116,6 +146,40 @@ function initGalaxyEngine(){
 
 function updateGalaxyDetails(sys){
   const d = document.getElementById('galaxyDetails'); if(!d) return;
+
+  // Tuđa baza — PvP napad
+  if (sys.isPlayerBase && sys.pvpData) {
+    const p = sys.pvpData;
+    const res = p.resources || {};
+    const pow = typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0;
+    d.innerHTML = `
+    <div class="card" style="border-color:#ff335555">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <div style="font-size:2.4rem">🔴</div>
+        <div style="flex:1">
+          <div style="font-weight:700;color:#ff3355;font-size:0.95rem">${p.username}</div>
+          <div style="font-size:0.65rem;color:#6a90b8;margin-top:2px">⭐ Rating: ${p.rating || 1000} · 💪 Moć: ${fmt(p.power || 0)}</div>
+        </div>
+      </div>
+      ${res.metal !== undefined ? `
+      <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:10px;padding:8px;background:rgba(255,51,85,0.06);border-radius:6px;border:1px solid rgba(255,51,85,0.2)">
+        <div style="color:#ff8899;margin-bottom:4px">📊 Procijenjeni resursi (plijen ~50k):</div>
+        🔩 ${fmt(res.metal)} metala &nbsp; 💎 ${fmt(res.crystal)} kristala &nbsp; ⛽ ${fmt(res.he3)} He3
+      </div>` : ''}
+      <div style="font-size:0.68rem;color:#6a90b8;margin-bottom:12px;padding:6px 8px;background:rgba(255,51,85,0.06);border-radius:4px;border-left:2px solid #ff3355">
+        ⚔️ Napad košta <b style="color:#fff">1000 ⚡ + 1000 BoCrypto</b><br>
+        🏆 Pobjeda: <b style="color:#00ff99">50k svakog resursa + rating poeni</b>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" style="flex:1;font-size:0.72rem;border-color:rgba(0,212,255,0.3);color:#00d4ff"
+          onclick="galaxyEspionage('${p.id}')">🔍 Skeniraj</button>
+        <button class="btn btn-danger" style="flex:1;font-size:0.72rem"
+          onclick="galaxyAttackBase('${p.id}')">⚔️ NAPADNI</button>
+      </div>
+    </div>`;
+    return;
+  }
+
   const owned    = colonies.some(c => c.planetId === sys.id);
   const pow      = typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : calcFleetStats(fleet.filter(Boolean)).power;
   const need     = sys.threat * 500;
@@ -511,4 +575,86 @@ function triggerFleetRecoveryMission(planetId, planet, fleetSlots, battle) {
   saveGame();
   toast(`🚑 Nova misija: "${narr.title}" — ${Math.floor(pct*100)}% flote povraćeno!`, 'warn');
   addLog(`🚑 Fleet recovery: ${planet.name} — +${fmt(recMetal)} Metal, +${fmt(recCrystal)} Crystal, +${fmt(recHe3)} He3`);
+}
+
+// ── GALAXY PVP — NAPAD NA TUĐU BAZU ──
+function galaxyEspionage(playerId) {
+  const p = _galaxyPlayerBases.find(b => b.id === playerId);
+  if (!p) return;
+  // Koristimo postojeći espionage sistem ako je dostupan
+  if (typeof openSendDronesModal === 'function') {
+    // Pronađi index u window._currentOpponents ako postoji
+    const idx = (window._currentOpponents || []).findIndex(o => o.id === playerId);
+    if (idx >= 0) { openSendDronesModal(idx); return; }
+  }
+  // Fallback — prikaži resurse direktno
+  const res = p.resources || {};
+  openModal('🔍 Skeniranje — ' + p.username,
+    `<div style="font-size:0.8rem;color:#6a90b8;margin-bottom:12px">Rezultati izviđanja:</div>
+    <div style="display:grid;gap:8px">
+      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">⭐ Rating: <b style="color:#ffcc44">${p.rating || 1000}</b></div>
+      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">💪 Moć flote: <b style="color:#00d4ff">${fmt(p.power || 0)}</b></div>
+      ${res.metal !== undefined ? `
+      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">
+        🔩 Metal: <b>${fmt(res.metal)}</b> &nbsp; 💎 Kristal: <b>${fmt(res.crystal)}</b> &nbsp; ⛽ He3: <b>${fmt(res.he3)}</b>
+      </div>` : '<div style="color:#6a90b8;font-size:0.72rem">Resursi nepoznati.</div>'}
+    </div>`,
+    [{ label: '⚔️ Napadni', cls: 'btn-danger', fn: () => { closeModal(); galaxyAttackBase(playerId); } },
+     { label: 'Zatvori', cls: '', fn: closeModal }]
+  );
+}
+
+function galaxyAttackBase(playerId) {
+  const p = _galaxyPlayerBases.find(b => b.id === playerId);
+  if (!p) return;
+
+  const energyCost = 1000, bocCost = 1000;
+  if (R.energy < energyCost) { toast('Nedovoljno energije! Treba ' + energyCost, 'warn'); return; }
+  if ((R.bocrypto || 0) < bocCost) { toast('Nedovoljno BoCrypto! Treba ' + bocCost, 'warn'); return; }
+
+  R.energy   -= energyCost;
+  R.bocrypto  = (R.bocrypto || 0) - bocCost;
+
+  const myFleet  = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal() : [];
+  const oppFleet = typeof buildPvpFleetFromSnapshot === 'function' ? buildPvpFleetFromSnapshot(p.fleet) : [];
+
+  if (!myFleet.length) { toast('Nemaš deployovanu flotu!', 'warn'); return; }
+  if (!oppFleet.length) { toast('Protivnik nema flotu.', 'warn'); return; }
+
+  toast('⚔️ Napadam bazu ' + p.username + '...', 'inf');
+
+  const battle = typeof simulatePvpBattle === 'function' ? simulatePvpBattle(myFleet, oppFleet) : null;
+  if (!battle) return;
+
+  const isVictory = battle.status === 'victory';
+  const pvp = (saveData.pvp = saveData.pvp || { rating: 1000, wins: 0, losses: 0, log: [] });
+
+  // Manji rating change nego normalni PvP (K=16 umjesto 32)
+  const myR = pvp.rating || 1000, oppR = p.rating || 1000;
+  const expected = 1 / (1 + Math.pow(10, (oppR - myR) / 400));
+  const ratingChange = Math.round(16 * ((isVictory ? 1 : 0) - expected));
+  pvp.rating = Math.max(0, pvp.rating + ratingChange);
+
+  if (isVictory) {
+    pvp.wins = (pvp.wins || 0) + 1;
+    R.metal   += 50000;
+    R.crystal += 50000;
+    R.he3     += 50000;
+    toast(`🏆 Pobjeda nad ${p.username}! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating`, 'ok');
+    addLog(`⚔️ Napad na bazu ${p.username} — POBJEDA! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating.`);
+  } else {
+    pvp.losses = (pvp.losses || 0) + 1;
+    toast(`💀 Poraz od ${p.username}. ${ratingChange} rating.`, 'warn');
+    addLog(`⚔️ Napad na bazu ${p.username} — PORAZ. ${ratingChange} rating.`);
+  }
+
+  pvp.log = pvp.log || [];
+  pvp.log.unshift({ time: Date.now(), opponent: p.username, rating: p.rating, result: battle.status, rounds: battle.round, ratingChange, loot: isVictory ? { metal:50000, crystal:50000, he3:50000 } : {} });
+  if (pvp.log.length > 20) pvp.log = pvp.log.slice(0, 20);
+
+  if (typeof updateResUI === 'function') updateResUI();
+  saveGame();
+
+  if (typeof showBattleOutcome === 'function') showBattleOutcome(battle, isVictory ? { metal:50000, crystal:50000, he3:50000, xp:0 } : {}, false);
+}
 }
