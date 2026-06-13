@@ -260,14 +260,14 @@ function calcRatingChange(myRating, oppRating, won) {
 // ============================================================
 async function refreshOpponents() {
   var el = document.getElementById('opponentList');
-  if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Trazim protivnike...</div>';
-  if (!window._supa) { if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Nije moguce ucitati protivnike.</div>'; return; }
+  if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.searching')+'</div>';
+  if (!window._supa) { if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.cannotLoad')+'</div>'; return; }
   var myId = window._supaSession ? window._supaSession.user.id : (window._hiveUser?'hive_'+window._hiveUser:null);
   var res = await window._supa.from('pvp_snapshots').select('*').neq('id',myId||'').order('rating',{ascending:false}).limit(20);
   var data = res.data, error = res.error;
   if (error || !data || data.length===0) {
     window._currentOpponents = [];
-    if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">Nema dostupnih protivnika.</div>';
+    if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.noOpponents')+'</div>';
     return;
   }
   var sorted = data.sort((a,b) => Math.abs(a.rating-(pvp.rating||1000)) - Math.abs(b.rating-(pvp.rating||1000)));
@@ -276,7 +276,7 @@ async function refreshOpponents() {
     power:row.power||0, fleet:Array.isArray(row.fleet)?row.fleet:[], isPremium:row.is_premium||false, updatedAt:row.updated_at,
   }));
   if (el) el.innerHTML = renderOpponentListHTML();
-  toast('Protivnici ucitani!','inf');
+  toast(t('pvp.loaded'),'inf');
 }
 
 function renderOpponentListHTML() {
@@ -304,21 +304,21 @@ function startPvpBattle(oppIdx) {
   if (document.getElementById('pvpBattleModal')) closePvpBattleModal();
   var opp = window._currentOpponents[oppIdx];
   if (!opp) return;
-  if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast('Shield je aktivan - ne mozes napadati!','warn'); return; }
+  if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast(t('pvp.shieldActive'),'warn'); return; }
   var energyCost=1000, bocCost=1000;
   // Provjeri flotu PRIJE oduzimanja resursa
   var myFleet = buildPvpFleetLocal();
-  if (myFleet.length===0) { toast('Nemas brodova u floti!','warn'); return; }
-  if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
-  if (R.energy<energyCost) { toast('Nedovoljno energije! Treba '+energyCost,'warn'); return; }
-  if ((R.bocrypto||0)<bocCost) { toast('Nedovoljno BOCRYPTO! Treba '+bocCost,'warn'); return; }
+  if (myFleet.length===0) { toast(t('pvp.noFleet'),'warn'); return; }
+  if (!opp.fleet||opp.fleet.length===0) { toast(t('pvp.enemyNoFleet'),'warn'); return; }
+  if (R.energy<energyCost) { toast(t('pvp.notEnoughEnergy',{cost:energyCost}),'warn'); return; }
+  if ((R.bocrypto||0)<bocCost) { toast(t('pvp.notEnoughBocrypto',{cost:bocCost}),'warn'); return; }
   R.energy -= energyCost;
   R.bocrypto = (R.bocrypto||0) - bocCost;
   if (typeof updateResUI==='function') updateResUI();
-  toast('Napadam '+opp.name+'...','inf');
+  toast(t('pvp.attacking',{name:opp.name}),'inf');
   setTimeout(function() {
     var oppFleet=buildPvpFleetFromSnapshot(opp.fleet);
-    if (oppFleet.length===0) { toast('Protivnik nema validnu flotu!','warn'); return; }
+    if (oppFleet.length===0) { toast(t('pvp.enemyNoValidFleet'),'warn'); return; }
     openPvpBattleVisual(myFleet, oppFleet, opp);
   }, 200);
 }
@@ -368,11 +368,11 @@ function renderPvp() {
 // ============================================================
 function activatePvpShield(hours, cost) {
   if (cost === undefined) cost = 300;
-  if ((R.bocrypto||0) < cost) { toast('Nedovoljno BoCrypto! Treba '+cost+' BOCRYPTO','warn'); return; }
+  if ((R.bocrypto||0) < cost) { toast(t('pvp.notEnoughBocShield',{cost:cost}),'warn'); return; }
   R.bocrypto = (R.bocrypto||0) - cost;
   window.pvpShield = { active:true, expiresAt:new Date(Date.now()+hours*3600000).toISOString() };
   if (typeof updateResUI==='function') updateResUI();
-  saveGame(); renderPvp(); toast('Shield aktivan '+hours+'h!','ok');
+  saveGame(); renderPvp(); toast(t('pvp.shieldBought',{hours:hours}),'ok');
 }
 function deactivatePvpShield() {
   window.pvpShield = { active:false, expiresAt:null };

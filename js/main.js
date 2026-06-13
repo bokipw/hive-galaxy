@@ -19,6 +19,10 @@ async function init() {
     addLog('💾 Igra učitana.');
   }
 
+  // Render language picker
+  const lpc = document.getElementById('langPickerContainer');
+  if (lpc && typeof renderLangPicker === 'function') lpc.innerHTML = renderLangPicker();
+
   updateResUI();
   renderBase();
   if (typeof generateDailyMissions  === 'function') generateDailyMissions();

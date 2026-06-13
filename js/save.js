@@ -207,7 +207,7 @@ function saveGame() {
     };
     _cloudSave(saveData);
     const btn = document.getElementById('saveBtn');
-    if (btn) { btn.textContent = '✅ Sačuvano'; setTimeout(() => btn.textContent = '💾 Sačuvaj', 1500); }
+    if (btn) { btn.textContent = t('btn.saved'); setTimeout(() => btn.textContent = t('btn.save'), 1500); }
   } catch(e) {
     console.error('Save error:', e);
   }
@@ -244,7 +244,7 @@ function loadGame() {
 }
 
 function resetGame() {
-  if (confirm('⚠️ SIGURNO? Ovo će obrisati SAV napredak!')) {
+  if (confirm(t('confirm.resetGame'))) {
     const uid = _getSaveId();
     if (uid && window._supa) {
       window._supa.from('saves').delete().eq('id', uid).then(() => location.reload());
