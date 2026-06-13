@@ -252,8 +252,8 @@
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Username</th><th>Metal</th><th>Crystal</th><th>He3</th><th>Score</th><th>Level</th></tr></thead>
-          <tbody id="econTbl"><tr><td colspan="6" class="loading">Klikni Ucitaj</td></tr></tbody>
+          <thead><tr><th>Username</th><th>Metal</th><th>Crystal</th><th>He3</th><th>Energija</th><th>BOCRYPTO</th><th>BCM</th><th>BPW</th><th>🗝️ Kljucevi</th><th>🔑 iKljucevi</th><th>Score</th><th>Level</th></tr></thead>
+          <tbody id="econTbl"><tr><td colspan="12" class="loading">Klikni Ucitaj</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -723,7 +723,7 @@ async function fullFill() {
 
 async function loadEconomy() {
   try {
-    const { data } = await _supa.from('saves').select('id,data').limit(50);
+    const { data } = await _supa.from('saves').select('id,data').limit(1000);
     const { data: lb } = await _supa.from('leaderboard').select('id,username').limit(200);
     const lbMap = {};
     if (lb) lb.forEach(x => lbMap[x.id] = x.username);
@@ -733,13 +733,20 @@ async function loadEconomy() {
       const gs = row.data || {};
       const R  = gs.R || {};
       const name = lbMap[row.id] || row.id.slice(0,8) + '...';
+      const bpw = ((R.spCard||0) / 100000000).toFixed(8);
       return '<tr>' +
-        '<td style="color:#fff">' + name + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + name + '</td>' +
         '<td style="color:#aaa">' + fmt(R.metal||0) + '</td>' +
         '<td style="color:#88aaff">' + fmt(R.crystal||0) + '</td>' +
         '<td style="color:#aaffaa">' + fmt(R.he3||0) + '</td>' +
-        '<td style="color:#ffcc44">' + fmt(gs.score||0) + '</td>' +
-        '<td>' + (gs.level||1) + '</td>' +
+        '<td style="color:#00d4ff">' + fmt(R.energy||0) + '</td>' +
+        '<td style="color:#ffcc44">' + (R.bocrypto||0).toFixed(3) + '</td>' +
+        '<td style="color:#ffcc44">' + (R.bcm||0) + '</td>' +
+        '<td style="color:#ffcc44">' + bpw + '</td>' +
+        '<td style="color:#aa44ff">' + (R.keys||0) + '</td>' +
+        '<td style="color:#aa44ff">' + (R.instanceKeys||0) + '</td>' +
+        '<td style="color:#ffcc44">' + fmt(gs.commander?.score||0) + '</td>' +
+        '<td>' + (gs.commander?.level||1) + '</td>' +
         '</tr>';
     }).join('');
   } catch(e) { showToast('Greska: ' + e.message, true); }
