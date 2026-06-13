@@ -38,13 +38,13 @@ function renderGalaxy(){
     </div>
     <div id="galaxyDetails" style="margin-top:12px"></div>
   `;
-  loadGalaxyPlayerBases().then(() => setTimeout(initGalaxyEngine, 30));
+  loadGalaxyPlayerBases().catch(()=>{}).finally(() => setTimeout(initGalaxyEngine, 30));
 }
 
 let _galaxyPlayerBases = [];
 
 async function loadGalaxyPlayerBases() {
-  if (!window._supa) return;
+  if (!window._supa) return Promise.resolve();
   const myId = typeof _getSaveId === 'function' ? _getSaveId() : null;
   const { data } = await window._supa.from('pvp_snapshots')
     .select('id,username,rating,power,fleet,resources')
@@ -627,7 +627,7 @@ function galaxyAttackBase(playerId) {
   if (!battle) return;
 
   const isVictory = battle.status === 'victory';
-  const pvp = (saveData.pvp = saveData.pvp || { rating: 1000, wins: 0, losses: 0, log: [] });
+  if (!pvp.log) pvp.log = [];
 
   // Manji rating change nego normalni PvP (K=16 umjesto 32)
   const myR = pvp.rating || 1000, oppR = p.rating || 1000;
