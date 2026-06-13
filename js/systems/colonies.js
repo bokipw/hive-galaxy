@@ -226,11 +226,16 @@ function _generateScanData(phalanxLv, colony) {
     });
   });
 
-  // PvP intel (viši nivo falange = bolje info)
-  let pvpIntel = null;
-  if (phalanxLv >= 3 && typeof window._pvpOpponents !== 'undefined' && window._pvpOpponents?.length > 0) {
-    const opp = window._pvpOpponents[Math.floor(Math.random() * window._pvpOpponents.length)];
-    pvpIntel = opp;
+  // PvP intel — igrači u dosegu iz galaxy baza
+  let pvpIntel = [];
+  if (phalanxLv >= 2) {
+    const bases = (typeof _galaxyPlayerBases !== 'undefined' ? _galaxyPlayerBases : []);
+    bases.forEach((p, i) => {
+      // Svaki igrač dobija pseudo-distancu na osnovu ratinga (manji rating = bliže)
+      const pseudoDist = Math.floor(p.rating / 400) + 1;
+      if (pseudoDist <= range) pvpIntel.push(p);
+    });
+    pvpIntel = pvpIntel.slice(0, 5);
   }
 
   // Event intel (Lv.5 = vidiš sljedeći event)
@@ -288,15 +293,28 @@ function _showScanModal(colony, phalanxLv, data) {
     html += `</div>`;
   }
 
-  // PvP intel
-  if (pvpIntel) {
-    html += `
-      <div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ PVP INTEL</div>
-      <div style="background:rgba(255,51,85,0.07);border:1px solid rgba(255,51,85,0.2);
-        border-radius:6px;padding:8px;margin-bottom:14px;font-size:0.65rem;color:#6a90b8;line-height:1.8">
-        Protivnik: <span style="color:white">${pvpIntel.name || 'Nepoznat'}</span><br>
-        Rating: <span style="color:#ffcc44">${pvpIntel.rating || '?'}</span>
+  // PvP intel — tuđe baze u dosegu
+  if (pvpIntel && pvpIntel.length > 0) {
+    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ NEPRIJATELJSKE BAZE U DOSEGU (${pvpIntel.length})</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">`;
+    pvpIntel.forEach(p => {
+      const res = p.resources || {};
+      html += `<div style="background:rgba(255,51,85,0.07);border:1px solid rgba(255,51,85,0.2);border-radius:6px;padding:8px;font-size:0.65rem;color:#6a90b8;line-height:1.8">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="color:white;font-weight:700">🔴 ${p.username}</span>
+          <span style="color:#ffcc44">⭐ ${p.rating || 1000}</span>
+        </div>
+        💪 Moć: <span style="color:#00d4ff">${fmt(p.power || 0)}</span>
+        ${res.metal !== undefined ? `&nbsp;·&nbsp; 🔩${fmt(res.metal)} 💎${fmt(res.crystal)} ⛽${fmt(res.he3)}` : ''}
+        <div style="margin-top:6px">
+          <button class="btn btn-danger" style="padding:3px 10px;font-size:0.62rem" onclick="closeModal();galaxyAttackBase('${p.id}')">⚔️ Napadni</button>
+        </div>
       </div>`;
+    });
+    html += `</div>`;
+  } else if (phalanxLv >= 2) {
+    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ PVP INTEL</div>
+    <div style="color:#6a90b8;font-size:0.7rem;margin-bottom:14px">Nema neprijateljskih baza u dosegu.</div>`;
   }
 
   // Event intel
