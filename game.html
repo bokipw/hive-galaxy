@@ -39,51 +39,58 @@
     }, { onConflict: 'hive_user' }).then(async () => {
       // Dohvati profil — premium status, ključevi
       const { data } = await _sb.from('hive_profiles')
-        .select('is_premium, keys, ikeys, boosters')
+        .select('is_premium, keys, boosters')
         .eq('hive_user', hiveUser)
         .single();
-      if(data) {
-        window._hiveProfile   = data;
-        window._playerPremium = data.is_premium || false;
+      window._hiveProfile   = data || {};
+      window._playerPremium = (data && data.is_premium) || false;
 
-        // Primijeni ključeve i resurse od admina
-        const pending    = data.boosters || {};
+      // Čekaj da se igra inicijalizira pa primijeni boosters i tokene
+      const applyKeys = async () => {
+        if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
 
-        // Čekaj da se igra inicijalizira pa primijeni
-        const applyKeys = async () => {
-          if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
+        // Dohvati sve iz hive_profiles direktno (tokeni + boosters)
+        try {
+          const { data: hp } = await _sb.from('hive_profiles')
+            .select('bcm, bocrypto, spcard, keys_cmd, keys_inst, boosters')
+            .eq('hive_user', hiveUser).single();
 
-          // Prvo učitaj tokene i ključeve iz Supabase (source of truth)
-          try {
-            const { data: tp } = await _sb.from('hive_profiles').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('hive_user', hiveUser).single();
-            if (tp) {
-              R.bcm         = tp.bcm       || 0;
-              R.bocrypto    = tp.bocrypto   || 0;
-              R.spCard      = tp.spcard     || 0;
-              R.keys        = tp.keys_cmd   || 0;
-              R.instanceKeys= tp.keys_inst  || 0;
+          if (hp) {
+            // Source of truth za tokene
+            R.bcm          = hp.bcm        || 0;
+            R.bocrypto     = hp.bocrypto    || 0;
+            R.spCard       = hp.spcard      || 0;
+            R.keys         = hp.keys_cmd    || 0;
+            R.instanceKeys = hp.keys_inst   || 0;
+
+            // Primijeni pending boosters od admina
+            const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};
+            var msgs = [];
+            if(pending.metal   > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal   + ' metal'); }
+            if(pending.crystal > 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
+            if(pending.he3     > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3     + ' He3'); }
+            if(pending.energy  > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : (R.energy + pending.energy)); msgs.push('+' + pending.energy + ' energija'); }
+            if(pending.bcm     > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;                             msgs.push('+' + pending.bcm      + ' BCM'); }
+            if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto;                        msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
+            if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000);     msgs.push('+' + pending.bpw      + ' BPW'); }
+
+            if(msgs.length > 0) {
+              await _sb.from('hive_profiles').update({
+                boosters:  {},
+                bcm:       R.bcm,
+                bocrypto:  R.bocrypto,
+                spcard:    R.spCard,
+                keys_cmd:  R.keys,
+                keys_inst: R.instanceKeys,
+              }).eq('hive_user', hiveUser);
+              if(typeof updateResUI === 'function') updateResUI();
+              if(typeof saveGame    === 'function') saveGame();
+              if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
             }
-          } catch(e) {}
-
-          var msgs = [];
-          if(pending.metal  > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal  + ' metal'); }
-          if(pending.crystal> 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
-          if(pending.he3    > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3 + ' He3'); }
-          if(pending.energy > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : R.energy + pending.energy); msgs.push('+' + pending.energy + ' energija'); }
-          if(pending.keys   > 0) { R.keys    = (R.keys    || 0) + pending.keys;    msgs.push('+' + pending.keys + ' 🗝️'); }
-          if(pending.ikeys  > 0) { R.instanceKeys = (R.instanceKeys || 0) + pending.ikeys; msgs.push('+' + pending.ikeys + ' 🔑'); }
-          if(pending.bcm      > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;      msgs.push('+' + pending.bcm      + ' BCM'); }
-          if(pending.bocrypto > 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
-          if(pending.bpw      > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }
-          if(msgs.length > 0) {
-            await _sb.from('hive_profiles').update({ boosters: {} }).eq('hive_user', hiveUser);
-            if(typeof updateResUI === 'function') updateResUI();
-            if(typeof saveGame    === 'function') saveGame();
-            if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
           }
-        };
-        applyKeys();
-      }
+        } catch(e) { console.error('applyKeys error:', e); }
+      };
+      applyKeys();
 
       // Fetch chain balances samo za wallet modal (ne diraj R.*)
       fetch('https://api.hive-engine.com/rpc/contracts', {

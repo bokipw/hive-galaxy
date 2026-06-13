@@ -1,9 +1,8 @@
 // ============================================================
 // HIVE GALAXY — js/save.js
-// Save / Load — localStorage + Supabase cloud save
+// Save / Load — Supabase only (no localStorage)
 // ============================================================
 
-// ── Helper: dohvati user ID za cloud save ──
 function _getSaveId() {
   if(window._supaSession) return window._supaSession.user.id;
   if(window._hiveUser)    return 'hive_' + window._hiveUser;
@@ -12,7 +11,6 @@ function _getSaveId() {
 
 async function _cloudSave(saveData) {
   if(!window._supa) return;
-
   const isEmail = !!window._supaSession;
   const isHive  = !!window._hiveUser;
   if(!isEmail && !isHive) return;
@@ -35,10 +33,7 @@ async function _cloudSave(saveData) {
 
   try {
     await window._supa.from('leaderboard').upsert({
-      id: uid,
-      username,
-      score,
-      level,
+      id: uid, username, score, level,
       is_premium: window._playerPremium || false,
       updated_at: new Date().toISOString()
     });
@@ -48,44 +43,30 @@ async function _cloudSave(saveData) {
     if (window._hiveUser) {
       await window._supa.from('hive_profiles').upsert({
         hive_user: window._hiveUser,
-        bcm:       typeof R !== 'undefined' ? (R.bcm          || 0) : 0,
-        bocrypto:  typeof R !== 'undefined' ? (R.bocrypto      || 0) : 0,
-        spcard:    typeof R !== 'undefined' ? (R.spCard        || 0) : 0,
-        keys_cmd:  typeof R !== 'undefined' ? (R.keys          || 0) : 0,
-        keys_inst: typeof R !== 'undefined' ? (R.instanceKeys  || 0) : 0,
+        bcm:       typeof R !== 'undefined' ? (R.bcm         || 0) : 0,
+        bocrypto:  typeof R !== 'undefined' ? (R.bocrypto     || 0) : 0,
+        spcard:    typeof R !== 'undefined' ? (R.spCard       || 0) : 0,
+        keys_cmd:  typeof R !== 'undefined' ? (R.keys         || 0) : 0,
+        keys_inst: typeof R !== 'undefined' ? (R.instanceKeys || 0) : 0,
       }, { onConflict: 'hive_user' });
     }
   } catch(e) { console.error('cloudSave tokens:', e); }
 
   try {
     const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
-      ship_id:        u.ship_id,
-      name:           u.name,
-      count:          u.count,
-      hp:             u.hp,
-      dps:            u.dps,
-      shield:         u.shield,
-      shield_regen:   u.shieldRegen,
-      agility:        u.agility,
-      speed:          u.speed,
-      armor:          u.armor,
-      dmg_reduction:  u.dmgReduction || 0,
-      crit_bonus:     u.critBonus    || 0,
-      engine_special: u.engineSpecial || null,
+      ship_id: u.ship_id, name: u.name, count: u.count, hp: u.hp, dps: u.dps,
+      shield: u.shield, shield_regen: u.shieldRegen, agility: u.agility,
+      speed: u.speed, armor: u.armor, dmg_reduction: u.dmgReduction || 0,
+      crit_bonus: u.critBonus || 0, engine_special: u.engineSpecial || null,
     })) : [];
-
     const commanders = (saveData.deployedCommanders || []).map(c => ({
       id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
     }));
-
     const { error } = await window._supa.from('pvp_snapshots').upsert({
-      id:         uid,
-      username,
+      id: uid, username,
       rating:     (saveData.pvp && saveData.pvp.rating) || 1000,
-      level,
-      power:      typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
-      fleet:      deployedFleet,
-      commanders,
+      level, power: typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
+      fleet: deployedFleet, commanders,
       is_premium: window._playerPremium || false,
       updated_at: new Date().toISOString()
     });
@@ -93,148 +74,18 @@ async function _cloudSave(saveData) {
   } catch(e) { console.error('cloudSave pvp_snapshots exception:', e); }
 }
 
-async function _cloudLoad() {
-  if(!window._supa) return null;
-  const uid = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
-  if(!uid) return null;
-  const { data, error } = await window._supa.from('saves').select('data').eq('id', uid).single();
-  if(error || !data) return null;
-  return data.data;
-}
-
-function _saveKey() {
-  if (window._hiveUser)    return 'hive_save_' + window._hiveUser;
-  if (window._supaSession) return 'hive_save_' + window._supaSession.user.id;
-  return 'hive_save';
-}
-
-function saveGame() {
+function _applyGameState(s) {
+  if (!s) return false;
   try {
-    // Tokeni se čuvaju samo u Supabase hive_profiles — ne u localStorage
-    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, ...RWithoutTokens } = R;
-    const saveData = {
-      _savedAt: new Date().toISOString(),
-      _season: window._serverSeason || 1,
-      R: RWithoutTokens,
-      buildings,
-      commander,
-      research,
-      fleet,
-      ownedBlueprints,
-      blueprintFragments,
-      colonies,
-      pvp,
-      espDrones,
-      espReports,
-      artifactFragments,
-      activeFormation,
-      starterGiven,
-      shipDesigns,
-      hangar,
-      instProgress: window._instProgress,
-      pvpShield: window.pvpShield,
-      artifactState: window.artifactState,
-      achievementState: window.achievementState,
-      missionState: window.missionState,
-      missionCounters: {
-        dailyInst: window._dailyInstCount||0,
-        dailyDepot: window._dailyDepotCount||0,
-        dailyRes: window._dailyResCount||0,
-        dailyShip: window._dailyShipCount||0,
-        dailyPvp: window._dailyPvpCount||0,
-        dailyEsp: window._dailyEspCount||0,
-        dailyBuild: window._dailyBuildCount||0,
-        dailyArt: window._dailyArtCount||0,
-        weeklyInst: window._weeklyInstCount||0,
-        weeklyPvp: window._weeklyPvpCount||0,
-        weeklyRes: window._weeklyResCount||0,
-      },
-      totalMetalMined: window._totalMetalMined,
-      totalDepotPickups: window._totalDepotPickups,
-      storageBuffer,
-      buildQueue,
-      recycleQueue,
-      ACHIEVES,
-      // Karte komandira + flote komandira (fleet je unutar ownedCommanders[i].fleet)
-      ownedCommanders:    window.ownedCommanders    || [],
-      activeCommander:    window._activeCommander    || null,
-      deployedCommanders:  window._deployedCommanders  || [],
-      designExtraSlots:    window._designExtraSlots    || 0,
-      designSlotsBought:   window._designSlotsBought   || 0,
-      formationSlots:     window._formationSlots     || Array(9).fill(null),
-      conqueredPlanets:     window._conqueredPlanets     || [],
-      colonyFleetReward:    window._colonyFleetReward    || {},
-      jumpGateCooldowns:    window._jumpGateCooldowns    || {},
-      fleetPosition:        window._fleetPosition        || null,
-      dropPity:             window._dropPity             || {},
-      dynamicStoryMissions: window._dynamicStoryMissions || [],
-      viewingCmdId:       window._viewingCmdId       || null,
-      packPity:           window._packPity           || {},
-      packPulls:          window._packPulls          || {},
-      cardAbilityCooldowns: Object.keys(window).filter(k=>k.startsWith('_cardAbility_'))
-        .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
-    };
-    localStorage.setItem(_saveKey(), JSON.stringify(saveData));
-    _cloudSave(saveData); // async, ne blokira
-    const btn = document.getElementById('saveBtn');
-    if (btn) { btn.textContent = '✅ Sačuvano'; setTimeout(() => btn.textContent = '💾 Sačuvaj', 1500); }
-  } catch(e) {
-    console.error('Save error:', e);
-  }
-}
-
-async function loadGameCloud() {
-  // Provjeri broj sezone — ako je server resetovan (sezona se promijenila), obrisi lokalni save
-  var serverSeason = 1;
-  try {
-    const { data: sys } = await window._supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
-    if (sys && sys.keys != null) serverSeason = sys.keys;
-    window._serverSeason = serverSeason;
-  } catch(e) {}
-
-  // Provjeri lokalnu sezonu
-  const localRaw = localStorage.getItem(_saveKey());
-  var localSeason = 1;
-  if (localRaw) {
-    try {
-      const localSave = JSON.parse(localRaw);
-      localSeason = localSave._season || 1;
-      if (localSeason < serverSeason) {
-        localStorage.removeItem(_saveKey());
-      }
-    } catch(e) { localStorage.removeItem(_saveKey()); }
-  }
-
-  // Ucitaj cloud save — koristi ga samo ako je noviji od lokalnog
-  const cloudData = await _cloudLoad();
-  if (cloudData) {
-    const cloudSeason  = cloudData._season  || 1;
-    const cloudSavedAt = cloudData._savedAt ? new Date(cloudData._savedAt).getTime() : 0;
-    const localRaw2    = localStorage.getItem(_saveKey());
-    const localSavedAt = localRaw2 ? (() => { try { const s = JSON.parse(localRaw2); return s._savedAt ? new Date(s._savedAt).getTime() : 0; } catch(e) { return 0; } })() : 0;
-    if (cloudSeason >= serverSeason && cloudSavedAt >= localSavedAt) {
-      localStorage.setItem(_saveKey(), JSON.stringify(cloudData));
-    }
-  }
-  return loadGame();
-}
-
-function loadGame() {
-  const raw = localStorage.getItem(_saveKey());
-  if (!raw) return false;
-  try {
-    const s = JSON.parse(raw);
-
     if (s.R) {
       const { bcm, bocrypto, spCard, keys, instanceKeys, ...rest } = s.R;
-      Object.assign(R, rest); // tokeni i ključevi se ne čitaju iz localStorage
+      Object.assign(R, rest);
     }
     if (s.storageBuffer)   Object.assign(storageBuffer, s.storageBuffer);
     if (s.buildQueue)      buildQueue = s.buildQueue;
     if (s.recycleQueue)    recycleQueue = s.recycleQueue;
     if (s.buildings)       Object.keys(s.buildings).forEach(k => { if (buildings[k]) buildings[k].level = s.buildings[k].level; });
     if (s.commander)       Object.assign(commander, s.commander);
-    // Migracija: nextExp se sad računa iz formule, ne sprema se statično
     if (typeof getExpForLevel === 'function') commander.nextExp = getExpForLevel(commander.level || 1);
     if (s.research)        Object.keys(s.research).forEach(k => { if (research[k]) research[k].level = s.research[k].level; });
     if (s.fleet)           fleet = s.fleet;
@@ -271,45 +122,128 @@ function loadGame() {
     if (s.totalMetalMined != null) window._totalMetalMined = s.totalMetalMined;
     if (s.totalDepotPickups != null) window._totalDepotPickups = s.totalDepotPickups;
     if (s.ACHIEVES)                ACHIEVES = s.ACHIEVES;
-
-    // Karte komandira + flote komandira
     if (s.ownedCommanders)    window.ownedCommanders    = s.ownedCommanders;
     if (s.activeCommander)    window._activeCommander   = s.activeCommander;
-    if (s.deployedCommanders)              window._deployedCommanders = s.deployedCommanders;
-    if (s.designExtraSlots  != null)       window._designExtraSlots   = s.designExtraSlots;
-    if (s.designSlotsBought != null)       window._designSlotsBought  = s.designSlotsBought;
+    if (s.deployedCommanders)        window._deployedCommanders = s.deployedCommanders;
+    if (s.designExtraSlots  != null) window._designExtraSlots   = s.designExtraSlots;
+    if (s.designSlotsBought != null) window._designSlotsBought  = s.designSlotsBought;
     if (s.formationSlots)     window._formationSlots     = s.formationSlots;
     if (s.viewingCmdId)       window._viewingCmdId      = s.viewingCmdId;
     if (s.packPity)           window._packPity          = s.packPity;
     if (s.packPulls)          window._packPulls         = s.packPulls;
     if (s.cardAbilityCooldowns) Object.assign(window, s.cardAbilityCooldowns);
-    // Legacy migration: stari cmdFleet se ignorira (flota je sada unutar ownedCommanders)
     if (!window._deployedCommanders) window._deployedCommanders = [];
     if (!window._formationSlots) window._formationSlots = Array(9).fill(null);
-    if (s.conqueredPlanets)     window._conqueredPlanets     = s.conqueredPlanets;
-    if (!window._conqueredPlanets) window._conqueredPlanets  = [];
-    if (s.colonyFleetReward)    window._colonyFleetReward    = s.colonyFleetReward;
+    if (s.conqueredPlanets)      window._conqueredPlanets     = s.conqueredPlanets;
+    if (!window._conqueredPlanets) window._conqueredPlanets   = [];
+    if (s.colonyFleetReward)     window._colonyFleetReward    = s.colonyFleetReward;
     if (!window._colonyFleetReward) window._colonyFleetReward = {};
-    if (s.jumpGateCooldowns)    window._jumpGateCooldowns    = s.jumpGateCooldowns;
+    if (s.jumpGateCooldowns)     window._jumpGateCooldowns    = s.jumpGateCooldowns;
     if (!window._jumpGateCooldowns) window._jumpGateCooldowns = {};
-    if (s.dropPity)             window._dropPity             = s.dropPity;
-    if (!window._dropPity)      window._dropPity             = {};
+    if (s.dropPity)              window._dropPity             = s.dropPity;
+    if (!window._dropPity)       window._dropPity             = {};
     window._fleetPosition = s.fleetPosition || null;
     if (s.dynamicStoryMissions) window._dynamicStoryMissions = s.dynamicStoryMissions;
     if (!window._dynamicStoryMissions) window._dynamicStoryMissions = [];
-
     return true;
   } catch(e) {
-    console.error('Load error:', e);
+    console.error('applyGameState error:', e);
     return false;
   }
 }
 
+function saveGame() {
+  try {
+    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, ...RWithoutTokens } = R;
+    const saveData = {
+      _savedAt: new Date().toISOString(),
+      _season: window._serverSeason || 1,
+      R: RWithoutTokens,
+      buildings, commander, research, fleet,
+      ownedBlueprints, blueprintFragments, colonies, pvp,
+      espDrones, espReports, artifactFragments, activeFormation,
+      starterGiven, shipDesigns, hangar,
+      instProgress: window._instProgress,
+      pvpShield: window.pvpShield,
+      artifactState: window.artifactState,
+      achievementState: window.achievementState,
+      missionState: window.missionState,
+      missionCounters: {
+        dailyInst: window._dailyInstCount||0, dailyDepot: window._dailyDepotCount||0,
+        dailyRes: window._dailyResCount||0, dailyShip: window._dailyShipCount||0,
+        dailyPvp: window._dailyPvpCount||0, dailyEsp: window._dailyEspCount||0,
+        dailyBuild: window._dailyBuildCount||0, dailyArt: window._dailyArtCount||0,
+        weeklyInst: window._weeklyInstCount||0, weeklyPvp: window._weeklyPvpCount||0,
+        weeklyRes: window._weeklyResCount||0,
+      },
+      totalMetalMined: window._totalMetalMined,
+      totalDepotPickups: window._totalDepotPickups,
+      storageBuffer, buildQueue, recycleQueue, ACHIEVES,
+      ownedCommanders:    window.ownedCommanders    || [],
+      activeCommander:    window._activeCommander    || null,
+      deployedCommanders: window._deployedCommanders || [],
+      designExtraSlots:   window._designExtraSlots   || 0,
+      designSlotsBought:  window._designSlotsBought  || 0,
+      formationSlots:     window._formationSlots     || Array(9).fill(null),
+      conqueredPlanets:   window._conqueredPlanets   || [],
+      colonyFleetReward:  window._colonyFleetReward  || {},
+      jumpGateCooldowns:  window._jumpGateCooldowns  || {},
+      fleetPosition:      window._fleetPosition      || null,
+      dropPity:           window._dropPity           || {},
+      dynamicStoryMissions: window._dynamicStoryMissions || [],
+      viewingCmdId:       window._viewingCmdId       || null,
+      packPity:           window._packPity           || {},
+      packPulls:          window._packPulls          || {},
+      cardAbilityCooldowns: Object.keys(window).filter(k=>k.startsWith('_cardAbility_'))
+        .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
+    };
+    _cloudSave(saveData);
+    const btn = document.getElementById('saveBtn');
+    if (btn) { btn.textContent = '✅ Sačuvano'; setTimeout(() => btn.textContent = '💾 Sačuvaj', 1500); }
+  } catch(e) {
+    console.error('Save error:', e);
+  }
+}
+
+async function loadGameCloud() {
+  // Provjeri sezonu
+  var serverSeason = 1;
+  try {
+    const { data: sys } = await window._supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
+    if (sys && sys.keys != null) serverSeason = sys.keys;
+    window._serverSeason = serverSeason;
+  } catch(e) {}
+
+  // Ucitaj iz Supabase
+  const uid = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
+  if (!uid) return false;
+
+  try {
+    const { data, error } = await window._supa.from('saves').select('data').eq('id', uid).single();
+    if (error || !data || !data.data) return false;
+    const s = data.data;
+    // Odbaci ako je stara sezona
+    if ((s._season || 1) < serverSeason) return false;
+    return _applyGameState(s);
+  } catch(e) {
+    console.error('loadGameCloud error:', e);
+    return false;
+  }
+}
+
+// Ostavljena za kompatibilnost — čita iz Supabase ako nema lokalnog
+function loadGame() {
+  return false;
+}
+
 function resetGame() {
   if (confirm('⚠️ SIGURNO? Ovo će obrisati SAV napredak!')) {
-    localStorage.removeItem(_saveKey());
-    localStorage.removeItem('hive_save');
-    location.reload();
+    const uid = _getSaveId();
+    if (uid && window._supa) {
+      window._supa.from('saves').delete().eq('id', uid).then(() => location.reload());
+    } else {
+      location.reload();
+    }
   }
 }
 
@@ -319,7 +253,7 @@ function addTestResources() {
   R.he3     += 1055555000;
   R.energy   = getEnergyMax();
   R.instanceKeys = (R.instanceKeys || 0) + 100;
-  R.keys = (R.keys || 0) + 500; // +500 ključeva za pull karte
+  R.keys = (R.keys || 0) + 500;
   if (typeof updateResUI === 'function') updateResUI();
   if (typeof toast === 'function') toast('➕ Test resursi + 100 inst. ključeva + 500 🗝️ za karte!', 'ok');
   saveGame();
