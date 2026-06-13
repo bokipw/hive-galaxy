@@ -127,6 +127,7 @@
     <button onclick="showSection('maintenance')">Sistem</button>
     <button onclick="showSection('season')" style="border-color:rgba(255,51,85,.4);color:#ff3355">🔱 Sezona Nagrade</button>
     <button onclick="showSection('premium')" style="border-color:rgba(255,204,51,.4);color:#ffcc33">💎 Premium</button>
+    <button onclick="showSection('withdrawals');loadWithdrawals()" style="border-color:rgba(255,100,0,.4);color:#ff6600">💸 Withdrawals</button>
   </div>
 
   <div class="content">
@@ -659,8 +660,175 @@
     <div id="bronzeRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
+    <!-- ══ WITHDRAWALS ══ -->
+    <div class="section" id="sec-withdrawals">
+      <div class="section-title">💸 WITHDRAWAL ZAHTEVI</div>
+
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+        <select id="witFilter" onchange="loadWithdrawals()" style="padding:6px 12px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,100,0,0.3);color:#c8dff0;border-radius:6px;font-size:0.75rem">
+          <option value="pending">⏳ Pending</option>
+          <option value="completed">✅ Completed</option>
+          <option value="rejected">❌ Rejected</option>
+          <option value="all">📋 Sve</option>
+        </select>
+        <button onclick="loadWithdrawals()" style="padding:6px 14px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:6px;cursor:pointer;font-size:0.75rem">🔄 Refresh</button>
+        <button onclick="deleteCompletedWithdrawals()" style="padding:6px 14px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:6px;cursor:pointer;font-size:0.75rem">🗑 Obriši completed/rejected</button>
+        <span id="witCount" style="font-size:0.7rem;color:#6a90b8"></span>
+      </div>
+
+      <div id="witList" style="font-size:0.75rem;color:#6a90b8;padding:20px 0;text-align:center">Učitavanje...</div>
+    </div>
+
   </div><!-- /content -->
 </div><!-- /adminApp -->
+
+<script>
+// ══ WITHDRAWALS ADMIN ══
+
+async function loadWithdrawals() {
+  const el = document.getElementById('witList');
+  const filter = document.getElementById('witFilter')?.value || 'pending';
+  if (el) el.innerHTML = '<div style="text-align:center;padding:20px;color:#6a90b8">Učitavanje...</div>';
+
+  let query = window._supa.from('withdrawals').select('*').order('requested_at', { ascending: false });
+  if (filter !== 'all') query = query.eq('status', filter);
+
+  const { data, error } = await query;
+  if (error || !data) { el.innerHTML = '<div style="color:#ff3355">Greška: ' + (error?.message || '?') + '</div>'; return; }
+
+  document.getElementById('witCount').textContent = data.length + ' zahteva';
+
+  if (data.length === 0) { el.innerHTML = '<div style="text-align:center;padding:30px;color:#6a90b8">Nema zahteva.</div>'; return; }
+
+  const tokenColor = { BCM: '#00ff88', BOCRYPTO: '#ffcc44', BPW: '#00d4ff' };
+  const statusBadge = {
+    pending:   '<span style="background:rgba(255,204,0,0.15);color:#ffcc44;border:1px solid #ffcc4444;padding:2px 8px;border-radius:4px;font-size:0.6rem">⏳ PENDING</span>',
+    completed: '<span style="background:rgba(0,255,136,0.15);color:#00ff88;border:1px solid #00ff8844;padding:2px 8px;border-radius:4px;font-size:0.6rem">✅ DONE</span>',
+    rejected:  '<span style="background:rgba(255,51,85,0.15);color:#ff3355;border:1px solid #ff335544;padding:2px 8px;border-radius:4px;font-size:0.6rem">❌ REJECTED</span>',
+  };
+
+  const fmt = (n) => n !== null && n !== undefined ? Number(n).toLocaleString() : '?';
+  const fmtAmt = (row) => {
+    if (row.token === 'BPW') return (row.net_amount / 1e8).toFixed(8) + ' BPW';
+    if (row.token === 'BCM') return Math.floor(row.net_amount) + ' BCM';
+    return Number(row.net_amount).toFixed(3) + ' BOCRYPTO';
+  };
+  const fmtGas = (row) => {
+    if (row.token === 'BCM') return '1,000 BoCrypto';
+    if (row.token === 'BPW') return (row.gas_amount / 1e8).toFixed(8) + ' BPW';
+    return Number(row.gas_amount).toFixed(3) + ' BOCRYPTO';
+  };
+
+  el.innerHTML = data.map(row => `
+    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,100,0,${row.status==='pending'?'0.25':'0.1'});
+      border-radius:10px;padding:16px;margin-bottom:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+        <div>
+          <span style="font-size:0.85rem;font-weight:700;color:white">@${row.username}</span>
+          ${row.hive_account ? `<span style="font-size:0.65rem;color:#6a90b8;margin-left:8px">HIVE: @${row.hive_account}</span>` : ''}
+          <div style="font-size:0.6rem;color:#444;margin-top:2px">${new Date(row.requested_at).toLocaleString('sr')}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${statusBadge[row.status] || ''}
+          <span style="font-family:'Orbitron',monospace;font-size:0.9rem;color:${tokenColor[row.token]||'white'}">${fmtAmt(row)}</span>
+          <span style="font-size:0.65rem;color:#6a90b8;background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:4px">${row.token}</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;font-size:0.65rem">
+        <div style="background:rgba(0,0,0,0.2);padding:8px;border-radius:6px">
+          <div style="color:#6a90b8;margin-bottom:2px">Traženo</div>
+          <div style="color:white">${row.token==='BPW' ? (row.amount/1e8).toFixed(8)+' BPW' : row.token==='BCM' ? Math.floor(row.amount)+' BCM' : Number(row.amount).toFixed(3)+' BOC'}</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:8px;border-radius:6px">
+          <div style="color:#6a90b8;margin-bottom:2px">Gas fee</div>
+          <div style="color:#ff6600">${fmtGas(row)}</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);padding:8px;border-radius:6px">
+          <div style="color:#6a90b8;margin-bottom:2px">Šalješ</div>
+          <div style="color:#00ff88;font-weight:700">${fmtAmt(row)}</div>
+        </div>
+      </div>
+
+      ${row.tx_id ? `<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:10px">TX: <span style="color:#00d4ff;font-family:monospace">${row.tx_id}</span></div>` : ''}
+
+      ${row.status === 'pending' ? `
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input id="tx_${row.id}" type="text" placeholder="TX ID / hash transakcije (opciono)"
+          style="flex:1;min-width:180px;padding:7px 12px;background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.2);
+            color:white;border-radius:6px;font-size:0.7rem;font-family:monospace">
+        <button onclick="approveWithdraw('${row.id}','${row.username}','${row.token}')"
+          style="padding:7px 16px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);
+            color:#00ff88;border-radius:6px;cursor:pointer;font-size:0.72rem;font-weight:700">✅ Odobri</button>
+        <button onclick="rejectWithdraw('${row.id}','${row.player_id}','${row.token}',${row.amount},${row.gas_amount})"
+          style="padding:7px 16px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);
+            color:#ff3355;border-radius:6px;cursor:pointer;font-size:0.72rem">❌ Odbij</button>
+        <button onclick="deleteWithdraw('${row.id}')"
+          style="padding:7px 12px;background:rgba(80,80,80,0.1);border:1px solid rgba(80,80,80,0.3);
+            color:#666;border-radius:6px;cursor:pointer;font-size:0.72rem">🗑</button>
+      </div>` : `
+      <button onclick="deleteWithdraw('${row.id}')"
+        style="padding:6px 14px;background:rgba(80,80,80,0.1);border:1px solid rgba(80,80,80,0.3);
+          color:#666;border-radius:6px;cursor:pointer;font-size:0.7rem">🗑 Delete</button>`}
+    </div>`).join('');
+}
+
+async function approveWithdraw(id, username, token) {
+  const txInput = document.getElementById('tx_' + id);
+  const txId = txInput ? txInput.value.trim() : '';
+  if (!confirm(`Odobri withdraw za @${username} (${token})?\n\nUveri se da si VEĆ poslao tokene pre potvrde!`)) return;
+
+  const { error } = await window._supa.from('withdrawals').update({
+    status: 'completed',
+    tx_id: txId || null,
+    processed_at: new Date().toISOString(),
+  }).eq('id', id);
+
+  if (error) { alert('Greška: ' + error.message); return; }
+  alert('✅ Withdraw označen kao completed!');
+  loadWithdrawals();
+}
+
+async function rejectWithdraw(id, playerId, token, amount, gasAmt) {
+  if (!confirm('Odbiti zahtev i VRATITI tokene igraču?')) return;
+
+  // Vrati tokene u save igrača
+  const { data: saveRow } = await window._supa.from('saves').select('data').eq('id', playerId).single();
+  if (saveRow && saveRow.data) {
+    const s = saveRow.data;
+    if (!s.R) s.R = {};
+    if (token === 'BCM') {
+      s.R.bcm = (s.R.bcm || 0) + Math.floor(amount);
+      s.R.bocrypto = (s.R.bocrypto || 0) + Number(gasAmt); // vrati gas
+    } else if (token === 'BOCRYPTO') {
+      s.R.bocrypto = (s.R.bocrypto || 0) + Number(amount) + Number(gasAmt);
+    } else if (token === 'BPW') {
+      s.R.spCard = (s.R.spCard || 0) + Number(amount) + Number(gasAmt);
+    }
+    await window._supa.from('saves').update({ data: s }).eq('id', playerId);
+  }
+
+  await window._supa.from('withdrawals').update({
+    status: 'rejected',
+    processed_at: new Date().toISOString(),
+  }).eq('id', id);
+
+  alert('❌ Zahtev odbijen, tokeni vraćeni igraču.');
+  loadWithdrawals();
+}
+
+async function deleteWithdraw(id) {
+  if (!confirm('Trajno obrisati ovaj zahtev?')) return;
+  await window._supa.from('withdrawals').delete().eq('id', id);
+  loadWithdrawals();
+}
+
+async function deleteCompletedWithdrawals() {
+  if (!confirm('Obrisati sve completed i rejected zahteve?')) return;
+  await window._supa.from('withdrawals').delete().in('status', ['completed', 'rejected']);
+  loadWithdrawals();
+}
+</script>
 
 <!-- MODAL: Player Actions -->
 <div class="modal-bg" id="playerModal">
