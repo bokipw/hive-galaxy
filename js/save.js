@@ -108,10 +108,12 @@ function _saveKey() {
 
 function saveGame() {
   try {
+    // Tokeni se čuvaju samo u Supabase hive_profiles — ne u localStorage
+    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, ...RWithoutTokens } = R;
     const saveData = {
       _savedAt: new Date().toISOString(),
       _season: window._serverSeason || 1,
-      R,
+      R: RWithoutTokens,
       buildings,
       commander,
       research,
@@ -221,7 +223,10 @@ function loadGame() {
   try {
     const s = JSON.parse(raw);
 
-    if (s.R)               Object.assign(R, s.R);
+    if (s.R) {
+      const { bcm, bocrypto, spCard, ...rest } = s.R;
+      Object.assign(R, rest); // tokeni se ne čitaju iz localStorage
+    }
     if (s.storageBuffer)   Object.assign(storageBuffer, s.storageBuffer);
     if (s.buildQueue)      buildQueue = s.buildQueue;
     if (s.recycleQueue)    recycleQueue = s.recycleQueue;
