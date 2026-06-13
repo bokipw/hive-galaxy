@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HIVE GALAXY â€” Leaderboards</title>
+  <title>HIVE GALAXY — Leaderboards</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -325,21 +325,21 @@
 
   <!-- Header -->
   <div class="header">
-    <h1>âš”ď¸Ź LEADERBOARDS</h1>
-    <p>HIVE GALAXY â€” PVP RANG LISTA â€” SEZONA 1</p>
+    <h1>⚔️ LEADERBOARDS</h1>
+    <p>HIVE GALAXY — PVP RANG LISTA — SEZONA 1</p>
   </div>
 
   <!-- Season bar -->
   <div class="season-bar">
-    <div class="season-label">đźŹ† SEZONA 1</div>
+    <div class="season-label">🏆 SEZONA 1</div>
     <div class="season-timer" id="seasonTimer">--d --h --m</div>
-    <div class="season-note">Top igraÄŤi na kraju sezone dobijaju ekskluzivne nagrade</div>
+    <div class="season-note">Top igrači na kraju sezone dobijaju ekskluzivne nagrade</div>
   </div>
 
   <!-- Search -->
   <div class="search-wrap">
-    <input class="search-input" id="searchInput" type="text" placeholder="đź”Ť PretraĹľi igraÄŤa...">
-    <button class="refresh-btn" onclick="generateAndRender()">â†» REFRESH</button>
+    <input class="search-input" id="searchInput" type="text" placeholder="🔍 Pretraži igrača...">
+    <button class="refresh-btn" onclick="generateAndRender()">↻ REFRESH</button>
   </div>
 
   <!-- Tabs -->
@@ -351,22 +351,22 @@
 </div>
 
 <script>
-// â”€â”€ DIVISIĂ“N CONFIG â”€â”€
+// ── DIVISION CONFIG ──
 const DIVISIONS = [
   {
     id: 'PERFECT_MASTER',
     name: 'Perfect Master',
-    icon: 'đź”±',
+    icon: '🔱',
     color: '#ff3355',
     positions: [1, 10],
     ratingMin: 5000,
     ratingMax: 9999,
-    factions: ['GalaktiÄŤki OsvajaÄŤ', 'KosmiÄŤki Tiranin'],
+    factions: ['Galaktički Osvajač', 'Kosmički Tiranin'],
   },
   {
     id: 'GRAND_MASTER',
     name: 'Grand Master',
-    icon: 'đź‘‘',
+    icon: '👑',
     color: '#ffaa00',
     positions: [11, 100],
     ratingMin: 3500,
@@ -376,7 +376,7 @@ const DIVISIONS = [
   {
     id: 'MASTER',
     name: 'Master',
-    icon: 'đź’«',
+    icon: '💫',
     color: '#aa44ff',
     positions: [101, 200],
     ratingMin: 2800,
@@ -386,7 +386,7 @@ const DIVISIONS = [
   {
     id: 'DIAMOND',
     name: 'Diamond',
-    icon: 'đź’Ž',
+    icon: '💎',
     color: '#00d4ff',
     positions: [201, 400],
     ratingMin: 2200,
@@ -396,7 +396,7 @@ const DIVISIONS = [
   {
     id: 'GOLD',
     name: 'Gold',
-    icon: 'đźĄ‡',
+    icon: '🥇',
     color: '#ffcc44',
     positions: [401, 650],
     ratingMin: 1600,
@@ -406,7 +406,7 @@ const DIVISIONS = [
   {
     id: 'SILVER',
     name: 'Silver',
-    icon: 'đźĄ',
+    icon: '🥈',
     color: '#aaaaaa',
     positions: [651, 1000],
     ratingMin: 1000,
@@ -416,7 +416,7 @@ const DIVISIONS = [
   {
     id: 'BRONZE',
     name: 'Bronze',
-    icon: 'đźĄ‰',
+    icon: '🥉',
     color: '#cd7f32',
     positions: [1001, 9999],
     ratingMin: 0,
@@ -425,7 +425,7 @@ const DIVISIONS = [
   },
 ];
 
-// â”€â”€ SUPABASE â”€â”€
+// ── SUPABASE ──
 const _supa = supabase.createClient(
   'https://kjgfouzyqcnlwbsyipxp.supabase.co',
   'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
@@ -442,13 +442,12 @@ function getDivForScore(score) {
 
 async function generatePlayers() {
   const { data, error } = await _supa
-    .from('leaderboard')
-    .select('username, score, level, is_premium')
-    .order('score', { ascending: false })
+    .from('pvp_snapshots')
+    .select('username, rating, level, is_premium')
+    .order('rating', { ascending: false })
     .limit(500);
 
   if (error || !data || data.length === 0) {
-    // Nema podataka joĹˇ
     allPlayers = [];
     return;
   }
@@ -456,14 +455,14 @@ async function generatePlayers() {
   allPlayers = data.map((row, i) => ({
     rank:      i + 1,
     name:      row.username,
-    rating:    row.score || 0,
+    rating:    row.rating || 1000,
     level:     row.level || 1,
     isPremium: row.is_premium || false,
-    divId:     getDivForScore(row.score || 0),
+    divId:     getDivForScore(row.rating || 1000),
   }));
 }
 
-// â”€â”€ RENDER â”€â”€
+// ── RENDER ──
 let activeTab = 'ALL';
 let currentPage = 1;
 const PAGE_SIZE = 25;
@@ -471,7 +470,7 @@ const PAGE_SIZE = 25;
 function renderTabs() {
   const el = document.getElementById('tabs');
   const all = `<div class="tab div-DIAMOND ${activeTab === 'ALL' ? 'active' : ''}"
-    onclick="setTab('ALL')" style="--c:#00d4ff;--g:rgba(0,212,255,0.2)">đźŚŚ SVI</div>`;
+    onclick="setTab('ALL')" style="--c:#00d4ff;--g:rgba(0,212,255,0.2)">🌌 SVI</div>`;
   const divTabs = DIVISIONS.map(d =>
     `<div class="tab div-${d.id} ${activeTab === d.id ? 'active' : ''}"
       onclick="setTab('${d.id}')">${d.icon} ${d.name.toUpperCase()}</div>`
@@ -505,14 +504,12 @@ function renderTable() {
     return;
   }
 
-  // Group by division for ALL view
   let html = '';
 
   if (activeTab !== 'ALL') {
     const div = DIVISIONS.find(d => d.id === activeTab);
     html += renderDivisionSection(div, pagePlayers, false);
   } else {
-    // Show all divisions
     DIVISIONS.forEach(div => {
       const divPlayers = pagePlayers.filter(p => p.divId === div.id);
       if (divPlayers.length > 0) {
@@ -521,7 +518,6 @@ function renderTable() {
     });
   }
 
-  // Pagination
   if (totalPages > 1) {
     html += `<div class="pagination">`;
     for (let p = 1; p <= Math.min(totalPages, 10); p++) {
@@ -544,15 +540,15 @@ function renderDivisionSection(div, players, compact) {
         <div class="section-icon">${div.icon}</div>
         <div>
           <div class="section-title">${div.name.toUpperCase()}</div>
-          <div class="section-sub">Pozicije ${div.positions[0]}â€“${div.positions[1] === 9999 ? 'âž' : div.positions[1]}</div>
+          <div class="section-sub">Pozicije ${div.positions[0]}–${div.positions[1] === 9999 ? '∞' : div.positions[1]}</div>
         </div>
-        <div class="section-count">${totalInDiv} IGRAÄŚA</div>
+        <div class="section-count">${totalInDiv} IGRAČA</div>
       </div>
       <table class="leaderboard-table">
         <thead>
           <tr>
             <th style="width:60px">RANK</th>
-            <th>IGRAÄŚ</th>
+            <th>IGRAČ</th>
             <th>LEVEL</th>
             <th>SCORE</th>
             <th>STATUS</th>
@@ -563,7 +559,7 @@ function renderDivisionSection(div, players, compact) {
   players.forEach(p => {
     const rankClass = p.rank === 1 ? 'rank-1' : p.rank === 2 ? 'rank-2' : p.rank === 3 ? 'rank-3' : 'rank-other';
     const nameClass = p.rank === 1 ? 'top1' : p.rank === 2 ? 'top2' : p.rank === 3 ? 'top3' : '';
-    const trophy = p.rank === 1 ? 'đźŹ†' : p.rank === 2 ? 'đźĄ' : p.rank === 3 ? 'đźĄ‰' : '';
+    const trophy = p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : p.rank === 3 ? '🥉' : '';
 
     html += `
       <tr class="${rankClass}">
@@ -575,7 +571,7 @@ function renderDivisionSection(div, players, compact) {
         <td style="font-family:'Orbitron',monospace;font-size:0.8rem;color:#c0d8f0">Lv.${p.level}</td>
         <td><span class="rating-val">${(p.rating||0).toLocaleString()}</span></td>
         <td>${p.isPremium
-          ? '<span style="font-size:0.65rem;color:#ffcc44;font-family:Orbitron,monospace;border:1px solid #ffcc4444;padding:2px 8px;border-radius:3px">â­ PREMIUM</span>'
+          ? '<span style="font-size:0.65rem;color:#ffcc44;font-family:Orbitron,monospace;border:1px solid #ffcc4444;padding:2px 8px;border-radius:3px">⭐ PREMIUM</span>'
           : '<span style="font-size:0.65rem;color:#6a90b8">FREE</span>'
         }</td>
       </tr>`;
@@ -594,7 +590,7 @@ function goPage(p) {
 async function generateAndRender() {
   document.getElementById('leaderboardContent').innerHTML =
     `<div style="text-align:center;padding:60px;color:#6a90b8;font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:2px">
-      âŹł UÄŚITAVANJE...
+      ⏳ UČITAVANJE...
     </div>`;
   await generatePlayers();
   currentPage = 1;
@@ -602,14 +598,14 @@ async function generateAndRender() {
   if (allPlayers.length === 0) {
     document.getElementById('leaderboardContent').innerHTML =
       `<div style="text-align:center;padding:60px;color:#6a90b8;font-size:0.85rem">
-        JoĹˇ nema igraÄŤa na leaderboardu. Budi prvi! đźš€
+        Još nema igrača na leaderboardu. Budi prvi! 🚀
       </div>`;
     return;
   }
   renderTable();
 }
 
-// Season timer (mock â€” 14 dana od danas)
+// Season timer — 14 dana od danas
 function updateTimer() {
   const end = new Date();
   end.setDate(end.getDate() + 14);
@@ -618,20 +614,17 @@ function updateTimer() {
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff % 86400000) / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
-  document.getElementById('seasonTimer').textContent = `âŹ± ${d}d ${h}h ${m}m do kraja sezone`;
+  document.getElementById('seasonTimer').textContent = `⏱ ${d}d ${h}h ${m}m do kraja sezone`;
 }
 
-// Search
 document.getElementById('searchInput').addEventListener('input', () => {
   currentPage = 1;
   renderTable();
 });
 
-// Init
 generateAndRender();
 updateTimer();
 setInterval(updateTimer, 60000);
 </script>
 </body>
 </html>
-
