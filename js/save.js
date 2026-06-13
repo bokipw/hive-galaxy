@@ -24,56 +24,60 @@ async function _cloudSave(saveData) {
   const score = (saveData.commander && saveData.commander.score) || 0;
   const level = (saveData.commander && saveData.commander.level) || 1;
 
-  // Upsert save (email i HIVE igrači)
-  await window._supa.from('saves').upsert({
-    id: uid,
-    data: saveData,
-    version: (saveData._version || 0) + 1,
-    saved_at: new Date().toISOString()
-  });
+  try {
+    await window._supa.from('saves').upsert({
+      id: uid,
+      data: saveData,
+      version: (saveData._version || 0) + 1,
+      saved_at: new Date().toISOString()
+    });
+  } catch(e) { console.error('cloudSave saves:', e); }
 
-  // Upsert leaderboard (email i HIVE igrači)
-  await window._supa.from('leaderboard').upsert({
-    id: uid,
-    username,
-    score,
-    level,
-    is_premium: window._playerPremium || false,
-    updated_at: new Date().toISOString()
-  });
+  try {
+    await window._supa.from('leaderboard').upsert({
+      id: uid,
+      username,
+      score,
+      level,
+      is_premium: window._playerPremium || false,
+      updated_at: new Date().toISOString()
+    });
+  } catch(e) { console.error('cloudSave leaderboard:', e); }
 
-  // Upsert PvP snapshot — koristimo buildPvpFleetLocal() koji računa SVE bonuse
-  const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
-    ship_id:        u.ship_id,
-    name:           u.name,
-    count:          u.count,
-    hp:             u.hp,
-    dps:            u.dps,
-    shield:         u.shield,
-    shield_regen:   u.shieldRegen,
-    agility:        u.agility,
-    speed:          u.speed,
-    armor:          u.armor,
-    dmg_reduction:  u.dmgReduction || 0,
-    crit_bonus:     u.critBonus    || 0,
-    engine_special: u.engineSpecial || null,
-  })) : [];
+  try {
+    const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
+      ship_id:        u.ship_id,
+      name:           u.name,
+      count:          u.count,
+      hp:             u.hp,
+      dps:            u.dps,
+      shield:         u.shield,
+      shield_regen:   u.shieldRegen,
+      agility:        u.agility,
+      speed:          u.speed,
+      armor:          u.armor,
+      dmg_reduction:  u.dmgReduction || 0,
+      crit_bonus:     u.critBonus    || 0,
+      engine_special: u.engineSpecial || null,
+    })) : [];
 
-  const commanders    = (saveData.deployedCommanders || []).map(c => ({
-    id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
-  }));
+    const commanders = (saveData.deployedCommanders || []).map(c => ({
+      id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
+    }));
 
-  await window._supa.from('pvp_snapshots').upsert({
-    id:         uid,
-    username,
-    rating:     (saveData.pvp && saveData.pvp.rating) || 1000,
-    level,
-    power:      typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
-    fleet:      deployedFleet,
-    commanders,
-    is_premium: window._playerPremium || false,
-    updated_at: new Date().toISOString()
-  });
+    const { error } = await window._supa.from('pvp_snapshots').upsert({
+      id:         uid,
+      username,
+      rating:     (saveData.pvp && saveData.pvp.rating) || 1000,
+      level,
+      power:      typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
+      fleet:      deployedFleet,
+      commanders,
+      is_premium: window._playerPremium || false,
+      updated_at: new Date().toISOString()
+    });
+    if (error) console.error('cloudSave pvp_snapshots:', error);
+  } catch(e) { console.error('cloudSave pvp_snapshots exception:', e); }
 }
 
 async function _cloudLoad() {
