@@ -48,9 +48,11 @@ async function _cloudSave(saveData) {
     if (window._hiveUser) {
       await window._supa.from('hive_profiles').upsert({
         hive_user: window._hiveUser,
-        bcm:      typeof R !== 'undefined' ? (R.bcm      || 0) : 0,
-        bocrypto: typeof R !== 'undefined' ? (R.bocrypto || 0) : 0,
-        spcard:   typeof R !== 'undefined' ? (R.spCard   || 0) : 0,
+        bcm:       typeof R !== 'undefined' ? (R.bcm          || 0) : 0,
+        bocrypto:  typeof R !== 'undefined' ? (R.bocrypto      || 0) : 0,
+        spcard:    typeof R !== 'undefined' ? (R.spCard        || 0) : 0,
+        keys_cmd:  typeof R !== 'undefined' ? (R.keys          || 0) : 0,
+        keys_inst: typeof R !== 'undefined' ? (R.instanceKeys  || 0) : 0,
       }, { onConflict: 'hive_user' });
     }
   } catch(e) { console.error('cloudSave tokens:', e); }
@@ -109,7 +111,7 @@ function _saveKey() {
 function saveGame() {
   try {
     // Tokeni se čuvaju samo u Supabase hive_profiles — ne u localStorage
-    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, ...RWithoutTokens } = R;
+    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, ...RWithoutTokens } = R;
     const saveData = {
       _savedAt: new Date().toISOString(),
       _season: window._serverSeason || 1,
@@ -224,8 +226,8 @@ function loadGame() {
     const s = JSON.parse(raw);
 
     if (s.R) {
-      const { bcm, bocrypto, spCard, ...rest } = s.R;
-      Object.assign(R, rest); // tokeni se ne čitaju iz localStorage
+      const { bcm, bocrypto, spCard, keys, instanceKeys, ...rest } = s.R;
+      Object.assign(R, rest); // tokeni i ključevi se ne čitaju iz localStorage
     }
     if (s.storageBuffer)   Object.assign(storageBuffer, s.storageBuffer);
     if (s.buildQueue)      buildQueue = s.buildQueue;

@@ -55,10 +55,16 @@
         const applyKeys = async () => {
           if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
 
-          // Prvo učitaj tokene iz Supabase (source of truth)
+          // Prvo učitaj tokene i ključeve iz Supabase (source of truth)
           try {
-            const { data: tp } = await _sb.from('hive_profiles').select('bcm, bocrypto, spcard').eq('hive_user', hiveUser).single();
-            if (tp) { R.bcm = tp.bcm || 0; R.bocrypto = tp.bocrypto || 0; R.spCard = tp.spcard || 0; }
+            const { data: tp } = await _sb.from('hive_profiles').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('hive_user', hiveUser).single();
+            if (tp) {
+              R.bcm         = tp.bcm       || 0;
+              R.bocrypto    = tp.bocrypto   || 0;
+              R.spCard      = tp.spcard     || 0;
+              R.keys        = tp.keys_cmd   || 0;
+              R.instanceKeys= tp.keys_inst  || 0;
+            }
           } catch(e) {}
 
           var msgs = [];
