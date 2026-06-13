@@ -54,6 +54,13 @@
         // Čekaj da se igra inicijalizira pa primijeni
         const applyKeys = async () => {
           if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
+
+          // Prvo učitaj tokene iz Supabase (source of truth)
+          try {
+            const { data: tp } = await _sb.from('hive_profiles').select('bcm, bocrypto, spcard').eq('hive_user', hiveUser).single();
+            if (tp) { R.bcm = tp.bcm || 0; R.bocrypto = tp.bocrypto || 0; R.spCard = tp.spcard || 0; }
+          } catch(e) {}
+
           var msgs = [];
           if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  msgs.push('+' + cloudKeys + ' 🗝️'); }
           if(cloudIKeys > 0) { R.instanceKeys  = (R.instanceKeys  || 0) + cloudIKeys; msgs.push('+' + cloudIKeys + ' 🔑'); }
@@ -66,9 +73,8 @@
           if(pending.bcm      > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;      msgs.push('+' + pending.bcm      + ' BCM'); }
           if(pending.bocrypto > 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
           if(pending.bpw      > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }
-          // Resetuj u Supabase da se ne dodaju opet — await da bi se izvrsilo prije sljedeceg refresha
           if(msgs.length > 0) {
-            await _sb.from('hive_profiles').update({ keys: 0, ikeys: 0, boosters: {} }).eq('hive_user', hiveUser);
+            await _sb.from('hive_profiles').update({ boosters: {} }).eq('hive_user', hiveUser);
             if(typeof updateResUI === 'function') updateResUI();
             if(typeof saveGame    === 'function') saveGame();
             if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
