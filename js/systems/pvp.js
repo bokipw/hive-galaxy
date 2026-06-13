@@ -306,7 +306,7 @@ function renderPvp() {
     '</div>' +
     (sa
       ? '<div style="padding:10px 14px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:0.7rem;color:#00d4ff">Shield aktivan - '+sl+' min</span><button onclick="deactivatePvpShield()" style="font-size:0.6rem;padding:3px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">Deaktiviraj</button></div>'
-      : '<div style="display:flex;gap:8px;margin-bottom:16px"><button onclick="activatePvpShield(4)" class="btn" style="flex:1;font-size:0.62rem">Shield 4h ('+fmt(50000)+' metal)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.62rem">Osvjezi protivnike</button></div>'
+      : '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"><button onclick="activatePvpShield(4,300)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 4h (300 BOCRYPTO)</button><button onclick="activatePvpShield(12,600)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 12h (600 BOCRYPTO)</button><button onclick="activatePvpShield(24,1000)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 24h (1000 BOCRYPTO)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.6rem">Osvjezi</button></div>'
     ) +
     '<div style="padding:8px 12px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px;margin-bottom:14px;font-size:0.65rem;color:#00ff88">⚔️ PvP MATCH DUELS — brodovi se ne gube nakon bitke</div>' +
     '<div style="font-size:0.6rem;color:#ff3355;font-family:Orbitron,monospace;letter-spacing:2px;margin-bottom:10px">PROTIVNICI</div>' +
@@ -319,10 +319,10 @@ function renderPvp() {
 // ============================================================
 // 8. SHIELD
 // ============================================================
-function activatePvpShield(hours) {
-  var cost=50000;
-  if (R.metal<cost) { toast('Nedovoljno metala ('+fmt(cost)+')','warn'); return; }
-  R.metal -= cost;
+function activatePvpShield(hours, cost) {
+  if (cost === undefined) cost = 300;
+  if ((R.bocrypto||0) < cost) { toast('Nedovoljno BoCrypto! Treba '+cost+' BOCRYPTO','warn'); return; }
+  R.bocrypto = (R.bocrypto||0) - cost;
   window.pvpShield = { active:true, expiresAt:new Date(Date.now()+hours*3600000).toISOString() };
   if (typeof updateResUI==='function') updateResUI();
   saveGame(); renderPvp(); toast('Shield aktivan '+hours+'h!','ok');
