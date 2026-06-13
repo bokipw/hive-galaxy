@@ -182,11 +182,8 @@ async function loadGameCloud() {
       localSeason = localSave._season || 1;
       if (localSeason < serverSeason) {
         localStorage.removeItem(_saveKey());
-        setTimeout(() => { if(typeof toast==='function') toast('RESET: sezona ' + localSeason + ' -> ' + serverSeason + ' | save obrisan', 'ok'); }, 2000);
       }
     } catch(e) { localStorage.removeItem(_saveKey()); }
-  } else {
-    setTimeout(() => { if(typeof toast==='function') toast('DEBUG: nema lokalnog savea | sezona=' + serverSeason, 'inf'); }, 2000);
   }
 
   // Ucitaj cloud save — ali ignoriši ga ako je iz stare sezone
