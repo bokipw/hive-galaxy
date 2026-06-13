@@ -47,8 +47,6 @@
         window._playerPremium = data.is_premium || false;
 
         // Primijeni ključeve i resurse od admina
-        const cloudKeys  = data.keys  || 0;
-        const cloudIKeys = data.ikeys || 0;
         const pending    = data.boosters || {};
 
         // Čekaj da se igra inicijalizira pa primijeni
@@ -68,8 +66,6 @@
           } catch(e) {}
 
           var msgs = [];
-          if(cloudKeys  > 0) { R.keys         = (R.keys         || 0) + cloudKeys;  msgs.push('+' + cloudKeys + ' 🗝️'); }
-          if(cloudIKeys > 0) { R.instanceKeys  = (R.instanceKeys  || 0) + cloudIKeys; msgs.push('+' + cloudIKeys + ' 🔑'); }
           if(pending.metal  > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal  + ' metal'); }
           if(pending.crystal> 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
           if(pending.he3    > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3 + ' He3'); }
