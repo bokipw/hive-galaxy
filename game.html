@@ -15,17 +15,65 @@
   window._supa = _sb;
   window._supaAnonKey = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
 
-  // Provjeri maintenance mode — redirect na maintenance.html ako je ukljucen
+  // Provjeri maintenance mode i tajmer
   document.documentElement.style.visibility = 'hidden';
-  _sb.from('hive_profiles').select('is_premium').eq('hive_user', '__system__').single().then(({ data, error }) => {
+  _sb.from('hive_profiles').select('is_premium, boosters').eq('hive_user', '__system__').single().then(({ data, error }) => {
     if (!error && data && data.is_premium === true) {
       window.location.replace('maintenance.html');
     } else {
       document.documentElement.style.visibility = 'visible';
+      // Pokreni maintenance tajmer ako je postavljen
+      if (data && data.boosters && data.boosters.maintenance_at) {
+        _startMaintBanner(data.boosters.maintenance_at);
+      }
     }
   }).catch(() => {
     document.documentElement.style.visibility = 'visible';
   });
+
+  var _maintBannerInterval = null;
+  var _maintPollInterval   = null;
+
+  function _startMaintBanner(isoAt) {
+    var target = new Date(isoAt);
+    var banner = document.getElementById('maintBanner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'maintBanner';
+      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(255,100,0,0.95);color:#fff;text-align:center;padding:10px 20px;font-family:Orbitron,sans-serif;font-size:.85rem;font-weight:700;letter-spacing:2px;display:flex;align-items:center;justify-content:center;gap:16px';
+      banner.innerHTML = '<span>⚠️ MAINTENANCE ZA:</span><span id="maintBannerTime" style="font-size:1.1rem;color:#ffe000"></span>';
+      document.body.appendChild(banner);
+    }
+    if (_maintBannerInterval) clearInterval(_maintBannerInterval);
+    _maintBannerInterval = setInterval(function() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        clearInterval(_maintBannerInterval);
+        window.location.replace('maintenance.html');
+        return;
+      }
+      var m = Math.floor(diff / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      var el = document.getElementById('maintBannerTime');
+      if (el) el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }, 1000);
+  }
+
+  // Poll svakih 30s da provjeri da li je tajmer postavljen
+  _maintPollInterval = setInterval(function() {
+    _sb.from('hive_profiles').select('is_premium, boosters').eq('hive_user', '__system__').single().then(function(res) {
+      var d = res.data;
+      if (!d) return;
+      if (d.is_premium) { window.location.replace('maintenance.html'); return; }
+      if (d.boosters && d.boosters.maintenance_at) {
+        _startMaintBanner(d.boosters.maintenance_at);
+      } else if (_maintBannerInterval) {
+        clearInterval(_maintBannerInterval);
+        var b = document.getElementById('maintBanner');
+        if (b) b.remove();
+      }
+    });
+  }, 30000);
 
   const hiveUser = localStorage.getItem('hg_hive_user');
   if(hiveUser) {

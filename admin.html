@@ -340,10 +340,17 @@
         <div style="background:rgba(0,20,50,.4);border:1px solid rgba(0,180,255,.15);border-radius:10px;padding:20px">
           <div style="font-size:.75rem;color:#00aaff;margin-bottom:12px;letter-spacing:1px">MAINTENANCE MODE</div>
           <div style="font-size:.72rem;color:#5a7a9a;margin-bottom:14px">Kad je aktivan, igraci ne mogu da se loginuju. Vide poruku o odrzavanju.</div>
-          <div style="display:flex;gap:10px">
+          <div style="display:flex;gap:10px;margin-bottom:10px">
             <button class="btn btn-red" style="flex:1" onclick="setMaintenance(true)">UKLJUCI</button>
             <button class="btn btn-green" style="flex:1" onclick="setMaintenance(false)">ISKLJUCI</button>
           </div>
+          <div style="font-size:.72rem;color:#5a7a9a;margin-bottom:8px;margin-top:4px">TAJMER — upozori igrace prije maintenance-a:</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+            <input type="number" id="maintMinutes" value="10" min="1" max="60" style="width:70px;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem;text-align:center"/> min
+            <button class="btn btn-gold" style="flex:1" onclick="startMaintTimer()">POKRENI TAJMER</button>
+            <button class="btn" style="flex:1;background:rgba(80,80,80,.3);border:1px solid rgba(255,255,255,.1)" onclick="cancelMaintTimer()">OTKAŽI</button>
+          </div>
+          <div id="maintCountdown" style="font-size:1.4rem;font-weight:700;color:#ffc832;text-align:center;letter-spacing:2px;min-height:30px"></div>
           <div id="maintStatus" style="margin-top:10px;font-size:.68rem;color:#4a6a8a"></div>
         </div>
 
@@ -950,12 +957,58 @@ async function unlockBlueprint() {
 // ============================================================
 async function setMaintenance(on) {
   try {
-    const { error } = await _supa.from('hive_profiles')
+    await _supa.from('hive_profiles')
       .upsert({ hive_user: '__system__', is_premium: on }, { onConflict: 'hive_user' });
+    if (on) {
+      // Obriši tajmer kad se ručno uključi
+      await _supa.from('hive_profiles').update({ boosters: {} }).eq('hive_user', '__system__');
+      cancelMaintTimer();
+    }
     document.getElementById('maintStatus').textContent = 'Maintenance: ' + (on ? 'UKLJUCEN' : 'ISKLJUCEN');
     document.getElementById('maintStatus').style.color = on ? '#ff6666' : '#00cc66';
     showToast('Maintenance mode ' + (on ? 'ukljucen' : 'iskljucen') + '.');
   } catch(e) { showToast('Greska: ' + e.message, true); }
+}
+
+var _maintTimerInterval = null;
+
+async function startMaintTimer() {
+  const mins = parseInt(document.getElementById('maintMinutes').value) || 10;
+  const at   = new Date(Date.now() + mins * 60000).toISOString();
+  try {
+    await _supa.from('hive_profiles').upsert(
+      { hive_user: '__system__', boosters: { maintenance_at: at } },
+      { onConflict: 'hive_user' }
+    );
+    showToast('Tajmer pokrenut — maintenance za ' + mins + ' min');
+    _runMaintCountdown(new Date(at));
+  } catch(e) { showToast('Greska: ' + e.message, true); }
+}
+
+async function cancelMaintTimer() {
+  if (_maintTimerInterval) { clearInterval(_maintTimerInterval); _maintTimerInterval = null; }
+  document.getElementById('maintCountdown').textContent = '';
+  try {
+    await _supa.from('hive_profiles').update({ boosters: {} }).eq('hive_user', '__system__');
+  } catch(e) {}
+}
+
+function _runMaintCountdown(targetDate) {
+  if (_maintTimerInterval) clearInterval(_maintTimerInterval);
+  const el = document.getElementById('maintCountdown');
+  _maintTimerInterval = setInterval(async () => {
+    const diff = targetDate - Date.now();
+    if (diff <= 0) {
+      clearInterval(_maintTimerInterval);
+      _maintTimerInterval = null;
+      el.textContent = '00:00';
+      await setMaintenance(true);
+      return;
+    }
+    const m = Math.floor(diff / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }, 1000);
 }
 
 async function serverReset() {
