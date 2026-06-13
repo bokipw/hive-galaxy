@@ -269,11 +269,24 @@
 
         <label style="color:#6a8aaa;font-size:.68rem;display:block;margin-bottom:4px">AKCIJA</label>
         <select id="shopAction" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:9px;border-radius:6px;font-size:.8rem;margin-bottom:16px">
-          <option value="premium_30">Daj Premium (30 dana)</option>
-          <option value="premium_perm">Daj Premium (trajno)</option>
-          <option value="remove_premium">Oduzmi Premium</option>
-          <option value="booster_2x_24h">Booster 2x resursi 24h</option>
-          <option value="booster_xp_24h">Booster 2x XP 24h</option>
+          <optgroup label="── PREMIUM ──">
+            <option value="premium_1">Daj Premium (1 dan)</option>
+            <option value="premium_7">Daj Premium (7 dana)</option>
+            <option value="premium_15">Daj Premium (15 dana)</option>
+            <option value="premium_30">Daj Premium (30 dana)</option>
+            <option value="premium_perm">Daj Premium (trajno)</option>
+            <option value="remove_premium">Oduzmi Premium</option>
+          </optgroup>
+          <optgroup label="── BUSTERI ──">
+            <option value="booster_2x_24h">Booster 2x resursi (24h)</option>
+            <option value="booster_2x_7d">Booster 2x resursi (7 dana)</option>
+            <option value="booster_2x_15d">Booster 2x resursi (15 dana)</option>
+            <option value="booster_2x_30d">Booster 2x resursi (30 dana)</option>
+            <option value="booster_xp_24h">Booster 2x XP (24h)</option>
+            <option value="booster_xp_7d">Booster 2x XP (7 dana)</option>
+            <option value="booster_xp_15d">Booster 2x XP (15 dana)</option>
+            <option value="booster_xp_30d">Booster 2x XP (30 dana)</option>
+          </optgroup>
         </select>
 
         <button class="btn btn-green" style="width:100%;padding:11px" onclick="executeShopAction()">IZVRSI AKCIJU</button>
@@ -763,17 +776,24 @@ async function executeShopAction() {
     let pvpUpdate = {};
     const now = new Date().toISOString();
 
-    if (action === 'premium_30' || action === 'premium_perm') {
+    const premiumDays = { premium_1:1, premium_7:7, premium_15:15, premium_30:30 };
+    const boosterDays = {
+      booster_2x_24h:1, booster_2x_7d:7, booster_2x_15d:15, booster_2x_30d:30,
+      booster_xp_24h:1, booster_xp_7d:7, booster_xp_15d:15, booster_xp_30d:30,
+    };
+
+    if (action === 'premium_perm' || premiumDays[action]) {
       update = { is_premium: true, premium_since: now };
       pvpUpdate = { is_premium: true };
     } else if (action === 'remove_premium') {
       update = { is_premium: false };
       pvpUpdate = { is_premium: false };
-    } else if (action === 'booster_2x_24h' || action === 'booster_xp_24h') {
+    } else if (boosterDays[action]) {
       const { data: prof } = await _supa.from('hive_profiles').select('boosters').eq('hive_user', username).single();
       const existing = (prof && prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
       const boosterList = Array.isArray(existing._boosters) ? existing._boosters : [];
-      const expires  = new Date(Date.now() + 24*3600*1000).toISOString();
+      const days = boosterDays[action];
+      const expires = new Date(Date.now() + days * 24 * 3600 * 1000).toISOString();
       boosterList.push({ type: action, expires_at: expires });
       update = { boosters: { ...existing, _boosters: boosterList } };
     }
