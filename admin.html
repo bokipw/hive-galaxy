@@ -125,6 +125,7 @@
     <button onclick="showSection('shop')">Shop / Items</button>
     <button onclick="showSection('blueprints')">Blueprinti</button>
     <button onclick="showSection('maintenance')">Sistem</button>
+    <button onclick="showSection('season')" style="border-color:rgba(255,51,85,.4);color:#ff3355">🔱 Sezona Nagrade</button>
   </div>
 
   <div class="content">
@@ -380,6 +381,54 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- SEZONA NAGRADE -->
+    <div class="section" id="sec-season">
+      <div class="section-title" style="color:#ff3355">🔱 PERFECT MASTER — SEZONA NAGRADE</div>
+
+      <div style="background:rgba(255,51,85,.06);border:1px solid rgba(255,51,85,.25);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+        <div style="font-size:.72rem;color:#ff8899;margin-bottom:12px">
+          Nagrade se šalju top 10 igrača u Perfect Master diviziji (rating ≥ 5000).
+          Nagrade se dodaju na postojeće vrijednosti u <b>hive_profiles</b>.
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:14px">
+          <thead><tr>
+            <th style="color:#ff3355;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,51,85,.2)">MJESTO</th>
+            <th style="color:#ff3355;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,51,85,.2)">KOMANDIR KLJUČEVI</th>
+            <th style="color:#ff3355;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,51,85,.2)">BCM</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:5px 10px;color:#ffd700">🥇 1. mjesto</td><td style="padding:5px 10px;color:#00aaff">1 000</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#c0c0c0">🥈 2. mjesto</td><td style="padding:5px 10px;color:#00aaff">750</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#cd7f32">🥉 3. mjesto</td><td style="padding:5px 10px;color:#00aaff">500</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#b0c8e8">4. mjesto</td><td style="padding:5px 10px;color:#00aaff">250</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#b0c8e8">5. mjesto</td><td style="padding:5px 10px;color:#00aaff">100</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#b0c8e8">6. mjesto</td><td style="padding:5px 10px;color:#00aaff">50</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#b0c8e8">7. mjesto</td><td style="padding:5px 10px;color:#00aaff">25</td><td style="padding:5px 10px;color:#ffcc44">3</td></tr>
+            <tr><td style="padding:5px 10px;color:#b0c8e8">8–10. mjesto</td><td style="padding:5px 10px;color:#00aaff">10</td><td style="padding:5px 10px;color:#ffcc44">2</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-blue" style="padding:9px 18px" onclick="loadSeasonTop10()">↻ UČITAJ TOP 10</button>
+          <button class="btn" id="distributeBtn" style="padding:9px 18px;background:rgba(255,51,85,.2);border-color:rgba(255,51,85,.5);color:#ff3355;display:none" onclick="distributeSeasonRewards()">🔱 ISPLATI NAGRADE</button>
+        </div>
+      </div>
+
+      <div class="section-title" style="color:#ff8899;font-size:.7rem">TOP 10 PERFECT MASTER IGRAČA</div>
+      <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Username</th><th>Rating</th><th>Level</th>
+            <th style="color:#00aaff">+Kom. Ključevi</th>
+            <th style="color:#ffcc44">+BCM</th>
+            <th>Status</th>
+          </tr></thead>
+          <tbody id="seasonTop10Tbl"><tr><td colspan="7" class="loading">Klikni Učitaj Top 10.</td></tr></tbody>
+        </table>
+      </div>
+
+      <div id="seasonRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
   </div><!-- /content -->
@@ -1066,6 +1115,119 @@ async function deletePlayer() {
   if (!username) { showToast('Unesi username!', true); return; }
   if (!confirm('Obrisi igraca ' + username + '? Ovo ne moze da se opozove!')) return;
   await deletePlayerByName(username);
+}
+
+// ============================================================
+// SEZONA NAGRADE
+// ============================================================
+const SEASON_REWARDS = [
+  { keys: 1000, bcm: 3 },
+  { keys: 750,  bcm: 3 },
+  { keys: 500,  bcm: 3 },
+  { keys: 250,  bcm: 3 },
+  { keys: 100,  bcm: 3 },
+  { keys: 50,   bcm: 3 },
+  { keys: 25,   bcm: 3 },
+  { keys: 10,   bcm: 2 },
+  { keys: 10,   bcm: 2 },
+  { keys: 10,   bcm: 2 },
+];
+
+let _seasonTop10 = [];
+
+async function loadSeasonTop10() {
+  const tbody = document.getElementById('seasonTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="7" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeBtn').style.display = 'none';
+
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 5000)
+      .order('rating', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+    _seasonTop10 = data || [];
+
+    if (_seasonTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Nema igrača u Perfect Master diviziji (rating ≥ 5000).</td></tr>';
+      return;
+    }
+
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _seasonTop10.map((p, i) => {
+      const r = SEASON_REWARDS[i] || { keys: 0, bcm: 0 };
+      const medal = medals[i] || (i + 1) + '.';
+      // Izvuci hive username iz id-a (hive_username)
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      return '<tr>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + medal + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username || '-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: ' + hiveUser + '</div>' : '') +
+        '</td>' +
+        '<td style="color:#ff3355;font-family:monospace">' + (p.rating || 0).toLocaleString() + '</td>' +
+        '<td>' + (p.level || 1) + '</td>' +
+        '<td style="color:#00aaff;font-weight:600">+' + r.keys.toLocaleString() + ' 🗝️</td>' +
+        '<td style="color:#ffcc44;font-weight:600">+' + r.bcm + ' BCM</td>' +
+        '<td id="sr-status-' + i + '" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+
+    document.getElementById('distributeBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Greška: ' + e.message + '</td></tr>';
+  }
+}
+
+async function distributeSeasonRewards() {
+  if (!confirm('SIGURNO? Ovo će poslati nagrade svim top 10 Perfect Master igračima!')) return;
+  const btn = document.getElementById('distributeBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Isplata u toku...';
+
+  const log = document.getElementById('seasonRewardLog');
+  log.innerHTML = '<div style="color:#00aaff;margin-bottom:8px">► Početak isplate — ' + new Date().toLocaleString() + '</div>';
+
+  let ok = 0, fail = 0;
+
+  for (let i = 0; i < _seasonTop10.length; i++) {
+    const p = _seasonTop10[i];
+    const r = SEASON_REWARDS[i] || { keys: 0, bcm: 0 };
+    const statusEl = document.getElementById('sr-status-' + i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE igrač'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ ' + (p.username || p.id) + ' — nije HIVE igrač, preskačem.</div>';
+      fail++;
+      continue;
+    }
+
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('keys_cmd, bcm').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: ' + hiveUser);
+
+      const { error: e2 } = await _supa.from('hive_profiles').update({
+        keys_cmd: (prof.keys_cmd || 0) + r.keys,
+        bcm:      (prof.bcm      || 0) + r.bcm,
+      }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #' + (i+1) + ' ' + hiveUser + ' — +' + r.keys + ' ključeva, +' + r.bcm + ' BCM</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #' + (i+1) + ' ' + hiveUser + ' — ' + e.message + '</div>';
+      fail++;
+    }
+  }
+
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: ' + ok + ' isplaćeno, ' + fail + ' greški.</div>';
+  btn.disabled = false;
+  btn.textContent = '🔱 ISPLATI NAGRADE';
+  showToast('Isplata završena: ' + ok + ' igrača nagrađeno.');
 }
 
 // ============================================================
