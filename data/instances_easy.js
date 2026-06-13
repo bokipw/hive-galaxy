@@ -13,11 +13,17 @@ const INSTANCES_EASY = [
     id: 'inst_1', name: 'Instanca 1', type: 'standard', number: 1,
     difficulty: 1,
     xp: 100,
-    min_power: 0,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
+    enemyGroups: [
+      {"ship_id":"scout_Swift_I","count":5,"row":1,"col":1},
+      {"ship_id":"scout_Swift_I","count":5,"row":1,"col":2},
+      {"ship_id":"scout_Swift_I","count":5,"row":1,"col":3},
+      {"ship_id":"scout_Swift_I","count":10,"row":2,"col":2,"isBoss":true}
+    ],
     boss: 'Alpha Drone',
-  bossShip: {"name":"Alpha Drone","structure":200,"shield":75,"armor_val":25,"dps":15,"agility":3,"speed":2},
+  bossShip: {"name":"Alpha Drone","structure":12000,"shield":4000,"armor_val":2000,"dps":1900,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -34,11 +40,17 @@ const INSTANCES_EASY = [
     id: 'inst_2', name: 'Instanca 2', type: 'standard', number: 2,
     difficulty: 1,
     xp: 117,
-    min_power: 500,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
+    enemyGroups: [
+      {"ship_id":"scout_Stinger_I","count":5,"row":1,"col":1},
+      {"ship_id":"scout_Stinger_I","count":5,"row":1,"col":2},
+      {"ship_id":"scout_Stinger_I","count":5,"row":1,"col":3},
+      {"ship_id":"scout_Stinger_I","count":10,"row":2,"col":2,"isBoss":true}
+    ],
     boss: 'Beta Drone',
-  bossShip: {"name":"Beta Drone","structure":200,"shield":75,"armor_val":25,"dps":15,"agility":3,"speed":2},
+  bossShip: {"name":"Beta Drone","structure":12000,"shield":4000,"armor_val":2000,"dps":1900,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -56,11 +68,17 @@ const INSTANCES_EASY = [
     id: 'inst_3', name: 'Instanca 3', type: 'standard', number: 3,
     difficulty: 1,
     xp: 137,
-    min_power: 800,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
+    enemyGroups: [
+      {"ship_id":"scout_Wisp_I","count":5,"row":1,"col":1},
+      {"ship_id":"scout_Glimmer_I","count":5,"row":1,"col":2},
+      {"ship_id":"scout_Wisp_I","count":5,"row":1,"col":3},
+      {"ship_id":"scout_Glimmer_I","count":10,"row":2,"col":2,"isBoss":true}
+    ],
     boss: 'Gamma Drone',
-  bossShip: {"name":"Gamma Drone","structure":320,"shield":120,"armor_val":40,"dps":24,"agility":3,"speed":2},
+  bossShip: {"name":"Gamma Drone","structure":12000,"shield":4000,"armor_val":2000,"dps":1900,"agility":5,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -79,11 +97,19 @@ const INSTANCES_EASY = [
     id: 'inst_4', name: 'Instanca 4', type: 'standard', number: 4,
     difficulty: 2,
     xp: 161,
-    min_power: 1200,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
+    enemyGroups: [
+      {"ship_id":"scout_Swift_I","count":8,"row":1,"col":1},
+      {"ship_id":"scout_Stinger_I","count":8,"row":1,"col":2},
+      {"ship_id":"scout_Swift_I","count":8,"row":1,"col":3},
+      {"ship_id":"fighter_Fury_I","count":8,"row":2,"col":1},
+      {"ship_id":"fighter_Fury_I","count":8,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Fury_I","count":8,"row":2,"col":3}
+    ],
     boss: 'Delta Commander',
-  bossShip: {"name":"Delta Commander","structure":480,"shield":180,"armor_val":60,"dps":36,"agility":4,"speed":3},
+  bossShip: {"name":"Delta Commander","structure":25000,"shield":8000,"armor_val":4000,"dps":4400,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -103,11 +129,19 @@ const INSTANCES_EASY = [
     id: 'inst_5', name: 'Instanca 5', type: 'standard', number: 5,
     difficulty: 2,
     xp: 189,
-    min_power: 1600,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter I', 'Rogue Drones III'],
+    enemyGroups: [
+      {"ship_id":"scout_Wisp_I","count":8,"row":1,"col":1},
+      {"ship_id":"scout_Glimmer_I","count":8,"row":1,"col":2},
+      {"ship_id":"scout_Wisp_I","count":8,"row":1,"col":3},
+      {"ship_id":"fighter_Talon_I","count":8,"row":2,"col":1},
+      {"ship_id":"fighter_Talon_I","count":8,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Talon_I","count":8,"row":2,"col":3}
+    ],
     boss: 'Epsilon Warlord',
-  bossShip: {"name":"Epsilon Warlord","structure":640,"shield":240,"armor_val":80,"dps":48,"agility":4,"speed":3},
+  bossShip: {"name":"Epsilon Warlord","structure":25000,"shield":8000,"armor_val":4000,"dps":4400,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -128,11 +162,19 @@ const INSTANCES_EASY = [
     id: 'inst_6', name: 'Instanca 6', type: 'standard', number: 6,
     difficulty: 2,
     xp: 221,
-    min_power: 2000,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter I', 'Vex Cruiser I'],
+    enemyGroups: [
+      {"ship_id":"scout_Stinger_I","count":8,"row":1,"col":1},
+      {"ship_id":"scout_Swift_I","count":8,"row":1,"col":2},
+      {"ship_id":"scout_Stinger_I","count":8,"row":1,"col":3},
+      {"ship_id":"fighter_Reaper_I","count":8,"row":2,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":8,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Reaper_I","count":8,"row":2,"col":3}
+    ],
     boss: 'Zeta Commander',
-  bossShip: {"name":"Zeta Commander","structure":800,"shield":300,"armor_val":100,"dps":60,"agility":4,"speed":3},
+  bossShip: {"name":"Zeta Commander","structure":25000,"shield":8000,"armor_val":4000,"dps":4400,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -151,11 +193,19 @@ const INSTANCES_EASY = [
     id: 'inst_7', name: 'Instanca 7', type: 'standard', number: 7,
     difficulty: 2,
     xp: 259,
-    min_power: 2500,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter II', 'Vex Cruiser I'],
+    enemyGroups: [
+      {"ship_id":"scout_Glimmer_I","count":8,"row":1,"col":1},
+      {"ship_id":"scout_Wisp_I","count":8,"row":1,"col":2},
+      {"ship_id":"scout_Glimmer_I","count":8,"row":1,"col":3},
+      {"ship_id":"fighter_Vengeance_I","count":8,"row":2,"col":1},
+      {"ship_id":"fighter_Vengeance_I","count":8,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Vengeance_I","count":8,"row":2,"col":3}
+    ],
     boss: 'Eta Overlord',
-  bossShip: {"name":"Eta Overlord","structure":1000,"shield":375,"armor_val":125,"dps":75,"agility":4,"speed":3},
+  bossShip: {"name":"Eta Overlord","structure":25000,"shield":8000,"armor_val":4000,"dps":4400,"agility":6,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -175,11 +225,22 @@ const INSTANCES_EASY = [
     id: 'inst_8', name: 'Instanca 8', type: 'standard', number: 8,
     difficulty: 3,
     xp: 304,
-    min_power: 3000,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser I', 'Marauder Fighter II'],
+    enemyGroups: [
+      {"ship_id":"fighter_Fury_I","count":10,"row":1,"col":1},
+      {"ship_id":"fighter_Talon_I","count":10,"row":1,"col":2},
+      {"ship_id":"fighter_Fury_I","count":10,"row":1,"col":3},
+      {"ship_id":"fighter_Reaper_I","count":9,"row":2,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Talon_I","count":9,"row":2,"col":3},
+      {"ship_id":"fighter_Fury_I","count":9,"row":3,"col":1},
+      {"ship_id":"fighter_Talon_I","count":9,"row":3,"col":2},
+      {"ship_id":"fighter_Fury_I","count":9,"row":3,"col":3}
+    ],
     boss: 'Theta Admiral',
-  bossShip: {"name":"Theta Admiral","structure":1200,"shield":450,"armor_val":150,"dps":90,"agility":5,"speed":3},
+  bossShip: {"name":"Theta Admiral","structure":60000,"shield":18000,"armor_val":9000,"dps":8900,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -198,11 +259,22 @@ const INSTANCES_EASY = [
     id: 'inst_9', name: 'Instanca 9', type: 'standard', number: 9,
     difficulty: 3,
     xp: 356,
-    min_power: 3600,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
+    enemyGroups: [
+      {"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":1},
+      {"ship_id":"fighter_Outlaw_I","count":10,"row":1,"col":2},
+      {"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":3},
+      {"ship_id":"fighter_Ravager_I","count":9,"row":2,"col":1},
+      {"ship_id":"fighter_Outlaw_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Ravager_I","count":9,"row":2,"col":3},
+      {"ship_id":"fighter_Vengeance_I","count":9,"row":3,"col":1},
+      {"ship_id":"fighter_Outlaw_I","count":9,"row":3,"col":2},
+      {"ship_id":"fighter_Vengeance_I","count":9,"row":3,"col":3}
+    ],
     boss: 'Iota Warlord',
-  bossShip: {"name":"Iota Warlord","structure":1440,"shield":540,"armor_val":180,"dps":108,"agility":5,"speed":3},
+  bossShip: {"name":"Iota Warlord","structure":60000,"shield":18000,"armor_val":9000,"dps":8900,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -222,11 +294,22 @@ const INSTANCES_EASY = [
     id: 'inst_10', name: 'Instanca 10', type: 'standard', number: 10,
     difficulty: 3,
     xp: 418,
-    min_power: 4200,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
+    enemyGroups: [
+      {"ship_id":"fighter_Fury_I","count":10,"row":1,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":10,"row":1,"col":2},
+      {"ship_id":"fighter_Outlaw_I","count":10,"row":1,"col":3},
+      {"ship_id":"fighter_Fury_I","count":9,"row":2,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Outlaw_I","count":9,"row":2,"col":3},
+      {"ship_id":"fighter_Fury_I","count":9,"row":3,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":9,"row":3,"col":2},
+      {"ship_id":"fighter_Outlaw_I","count":9,"row":3,"col":3}
+    ],
     boss: 'Kappa Commander',
-  bossShip: {"name":"Kappa Commander","structure":1680,"shield":630,"armor_val":210,"dps":126,"agility":5,"speed":3},
+  bossShip: {"name":"Kappa Commander","structure":60000,"shield":18000,"armor_val":9000,"dps":8900,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -245,11 +328,22 @@ const INSTANCES_EASY = [
     id: 'inst_11', name: 'Instanca 11', type: 'standard', number: 11,
     difficulty: 3,
     xp: 489,
-    min_power: 5000,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Khal Battleship I', 'Vex Cruiser III'],
+    enemyGroups: [
+      {"ship_id":"fighter_Talon_I","count":10,"row":1,"col":1},
+      {"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":2},
+      {"ship_id":"fighter_Ravager_I","count":10,"row":1,"col":3},
+      {"ship_id":"fighter_Talon_I","count":9,"row":2,"col":1},
+      {"ship_id":"fighter_Vengeance_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Ravager_I","count":9,"row":2,"col":3},
+      {"ship_id":"fighter_Talon_I","count":9,"row":3,"col":1},
+      {"ship_id":"fighter_Vengeance_I","count":9,"row":3,"col":2},
+      {"ship_id":"fighter_Ravager_I","count":9,"row":3,"col":3}
+    ],
     boss: 'Lambda Dreadnought',
-  bossShip: {"name":"Lambda Dreadnought","structure":2000,"shield":750,"armor_val":250,"dps":150,"agility":5,"speed":3},
+  bossShip: {"name":"Lambda Dreadnought","structure":60000,"shield":18000,"armor_val":9000,"dps":8900,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -271,11 +365,22 @@ const INSTANCES_EASY = [
     id: 'inst_12', name: 'Instanca 12', type: 'standard', number: 12,
     difficulty: 4,
     xp: 574,
-    min_power: 6000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
+    enemyGroups: [
+      {"ship_id":"fighter_Fury_I","count":20,"row":1,"col":1},
+      {"ship_id":"fighter_Talon_I","count":20,"row":1,"col":2},
+      {"ship_id":"fighter_Fury_I","count":20,"row":1,"col":3},
+      {"ship_id":"fighter_Vengeance_I","count":20,"row":2,"col":1},
+      {"ship_id":"cruiser_Defender_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Vengeance_I","count":20,"row":2,"col":3},
+      {"ship_id":"cruiser_Guardian_I","count":12,"row":3,"col":1},
+      {"ship_id":"cruiser_Defender_I","count":12,"row":3,"col":2},
+      {"ship_id":"cruiser_Bulwark_I","count":12,"row":3,"col":3}
+    ],
     boss: 'Mu Overlord',
-  bossShip: {"name":"Mu Overlord","structure":2400,"shield":900,"armor_val":300,"dps":180,"agility":6,"speed":4},
+  bossShip: {"name":"Mu Overlord","structure":130000,"shield":40000,"armor_val":20000,"dps":20200,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -297,11 +402,22 @@ const INSTANCES_EASY = [
     id: 'inst_13', name: 'Instanca 13', type: 'standard', number: 13,
     difficulty: 4,
     xp: 672,
-    min_power: 7000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
+    enemyGroups: [
+      {"ship_id":"fighter_Reaper_I","count":20,"row":1,"col":1},
+      {"ship_id":"fighter_Outlaw_I","count":20,"row":1,"col":2},
+      {"ship_id":"fighter_Reaper_I","count":20,"row":1,"col":3},
+      {"ship_id":"fighter_Ravager_I","count":20,"row":2,"col":1},
+      {"ship_id":"cruiser_Rampart_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Ravager_I","count":20,"row":2,"col":3},
+      {"ship_id":"cruiser_Bulwark_I","count":12,"row":3,"col":1},
+      {"ship_id":"cruiser_Rampart_I","count":12,"row":3,"col":2},
+      {"ship_id":"cruiser_Paladin_I","count":12,"row":3,"col":3}
+    ],
     boss: 'Nu Admiral',
-  bossShip: {"name":"Nu Admiral","structure":2800,"shield":1050,"armor_val":350,"dps":210,"agility":6,"speed":4},
+  bossShip: {"name":"Nu Admiral","structure":130000,"shield":40000,"armor_val":20000,"dps":20200,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -325,11 +441,22 @@ const INSTANCES_EASY = [
     id: 'inst_14', name: 'Instanca 14', type: 'standard', number: 14,
     difficulty: 4,
     xp: 788,
-    min_power: 8000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
+    enemyGroups: [
+      {"ship_id":"fighter_Talon_I","count":20,"row":1,"col":1},
+      {"ship_id":"fighter_Reaper_I","count":20,"row":1,"col":2},
+      {"ship_id":"fighter_Outlaw_I","count":20,"row":1,"col":3},
+      {"ship_id":"fighter_Fury_I","count":20,"row":2,"col":1},
+      {"ship_id":"cruiser_Shield_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Fury_I","count":20,"row":2,"col":3},
+      {"ship_id":"cruiser_Paladin_I","count":12,"row":3,"col":1},
+      {"ship_id":"cruiser_Shield_I","count":12,"row":3,"col":2},
+      {"ship_id":"cruiser_Defender_I","count":12,"row":3,"col":3}
+    ],
     boss: 'Xi Warlord',
-  bossShip: {"name":"Xi Warlord","structure":3200,"shield":1200,"armor_val":400,"dps":240,"agility":6,"speed":4},
+  bossShip: {"name":"Xi Warlord","structure":130000,"shield":40000,"armor_val":20000,"dps":20200,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -350,11 +477,22 @@ const INSTANCES_EASY = [
     id: 'inst_15', name: 'Instanca 15', type: 'standard', number: 15,
     difficulty: 4,
     xp: 924,
-    min_power: 9500,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
+    enemyGroups: [
+      {"ship_id":"fighter_Vengeance_I","count":20,"row":1,"col":1},
+      {"ship_id":"fighter_Ravager_I","count":20,"row":1,"col":2},
+      {"ship_id":"fighter_Vengeance_I","count":20,"row":1,"col":3},
+      {"ship_id":"fighter_Outlaw_I","count":20,"row":2,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":12,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"fighter_Outlaw_I","count":20,"row":2,"col":3},
+      {"ship_id":"cruiser_Bastion_I","count":12,"row":3,"col":1},
+      {"ship_id":"cruiser_Guardian_I","count":12,"row":3,"col":2},
+      {"ship_id":"cruiser_Rampart_I","count":12,"row":3,"col":3}
+    ],
     boss: 'Omicron Dreadnought',
-  bossShip: {"name":"Omicron Dreadnought","structure":3800,"shield":1425,"armor_val":475,"dps":285,"agility":6,"speed":4},
+  bossShip: {"name":"Omicron Dreadnought","structure":130000,"shield":40000,"armor_val":20000,"dps":20200,"agility":8,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -380,11 +518,22 @@ const INSTANCES_EASY = [
     id: 'inst_16', name: 'Instanca 16', type: 'standard', number: 16,
     difficulty: 5,
     xp: 1083,
-    min_power: 11000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Defender_I","count":23,"row":1,"col":1},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":1,"col":2},
+      {"ship_id":"cruiser_Defender_I","count":23,"row":1,"col":3},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":2,"col":1},
+      {"ship_id":"cruiser_Defender_I","count":23,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":2,"col":3},
+      {"ship_id":"cruiser_Defender_I","count":23,"row":3,"col":1},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":3,"col":2},
+      {"ship_id":"cruiser_Defender_I","count":23,"row":3,"col":3}
+    ],
     boss: 'Pi Commander',
-  bossShip: {"name":"Pi Commander","structure":4400,"shield":1650,"armor_val":550,"dps":330,"agility":7,"speed":4},
+  bossShip: {"name":"Pi Commander","structure":300000,"shield":90000,"armor_val":45000,"dps":42500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -407,11 +556,22 @@ const INSTANCES_EASY = [
     id: 'inst_17', name: 'Instanca 17', type: 'standard', number: 17,
     difficulty: 5,
     xp: 1269,
-    min_power: 13000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Bulwark_I","count":23,"row":1,"col":1},
+      {"ship_id":"cruiser_Rampart_I","count":23,"row":1,"col":2},
+      {"ship_id":"cruiser_Bulwark_I","count":23,"row":1,"col":3},
+      {"ship_id":"cruiser_Rampart_I","count":23,"row":2,"col":1},
+      {"ship_id":"cruiser_Paladin_I","count":23,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Rampart_I","count":23,"row":2,"col":3},
+      {"ship_id":"cruiser_Bulwark_I","count":23,"row":3,"col":1},
+      {"ship_id":"cruiser_Paladin_I","count":23,"row":3,"col":2},
+      {"ship_id":"cruiser_Bulwark_I","count":23,"row":3,"col":3}
+    ],
     boss: 'Rho Admiral',
-  bossShip: {"name":"Rho Admiral","structure":5200,"shield":1950,"armor_val":650,"dps":390,"agility":7,"speed":4},
+  bossShip: {"name":"Rho Admiral","structure":300000,"shield":90000,"armor_val":45000,"dps":42500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -431,11 +591,22 @@ const INSTANCES_EASY = [
     id: 'inst_18', name: 'Instanca 18', type: 'standard', number: 18,
     difficulty: 5,
     xp: 1487,
-    min_power: 15000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Shield_I","count":23,"row":1,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":23,"row":1,"col":2},
+      {"ship_id":"cruiser_Shield_I","count":23,"row":1,"col":3},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":2,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":23,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Guardian_I","count":23,"row":2,"col":3},
+      {"ship_id":"cruiser_Shield_I","count":23,"row":3,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":23,"row":3,"col":2},
+      {"ship_id":"cruiser_Shield_I","count":23,"row":3,"col":3}
+    ],
     boss: 'Sigma Warlord',
-  bossShip: {"name":"Sigma Warlord","structure":6000,"shield":2250,"armor_val":750,"dps":450,"agility":7,"speed":4},
+  bossShip: {"name":"Sigma Warlord","structure":300000,"shield":90000,"armor_val":45000,"dps":42500,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -456,11 +627,22 @@ const INSTANCES_EASY = [
     id: 'inst_19', name: 'Instanca 19', type: 'standard', number: 19,
     difficulty: 6,
     xp: 1743,
-    min_power: 18000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Defender_I","count":51,"row":1,"col":1},
+      {"ship_id":"cruiser_Paladin_I","count":51,"row":1,"col":2},
+      {"ship_id":"cruiser_Defender_I","count":51,"row":1,"col":3},
+      {"ship_id":"cruiser_Paladin_I","count":51,"row":2,"col":1},
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Paladin_I","count":51,"row":2,"col":3},
+      {"ship_id":"cruiser_Defender_I","count":51,"row":3,"col":1},
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":3,"col":2},
+      {"ship_id":"cruiser_Defender_I","count":51,"row":3,"col":3}
+    ],
     boss: 'Tau Overlord',
-  bossShip: {"name":"Tau Overlord","structure":7200,"shield":2700,"armor_val":900,"dps":540,"agility":7,"speed":5},
+  bossShip: {"name":"Tau Overlord","structure":700000,"shield":220000,"armor_val":110000,"dps":96000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -477,11 +659,22 @@ const INSTANCES_EASY = [
     id: 'inst_20', name: 'Instanca 20', type: 'standard', number: 20,
     difficulty: 6,
     xp: 2043,
-    min_power: 21000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":1,"col":1},
+      {"ship_id":"cruiser_Bulwark_I","count":51,"row":1,"col":2},
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":1,"col":3},
+      {"ship_id":"cruiser_Bulwark_I","count":51,"row":2,"col":1},
+      {"ship_id":"cruiser_Rampart_I","count":51,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Bulwark_I","count":51,"row":2,"col":3},
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":3,"col":1},
+      {"ship_id":"cruiser_Rampart_I","count":51,"row":3,"col":2},
+      {"ship_id":"cruiser_Guardian_I","count":51,"row":3,"col":3}
+    ],
     boss: 'Upsilon Dreadnought',
-  bossShip: {"name":"Upsilon Dreadnought","structure":8400,"shield":3150,"armor_val":1050,"dps":630,"agility":7,"speed":5},
+  bossShip: {"name":"Upsilon Dreadnought","structure":700000,"shield":220000,"armor_val":110000,"dps":96000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -499,11 +692,22 @@ const INSTANCES_EASY = [
     id: 'inst_21', name: 'Instanca 21', type: 'standard', number: 21,
     difficulty: 6,
     xp: 2395,
-    min_power: 25000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
+    enemyGroups: [
+      {"ship_id":"cruiser_Shield_I","count":51,"row":1,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":51,"row":1,"col":2},
+      {"ship_id":"cruiser_Shield_I","count":51,"row":1,"col":3},
+      {"ship_id":"cruiser_Rampart_I","count":51,"row":2,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":51,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"cruiser_Rampart_I","count":51,"row":2,"col":3},
+      {"ship_id":"cruiser_Shield_I","count":51,"row":3,"col":1},
+      {"ship_id":"cruiser_Bastion_I","count":51,"row":3,"col":2},
+      {"ship_id":"cruiser_Shield_I","count":51,"row":3,"col":3}
+    ],
     boss: 'Phi Commander',
-  bossShip: {"name":"Phi Commander","structure":10000,"shield":3750,"armor_val":1250,"dps":750,"agility":7,"speed":5},
+  bossShip: {"name":"Phi Commander","structure":700000,"shield":220000,"armor_val":110000,"dps":96000,"agility":9,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -524,11 +728,22 @@ const INSTANCES_EASY = [
     id: 'inst_22', name: 'Instanca 22', type: 'standard', number: 22,
     difficulty: 7,
     xp: 2807,
-    min_power: 30000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":3}
+    ],
     boss: 'Chi Warlord',
-  bossShip: {"name":"Chi Warlord","structure":12000,"shield":4500,"armor_val":1500,"dps":900,"agility":8,"speed":5},
+  bossShip: {"name":"Chi Warlord","structure":1450000,"shield":460000,"armor_val":230000,"dps":206000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -546,11 +761,22 @@ const INSTANCES_EASY = [
     id: 'inst_23', name: 'Instanca 23', type: 'standard', number: 23,
     difficulty: 7,
     xp: 3290,
-    min_power: 35000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":3},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":3}
+    ],
     boss: 'Psi Admiral',
-  bossShip: {"name":"Psi Admiral","structure":14000,"shield":5250,"armor_val":1750,"dps":1050,"agility":8,"speed":5},
+  bossShip: {"name":"Psi Admiral","structure":1450000,"shield":460000,"armor_val":230000,"dps":206000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -572,11 +798,22 @@ const INSTANCES_EASY = [
     id: 'inst_24', name: 'Instanca 24', type: 'standard', number: 24,
     difficulty: 7,
     xp: 3857,
-    min_power: 40000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
+    enemyGroups: [
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":1,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":1,"col":3},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Titan_I","count":57,"row":2,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":3,"col":1},
+      {"ship_id":"battleship_Titan_I","count":57,"row":3,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":57,"row":3,"col":3}
+    ],
     boss: 'Omega Warlord',
-  bossShip: {"name":"Omega Warlord","structure":16000,"shield":6000,"armor_val":2000,"dps":1200,"agility":8,"speed":5},
+  bossShip: {"name":"Omega Warlord","structure":1450000,"shield":460000,"armor_val":230000,"dps":206000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -601,11 +838,22 @@ const INSTANCES_EASY = [
     id: 'inst_25', name: 'Instanca 25', type: 'standard', number: 25,
     difficulty: 8,
     xp: 4520,
-    min_power: 48000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":125,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":125,"row":3,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":125,"row":3,"col":3}
+    ],
     boss: 'Omega Admiral',
-  bossShip: {"name":"Omega Admiral","structure":19200,"shield":7200,"armor_val":2400,"dps":1440,"agility":9,"speed":6},
+  bossShip: {"name":"Omega Admiral","structure":3200000,"shield":1020000,"armor_val":510000,"dps":452000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -630,11 +878,22 @@ const INSTANCES_EASY = [
     id: 'inst_26', name: 'Instanca 26', type: 'standard', number: 26,
     difficulty: 8,
     xp: 5298,
-    min_power: 58000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":1},
+      {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":3},
+      {"ship_id":"battleship_Titan_I","count":125,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":125,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Titan_I","count":125,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":125,"row":3,"col":1},
+      {"ship_id":"battleship_Titan_I","count":125,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":125,"row":3,"col":3}
+    ],
     boss: 'Titan Warlord',
-  bossShip: {"name":"Titan Warlord","structure":23200,"shield":8700,"armor_val":2900,"dps":1740,"agility":9,"speed":6},
+  bossShip: {"name":"Titan Warlord","structure":3200000,"shield":1020000,"armor_val":510000,"dps":452000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -663,11 +922,22 @@ const INSTANCES_EASY = [
     id: 'inst_27', name: 'Instanca 27', type: 'standard', number: 27,
     difficulty: 8,
     xp: 6210,
-    min_power: 70000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Omega Carrier II', 'Void Flagship I'],
+    enemyGroups: [
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":1,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":1,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":1,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":2,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":2,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":3,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":3,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":125,"row":3,"col":3}
+    ],
     boss: 'Colossus Commander',
-  bossShip: {"name":"Colossus Commander","structure":28000,"shield":10500,"armor_val":3500,"dps":2100,"agility":9,"speed":6},
+  bossShip: {"name":"Colossus Commander","structure":3200000,"shield":1020000,"armor_val":510000,"dps":452000,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -692,11 +962,22 @@ const INSTANCES_EASY = [
     id: 'inst_28', name: 'Instanca 28', type: 'standard', number: 28,
     difficulty: 9,
     xp: 7279,
-    min_power: 85000,
+    min_power: 54876000,
     icon: '🌌',
     enemies: ['Void Flagship I', 'Omega Carrier III'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":275,"row":1,"col":1},
+      {"ship_id":"battleship_Titan_I","count":275,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":275,"row":1,"col":3},
+      {"ship_id":"battleship_Titan_I","count":275,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":275,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Titan_I","count":275,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":275,"row":3,"col":1},
+      {"ship_id":"battleship_Titan_I","count":275,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":275,"row":3,"col":3}
+    ],
     boss: 'Destroyer Prime',
-  bossShip: {"name":"Destroyer Prime","structure":34000,"shield":12750,"armor_val":4250,"dps":2550,"agility":10,"speed":6},
+  bossShip: {"name":"Destroyer Prime","structure":7000000,"shield":2240000,"armor_val":1120000,"dps":990000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -724,11 +1005,22 @@ const INSTANCES_EASY = [
     id: 'inst_29', name: 'Instanca 29', type: 'standard', number: 29,
     difficulty: 9,
     xp: 8532,
-    min_power: 100000,
+    min_power: 54876000,
     icon: '🌌',
     enemies: ['Omega Carrier III', 'Void Flagship II'],
+    enemyGroups: [
+      {"ship_id":"battleship_Behemoth_I","count":275,"row":1,"col":1},
+      {"ship_id":"battleship_Titan_I","count":275,"row":1,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":275,"row":1,"col":3},
+      {"ship_id":"battleship_Titan_I","count":275,"row":2,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":275,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Titan_I","count":275,"row":2,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":275,"row":3,"col":1},
+      {"ship_id":"battleship_Titan_I","count":275,"row":3,"col":2},
+      {"ship_id":"battleship_Behemoth_I","count":275,"row":3,"col":3}
+    ],
     boss: 'Annihilator Prime',
-  bossShip: {"name":"Annihilator Prime","structure":40000,"shield":15000,"armor_val":5000,"dps":3000,"agility":10,"speed":6},
+  bossShip: {"name":"Annihilator Prime","structure":7000000,"shield":2240000,"armor_val":1120000,"dps":990000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -746,11 +1038,22 @@ const INSTANCES_EASY = [
     id: 'inst_30', name: 'Instanca 30', type: 'standard', number: 30,
     difficulty: 10,
     xp: 10000,
-    min_power: 120000,
+    min_power: 120727000,
     icon: '🌌',
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
+    enemyGroups: [
+      {"ship_id":"battleship_Titan_I","count":605,"row":1,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":605,"row":1,"col":2},
+      {"ship_id":"battleship_Titan_I","count":605,"row":1,"col":3},
+      {"ship_id":"battleship_Behemoth_I","count":605,"row":2,"col":1},
+      {"ship_id":"battleship_Titan_I","count":605,"row":2,"col":2,"isBoss":true},
+      {"ship_id":"battleship_Behemoth_I","count":605,"row":2,"col":3},
+      {"ship_id":"battleship_Titan_I","count":605,"row":3,"col":1},
+      {"ship_id":"battleship_Behemoth_I","count":605,"row":3,"col":2},
+      {"ship_id":"battleship_Titan_I","count":605,"row":3,"col":3}
+    ],
     boss: 'Omega Supreme',
-  bossShip: {"name":"Omega Supreme","structure":48000,"shield":18000,"armor_val":6000,"dps":3600,"agility":10,"speed":7},
+  bossShip: {"name":"Omega Supreme","structure":15500000,"shield":5100000,"armor_val":2550000,"dps":2220000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [

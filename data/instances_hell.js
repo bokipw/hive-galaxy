@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // HIVE GALAXY — data/instances_easy.js
 // Normal instance data — R tier blueprinti, 3 flote
 // ============================================================
@@ -12,7 +12,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_1', name: 'Instanca 1', type: 'standard', number: 1,
     difficulty: 1,
-    min_power: 0,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
@@ -40,7 +40,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_2', name: 'Instanca 2', type: 'standard', number: 2,
     difficulty: 1,
-    min_power: 500,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
@@ -69,7 +69,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_3', name: 'Instanca 3', type: 'standard', number: 3,
     difficulty: 1,
-    min_power: 800,
+    min_power: 100000,
     icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
@@ -103,7 +103,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_4', name: 'Instanca 4', type: 'standard', number: 4,
     difficulty: 2,
-    min_power: 1200,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -134,7 +134,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_5', name: 'Instanca 5', type: 'standard', number: 5,
     difficulty: 2,
-    min_power: 1600,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter I', 'Rogue Drones III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
@@ -169,7 +169,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_6', name: 'Instanca 6', type: 'standard', number: 6,
     difficulty: 2,
-    min_power: 2000,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter I', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -204,7 +204,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_7', name: 'Instanca 7', type: 'standard', number: 7,
     difficulty: 2,
-    min_power: 2500,
+    min_power: 220000,
     icon: '🌌',
     enemies: ['Marauder Fighter II', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -234,7 +234,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_8', name: 'Instanca 8', type: 'standard', number: 8,
     difficulty: 3,
-    min_power: 3000,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser I', 'Marauder Fighter II'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
@@ -264,7 +264,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_9', name: 'Instanca 9', type: 'standard', number: 9,
     difficulty: 3,
-    min_power: 3600,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Shadow_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
@@ -299,7 +299,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_10', name: 'Instanca 10', type: 'standard', number: 10,
     difficulty: 3,
-    min_power: 4200,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
@@ -333,7 +333,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_11', name: 'Instanca 11', type: 'standard', number: 11,
     difficulty: 3,
-    min_power: 5000,
+    min_power: 484000,
     icon: '🌌',
     enemies: ['Khal Battleship I', 'Vex Cruiser III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
@@ -367,7 +367,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_12', name: 'Instanca 12', type: 'standard', number: 12,
     difficulty: 4,
-    min_power: 6000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
@@ -408,7 +408,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_13', name: 'Instanca 13', type: 'standard', number: 13,
     difficulty: 4,
-    min_power: 7000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -444,7 +444,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_14', name: 'Instanca 14', type: 'standard', number: 14,
     difficulty: 4,
-    min_power: 8000,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -476,7 +476,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_15', name: 'Instanca 15', type: 'standard', number: 15,
     difficulty: 4,
-    min_power: 9500,
+    min_power: 1065000,
     icon: '🌌',
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
@@ -528,7 +528,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_16', name: 'Instanca 16', type: 'standard', number: 16,
     difficulty: 5,
-    min_power: 11000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
@@ -563,7 +563,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_17', name: 'Instanca 17', type: 'standard', number: 17,
     difficulty: 5,
-    min_power: 13000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
@@ -595,7 +595,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_18', name: 'Instanca 18', type: 'standard', number: 18,
     difficulty: 5,
-    min_power: 15000,
+    min_power: 2343000,
     icon: '🌌',
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
   enemyGroups: [{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
@@ -637,7 +637,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_19', name: 'Instanca 19', type: 'standard', number: 19,
     difficulty: 6,
-    min_power: 18000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
@@ -666,7 +666,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_20', name: 'Instanca 20', type: 'standard', number: 20,
     difficulty: 6,
-    min_power: 21000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
@@ -706,7 +706,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_21', name: 'Instanca 21', type: 'standard', number: 21,
     difficulty: 6,
-    min_power: 25000,
+    min_power: 5154000,
     icon: '🌌',
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":3}],
@@ -752,7 +752,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_22', name: 'Instanca 22', type: 'standard', number: 22,
     difficulty: 7,
-    min_power: 30000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
@@ -787,7 +787,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_23', name: 'Instanca 23', type: 'standard', number: 23,
     difficulty: 7,
-    min_power: 35000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
@@ -826,7 +826,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_24', name: 'Instanca 24', type: 'standard', number: 24,
     difficulty: 7,
-    min_power: 40000,
+    min_power: 11338000,
     icon: '🌌',
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
@@ -876,7 +876,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_25', name: 'Instanca 25', type: 'standard', number: 25,
     difficulty: 8,
-    min_power: 48000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
@@ -921,7 +921,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_26', name: 'Instanca 26', type: 'standard', number: 26,
     difficulty: 8,
-    min_power: 58000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Haven_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
@@ -969,7 +969,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_27', name: 'Instanca 27', type: 'standard', number: 27,
     difficulty: 8,
-    min_power: 70000,
+    min_power: 24944000,
     icon: '🌌',
     enemies: ['Omega Carrier II', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
@@ -1018,7 +1018,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_28', name: 'Instanca 28', type: 'standard', number: 28,
     difficulty: 9,
-    min_power: 85000,
+    min_power: 54876000,
     icon: '🌌',
     enemies: ['Void Flagship I', 'Omega Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
@@ -1067,7 +1067,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_29', name: 'Instanca 29', type: 'standard', number: 29,
     difficulty: 9,
-    min_power: 100000,
+    min_power: 54876000,
     icon: '🌌',
     enemies: ['Omega Carrier III', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":3}],
@@ -1106,7 +1106,7 @@ const INSTANCES_HELL = [
   {
     id: 'inst_30', name: 'Instanca 30', type: 'standard', number: 30,
     difficulty: 10,
-    min_power: 120000,
+    min_power: 120727000,
     icon: '🌌',
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Goliath_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],

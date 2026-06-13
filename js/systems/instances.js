@@ -107,7 +107,7 @@ function getInstanceEnergyCost(inst) {
 // ── MIN POWER SKALIRAN PO MODU ──
 function getInstanceMinPower(inst) {
   // Mode multiplikator — Easy je baza, svaki mod skalira gore
-  const modeMult = { easy: 1, normal: 2.5, nightmare: 6, hell: 15 }[_instDifficultyMode] || 1;
+  const modeMult = { easy: 1, normal: 3, nightmare: 6, hell: 9 }[_instDifficultyMode] || 1;
 
   // Koristi inst.min_power kao easy bazu i skaliraj modom
   if (inst.min_power != null) {
