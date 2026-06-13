@@ -431,6 +431,54 @@
       <div id="seasonRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
+    <!-- GRAND MASTER NAGRADE -->
+    <div class="section-title" style="color:#ffaa00;margin-top:32px">👑 GRAND MASTER — SEZONA NAGRADE</div>
+
+    <div style="background:rgba(255,170,0,.05);border:1px solid rgba(255,170,0,.2);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+      <div style="font-size:.72rem;color:#ffcc88;margin-bottom:12px">
+        Nagrade za top 10 Grand Master igrača (rating 3500–4999).<br>
+        <span style="color:#ff6666">⚠ Mjesta 1–4 isplati ručno kroz Shop/Items sekciju. Mjesta 5–10 (instance ključevi) isplaćuju se automatski.</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:14px">
+        <thead><tr>
+          <th style="color:#ffaa00;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,170,0,.2)">MJESTO</th>
+          <th style="color:#ffaa00;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,170,0,.2)">NAGRADA</th>
+          <th style="color:#ffaa00;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,170,0,.2)">TIP</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 10px;color:#ffd700">🥇 1.</td><td style="padding:5px 10px;color:#ff8899">VIP Commander Pack (3× Epic)</td><td style="padding:5px 10px;color:#ffcc44">Ručno</td></tr>
+          <tr><td style="padding:5px 10px;color:#c0c0c0">🥈 2.</td><td style="padding:5px 10px;color:#00d4ff">Booster Bundle 30 dana</td><td style="padding:5px 10px;color:#ffcc44">Ručno</td></tr>
+          <tr><td style="padding:5px 10px;color:#cd7f32">🥉 3.</td><td style="padding:5px 10px;color:#ffcc44">100% XP Boost 30 dana</td><td style="padding:5px 10px;color:#ffcc44">Ručno</td></tr>
+          <tr><td style="padding:5px 10px;color:#ffaa00">4.</td><td style="padding:5px 10px;color:#ffaa00">100% Mining Boost 30 dana</td><td style="padding:5px 10px;color:#ffcc44">Ručno</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">5.</td><td style="padding:5px 10px;color:#aa44ff">500 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">6.</td><td style="padding:5px 10px;color:#aa44ff">400 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">7.</td><td style="padding:5px 10px;color:#aa44ff">300 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">8.</td><td style="padding:5px 10px;color:#aa44ff">200 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">9.</td><td style="padding:5px 10px;color:#aa44ff">150 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+          <tr><td style="padding:5px 10px;color:#aa44ff">10.</td><td style="padding:5px 10px;color:#aa44ff">100 instance ključeva</td><td style="padding:5px 10px;color:#00cc66">Auto</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-blue" style="padding:9px 18px" onclick="loadGMTop10()">↻ UČITAJ TOP 10 GM</button>
+        <button class="btn" id="distributeGMBtn" style="padding:9px 18px;background:rgba(255,170,0,.2);border-color:rgba(255,170,0,.5);color:#ffaa00;display:none" onclick="distributeGMRewards()">👑 ISPLATI INST. KLJUČEVE (5–10)</button>
+      </div>
+    </div>
+
+    <div class="section-title" style="color:#aa88ff;font-size:.7rem">TOP 10 GRAND MASTER IGRAČA</div>
+    <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Username</th><th>Rating</th><th>Level</th>
+          <th style="color:#aa44ff">+Inst. Ključevi</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody id="gmTop10Tbl"><tr><td colspan="6" class="loading">Klikni Učitaj Top 10 GM.</td></tr></tbody>
+      </table>
+    </div>
+
+    <div id="gmRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
+    </div>
+
   </div><!-- /content -->
 </div><!-- /adminApp -->
 
@@ -1228,6 +1276,127 @@ async function distributeSeasonRewards() {
   btn.disabled = false;
   btn.textContent = '🔱 ISPLATI NAGRADE';
   showToast('Isplata završena: ' + ok + ' igrača nagrađeno.');
+}
+
+// ============================================================
+// GRAND MASTER NAGRADE
+// ============================================================
+const GM_REWARDS = [
+  { ikeys: 0,   manual: 'VIP Commander Pack (3× Epic)' },
+  { ikeys: 0,   manual: 'Booster Bundle 30 dana' },
+  { ikeys: 0,   manual: '100% XP Boost 30 dana' },
+  { ikeys: 0,   manual: '100% Mining Boost 30 dana' },
+  { ikeys: 500, manual: null },
+  { ikeys: 400, manual: null },
+  { ikeys: 300, manual: null },
+  { ikeys: 200, manual: null },
+  { ikeys: 150, manual: null },
+  { ikeys: 100, manual: null },
+];
+
+let _gmTop10 = [];
+
+async function loadGMTop10() {
+  const tbody = document.getElementById('gmTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="6" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeGMBtn').style.display = 'none';
+
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 3500)
+      .lt('rating', 5000)
+      .order('rating', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+    _gmTop10 = data || [];
+
+    if (_gmTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="loading" style="color:#ff6666">Nema igrača u Grand Master diviziji (3500–4999).</td></tr>';
+      return;
+    }
+
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _gmTop10.map((p, i) => {
+      const r = GM_REWARDS[i] || { ikeys: 0, manual: null };
+      const medal = medals[i] || (i + 1) + '.';
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      const rewardCell = r.manual
+        ? '<span style="color:#ffcc44;font-size:.68rem">⚠ ' + r.manual + '</span>'
+        : '<span style="color:#aa44ff">+' + r.ikeys + ' 🔑</span>';
+      return '<tr>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + medal + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username || '-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: ' + hiveUser + '</div>' : '') +
+        '</td>' +
+        '<td style="color:#ffaa00;font-family:monospace">' + (p.rating || 0).toLocaleString() + '</td>' +
+        '<td>' + (p.level || 1) + '</td>' +
+        '<td>' + rewardCell + '</td>' +
+        '<td id="gm-status-' + i + '" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+
+    document.getElementById('distributeGMBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="6" class="loading" style="color:#ff6666">Greška: ' + e.message + '</td></tr>';
+  }
+}
+
+async function distributeGMRewards() {
+  if (!confirm('SIGURNO? Šalje instance ključeve igračima na mjestima 5–10 Grand Master.')) return;
+  const btn = document.getElementById('distributeGMBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Isplata u toku...';
+
+  const log = document.getElementById('gmRewardLog');
+  log.innerHTML = '<div style="color:#ffaa00;margin-bottom:8px">► Početak GM isplate — ' + new Date().toLocaleString() + '</div>';
+
+  let ok = 0, skipped = 0, fail = 0;
+
+  for (let i = 0; i < _gmTop10.length; i++) {
+    const p = _gmTop10[i];
+    const r = GM_REWARDS[i] || { ikeys: 0, manual: null };
+    const statusEl = document.getElementById('gm-status-' + i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+
+    if (r.manual) {
+      if (statusEl) { statusEl.textContent = '⚠ Ručno'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ #' + (i+1) + ' ' + (p.username || '-') + ' — ' + r.manual + ' (isplati ručno)</div>';
+      skipped++;
+      continue;
+    }
+
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ ' + (p.username || p.id) + ' — nije HIVE igrač, preskačem.</div>';
+      fail++;
+      continue;
+    }
+
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('keys_inst').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: ' + hiveUser);
+
+      const { error: e2 } = await _supa.from('hive_profiles').update({
+        keys_inst: (prof.keys_inst || 0) + r.ikeys,
+      }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #' + (i+1) + ' ' + hiveUser + ' — +' + r.ikeys + ' instance ključeva</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #' + (i+1) + ' ' + hiveUser + ' — ' + e.message + '</div>';
+      fail++;
+    }
+  }
+
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: ' + ok + ' isplaćeno, ' + skipped + ' ručnih, ' + fail + ' greški.</div>';
+  btn.disabled = false;
+  btn.textContent = '👑 ISPLATI INST. KLJUČEVE (5–10)';
+  showToast('GM isplata završena: ' + ok + ' igrača nagrađeno.');
 }
 
 // ============================================================
