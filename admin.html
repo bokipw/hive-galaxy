@@ -477,6 +477,45 @@
     </div>
 
     <div id="gmRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
+
+    <!-- MASTER NAGRADE -->
+    <div class="section-title" style="color:#aa44ff;margin-top:32px">💫 MASTER — SEZONA NAGRADE</div>
+    <div style="background:rgba(170,68,255,.05);border:1px solid rgba(170,68,255,.2);border-radius:10px;padding:16px;margin-bottom:20px;max-width:700px">
+      <div style="font-size:.72rem;color:#cc99ff;margin-bottom:12px">
+        Nagrade za top 10 Master igrača (rating 2800–3499). BCM i BPW se isplaćuju automatski.
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:14px">
+        <thead><tr>
+          <th style="color:#aa44ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(170,68,255,.2)">MJESTO</th>
+          <th style="color:#aa44ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(170,68,255,.2)">BCM</th>
+          <th style="color:#aa44ff;padding:6px 10px;text-align:left;border-bottom:1px solid rgba(170,68,255,.2)">BPW (satoshi)</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 10px;color:#ffd700">🥇 1.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#aa44ff">100 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#c0c0c0">🥈 2.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#aa44ff">50 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#cd7f32">🥉 3.</td><td style="padding:5px 10px;color:#ffcc44">1</td><td style="padding:5px 10px;color:#aa44ff">25 000</td></tr>
+          <tr><td style="padding:5px 10px;color:#cc99ff">4–10.</td><td style="padding:5px 10px;color:#4a6a8a">—</td><td style="padding:5px 10px;color:#aa44ff">10 000</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-blue" style="padding:9px 18px" onclick="loadMasterTop10()">↻ UČITAJ TOP 10 MASTER</button>
+        <button class="btn" id="distributeMasterBtn" style="padding:9px 18px;background:rgba(170,68,255,.2);border-color:rgba(170,68,255,.5);color:#aa44ff;display:none" onclick="distributeMasterRewards()">💫 ISPLATI MASTER NAGRADE</button>
+      </div>
+    </div>
+
+    <div class="section-title" style="color:#cc99ff;font-size:.7rem">TOP 10 MASTER IGRAČA</div>
+    <div class="tbl-wrap" style="max-width:700px;margin-bottom:20px">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Username</th><th>Rating</th><th>Level</th>
+          <th style="color:#ffcc44">+BCM</th>
+          <th style="color:#aa44ff">+BPW (sat)</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody id="masterTop10Tbl"><tr><td colspan="7" class="loading">Klikni Učitaj Top 10 Master.</td></tr></tbody>
+      </table>
+    </div>
+    <div id="masterRewardLog" style="max-width:700px;font-size:.72rem;color:#4a6a8a"></div>
     </div>
 
   </div><!-- /content -->
@@ -1397,6 +1436,120 @@ async function distributeGMRewards() {
   btn.disabled = false;
   btn.textContent = '👑 ISPLATI INST. KLJUČEVE (5–10)';
   showToast('GM isplata završena: ' + ok + ' igrača nagrađeno.');
+}
+
+// ============================================================
+// MASTER NAGRADE
+// ============================================================
+const MASTER_REWARDS = [
+  { bcm: 1, bpw: 100000 },
+  { bcm: 1, bpw: 50000 },
+  { bcm: 1, bpw: 25000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+  { bcm: 0, bpw: 10000 },
+];
+
+let _masterTop10 = [];
+
+async function loadMasterTop10() {
+  const tbody = document.getElementById('masterTop10Tbl');
+  tbody.innerHTML = '<tr><td colspan="7" class="loading">Učitavam...</td></tr>';
+  document.getElementById('distributeMasterBtn').style.display = 'none';
+
+  try {
+    const { data, error } = await _supa.from('pvp_snapshots')
+      .select('id, username, rating, level')
+      .gte('rating', 2800)
+      .lt('rating', 3500)
+      .order('rating', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+    _masterTop10 = data || [];
+
+    if (_masterTop10.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Nema igrača u Master diviziji (2800–3499).</td></tr>';
+      return;
+    }
+
+    const medals = ['🥇','🥈','🥉'];
+    tbody.innerHTML = _masterTop10.map((p, i) => {
+      const r = MASTER_REWARDS[i] || { bcm: 0, bpw: 0 };
+      const medal = medals[i] || (i + 1) + '.';
+      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      return '<tr>' +
+        '<td style="color:#ffcc44;font-family:monospace">' + medal + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.username || '-') +
+          (hiveUser ? '<div style="font-size:.6rem;color:#4a6a8a">HIVE: ' + hiveUser + '</div>' : '') +
+        '</td>' +
+        '<td style="color:#aa44ff;font-family:monospace">' + (p.rating || 0).toLocaleString() + '</td>' +
+        '<td>' + (p.level || 1) + '</td>' +
+        '<td style="color:#ffcc44;font-weight:600">' + (r.bcm ? '+' + r.bcm : '—') + '</td>' +
+        '<td style="color:#aa44ff;font-weight:600">+' + r.bpw.toLocaleString() + '</td>' +
+        '<td id="master-status-' + i + '" style="color:#4a6a8a">—</td>' +
+        '</tr>';
+    }).join('');
+
+    document.getElementById('distributeMasterBtn').style.display = '';
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:#ff6666">Greška: ' + e.message + '</td></tr>';
+  }
+}
+
+async function distributeMasterRewards() {
+  if (!confirm('SIGURNO? Šalje BCM i BPW top 10 Master igračima.')) return;
+  const btn = document.getElementById('distributeMasterBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Isplata u toku...';
+
+  const log = document.getElementById('masterRewardLog');
+  log.innerHTML = '<div style="color:#aa44ff;margin-bottom:8px">► Početak Master isplate — ' + new Date().toLocaleString() + '</div>';
+
+  let ok = 0, fail = 0;
+
+  for (let i = 0; i < _masterTop10.length; i++) {
+    const p = _masterTop10[i];
+    const r = MASTER_REWARDS[i] || { bcm: 0, bpw: 0 };
+    const statusEl = document.getElementById('master-status-' + i);
+    const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+
+    if (!hiveUser) {
+      if (statusEl) { statusEl.textContent = '⚠ Nije HIVE'; statusEl.style.color = '#ffcc44'; }
+      log.innerHTML += '<div style="color:#ffcc44">⚠ ' + (p.username || p.id) + ' — nije HIVE igrač, preskačem.</div>';
+      fail++;
+      continue;
+    }
+
+    try {
+      const { data: prof, error: e1 } = await _supa.from('hive_profiles').select('bcm, spcard').eq('hive_user', hiveUser).single();
+      if (e1 || !prof) throw new Error('Profil nije pronađen: ' + hiveUser);
+
+      const { error: e2 } = await _supa.from('hive_profiles').update({
+        bcm:    (prof.bcm    || 0) + r.bcm,
+        spcard: (prof.spcard || 0) + r.bpw,
+      }).eq('hive_user', hiveUser);
+      if (e2) throw e2;
+
+      if (statusEl) { statusEl.textContent = '✅ Isplaćeno'; statusEl.style.color = '#00cc66'; }
+      log.innerHTML += '<div style="color:#00cc66">✅ #' + (i+1) + ' ' + hiveUser +
+        (r.bcm ? ' — +' + r.bcm + ' BCM' : '') + ' — +' + r.bpw.toLocaleString() + ' sat BPW</div>';
+      ok++;
+    } catch(e) {
+      if (statusEl) { statusEl.textContent = '❌ Greška'; statusEl.style.color = '#ff6666'; }
+      log.innerHTML += '<div style="color:#ff6666">❌ #' + (i+1) + ' ' + hiveUser + ' — ' + e.message + '</div>';
+      fail++;
+    }
+  }
+
+  log.innerHTML += '<div style="color:#c0d8f0;margin-top:8px;font-weight:600">► Završeno: ' + ok + ' isplaćeno, ' + fail + ' greški.</div>';
+  btn.disabled = false;
+  btn.textContent = '💫 ISPLATI MASTER NAGRADE';
+  showToast('Master isplata završena: ' + ok + ' igrača nagrađeno.');
 }
 
 // ============================================================
