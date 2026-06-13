@@ -249,7 +249,7 @@ function renderOpponentListHTML() {
       '<div style="text-align:right"><div style="font-size:0.65rem;color:#00d4ff;font-family:Orbitron,monospace">'+fmt(opp.power)+'</div>' +
       '<div style="font-size:0.55rem;color:#6a90b8">'+(opp.fleet?opp.fleet.length:0)+' brodova</div></div>' +
       '</div>' +
-      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">NAPADNI</button>' +
+      '<button class="btn btn-danger" style="width:100%;font-size:0.68rem" onclick="startPvpBattle('+idx+')">⚔️ NAPADNI</button>' +
       '</div>';
   }).join('');
 }
