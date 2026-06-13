@@ -225,6 +225,21 @@
           </div>
         </div>
 
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+          <div>
+            <label style="color:#ffcc44;font-size:.68rem;display:block;margin-bottom:4px">BCM</label>
+            <input type="number" id="resBcm" placeholder="0" min="0" step="1" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(255,204,68,.2);color:#c8deff;padding:8px;border-radius:5px;font-size:.8rem" />
+          </div>
+          <div>
+            <label style="color:#ffcc44;font-size:.68rem;display:block;margin-bottom:4px">BOCRYPTO</label>
+            <input type="number" id="resBocrypto" placeholder="0" min="0" step="0.001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(255,204,68,.2);color:#c8deff;padding:8px;border-radius:5px;font-size:.8rem" />
+          </div>
+          <div>
+            <label style="color:#ffcc44;font-size:.68rem;display:block;margin-bottom:4px">BPW</label>
+            <input type="number" id="resBpw" placeholder="0" min="0" step="0.00000001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(255,204,68,.2);color:#c8deff;padding:8px;border-radius:5px;font-size:.8rem" />
+          </div>
+        </div>
+
         <div style="display:flex;gap:10px">
           <button class="btn btn-green" style="flex:1;padding:10px" onclick="sendResources()">POSALJI RESURSE</button>
           <button class="btn btn-gold" style="flex:1;padding:10px" onclick="fullFill()">FULL NAPUNI SVE</button>
@@ -647,12 +662,15 @@ async function sendResources() {
   const username = document.getElementById('resUsername').value.trim();
   if (!username) { showToast('Unesi username!', true); return; }
 
-  const metal   = parseInt(document.getElementById('resMetal').value)   || 0;
-  const crystal = parseInt(document.getElementById('resCrystal').value) || 0;
-  const he3     = parseInt(document.getElementById('resHe3').value)     || 0;
-  const energy  = parseInt(document.getElementById('resEnergy').value)  || 0;
-  const ikeys   = parseInt(document.getElementById('resIkeys').value)   || 0;
-  const keys    = parseInt(document.getElementById('resKeys').value)    || 0;
+  const metal     = parseInt(document.getElementById('resMetal').value)     || 0;
+  const crystal   = parseInt(document.getElementById('resCrystal').value)   || 0;
+  const he3       = parseInt(document.getElementById('resHe3').value)       || 0;
+  const energy    = parseInt(document.getElementById('resEnergy').value)    || 0;
+  const ikeys     = parseInt(document.getElementById('resIkeys').value)     || 0;
+  const keys      = parseInt(document.getElementById('resKeys').value)      || 0;
+  const bcm       = parseFloat(document.getElementById('resBcm').value)     || 0;
+  const bocrypto  = parseFloat(document.getElementById('resBocrypto').value)|| 0;
+  const bpw       = parseFloat(document.getElementById('resBpw').value)     || 0;
 
   try {
     const { data: prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
@@ -661,10 +679,13 @@ async function sendResources() {
     // Resursi (metal/crystal/he3/energy) idu u boosters — igra ih pokupi pri loginu
     const existing = (prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
     const pending = {
-      metal:   (existing.metal   || 0) + metal,
-      crystal: (existing.crystal || 0) + crystal,
-      he3:     (existing.he3     || 0) + he3,
-      energy:  (existing.energy  || 0) + energy,
+      metal:    (existing.metal    || 0) + metal,
+      crystal:  (existing.crystal  || 0) + crystal,
+      he3:      (existing.he3      || 0) + he3,
+      energy:   (existing.energy   || 0) + energy,
+      bcm:      (existing.bcm      || 0) + bcm,
+      bocrypto: (existing.bocrypto || 0) + bocrypto,
+      bpw:      (existing.bpw      || 0) + bpw,
     };
 
     // Keys idu direktno u hive_profiles.keys/ikeys — igra ih vec cita odvojeno
