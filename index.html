@@ -563,7 +563,10 @@ async function emailReg() {
   openMod('Registracija...', 'Molimo pricekaj...', []);
   const { data, error } = await _supa.auth.signUp({
     email, password: pass,
-    options: { data: { username: email.split('@')[0] } }
+    options: {
+      data: { username: email.split('@')[0] },
+      emailRedirectTo: 'https://bokipw.github.io/hive-galaxy/game.html'
+    }
   });
   if(error) { openMod('Greska', error.message, [{label:'OK',fn:closeMod}]); return; }
   openMod('Registracija uspjesna!', 'Potvrdi email adresu ' + email + ' - poslali smo ti link. Nakon potvrde mozes se prijaviti i igrati.', [{label:'OK',fn:closeMod}]);
