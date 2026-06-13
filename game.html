@@ -163,9 +163,16 @@
     return;
   }
 
-  _sb.auth.getSession().then(({ data }) => {
-    if(data.session) { window._supaSession = data.session; window._loginType = 'email'; }
-    else { window.location.href = 'index.html'; }
+  _sb.auth.getSession().then(async ({ data }) => {
+    if(data.session) {
+      window._supaSession = data.session;
+      window._loginType = 'email';
+      const email = data.session.user.email?.toLowerCase();
+      if (email) {
+        const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).single();
+        window._playerPremium = !!(pu && pu.is_premium);
+      }
+    } else { window.location.href = 'index.html'; }
   });
 })();
 </script>

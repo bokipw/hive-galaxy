@@ -126,6 +126,7 @@
     <button onclick="showSection('blueprints')">Blueprinti</button>
     <button onclick="showSection('maintenance')">Sistem</button>
     <button onclick="showSection('season')" style="border-color:rgba(255,51,85,.4);color:#ff3355">🔱 Sezona Nagrade</button>
+    <button onclick="showSection('premium')" style="border-color:rgba(255,204,51,.4);color:#ffcc33">💎 Premium</button>
   </div>
 
   <div class="content">
@@ -380,6 +381,33 @@
           <button class="btn btn-red" style="width:100%" onclick="deletePlayer()">OBRISI IGRACA</button>
         </div>
 
+      </div>
+    </div>
+
+    <!-- PREMIUM UPRAVLJANJE -->
+    <div class="section" id="sec-premium">
+      <div class="section-title" style="color:#ffcc33">💎 PREMIUM — EMAIL IGRAČI</div>
+      <div style="background:rgba(255,204,51,.06);border:1px solid rgba(255,204,51,.2);border-radius:10px;padding:20px;max-width:500px;margin-bottom:24px">
+        <div style="font-size:.75rem;color:#ffcc33;margin-bottom:12px;letter-spacing:1px">AKTIVIRAJ PREMIUM</div>
+        <label style="font-size:.7rem;color:#5a8aaa;display:block;margin-bottom:4px">EMAIL IGRAČA</label>
+        <input type="email" id="premEmailInput" placeholder="igrac@email.com" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,204,51,.25);color:#fff;padding:9px 12px;border-radius:6px;font-size:.85rem;margin-bottom:10px;outline:none">
+        <div style="display:flex;gap:8px">
+          <button class="btn" onclick="setPremium(true)" style="flex:1;background:rgba(255,204,51,.15);border-color:rgba(255,204,51,.4);color:#ffcc33">✓ Daj Premium</button>
+          <button class="btn" onclick="setPremium(false)" style="flex:1;background:rgba(255,80,80,.1);border-color:rgba(255,80,80,.3);color:#ff8080">✗ Ukloni Premium</button>
+        </div>
+        <div id="premResult" style="margin-top:12px;font-size:.75rem;min-height:20px"></div>
+      </div>
+      <div style="background:rgba(0,20,50,.5);border:1px solid rgba(0,180,255,.12);border-radius:10px;padding:20px;max-width:900px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-size:.75rem;color:#00aaff;letter-spacing:1px">LISTA EMAIL IGRAČA</div>
+          <button class="btn" onclick="loadEmailPlayers()" style="padding:5px 14px;font-size:.7rem">Učitaj</button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Email</th><th>Username</th><th>Registrovan</th><th>Premium</th><th>Akcija</th></tr></thead>
+            <tbody id="emailPlayersTbl"><tr><td colspan="5" class="loading">Klikni Učitaj.</td></tr></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -2040,6 +2068,55 @@ function showToast(msg, isErr) {
   el.style.color        = isErr ? '#ff8080' : '#00d4ff';
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => el.style.display = 'none', 3500);
+}
+
+// ============================================================
+// PREMIUM — EMAIL IGRAČI
+// ============================================================
+async function setPremium(activate) {
+  const email = document.getElementById('premEmailInput').value.trim().toLowerCase();
+  const res   = document.getElementById('premResult');
+  if (!email || !email.includes('@')) { res.style.color='#ff8080'; res.textContent='Unesi ispravan email.'; return; }
+  res.style.color = '#5a8aaa'; res.textContent = 'Čuvam...';
+  const { error } = await _supa.from('premium_users').upsert({
+    email, is_premium: activate, granted_at: new Date().toISOString()
+  }, { onConflict: 'email' });
+  if (error) { res.style.color='#ff8080'; res.textContent='Greška: ' + error.message; return; }
+  res.style.color = activate ? '#00ff99' : '#ff8080';
+  res.textContent = activate ? `✓ Premium aktiviran za ${email}` : `✗ Premium uklonjen za ${email}`;
+  loadEmailPlayers();
+}
+
+async function loadEmailPlayers() {
+  const tbody = document.getElementById('emailPlayersTbl');
+  tbody.innerHTML = '<tr><td colspan="5" class="loading">Učitavam...</td></tr>';
+  const { data, error } = await _supa.from('premium_users').select('*').order('granted_at', { ascending: false });
+  if (error) { tbody.innerHTML = '<tr><td colspan="5" class="loading" style="color:#ff8080">Greška pri učitavanju.</td></tr>'; return; }
+  if (!data || data.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="loading">Nema upisanih igrača.</td></tr>'; return; }
+  tbody.innerHTML = data.map(u => {
+    const isPrem = u.is_premium;
+    const granted = u.granted_at ? new Date(u.granted_at).toLocaleDateString('hr') : '—';
+    return `<tr>
+      <td style="font-family:monospace;font-size:.75rem">${u.email}</td>
+      <td style="color:#4a6a8a">${granted}</td>
+      <td>${u.note || '—'}</td>
+      <td><span style="color:${isPrem?'#00ff99':'#4a6a8a'}">${isPrem?'✓ Premium':'Free'}</span></td>
+      <td>
+        <button class="btn" onclick="quickPremium('${u.email}',${!isPrem})"
+          style="padding:3px 10px;font-size:.65rem;${isPrem?'color:#ff8080;border-color:rgba(255,80,80,.4)':'color:#ffcc33;border-color:rgba(255,204,51,.4)'}">
+          ${isPrem?'Ukloni':'Daj Premium'}
+        </button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function quickPremium(email, activate) {
+  const { error } = await _supa.from('premium_users').upsert({
+    email, is_premium: activate, granted_at: new Date().toISOString()
+  }, { onConflict: 'email' });
+  if (error) { alert('Greška: ' + error.message); return; }
+  loadEmailPlayers();
 }
 </script>
 </body>
