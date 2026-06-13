@@ -262,9 +262,9 @@ function startPvpBattle(oppIdx) {
   var opp = window._currentOpponents[oppIdx];
   if (!opp) return;
   if (window.pvpShield && window.pvpShield.active && Date.now()<new Date(window.pvpShield.expiresAt).getTime()) { toast('Shield je aktivan - ne mozes napadati!','warn'); return; }
-  var he3Cost=10;
-  if (R.he3<he3Cost) { toast('Nedovoljno He3! Treba '+he3Cost,'warn'); return; }
-  R.he3 -= he3Cost;
+  var energyCost=100;
+  if (R.energy<energyCost) { toast('Nedovoljno energije! Treba '+energyCost,'warn'); return; }
+  R.energy -= energyCost;
   if (typeof updateResUI==='function') updateResUI();
   if (!opp.fleet||opp.fleet.length===0) { toast('Protivnik nema rasporedjenu flotu!','warn'); return; }
   toast('Napadam '+opp.name+'...','inf');
