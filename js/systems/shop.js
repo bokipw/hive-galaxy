@@ -556,12 +556,11 @@ function renderShopCard(item, activeTab) {
 
 function openShopPurchase(itemId) {
   const item = SHOP_ITEMS.find(i => i.id === itemId);
-  if (item && item.action === 'buyWithBoCrypto') {
+  if (!item) return;
+  if (item.action === 'buyWithBoCrypto') {
     buyWithBoCrypto(item);
     return;
   }
-  const item = SHOP_ITEMS.find(i => i.id === itemId);
-  if (!item) return;
 
   const cryptos = _shopTab === 'hive'
     ? (item.cryptosHive  || [])
