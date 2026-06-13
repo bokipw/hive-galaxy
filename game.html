@@ -135,6 +135,8 @@
       background:rgba(255,204,68,0.1);border-bottom:1px solid rgba(255,204,68,0.2);
       text-align:center"></div>
     <div style="display:flex;gap:8px;align-items:center">
+      <button onclick="showPanel('shop')" style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🛒 Shop</button>
+      <button onclick="openLeaderboard()" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🏆 Leaderboard</button>
       <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>
       <button onclick="resetGame()" style="background:#3a1a1a;border:1px solid #ff4444;color:#ff4444;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🗑️ Reset</button>
       <button onclick="addTestResources()" style="background:#1a3a1a;border:1px solid #00ff88;color:#00ff88;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">+ Test</button>
@@ -795,6 +797,23 @@ function walletWithdraw(symbol) {
   if (typeof saveGame === 'function') saveGame();
   if (typeof toast === 'function') toast('⏳ Withdraw ' + amt.toFixed(3) + ' ' + symbol + ' zahtjev primljen. Isplata do 24h.', 'inf');
   refreshHiveWallet();
+}
+
+async function openLeaderboard() {
+  infoModal('🏆 Leaderboard', '<div style="text-align:center;color:#6a90b8;padding:20px">Učitavam...</div>');
+  if (!window._supa) return;
+  const { data } = await window._supa.from('leaderboard').select('username,score,level,is_premium').order('score', { ascending: false }).limit(50);
+  if (!data || data.length === 0) { infoModal('🏆 Leaderboard', '<div style="color:#6a90b8;text-align:center;padding:20px">Nema igrača.</div>'); return; }
+  const rows = data.map((p, i) => {
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';
+    const prem  = p.is_premium ? ' <span style="color:#ffcc44;font-size:0.6rem">★</span>' : '';
+    const isMe  = p.username === (window._hiveUser || '');
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)' + (isMe ? ';background:rgba(0,212,255,0.05);border-radius:4px;padding:7px 6px' : '') + '">' +
+      '<div><span style="color:#6a90b8;font-size:0.7rem;margin-right:8px">' + medal + '</span><span style="color:' + (isMe ? '#00d4ff' : '#fff') + ';font-size:0.78rem;font-weight:600">' + p.username + '</span>' + prem + '<span style="color:#4a6a8a;font-size:0.6rem;margin-left:6px">Lv.' + (p.level||1) + '</span></div>' +
+      '<span style="color:#ffcc44;font-size:0.72rem;font-family:Orbitron,monospace">' + fmt(p.score||0) + '</span>' +
+      '</div>';
+  }).join('');
+  infoModal('🏆 Leaderboard', '<div style="max-height:60vh;overflow-y:auto">' + rows + '</div>');
 }
 </script>
 <!-- 6. MAIN — zadnji -->
