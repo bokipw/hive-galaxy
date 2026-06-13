@@ -191,11 +191,20 @@ function sensorPhalanxScan(colonyId) {
   R.he3 -= SENSOR_SCAN_COST;
   updateResUI();
 
-  // Generiši scan rezultate ovisno o nivou falange
-  const scanData = _generateScanData(phalanxLv, colony);
-  _showScanModal(colony, phalanxLv, scanData);
-  addLog(`📡 Senzorska Falanga na ${colony.name} aktivirana. (-${fmt(SENSOR_SCAN_COST)} He3)`);
-  saveGame();
+  const _doScan = () => {
+    const scanData = _generateScanData(phalanxLv, colony);
+    _showScanModal(colony, phalanxLv, scanData);
+    addLog(`📡 Senzorska Falanga na ${colony.name} aktivirana. (-${fmt(SENSOR_SCAN_COST)} He3)`);
+    saveGame();
+  };
+
+  // Učitaj igrače ako još nisu učitani
+  if (typeof loadGalaxyPlayerBases === 'function' &&
+      (typeof _galaxyPlayerBases === 'undefined' || _galaxyPlayerBases.length === 0)) {
+    loadGalaxyPlayerBases().catch(() => {}).finally(_doScan);
+  } else {
+    _doScan();
+  }
 }
 
 function _generateScanData(phalanxLv, colony) {
