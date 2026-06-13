@@ -24,27 +24,23 @@ async function _cloudSave(saveData) {
   const score = (saveData.commander && saveData.commander.score) || 0;
   const level = (saveData.commander && saveData.commander.level) || 1;
 
-  // Upsert save (samo email igrači)
-  if(isEmail) {
-    await window._supa.from('saves').upsert({
-      id: uid,
-      data: saveData,
-      version: (saveData._version || 0) + 1,
-      saved_at: new Date().toISOString()
-    });
-  }
+  // Upsert save (email i HIVE igrači)
+  await window._supa.from('saves').upsert({
+    id: uid,
+    data: saveData,
+    version: (saveData._version || 0) + 1,
+    saved_at: new Date().toISOString()
+  });
 
-  // Upsert leaderboard (samo email igrači jer leaderboard.id = auth.users uuid)
-  if (isEmail) {
-    await window._supa.from('leaderboard').upsert({
-      id: window._supaSession.user.id,
-      username,
-      score,
-      level,
-      is_premium: window._playerPremium || false,
-      updated_at: new Date().toISOString()
-    });
-  }
+  // Upsert leaderboard (email i HIVE igrači)
+  await window._supa.from('leaderboard').upsert({
+    id: uid,
+    username,
+    score,
+    level,
+    is_premium: window._playerPremium || false,
+    updated_at: new Date().toISOString()
+  });
 
   // Upsert PvP snapshot — koristimo buildPvpFleetLocal() koji računa SVE bonuse
   const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
@@ -81,8 +77,9 @@ async function _cloudSave(saveData) {
 }
 
 async function _cloudLoad() {
-  if(!window._supa || !window._supaSession) return null;
-  const uid = window._supaSession.user.id;
+  if(!window._supa) return null;
+  const uid = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
+  if(!uid) return null;
   const { data, error } = await window._supa.from('saves').select('data').eq('id', uid).single();
   if(error || !data) return null;
   return data.data;
@@ -97,6 +94,8 @@ function _saveKey() {
 function saveGame() {
   try {
     const saveData = {
+      _savedAt: new Date().toISOString(),
+      _season: window._serverSeason || 1,
       R,
       buildings,
       commander,
@@ -166,15 +165,43 @@ function saveGame() {
 }
 
 async function loadGameCloud() {
+  // Provjeri broj sezone — ako je server resetovan (sezona se promijenila), obrisi lokalni save
+  var serverSeason = 1;
+  try {
+    const { data: sys } = await window._supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
+    if (sys && sys.keys != null) serverSeason = sys.keys;
+    window._serverSeason = serverSeason;
+  } catch(e) {}
+
+  // Provjeri lokalnu sezonu
+  const localRaw = localStorage.getItem(_saveKey());
+  var localSeason = 1;
+  if (localRaw) {
+    try {
+      const localSave = JSON.parse(localRaw);
+      localSeason = localSave._season || 1;
+      if (localSeason < serverSeason) {
+        localStorage.removeItem(_saveKey());
+        setTimeout(() => { if(typeof toast==='function') toast('RESET: sezona ' + localSeason + ' -> ' + serverSeason + ' | save obrisan', 'ok'); }, 2000);
+      }
+    } catch(e) { localStorage.removeItem(_saveKey()); }
+  } else {
+    setTimeout(() => { if(typeof toast==='function') toast('DEBUG: nema lokalnog savea | sezona=' + serverSeason, 'inf'); }, 2000);
+  }
+
+  // Ucitaj cloud save — ali ignoriši ga ako je iz stare sezone
   const cloudData = await _cloudLoad();
-  if(cloudData) {
-    localStorage.setItem('hive_save', JSON.stringify(cloudData));
+  if (cloudData) {
+    const cloudSeason = cloudData._season || 1;
+    if (cloudSeason >= serverSeason) {
+      localStorage.setItem(_saveKey(), JSON.stringify(cloudData));
+    }
   }
   return loadGame();
 }
 
 function loadGame() {
-  const raw = localStorage.getItem(_saveKey()) || localStorage.getItem('hive_save');
+  const raw = localStorage.getItem(_saveKey());
   if (!raw) return false;
   try {
     const s = JSON.parse(raw);

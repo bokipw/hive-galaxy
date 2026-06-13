@@ -7,7 +7,7 @@
 // ── INICIJALIZACIJA ──
 async function init() {
   // Cloud load ako je email igrač sa Supabase sesijom, inače localStorage
-  const loaded = window._supaSession ? await loadGameCloud() : loadGame();
+  const loaded = (window._supaSession || window._hiveUser) ? await loadGameCloud() : loadGame();
 
   // Inicijalizacija energije na max ako je novi igrač
   if (!loaded) {
@@ -15,7 +15,7 @@ async function init() {
     addLog('🚀 Dobrodošao, Admirale! Izgradi svoju bazu i osvoji galaksiju.');
     toast('🚀 HIVE GALAXY — Dobrodošao!', 'ok');
   } else {
-    toast('💾 Igra učitana!', 'inf');
+    toast('Igra ucitana | user=' + window._hiveUser + ' sezona=' + window._serverSeason, 'inf');
     addLog('💾 Igra učitana.');
   }
 

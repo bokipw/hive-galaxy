@@ -518,6 +518,14 @@ const _supa = supabase.createClient(
   'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
 );
 
+// Provjeri maintenance mode
+(async function() {
+  const { data, error } = await _supa.from('hive_profiles').select('is_premium').eq('hive_user', '__system__').single();
+  if (!error && data && data.is_premium === true) {
+    window.location.replace('maintenance.html');
+  }
+})();
+
 function hiveLogin() {
   if(typeof window.hive_keychain === 'undefined') {
     openMod(
