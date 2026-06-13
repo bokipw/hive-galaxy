@@ -978,52 +978,53 @@ function renderDivisionSection(div, players, compact) {
         </tr></thead>
         <tbody>`;
 
-  // Reward slots (top 10 — uvijek prikazani, prazni ako nema igrača)
-  for (let i = 0; i < rewards.length; i++) {
+  // Ukupan broj slotova po diviziji
+  const totalSlots = div.positions[1] === 9999 ? null : (div.positions[1] - div.positions[0] + 1);
+  const globalOffset = div.positions[0] - 1; // offset globalnog ranka (PM=0, GM=10, Master=100...)
+
+  // Koliko slotova prikazati: za Bronze samo igrači + 5 praznih; ostale po definiciji
+  const slotsToShow = totalSlots || (players.length + 5);
+
+  for (let i = 0; i < slotsToShow; i++) {
     const slotRank = i + 1;
+    const globalRank = globalOffset + slotRank;
     const p = players[i] || null;
-    const reward = rewards[i];
+    const reward = rewards[i] || null;
     const rankClass = slotRank === 1 ? 'rank-1' : slotRank === 2 ? 'rank-2' : slotRank === 3 ? 'rank-3' : 'rank-other';
     const trophy = slotRank === 1 ? '🏆' : slotRank === 2 ? '🥈' : slotRank === 3 ? '🥉' : '';
-    const rewardBadge = `<span style="font-size:.68rem;color:${div.color};background:${div.color}18;padding:2px 9px;border-radius:4px;border:1px solid ${div.color}44;white-space:nowrap">${reward.label}</span>`;
+    const rewardCell = reward
+      ? `<span style="font-size:.68rem;color:${div.color};background:${div.color}18;padding:2px 9px;border-radius:4px;border:1px solid ${div.color}44;white-space:nowrap">${reward.label}</span>`
+      : `<span style="font-size:.65rem;color:#2a3a50">—</span>`;
 
     if (p) {
       const nameClass = slotRank === 1 ? 'top1' : slotRank === 2 ? 'top2' : slotRank === 3 ? 'top3' : '';
       html += `<tr class="${rankClass}">
-        <td><div class="rank-badge">${trophy || '#'+slotRank}</div></td>
+        <td><div class="rank-badge" title="Globalni rank #${globalRank}">${trophy || '#'+globalRank}</div></td>
         <td>
           <div class="player-name ${nameClass}">${p.name}</div>
           <div class="player-level">Lv.${p.level}</div>
         </td>
         <td><span class="rating-val">${(p.rating||0).toLocaleString()}</span></td>
-        <td>${rewardBadge}</td>
+        <td>${reward
+          ? `<span style="font-size:.68rem;color:${div.color};background:${div.color}18;padding:2px 9px;border-radius:4px;border:1px solid ${div.color}44;white-space:nowrap">${reward.label}</span>`
+          : `<span style="font-size:.65rem;color:#2a3a50">—</span>`}</td>
         <td>${p.isPremium
           ? '<span style="font-size:.65rem;color:#ffcc44;font-family:Orbitron,monospace;border:1px solid #ffcc4444;padding:2px 8px;border-radius:3px">⭐ PREMIUM</span>'
           : '<span style="font-size:.65rem;color:#6a90b8">FREE</span>'}</td>
       </tr>`;
     } else {
-      html += `<tr style="opacity:.4">
-        <td><div class="rank-badge" style="border-style:dashed;color:#3a5070;border-color:#3a5070">${trophy || '#'+slotRank}</div></td>
-        <td><div class="player-name" style="color:#2a3a5a;font-style:italic">— Slobodno —</div></td>
-        <td><span class="rating-val" style="color:#2a3a5a">—</span></td>
-        <td><span style="font-size:.68rem;color:${div.color}66;background:${div.color}08;padding:2px 9px;border-radius:4px;border:1px dashed ${div.color}30">${reward.label}</span></td>
+      const rewardDashed = reward
+        ? `<span style="font-size:.68rem;color:${div.color}55;background:${div.color}08;padding:2px 9px;border-radius:4px;border:1px dashed ${div.color}28">${reward.label}</span>`
+        : `<span style="font-size:.65rem;color:#1a2a3a">—</span>`;
+      html += `<tr style="opacity:.35">
+        <td><div class="rank-badge" style="border-style:dashed;color:#2a3a50;border-color:#2a3a50">${trophy || '#'+globalRank}</div></td>
+        <td><div class="player-name" style="color:#1e2e40;font-style:italic">— Slobodno —</div></td>
+        <td><span class="rating-val" style="color:#1e2e40">—</span></td>
+        <td>${rewardDashed}</td>
         <td></td>
       </tr>`;
     }
   }
-
-  // Igrači van top 10 (bez nagrade)
-  players.slice(rewards.length).forEach(p => {
-    html += `<tr class="rank-other">
-      <td><div class="rank-badge">#${p.rank}</div></td>
-      <td><div class="player-name">${p.name}</div><div class="player-level">Lv.${p.level}</div></td>
-      <td><span class="rating-val">${(p.rating||0).toLocaleString()}</span></td>
-      <td><span style="font-size:.65rem;color:#2a3a50">—</span></td>
-      <td>${p.isPremium
-        ? '<span style="font-size:.65rem;color:#ffcc44;font-family:Orbitron,monospace;border:1px solid #ffcc4444;padding:2px 8px;border-radius:3px">⭐ PREMIUM</span>'
-        : '<span style="font-size:.65rem;color:#6a90b8">FREE</span>'}</td>
-    </tr>`;
-  });
 
   html += `</tbody></table></div>`;
   return html;
