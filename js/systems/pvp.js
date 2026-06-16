@@ -226,6 +226,7 @@ function finishPvpBattle() {
   else if (result.status==='defeat') pvp.losses = (pvp.losses||0)+1;
   window._dailyPvpCount = (window._dailyPvpCount||0)+1;
   if (isVictory) window._weeklyPvpCount = (window._weeklyPvpCount||0)+1;
+  if (isVictory) window._dailyPvpWinCount = (window._dailyPvpWinCount||0)+1;
   var loot = { metal:0, crystal:0, he3:0, bocrypto:0 };
   if (isVictory) {
     loot.metal    = 100000;
