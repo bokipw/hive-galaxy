@@ -255,13 +255,17 @@ function resetGame() {
 }
 
 function addTestResources() {
-  R.metal   += 10055555500;
-  R.crystal += 200555555500;
-  R.he3     += 1055555000;
+  if (!window._devMode) {
+    if (typeof toast === 'function') toast('❌ Nije dostupno u produkciji!', 'err');
+    return;
+  }
+  R.metal   += 1000;
+  R.crystal += 2005;
+  R.he3     += 1055;
   R.energy   = getEnergyMax();
-  R.instanceKeys = (R.instanceKeys || 0) + 100;
-  R.keys = (R.keys || 0) + 500;
+  R.instanceKeys = (R.instanceKeys || 0) + 10;
+  R.keys = (R.keys || 0) + 50;
   if (typeof updateResUI === 'function') updateResUI();
-  if (typeof toast === 'function') toast('➕ Test resursi + 100 inst. ključeva + 500 🗝️ za karte!', 'ok');
+  if (typeof toast === 'function') toast('➕ Test resursi + 10 inst. ključeva + 50 🗝️ za karte!', 'ok');
   saveGame();
 }
