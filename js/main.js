@@ -34,6 +34,8 @@ async function init() {
   setInterval(tickBuildQueue,  1000);
   setInterval(() => { if (typeof checkAchievements === 'function') checkAchievements(); }, 5000);
   setInterval(saveGame,      60000); // auto-save svaku minutu
+  setInterval(checkBcmDailyReward, 60000); // BCM snapshot provjera svaku minutu
+  checkBcmDailyReward(); // provjeri odmah na startu
   setInterval(() => { if (typeof tickArtifactSurge === 'function') tickArtifactSurge(); }, 60000); // surge check svakih 60s
   // Research timer refresh
   setInterval(() => {
@@ -62,6 +64,27 @@ function ensureNavGroupVisible(panel) {
   if (grp && grp.classList.contains('collapsed')) {
     toggleNavGroup(grp.id);
   }
+}
+
+// ── BCM DAILY SNAPSHOT ──
+function checkBcmDailyReward() {
+  const now      = new Date();
+  const todayKey = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+  const lastPaid = localStorage.getItem('bcm_last_paid');
+
+  if (lastPaid === todayKey) return; // već isplaćeno danas
+  const bcmAmount = R.bcm || 0;
+  if (bcmAmount <= 0) return; // nema BCM tokena
+
+  const bocryptoReward = bcmAmount * 100;
+  R.bocrypto = (R.bocrypto || 0) + bocryptoReward;
+
+  localStorage.setItem('bcm_last_paid', todayKey);
+
+  toast('💰 BCM Dividenda! +' + fmt(bocryptoReward) + ' BoCrypto (' + bcmAmount + ' BCM × 100)', 'ok');
+  addLog('💰 Dnevna BCM dividenda isplaćena: +' + fmt(bocryptoReward) + ' BoCrypto');
+  updateResUI();
+  saveGame();
 }
 
 // ── POKRETANJE ──
