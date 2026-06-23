@@ -378,7 +378,7 @@ function renderItemBpCard(item) {
     '</div>' +
     '<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;line-height:1.6">' + effectHtml + '</div>' +
     '<div style="font-size:0.6rem;padding:3px 6px;border-radius:4px;background:' + (owned?'rgba(0,255,136,0.08)':'rgba(255,255,255,0.04)') + ';color:' + (owned?'#00ff88':'#6a90b8') + '">' +
-      (owned ? '✅ Otključan' : '🔒 ' + (t(item.sourceKey) || item.source || 'Nepoznato') + ' &nbsp;' + getRarityModeLabel(item.rarity||'C')) +
+      (owned ? '✅ Otključan' : '🔒 ' + (t(item.sourceKey || '') || item.source || 'Nepoznato') + ' &nbsp;' + getRarityModeLabel(item.rarity||'C')) +
     '</div>' + fragBar + '</div>';
 }
 
