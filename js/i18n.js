@@ -7,10 +7,14 @@ window._i18nLang = localStorage.getItem('hg_lang') || 'sr';
 window._i18nData = {};
 
 const _I18N_LANGS = {
-  sr: { label: '🇷🇸 Srpski',  flag: '🇷🇸' },
-  en: { label: '🇬🇧 English', flag: '🇬🇧' },
-  de: { label: '🇩🇪 Deutsch', flag: '🇩🇪' },
-  it: { label: '🇮🇹 Italiano',flag: '🇮🇹' },
+  sr: { label: '🇷🇸 Srpski',    flag: '🇷🇸' },
+  en: { label: '🇬🇧 English',   flag: '🇬🇧' },
+  de: { label: '🇩🇪 Deutsch',   flag: '🇩🇪' },
+  fr: { label: '🇫🇷 Français',  flag: '🇫🇷' },
+  it: { label: '🇮🇹 Italiano',  flag: '🇮🇹' },
+  pt: { label: '🇵🇹 Português', flag: '🇵🇹' },
+  pl: { label: '🇵🇱 Polski',    flag: '🇵🇱' },
+  ja: { label: '🇯🇵 日本語',    flag: '🇯🇵' },
 };
 
 async function loadLang(lang) {
@@ -117,6 +121,44 @@ document.addEventListener('click', e => {
     if (dd) dd.style.display = 'none';
   }
 });
+
+// ── Helperi za prevođenje podataka ──
+// dn(dataItem) → translated name (ili fallback na dataItem.name)
+window.dn = function(item) {
+  if (!item) return '';
+  if (item.nameKey) {
+    const val = window.t(item.nameKey);
+    if (val !== item.nameKey) return val;
+  }
+  return item.name || '';
+};
+// dd(dataItem) → translated desc (ili fallback na dataItem.desc)
+window.dd = function(item) {
+  if (!item) return '';
+  if (item.descKey) {
+    const val = window.t(item.descKey);
+    if (val !== item.descKey) return val;
+  }
+  return item.desc || '';
+};
+// dl(milestone) → translated label
+window.dl = function(m) {
+  if (!m) return '';
+  if (m.labelKey) {
+    const val = window.t(m.labelKey);
+    if (val !== m.labelKey) return val;
+  }
+  return m.label || '';
+};
+// db(milestone) → translated bonus
+window.db = function(m) {
+  if (!m) return '';
+  if (m.bonusKey) {
+    const val = window.t(m.bonusKey);
+    if (val !== m.bonusKey) return val;
+  }
+  return m.bonus || '';
+};
 
 // Init on load
 loadLang(window._i18nLang);
