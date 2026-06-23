@@ -4214,6 +4214,265 @@
     "rank": "Rank #{n}",
     "player": "Player",
     "you": "You"
+  },
+  "index": {
+    "title": "HIVE GALAXY - Conquer the Galaxy",
+    "nav": {
+      "logo": "⬡ HIVE GALAXY",
+      "features": "Features",
+      "ships": "Ships",
+      "tokens": "Tokens",
+      "howtoplay": "How to Play",
+      "faq": "FAQ",
+      "playnow": "\u25B6 Play Now"
+    },
+    "hero": {
+      "badge": "\u2B21 Galactic MMO Strategy \u00B7 Blockchain Powered",
+      "title": {
+        "hive": "HIVE",
+        "galaxy": "GALAXY"
+      },
+      "subtitle": "Conquer the galaxy. Build your fleet. Ultimate PvP experience with blockchain economy. Every player. Every decision. Every battle \u2014 on-chain.",
+      "playfree": "\u25B6 PLAY FREE",
+      "premium": "\u2605 PREMIUM \u2014 10\u20AC",
+      "stats": {
+        "blueprints_val": "715+",
+        "blueprints_lbl": "BLUEPRINTS",
+        "instances_val": "11",
+        "instances_lbl": "INSTANCE TYPES",
+        "commanders_val": "300",
+        "commanders_lbl": "COMMANDERS",
+        "tokens_val": "3",
+        "tokens_lbl": "BCM TOKENS"
+      },
+      "scroll": "\u25BC SCROLL \u25BC"
+    },
+    "section": {
+      "features": {
+        "label": "// Key Features",
+        "title": "Everything you need for<br>galactic domination"
+      },
+      "ships": {
+        "label": "// Ship Classes",
+        "title": "6 classes. Hundreds of configurations.<br>One winning strategy.",
+        "desc": "Each ship has fixed armor, defined slots and a class bonus. A mixed fleet always beats a mono fleet of the same cost."
+      },
+      "tokens": {
+        "label": "// HIVE Blockchain Economy",
+        "title": "Three tokens. One ecosystem.<br>Endless value.",
+        "desc": "Each token has a specific role. Play, watch streams, hold tokens \u2014 everything is rewarded on the blockchain."
+      },
+      "howtoplay": {
+        "label": "// How to Start",
+        "title": "From zero to admiral<br>in 5 minutes"
+      },
+      "login": {
+        "label": ""
+      },
+      "faq": {
+        "label": "// Frequently Asked Questions",
+        "title": "FAQ"
+      }
+    },
+    "features": {
+      "base": {
+        "title": "Base Building",
+        "desc": "Build mines, energy systems and defensive structures. Balancing energy is key for efficient production."
+      },
+      "pvp": {
+        "title": "PvP Combat",
+        "desc": "Real combat system with Kinetic/Heat/Magnetic/Explosive damage types, armor resistance and Shield-Armor-Structure layers."
+      },
+      "designer": {
+        "title": "Ship Designer",
+        "desc": "Design your own ships. Choose the chassis, install modules from blueprints. Every ship is your creation and strategy."
+      },
+      "instances": {
+        "title": "Instance Dungeons",
+        "desc": "30 normal + Restricted, Trial, Pirate, Humanoid and Constellation instances. Wave after wave \u2014 strategic combat with exclusive rewards."
+      },
+      "galaxy": {
+        "title": "Galaxy Map",
+        "desc": "Conquer star systems, expand your empire and attack enemy bases. Every galaxy is a living war theater."
+      },
+      "blockchain": {
+        "title": "Blockchain Economy",
+        "desc": "BCM, BoCrypto and BPW tokens on the HIVE blockchain. In-game earnings are real \u2014 exchangeable and valuable."
+      }
+    },
+    "ships": {
+      "scout": {
+        "name": "SCOUT",
+        "role": "Stealth \u00B7 Detection"
+      },
+      "fighter": {
+        "name": "FIGHTER",
+        "role": "Agility \u00B7 Crit"
+      },
+      "cruiser": {
+        "name": "CRUISER",
+        "role": "Shield \u00B7 Cover"
+      },
+      "battleship": {
+        "name": "BATTLESHIP",
+        "role": "Power \u00B7 Barrage"
+      },
+      "carrier": {
+        "name": "CARRIER",
+        "role": "Strategic \u00B7 Launch"
+      },
+      "flagship": {
+        "name": "FLAGSHIP",
+        "role": "Command \u00B7 +100 Stack"
+      }
+    },
+    "tokens": {
+      "bcm": {
+        "badge": "HIVE-ENGINE",
+        "name": "BCM",
+        "label": "BO CRYPTO MINER",
+        "price": "1 BCM = 10\u20AC STABLE",
+        "items": {
+          "0": "Gaming license (1 BCM)",
+          "1": "Premium blueprints and content",
+          "2": "Clan and seasonal access",
+          "3": "Passive income: 144 BoCrypto/day per miner",
+          "4": "In-game premium purchases"
+        }
+      },
+      "boc": {
+        "badge": "TWITCH REWARD",
+        "name": "BoCrypto",
+        "label": "BOCRYPTO TOKEN",
+        "price": "0.001 min \u00B7 3 decimals",
+        "items": {
+          "0": "Twitch: 1 token / 10 min watched",
+          "1": "Subscribers: 3x token bonus",
+          "2": "In-game resources and ship cosmetics",
+          "3": "Instance retry and daily boost",
+          "4": "SP Card exchange in game"
+        }
+      },
+      "bpw": {
+        "badge": "MICRO REWARDS",
+        "name": "BPW",
+        "label": "BPW TOKEN",
+        "price": "0.00000001 min \u00B7 8 decimals",
+        "items": {
+          "0": "Daily login: +5 satoshi",
+          "1": "Completed mission: 10-50 satoshi",
+          "2": "Instance reward: 100-500 satoshi",
+          "3": "PvP victory and leaderboard rewards",
+          "4": "Faucet: x5 satoshi / 24h"
+        }
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Register",
+        "desc": "Email registration \u2014 free, no credit card. Play immediately."
+      },
+      "2": {
+        "title": "Get a galaxy",
+        "desc": "Server places you in a galaxy. Your base awaits \u2014 start building right away."
+      },
+      "3": {
+        "title": "Conquer",
+        "desc": "Build fleet, farm instances, grind blueprints, PvP domination."
+      },
+      "4": {
+        "title": "Go Premium",
+        "desc": "HIVE Keychain or crypto \u2014 unlock blockchain earnings and exclusive content."
+      }
+    },
+    "login": {
+      "free": {
+        "badge": "FREE",
+        "title": "\uD83C\uDFAE PLAY 2 FREE",
+        "sub": "Register with email and play immediately. No payment, no credit card.",
+        "email_label": "EMAIL ADDRESS",
+        "email_placeholder": "your@email.com",
+        "pass_label": "PASSWORD",
+        "pass_placeholder": "Minimum 8 characters",
+        "btn": "\u25B6 REGISTER FREE",
+        "login_link": "Already have an account?",
+        "login_cta": "Sign in \u2192",
+        "features": "\u2713 All instances and content\n\u2713 300 commanders\n\u2713 PvP and galaxy\n\u2717 Blockchain earnings",
+        "check1": "✓ All instances and content",
+        "check2": "✓ 300 commanders",
+        "check3": "✓ PvP and galaxy",
+        "check4": "✗ Blockchain earnings"
+      },
+      "hive": {
+        "badge": "INSTANT PREMIUM",
+        "title": "\u26D3 HIVE KEYCHAIN",
+        "sub": "Have a HIVE account? Sign in via Keychain and buy Premium \u2014 \u20AC10 one-time or 1 BCM.",
+        "btn": "CONNECT HIVE KEYCHAIN",
+        "pay_label": "Premium payment (choose):",
+        "pay_hive": "HIVE",
+        "pay_hbd": "HBD (~10 HBD)",
+        "pay_bcm": "BCM (1 BCM)",
+        "features": "\u2713 All Free options\n\u2713 BPW token earnings\n\u2713 BCM and BoCrypto\n\u2713 Exclusive content",
+        "no_account": "Don't have a HIVE account?",
+        "register": "Register free \u2192",
+        "check1": "✓ All Free options",
+        "check2": "✓ BPW token earnings",
+        "check3": "✓ BCM and BoCrypto",
+        "check4": "✓ Exclusive content"
+      },
+      "crypto": {
+        "badge": "PREMIUM \u00B7 10\u20AC",
+        "title": "\uD83D\uDC8E CRYPTO PREMIUM",
+        "sub": "Already have a Free account? Upgrade to Premium by paying with cryptocurrency.",
+        "pay_btc": "Bitcoin",
+        "pay_usdt": "USDT",
+        "pay_ltc": "Litecoin",
+        "pay_hbd": "HBD",
+        "price_label": "Price:",
+        "price": "10\u20AC",
+        "price_note": "\u00B7 One-time \u00B7 Lifetime access",
+        "btn": "\u25B6 BUY PREMIUM",
+        "features": "\u2713 All Free options\n\u2713 BPW token earnings\n\u2713 BCM and BoCrypto\n\u2713 Exclusive content",
+        "check1": "✓ All Free options",
+        "check2": "✓ BPW token earnings",
+        "check3": "✓ BCM and BoCrypto",
+        "check4": "✓ Exclusive content"
+      }
+    },
+    "faq": {
+      "q1": "Is the game free?",
+      "a1": "Yes \u2014 the game is free for everyone. Register by email and play immediately. Premium status (10\u20AC one-time) unlocks blockchain earnings (BPW, BoCrypto tokens) and exclusive content. No subscription, no hidden costs.",
+      "q2": "Is the game pay-to-win?",
+      "a2": "No. Premium status does not give a combat advantage. Exclusive blueprints are only obtained by farming instances \u2014 money cannot buy them. Skill and time always win.",
+      "q3": "What is HIVE Keychain and how do I install it?",
+      "a3": "HIVE Keychain is a free browser extension (like MetaMask) for the HIVE blockchain. If you have a HIVE account, you can pay for Premium via Keychain \u2014 \u20AC10 or 1 BCM. Install at hive-keychain.com.",
+      "q4": "How do I earn real tokens by playing?",
+      "a4": "Premium players earn BPW tokens through missions, instances and PvP victories. BoCrypto tokens are earned by watching Twitch streams. Both tokens are on HIVE-Engine and can be exchanged for cryptocurrencies.",
+      "q5": "Is there protection for new players?",
+      "a5": "Yes \u2014 for the first 72 hours after registration you play under a peace shield. No one can attack you until you establish yourself. After that, real PvP begins."
+    },
+    "donate": {
+      "label": "// SUPPORT DEVELOPMENT",
+      "title": "Enjoying the game?",
+      "desc": "Every donation helps develop new content and servers.",
+      "btn": "\uD83D\uDCB3 DONATE VIA PAYPAL"
+    },
+    "footer": {
+      "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
+      "developed": "Developed by",
+      "links": {
+        "discord": "Discord",
+        "twitch": "Twitch",
+        "blog": "HIVE Blog",
+        "github": "GitHub"
+      },
+      "logo": "⬡ HIVE GALAXY",
+      "author": "@bokica80",
+      "twitch_link": "twitch/bokipw",
+      "bcm": "BCM",
+      "bocrypto": "BoCrypto",
+      "bpw": "BPW"
+    }
   }
 }
 
