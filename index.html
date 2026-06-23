@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIVE GALAXY - Osvoji Galaksiju</title>
+<title data-i18n="index.title">HIVE GALAXY - Osvoji Galaksiju</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/i18n.js"></script>
 <style>
 :root {
   --bg:      #020408;
@@ -224,111 +225,112 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 <main>
 
 <nav>
-  <div class="nav-logo">&#x2B27; HIVE GALAXY</div>
+  <div class="nav-logo" data-i18n="index.nav.logo">&#x2B27; HIVE GALAXY</div>
   <div class="nav-links">
-    <a href="#feat-sec">Funkcije</a>
-    <a href="#ships-sec">Brodovi</a>
-    <a href="#tok-sec">Tokeni</a>
-    <a href="#how-sec">Kako igrati</a>
-    <a href="#faq-wrap">FAQ</a>
+    <a href="#feat-sec" data-i18n="index.nav.features">Funkcije</a>
+    <a href="#ships-sec" data-i18n="index.nav.ships">Brodovi</a>
+    <a href="#tok-sec" data-i18n="index.nav.tokens">Tokeni</a>
+    <a href="#how-sec" data-i18n="index.nav.howtoplay">Kako igrati</a>
+    <a href="#faq-wrap" data-i18n="index.nav.faq">FAQ</a>
   </div>
-  <button class="nav-cta" onclick="goLogin()">&#x25B6; Igraj Sada</button>
+  <button class="nav-cta" onclick="goLogin()" data-i18n="index.nav.playnow">&#x25B6; Igraj Sada</button>
+  <div id="langPickerContainer" style="display:inline-block;margin-left:8px"></div>
 </nav>
 
 <section id="hero" style="position:relative">
   <div class="hero-inner">
-    <div class="hero-badge">&#x2B27; Galakticka MMO Strategija &middot; Blockchain Powered</div>
-    <h1><span class="c">HIVE</span><br><span class="g">GALAXY</span></h1>
-    <p class="hero-sub">Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igrac. Svaka odluka. Svaka bitka &mdash; na lancu.</p>
+    <div class="hero-badge" data-i18n="index.hero.badge">&#x2B27; Galakticka MMO Strategija &middot; Blockchain Powered</div>
+    <h1><span class="c" data-i18n="index.hero.title.hive">HIVE</span><br><span class="g" data-i18n="index.hero.title.galaxy">GALAXY</span></h1>
+    <p class="hero-sub" data-i18n="index.hero.subtitle">Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igrac. Svaka odluka. Svaka bitka &mdash; na lancu.</p>
     <div class="hero-ctas">
-      <button class="btn-p" onclick="location.href='game.html'">&#x25B6; IGRAJ BESPLATNO</button>
-      <button class="btn-s" onclick="goLogin()">&#x2605; PREMIUM &mdash; 10&euro;</button>
+      <button class="btn-p" onclick="location.href='game.html'" data-i18n="index.hero.playfree">&#x25B6; IGRAJ BESPLATNO</button>
+      <button class="btn-s" onclick="goLogin()" data-i18n="index.hero.premium">&#x2605; PREMIUM &mdash; 10&euro;</button>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><span class="v">715+</span><span class="l">BLUEPRINTA</span></div>
-      <div class="hstat"><span class="v">11</span><span class="l">TIPOVA INSTANCE</span></div>
-      <div class="hstat"><span class="v">300</span><span class="l">KOMANDIRA</span></div>
-      <div class="hstat"><span class="v">3</span><span class="l">BCM TOKENA</span></div>
+      <div class="hstat"><span class="v" data-i18n="index.hero.stats.blueprints_val">715+</span><span class="l" data-i18n="index.hero.stats.blueprints_lbl">BLUEPRINTA</span></div>
+      <div class="hstat"><span class="v" data-i18n="index.hero.stats.instances_val">11</span><span class="l" data-i18n="index.hero.stats.instances_lbl">TIPOVA INSTANCE</span></div>
+      <div class="hstat"><span class="v" data-i18n="index.hero.stats.commanders_val">300</span><span class="l" data-i18n="index.hero.stats.commanders_lbl">KOMANDIRA</span></div>
+      <div class="hstat"><span class="v" data-i18n="index.hero.stats.tokens_val">3</span><span class="l" data-i18n="index.hero.stats.tokens_lbl">BCM TOKENA</span></div>
     </div>
   </div>
-  <div class="scroll-down">&#x25BC; SCROLL &#x25BC;</div>
+  <div class="scroll-down" data-i18n="index.hero.scroll">&#x25BC; SCROLL &#x25BC;</div>
 </section>
 
 <div class="gl"></div>
 
 <div class="sec rev" id="feat-sec">
-  <span class="sec-lbl">// Kljucne funkcije</span>
-  <h2 class="sec-title">Sve sto trebas za<br>galakticku dominaciju</h2>
+  <span class="sec-lbl" data-i18n="index.section.features.label">// Kljucne funkcije</span>
+  <h2 class="sec-title" data-i18n="index.section.features.title">Sve sto trebas za<br>galakticku dominaciju</h2>
   <div class="feat-grid">
-    <div class="feat rev" style="--ac:rgba(0,229,255,0.5)"><div class="feat-ico">&#x1F3F0;</div><div class="feat-ttl">Izgradnja Baze</div><div class="feat-dsc">Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je kljucno za efikasnu produkciju.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,51,85,0.5)"><div class="feat-ico">&#x2694;&#xFE0F;</div><div class="feat-ttl">PvP Borba</div><div class="feat-dsc">Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima stete, oklop otpornoscu i Shield-Armor-Structure slojevima.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,204,51,0.5)"><div class="feat-ico">&#x1F527;</div><div class="feat-ttl">Dizajner Brodova</div><div class="feat-dsc">Dizajniraj vlastite brodove. Odaberi sasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija.</div></div>
-    <div class="feat rev" style="--ac:rgba(0,255,153,0.5)"><div class="feat-ico">&#x26A1;</div><div class="feat-ttl">Instance Dungeoni</div><div class="feat-dsc">30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas &mdash; strateska borba s ekskluzivnim nagradama.</div></div>
-    <div class="feat rev" style="--ac:rgba(153,51,255,0.5)"><div class="feat-ico">&#x1F30C;</div><div class="feat-ttl">Galaksijska Mapa</div><div class="feat-dsc">Osvajaj zvjezdane sisteme, siri imperiju i napadaj protivnicke baze. Svaka galaksija je zivi ratni teatar.</div></div>
-    <div class="feat rev" style="--ac:rgba(255,136,0,0.5)"><div class="feat-ico">&#x1F517;</div><div class="feat-ttl">Blockchain Ekonomija</div><div class="feat-dsc">BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave &mdash; razmjenljive i vrijedne.</div></div>
+    <div class="feat rev" style="--ac:rgba(0,229,255,0.5)"><div class="feat-ico">&#x1F3F0;</div><div class="feat-ttl" data-i18n="index.features.base.title">Izgradnja Baze</div><div class="feat-dsc" data-i18n="index.features.base.desc">Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je kljucno za efikasnu produkciju.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,51,85,0.5)"><div class="feat-ico">&#x2694;&#xFE0F;</div><div class="feat-ttl" data-i18n="index.features.pvp.title">PvP Borba</div><div class="feat-dsc" data-i18n="index.features.pvp.desc">Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima stete, oklop otpornoscu i Shield-Armor-Structure slojevima.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,204,51,0.5)"><div class="feat-ico">&#x1F527;</div><div class="feat-ttl" data-i18n="index.features.designer.title">Dizajner Brodova</div><div class="feat-dsc" data-i18n="index.features.designer.desc">Dizajniraj vlastite brodove. Odaberi sasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija.</div></div>
+    <div class="feat rev" style="--ac:rgba(0,255,153,0.5)"><div class="feat-ico">&#x26A1;</div><div class="feat-ttl" data-i18n="index.features.instances.title">Instance Dungeoni</div><div class="feat-dsc" data-i18n="index.features.instances.desc">30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas &mdash; strateska borba s ekskluzivnim nagradama.</div></div>
+    <div class="feat rev" style="--ac:rgba(153,51,255,0.5)"><div class="feat-ico">&#x1F30C;</div><div class="feat-ttl" data-i18n="index.features.galaxy.title">Galaksijska Mapa</div><div class="feat-dsc" data-i18n="index.features.galaxy.desc">Osvajaj zvjezdane sisteme, siri imperiju i napadaj protivnicke baze. Svaka galaksija je zivi ratni teatar.</div></div>
+    <div class="feat rev" style="--ac:rgba(255,136,0,0.5)"><div class="feat-ico">&#x1F517;</div><div class="feat-ttl" data-i18n="index.features.blockchain.title">Blockchain Ekonomija</div><div class="feat-dsc" data-i18n="index.features.blockchain.desc">BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave &mdash; razmjenljive i vrijedne.</div></div>
   </div>
 </div>
 
 <div class="gl"></div>
 
 <div class="sec rev" id="ships-sec">
-  <span class="sec-lbl">// Klase brodova</span>
-  <h2 class="sec-title">6 klasa. Stotine konfiguracija.<br>Jedna strategija pobjeduje.</h2>
-  <p class="sec-desc">Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Mjesana flota uvijek pobjeduje mono flotu istog troska.</p>
+  <span class="sec-lbl" data-i18n="index.section.ships.label">// Klase brodova</span>
+  <h2 class="sec-title" data-i18n="index.section.ships.title">6 klasa. Stotine konfiguracija.<br>Jedna strategija pobjeduje.</h2>
+  <p class="sec-desc" data-i18n="index.section.ships.desc">Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Mjesana flota uvijek pobjeduje mono flotu istog troska.</p>
   <div class="ships-grid">
-    <div class="ship rev"><span class="ship-ico">&#x1F6F8;</span><div class="ship-nm">IZVIDJAC</div><div class="ship-rl">Stealth &middot; Detection</div><div class="ship-bar"><div class="ship-fill" style="width:95%;background:var(--cyan)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">&#x2694;&#xFE0F;</span><div class="ship-nm">LOVAC</div><div class="ship-rl">Agility &middot; Crit</div><div class="ship-bar"><div class="ship-fill" style="width:72%;background:var(--red)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">&#x1F6E1;&#xFE0F;</span><div class="ship-nm">KRSTARICA</div><div class="ship-rl">Shield &middot; Cover</div><div class="ship-bar"><div class="ship-fill" style="width:65%;background:var(--green)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">&#x1F4A5;</span><div class="ship-nm">BOJNI BROD</div><div class="ship-rl">Power &middot; Barrage</div><div class="ship-bar"><div class="ship-fill" style="width:85%;background:var(--gold)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">&#x1F30C;</span><div class="ship-nm">NOSAC</div><div class="ship-rl">Strategic &middot; Launch</div><div class="ship-bar"><div class="ship-fill" style="width:68%;background:var(--purple)"></div></div></div>
-    <div class="ship rev"><span class="ship-ico">&#x1F451;</span><div class="ship-nm">FLAGSHIP</div><div class="ship-rl">Command &middot; +100 Stack</div><div class="ship-bar"><div class="ship-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--cyan))"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F6F8;</span><div class="ship-nm" data-i18n="index.ships.scout.name">IZVIDJAC</div><div class="ship-rl" data-i18n="index.ships.scout.role">Stealth &middot; Detection</div><div class="ship-bar"><div class="ship-fill" style="width:95%;background:var(--cyan)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x2694;&#xFE0F;</span><div class="ship-nm" data-i18n="index.ships.fighter.name">LOVAC</div><div class="ship-rl" data-i18n="index.ships.fighter.role">Agility &middot; Crit</div><div class="ship-bar"><div class="ship-fill" style="width:72%;background:var(--red)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F6E1;&#xFE0F;</span><div class="ship-nm" data-i18n="index.ships.cruiser.name">KRSTARICA</div><div class="ship-rl" data-i18n="index.ships.cruiser.role">Shield &middot; Cover</div><div class="ship-bar"><div class="ship-fill" style="width:65%;background:var(--green)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F4A5;</span><div class="ship-nm" data-i18n="index.ships.battleship.name">BOJNI BROD</div><div class="ship-rl" data-i18n="index.ships.battleship.role">Power &middot; Barrage</div><div class="ship-bar"><div class="ship-fill" style="width:85%;background:var(--gold)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F30C;</span><div class="ship-nm" data-i18n="index.ships.carrier.name">NOSAC</div><div class="ship-rl" data-i18n="index.ships.carrier.role">Strategic &middot; Launch</div><div class="ship-bar"><div class="ship-fill" style="width:68%;background:var(--purple)"></div></div></div>
+    <div class="ship rev"><span class="ship-ico">&#x1F451;</span><div class="ship-nm" data-i18n="index.ships.flagship.name">FLAGSHIP</div><div class="ship-rl" data-i18n="index.ships.flagship.role">Command &middot; +100 Stack</div><div class="ship-bar"><div class="ship-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--cyan))"></div></div></div>
   </div>
 </div>
 
 <div class="gl"></div>
 
 <div class="sec rev" id="tok-sec">
-  <span class="sec-lbl">// HIVE Blockchain Ekonomija</span>
-  <h2 class="sec-title">Tri tokena. Jedan ekosistem.<br>Beskrajna vrijednost.</h2>
-  <p class="sec-desc">Svaki token ima specificnu ulogu. Igraj, gledaj stream, drzi tokene &mdash; sve se nagraduje na blockchainu.</p>
+  <span class="sec-lbl" data-i18n="index.section.tokens.label">// HIVE Blockchain Ekonomija</span>
+  <h2 class="sec-title" data-i18n="index.section.tokens.title">Tri tokena. Jedan ekosistem.<br>Beskrajna vrijednost.</h2>
+  <p class="sec-desc" data-i18n="index.section.tokens.desc">Svaki token ima specificnu ulogu. Igraj, gledaj stream, drzi tokene &mdash; sve se nagraduje na blockchainu.</p>
   <div class="tok-grid">
     <div class="tok bcm rev">
-      <div class="tok-badge">HIVE-ENGINE</div>
-      <div class="tok-sym">BCM</div>
-      <div class="tok-lbl">BO CRYPTO MINER</div>
-      <div class="tok-price">1 BCM = 10&euro; STABLE</div>
+      <div class="tok-badge" data-i18n="index.tokens.bcm.badge">HIVE-ENGINE</div>
+      <div class="tok-sym" data-i18n="index.tokens.bcm.name">BCM</div>
+      <div class="tok-lbl" data-i18n="index.tokens.bcm.label">BO CRYPTO MINER</div>
+      <div class="tok-price" data-i18n="index.tokens.bcm.price">1 BCM = 10&euro; STABLE</div>
       <ul class="tok-list">
-        <li>Gaming licenca (1 BCM)</li>
-        <li>Premium blueprinti i sadrzaj</li>
-        <li>Klanski i sezonski pristup</li>
-        <li>Pasivni prihod: 144 BoCrypto/dan po mineru</li>
-        <li>In-game premium kupovine</li>
+        <li data-i18n="index.tokens.bcm.items.0">Gaming licenca (1 BCM)</li>
+        <li data-i18n="index.tokens.bcm.items.1">Premium blueprinti i sadrzaj</li>
+        <li data-i18n="index.tokens.bcm.items.2">Klanski i sezonski pristup</li>
+        <li data-i18n="index.tokens.bcm.items.3">Pasivni prihod: 144 BoCrypto/dan po mineru</li>
+        <li data-i18n="index.tokens.bcm.items.4">In-game premium kupovine</li>
       </ul>
     </div>
     <div class="tok boc rev">
-      <div class="tok-badge">TWITCH REWARD</div>
-      <div class="tok-sym">BoCrypto</div>
-      <div class="tok-lbl">BOCRYPTO TOKEN</div>
-      <div class="tok-price">0.001 min &middot; 3 decimale</div>
+      <div class="tok-badge" data-i18n="index.tokens.boc.badge">TWITCH REWARD</div>
+      <div class="tok-sym" data-i18n="index.tokens.boc.name">BoCrypto</div>
+      <div class="tok-lbl" data-i18n="index.tokens.boc.label">BOCRYPTO TOKEN</div>
+      <div class="tok-price" data-i18n="index.tokens.boc.price">0.001 min &middot; 3 decimale</div>
       <ul class="tok-list">
-        <li>Twitch: 1 token / 10 min gledanja</li>
-        <li>Subscribers: 3x bonus tokena</li>
-        <li>In-game resursi i kozmetika brodova</li>
-        <li>Instance retry i daily boost</li>
-        <li>SP Card zamjena u igri</li>
+        <li data-i18n="index.tokens.boc.items.0">Twitch: 1 token / 10 min gledanja</li>
+        <li data-i18n="index.tokens.boc.items.1">Subscribers: 3x bonus tokena</li>
+        <li data-i18n="index.tokens.boc.items.2">In-game resursi i kozmetika brodova</li>
+        <li data-i18n="index.tokens.boc.items.3">Instance retry i daily boost</li>
+        <li data-i18n="index.tokens.boc.items.4">SP Card zamjena u igri</li>
       </ul>
     </div>
     <div class="tok bpw rev">
-      <div class="tok-badge">MICRO REWARDS</div>
-      <div class="tok-sym">BPW</div>
-      <div class="tok-lbl">BPW TOKEN</div>
-      <div class="tok-price">0.00000001 min &middot; 8 decimala</div>
+      <div class="tok-badge" data-i18n="index.tokens.bpw.badge">MICRO REWARDS</div>
+      <div class="tok-sym" data-i18n="index.tokens.bpw.name">BPW</div>
+      <div class="tok-lbl" data-i18n="index.tokens.bpw.label">BPW TOKEN</div>
+      <div class="tok-price" data-i18n="index.tokens.bpw.price">0.00000001 min &middot; 8 decimala</div>
       <ul class="tok-list">
-        <li>Dnevni login: +5 satoshi</li>
-        <li>Zavrsena misija: 10-50 satoshi</li>
-        <li>Instance nagrada: 100-500 satoshi</li>
-        <li>PvP pobjeda i rang lista nagrade</li>
-        <li>Faucet: x5 satoshi / 24h</li>
+        <li data-i18n="index.tokens.bpw.items.0">Dnevni login: +5 satoshi</li>
+        <li data-i18n="index.tokens.bpw.items.1">Zavrsena misija: 10-50 satoshi</li>
+        <li data-i18n="index.tokens.bpw.items.2">Instance nagrada: 100-500 satoshi</li>
+        <li data-i18n="index.tokens.bpw.items.3">PvP pobjeda i rang lista nagrade</li>
+        <li data-i18n="index.tokens.bpw.items.4">Faucet: x5 satoshi / 24h</li>
       </ul>
     </div>
   </div>
@@ -337,13 +339,13 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 <div class="gl"></div>
 
 <div class="steps-wrap rev" id="how-sec">
-  <span class="sec-lbl" style="display:block;margin-bottom:14px">// Kako poceti</span>
-  <h2 class="sec-title" style="font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700">Od nule do admirala<br>za 5 minuta</h2>
+  <span class="sec-lbl" style="display:block;margin-bottom:14px" data-i18n="index.section.howtoplay.label">// Kako poceti</span>
+  <h2 class="sec-title" style="font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700" data-i18n="index.section.howtoplay.title">Od nule do admirala<br>za 5 minuta</h2>
   <div class="steps" style="margin-top:52px">
-    <div class="step rev"><div class="step-n">01</div><div class="step-t">Registruj se</div><div class="step-d">Email registracija &mdash; besplatno, bez kreditne kartice. Odmah igraas.</div></div>
-    <div class="step rev"><div class="step-n">02</div><div class="step-t">Dobij galaksiju</div><div class="step-d">Server te smjesta u galaksiju. Tvoja baza ceka &mdash; pocni graditi odmah.</div></div>
-    <div class="step rev"><div class="step-n">03</div><div class="step-t">Osvajaj</div><div class="step-d">Gradi flotu, biji instance, farmaj blueprinte, PvP dominacija.</div></div>
-    <div class="step rev"><div class="step-n">04</div><div class="step-t">Postani Premium</div><div class="step-d">HIVE Keychain ili crypto &mdash; otkljucaj blockchain zarade i ekskluzivni sadrzaj.</div></div>
+    <div class="step rev"><div class="step-n">01</div><div class="step-t" data-i18n="index.steps.1.title">Registruj se</div><div class="step-d" data-i18n="index.steps.1.desc">Email registracija &mdash; besplatno, bez kreditne kartice. Odmah igraas.</div></div>
+    <div class="step rev"><div class="step-n">02</div><div class="step-t" data-i18n="index.steps.2.title">Dobij galaksiju</div><div class="step-d" data-i18n="index.steps.2.desc">Server te smjesta u galaksiju. Tvoja baza ceka &mdash; pocni graditi odmah.</div></div>
+    <div class="step rev"><div class="step-n">03</div><div class="step-t" data-i18n="index.steps.3.title">Osvajaj</div><div class="step-d" data-i18n="index.steps.3.desc">Gradi flotu, biji instance, farmaj blueprinte, PvP dominacija.</div></div>
+    <div class="step rev"><div class="step-n">04</div><div class="step-t" data-i18n="index.steps.4.title">Postani Premium</div><div class="step-d" data-i18n="index.steps.4.desc">HIVE Keychain ili crypto &mdash; otkljucaj blockchain zarade i ekskluzivni sadrzaj.</div></div>
   </div>
 </div>
 
@@ -352,61 +354,61 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 <div id="login-sec" style="max-width:1100px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start">
 
   <div class="lbox rev" style="--lc:var(--green);border:1px solid rgba(0,255,153,0.25)">
-    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--green);background:rgba(0,255,153,0.08);border:1px solid rgba(0,255,153,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">BESPLATNO</div>
-    <div class="lbox-ttl">&#x1F3AE; PLAY 2 FREE</div>
-    <div class="lbox-sub">Registruj se emailom i igraj odmah. Bez placanja, bez kreditne kartice.</div>
-    <label class="flbl">EMAIL ADRESA</label>
-    <input type="email" class="finp" id="rEmail" placeholder="tvoj@email.com">
-    <label class="flbl">LOZINKA</label>
-    <input type="password" class="finp" id="rPass" placeholder="Minimalno 8 znakova">
-    <button class="reg-btn" style="background:linear-gradient(135deg,rgba(0,255,153,0.14),rgba(0,255,153,0.07));border-color:rgba(0,255,153,0.4);color:var(--green)" onclick="emailReg()">&#x25B6; REGISTRUJ SE BESPLATNO</button>
+    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--green);background:rgba(0,255,153,0.08);border:1px solid rgba(0,255,153,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px" data-i18n="index.login.free.badge">BESPLATNO</div>
+    <div class="lbox-ttl" data-i18n="index.login.free.title">&#x1F3AE; PLAY 2 FREE</div>
+    <div class="lbox-sub" data-i18n="index.login.free.sub">Registruj se emailom i igraj odmah. Bez placanja, bez kreditne kartice.</div>
+    <label class="flbl" data-i18n="index.login.free.email_label">EMAIL ADRESA</label>
+    <input type="email" class="finp" id="rEmail" placeholder="tvoj@email.com" data-i18n="index.login.free.email_placeholder" data-i18n-attr="placeholder">
+    <label class="flbl" data-i18n="index.login.free.pass_label">LOZINKA</label>
+    <input type="password" class="finp" id="rPass" placeholder="Minimalno 8 znakova" data-i18n="index.login.free.pass_placeholder" data-i18n-attr="placeholder">
+    <button class="reg-btn" style="background:linear-gradient(135deg,rgba(0,255,153,0.14),rgba(0,255,153,0.07));border-color:rgba(0,255,153,0.4);color:var(--green)" onclick="emailReg()" data-i18n="index.login.free.btn">&#x25B6; REGISTRUJ SE BESPLATNO</button>
     <p style="margin-top:12px;font-size:0.7rem;color:var(--text2);text-align:center">
-      Vec imas nalog? <a href="#" onclick="emailLog(event)" style="color:var(--green);text-decoration:none">Prijavi se &rarr;</a>
+      <span data-i18n="index.login.free.login_link">Vec imas nalog?</span> <a href="#" onclick="emailLog(event)" style="color:var(--green);text-decoration:none" data-i18n="index.login.free.login_cta">Prijavi se &rarr;</a>
     </p>
     <div style="margin-top:16px;padding:10px;background:rgba(0,255,153,0.04);border-radius:6px;border:1px solid rgba(0,255,153,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve instance i sadrzaj<br>&#x2713; 300 komandira<br>&#x2713; PvP i galaksija<br>&#x2717; Blockchain zarade</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7"><span data-i18n="index.login.free.check1">&#x2713; Sve instance i sadrzaj</span><br><span data-i18n="index.login.free.check2">&#x2713; 300 komandira</span><br><span data-i18n="index.login.free.check3">&#x2713; PvP i galaksija</span><br><span data-i18n="index.login.free.check4">&#x2717; Blockchain zarade</span></div>
     </div>
   </div>
 
   <div class="lbox hive lbox-border-hive rev">
-    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:#e31337;background:rgba(227,19,55,0.08);border:1px solid rgba(227,19,55,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">INSTANT PREMIUM</div>
-    <div class="lbox-ttl">&#x26D3;&#xFE0F; HIVE KEYCHAIN</div>
-    <div class="lbox-sub">Imas HIVE nalog? Prijavi se putem Keychaina &mdash; automatski dobijas Premium status.</div>
+    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:#e31337;background:rgba(227,19,55,0.08);border:1px solid rgba(227,19,55,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px" data-i18n="index.login.hive.badge">INSTANT PREMIUM</div>
+    <div class="lbox-ttl" data-i18n="index.login.hive.title">&#x26D3;&#xFE0F; HIVE KEYCHAIN</div>
+    <div class="lbox-sub" data-i18n="index.login.hive.sub">Imas HIVE nalog? Prijavi se putem Keychaina &mdash; automatski dobijas Premium status.</div>
     <button class="hive-btn" onclick="hiveLogin()">
       <span style="font-size:1.3rem">&#x26D3;&#xFE0F;</span>
-      CONNECTUJ HIVE KEYCHAIN
+      <span data-i18n="index.login.hive.btn">CONNECTUJ HIVE KEYCHAIN</span>
     </button>
     <div class="hive-info" style="margin-top:14px">
-      <p>Premium placanje (odaberi):</p>
+      <p data-i18n="index.login.hive.pay_label">Premium placanje (odaberi):</p>
       <div class="ptags">
-        <span class="ptag h">HIVE</span>
-        <span class="ptag d">HBD (~10 HBD)</span>
-        <span class="ptag b">BCM (1 BCM)</span>
+        <span class="ptag h" data-i18n="index.login.hive.pay_hive">HIVE</span>
+        <span class="ptag d" data-i18n="index.login.hive.pay_hbd">HBD (~10 HBD)</span>
+        <span class="ptag b" data-i18n="index.login.hive.pay_bcm">BCM (1 BCM)</span>
       </div>
     </div>
     <div style="margin-top:14px;padding:10px;background:rgba(227,19,55,0.04);border-radius:6px;border:1px solid rgba(227,19,55,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve Free opcije<br>&#x2713; BPW token zarade<br>&#x2713; BCM i BoCrypto<br>&#x2713; Ekskluzivni sadrzaj</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7"><span data-i18n="index.login.hive.check1">&#x2713; Sve Free opcije</span><br><span data-i18n="index.login.hive.check2">&#x2713; BPW token zarade</span><br><span data-i18n="index.login.hive.check3">&#x2713; BCM i BoCrypto</span><br><span data-i18n="index.login.hive.check4">&#x2713; Ekskluzivni sadrzaj</span></div>
     </div>
-    <div style="margin-top:12px;font-size:0.68rem;color:var(--text2)">Nemas HIVE nalog? <a href="https://signup.hive.io" target="_blank" style="color:var(--cyan);text-decoration:none">Registruj se besplatno &rarr;</a></div>
+    <div style="margin-top:12px;font-size:0.68rem;color:var(--text2)"><span data-i18n="index.login.hive.no_account">Nemas HIVE nalog?</span> <a href="https://signup.hive.io" target="_blank" style="color:var(--cyan);text-decoration:none" data-i18n="index.login.hive.register">Registruj se besplatno &rarr;</a></div>
   </div>
 
   <div class="lbox email lbox-border-email rev">
-    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--gold);background:rgba(255,204,51,0.08);border:1px solid rgba(255,204,51,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px">PREMIUM &middot; 10&euro;</div>
-    <div class="lbox-ttl">&#x1F48E; CRYPTO PREMIUM</div>
-    <div class="lbox-sub">Vec imas Free nalog? Nadogradi na Premium placanjem kriptovalutom.</div>
+    <div style="display:inline-block;font-size:0.58rem;letter-spacing:3px;font-family:'Share Tech Mono',monospace;color:var(--gold);background:rgba(255,204,51,0.08);border:1px solid rgba(255,204,51,0.2);padding:3px 10px;border-radius:3px;margin-bottom:12px" data-i18n="index.login.crypto.badge">PREMIUM &middot; 10&euro;</div>
+    <div class="lbox-ttl" data-i18n="index.login.crypto.title">&#x1F48E; CRYPTO PREMIUM</div>
+    <div class="lbox-sub" data-i18n="index.login.crypto.sub">Vec imas Free nalog? Nadogradi na Premium placanjem kriptovalutom.</div>
     <div class="pgrid">
-      <div class="popt sel" onclick="selPay(this)"><span class="pi">&#x20BF;</span>Bitcoin</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1F4B5;</span>USDT</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">L</span>Litecoin</div>
-      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1FAB7;</span>HBD</div>
+      <div class="popt sel" onclick="selPay(this)"><span class="pi">&#x20BF;</span><span data-i18n="index.login.crypto.pay_btc">Bitcoin</span></div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1F4B5;</span><span data-i18n="index.login.crypto.pay_usdt">USDT</span></div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">L</span><span data-i18n="index.login.crypto.pay_ltc">Litecoin</span></div>
+      <div class="popt" onclick="selPay(this)"><span class="pi">&#x1FAB7;</span><span data-i18n="index.login.crypto.pay_hbd">HBD</span></div>
     </div>
     <div class="lic-info">
-      <span>Cijena:</span><span class="price">10&euro;</span>
-      <span>&middot; Jednokratno &middot; Dozivotni pristup</span>
+      <span data-i18n="index.login.crypto.price_label">Cijena:</span><span class="price" data-i18n="index.login.crypto.price">10&euro;</span>
+      <span data-i18n="index.login.crypto.price_note">&middot; Jednokratno &middot; Dozivotni pristup</span>
     </div>
-    <button class="reg-btn" onclick="emailReg()">&#x25B6; KUPI PREMIUM</button>
+    <button class="reg-btn" onclick="emailReg()" data-i18n="index.login.crypto.btn">&#x25B6; KUPI PREMIUM</button>
     <div style="margin-top:16px;padding:10px;background:rgba(255,204,51,0.04);border-radius:6px;border:1px solid rgba(255,204,51,0.1)">
-      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7">&#x2713; Sve Free opcije<br>&#x2713; BPW token zarade<br>&#x2713; BCM i BoCrypto<br>&#x2713; Ekskluzivni sadrzaj</div>
+      <div style="font-size:0.68rem;color:var(--text2);line-height:1.7"><span data-i18n="index.login.crypto.check1">&#x2713; Sve Free opcije</span><br><span data-i18n="index.login.crypto.check2">&#x2713; BPW token zarade</span><br><span data-i18n="index.login.crypto.check3">&#x2713; BCM i BoCrypto</span><br><span data-i18n="index.login.crypto.check4">&#x2713; Ekskluzivni sadrzaj</span></div>
     </div>
   </div>
 
@@ -416,68 +418,69 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 
 <div class="faq-wrap rev" id="faq-wrap">
   <div style="text-align:center;margin-bottom:40px">
-    <span class="sec-lbl" style="display:block;margin-bottom:12px">// Cesta pitanja</span>
-    <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700">FAQ</h2>
+    <span class="sec-lbl" style="display:block;margin-bottom:12px" data-i18n="index.section.faq.label">// Cesta pitanja</span>
+    <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700" data-i18n="index.section.faq.title">FAQ</h2>
   </div>
-  <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Je li igra besplatna? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Da &mdash; igra je besplatna za sve. Registruj se emailom i igraas odmah. Premium status (10&euro; jednokratno) otkljucava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadrzaj. Nema pretplate, nema skrivenih troskova.</div></div>
-  </div>
-  <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Je li igra pay-to-win? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci &mdash; novac ih ne moze kupiti. Vjestina i vrijeme uvijek pobjeduju.</div></div>
-  </div>
-  <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Sta je HIVE Keychain i kako ga instaliram? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako imas HIVE nalog, automatski dobijas Premium status &mdash; bez dodatnog placanja. Instaliraj na hive-keychain.com.</div></div>
-  </div>
-  <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Kako zaraditi prave tokene igrajuci? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Premium igraci zaraduju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.</div></div>
-  </div>
-  <div class="faq-item rev">
-    <div class="faq-q" onclick="togFaq(this)">Da li postoji zastita za nove igrace? <span class="faq-tog">+</span></div>
-    <div class="faq-a"><div class="faq-ai">Da &mdash; prvih 72 sata od registracije igraas pod mirovnim stitom. Nitko te ne moze napasti dok se ne etabliras. Nakon toga postaje pravi PvP.</div></div>
-  </div>
+    <div class="faq-item rev">
+      <div class="faq-q" onclick="togFaq(this)"><span data-i18n="index.faq.q1">Je li igra besplatna?</span> <span class="faq-tog">+</span></div>
+      <div class="faq-a"><div class="faq-ai" data-i18n="index.faq.a1">Da &mdash; igra je besplatna za sve. Registruj se emailom i igraas odmah. Premium status (10&euro; jednokratno) otkljucava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadrzaj. Nema pretplate, nema skrivenih troskova.</div></div>
+    </div>
+    <div class="faq-item rev">
+      <div class="faq-q" onclick="togFaq(this)"><span data-i18n="index.faq.q2">Je li igra pay-to-win?</span> <span class="faq-tog">+</span></div>
+      <div class="faq-a"><div class="faq-ai" data-i18n="index.faq.a2">Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci &mdash; novac ih ne moze kupiti. Vjestina i vrijeme uvijek pobjeduju.</div></div>
+    </div>
+    <div class="faq-item rev">
+      <div class="faq-q" onclick="togFaq(this)"><span data-i18n="index.faq.q3">Sta je HIVE Keychain i kako ga instaliram?</span> <span class="faq-tog">+</span></div>
+      <div class="faq-a"><div class="faq-ai" data-i18n="index.faq.a3">HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako imas HIVE nalog, automatski dobijas Premium status &mdash; bez dodatnog placanja. Instaliraj na hive-keychain.com.</div></div>
+    </div>
+    <div class="faq-item rev">
+      <div class="faq-q" onclick="togFaq(this)"><span data-i18n="index.faq.q4">Kako zaraditi prave tokene igrajuci?</span> <span class="faq-tog">+</span></div>
+      <div class="faq-a"><div class="faq-ai" data-i18n="index.faq.a4">Premium igraci zaraduju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.</div></div>
+    </div>
+    <div class="faq-item rev">
+      <div class="faq-q" onclick="togFaq(this)"><span data-i18n="index.faq.q5">Da li postoji zastita za nove igrace?</span> <span class="faq-tog">+</span></div>
+      <div class="faq-a"><div class="faq-ai" data-i18n="index.faq.a5">Da &mdash; prvih 72 sata od registracije igraas pod mirovnim stitom. Nitko te ne moze napasti dok se ne etabliras. Nakon toga postaje pravi PvP.</div></div>
+    </div>
 </div>
 
 <div style="text-align:center;padding:48px 24px;background:rgba(6,12,24,0.6);border-top:1px solid rgba(255,255,255,0.04)">
-  <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:4px;color:#6a90b8;margin-bottom:10px">// PODRZI RAZVOJ</div>
-  <div style="font-family:'Orbitron',monospace;font-size:0.85rem;color:white;margin-bottom:6px">Svidja ti se igra?</div>
-  <div style="font-size:0.8rem;color:#5a7a9a;margin-bottom:18px">Svaka donacija pomaze razvoju novih sadrzaja i servera.</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:4px;color:#6a90b8;margin-bottom:10px" data-i18n="index.donate.label">// PODRZI RAZVOJ</div>
+  <div style="font-family:'Orbitron',monospace;font-size:0.85rem;color:white;margin-bottom:6px" data-i18n="index.donate.title">Svidja ti se igra?</div>
+  <div style="font-size:0.8rem;color:#5a7a9a;margin-bottom:18px" data-i18n="index.donate.desc">Svaka donacija pomaze razvoju novih sadrzaja i servera.</div>
   <a href="https://paypal.me/bokica80ttv" target="_blank"
     style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#003087,#009cde);
     color:white;font-family:'Orbitron',monospace;font-weight:700;font-size:0.75rem;letter-spacing:1px;
     padding:12px 28px;border-radius:6px;text-decoration:none;transition:all 0.25s;
     box-shadow:0 0 20px rgba(0,156,222,0.2)"
     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 36px rgba(0,156,222,0.4)'"
-    onmouseout="this.style.transform='';this.style.boxShadow='0 0 20px rgba(0,156,222,0.2)'">
+    onmouseout="this.style.transform='';this.style.boxShadow='0 0 20px rgba(0,156,222,0.2)'"
+    data-i18n="index.donate.btn">
     &#x1F4B3; DONIRAJ PUTEM PAYPALA
   </a>
 </div>
 
 <div class="gl"></div>
 <footer>
-  <div class="ft-logo">&#x2B27; HIVE GALAXY</div>
+  <div class="ft-logo" data-i18n="index.footer.logo">&#x2B27; HIVE GALAXY</div>
   <div class="ft-links">
-    <a href="https://discord.gg/X5x9xu9A" target="_blank">Discord</a>
-    <a href="https://twitch.tv/bokipw" target="_blank">Twitch</a>
-    <a href="https://hive.blog/@bokica80" target="_blank">HIVE Blog</a>
-    <a href="https://github.com/bokipw" target="_blank">GitHub</a>
+    <a href="https://discord.gg/x2DjWjdDA" target="_blank" data-i18n="index.footer.links.discord">Discord</a>
+    <a href="https://twitch.tv/bokipw" target="_blank" data-i18n="index.footer.links.twitch">Twitch</a>
+    <a href="https://hive.blog/@bokica80" target="_blank" data-i18n="index.footer.links.blog">HIVE Blog</a>
+    <a href="https://github.com/bokipw" target="_blank" data-i18n="index.footer.links.github">GitHub</a>
   </div>
   <div style="text-align:center">
-    <div class="ft-copy">&copy; 2026 HIVE GALAXY &middot; Powered by HIVE Blockchain</div>
+    <div class="ft-copy" data-i18n="index.footer.copyright">&copy; 2026 HIVE GALAXY &middot; Powered by HIVE Blockchain</div>
     <div style="margin-top:8px;font-size:0.72rem;color:var(--text2)">
-      Developed by
-      <a href="https://hive.blog/@bokica80" target="_blank" style="color:var(--cyan);text-decoration:none;font-family:'Share Tech Mono',monospace">@bokica80</a>
+      <span data-i18n="index.footer.developed">Developed by</span>
+      <a href="https://hive.blog/@bokica80" target="_blank" style="color:var(--cyan);text-decoration:none;font-family:'Share Tech Mono',monospace" data-i18n="index.footer.author">@bokica80</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://twitch.tv/bokipw" target="_blank" style="color:var(--purple);text-decoration:none;font-family:'Share Tech Mono',monospace">twitch/bokipw</a>
+      <a href="https://twitch.tv/bokipw" target="_blank" style="color:var(--purple);text-decoration:none;font-family:'Share Tech Mono',monospace" data-i18n="index.footer.twitch_link">twitch/bokipw</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://hive-engine.com/trade/BCM" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BCM</a>
+      <a href="https://hive-engine.com/trade/BCM" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace" data-i18n="index.footer.bcm">BCM</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://hive-engine.com/trade/BOCRYPTO" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BoCrypto</a>
+      <a href="https://hive-engine.com/trade/BOCRYPTO" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace" data-i18n="index.footer.bocrypto">BoCrypto</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://hive-engine.com/trade/BPW" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace">BPW</a>
+      <a href="https://hive-engine.com/trade/BPW" target="_blank" style="color:var(--gold);text-decoration:none;font-family:'Share Tech Mono',monospace" data-i18n="index.footer.bpw">BPW</a>
     </div>
   </div>
 </footer>
@@ -485,6 +488,18 @@ footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex;
 </main>
 
 <script>
+// ── I18N: Render language picker ──
+(function initI18n() {
+  var c = document.getElementById('langPickerContainer');
+  if (c && typeof renderLangPicker === 'function') {
+    c.innerHTML = renderLangPicker();
+  }
+  // Apply translations on load
+  if (typeof loadLang === 'function') {
+    loadLang(window._i18nLang || 'sr');
+  }
+})();
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.08 });
