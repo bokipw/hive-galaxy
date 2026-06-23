@@ -60,7 +60,7 @@ function _applyLangToDOM() {
       if (el.hasAttribute('data-i18n-attr')) {
         el.setAttribute(el.getAttribute('data-i18n-attr'), val);
       } else {
-        el.textContent = val;
+        el.innerHTML = val;
       }
     }
   });
