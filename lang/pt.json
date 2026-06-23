@@ -1,0 +1,4440 @@
+{
+  "nav": {
+    "base": "Base",
+    "fleet": "Frota",
+    "galaxy": "Galáxia",
+    "colonies": "Colônias",
+    "pvp": "PvP",
+    "research": "Pesquisa",
+    "missions": "Missões",
+    "shop": "Loja",
+    "leaderboard": "Classificação",
+    "blueprints": "Projetos",
+    "commanders": "Comandantes",
+    "espionage": "Espionagem",
+    "artifacts": "Artefatos",
+    "designer": "Projetista",
+    "formations": "Formações",
+    "achievements": "Conquistas",
+    "cards": "Cartas"
+  },
+  "tab": {
+    "log": "📋 Registro",
+    "events": "📡 Eventos",
+    "pvp": "⚔️ PvP"
+  },
+  "btn": {
+    "save": "💾 Salvar",
+    "saved": "✅ Salvo",
+    "attack": "⚔️ Atacar",
+    "scan": "🔍 Escanear",
+    "buy": "Comprar",
+    "upgrade": "Melhorar",
+    "build": "Construir",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "collect": "Coletar",
+    "research": "Pesquisar",
+    "equip": "Equipar",
+    "unequip": "Desequipar",
+    "deploy": "Implantar",
+    "recruit": "Recrutar",
+    "open": "Abrir",
+    "send": "Enviar",
+    "activate": "Ativar",
+    "deactivate": "Desativar"
+  },
+  "res": {
+    "metal": "Metal",
+    "crystal": "Cristal",
+    "he3": "He-3",
+    "energy": "Energia",
+    "bocrypto": "BoCrypto",
+    "score": "Pontuação",
+    "keys": "Chaves",
+    "instanceKeys": "Chaves de Inst."
+  },
+  "pvp": {
+    "title": "⚔️ ARENA PvP",
+    "searching": "Procurando oponentes...",
+    "loaded": "Oponentes carregados!",
+    "noOpponents": "Nenhum oponente disponível.",
+    "cannotLoad": "Não foi possível carregar oponentes.",
+    "shieldActive": "Escudo está ativo - você não pode atacar!",
+    "noFleet": "Você não tem naves na sua frota!",
+    "enemyNoFleet": "Oponente não tem frota implantada!",
+    "enemyNoValidFleet": "Oponente não tem frota válida!",
+    "notEnoughEnergy": "Energia insuficiente! Precisa de {cost}",
+    "notEnoughBocrypto": "BOCRYPTO insuficiente! Precisa de {cost}",
+    "attacking": "Atacando {name}...",
+    "victory": "Vitória sobre {name}!",
+    "defeat": "Derrota para {name}",
+    "lootGained": "Saque: {metal} Metal, {crystal} Cristal, {he3} He-3, {boc} BoCrypto",
+    "ratingGain": "+{n} classificação",
+    "ratingLoss": "{n} classificação",
+    "shieldBought": "Escudo ativo por {hours}h!",
+    "notEnoughBocShield": "BoCrypto insuficiente! Precisa de {cost} BOCRYPTO",
+    "energyCost": "Custo: {energy} energia + {boc} BoCrypto",
+    "rank": "Ranque",
+    "rating": "Classificação",
+    "power": "Poder",
+    "level": "Nível",
+    "wins": "Vitórias",
+    "losses": "Derrotas",
+    "yourRating": "Sua classificação",
+    "shieldStatus": "Status do Escudo",
+    "shieldInactive": "Inativo",
+    "shieldActiveUntil": "Ativo até {time}",
+    "buyShield": "Comprar Escudo",
+    "findOpponents": "Encontrar Oponentes"
+  },
+  "galaxy": {
+    "title": "🌌 GALÁXIA",
+    "loading": "Carregando galáxia...",
+    "playerBase": "Base do Jogador",
+    "neutralSystem": "Sistema Neutro",
+    "espionage": "🔍 Reconhecimento",
+    "attack": "⚔️ Atacar Base",
+    "attackCost": "Custo de ataque: {energy} energia + {boc} BoCrypto",
+    "attackVictory": "Vitória! Roubado {metal} metal, {crystal} cristal, {he3} He-3!",
+    "attackDefeat": "Derrota! A defesa era mais forte.",
+    "attackNoFleet": "Você não tem naves na sua frota!",
+    "attackNotEnoughEnergy": "Energia insuficiente! Precisa de {cost}",
+    "attackNotEnoughBoc": "BoCrypto insuficiente! Precisa de {cost}",
+    "espResources": "Recursos: {metal} Metal | {crystal} Cristal | {he3} He-3",
+    "espNoData": "Nenhum dado de recurso disponível."
+  },
+  "shop": {
+    "title": "🏪 LOJA ESPACIAL",
+    "premium": "⭐ PREMIUM",
+    "purchaseConfirm": "Confirmar Compra",
+    "purchaseSuccess": "Compra realizada com sucesso!",
+    "purchaseFailed": "Falha na compra.",
+    "notEnoughBoc": "BoCrypto insuficiente! Você tem {have}, precisa de {need}",
+    "bocBalance": "Saldo de BoCrypto: {amount}",
+    "buyWithBoc": "Comprar por {cost} BoCrypto",
+    "ikeys100": "100 Chaves de Instância",
+    "keys10": "10 Chaves de Comandante"
+  },
+  "base": {
+    "title": "🏰 BASE",
+    "buildQueue": "Fila de Construção",
+    "recycleQueue": "Fila de Reciclagem",
+    "queueFull": "Fila está cheia!",
+    "notEnoughRes": "Recursos insuficientes!",
+    "buildStarted": "Construção iniciada!",
+    "buildComplete": "Construção concluída: {name}",
+    "maxLevel": "Nível Máximo",
+    "upgrading": "Melhorando...",
+    "recycling": "Reciclando..."
+  },
+  "research": {
+    "title": "🔬 PESQUISA",
+    "researchStarted": "Pesquisa iniciada: {name}",
+    "researchComplete": "Pesquisa concluída: {name}",
+    "maxLevel": "Nível Máximo",
+    "notEnoughRes": "Recursos insuficientes!"
+  },
+  "fleet": {
+    "title": "🚀 FROTA",
+    "noShips": "Você não tem naves",
+    "deployedFleet": "Frota Implantada",
+    "hangar": "Hangar",
+    "recruit": "Recrutar Naves",
+    "totalPower": "Poder Total",
+    "shipAdded": "{count}x {name} adicionado à frota!",
+    "notEnoughRes": "Recursos insuficientes!"
+  },
+  "missions": {
+    "title": "📡 MISSÕES",
+    "daily": "Missões Diárias",
+    "weekly": "Missões Semanais",
+    "story": "História",
+    "completed": "Concluído",
+    "claimed": "Resgatado",
+    "claimReward": "Resgatar Recompensa",
+    "rewardClaimed": "Recompensa resgatada!",
+    "progress": "Progresso"
+  },
+  "colonies": {
+    "title": "🪐 COLÔNIAS",
+    "loading": "Carregando colônias...",
+    "noColonies": "Você não tem colônias. Conquiste planetas na galáxia!",
+    "phalanxScan": "Escaneamento Falange",
+    "scanComplete": "Escaneamento concluído! {count} sistemas escaneados.",
+    "scanCost": "Custo: {cost} He-3",
+    "notEnoughHe3": "He-3 insuficiente para escanear! Precisa de {cost}",
+    "enemyBase": "Base Inimiga",
+    "rating": "Classificação: {rating}",
+    "power": "Poder: {power}"
+  },
+  "commanders": {
+    "title": "👨‍✈️ COMANDANTES",
+    "owned": "Meus Comandantes",
+    "active": "Ativo",
+    "deploy": "Implantar",
+    "recall": "Recolher",
+    "stats": "Estatísticas",
+    "openPack": "Abrir Pacote",
+    "noCommanders": "Você não tem comandantes."
+  },
+  "blueprints": {
+    "title": "📐 PROJETOS",
+    "owned": "Projetos Possuídos",
+    "fragments": "Fragmentos",
+    "craft": "Fabricar",
+    "craftSuccess": "Projeto fabricado: {name}!",
+    "notEnoughFragments": "Fragmentos insuficientes!"
+  },
+  "espionage": {
+    "title": "🕵️ ESPIONAGEM",
+    "sendDrone": "Enviar Drone",
+    "dronesSent": "{count} drones enviados!",
+    "reportReady": "Relatório pronto!",
+    "noDrones": "Você não tem drones!",
+    "targetInfo": "Informações do Alvo"
+  },
+  "artifacts": {
+    "title": "🏺 ARTEfATOS",
+    "fragments": "Fragmentos de Artefato",
+    "assemble": "Montar",
+    "assembled": "Artefato montado!",
+    "notEnoughFragments": "Fragmentos insuficientes!"
+  },
+  "toast": {
+    "saveOk": "✅ Jogo salvo!",
+    "saveFail": "❌ Falha ao salvar!",
+    "loginOk": "✅ Login bem-sucedido!",
+    "loginFail": "❌ Falha no login!",
+    "loading": "⏳ Carregando...",
+    "error": "❌ Erro: {msg}",
+    "notEnoughRes": "❌ Recursos insuficientes!",
+    "maxLevel": "✅ Nível máximo!",
+    "featureWip": "🚧 Em breve..."
+  },
+  "confirm": {
+    "resetGame": "⚠️ TEM CERTEZA? Isso apagará TODO o progresso!",
+    "buyItem": "Comprar {name} por {cost}?",
+    "attack": "Atacar {name}? Custo: {cost}"
+  },
+  "season": {
+    "label": "Temporada",
+    "reset": "Reinício de Temporada",
+    "rank": "Ranque da Temporada"
+  },
+  "premium": {
+    "label": "⭐ PREMIUM",
+    "active": "Premium Ativo",
+    "inactive": "Não é Premium",
+    "benefits": "Benefícios Premium",
+    "getit": "Obter Premium"
+  },
+  "armor": {
+    "nano": "Nano",
+    "neutralizing": "Neutralizing",
+    "chrome": "Chrome",
+    "regen": "Regen",
+    "light": "Light"
+  },
+  "ship_class": {
+    "scout": {
+      "name": "Olheira",
+      "desc": "Rápido e furtivo. Ideal para explorar e combater lutadores."
+    },
+    "fighter": {
+      "name": "Lutadora",
+      "desc": "Navio de combate versátil. Ideal como espinha dorsal de qualquer frota."
+    },
+    "cruiser": {
+      "name": "Cruzador",
+      "desc": "Defesa pesada. Protege navios menores da frota."
+    },
+    "battleship": {
+      "name": "Encouraçado",
+      "desc": "Poder de fogo máximo. Lento, mas devastador."
+    },
+    "carrier": {
+      "name": "Operadora",
+      "desc": "Navio estratégico. Lança esquadrões de caça para a batalha."
+    },
+    "special": {
+      "name": "Carro-chefe",
+      "desc": "Navio de comando da frota. Fornece um bônus para todos os navios."
+    }
+  },
+  "damage_type": {
+    "Kinetic": {
+      "name": "Cinético",
+      "desc": "Danos físicos. Alto DPS, sem efeito especial."
+    },
+    "Heat": {
+      "name": "Aquecer",
+      "desc": "Thermal damage. Efeito de queima – dano ao longo de X rodadas."
+    },
+    "Magnetic": {
+      "name": "Magnética",
+      "desc": "Danos de PEM. Chance de atordoar ou desativar armas/motor."
+    },
+    "Explosive": {
+      "name": "Explosiva",
+      "desc": "Dano de área. Atinge vários navios ao mesmo tempo."
+    },
+    "Mixed": {
+      "name": "Misturada",
+      "desc": "Danos combinados. Unidades Elite Fighter Bay."
+    }
+  },
+  "weapon_subtype": {
+    "Ballistic": {
+      "name": "Balística",
+      "desc": "Fogo direto. Maior DPS, curto alcance."
+    },
+    "Directional": {
+      "name": "Direcional",
+      "desc": "Feixe direcionado. DPS médio, alcance médio, +10% crítico."
+    },
+    "Missile": {
+      "name": "Míssil",
+      "desc": "Míssil guiado. Nunca erra. Longo alcance."
+    },
+    "FighterBay": {
+      "name": "Baía dos Lutadores",
+      "desc": "Lança naves de combate. Somente transportadoras e navios-chefe. Multi-alvo."
+    }
+  },
+  "weapon": {
+    "w_kinetic_railgun_I": {
+      "name": "Canhão elétrico I",
+      "desc": "Railgun I — Arma cinética básica. +10% de chance crítica.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Atualizar Fábrica de Navios II"
+    },
+    "w_kinetic_railgun_II": {
+      "name": "Canhão elétrico II",
+      "desc": "Railgun II — Canhão cinético aprimorado. +15% de crítico.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_railgun_III": {
+      "name": "Canhão elétrico III",
+      "desc": "Railgun III — Canhão cinético avançado. +22% de crítico.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_gauss_cannon_I": {
+      "name": "Canhão Gauss I",
+      "desc": "Canhão Gauss I — Canhão eletromagnético. +10% de crítico.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 6"
+    },
+    "w_kinetic_gauss_cannon_II": {
+      "name": "Canhão Gauss II",
+      "desc": "Canhão Gauss II — Canhão eletromagnético aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_gauss_cannon_III": {
+      "name": "Canhão Gauss III",
+      "desc": "Canhão Gauss III — Canhão eletromagnético avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_mass_driver_I": {
+      "name": "Motorista de massa I",
+      "desc": "Mass Driver I – Dispara projéteis enormes.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 10"
+    },
+    "w_kinetic_mass_driver_II": {
+      "name": "Motorista de massa II",
+      "desc": "Mass Driver II — Driver de massa aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_mass_driver_III": {
+      "name": "Motorista de massa III",
+      "desc": "Mass Driver III — Driver de massa avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_shredder_I": {
+      "name": "Triturador eu",
+      "desc": "Shredder I – Rasga a armadura com fragmentos de metal.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Pirata 2"
+    },
+    "w_kinetic_shredder_II": {
+      "name": "Triturador II",
+      "desc": "Shredder II — Triturador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_shredder_III": {
+      "name": "Triturador III",
+      "desc": "Shredder III — Triturador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_penetrator_I": {
+      "name": "Penetrador I",
+      "desc": "Penetrador I – Perfura armaduras grossas.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Pirata 4"
+    },
+    "w_kinetic_penetrator_II": {
+      "name": "Penetrador II",
+      "desc": "Penetrador II — Penetrador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_penetrator_III": {
+      "name": "Penetrador III",
+      "desc": "Penetrador III — Penetrador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_accelerator_I": {
+      "name": "Acelerador I",
+      "desc": "Acelerador I — Acelera projéteis.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Pirata 6"
+    },
+    "w_kinetic_accelerator_II": {
+      "name": "Acelerador II",
+      "desc": "Acelerador II — Acelerador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_accelerator_III": {
+      "name": "Acelerador III",
+      "desc": "Acelerador III — Acelerador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_ripper_I": {
+      "name": "Estripador eu",
+      "desc": "Estripador I – Rasga o alvo em pedaços.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Pirata 9"
+    },
+    "w_kinetic_ripper_II": {
+      "name": "Estripador II",
+      "desc": "Estripador II — Estripador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_ripper_III": {
+      "name": "Estripador III",
+      "desc": "Estripador III — Estripador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_hailstorm_I": {
+      "name": "Tempestade de granizo eu",
+      "desc": "Tempestade de granizo I — Chuva de projéteis.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Constelação 3"
+    },
+    "w_kinetic_hailstorm_II": {
+      "name": "Tempestade de granizo II",
+      "desc": "Tempestade de granizo II — Chuva de projéteis melhorada.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_hailstorm_III": {
+      "name": "Tempestade de granizo III",
+      "desc": "Hailstorm III — Chuva avançada de projéteis.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_obliterator_I": {
+      "name": "Obliterador I",
+      "desc": "Obliterador I – Destruição total.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Constelação 2"
+    },
+    "w_kinetic_obliterator_II": {
+      "name": "Obliterador II",
+      "desc": "Obliterador II — Obliterador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_obliterator_III": {
+      "name": "Obliterador III",
+      "desc": "Obliterador III — Obliterador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_kinetic_annihilator_I": {
+      "name": "Aniquilador I",
+      "desc": "Aniquilador I – Erradicação completa do alvo.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Constelação 1"
+    },
+    "w_kinetic_annihilator_II": {
+      "name": "Aniquilador II",
+      "desc": "Aniquilador II — Aniquilador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-15"
+    },
+    "w_kinetic_annihilator_III": {
+      "name": "Aniquilador III",
+      "desc": "Aniquilador III — Aniquilador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-25"
+    },
+    "w_heat_inferno_I": {
+      "name": "Inferno I",
+      "desc": "Inferno I – Fogo do Inferno.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Humanóide 7"
+    },
+    "w_heat_inferno_II": {
+      "name": "Inferno II",
+      "desc": "Inferno II – Fogo do inferno aprimorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_inferno_III": {
+      "name": "Inferno III",
+      "desc": "Inferno III — Fogo do inferno avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_scorch_I": {
+      "name": "Queimar eu",
+      "desc": "Scorch I – Queima a superfície do navio.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Teste 3"
+    },
+    "w_heat_scorch_II": {
+      "name": "Queimar II",
+      "desc": "Queimadura II – Queima melhorada.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_scorch_III": {
+      "name": "Queimar III",
+      "desc": "Queimadura III – Queimadura avançada.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_molten_core_I": {
+      "name": "Núcleo Derretido I",
+      "desc": "Núcleo Fundido I — Núcleo Fundido.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Teste 5"
+    },
+    "w_heat_molten_core_II": {
+      "name": "Núcleo Derretido II",
+      "desc": "Núcleo Fundido II — Núcleo fundido aprimorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_molten_core_III": {
+      "name": "Núcleo Derretido III",
+      "desc": "Núcleo Fundido III — Núcleo fundido avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_pyro_blast_I": {
+      "name": "Explosão Pyro I",
+      "desc": "Pyro Blast I – Bola de fogo explosiva.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Teste 8"
+    },
+    "w_heat_pyro_blast_II": {
+      "name": "Explosão Piro II",
+      "desc": "Pyro Blast II – Bola de fogo aprimorada.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_pyro_blast_III": {
+      "name": "Explosão Piro III",
+      "desc": "Pyro Blast III — Bola de fogo avançada.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_thermal_lance_I": {
+      "name": "Lança Térmica I",
+      "desc": "Lança Térmica I — Feixe térmico focado.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 1"
+    },
+    "w_heat_thermal_lance_II": {
+      "name": "Lança Térmica II",
+      "desc": "Lança Térmica II — Feixe térmico aprimorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_thermal_lance_III": {
+      "name": "Lança Térmica III",
+      "desc": "Lança Térmica III — Feixe térmico avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_sunflare_I": {
+      "name": "Luz solar eu",
+      "desc": "Sunflare I — Explosão de energia solar.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 3"
+    },
+    "w_heat_sunflare_II": {
+      "name": "Respiração II",
+      "desc": "Sunflare II — Sunflare melhorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_sunflare_III": {
+      "name": "Solar III",
+      "desc": "Sunflare III — Sunflare avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_magma_I": {
+      "name": "Magma I",
+      "desc": "Magma I – Rocha fundida.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 5"
+    },
+    "w_heat_magma_II": {
+      "name": "Magma II",
+      "desc": "Magma II — Magma melhorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_magma_III": {
+      "name": "Magma III",
+      "desc": "Magma III — Magma avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_incinerator_I": {
+      "name": "Incinerador I",
+      "desc": "Incinerador I – Queima tudo.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 7"
+    },
+    "w_heat_incinerator_II": {
+      "name": "Incinerador II",
+      "desc": "Incinerador II — Incinerador aprimorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_incinerator_III": {
+      "name": "Incinerador III",
+      "desc": "Incinerador III — Incinerador avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_phoenix_I": {
+      "name": "Fênix I",
+      "desc": "Fênix I – Pássaro de Fogo.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 8"
+    },
+    "w_heat_phoenix_II": {
+      "name": "Fênix II",
+      "desc": "Phoenix II — Pássaro de fogo aprimorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_phoenix_III": {
+      "name": "Fênix III",
+      "desc": "Phoenix III — Pássaro de fogo avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_heat_hellfire_I": {
+      "name": "Fogo do inferno eu",
+      "desc": "Fogo do Inferno I – Fogo do Inferno.",
+      "special": "15% de chance: queimar 2 rodadas (+20 de dano/rodada)",
+      "source": "Pirata 10"
+    },
+    "w_heat_hellfire_II": {
+      "name": "Fogo do Inferno II",
+      "desc": "Hellfire II – Hellfire melhorado.",
+      "special": "20% de chance: queimar 2 rodadas (+35 de dano/rodada)",
+      "source": "Instância 11-15"
+    },
+    "w_heat_hellfire_III": {
+      "name": "Fogo do Inferno III",
+      "desc": "Hellfire III – Hellfire avançado.",
+      "special": "30% de chance: queimar 3 rodadas (+50 de dano/rodada)",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_pulsar_I": {
+      "name": "Pulsar I",
+      "desc": "Pulsar I – pulso EMP.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_pulsar_II": {
+      "name": "Pulsar II",
+      "desc": "Pulsar II — Pulso EMP melhorado.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_pulsar_III": {
+      "name": "Pulsar III",
+      "desc": "Pulsar III — Pulso EMP avançado.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_emp_blast_I": {
+      "name": "Explosão EMP I",
+      "desc": "EMP Blast I — Pulso eletromagnético.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_emp_blast_II": {
+      "name": "Explosão EMP II",
+      "desc": "EMP Blast II – Explosão EMP aprimorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_emp_blast_III": {
+      "name": "Explosão EMP III",
+      "desc": "EMP Blast III – Explosão EMP avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_stasis_beam_I": {
+      "name": "Feixe de Estase I",
+      "desc": "Stasis Beam I – Paralisa a nave.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_stasis_beam_II": {
+      "name": "Feixe de Estase II",
+      "desc": "Stasis Beam II – Feixe de estase aprimorado.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_stasis_beam_III": {
+      "name": "Feixe de Estase III",
+      "desc": "Stasis Beam III — Feixe de estase avançado.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_disruptor_I": {
+      "name": "Disruptor I",
+      "desc": "Disruptor I – Interrompe sistemas.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_disruptor_II": {
+      "name": "Disruptor II",
+      "desc": "Disruptor II — Disruptor aprimorado.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_disruptor_III": {
+      "name": "Disruptor III",
+      "desc": "Disruptor III — Disruptor avançado.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_magnetron_I": {
+      "name": "Magnetrão I",
+      "desc": "Magnetron I — Campo magnético.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_magnetron_II": {
+      "name": "Magnetrão II",
+      "desc": "Magnetron II — Magnetron melhorado.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_magnetron_III": {
+      "name": "Magnetrão III",
+      "desc": "Magnetron III — Magnetron avançado.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_neutron_wave_I": {
+      "name": "Onda de nêutrons I",
+      "desc": "Onda de nêutrons I — espalha onda de interferência.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_neutron_wave_II": {
+      "name": "Onda de nêutrons II",
+      "desc": "Onda de nêutrons II — Onda de nêutrons aprimorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_neutron_wave_III": {
+      "name": "Onda de nêutrons III",
+      "desc": "Onda de nêutrons III — Onda de nêutrons avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_cascade_I": {
+      "name": "Cascata I",
+      "desc": "Cascata I — Reação em cadeia.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_cascade_II": {
+      "name": "Cachoeiras II",
+      "desc": "Cascata II — Reação em cadeia melhorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_cascade_III": {
+      "name": "Cascata III",
+      "desc": "Cascata III — Reação em cadeia avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_ion_storm_I": {
+      "name": "Tempestade de íons I",
+      "desc": "Tempestade Iônica I — Tempestade iônica.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_ion_storm_II": {
+      "name": "Tempestade de íons II",
+      "desc": "Ion Storm II — Tempestade iônica aprimorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_ion_storm_III": {
+      "name": "Tempestade de íons III",
+      "desc": "Tempestade Iônica III — Tempestade iônica avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_magnetosphere_I": {
+      "name": "Magnetosfera I",
+      "desc": "Magnetosfera I — Campo magnético defensivo.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_magnetosphere_II": {
+      "name": "Magnetosfera II",
+      "desc": "Magnetosfera II — Magnetosfera melhorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_magnetosphere_III": {
+      "name": "Magnetosfera III",
+      "desc": "Magnetosfera III — Magnetosfera avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_magnetic_singularity_I": {
+      "name": "Singularidade eu",
+      "desc": "Singularidade I — Singularidade magnética.",
+      "special": "5% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 6-10"
+    },
+    "w_magnetic_singularity_II": {
+      "name": "Singularidade II",
+      "desc": "Singularidade II — Singularidade aprimorada.",
+      "special": "10% de chance: desativar escudo em 1 rodada",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_singularity_III": {
+      "name": "Singularidade III",
+      "desc": "Singularidade III — Singularidade avançada.",
+      "special": "18% de chance: desativar escudo por 2 rodadas",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_devastator_I": {
+      "name": "Devastador I",
+      "desc": "Devastator I – Devasta tudo em seu caminho.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_devastator_II": {
+      "name": "Devastador II",
+      "desc": "Devastator II — Devastador melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_devastator_III": {
+      "name": "Devastador III",
+      "desc": "Devastator III — Devastador avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_annihilator_I": {
+      "name": "Aniquilador I",
+      "desc": "Aniquilador I – Aniquilação total.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_annihilator_II": {
+      "name": "Aniquilador II",
+      "desc": "Aniquilador II — Aniquilador aprimorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_annihilator_III": {
+      "name": "Aniquilador III",
+      "desc": "Aniquilador III — Aniquilador avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_maelstrom_I": {
+      "name": "Redemoinho I",
+      "desc": "Maelstrom I — Vórtice de explosões.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_maelstrom_II": {
+      "name": "Redemoinho II",
+      "desc": "Redemoinho II — Redemoinho melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_maelstrom_III": {
+      "name": "Redemoinho III",
+      "desc": "Redemoinho III — Redemoinho avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_cataclysm_I": {
+      "name": "Cataclismo I",
+      "desc": "Cataclismo I — Explosão cataclísmica.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_cataclysm_II": {
+      "name": "Cataclismo II",
+      "desc": "Cataclismo II — Cataclismo melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_cataclysm_III": {
+      "name": "Cataclismo III",
+      "desc": "Cataclismo III — Cataclismo avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_oblivion_I": {
+      "name": "Esquecimento eu",
+      "desc": "Oblivion I – Apaga o alvo da existência.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_oblivion_II": {
+      "name": "Esquecimento II",
+      "desc": "Esquecimento II — Esquecimento melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_oblivion_III": {
+      "name": "Esquecimento III",
+      "desc": "Esquecimento III — Esquecimento avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_earthshaker_I": {
+      "name": "Agitador de Terra I",
+      "desc": "Earthshaker I – Sacode o campo de batalha.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_earthshaker_II": {
+      "name": "Agitador de Terra II",
+      "desc": "Earthshaker II — Earthshaker aprimorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_earthshaker_III": {
+      "name": "Agitador de Terra III",
+      "desc": "Earthshaker III — Earthshaker avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_nova_I": {
+      "name": "Nova I",
+      "desc": "Nova I — Explosão de energia estelar.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_nova_II": {
+      "name": "Nova II",
+      "desc": "Nova II — Nova melhorada.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_nova_III": {
+      "name": "Nova III",
+      "desc": "Nova III — Nova avançada.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_armageddon_I": {
+      "name": "Armagedom I",
+      "desc": "Armagedom I – Dia do Julgamento.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_armageddon_II": {
+      "name": "Armagedom II",
+      "desc": "Armagedom II – Armagedom melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_armageddon_III": {
+      "name": "Armagedom III",
+      "desc": "Armagedom III – Armagedom avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_apocalypse_I": {
+      "name": "Apocalipse I",
+      "desc": "Apocalipse I – Apocalipse.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_apocalypse_II": {
+      "name": "Apocalipse II",
+      "desc": "Apocalipse II — Apocalipse melhorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_apocalypse_III": {
+      "name": "Apocalipse III",
+      "desc": "Apocalipse III — Apocalipse avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_explosive_crusher_I": {
+      "name": "Triturador eu",
+      "desc": "Crusher I – Esmaga a armadura.",
+      "special": "10% de chance: dano de área (atinge 1 nave extra)",
+      "source": "Instância 6-10"
+    },
+    "w_explosive_crusher_II": {
+      "name": "Triturador II",
+      "desc": "Triturador II — Triturador aprimorado.",
+      "special": "15% de chance: dano de área (atinge 2 navios extras)",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_crusher_III": {
+      "name": "Triturador III",
+      "desc": "Triturador III — Britador avançado.",
+      "special": "25% de chance: dano de área (atinge 3 navios extras)",
+      "source": "Restrito 1-3"
+    },
+    "w_kinetic_railgun_beam_I": {
+      "name": "Feixe de canhão elétrico I",
+      "desc": "Railgun Beam I - Feixe cinético. +10% de crítico.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Instância 1"
+    },
+    "w_kinetic_railgun_beam_II": {
+      "name": "Feixe de Canhão Ferroviário II",
+      "desc": "Railgun Beam II — Feixe cinético aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_railgun_beam_III": {
+      "name": "Feixe de Canhão Ferroviário III",
+      "desc": "Railgun Beam III — Feixe cinético avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_gauss_cannon_beam_I": {
+      "name": "Feixe de canhão Gauss I",
+      "desc": "Feixe de canhão Gauss I — Feixe eletromagnético.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Instância 22"
+    },
+    "w_kinetic_gauss_cannon_beam_II": {
+      "name": "Feixe de canhão Gauss II",
+      "desc": "Gauss Cannon Beam II — Feixe eletromagnético aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_gauss_cannon_beam_III": {
+      "name": "Feixe de canhão Gauss III",
+      "desc": "Gauss Cannon Beam III — Feixe eletromagnético avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_mass_driver_beam_I": {
+      "name": "Feixe condutor de massa I",
+      "desc": "Mass Driver Beam I — Feixe condutor de massa.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Instância 7"
+    },
+    "w_kinetic_mass_driver_beam_II": {
+      "name": "Feixe de acionamento de massa II",
+      "desc": "Mass Driver Beam II — Feixe de acionamento de massa aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_mass_driver_beam_III": {
+      "name": "Feixe de acionamento de massa III",
+      "desc": "Mass Driver Beam III — Feixe de driver de massa avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_shredder_beam_I": {
+      "name": "Feixe Triturador I",
+      "desc": "Shredder Beam I – Feixe que destrói armaduras.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Instância 17"
+    },
+    "w_kinetic_shredder_beam_II": {
+      "name": "Feixe Triturador II",
+      "desc": "Shredder Beam II — Feixe triturador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_shredder_beam_III": {
+      "name": "Feixe Triturador III",
+      "desc": "Shredder Beam III — Feixe triturador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_penetrator_beam_I": {
+      "name": "Feixe Penetrador I",
+      "desc": "Feixe penetrador I — Feixe penetrador.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Instância 26"
+    },
+    "w_kinetic_penetrator_beam_II": {
+      "name": "Feixe Penetrador II",
+      "desc": "Feixe Penetrador II — Feixe penetrador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_penetrator_beam_III": {
+      "name": "Feixe Penetrador III",
+      "desc": "Feixe Penetrador III — Feixe penetrador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_accelerator_beam_I": {
+      "name": "Feixe Acelerador I",
+      "desc": "Feixe Acelerador I — Feixe acelerado.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Humanóide 10"
+    },
+    "w_kinetic_accelerator_beam_II": {
+      "name": "Feixe Acelerador II",
+      "desc": "Accelerator Beam II — Feixe acelerado aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_accelerator_beam_III": {
+      "name": "Feixe Acelerador III",
+      "desc": "Accelerator Beam III — Feixe acelerado avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_ripper_beam_I": {
+      "name": "Feixe Estripador I",
+      "desc": "Viga do Estripador I — Viga do Estripador.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 2"
+    },
+    "w_kinetic_ripper_beam_II": {
+      "name": "Viga do Estripador II",
+      "desc": "Ripper Beam II — Feixe de escarificação aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_ripper_beam_III": {
+      "name": "Viga do Estripador III",
+      "desc": "Ripper Beam III — Feixe de escarificação avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_hailstorm_beam_I": {
+      "name": "Feixe de tempestade de granizo I",
+      "desc": "Feixe de tempestade de granizo I — Feixe de tempestade de granizo.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 4"
+    },
+    "w_kinetic_hailstorm_beam_II": {
+      "name": "Feixe de Tempestade de Granizo II",
+      "desc": "Hailstorm Beam II — Feixe de granizo aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_hailstorm_beam_III": {
+      "name": "Feixe de Tempestade de Granizo III",
+      "desc": "Hailstorm Beam III — Feixe avançado de tempestade de granizo.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_obliterator_beam_I": {
+      "name": "Feixe Obliterador I",
+      "desc": "Feixe obliterador I — Feixe obliterador.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 7"
+    },
+    "w_kinetic_obliterator_beam_II": {
+      "name": "Feixe Obliterador II",
+      "desc": "Feixe Obliterador II — Feixe obliterador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_obliterator_beam_III": {
+      "name": "Feixe Obliterador III",
+      "desc": "Feixe Obliterador III — Feixe obliterador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_annihilator_beam_I": {
+      "name": "Feixe Aniquilador I",
+      "desc": "Feixe Aniquilador I — Feixe Aniquilador.",
+      "special": "+10% de chance de acerto crítico",
+      "source": "Teste 9"
+    },
+    "w_kinetic_annihilator_beam_II": {
+      "name": "Feixe Aniquilador II",
+      "desc": "Feixe Aniquilador II — Feixe aniquilador aprimorado.",
+      "special": "+15% de chance de acerto crítico",
+      "source": "Instância 11-16"
+    },
+    "w_kinetic_annihilator_beam_III": {
+      "name": "Feixe Aniquilador III",
+      "desc": "Feixe Aniquilador III — Feixe aniquilador avançado.",
+      "special": "+22% de chance de acerto crítico",
+      "source": "Instância 21-26"
+    },
+    "w_heat_inferno_beam_I": {
+      "name": "Raio Infernal I",
+      "desc": "Raio Inferno I – Raio Infernal.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 2"
+    },
+    "w_heat_inferno_beam_II": {
+      "name": "Raio Infernal II",
+      "desc": "Inferno Beam II – Feixe infernal aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_inferno_beam_III": {
+      "name": "Raio Infernal III",
+      "desc": "Inferno Beam III — Feixe infernal avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_scorch_beam_I": {
+      "name": "Feixe de Queimadura I",
+      "desc": "Scorch Beam I — Feixe escaldante.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 6"
+    },
+    "w_heat_scorch_beam_II": {
+      "name": "Feixe de Queimadura II",
+      "desc": "Scorch Beam II — Feixe de queimadura aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_scorch_beam_III": {
+      "name": "Feixe de Queimadura III",
+      "desc": "Scorch Beam III — Feixe de queimadura avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_molten_core_beam_I": {
+      "name": "Feixe de núcleo fundido I",
+      "desc": "Viga de núcleo fundido I — Viga de núcleo fundido.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 11"
+    },
+    "w_heat_molten_core_beam_II": {
+      "name": "Feixe de Núcleo Fundido II",
+      "desc": "Molten Core Beam II — Feixe de núcleo fundido aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_molten_core_beam_III": {
+      "name": "Feixe de Núcleo Fundido III",
+      "desc": "Molten Core Beam III — Feixe de núcleo fundido avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_pyro_blast_beam_I": {
+      "name": "Raio de explosão pirotécnico I",
+      "desc": "Pyro Blast Beam I – Feixe de bola de fogo.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 16"
+    },
+    "w_heat_pyro_blast_beam_II": {
+      "name": "Feixe de Explosão Piro II",
+      "desc": "Pyro Blast Beam II — Feixe de explosão pirotécnico aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_pyro_blast_beam_III": {
+      "name": "Feixe de Explosão Piro III",
+      "desc": "Pyro Blast Beam III — Feixe de explosão pirotécnico avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_thermal_lance_beam_I": {
+      "name": "Feixe de Lança Térmica I",
+      "desc": "Feixe de Lança Térmica I — Feixe térmico.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 27"
+    },
+    "w_heat_thermal_lance_beam_II": {
+      "name": "Feixe de Lança Térmica II",
+      "desc": "Thermal Lance Beam II — Feixe térmico aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_thermal_lance_beam_III": {
+      "name": "Feixe de Lança Térmica III",
+      "desc": "Thermal Lance Beam III — Feixe térmico avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_sunflare_beam_I": {
+      "name": "Raio Solar I",
+      "desc": "Sunflare Beam I — Feixe de explosão solar.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 12"
+    },
+    "w_heat_sunflare_beam_II": {
+      "name": "Raio Solar II",
+      "desc": "Sunflare Beam II — Feixe de sunflare aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_sunflare_beam_III": {
+      "name": "Raio Solar III",
+      "desc": "Sunflare Beam III — Feixe solar avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_magma_beam_I": {
+      "name": "Feixe de Magma I",
+      "desc": "Feixe de Magma I — Feixe de magma.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Instância 21"
+    },
+    "w_heat_magma_beam_II": {
+      "name": "Feixe de Magma II",
+      "desc": "Magma Beam II — Feixe de magma aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_magma_beam_III": {
+      "name": "Feixe de Magma III",
+      "desc": "Magma Beam III — Feixe de magma avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_incinerator_beam_I": {
+      "name": "Feixe Incinerador I",
+      "desc": "Feixe Incinerador I — Feixe Incinerador.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Humanóide 1"
+    },
+    "w_heat_incinerator_beam_II": {
+      "name": "Feixe Incinerador II",
+      "desc": "Feixe do Incinerador II — Feixe do incinerador aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_incinerator_beam_III": {
+      "name": "Feixe Incinerador III",
+      "desc": "Feixe Incinerador III — Feixe incinerador avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_phoenix_beam_I": {
+      "name": "Feixe Fênix I",
+      "desc": "Feixe Fênix I — Feixe Fênix.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Humanóide 4"
+    },
+    "w_heat_phoenix_beam_II": {
+      "name": "Feixe Fênix II",
+      "desc": "Phoenix Beam II — Feixe de fênix aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_phoenix_beam_III": {
+      "name": "Feixe Fênix III",
+      "desc": "Phoenix Beam III — Feixe de fênix avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_heat_hellfire_beam_I": {
+      "name": "Raio de Fogo do Inferno I",
+      "desc": "Feixe de Fogo do Inferno I — Feixe de Fogo do Inferno.",
+      "special": "Derrete armadura: -10% de defesa em 1 rodada",
+      "source": "Teste 1"
+    },
+    "w_heat_hellfire_beam_II": {
+      "name": "Raio de Fogo do Inferno II",
+      "desc": "Hellfire Beam II – Feixe de fogo do inferno aprimorado.",
+      "special": "Derrete armadura: -15% de defesa em 2 rodadas",
+      "source": "Instância 11-16"
+    },
+    "w_heat_hellfire_beam_III": {
+      "name": "Raio de Fogo do Inferno III",
+      "desc": "Hellfire Beam III — Feixe de fogo do inferno avançado.",
+      "special": "Derrete armadura: -22% de defesa em 3 rodadas",
+      "source": "Instância 21-26"
+    },
+    "w_magnetic_pulsar_beam_I": {
+      "name": "Feixe Pulsar I",
+      "desc": "Feixe Pulsar I — feixe de pulso EMP.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_pulsar_beam_II": {
+      "name": "Feixe Pulsar II",
+      "desc": "Pulsar Beam II — Feixe pulsar aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_pulsar_beam_III": {
+      "name": "Feixe Pulsar III",
+      "desc": "Pulsar Beam III — Feixe pulsar avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_emp_blast_beam_I": {
+      "name": "Feixe de explosão EMP I",
+      "desc": "Feixe de Explosão EMP I — Feixe EMP.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_emp_blast_beam_II": {
+      "name": "Feixe de Explosão EMP II",
+      "desc": "EMP Blast Beam II — Feixe EMP aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_emp_blast_beam_III": {
+      "name": "Feixe de Explosão EMP III",
+      "desc": "EMP Blast Beam III — Feixe EMP avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_stasis_beam_beam_I": {
+      "name": "Feixe de Estase I",
+      "desc": "Stasis Beam — Feixe de congelamento.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_stasis_beam_beam_II": {
+      "name": "Feixe de Estase II",
+      "desc": "Stasis Beam II – Feixe de estase aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_stasis_beam_beam_III": {
+      "name": "Feixe de Estase III",
+      "desc": "Stasis Beam III — Feixe de estase avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_disruptor_beam_I": {
+      "name": "Feixe Disruptor I",
+      "desc": "Feixe Disruptor I – Feixe Jammer.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_disruptor_beam_II": {
+      "name": "Feixe Disruptor II",
+      "desc": "Disruptor Beam II — Feixe disruptor aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_disruptor_beam_III": {
+      "name": "Feixe Disruptor III",
+      "desc": "Disruptor Beam III — Feixe disruptor avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_magnetron_beam_I": {
+      "name": "Feixe Magnetron I",
+      "desc": "Feixe Magnetron I — Feixe Magnetron.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_magnetron_beam_II": {
+      "name": "Feixe Magnetron II",
+      "desc": "Magnetron Beam II — Feixe de magnetron aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_magnetron_beam_III": {
+      "name": "Feixe Magnetron III",
+      "desc": "Magnetron Beam III — Feixe de magnetron avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_neutron_wave_beam_I": {
+      "name": "Feixe de onda de nêutrons I",
+      "desc": "Feixe de onda de nêutrons I — Feixe de onda de nêutrons.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_neutron_wave_beam_II": {
+      "name": "Feixe de onda de nêutrons II",
+      "desc": "Neutron Wave Beam II — Feixe de onda de nêutrons aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_neutron_wave_beam_III": {
+      "name": "Feixe de ondas de nêutrons III",
+      "desc": "Neutron Wave Beam III — Feixe de onda de nêutrons avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_cascade_beam_I": {
+      "name": "Feixe Cascata I",
+      "desc": "Viga em Cascata I — Viga em Cascata.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_cascade_beam_II": {
+      "name": "Feixe Cascata II",
+      "desc": "Cascade Beam II — Feixe em cascata aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_cascade_beam_III": {
+      "name": "Feixe Cascata III",
+      "desc": "Cascade Beam III — Feixe em cascata avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_ion_storm_beam_I": {
+      "name": "Feixe de Tempestade Iônica I",
+      "desc": "Feixe de tempestade de íons I — Feixe de tempestade de íons.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_ion_storm_beam_II": {
+      "name": "Feixe de Tempestade Iônica II",
+      "desc": "Ion Storm Beam II — Feixe de tempestade de íons aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_ion_storm_beam_III": {
+      "name": "Feixe de Tempestade Iônica III",
+      "desc": "Ion Storm Beam III — Feixe avançado de tempestade de íons.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_magnetosphere_beam_I": {
+      "name": "Feixe Magnetosfera I",
+      "desc": "Feixe da Magnetosfera I — Feixe da Magnetosfera.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_magnetosphere_beam_II": {
+      "name": "Feixe Magnetosfera II",
+      "desc": "Feixe de Magnetosfera II — Feixe de magnetosfera aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_magnetosphere_beam_III": {
+      "name": "Feixe Magnetosfera III",
+      "desc": "Feixe de Magnetosfera III — Feixe de magnetosfera avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_magnetic_singularity_beam_I": {
+      "name": "Feixe de Singularidade I",
+      "desc": "Feixe de Singularidade I — Feixe de Singularidade.",
+      "special": "10% de chance: desabilitar arma em 1 rodada",
+      "source": "Instância 11-15"
+    },
+    "w_magnetic_singularity_beam_II": {
+      "name": "Feixe de Singularidade II",
+      "desc": "Feixe de Singularidade II — Feixe de singularidade aprimorado.",
+      "special": "18% de chance: desabilitar arma em 2 rodadas",
+      "source": "Instância 16-20"
+    },
+    "w_magnetic_singularity_beam_III": {
+      "name": "Feixe de Singularidade III",
+      "desc": "Feixe de Singularidade III — Feixe de singularidade avançado.",
+      "special": "28% de chance: desabilitar arma em 2 rodadas",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_devastator_beam_I": {
+      "name": "Feixe Devastador I",
+      "desc": "Devastator Beam I — Feixe devastador.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_devastator_beam_II": {
+      "name": "Feixe Devastador II",
+      "desc": "Devastator Beam II — Feixe devastador aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_devastator_beam_III": {
+      "name": "Feixe Devastador III",
+      "desc": "Devastator Beam III — Feixe devastador avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_annihilator_beam_I": {
+      "name": "Feixe Aniquilador I",
+      "desc": "Feixe Aniquilador I — Feixe Aniquilador.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_annihilator_beam_II": {
+      "name": "Feixe Aniquilador II",
+      "desc": "Feixe Aniquilador II — Feixe aniquilador aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_annihilator_beam_III": {
+      "name": "Feixe Aniquilador III",
+      "desc": "Feixe Aniquilador III — Feixe aniquilador avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_maelstrom_beam_I": {
+      "name": "Feixe do redemoinho I",
+      "desc": "Feixe de redemoinho I - feixe de redemoinho.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_maelstrom_beam_II": {
+      "name": "Feixe de redemoinho II",
+      "desc": "Maelstrom Beam II — Feixe de turbilhão aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_maelstrom_beam_III": {
+      "name": "Feixe de Redemoinho III",
+      "desc": "Maelstrom Beam III — Feixe de redemoinho avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_cataclysm_beam_I": {
+      "name": "Feixe Cataclismo I",
+      "desc": "Feixe Cataclísmico I — Feixe cataclísmico.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_cataclysm_beam_II": {
+      "name": "Feixe Cataclismo II",
+      "desc": "Cataclysm Beam II — Feixe cataclísmico aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_cataclysm_beam_III": {
+      "name": "Feixe Cataclismo III",
+      "desc": "Cataclysm Beam III — Feixe cataclísmico avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_oblivion_beam_I": {
+      "name": "Feixe do Esquecimento I",
+      "desc": "Feixe de esquecimento I — Feixe de esquecimento.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_oblivion_beam_II": {
+      "name": "Feixe do Esquecimento II",
+      "desc": "Oblivion Beam II — Feixe de esquecimento aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_oblivion_beam_III": {
+      "name": "Feixe do Esquecimento III",
+      "desc": "Oblivion Beam III — Feixe de esquecimento avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_earthshaker_beam_I": {
+      "name": "Feixe Agitador de Terra I",
+      "desc": "Feixe Earthshaker I — Feixe Earthshaker.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_earthshaker_beam_II": {
+      "name": "Feixe Agitador de Terra II",
+      "desc": "Earthshaker Beam II — Feixe de terremoto aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_earthshaker_beam_III": {
+      "name": "Feixe Agitador de Terra III",
+      "desc": "Earthshaker Beam III — Feixe Earthshaker avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_nova_beam_I": {
+      "name": "Nova Feixe I",
+      "desc": "Feixe Nova I — Feixe Nova.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_nova_beam_II": {
+      "name": "Nova Feixe II",
+      "desc": "Nova Beam II — Feixe nova melhorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_nova_beam_III": {
+      "name": "Nova Feixe III",
+      "desc": "Nova Beam III — Feixe nova avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_armageddon_beam_I": {
+      "name": "Raio do Armagedom I",
+      "desc": "Raio do Armagedom I – Raio do Armagedom.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_armageddon_beam_II": {
+      "name": "Feixe do Armagedom II",
+      "desc": "Armageddon Beam II — Feixe de Armageddon aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_armageddon_beam_III": {
+      "name": "Feixe do Armagedom III",
+      "desc": "Armageddon Beam III — Feixe de armageddon avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_apocalypse_beam_I": {
+      "name": "Raio do Apocalipse I",
+      "desc": "Apocalipse Beam I — Feixe apocalíptico.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_apocalypse_beam_II": {
+      "name": "Feixe do Apocalipse II",
+      "desc": "Apocalypse Beam II — Feixe apocalíptico aprimorado.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_apocalypse_beam_III": {
+      "name": "Feixe do Apocalipse III",
+      "desc": "Apocalypse Beam III — Feixe apocalíptico avançado.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_explosive_crusher_beam_I": {
+      "name": "Viga do britador I",
+      "desc": "Viga do britador I — Viga do britador.",
+      "special": "+20% de dano direto através do escudo",
+      "source": "Instância 11-15"
+    },
+    "w_explosive_crusher_beam_II": {
+      "name": "Viga Trituradora II",
+      "desc": "Viga do britador II — Viga do britador aprimorada.",
+      "special": "+30% de dano direto através do escudo",
+      "source": "Instância 16-20"
+    },
+    "w_explosive_crusher_beam_III": {
+      "name": "Viga Trituradora III",
+      "desc": "Crusher Beam III — Viga trituradora avançada.",
+      "special": "+45% de dano direto através do escudo",
+      "source": "Restrito 4-6"
+    },
+    "w_kinetic_railgun_missile_I": {
+      "name": "Míssil canhão elétrico I",
+      "desc": "Míssil Railgun I — Míssil guiado. Sempre acerta.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_railgun_missile_II": {
+      "name": "Míssil Canhão Ferroviário II",
+      "desc": "Railgun Missile II — Míssil guiado aprimorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_railgun_missile_III": {
+      "name": "Míssil Canhão Ferroviário III",
+      "desc": "Railgun Missile III — Míssil guiado de elite.",
+      "special": "Guiado – 100% de acerto + 10% de dano adicional",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_gauss_cannon_missile_I": {
+      "name": "Míssil Canhão Gauss I",
+      "desc": "Míssil Gauss Cannon I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_gauss_cannon_missile_II": {
+      "name": "Míssil Canhão Gauss II",
+      "desc": "Gauss Cannon Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_gauss_cannon_missile_III": {
+      "name": "Míssil Canhão Gauss III",
+      "desc": "Míssil Gauss Cannon III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_mass_driver_missile_I": {
+      "name": "Míssil Mass Driver I",
+      "desc": "Mass Driver Missile I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_mass_driver_missile_II": {
+      "name": "Míssil Mass Driver II",
+      "desc": "Mass Driver Missile II — Míssil aprimorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_mass_driver_missile_III": {
+      "name": "Míssil Mass Driver III",
+      "desc": "Mass Driver Missile III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_shredder_missile_I": {
+      "name": "Míssil Triturador I",
+      "desc": "Míssil Shredder I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_shredder_missile_II": {
+      "name": "Míssil Triturador II",
+      "desc": "Shredder Missile II — Míssil aprimorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_shredder_missile_III": {
+      "name": "Míssil Triturador III",
+      "desc": "Míssil Shredder III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_penetrator_missile_I": {
+      "name": "Míssil penetrador I",
+      "desc": "Míssil Penetrador I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_penetrator_missile_II": {
+      "name": "Míssil Penetrador II",
+      "desc": "Penetrator Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_penetrator_missile_III": {
+      "name": "Míssil Penetrador III",
+      "desc": "Míssil Penetrador III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_accelerator_missile_I": {
+      "name": "Míssil Acelerador I",
+      "desc": "Míssil Acelerador I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_accelerator_missile_II": {
+      "name": "Míssil Acelerador II",
+      "desc": "Accelerator Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_accelerator_missile_III": {
+      "name": "Míssil Acelerador III",
+      "desc": "Míssil Acelerador III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_ripper_missile_I": {
+      "name": "Míssil Estripador I",
+      "desc": "Ripper Missile I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_ripper_missile_II": {
+      "name": "Míssil Estripador II",
+      "desc": "Ripper Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_ripper_missile_III": {
+      "name": "Míssil Estripador III",
+      "desc": "Míssil Ripper III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_hailstorm_missile_I": {
+      "name": "Míssil de tempestade de granizo I",
+      "desc": "Míssil Hailstorm I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_hailstorm_missile_II": {
+      "name": "Míssil Tempestade de Granizo II",
+      "desc": "Hailstorm Missile II — Míssil aprimorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_hailstorm_missile_III": {
+      "name": "Míssil Tempestade de Granizo III",
+      "desc": "Míssil Hailstorm III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_obliterator_missile_I": {
+      "name": "Míssil Obliterador I",
+      "desc": "Míssil Obliterador I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_obliterator_missile_II": {
+      "name": "Míssil Obliterador II",
+      "desc": "Obliterator Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_obliterator_missile_III": {
+      "name": "Míssil Obliterador III",
+      "desc": "Míssil Obliterador III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_kinetic_annihilator_missile_I": {
+      "name": "Míssil Aniquilador I",
+      "desc": "Míssil Aniquilador I — Míssil guiado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 16-20"
+    },
+    "w_kinetic_annihilator_missile_II": {
+      "name": "Míssil Aniquilador II",
+      "desc": "Annihilator Missile II — Míssil melhorado.",
+      "special": "Guiado – 100% de acerto",
+      "source": "Instância 21-26"
+    },
+    "w_kinetic_annihilator_missile_III": {
+      "name": "Míssil Aniquilador III",
+      "desc": "Míssil Aniquilador III — Míssil de elite.",
+      "special": "Guiado – 100% de acerto + 10% de bônus",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_inferno_missile_I": {
+      "name": "Míssil Inferno I",
+      "desc": "Inferno Missile I — Míssil guiado termicamente.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_inferno_missile_II": {
+      "name": "Míssil Inferno II",
+      "desc": "Inferno Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_inferno_missile_III": {
+      "name": "Míssil Inferno III",
+      "desc": "Inferno Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_scorch_missile_I": {
+      "name": "Míssil de queimadura I",
+      "desc": "Míssil Scorch I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_scorch_missile_II": {
+      "name": "Míssil Chamuscante II",
+      "desc": "Scorch Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_scorch_missile_III": {
+      "name": "Míssil Chamuscante III",
+      "desc": "Scorch Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_molten_core_missile_I": {
+      "name": "Míssil de Núcleo Derretido I",
+      "desc": "Molten Core Missile I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_molten_core_missile_II": {
+      "name": "Míssil de Núcleo Derretido II",
+      "desc": "Molten Core Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_molten_core_missile_III": {
+      "name": "Míssil de Núcleo Derretido III",
+      "desc": "Molten Core Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_pyro_blast_missile_I": {
+      "name": "Míssil Pyro Blast I",
+      "desc": "Pyro Blast Missile I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_pyro_blast_missile_II": {
+      "name": "Míssil Pyro Blast II",
+      "desc": "Pyro Blast Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_pyro_blast_missile_III": {
+      "name": "Míssil Pyro Blast III",
+      "desc": "Pyro Blast Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_thermal_lance_missile_I": {
+      "name": "Míssil Lança Térmica I",
+      "desc": "Míssil Lança Térmica I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_thermal_lance_missile_II": {
+      "name": "Míssil Lança Térmica II",
+      "desc": "Thermal Lance Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_thermal_lance_missile_III": {
+      "name": "Míssil Lança Térmica III",
+      "desc": "Míssil Thermal Lance III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_sunflare_missile_I": {
+      "name": "Míssil Sunflare I",
+      "desc": "Míssil Sunflare I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_sunflare_missile_II": {
+      "name": "Míssil Solar II",
+      "desc": "Sunflare Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_sunflare_missile_III": {
+      "name": "Míssil Solar III",
+      "desc": "Sunflare Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_magma_missile_I": {
+      "name": "Míssil Magma I",
+      "desc": "Míssil Magma I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_magma_missile_II": {
+      "name": "Míssil Magma II",
+      "desc": "Magma Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_magma_missile_III": {
+      "name": "Míssil Magma III",
+      "desc": "Míssil Magma III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_incinerator_missile_I": {
+      "name": "Míssil Incinerador I",
+      "desc": "Míssil Incinerador I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_incinerator_missile_II": {
+      "name": "Míssil Incinerador II",
+      "desc": "Míssil Incinerador II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_incinerator_missile_III": {
+      "name": "Míssil Incinerador III",
+      "desc": "Míssil Incinerador III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_phoenix_missile_I": {
+      "name": "Míssil Fênix I",
+      "desc": "Míssil Phoenix I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_phoenix_missile_II": {
+      "name": "Míssil Fênix II",
+      "desc": "Phoenix Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_phoenix_missile_III": {
+      "name": "Míssil Fênix III",
+      "desc": "Phoenix Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_heat_hellfire_missile_I": {
+      "name": "Míssil Fogo do Inferno I",
+      "desc": "Hellfire Missile I — Míssil térmico.",
+      "special": "Guiado + queimar 2 rodadas (15 de dano/rodada)",
+      "source": "Instância 16-20"
+    },
+    "w_heat_hellfire_missile_II": {
+      "name": "Míssil Fogo do Inferno II",
+      "desc": "Hellfire Missile II — Míssil térmico aprimorado.",
+      "special": "Guiado + queimar 2 rodadas (28 de dano/rodada)",
+      "source": "Instância 21-26"
+    },
+    "w_heat_hellfire_missile_III": {
+      "name": "Míssil Fogo do Inferno III",
+      "desc": "Hellfire Missile III — Míssil térmico de elite.",
+      "special": "Guiado + queimar 3 rodadas (45 de dano/rodada)",
+      "source": "Restrito 6-8"
+    },
+    "w_magnetic_pulsar_missile_I": {
+      "name": "Míssil Pulsar I",
+      "desc": "Míssil Pulsar I — Míssil teleguiado magnético.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_pulsar_missile_II": {
+      "name": "Míssil Pulsar II",
+      "desc": "Pulsar Missile II — Míssil magnético aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_pulsar_missile_III": {
+      "name": "Míssil Pulsar III",
+      "desc": "Míssil Pulsar III — Míssil magnético de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_emp_blast_missile_I": {
+      "name": "Míssil de explosão EMP I",
+      "desc": "EMP Blast Missile I — Míssil EMP.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_emp_blast_missile_II": {
+      "name": "Míssil de explosão EMP II",
+      "desc": "EMP Blast Missile II — Míssil EMP aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_emp_blast_missile_III": {
+      "name": "Míssil de explosão EMP III",
+      "desc": "EMP Blast Missile III — Míssil EMP de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_stasis_beam_missile_I": {
+      "name": "Míssil Estase I",
+      "desc": "Míssil Stasis I — Míssil Stasis.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_stasis_beam_missile_II": {
+      "name": "Míssil Estase II",
+      "desc": "Stasis Missile II — Míssil de estase aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_stasis_beam_missile_III": {
+      "name": "Míssil Estase III",
+      "desc": "Míssil Stasis III — Míssil de estase de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_disruptor_missile_I": {
+      "name": "Míssil Disruptor I",
+      "desc": "Míssil Disruptor I — Míssil disruptor.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_disruptor_missile_II": {
+      "name": "Míssil Disruptor II",
+      "desc": "Disruptor Missile II — Míssil disruptor aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_disruptor_missile_III": {
+      "name": "Míssil Disruptor III",
+      "desc": "Disruptor Missile III — Míssil disruptor de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_magnetron_missile_I": {
+      "name": "Míssil Magnetron I",
+      "desc": "Míssil Magnetron I — Míssil Magnetron.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_magnetron_missile_II": {
+      "name": "Míssil Magnetron II",
+      "desc": "Míssil Magnetron II — Míssil magnetron aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_magnetron_missile_III": {
+      "name": "Míssil Magnetron III",
+      "desc": "Míssil Magnetron III — Míssil magnetron de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_neutron_wave_missile_I": {
+      "name": "Míssil de onda de nêutrons I",
+      "desc": "Míssil Neutron Wave I — Míssil Neutron.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_neutron_wave_missile_II": {
+      "name": "Míssil de ondas de nêutrons II",
+      "desc": "Neutron Wave Missile II — Míssil de nêutrons aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_neutron_wave_missile_III": {
+      "name": "Míssil de onda de nêutrons III",
+      "desc": "Neutron Wave Missile III — Míssil de nêutrons de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_cascade_missile_I": {
+      "name": "Míssil Cascata I",
+      "desc": "Míssil Cascade I — Míssil Cascade.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_cascade_missile_II": {
+      "name": "Míssil Cascata II",
+      "desc": "Cascade Missile II — Míssil em cascata aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_cascade_missile_III": {
+      "name": "Míssil Cascata III",
+      "desc": "Cascade Missile III — Míssil cascata de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_ion_storm_missile_I": {
+      "name": "Míssil Tempestade Iônica I",
+      "desc": "Míssil Ion Storm I — Míssil iônico.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_ion_storm_missile_II": {
+      "name": "Míssil Tempestade Iônica II",
+      "desc": "Ion Storm Missile II — Míssil iônico aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_ion_storm_missile_III": {
+      "name": "Míssil Tempestade Iônica III",
+      "desc": "Ion Storm Missile III — Míssil iônico de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_magnetosphere_missile_I": {
+      "name": "Míssil Magnetosfera I",
+      "desc": "Míssil Magnetosfera I — Míssil Magnetosfera.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_magnetosphere_missile_II": {
+      "name": "Míssil Magnetosfera II",
+      "desc": "Míssil Magnetosfera II — Míssil magnetosfera aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_magnetosphere_missile_III": {
+      "name": "Míssil Magnetosfera III",
+      "desc": "Míssil Magnetosfera III — Míssil magnetosfera de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_magnetic_singularity_missile_I": {
+      "name": "Míssil Singularidade I",
+      "desc": "Míssil Singularidade I — Míssil Singularidade.",
+      "special": "Guiado + 15% de chance: desabilitar motor 1 rodada",
+      "source": "Instância 21-25"
+    },
+    "w_magnetic_singularity_missile_II": {
+      "name": "Míssil Singularidade II",
+      "desc": "Singularity Missile II — Míssil de singularidade aprimorado.",
+      "special": "Guiado + 25% de chance: desabilitar motor 2 rodadas",
+      "source": "Restrito 3-5"
+    },
+    "w_magnetic_singularity_missile_III": {
+      "name": "Míssil Singularidade III",
+      "desc": "Singularity Missile III — Míssil de singularidade de elite.",
+      "special": "Guiado + 38% de chance: desabilitar motor em 2 rodadas",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_devastator_missile_I": {
+      "name": "Míssil Devastador I",
+      "desc": "Devastator Missile I — Míssil devastador.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_devastator_missile_II": {
+      "name": "Míssil Devastador II",
+      "desc": "Devastator Missile II — Míssil devastador aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_devastator_missile_III": {
+      "name": "Míssil Devastador III",
+      "desc": "Devastator Missile III - Míssil devastador de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_annihilator_missile_I": {
+      "name": "Míssil Aniquilador I",
+      "desc": "Míssil Aniquilador I — Míssil aniquilador.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_annihilator_missile_II": {
+      "name": "Míssil Aniquilador II",
+      "desc": "Annihilator Missile II — Míssil aniquilador aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_annihilator_missile_III": {
+      "name": "Míssil Aniquilador III",
+      "desc": "Míssil Aniquilador III — Míssil aniquilador de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_maelstrom_missile_I": {
+      "name": "Míssil Maelstrom I",
+      "desc": "Míssil Maelstrom I — Míssil Maelstrom.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_maelstrom_missile_II": {
+      "name": "Míssil Maelstrom II",
+      "desc": "Maelstrom Missile II — Míssil redemoinho aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_maelstrom_missile_III": {
+      "name": "Míssil Maelstrom III",
+      "desc": "Míssil Maelstrom III — Míssil redemoinho de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_cataclysm_missile_I": {
+      "name": "Míssil Cataclismo I",
+      "desc": "Míssil Cataclysm I — Míssil cataclísmico.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_cataclysm_missile_II": {
+      "name": "Míssil Cataclismo II",
+      "desc": "Míssil Cataclysm II — Míssil cataclísmico aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_cataclysm_missile_III": {
+      "name": "Míssil Cataclismo III",
+      "desc": "Míssil Cataclysm III — Míssil cataclísmico de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_oblivion_missile_I": {
+      "name": "Míssil do Esquecimento I",
+      "desc": "Míssil Oblivion I — Míssil Oblivion.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_oblivion_missile_II": {
+      "name": "Míssil do Esquecimento II",
+      "desc": "Oblivion Missile II — Míssil de esquecimento aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_oblivion_missile_III": {
+      "name": "Míssil do Esquecimento III",
+      "desc": "Oblivion Missile III — Míssil de esquecimento de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_earthshaker_missile_I": {
+      "name": "Míssil Earthshaker I",
+      "desc": "Míssil Earthshaker I — Míssil Earthshaker.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_earthshaker_missile_II": {
+      "name": "Míssil Earthshaker II",
+      "desc": "Earthshaker Missile II — Míssil Earthshaker aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_earthshaker_missile_III": {
+      "name": "Míssil Earthshaker III",
+      "desc": "Míssil Earthshaker III — Míssil Earthshaker de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_nova_missile_I": {
+      "name": "Míssil Nova I",
+      "desc": "Míssil Nova I — Míssil Nova.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_nova_missile_II": {
+      "name": "Míssil Nova II",
+      "desc": "Nova Missile II — Míssil nova melhorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_nova_missile_III": {
+      "name": "Míssil Nova III",
+      "desc": "Nova Missile III — Míssil nova de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_armageddon_missile_I": {
+      "name": "Míssil Armagedom I",
+      "desc": "Míssil Armageddon I — Míssil Armageddon.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_armageddon_missile_II": {
+      "name": "Míssil Armagedom II",
+      "desc": "Armageddon Missile II — Míssil Armageddon aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_armageddon_missile_III": {
+      "name": "Míssil Armagedom III",
+      "desc": "Armageddon Missile III — Míssil Armageddon de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_apocalypse_missile_I": {
+      "name": "Míssil Apocalipse I",
+      "desc": "Míssil Apocalipse I — Míssil apocalíptico.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_apocalypse_missile_II": {
+      "name": "Míssil Apocalipse II",
+      "desc": "Apocalypse Missile II — Míssil apocalíptico aprimorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_apocalypse_missile_III": {
+      "name": "Míssil Apocalipse III",
+      "desc": "Apocalypse Missile III — Míssil apocalíptico de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_explosive_crusher_missile_I": {
+      "name": "Míssil Triturador I",
+      "desc": "Míssil Triturador I — Míssil triturador.",
+      "special": "Guiado + 5% de chance: destruir módulo",
+      "source": "Instância 21-25"
+    },
+    "w_explosive_crusher_missile_II": {
+      "name": "Míssil Triturador II",
+      "desc": "Crusher Missile II — Míssil triturador melhorado.",
+      "special": "Guiado + 10% de chance: destruir módulo",
+      "source": "Restrito 3-5"
+    },
+    "w_explosive_crusher_missile_III": {
+      "name": "Míssil Triturador III",
+      "desc": "Míssil Triturador III — Míssil triturador de elite.",
+      "special": "Guiado + 18% de chance: destruir módulo + área",
+      "source": "Teste 1-3"
+    },
+    "w_light_fighters_I": {
+      "name": "Lutadores leves I",
+      "desc": "Lutadores leves. Rápido e ágil.",
+      "special": "Ataca 1 alvo +20% de evasão",
+      "source": "Instância 26-28"
+    },
+    "w_light_fighters_II": {
+      "name": "Lutadores leves II",
+      "desc": "Caças leves avançados.",
+      "special": "Ataca 1 alvo +28% de evasão",
+      "source": "Teste 1-3"
+    },
+    "w_light_fighters_III": {
+      "name": "Lutadores Ligeiros III",
+      "desc": "Caças leves de elite.",
+      "special": "Ataca 2 alvos +35% de evasão",
+      "source": "Teste 5-7"
+    },
+    "w_heavy_fighters_I": {
+      "name": "Lutadores Pesados ​​I",
+      "desc": "Lutadores pesados. Golpe mais lento, mas mais difícil.",
+      "special": "+15% de dano total",
+      "source": "Instância 29-30"
+    },
+    "w_heavy_fighters_II": {
+      "name": "Lutadores Pesados ​​II",
+      "desc": "Caças pesados ​​avançados.",
+      "special": "+22% de dano total",
+      "source": "Teste 2-4"
+    },
+    "w_heavy_fighters_III": {
+      "name": "Lutadores Pesados ​​III",
+      "desc": "Lutadores pesados ​​de elite.",
+      "special": "+35% de dano total + queimadura",
+      "source": "Teste 6-8"
+    },
+    "w_magnetic_fighters_I": {
+      "name": "Lutadores Magnéticos I",
+      "desc": "Lutadores magnéticos. Campo EMP.",
+      "special": "15% de chance: atordoamento (perde rodada)",
+      "source": "Restrito 5-7"
+    },
+    "w_magnetic_fighters_II": {
+      "name": "Lutadores Magnéticos II",
+      "desc": "Lutadores magnéticos avançados.",
+      "special": "25% de chance: atordoamento (perde rodada)",
+      "source": "Teste 3-5"
+    },
+    "w_magnetic_fighters_III": {
+      "name": "Lutadores Magnéticos III",
+      "desc": "Lutadores magnéticos de elite.",
+      "special": "35% de chance: atordoar 2 rodadas + desativar escudo",
+      "source": "Teste 8-10"
+    },
+    "w_bomber_squadron_I": {
+      "name": "Esquadrão de Bombardeiros I",
+      "desc": "Bombardeiros. Atinge vários alvos.",
+      "special": "Dano de área – ataca 1-3 alvos",
+      "source": "Restrito 6-8"
+    },
+    "w_bomber_squadron_II": {
+      "name": "Esquadrão de Bombardeiros II",
+      "desc": "Bombardeiros avançados.",
+      "special": "Dano de área – ataca de 1 a 4 alvos",
+      "source": "Teste 4-6"
+    },
+    "w_bomber_squadron_III": {
+      "name": "Esquadrão de Bombardeiros III",
+      "desc": "Bombardeiros de elite.",
+      "special": "Dano de área – ataca de 1 a 5 alvos + possível destruição",
+      "source": "Evento Chefe"
+    },
+    "w_elite_squadron_I": {
+      "name": "Esquadrão de Elite I",
+      "desc": "Esquadrão de elite.",
+      "special": "Ataca 2 alvos – mistura tipos de dano",
+      "source": "Restrito 8-10"
+    },
+    "w_elite_squadron_II": {
+      "name": "Esquadrão de Elite II",
+      "desc": "Esquadrão de elite avançado.",
+      "special": "Ataca 3 alvos – dano adaptativo",
+      "source": "Teste 7-9"
+    },
+    "w_elite_squadron_III": {
+      "name": "Esquadrão de Elite III",
+      "desc": "Esquadrão de elite final.",
+      "special": "Ataca 4 alvos – escolhe a armadura mais fraca",
+      "source": "Evento Chefe"
+    }
+  },
+  "shield": {
+    "sh_nano_veil_I": {
+      "name": "Nano Véu I",
+      "desc": "Barreira de nanofilamentos. Proteção básica de escoteiros.",
+      "source": "Instância 3"
+    },
+    "sh_nano_veil_II": {
+      "name": "Nano Véu II",
+      "desc": "Barreira de nanofilamentos melhorada.",
+      "source": "Restrito 1"
+    },
+    "sh_nano_veil_III": {
+      "name": "Nano Véu III",
+      "desc": "Barreira avançada de nanofilamentos para navios leves.",
+      "source": "Restrito 6"
+    },
+    "sh_iron_guard_I": {
+      "name": "Guarda de Ferro I",
+      "desc": "Tela protetora de aço. Confiável e barato.",
+      "source": "Instância 6"
+    },
+    "sh_iron_guard_II": {
+      "name": "Guarda de Ferro II",
+      "desc": "Tela protetora de aço melhorada.",
+      "source": "Instância 18"
+    },
+    "sh_iron_guard_III": {
+      "name": "Guarda de Ferro III",
+      "desc": "Escudo de aço avançado para lutadores e batedores.",
+      "source": "Restrito 9"
+    },
+    "sh_photon_barrier_I": {
+      "name": "Barreira de Fótons I",
+      "desc": "Barreira de energia de fótons. Equipamento padrão.",
+      "source": "Instância 9"
+    },
+    "sh_photon_barrier_II": {
+      "name": "Barreira de Fótons II",
+      "desc": "Barreira de fótons melhorada.",
+      "source": "Restrito 7"
+    },
+    "sh_photon_barrier_III": {
+      "name": "Barreira de Fótons III",
+      "desc": "Barreira de fótons avançada.",
+      "source": "Teste 3"
+    },
+    "sh_pulse_ward_I": {
+      "name": "Ala de Pulso I",
+      "desc": "Camada de proteção de pulso que absorve impactos.",
+      "source": "Instância 12"
+    },
+    "sh_pulse_ward_II": {
+      "name": "Ala de Pulso II",
+      "desc": "Camada de proteção de pulso aprimorada.",
+      "source": "Instância 30"
+    },
+    "sh_pulse_ward_III": {
+      "name": "Ala de Pulso III",
+      "desc": "Escudo de pulso avançado para navios de nível médio.",
+      "source": "Teste 7"
+    },
+    "sh_quartz_shell_I": {
+      "name": "Concha de Quartzo I",
+      "desc": "Concha de cristal de quartzo. Boa base para cruzadores.",
+      "source": "Instância 15"
+    },
+    "sh_quartz_shell_II": {
+      "name": "Concha de Quartzo II",
+      "desc": "Concha de quartzo melhorada.",
+      "source": "Restrito 10"
+    },
+    "sh_quartz_shell_III": {
+      "name": "Concha de Quartzo III",
+      "desc": "Concha de quartzo avançada.",
+      "source": "Teste 9"
+    },
+    "sh_flux_buffer_I": {
+      "name": "Buffer de Fluxo I",
+      "desc": "Buffer de fluxo que equilibra os campos de energia.",
+      "source": "Restrito 3"
+    },
+    "sh_flux_buffer_II": {
+      "name": "Buffer de Fluxo II",
+      "desc": "Buffer de fluxo aprimorado.",
+      "source": "Teste 1"
+    },
+    "sh_flux_buffer_III": {
+      "name": "Tampão de Fluxo III",
+      "desc": "Buffer de fluxo avançado. Bom para cruzadores.",
+      "source": "Humanóide 2"
+    },
+    "sh_alloy_plate_I": {
+      "name": "Placa de liga I",
+      "desc": "Placa de liga composta. Pesado, mas durável.",
+      "source": "Restrito 5"
+    },
+    "sh_alloy_plate_II": {
+      "name": "Placa de liga II",
+      "desc": "Placa composta melhorada.",
+      "source": "Teste 4"
+    },
+    "sh_alloy_plate_III": {
+      "name": "Placa de liga III",
+      "desc": "Placa composta avançada para navios de guerra.",
+      "source": "Humanóide 5"
+    },
+    "sh_carbon_shell_I": {
+      "name": "Casca de carbono I",
+      "desc": "Casca de nanofibra de carbono. Leve e forte.",
+      "source": "Instância 21"
+    },
+    "sh_carbon_shell_II": {
+      "name": "Concha de Carbono II",
+      "desc": "Concha de carbono melhorada.",
+      "source": "Teste 6"
+    },
+    "sh_carbon_shell_III": {
+      "name": "Carcaça de Carbono III",
+      "desc": "Concha de carbono avançada.",
+      "source": "Humanóide 8"
+    },
+    "sh_mesh_barrier_I": {
+      "name": "Barreira de malha I",
+      "desc": "Barreira de energia em malha. Distribui impactos.",
+      "source": "Instância 24"
+    },
+    "sh_mesh_barrier_II": {
+      "name": "Barreira de malha II",
+      "desc": "Barreira de malha melhorada.",
+      "source": "Teste 8"
+    },
+    "sh_mesh_barrier_III": {
+      "name": "Barreira de Malha III",
+      "desc": "Barreira de malha avançada para transportadores.",
+      "source": "Constelação 2"
+    },
+    "sh_void_plate_I": {
+      "name": "Placa Vazia I",
+      "desc": "Placa de escudo de matéria escura. Escudo comum sólido.",
+      "source": "Instância 27"
+    },
+    "sh_void_plate_II": {
+      "name": "Placa Vazia II",
+      "desc": "Placa de matéria escura melhorada.",
+      "source": "Teste 10"
+    },
+    "sh_void_plate_III": {
+      "name": "Placa do Vazio III",
+      "desc": "Placa avançada de matéria escura. Escudo comum superior.",
+      "source": "Constelação 3"
+    },
+    "sh_srednji_I": {
+      "name": "Escudo Médio I",
+      "desc": "Escudo médio padrão. Proteção equilibrada.",
+      "source": "Restrito 2"
+    },
+    "sh_srednji_II": {
+      "name": "Escudo Médio II",
+      "desc": "Escudo médio aprimorado.",
+      "source": "Restrito 8"
+    },
+    "sh_srednji_III": {
+      "name": "Escudo Médio III",
+      "desc": "Escudo médio avançado. Sólido comum para nível intermediário.",
+      "source": "Teste 5"
+    },
+    "sh_jaki_I": {
+      "name": "Escudo Forte I",
+      "desc": "Escudo comum reforçado. Bom para lutadores avançados.",
+      "source": "Restrito 4"
+    },
+    "sh_jaki_II": {
+      "name": "Escudo Forte II",
+      "desc": "Escudo forte melhorado.",
+      "source": "Teste 2"
+    },
+    "sh_jaki_III": {
+      "name": "Escudo Forte III",
+      "desc": "Escudo forte avançado. Superior comum para nível superior.",
+      "source": "Constelação 1"
+    },
+    "sh_phase_curtain_I": {
+      "name": "Cortina de Fase I",
+      "desc": "Cortina de fase. Chance de bloquear completamente os ataques.",
+      "special": "10% de chance: bloqueia completamente o ataque",
+      "source": "Instância 18"
+    },
+    "sh_phase_curtain_II": {
+      "name": "Cortina de Fase II",
+      "desc": "Cortina de fase aprimorada.",
+      "special": "10% de chance: bloqueia completamente o ataque",
+      "source": "Instância 22"
+    },
+    "sh_phase_curtain_III": {
+      "name": "Cortina de Fase III",
+      "desc": "Cortina de fase avançada.",
+      "special": "10% de chance: bloqueia completamente o ataque",
+      "source": "Instância 26"
+    },
+    "sh_particle_veil_I": {
+      "name": "Véu de Partículas I",
+      "desc": "Véu de partículas. Chance de atordoar o inimigo.",
+      "special": "3% de chance: atordoa o atacante em 1 rodada",
+      "source": "Instância 19"
+    },
+    "sh_particle_veil_II": {
+      "name": "Véu de Partículas II",
+      "desc": "Véu de partículas melhorado.",
+      "special": "3% de chance: atordoa o atacante em 1 rodada",
+      "source": "Instância 23"
+    },
+    "sh_particle_veil_III": {
+      "name": "Véu de Partículas III",
+      "desc": "Véu de partículas avançado.",
+      "special": "3% de chance: atordoa o atacante em 1 rodada",
+      "source": "Instância 27"
+    },
+    "sh_ballistic_ward_I": {
+      "name": "Ala Balística I",
+      "desc": "Ala balística. Resistente a projéteis cinéticos.",
+      "special": "+20% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Instância 20"
+    },
+    "sh_ballistic_ward_II": {
+      "name": "Ala Balística II",
+      "desc": "Ala balística melhorada.",
+      "special": "+20% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Instância 24"
+    },
+    "sh_ballistic_ward_III": {
+      "name": "Ala Balística III",
+      "desc": "Ala balística avançada.",
+      "special": "+20% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Instância 28"
+    },
+    "sh_thermal_guard_I": {
+      "name": "Guarda Térmica I",
+      "desc": "Camada de proteção térmica. Resistente a ataques térmicos.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 21"
+    },
+    "sh_thermal_guard_II": {
+      "name": "Guarda Térmica II",
+      "desc": "Proteção térmica melhorada.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 25"
+    },
+    "sh_thermal_guard_III": {
+      "name": "Guarda Térmica III",
+      "desc": "Proteção térmica avançada.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 29"
+    },
+    "sh_mag_field_I": {
+      "name": "Campo Mag I",
+      "desc": "Escudo de campo magnético. Resistente a ataques magnéticos.",
+      "special": "+20% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Instância 22"
+    },
+    "sh_mag_field_II": {
+      "name": "Campo Mag II",
+      "desc": "Campo magnético melhorado.",
+      "special": "+20% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Instância 26"
+    },
+    "sh_mag_field_III": {
+      "name": "Campo Mag III",
+      "desc": "Escudo magnético avançado.",
+      "special": "+20% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Instância 30"
+    },
+    "sh_blast_barrier_I": {
+      "name": "Barreira de Explosão I",
+      "desc": "Barreira de explosão. Resistente a armas explosivas.",
+      "special": "+20% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Instância 23"
+    },
+    "sh_blast_barrier_II": {
+      "name": "Barreira de Explosão II",
+      "desc": "Barreira contra explosão melhorada.",
+      "special": "+20% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Instância 27"
+    },
+    "sh_blast_barrier_III": {
+      "name": "Barreira de Explosão III",
+      "desc": "Barreira anti-explosão avançada.",
+      "special": "+20% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Restrito 1"
+    },
+    "sh_deflector_web_I": {
+      "name": "Defletor Web I",
+      "desc": "Teia defletora. Melhor chance de bloquear ataques.",
+      "special": "12% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 1"
+    },
+    "sh_deflector_web_II": {
+      "name": "Defletor Web II",
+      "desc": "Rede defletora aprimorada.",
+      "special": "12% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 3"
+    },
+    "sh_deflector_web_III": {
+      "name": "Teia Defletor III",
+      "desc": "Rede defletora avançada.",
+      "special": "12% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 5"
+    },
+    "sh_ionic_shell_I": {
+      "name": "Concha Iônica I",
+      "desc": "Casca iônica com alta carga. Atordoa os atacantes.",
+      "special": "5% de chance: atordoa o atacante em 1 rodada",
+      "source": "Restrito 2"
+    },
+    "sh_ionic_shell_II": {
+      "name": "Concha Iônica II",
+      "desc": "Casca iônica aprimorada.",
+      "special": "5% de chance: atordoa o atacante em 1 rodada",
+      "source": "Restrito 4"
+    },
+    "sh_ionic_shell_III": {
+      "name": "Concha Iônica III",
+      "desc": "Casca iônica avançada.",
+      "special": "5% de chance: atordoa o atacante em 1 rodada",
+      "source": "Restrito 6"
+    },
+    "sh_ember_diffuser_I": {
+      "name": "Difusor Ember I",
+      "desc": "Difusor de brasa. Dispersa ondas térmicas.",
+      "special": "+28% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 22"
+    },
+    "sh_ember_diffuser_II": {
+      "name": "Difusor Ember II",
+      "desc": "Difusor de brasa melhorado.",
+      "special": "+28% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 26"
+    },
+    "sh_ember_diffuser_III": {
+      "name": "Difusor de Brasa III",
+      "desc": "Difusor de brasa avançado.",
+      "special": "+28% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 30"
+    },
+    "sh_pulse_nullifier_I": {
+      "name": "Anulificador de pulso I",
+      "desc": "Anulador de pulso. Absorve impactos magnéticos.",
+      "special": "+28% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Instância 23"
+    },
+    "sh_pulse_nullifier_II": {
+      "name": "Anulificador de pulso II",
+      "desc": "Anulador de pulso aprimorado.",
+      "special": "+28% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Instância 27"
+    },
+    "sh_pulse_nullifier_III": {
+      "name": "Anulificador de Pulso III",
+      "desc": "Anulador de pulso avançado.",
+      "special": "+28% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Restrito 7"
+    },
+    "sh_mirror_plate_I": {
+      "name": "Placa de espelho I",
+      "desc": "Placa espelhada. Reflete algum dano ao atacante.",
+      "special": "8% de chance: reflete 30% do dano recebido",
+      "source": "Restrito 3"
+    },
+    "sh_mirror_plate_II": {
+      "name": "Placa Espelho II",
+      "desc": "Placa de espelho aprimorada.",
+      "special": "8% de chance: reflete 30% do dano recebido",
+      "source": "Restrito 5"
+    },
+    "sh_mirror_plate_III": {
+      "name": "Placa Espelho III",
+      "desc": "Placa de espelho avançada.",
+      "special": "8% de chance: reflete 30% do dano recebido",
+      "source": "Restrito 8"
+    },
+    "sh_heat_diff_I": {
+      "name": "Difusor de Calor I",
+      "desc": "Difusor de calor. Dispersa ataques de calor.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 21"
+    },
+    "sh_heat_diff_II": {
+      "name": "Difusor de Calor II",
+      "desc": "Difusor de calor melhorado.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 25"
+    },
+    "sh_heat_diff_III": {
+      "name": "Difusor de Calor III",
+      "desc": "Difusor de calor avançado. Ótimo para nível final.",
+      "special": "+20% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Instância 28"
+    },
+    "sh_charge_acc_I": {
+      "name": "Acumulador de Carga I",
+      "desc": "Acumulador de carga. Acelera a recuperação do escudo.",
+      "special": "Regeneração de escudo +30% mais rápida",
+      "source": "Restrito 4"
+    },
+    "sh_charge_acc_II": {
+      "name": "Acumulador de Carga II",
+      "desc": "Acumulador de carga aprimorado.",
+      "special": "Regeneração de escudo +30% mais rápida",
+      "source": "Restrito 6"
+    },
+    "sh_charge_acc_III": {
+      "name": "Acumulador de Carga III",
+      "desc": "Acumulador de carga avançado. Ótimo para longas batalhas.",
+      "special": "Regeneração de escudo +30% mais rápida",
+      "source": "Restrito 9"
+    },
+    "sh_quantum_veil_I": {
+      "name": "Véu Quântico I",
+      "desc": "Véu quântico. Alta chance de bloquear ataques.",
+      "special": "15% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 2"
+    },
+    "sh_quantum_veil_II": {
+      "name": "Véu Quântico II",
+      "desc": "Véu quântico melhorado.",
+      "special": "15% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 4"
+    },
+    "sh_quantum_veil_III": {
+      "name": "Véu Quântico III",
+      "desc": "Véu quântico avançado.",
+      "special": "15% de chance: bloqueia completamente o ataque",
+      "source": "Restrito 6"
+    },
+    "sh_nova_barrier_I": {
+      "name": "Nova Barreira I",
+      "desc": "Barreira Nova. Às vezes retalia com explosão.",
+      "special": "5% de chance: contra-explosão quando atingido",
+      "source": "Restrito 7"
+    },
+    "sh_nova_barrier_II": {
+      "name": "Nova Barreira II",
+      "desc": "Barreira nova melhorada.",
+      "special": "5% de chance: contra-explosão quando atingido",
+      "source": "Restrito 9"
+    },
+    "sh_nova_barrier_III": {
+      "name": "Nova Barreira III",
+      "desc": "Barreira nova avançada.",
+      "special": "5% de chance: contra-explosão quando atingido",
+      "source": "Teste 2"
+    },
+    "sh_kinetic_fortress_I": {
+      "name": "Fortaleza Cinética I",
+      "desc": "Fortaleza cinética. Forte resistência a projéteis.",
+      "special": "+35% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Restrito 3"
+    },
+    "sh_kinetic_fortress_II": {
+      "name": "Fortaleza Cinética II",
+      "desc": "Fortaleza cinética melhorada.",
+      "special": "+35% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Restrito 5"
+    },
+    "sh_kinetic_fortress_III": {
+      "name": "Fortaleza Cinética III",
+      "desc": "Fortaleza cinética avançada.",
+      "special": "+35% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Teste 3"
+    },
+    "sh_plasma_guard_I": {
+      "name": "Protetor de Plasma I",
+      "desc": "Protetor de plasma. Forte resistência a ataques térmicos.",
+      "special": "+35% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Restrito 4"
+    },
+    "sh_plasma_guard_II": {
+      "name": "Guarda Plasma II",
+      "desc": "Proteção de plasma aprimorada.",
+      "special": "+35% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Restrito 6"
+    },
+    "sh_plasma_guard_III": {
+      "name": "Guarda Plasma III",
+      "desc": "Proteção de plasma avançada.",
+      "special": "+35% de resistência a dano térmico enquanto escudo ativo",
+      "source": "Teste 4"
+    },
+    "sh_void_field_I": {
+      "name": "Campo Vazio I",
+      "desc": "Campos vazios. Forte resistência a ataques magnéticos.",
+      "special": "+35% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Restrito 7"
+    },
+    "sh_void_field_II": {
+      "name": "Campo Vazio II",
+      "desc": "Campos vazios aprimorados.",
+      "special": "+35% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Restrito 9"
+    },
+    "sh_void_field_III": {
+      "name": "Campo Vazio III",
+      "desc": "Campos vazios avançados.",
+      "special": "+35% de resistência a dano magnético enquanto escudo ativo",
+      "source": "Teste 5"
+    },
+    "sh_shockwave_shell_I": {
+      "name": "Concha de Onda de Choque I",
+      "desc": "Concha de ondas de choque. Forte resistência a explosivos.",
+      "special": "+35% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Restrito 8"
+    },
+    "sh_shockwave_shell_II": {
+      "name": "Concha de Onda de Choque II",
+      "desc": "Concha de ondas de choque aprimorada.",
+      "special": "+35% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Restrito 10"
+    },
+    "sh_shockwave_shell_III": {
+      "name": "Concha de Onda de Choque III",
+      "desc": "Concha avançada de ondas de choque.",
+      "special": "+35% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Teste 6"
+    },
+    "sh_echo_mirror_I": {
+      "name": "Eco Espelho I",
+      "desc": "Espelho de eco. Reflete o dano ao atacante.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Teste 1"
+    },
+    "sh_echo_mirror_II": {
+      "name": "Espelho Eco II",
+      "desc": "Espelho de eco aprimorado.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Teste 4"
+    },
+    "sh_echo_mirror_III": {
+      "name": "Espelho Eco III",
+      "desc": "Espelho de eco avançado.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Teste 7"
+    },
+    "sh_phoenix_shell_I": {
+      "name": "Concha Fênix I",
+      "desc": "Concha de Fênix. Regeneração rápida do escudo.",
+      "special": "Regeneração de escudo +55% mais rápida",
+      "source": "Teste 2"
+    },
+    "sh_phoenix_shell_II": {
+      "name": "Concha Fênix II",
+      "desc": "Concha de fênix aprimorada.",
+      "special": "Regeneração de escudo +55% mais rápida",
+      "source": "Teste 5"
+    },
+    "sh_phoenix_shell_III": {
+      "name": "Concha Fênix III",
+      "desc": "Concha de fênix avançada.",
+      "special": "Regeneração de escudo +55% mais rápida",
+      "source": "Teste 8"
+    },
+    "sh_titan_core_I": {
+      "name": "Núcleo Titã I",
+      "desc": "Núcleo de Titã. Aumenta a capacidade total do escudo.",
+      "special": "+28% de capacidade máxima do escudo",
+      "source": "Restrito 8"
+    },
+    "sh_titan_core_II": {
+      "name": "Núcleo Titã II",
+      "desc": "Núcleo de titã melhorado.",
+      "special": "+28% de capacidade máxima do escudo",
+      "source": "Teste 3"
+    },
+    "sh_titan_core_III": {
+      "name": "Núcleo Titã III",
+      "desc": "Núcleo de titã avançado.",
+      "special": "+28% de capacidade máxima do escudo",
+      "source": "Teste 6"
+    },
+    "sh_storm_absorber_I": {
+      "name": "Absorvedor de Tempestade I",
+      "desc": "Absorvente de tempestade. Converte algum dano em regeneração.",
+      "special": "Absorve 20% do dano recebido e converte em regeneração de escudo",
+      "source": "Restrito 9"
+    },
+    "sh_storm_absorber_II": {
+      "name": "Absorvedor de Tempestades II",
+      "desc": "Absorvedor de tempestade aprimorado.",
+      "special": "Absorve 20% do dano recebido e converte em regeneração de escudo",
+      "source": "Teste 2"
+    },
+    "sh_storm_absorber_III": {
+      "name": "Absorvedor de Tempestade III",
+      "desc": "Absorvedor de tempestade avançado.",
+      "special": "Absorve 20% do dano recebido e converte em regeneração de escudo",
+      "source": "Teste 5"
+    },
+    "sh_flash_gate_I": {
+      "name": "Portão Flash I",
+      "desc": "Portão instantâneo. Chance de recuperação instantânea do escudo.",
+      "special": "5% de chance: restaura instantaneamente o escudo completo",
+      "source": "Restrito 10"
+    },
+    "sh_flash_gate_II": {
+      "name": "Portão Flash II",
+      "desc": "Porta de flash aprimorada.",
+      "special": "5% de chance: restaura instantaneamente o escudo completo",
+      "source": "Teste 4"
+    },
+    "sh_flash_gate_III": {
+      "name": "Portão Flash III",
+      "desc": "Portão de flash avançado.",
+      "special": "5% de chance: restaura instantaneamente o escudo completo",
+      "source": "Teste 7"
+    },
+    "sh_arc_deflector_I": {
+      "name": "Defletor de Arco I",
+      "desc": "Defletor de arco. Combinação de bloquear e refletir.",
+      "special": "12% de bloqueio + 15% de retorno do dano",
+      "source": "Teste 1"
+    },
+    "sh_arc_deflector_II": {
+      "name": "Defletor de Arco II",
+      "desc": "Defletor de arco aprimorado.",
+      "special": "12% de bloqueio + 15% de retorno do dano",
+      "source": "Teste 4"
+    },
+    "sh_arc_deflector_III": {
+      "name": "Defletor de Arco III",
+      "desc": "Defletor de arco avançado.",
+      "special": "12% de bloqueio + 15% de retorno do dano",
+      "source": "Teste 7"
+    },
+    "sh_cryo_ward_I": {
+      "name": "Ala Cryo I",
+      "desc": "Ala criogênica. Congela o atacante com uma chance.",
+      "special": "7% de chance: atordoa o atacante em 1 rodada",
+      "source": "Restrito 8"
+    },
+    "sh_cryo_ward_II": {
+      "name": "Ala Cryo II",
+      "desc": "Ala criogênica melhorada.",
+      "special": "7% de chance: atordoa o atacante em 1 rodada",
+      "source": "Teste 3"
+    },
+    "sh_cryo_ward_III": {
+      "name": "Ala Cryo III",
+      "desc": "Ala criogênica avançada.",
+      "special": "7% de chance: atordoa o atacante em 1 rodada",
+      "source": "Teste 6"
+    },
+    "sh_detonator_field_I": {
+      "name": "Campo Detonador I",
+      "desc": "Campo detonador. Contador explosivo frequente.",
+      "special": "10% de chance: contra-explosão quando atingido",
+      "source": "Teste 2"
+    },
+    "sh_detonator_field_II": {
+      "name": "Campo Detonador II",
+      "desc": "Campo de detonador aprimorado.",
+      "special": "10% de chance: contra-explosão quando atingido",
+      "source": "Teste 5"
+    },
+    "sh_detonator_field_III": {
+      "name": "Campo Detonador III",
+      "desc": "Campo detonador avançado.",
+      "special": "10% de chance: contra-explosão quando atingido",
+      "source": "Teste 8"
+    },
+    "sh_aegis_prime_I": {
+      "name": "Égide Prime I",
+      "desc": "Égide Prime. Chance final de bloquear ataques.",
+      "special": "22% de chance: bloqueia completamente o ataque",
+      "source": "Teste 5"
+    },
+    "sh_aegis_prime_II": {
+      "name": "Você está jogando Prime II",
+      "desc": "Aegis Prime melhorado.",
+      "special": "22% de chance: bloqueia completamente o ataque",
+      "source": "Teste 7"
+    },
+    "sh_aegis_prime_III": {
+      "name": "Você está jogando Prime III?",
+      "desc": "Aegis Prime Avançado. Um dos escudos de bloco mais fortes.",
+      "special": "22% de chance: bloqueia completamente o ataque",
+      "source": "Teste 10"
+    },
+    "sh_eternal_fortress_I": {
+      "name": "Fortaleza Eterna I",
+      "desc": "Fortaleza eterna. Grande capacidade de escudo.",
+      "special": "+42% da capacidade máxima do escudo",
+      "source": "Teste 6"
+    },
+    "sh_eternal_fortress_II": {
+      "name": "Fortaleza Eterna II",
+      "desc": "Fortaleza Eterna Melhorada.",
+      "special": "+42% da capacidade máxima do escudo",
+      "source": "Teste 8"
+    },
+    "sh_eternal_fortress_III": {
+      "name": "Fortaleza Eterna III",
+      "desc": "Fortaleza Eterna Avançada. Fortaleza lendária.",
+      "special": "+42% da capacidade máxima do escudo",
+      "source": "Evento Chefe"
+    },
+    "sh_bulwark_prime_I": {
+      "name": "Baluarte Prime I",
+      "desc": "Baluarte principal. Quase imune a ataques cinéticos.",
+      "special": "+50% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Teste 5"
+    },
+    "sh_bulwark_prime_II": {
+      "name": "Baluarte Prime II",
+      "desc": "Baluarte Prime melhorado.",
+      "special": "+50% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Teste 7"
+    },
+    "sh_bulwark_prime_III": {
+      "name": "Baluarte Prime III",
+      "desc": "Baluarte Avançado Prime. Escudo cinético lendário.",
+      "special": "+50% de resistência a dano cinético enquanto escudo ativo",
+      "source": "Teste 10"
+    },
+    "sh_celestial_mirror_I": {
+      "name": "Espelho Celestial I",
+      "desc": "Espelho celestial. Reflete uma grande quantidade de dano.",
+      "special": "22% de chance: reflete 30% do dano recebido",
+      "source": "Teste 6"
+    },
+    "sh_celestial_mirror_II": {
+      "name": "Espelho Celestial II",
+      "desc": "Espelho celestial aprimorado.",
+      "special": "22% de chance: reflete 30% do dano recebido",
+      "source": "Teste 8"
+    },
+    "sh_celestial_mirror_III": {
+      "name": "Espelho Celestial III",
+      "desc": "Espelho celestial avançado. Exclusivo Constelação.",
+      "special": "22% de chance: reflete 30% do dano recebido",
+      "source": "Constelação"
+    },
+    "sh_supernova_shell_I": {
+      "name": "Concha de Supernova I",
+      "desc": "Concha de supernova. Retaliação explosiva frequente.",
+      "special": "15% de chance: contra-explosão massiva quando atingido",
+      "source": "Teste 6"
+    },
+    "sh_supernova_shell_II": {
+      "name": "Supernova Concha II",
+      "desc": "Concha de supernova aprimorada.",
+      "special": "15% de chance: contra-explosão massiva quando atingido",
+      "source": "Teste 9"
+    },
+    "sh_supernova_shell_III": {
+      "name": "Supernova Concha III",
+      "desc": "Concha de supernova avançada.",
+      "special": "15% de chance: contra-explosão massiva quando atingido",
+      "source": "Evento Chefe"
+    },
+    "sh_detonation_ward_I": {
+      "name": "Ala de Detonação I",
+      "desc": "Ala de detonação. Quase imune a explosivos.",
+      "special": "+50% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Teste 6"
+    },
+    "sh_detonation_ward_II": {
+      "name": "Ala de Detonação II",
+      "desc": "Ala de detonação aprimorada.",
+      "special": "+50% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Teste 9"
+    },
+    "sh_detonation_ward_III": {
+      "name": "Ala de Detonação III",
+      "desc": "Ala de detonação avançada. Exclusivo do Evento Boss.",
+      "special": "+50% de resistência a dano explosivo enquanto escudo ativo",
+      "source": "Evento Chefe"
+    },
+    "sh_infinity_regen_I": {
+      "name": "Regeneração Infinita I",
+      "desc": "Regeneração infinita. Regeneração extremamente rápida.",
+      "special": "Regeneração de escudo +85% mais rápida – renovação quase constante",
+      "source": "Teste 7"
+    },
+    "sh_infinity_regen_II": {
+      "name": "Infinito Regeneração II",
+      "desc": "Regeneração infinita aprimorada.",
+      "special": "Regeneração de escudo +85% mais rápida – renovação quase constante",
+      "source": "Teste 9"
+    },
+    "sh_infinity_regen_III": {
+      "name": "Regeneração Infinita III",
+      "desc": "Regeneração infinita avançada. Exclusivo Constelação.",
+      "special": "Regeneração de escudo +85% mais rápida – renovação quase constante",
+      "source": "Constelação"
+    },
+    "sh_omega_absorber_I": {
+      "name": "Absorvedor Ômega I",
+      "desc": "Absorvedor de ômega. Converte grandes danos em regeneração.",
+      "special": "Absorve 38% do dano recebido e converte em regeneração de escudo",
+      "source": "Teste 5"
+    },
+    "sh_omega_absorber_II": {
+      "name": "Absorvedor Ômega II",
+      "desc": "Absorvedor de ômega melhorado.",
+      "special": "Absorve 38% do dano recebido e converte em regeneração de escudo",
+      "source": "Teste 8"
+    },
+    "sh_omega_absorber_III": {
+      "name": "Absorvedor Ômega III",
+      "desc": "Absorvedor de ômega avançado. Exclusivo do Evento Boss.",
+      "special": "Absorve 38% do dano recebido e converte em regeneração de escudo",
+      "source": "Evento Chefe"
+    },
+    "sh_phoenix_core_I": {
+      "name": "Núcleo Fênix I",
+      "desc": "Núcleo de Fênix. Chance de recuperação instantânea do escudo.",
+      "special": "8% de chance: restaura instantaneamente o escudo completo",
+      "source": "Teste 6"
+    },
+    "sh_phoenix_core_II": {
+      "name": "Núcleo Fênix II",
+      "desc": "Núcleo de fênix aprimorado.",
+      "special": "8% de chance: restaura instantaneamente o escudo completo",
+      "source": "Teste 9"
+    },
+    "sh_phoenix_core_III": {
+      "name": "Núcleo Fênix III",
+      "desc": "Núcleo de fênix avançado. Exclusivo Constelação.",
+      "special": "8% de chance: restaura instantaneamente o escudo completo",
+      "source": "Constelação"
+    },
+    "sh_spacetime_I": {
+      "name": "Escudo do Espaço-Tempo I",
+      "desc": "Escudo do espaço-tempo. Distorce o espaço ao redor da nave.",
+      "special": "18% de chance: bloqueia completamente o ataque",
+      "source": "Instância 30"
+    },
+    "sh_spacetime_II": {
+      "name": "Escudo do Espaço-Tempo II",
+      "desc": "Escudo de espaço-tempo aprimorado.",
+      "special": "18% de chance: bloqueia completamente o ataque",
+      "source": "Instância 30"
+    },
+    "sh_spacetime_III": {
+      "name": "Escudo do Espaço-Tempo III",
+      "desc": "Escudo avançado do espaço-tempo.",
+      "special": "18% de chance: bloqueia completamente o ataque",
+      "source": "Instância Elite"
+    },
+    "sh_eos_I": {
+      "name": "Escudo Eos I",
+      "desc": "Escudo Eos. Energia reflexiva radiante.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Instância Elite"
+    },
+    "sh_eos_II": {
+      "name": "Escudo Eos II",
+      "desc": "Escudo Eos aprimorado.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Instância Elite"
+    },
+    "sh_eos_III": {
+      "name": "Escudo Eos III",
+      "desc": "Escudo Eos avançado. Reflexão final.",
+      "special": "15% de chance: reflete 30% do dano recebido",
+      "source": "Instância Elite"
+    },
+    "sh_fortress_I": {
+      "name": "Escudo da Fortaleza I",
+      "desc": "Escudo da fortaleza. Grande capacidade de escudo.",
+      "special": "+35% da capacidade máxima do escudo",
+      "source": "Instância Elite"
+    },
+    "sh_fortress_II": {
+      "name": "Escudo da Fortaleza II",
+      "desc": "Escudo da Fortaleza aprimorado.",
+      "special": "+35% da capacidade máxima do escudo",
+      "source": "Instância Elite"
+    },
+    "sh_fortress_III": {
+      "name": "Escudo da Fortaleza III",
+      "desc": "Escudo de Fortaleza Avançado.",
+      "special": "+35% da capacidade máxima do escudo",
+      "source": "Instância Elite"
+    },
+    "sh_immortal_I": {
+      "name": "Escudo Imortal I",
+      "desc": "Escudo imortal. Quase indestrutível.",
+      "special": "Absorve 30% do dano recebido e converte em regeneração de escudo",
+      "source": "Instância Elite"
+    },
+    "sh_immortal_II": {
+      "name": "Escudo Imortal II",
+      "desc": "Escudo imortal aprimorado.",
+      "special": "Absorve 30% do dano recebido e converte em regeneração de escudo",
+      "source": "Instância Elite"
+    },
+    "sh_immortal_III": {
+      "name": "Escudo Imortal III",
+      "desc": "Escudo imortal avançado. Proteção lendária.",
+      "special": "Absorve 30% do dano recebido e converte em regeneração de escudo",
+      "source": "Instância Elite"
+    },
+    "sh_divine_I": {
+      "name": "Divino eu",
+      "desc": "Escudo divino. Bloqueio de 50%. Somente Evento Boss. Máximo de 1 por jogador.",
+      "special": "50% de chance de bloquear QUALQUER ataque",
+      "source": "Evento Boss (apenas drop)"
+    },
+    "sh_divine_II": {
+      "name": "Divino II",
+      "desc": "Escudo Divino melhorado. Item mais raro do jogo.",
+      "special": "50% de chance de bloquear QUALQUER ataque",
+      "source": "Evento Boss (apenas drop)"
+    },
+    "sh_divine_III": {
+      "name": "Divino III",
+      "desc": "Escudo divino final. Mítico, lendário, único. Apenas o melhor.",
+      "special": "50% de chance de bloquear QUALQUER ataque",
+      "source": "Evento Boss (apenas drop)"
+    }
+  },
+  "engine": {
+    "eng_basic_I": {
+      "name": "Unidade Básica I",
+      "desc": "Unidade padrão para iniciantes.",
+      "source": "Instância 5"
+    },
+    "eng_basic_II": {
+      "name": "Unidade Básica II",
+      "desc": "Unidade padrão aprimorada.",
+      "source": "Instância 10"
+    },
+    "eng_basic_III": {
+      "name": "Unidade Básica III",
+      "desc": "Unidade padrão avançada.",
+      "source": "Instância 15"
+    },
+    "eng_tactical_I": {
+      "name": "Unidade Tática I",
+      "desc": "Movimentação tática. Concentre-se na manobrabilidade.",
+      "source": "Instância 20"
+    },
+    "eng_tactical_II": {
+      "name": "Unidade Tática II",
+      "desc": "Unidade tática aprimorada.",
+      "source": "Instância 25"
+    },
+    "eng_tactical_III": {
+      "name": "Unidade Tática III",
+      "desc": "Unidade tática avançada. Ideal para lutadores.",
+      "source": "Instância 30"
+    },
+    "eng_scout_I": {
+      "name": "Unidade Escoteira I",
+      "desc": "Unidade de escoteiro. Concentre-se na evasão rápida.",
+      "source": "Restrito 1"
+    },
+    "eng_scout_II": {
+      "name": "Unidade Escoteira II",
+      "desc": "Unidade de reconhecimento aprimorada.",
+      "source": "Restrito 2"
+    },
+    "eng_scout_III": {
+      "name": "Unidade Escoteira III",
+      "desc": "Unidade de reconhecimento avançada.",
+      "source": "Restrito 3"
+    },
+    "eng_nano_I": {
+      "name": "Nano Drive II",
+      "desc": "Unidade nanomolecular. Abordagem equilibrada.",
+      "source": "Restrito 4"
+    },
+    "eng_nano_II": {
+      "name": "Nano Drive II",
+      "desc": "Unidade nano melhorada.",
+      "source": "Restrito 5"
+    },
+    "eng_nano_III": {
+      "name": "Nano Drive III",
+      "desc": "Unidade nano avançada.",
+      "source": "Restrito 6"
+    },
+    "eng_pulse_I": {
+      "name": "Unidade de pulso I",
+      "desc": "Unidade de pulso. Regenera HP a cada rodada.",
+      "special": "Restaura 15 HP a cada rodada",
+      "source": "Restrito 7"
+    },
+    "eng_pulse_II": {
+      "name": "Unidade de pulso II",
+      "desc": "Unidade de pulso melhorada.",
+      "special": "Restaura 28 HP a cada rodada",
+      "source": "Restrito 8"
+    },
+    "eng_pulse_III": {
+      "name": "Unidade de pulso III",
+      "desc": "Unidade de pulso avançada. Regeneração constante de HP.",
+      "special": "Restaura 45 HP a cada rodada",
+      "source": "Restrito 9"
+    },
+    "eng_endurance_I": {
+      "name": "Unidade de resistência I",
+      "desc": "Unidade de resistência. Recuperação mais rápida da HP.",
+      "special": "Restaura 25 HP a cada rodada",
+      "source": "Restrito 10"
+    },
+    "eng_endurance_II": {
+      "name": "Unidade de resistência II",
+      "desc": "Impulso de resistência aprimorado.",
+      "special": "Restaura 45 HP a cada rodada",
+      "source": "Constelação 1"
+    },
+    "eng_endurance_III": {
+      "name": "Unidade de resistência III",
+      "desc": "Unidade de resistência avançada.",
+      "special": "Restaura 72 HP a cada rodada",
+      "source": "Constelação 2"
+    },
+    "eng_heavy_I": {
+      "name": "Unidade Pesada I",
+      "desc": "Movimentação pesada. Reduz o dano recebido.",
+      "special": "-8% de dano recebido",
+      "source": "Constelação 3"
+    },
+    "eng_heavy_II": {
+      "name": "Unidade Pesada II",
+      "desc": "Movimentação pesada aprimorada.",
+      "special": "-14% de dano recebido",
+      "source": "Pirata 2"
+    },
+    "eng_heavy_III": {
+      "name": "Unidade Pesada III",
+      "desc": "Unidade pesada avançada.",
+      "special": "-20% de dano recebido",
+      "source": "Pirata 4"
+    },
+    "eng_stabilizer_I": {
+      "name": "Unidade estabilizadora I",
+      "desc": "Unidade estabilizadora. Reforça a armadura.",
+      "special": "-12% de dano recebido",
+      "source": "Pirata 6"
+    },
+    "eng_stabilizer_II": {
+      "name": "Unidade Estabilizadora II",
+      "desc": "Acionamento do estabilizador aprimorado.",
+      "special": "-18% de dano recebido",
+      "source": "Pirata 8"
+    },
+    "eng_stabilizer_III": {
+      "name": "Unidade Estabilizadora III",
+      "desc": "Unidade estabilizadora avançada.",
+      "special": "-25% de dano recebido",
+      "source": "Pirata 10"
+    },
+    "eng_sprint_I": {
+      "name": "Sprint Drive I",
+      "desc": "Unidade de sprint. Garante iniciativa.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Instância 20"
+    },
+    "eng_sprint_II": {
+      "name": "Sprint Drive II",
+      "desc": "Impulso de sprint aprimorado.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Instância 24"
+    },
+    "eng_sprint_III": {
+      "name": "Sprint Drive III",
+      "desc": "Unidade de sprint avançada. Iniciativa máxima.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Restrito 2"
+    },
+    "eng_surge_I": {
+      "name": "Surge Drive I",
+      "desc": "Unidade de assalto com iniciativa de ataque.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Instância 21"
+    },
+    "eng_surge_II": {
+      "name": "Unidade de surto II",
+      "desc": "Unidade de assalto aprimorada.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Instância 25"
+    },
+    "eng_surge_III": {
+      "name": "Unidade de Surto III",
+      "desc": "Unidade de assalto avançada.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Restrito 3"
+    },
+    "eng_combat_I": {
+      "name": "Unidade de Combate I",
+      "desc": "Unidade de combate. Chance de ataque duplo.",
+      "special": "8% de chance de segundo ataque",
+      "source": "Instância 22"
+    },
+    "eng_combat_II": {
+      "name": "Unidade de Combate II",
+      "desc": "Impulso de combate aprimorado.",
+      "special": "12% de chance de segundo ataque",
+      "source": "Instância 26"
+    },
+    "eng_combat_III": {
+      "name": "Unidade de Combate III",
+      "desc": "Unidade de combate avançada.",
+      "special": "16% de chance de segundo ataque",
+      "source": "Restrito 4"
+    },
+    "eng_phantom_I": {
+      "name": "Unidade Fantasma I",
+      "desc": "Unidade fantasma. Nega ataques recebidos.",
+      "special": "10% de chance: nega ataque recebido",
+      "source": "Instância 23"
+    },
+    "eng_phantom_II": {
+      "name": "Unidade Fantasma II",
+      "desc": "Unidade fantasma aprimorada.",
+      "special": "15% de chance: nega ataque recebido",
+      "source": "Instância 27"
+    },
+    "eng_phantom_III": {
+      "name": "Unidade Fantasma III",
+      "desc": "Unidade fantasma avançada.",
+      "special": "20% de chance: nega ataque recebido",
+      "source": "Restrito 5"
+    },
+    "eng_reactive_I": {
+      "name": "Unidade Reativa I",
+      "desc": "Unidade reativa. Ativa quando o navio é danificado.",
+      "special": "Quando HP < 50%, permanentemente +20% DPS",
+      "source": "Instância 20"
+    },
+    "eng_reactive_II": {
+      "name": "Unidade Reativa II",
+      "desc": "Unidade reativa aprimorada.",
+      "special": "Quando HP < 50%, permanentemente +28% DPS",
+      "source": "Instância 24"
+    },
+    "eng_reactive_III": {
+      "name": "Unidade Reativa III",
+      "desc": "Unidade reativa avançada.",
+      "special": "Quando HP < 50%, permanentemente +36% DPS",
+      "source": "Restrito 6"
+    },
+    "eng_adaptive_I": {
+      "name": "Unidade adaptativa I",
+      "desc": "Unidade adaptativa. Capacidade reativa mais forte.",
+      "special": "Quando HP < 50%, permanentemente +25% DPS",
+      "source": "Instância 21"
+    },
+    "eng_adaptive_II": {
+      "name": "Unidade Adaptativa II",
+      "desc": "Unidade adaptativa aprimorada.",
+      "special": "Quando HP < 50%, permanentemente +35% DPS",
+      "source": "Instância 25"
+    },
+    "eng_adaptive_III": {
+      "name": "Unidade Adaptativa III",
+      "desc": "Unidade adaptativa avançada.",
+      "special": "Quando HP < 50%, permanentemente +45% DPS",
+      "source": "Restrito 7"
+    },
+    "eng_pulse_regen_I": {
+      "name": "Regeneração de pulso I",
+      "desc": "Unidade de regeneração. Regeneração constante e forte de HP.",
+      "special": "Restaura 65 HP a cada rodada",
+      "source": "Instância 22"
+    },
+    "eng_pulse_regen_II": {
+      "name": "Regeneração de Pulso II",
+      "desc": "Unidade de regeneração aprimorada.",
+      "special": "Restaura 125 HP a cada rodada",
+      "source": "Instância 26"
+    },
+    "eng_pulse_regen_III": {
+      "name": "Regeneração de Pulso III",
+      "desc": "Unidade de regeneração avançada.",
+      "special": "Restaura 200 HP a cada rodada",
+      "source": "Restrito 8"
+    },
+    "eng_fortified_I": {
+      "name": "Unidade Fortificada I",
+      "desc": "Unidade fortificada. Forte redução de danos.",
+      "special": "-18% de dano recebido",
+      "source": "Instância 23"
+    },
+    "eng_fortified_II": {
+      "name": "Unidade Fortificada II",
+      "desc": "Unidade fortificada melhorada.",
+      "special": "-26% de dano recebido",
+      "source": "Instância 27"
+    },
+    "eng_fortified_III": {
+      "name": "Unidade Fortificada III",
+      "desc": "Unidade fortificada avançada.",
+      "special": "-34% de dano recebido",
+      "source": "Restrito 9"
+    },
+    "eng_stealth_I": {
+      "name": "Unidade Furtiva I",
+      "desc": "Unidade furtiva. Alta chance de fugir.",
+      "special": "12% de chance: inimigo erra",
+      "source": "Instância 22"
+    },
+    "eng_stealth_II": {
+      "name": "Unidade Furtiva II",
+      "desc": "Unidade furtiva aprimorada.",
+      "special": "18% de chance: inimigo erra",
+      "source": "Instância 25"
+    },
+    "eng_stealth_III": {
+      "name": "Unidade Furtiva III",
+      "desc": "Unidade furtiva avançada. Quase invisível.",
+      "special": "24% de chance: inimigo erra",
+      "source": "Restrito 8"
+    },
+    "eng_he3_saver_I": {
+      "name": "He3 Economizador I",
+      "desc": "Acionamento eficiente em He3. Economiza combustível na batalha.",
+      "special": "-25% de consumo de he3",
+      "source": "Instância 20"
+    },
+    "eng_he3_saver_II": {
+      "name": "He3 Economizador II",
+      "desc": "Economia de He3 aprimorada.",
+      "special": "-35% de consumo de he3",
+      "source": "Instância 24"
+    },
+    "eng_he3_saver_III": {
+      "name": "He3 Economizador III",
+      "desc": "Economizador He3 avançado. Economiza drasticamente combustível.",
+      "special": "-45% de consumo de he3",
+      "source": "Restrito 7"
+    },
+    "eng_quantum_I": {
+      "name": "Unidade Quântica I",
+      "desc": "Unidade quântica. Alta chance de negar ataques.",
+      "special": "18% de chance: nega ataque recebido",
+      "source": "Restrito 2"
+    },
+    "eng_quantum_II": {
+      "name": "Unidade Quântica II",
+      "desc": "Unidade quântica aprimorada.",
+      "special": "25% de chance: nega ataque recebido",
+      "source": "Restrito 4"
+    },
+    "eng_quantum_III": {
+      "name": "Unidade Quântica III",
+      "desc": "Unidade quântica avançada. Quase impossível de acertar.",
+      "special": "32% de chance: nega ataque recebido",
+      "source": "Restrito 6"
+    },
+    "eng_berserker_I": {
+      "name": "Berserker Drive I",
+      "desc": "Unidade Berserker. Ataque duplo agressivo.",
+      "special": "18% de chance de segundo ataque",
+      "source": "Restrito 3"
+    },
+    "eng_berserker_II": {
+      "name": "Unidade Berserker II",
+      "desc": "Unidade berserker aprimorada.",
+      "special": "24% de chance de segundo ataque",
+      "source": "Restrito 5"
+    },
+    "eng_berserker_III": {
+      "name": "Unidade Berserker III",
+      "desc": "Unidade berserker avançada.",
+      "special": "30% de chance de segundo ataque",
+      "source": "Restrito 7"
+    },
+    "eng_sentinel_I": {
+      "name": "Unidade Sentinela I",
+      "desc": "Unidade Sentinela. Redução massiva de danos.",
+      "special": "-28% de dano recebido",
+      "source": "Restrito 3"
+    },
+    "eng_sentinel_II": {
+      "name": "Unidade Sentinela II",
+      "desc": "Unidade sentinela aprimorada.",
+      "special": "-38% de dano recebido",
+      "source": "Restrito 5"
+    },
+    "eng_sentinel_III": {
+      "name": "Unidade Sentinela III",
+      "desc": "Unidade sentinela avançada. Armadura quase impenetrável.",
+      "special": "-48% de dano recebido",
+      "source": "Restrito 7"
+    },
+    "eng_void_I": {
+      "name": "Unidade Vazia I",
+      "desc": "Unidade nula. Chance rara de imunidade completa.",
+      "special": "5% de chance: imunidade completa naquela rodada",
+      "source": "Restrito 4"
+    },
+    "eng_void_II": {
+      "name": "Unidade Vazia II",
+      "desc": "Unidade de vazio aprimorada.",
+      "special": "8% de chance: imunidade completa naquela rodada",
+      "source": "Restrito 6"
+    },
+    "eng_void_III": {
+      "name": "Unidade Vazia III",
+      "desc": "Unidade nula avançada.",
+      "special": "12% de chance: imunidade completa naquela rodada",
+      "source": "Restrito 8"
+    },
+    "eng_predator_I": {
+      "name": "Predador Dirigir I",
+      "desc": "Unidade predadora. Sempre primeira iniciativa.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Restrito 5"
+    },
+    "eng_predator_II": {
+      "name": "Predador Drive II",
+      "desc": "Impulso de predador aprimorado.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Restrito 7"
+    },
+    "eng_predator_III": {
+      "name": "Predador Unidade III",
+      "desc": "Impulso predador avançado.",
+      "special": "Sempre ataca primeiro a cada rodada",
+      "source": "Restrito 9"
+    },
+    "eng_phoenix_core_I": {
+      "name": "Núcleo Fênix I",
+      "desc": "Unidade central Phoenix. Regeneração massiva de HP.",
+      "special": "Restaura 250 HP a cada rodada",
+      "source": "Teste 1"
+    },
+    "eng_phoenix_core_II": {
+      "name": "Núcleo Fênix II",
+      "desc": "Unidade central Phoenix aprimorada.",
+      "special": "Restaura 450 HP a cada rodada",
+      "source": "Teste 4"
+    },
+    "eng_phoenix_core_III": {
+      "name": "Núcleo Fênix III",
+      "desc": "Unidade central Phoenix avançada.",
+      "special": "Restaura 700 HP a cada rodada",
+      "source": "Teste 7"
+    },
+    "eng_fleet_sync_I": {
+      "name": "Sincronização de Frota I",
+      "desc": "Unidade de sincronização de frota. Aumenta toda a frota.",
+      "special": "Todos os aliados +5 de agilidade no início",
+      "source": "Teste 2"
+    },
+    "eng_fleet_sync_II": {
+      "name": "Sincronização de Frota II",
+      "desc": "Unidade de sincronização de frota aprimorada.",
+      "special": "Todos os aliados +8 de agilidade no início",
+      "source": "Teste 5"
+    },
+    "eng_fleet_sync_III": {
+      "name": "Sincronização de Frota III",
+      "desc": "Unidade avançada de sincronização de frota.",
+      "special": "Todos os aliados +12 de agilidade no início",
+      "source": "Teste 8"
+    },
+    "eng_apex_I": {
+      "name": "Unidade Apex I",
+      "desc": "Unidade Apex. Alta chance de golpe duplo.",
+      "special": "22% de chance de segundo ataque",
+      "source": "Teste 3"
+    },
+    "eng_apex_II": {
+      "name": "Unidade Apex II",
+      "desc": "Unidade de ápice aprimorada.",
+      "special": "30% de chance de segundo ataque",
+      "source": "Teste 6"
+    },
+    "eng_apex_III": {
+      "name": "Unidade Apex III",
+      "desc": "Unidade apex avançada.",
+      "special": "38% de chance de segundo ataque",
+      "source": "Teste 9"
+    },
+    "eng_hyperdrive_I": {
+      "name": "Hiperdrive I",
+      "desc": "Hiperdrive. Ataque duplo massivo.",
+      "special": "35% de chance de segundo ataque",
+      "source": "Teste 3"
+    },
+    "eng_hyperdrive_II": {
+      "name": "Hiperdrive II",
+      "desc": "Hiperdrive aprimorado.",
+      "special": "45% de chance de segundo ataque",
+      "source": "Teste 6"
+    },
+    "eng_hyperdrive_III": {
+      "name": "Hiperdrive III",
+      "desc": "Hiperdrive avançado. Unidade dominante no jogo.",
+      "special": "55% de chance de segundo ataque",
+      "source": "Teste 9"
+    },
+    "eng_voidwarp_I": {
+      "name": "Voidwarp I",
+      "desc": "Unidade Voidwarp. Imunidade completa frequente.",
+      "special": "15% de chance: imunidade completa naquela rodada",
+      "source": "Pirata 3"
+    },
+    "eng_voidwarp_II": {
+      "name": "Voidwarp II",
+      "desc": "Unidade voidwarp aprimorada.",
+      "special": "22% de chance: imunidade completa naquela rodada",
+      "source": "Pirata 6"
+    },
+    "eng_voidwarp_III": {
+      "name": "Voidwarp III",
+      "desc": "Voidwarp avançado. Exclusivo pirata.",
+      "special": "30% de chance: imunidade completa naquela rodada",
+      "source": "Pirata 9"
+    },
+    "eng_celestial_I": {
+      "name": "Unidade Celestial I",
+      "desc": "Impulso celestial. Aumenta toda a frota.",
+      "special": "Todos os aliados +15 de agilidade no início",
+      "source": "Constelação 1"
+    },
+    "eng_celestial_II": {
+      "name": "Unidade Celestial II",
+      "desc": "Impulso celestial aprimorado.",
+      "special": "Todos os aliados +22 de agilidade no início",
+      "source": "Constelação 2"
+    },
+    "eng_celestial_III": {
+      "name": "Unidade Celestial III",
+      "desc": "Celestial avançado. Exclusivo Constelação.",
+      "special": "Todos os aliados +30 de agilidade no início",
+      "source": "Constelação 3"
+    },
+    "eng_titan_I": {
+      "name": "Titã Drive I",
+      "desc": "Unidade Titã. Redução massiva de danos.",
+      "special": "-55% de dano recebido",
+      "source": "Teste 5"
+    },
+    "eng_titan_II": {
+      "name": "Unidade Titã II",
+      "desc": "Unidade de titã aprimorada.",
+      "special": "-70% de dano recebido",
+      "source": "Teste 8"
+    },
+    "eng_titan_III": {
+      "name": "Unidade Titã III",
+      "desc": "Titã avançado. Armadura quase invulnerável.",
+      "special": "-85% de dano recebido",
+      "source": "Teste 10"
+    },
+    "eng_annihilator_I": {
+      "name": "Aniquilador I",
+      "desc": "Unidade aniquiladora. Mais rápido que qualquer coisa.",
+      "special": "Sempre ataca primeiro + agilidade máxima",
+      "source": "Teste 4"
+    },
+    "eng_annihilator_II": {
+      "name": "Aniquilador II",
+      "desc": "Unidade aniquiladora aprimorada.",
+      "special": "Sempre ataca primeiro + agilidade máxima",
+      "source": "Teste 7"
+    },
+    "eng_annihilator_III": {
+      "name": "Aniquilador III",
+      "desc": "Aniquilador avançado. Iniciativa final.",
+      "special": "Sempre ataca primeiro + agilidade máxima",
+      "source": "Teste 10"
+    },
+    "eng_divine_I": {
+      "name": "Unidade Divina I",
+      "desc": "Impulso divino. Iniciativa + fase de vazio + aura. Somente Evento Boss.",
+      "special": "Sempre ataca primeiro + 20% void_phase + todos os aliados +5 agilidade",
+      "source": "Evento Boss (apenas drop)"
+    },
+    "eng_divine_II": {
+      "name": "Unidade Divina II",
+      "desc": "Impulso divino melhorado. O drive mais raro do jogo.",
+      "special": "Sempre ataca primeiro + 25% void_phase + todos os aliados +8 agilidade",
+      "source": "Evento Boss (apenas drop)"
+    },
+    "eng_divine_III": {
+      "name": "Unidade Divina III",
+      "desc": "Impulso divino final. Mítico, único. Apenas o melhor.",
+      "special": "Sempre ataca primeiro + 30% void_phase + todos os aliados +12 agilidade",
+      "source": "Evento Boss (apenas drop)"
+    }
+  },
+  "building": {
+    "hq": {
+      "name": "QG",
+      "desc": "Centro de comando. Determina o nível máximo de todos os outros edifícios.",
+      "milestone": {
+        "25": {
+          "label": "Comando Avançado",
+          "bonus": "Todos os edifícios -10% de custo de atualização"
+        },
+        "50": {
+          "label": "Centro Estratégico",
+          "bonus": "Temporizador de construção -25% para todos os edifícios"
+        },
+        "75": {
+          "label": "QG Galáctico",
+          "bonus": "Todos os edifícios -20% de custo de atualização"
+        },
+        "100": {
+          "label": "COMANDO LENDÁRIO",
+          "bonus": "Temporizador de construção -50%, custo de todos os edifícios -30%"
+        }
+      }
+    },
+    "metal_mine": {
+      "name": "Mina de metal",
+      "desc": "Produz metal. Cada nível +0,01/s.",
+      "milestone": {
+        "25": {
+          "label": "Perfuração Profunda",
+          "bonus": "+25% de produção de metal"
+        },
+        "50": {
+          "label": "Mina Automatizada",
+          "bonus": "+50% de produção de metal"
+        },
+        "75": {
+          "label": "Nano-Extração",
+          "bonus": "+100% de produção de metal"
+        },
+        "100": {
+          "label": "MINA TITÃ",
+          "bonus": "+200% de produção de metal + -50% de consumo de energia"
+        }
+      }
+    },
+    "crystal_mine": {
+      "name": "Mina de Cristal",
+      "desc": "Produz cristal. Cada nível +0,007/s.",
+      "milestone": {
+        "25": {
+          "label": "Ressonância Cristalina",
+          "bonus": "+25% de produção de cristal"
+        },
+        "50": {
+          "label": "Corte a laser de frequência",
+          "bonus": "+50% de produção de cristal"
+        },
+        "75": {
+          "label": "Extração Quântica",
+          "bonus": "+100% de produção de cristal"
+        },
+        "100": {
+          "label": "MATRIZ DE CRISTAL",
+          "bonus": "+200% produção de cristal + mina de metal +10%"
+        }
+      }
+    },
+    "he3_refinery": {
+      "name": "Refinaria He3",
+      "desc": "Produz He3. Cada nível +0,003/s.",
+      "milestone": {
+        "25": {
+          "label": "Filtragem de Fusão",
+          "bonus": "+25% de produção de He3"
+        },
+        "50": {
+          "label": "Separador de Plasma",
+          "bonus": "+50% de produção de He3"
+        },
+        "75": {
+          "label": "Destilação Isotópica",
+          "bonus": "+100% de produção de He3"
+        },
+        "100": {
+          "label": "REFINARIA DE SINGULARIDADE",
+          "bonus": "+200% He3 + edifícios de energia +10%"
+        }
+      }
+    },
+    "depot": {
+      "name": "Depósito",
+      "desc": "Armazém de recursos. O jogador deve coletar recursos. Se estiver cheio – a produção é interrompida.",
+      "milestone": {
+        "25": {
+          "label": "Armazenamento Expandido",
+          "bonus": "+10% de capacidade"
+        },
+        "50": {
+          "label": "Armazenamento Industrial",
+          "bonus": "+25% de capacidade"
+        },
+        "75": {
+          "label": "Recipientes Quânticos",
+          "bonus": "+50% de capacidade"
+        },
+        "100": {
+          "label": "MEGA DEPÓSITO",
+          "bonus": "+100% de capacidade"
+        }
+      }
+    },
+    "ship_factory": {
+      "name": "Fábrica de navios",
+      "desc": "Estaleiro. Desbloqueia classes de navios e acelera a construção.",
+      "milestone": {
+        "25": {
+          "label": "Linha Automatizada",
+          "bonus": "+5% de velocidade de construção, -5% de custo"
+        },
+        "50": {
+          "label": "Estaleiro Avançado",
+          "bonus": "+10% de velocidade, -10% de custo"
+        },
+        "75": {
+          "label": "Megafábrica",
+          "bonus": "+15% de velocidade, -15% de custo"
+        },
+        "100": {
+          "label": "ARSENAL GALÁCTICO",
+          "bonus": "+25% de velocidade, -20% de custo, todos os navios +5% de estatísticas"
+        }
+      }
+    },
+    "solar": {
+      "name": "Painel solar",
+      "desc": "Gera energia. Cada nível +4 MWh/s.",
+      "milestone": {
+        "25": {
+          "label": "Rede Fotovoltaica",
+          "bonus": "+25% de geração solar"
+        },
+        "50": {
+          "label": "Coletores Orbitais",
+          "bonus": "+50% de geração solar"
+        },
+        "75": {
+          "label": "Anel Solar",
+          "bonus": "+100% de geração solar"
+        },
+        "100": {
+          "label": "ESFERA DE DISON",
+          "bonus": "+200% solar + todos os edifícios de energia +15%"
+        }
+      }
+    },
+    "fusion": {
+      "name": "Reator de Fusão",
+      "desc": "Energia poderosa. Cada nível +12 MWh/s, +1 MWh de capacidade.",
+      "milestone": {
+        "25": {
+          "label": "Gaiola Magnética",
+          "bonus": "+25% de geração de fusão"
+        },
+        "50": {
+          "label": "Otimização de Tokamak",
+          "bonus": "+50% de geração de fusão"
+        },
+        "75": {
+          "label": "Impulso de Antimatéria",
+          "bonus": "+100% de geração de fusão"
+        },
+        "100": {
+          "label": "CORAÇÕES ESTELARES",
+          "bonus": "+200% de fusão + capacidade x3"
+        }
+      }
+    },
+    "battery": {
+      "name": "Bloco de bateria",
+      "desc": "Armazena energia. Cada nível +1 MWh/s, +97 MWh de capacidade.",
+      "milestone": {
+        "25": {
+          "label": "Supercapacitor",
+          "bonus": "+25% de capacidade"
+        },
+        "50": {
+          "label": "Nanocélulas",
+          "bonus": "+50% de capacidade"
+        },
+        "75": {
+          "label": "Bateria Quântica",
+          "bonus": "+100% de capacidade"
+        },
+        "100": {
+          "label": "PERPETUAMENTE MÓVEL",
+          "bonus": "+200% de capacidade + não pode cair abaixo de 20%"
+        }
+      }
+    },
+    "grid": {
+      "name": "Rede Elétrica",
+      "desc": "Otimiza a distribuição de energia. Cada nível drena -0,5% em todos os edifícios. Lv100 = -50% de drenagem.",
+      "milestone": {
+        "25": {
+          "label": "Grade Otimizada",
+          "bonus": "-12,5% de drenagem em todos os edifícios"
+        },
+        "50": {
+          "label": "Supercondutor",
+          "bonus": "-25% de drenagem em todos os edifícios"
+        },
+        "75": {
+          "label": "Distribuição Quântica",
+          "bonus": "-37,5% de drenagem em todos os edifícios"
+        },
+        "100": {
+          "label": "EFICIÊNCIA INFINITA",
+          "bonus": "-50% de drenagem em todos os edifícios"
+        }
+      }
+    },
+    "turret": {
+      "name": "Torre Laser",
+      "desc": "Defesa básica básica. Cada nível +80 de defesa.",
+      "milestone": {
+        "25": {
+          "label": "Segmentação automática",
+          "bonus": "Frota: +10% de ataque"
+        },
+        "50": {
+          "label": "Canhão de Plasma",
+          "bonus": "Frota: +20% de ataque, +5% de acerto crítico"
+        },
+        "75": {
+          "label": "Arma Anticapital",
+          "bonus": "Frota: +35% de ataque, +10% de acerto crítico"
+        },
+        "100": {
+          "label": "CANHÃO ORBITAL",
+          "bonus": "Frota: +50% de ataque, +20% de acerto crítico"
+        }
+      }
+    },
+    "missile_bat": {
+      "name": "Bateria de mísseis",
+      "desc": "Defesa antimísseis. Cada nível +80 de defesa.",
+      "milestone": {
+        "25": {
+          "label": "Mísseis de vários estágios",
+          "bonus": "Bloqueia a espionagem na base"
+        },
+        "50": {
+          "label": "Ogivas Nucleares",
+          "bonus": "Bloqueia espionagem, frota: +5 evasão"
+        },
+        "75": {
+          "label": "Interceptador Orbital",
+          "bonus": "Bloqueia espionagem, frota: +10 evasão, +1 velocidade"
+        },
+        "100": {
+          "label": "APOCALIPSE",
+          "bonus": "Bloqueia espionagem, frota: +15 evasão, +2 velocidade"
+        }
+      }
+    },
+    "shield_gen": {
+      "name": "Gerador de Escudo",
+      "desc": "Escudo de energia para base. Cada nível +80 de defesa.",
+      "milestone": {
+        "25": {
+          "label": "Escudo de Fase",
+          "bonus": "Frota: +10% de escudo"
+        },
+        "50": {
+          "label": "Escudo Harmônico",
+          "bonus": "Frota: +20% de escudo, +10% de regeneração de escudo"
+        },
+        "75": {
+          "label": "Escudo Quântico",
+          "bonus": "Frota: +35% de escudo, +20% de regeneração de escudo"
+        },
+        "100": {
+          "label": "ESCUDO IMPENETRÁVEL",
+          "bonus": "Frota: +50% de escudo, +30% de regeneração, +5% de redução de dano"
+        }
+      }
+    },
+    "sensor": {
+      "name": "Torre de Sensores",
+      "desc": "Detecção de inimigo. Cada nível +80 de defesa.",
+      "milestone": {
+        "25": {
+          "label": "Varredura Profunda",
+          "bonus": "+25% de chance de espionagem"
+        },
+        "50": {
+          "label": "Sensores Quânticos",
+          "bonus": "+50% de chance de espionagem, +1 nível de revelação"
+        },
+        "75": {
+          "label": "Radar Galáctico",
+          "bonus": "+75% de chance de espionagem, +1 nível de revelação"
+        },
+        "100": {
+          "label": "OLHO QUE TUDO VÊ",
+          "bonus": "+100% de chance de espionagem, +2 níveis de revelação"
+        }
+      }
+    },
+    "jump_gate": {
+      "name": "Portão de Salto",
+      "desc": "Transporta navios para colônias. Cada nível +1 intervalo do sistema.",
+      "milestone": {
+        "25": {
+          "label": "Corredor Estável",
+          "bonus": "+1 colônia máxima, trânsito mais rápido"
+        },
+        "50": {
+          "label": "Rede de buraco de minhoca",
+          "bonus": "+2 colônias no máximo, trânsito instantâneo"
+        },
+        "75": {
+          "label": "Portais Galácticos",
+          "bonus": "+3 colônias no máximo"
+        },
+        "100": {
+          "label": "SALTO INFINITO",
+          "bonus": "+5 colônias no máximo + teleporte para qualquer lugar"
+        }
+      }
+    },
+    "laboratory": {
+      "name": "Laboratório",
+      "desc": "Limita o nível máximo de pesquisa. Lv1 = Pesquisa Lv1, Lv100 = Pesquisa Lv100.",
+      "milestone": {
+        "25": {
+          "label": "Laboratório Avançado",
+          "bonus": "Pesquisa -20% custo"
+        },
+        "50": {
+          "label": "Laboratório Quântico",
+          "bonus": "Custo de pesquisa -35%"
+        },
+        "75": {
+          "label": "Centro Xenotech",
+          "bonus": "Pesquisa -50% custo"
+        },
+        "100": {
+          "label": "SINGULARIDADE",
+          "bonus": "Todas as pesquisas instantâneas + -75% de custo"
+        }
+      }
+    },
+    "recycler": {
+      "name": "Reciclador",
+      "desc": "Recicla navios em busca de recursos. Lv1=20%, Lv100=100% do custo original.",
+      "milestone": {
+        "25": {
+          "label": "Reciclagem Avançada",
+          "bonus": "Retorno de bônus de +5% (acima da base)"
+        },
+        "50": {
+          "label": "Nano-Desmontador",
+          "bonus": "Retorno + bônus de 10% + reciclagem rápida"
+        },
+        "75": {
+          "label": "Reprocessador Atômico",
+          "bonus": "Retorno + bônus de 15%"
+        },
+        "100": {
+          "label": "RECICLADOR DE MATÉRIA",
+          "bonus": "100% de retorno + chance de fragmento do projeto"
+        }
+      }
+    }
+  },
+  "ui": {
+    "yes": "Sim",
+    "no": "Não",
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "info": "Info",
+    "unknown": "Desconhecido",
+    "none": "Nenhum",
+    "all": "Todos",
+    "level": "Nível {n}",
+    "rank": "Ranque #{n}",
+    "player": "Jogador",
+    "you": "Você"
+  }
+}

@@ -1,0 +1,4440 @@
+{
+  "nav": {
+    "base": "Baza",
+    "fleet": "Flota",
+    "galaxy": "Galaktyka",
+    "colonies": "Kolonii",
+    "pvp": "PvP",
+    "research": "Badania",
+    "missions": "Misje",
+    "shop": "Sklep",
+    "leaderboard": "Tablica",
+    "blueprints": "Projekty",
+    "commanders": "Dowódcy",
+    "espionage": "Szpiegostwo",
+    "artifacts": "Artefakty",
+    "designer": "Projektant",
+    "formations": "Formacje",
+    "achievements": "Osiągnięcia",
+    "cards": "Karty"
+  },
+  "tab": {
+    "log": "📋 Dziennik",
+    "events": "📡 Wydarzenia",
+    "pvp": "⚔️ PvP"
+  },
+  "btn": {
+    "save": "💾 Zapisz",
+    "saved": "✅ ZapisanO",
+    "attack": "⚔️ Atakuj",
+    "scan": "🔍 Skanuj",
+    "buy": "Kup",
+    "upgrade": "Ulepsz",
+    "build": "Buduj",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź",
+    "close": "Zamknij",
+    "back": "Wstecz",
+    "collect": "Zbierz",
+    "research": "Badaj",
+    "equip": "Wyposaż",
+    "unequip": "Zdejmij",
+    "deploy": "Rozmieść",
+    "recruit": "WerBuj",
+    "open": "Otwórz",
+    "send": "Wyślij",
+    "activate": "Aktywuj",
+    "deactivate": "Deaktywuj"
+  },
+  "res": {
+    "metal": "Metal",
+    "crystal": "Kryształ",
+    "he3": "He-3",
+    "energy": "Energia",
+    "bocrypto": "BoCrypto",
+    "score": "Punkty",
+    "keys": "Klucze",
+    "instanceKeys": "Kl. instancji"
+  },
+  "pvp": {
+    "title": "⚔️ ARENA PvP",
+    "searching": "Szukanie przeciwników...",
+    "loaded": "Przeciwnicy załadowani!",
+    "noOpponents": "Brak dostępnych przeciwników.",
+    "cannotLoad": "Nie można załadować przeciwników.",
+    "shieldActive": "Tarcza jest aktywna - nie możesz atakować!",
+    "noFleet": "Nie masz statków we flocie!",
+    "enemyNoFleet": "Przeciwnik nie ma rozmieszczonej floty!",
+    "enemyNoValidFleet": "Przeciwnik nie ma ważnej floty!",
+    "notEnoughEnergy": "Za mało energii! Potrzeba {cost}",
+    "notEnoughBocrypto": "Za mało BOCRYPTO! Potrzeba {cost}",
+    "attacking": "Atakowanie {name}...",
+    "victory": "Zwycięstwo nad {name}!",
+    "defeat": "Porażka z {name}",
+    "lootGained": "Łup: {metal} Metalu, {crystal} Kryształu, {he3} He-3, {boc} BoCrypto",
+    "ratingGain": "+{n} rankingu",
+    "ratingLoss": "{n} rankingu",
+    "shieldBought": "Tarcza aktywna przez {hours}h!",
+    "notEnoughBocShield": "Za mało BoCrypto! Potrzeba {cost} BOCRYPTO",
+    "energyCost": "Koszt: {energy} energii + {boc} BoCrypto",
+    "rank": "Ranga",
+    "rating": "Ranking",
+    "power": "Siła",
+    "level": "Poziom",
+    "wins": "Zwycięstwa",
+    "losses": "Porażki",
+    "yourRating": "Twój ranking",
+    "shieldStatus": "Status tarczy",
+    "shieldInactive": "Nieaktywna",
+    "shieldActiveUntil": "Aktywna do {time}",
+    "buyShield": "Kup tarczę",
+    "findOpponents": "Znajdź przeciwników"
+  },
+  "galaxy": {
+    "title": "🌌 GALAKTYKA",
+    "loading": "Ładowanie galaktyki...",
+    "playerBase": "Baza gracza",
+    "neutralSystem": "System neutralny",
+    "espionage": "🔍 Zwiad",
+    "attack": "⚔️ Atakuj bazę",
+    "attackCost": "Koszt ataku: {energy} energii + {boc} BoCrypto",
+    "attackVictory": "Zwycięstwo! Skradziono {metal} metalu, {crystal} kryształu, {he3} He-3!",
+    "attackDefeat": "Porażka! Obrona była silniejsza.",
+    "attackNoFleet": "Nie masz statków we flocie!",
+    "attackNotEnoughEnergy": "Za mało energii! Potrzeba {cost}",
+    "attackNotEnoughBoc": "Za mało BoCrypto! Potrzeba {cost}",
+    "espResources": "Zasoby: {metal} Metalu | {crystal} Kryształu | {he3} He-3",
+    "espNoData": "Brak danych o zasobach."
+  },
+  "shop": {
+    "title": "🏪 SKLEP KOSMICZNY",
+    "premium": "⭐ PREMIUM",
+    "purchaseConfirm": "Potwierdź zakup",
+    "purchaseSuccess": "Zakup udany!",
+    "purchaseFailed": "Zakup nieudany.",
+    "notEnoughBoc": "Za mało BoCrypto! Masz {have}, potrzebujesz {need}",
+    "bocBalance": "Saldo BoCrypto: {amount}",
+    "buyWithBoc": "Kup za {cost} BoCrypto",
+    "ikeys100": "100 Kluczy instancji",
+    "keys10": "10 Kluczy dowódcy"
+  },
+  "base": {
+    "title": "🏰 BAZA",
+    "buildQueue": "Kolejka budowy",
+    "recycleQueue": "Kolejka recyklingu",
+    "queueFull": "Kolejka jest pełna!",
+    "notEnoughRes": "Za mało zasobów!",
+    "buildStarted": "Budowa rozpoczęta!",
+    "buildComplete": "Budowa ukończona: {name}",
+    "maxLevel": "Maksymalny poziom",
+    "upgrading": "Ulepszanie...",
+    "recycling": "Recykling..."
+  },
+  "research": {
+    "title": "🔬 BADANIA",
+    "researchStarted": "Badania rozpoczęte: {name}",
+    "researchComplete": "Badania ukończone: {name}",
+    "maxLevel": "Maksymalny poziom",
+    "notEnoughRes": "Za mało zasobów!"
+  },
+  "fleet": {
+    "title": "🚀 FLOTA",
+    "noShips": "Nie masz statków",
+    "deployedFleet": "Rozmieszczona flota",
+    "hangar": "Hangar",
+    "recruit": "WerBuj statki",
+    "totalPower": "Całkowita siła",
+    "shipAdded": "{count}x {name} dodano do floty!",
+    "notEnoughRes": "Za mało zasobów!"
+  },
+  "missions": {
+    "title": "📡 MISJE",
+    "daily": "Misje codzienne",
+    "weekly": "Misje tygodniowe",
+    "story": "Historia",
+    "completed": "Ukończone",
+    "claimed": "Odebrane",
+    "claimReward": "Odbierz nagrodę",
+    "rewardClaimed": "Nagroda odebrana!",
+    "progress": "Postęp"
+  },
+  "colonies": {
+    "title": "🪐 KOLONIE",
+    "loading": "Ładowanie kolonii...",
+    "noColonies": "Nie masz kolonii. Podbijaj planety w galaktyce!",
+    "phalanxScan": "Skan Falangi",
+    "scanComplete": "Skan ukończony! Przeskanowano {count} systemów.",
+    "scanCost": "Koszt: {cost} He-3",
+    "notEnoughHe3": "Za mało He-3 do skanu! Potrzeba {cost}",
+    "enemyBase": "Baza wroga",
+    "rating": "Ranking: {rating}",
+    "power": "Siła: {power}"
+  },
+  "commanders": {
+    "title": "👨‍✈️ DOWÓDCY",
+    "owned": "Moi dowódcy",
+    "active": "Aktywny",
+    "deploy": "Rozmieść",
+    "recall": "Odwołaj",
+    "stats": "Statystyki",
+    "openPack": "Otwórz paczkę",
+    "noCommanders": "Nie masz dowódców."
+  },
+  "blueprints": {
+    "title": "📐 PROJEKTY",
+    "owned": "Posiadane projekty",
+    "fragments": "Fragmenty",
+    "craft": "Wytwórz",
+    "craftSuccess": "Projekt wytworzony: {name}!",
+    "notEnoughFragments": "Za mało fragmentów!"
+  },
+  "espionage": {
+    "title": "🕵️ SZPIEGOSTWO",
+    "sendDrone": "Wyślij drona",
+    "dronesSent": "Wysłano {count} dronów!",
+    "reportReady": "Raport gotowy!",
+    "noDrones": "Nie masz dronów!",
+    "targetInfo": "Info o celu"
+  },
+  "artifacts": {
+    "title": "🏺 ARTEFAKTY",
+    "fragments": "Fragmenty artefaktów",
+    "assemble": "Złóż",
+    "assembled": "Artefakt złożony!",
+    "notEnoughFragments": "Za mało fragmentów!"
+  },
+  "toast": {
+    "saveOk": "✅ Gra zapisana!",
+    "saveFail": "❌ Zapisywanie nieudane!",
+    "loginOk": "✅ Logowanie udane!",
+    "loginFail": "❌ Logowanie nieudane!",
+    "loading": "⏳ Ładowanie...",
+    "error": "❌ Błąd: {msg}",
+    "notEnoughRes": "❌ Za mało zasobów!",
+    "maxLevel": "✅ Maksymalny poziom!",
+    "featureWip": "🚧 Wkrótce..."
+  },
+  "confirm": {
+    "resetGame": "⚠️ JESTEŚ PEWIEN? To usunie CAŁY postęp!",
+    "buyItem": "Kupić {name} za {cost}?",
+    "attack": "ZaAtakować {name}? Koszt: {cost}"
+  },
+  "season": {
+    "label": "Sezon",
+    "reset": "Reset sezonu",
+    "rank": "Ranga sezonu"
+  },
+  "premium": {
+    "label": "⭐ PREMIUM",
+    "active": "Premium aktywne",
+    "inactive": "Brak premium",
+    "benefits": "Korzyści premium",
+    "getit": "Zdobądź premium"
+  },
+  "armor": {
+    "nano": "Nano",
+    "neutralizing": "Neutralizing",
+    "chrome": "Chrome",
+    "regen": "Regen",
+    "light": "Light"
+  },
+  "ship_class": {
+    "scout": {
+      "name": "Zwiadowca",
+      "desc": "Szybki i dyskretny. Idealny do zwiadu i zwalczania wojowników."
+    },
+    "fighter": {
+      "name": "Myśliwiec",
+      "desc": "Wszechstronny statek bojowy. Idealny jako kręgosłup każdej floty."
+    },
+    "cruiser": {
+      "name": "Krążownik",
+      "desc": "Ciężka obrona. Chroni mniejsze statki we flocie."
+    },
+    "battleship": {
+      "name": "Okręt wojenny",
+      "desc": "Maksymalna siła ognia. Powolne, ale wyniszczające."
+    },
+    "carrier": {
+      "name": "Przewoźnik",
+      "desc": "Strategiczny statek. Wystrzeliwuje eskadry myśliwców do bitwy."
+    },
+    "special": {
+      "name": "Flagowiec",
+      "desc": "Statek dowodzenia flotą. Zapewnia premię wszystkim statkom."
+    }
+  },
+  "damage_type": {
+    "Kinetic": {
+      "name": "Kinetyczny",
+      "desc": "Uszkodzenia fizyczne. Wysoki DPS, bez efektów specjalnych."
+    },
+    "Heat": {
+      "name": "Ciepło",
+      "desc": "Uszkodzenia termiczne. Efekt spalania — obrażenia w ciągu X rund."
+    },
+    "Magnetic": {
+      "name": "Magnetyczny",
+      "desc": "Uszkodzenia EMP. Szansa na ogłuszenie lub wyłączenie broni/silnika."
+    },
+    "Explosive": {
+      "name": "Materiał wybuchowy",
+      "desc": "Uszkodzenia obszarowe. Uderza w wiele statków na raz."
+    },
+    "Mixed": {
+      "name": "Mieszany",
+      "desc": "Połączone obrażenia. Elitarne jednostki myśliwskie."
+    }
+  },
+  "weapon_subtype": {
+    "Ballistic": {
+      "name": "Balistyczny",
+      "desc": "Bezpośredni ogień. Najwyższy DPS, krótki zasięg."
+    },
+    "Directional": {
+      "name": "Kierunkowy",
+      "desc": "Wiązka skierowana. Średni DPS, średni zasięg, +10% kryty."
+    },
+    "Missile": {
+      "name": "Pocisk",
+      "desc": "Pocisk kierowany. Nigdy nie tęskni. Duży zasięg."
+    },
+    "FighterBay": {
+      "name": "Zatoka Myśliwska",
+      "desc": "Wystrzeliwuje myśliwce. Tylko przewoźnicy i statki flagowe. Wiele celów."
+    }
+  },
+  "weapon": {
+    "w_kinetic_railgun_I": {
+      "name": "Railgun I",
+      "desc": "Railgun I — podstawowa broń kinetyczna. +10% szansy na trafienie krytyczne.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Ulepsz fabrykę statków II"
+    },
+    "w_kinetic_railgun_II": {
+      "name": "Railgun II",
+      "desc": "Railgun II — ulepszone działo kinetyczne. +15% krytyka.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_railgun_III": {
+      "name": "Railgun III",
+      "desc": "Railgun III — zaawansowane działo kinetyczne. +22% trafień krytycznych.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_gauss_cannon_I": {
+      "name": "Działo Gaussa I",
+      "desc": "Działo Gaussa I — Działo elektromagnetyczne. +10% krytyka.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 6"
+    },
+    "w_kinetic_gauss_cannon_II": {
+      "name": "Działo Gaussa II",
+      "desc": "Działo Gaussa II — ulepszone działo elektromagnetyczne.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_gauss_cannon_III": {
+      "name": "Działo Gaussa III",
+      "desc": "Działo Gaussa III — zaawansowane działo elektromagnetyczne.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_mass_driver_I": {
+      "name": "Kierowca masowy I",
+      "desc": "Mass Driver I — wystrzeliwuje masywne pociski.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 10"
+    },
+    "w_kinetic_mass_driver_II": {
+      "name": "Kierowca masowy II",
+      "desc": "Mass Driver II — Ulepszony sterownik masowy.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_mass_driver_III": {
+      "name": "Kierowca masowy III",
+      "desc": "Mass Driver III — Zaawansowany sterownik masowy.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_shredder_I": {
+      "name": "Niszczyciel I",
+      "desc": "Shredder I — Rozdziera zbroję fragmentami metalu.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Pirat 2"
+    },
+    "w_kinetic_shredder_II": {
+      "name": "Niszczarka II",
+      "desc": "Shredder II — Ulepszona niszczarka.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_shredder_III": {
+      "name": "Niszczarka III",
+      "desc": "Shredder III — zaawansowana niszczarka.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_penetrator_I": {
+      "name": "Penetrator I",
+      "desc": "Penetrator I — przebija gruby pancerz.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Pirat 4"
+    },
+    "w_kinetic_penetrator_II": {
+      "name": "Penetrator II",
+      "desc": "Penetrator II — ulepszony penetrator.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_penetrator_III": {
+      "name": "Penetrator III",
+      "desc": "Penetrator III — zaawansowany penetrator.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_accelerator_I": {
+      "name": "Akcelerator I",
+      "desc": "Akcelerator I — przyspiesza pociski.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Pirat 6"
+    },
+    "w_kinetic_accelerator_II": {
+      "name": "Akcelerator II",
+      "desc": "Akcelerator II — Ulepszony akcelerator.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_accelerator_III": {
+      "name": "Akcelerator III",
+      "desc": "Akcelerator III — Zaawansowany akcelerator.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_ripper_I": {
+      "name": "Rozpruwacz I",
+      "desc": "Rozpruwacz I — Rozdziera cel na kawałki.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Pirat 9"
+    },
+    "w_kinetic_ripper_II": {
+      "name": "Rozpruwacz II",
+      "desc": "Ripper II — ulepszony ripper.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_ripper_III": {
+      "name": "Rozpruwacz III",
+      "desc": "Ripper III — Zaawansowany ripper.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_hailstorm_I": {
+      "name": "Burza gradowa I",
+      "desc": "Gradobicie I — Deszcz pocisków.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Konstelacja 3"
+    },
+    "w_kinetic_hailstorm_II": {
+      "name": "Burza gradowa II",
+      "desc": "Hailstorm II — poprawiono deszcz pocisków.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_hailstorm_III": {
+      "name": "Burza gradowa III",
+      "desc": "Hailstorm III — Zaawansowany deszcz pocisków.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_obliterator_I": {
+      "name": "Obliterator I",
+      "desc": "Obliterator I — Całkowite zniszczenie.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Konstelacja 2"
+    },
+    "w_kinetic_obliterator_II": {
+      "name": "Obliterator II",
+      "desc": "Obliterator II — ulepszony niszczyciel.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_obliterator_III": {
+      "name": "Obliterator III",
+      "desc": "Obliterator III — zaawansowany niszczyciel.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_kinetic_annihilator_I": {
+      "name": "Anihilator I",
+      "desc": "Annihilator I — całkowite zniszczenie celu.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Konstelacja 1"
+    },
+    "w_kinetic_annihilator_II": {
+      "name": "Niszczyciel II",
+      "desc": "Annihilator II — ulepszony anihilator.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-15"
+    },
+    "w_kinetic_annihilator_III": {
+      "name": "Niszczyciel III",
+      "desc": "Annihilator III — zaawansowany anihilator.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_inferno_I": {
+      "name": "Piekło I",
+      "desc": "Piekło I — Ogień Piekielny.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Humanoid 7"
+    },
+    "w_heat_inferno_II": {
+      "name": "Piekło II",
+      "desc": "Inferno II — ulepszony ogień piekielny.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_inferno_III": {
+      "name": "Piekło III",
+      "desc": "Inferno III — Zaawansowany ogień piekielny.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_scorch_I": {
+      "name": "Scorch I",
+      "desc": "Scorch I — spala powierzchnię statku.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Próba 3"
+    },
+    "w_heat_scorch_II": {
+      "name": "Skorża II",
+      "desc": "Scorch II — ulepszone przypalanie.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_scorch_III": {
+      "name": "Skorża III",
+      "desc": "Scorch III — Zaawansowane Scorch.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_molten_core_I": {
+      "name": "Stopiony rdzeń I",
+      "desc": "Stopiony rdzeń I — stopiony rdzeń.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Próba 5"
+    },
+    "w_heat_molten_core_II": {
+      "name": "Stopiony rdzeń II",
+      "desc": "Molten Core II — ulepszony stopiony rdzeń.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_molten_core_III": {
+      "name": "Stopiony rdzeń III",
+      "desc": "Molten Core III — zaawansowany stopiony rdzeń.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_pyro_blast_I": {
+      "name": "Wybuch pirotechniczny I",
+      "desc": "Pyro Blast I — Wybuchowa kula ognia.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Próba 8"
+    },
+    "w_heat_pyro_blast_II": {
+      "name": "Wybuch pirotechniczny II",
+      "desc": "Pyro Blast II — ulepszona kula ognia.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_pyro_blast_III": {
+      "name": "Wybuch pirotechniczny III",
+      "desc": "Pyro Blast III — zaawansowana kula ognia.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_thermal_lance_I": {
+      "name": "Lanca Termiczna I",
+      "desc": "Lanca termiczna I — Skoncentrowana wiązka termiczna.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 1"
+    },
+    "w_heat_thermal_lance_II": {
+      "name": "Lanca Termiczna II",
+      "desc": "Lanca termiczna II — ulepszona wiązka termiczna.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_thermal_lance_III": {
+      "name": "Lanca Termiczna III",
+      "desc": "Lanca termiczna III — zaawansowana wiązka termiczna.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_sunflare_I": {
+      "name": "Słoneczko I",
+      "desc": "Rozbłysk słoneczny I — eksplozja energii słonecznej.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 3"
+    },
+    "w_heat_sunflare_II": {
+      "name": "Oddychanie II",
+      "desc": "Rozbłysk słoneczny II — Ulepszono rozbłysk słoneczny.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_sunflare_III": {
+      "name": "Rozbłysk słońca III",
+      "desc": "Rozbłysk słoneczny III — Zaawansowany rozbłysk słoneczny.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_magma_I": {
+      "name": "Magma I",
+      "desc": "Magma I — Stopiona skała.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 5"
+    },
+    "w_heat_magma_II": {
+      "name": "Magma II",
+      "desc": "Magma II — ulepszona magma.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_magma_III": {
+      "name": "Magma III",
+      "desc": "Magma III — zaawansowana magma.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_incinerator_I": {
+      "name": "Spalarnia I",
+      "desc": "Spalarnia I — spala wszystko doszczętnie.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 7"
+    },
+    "w_heat_incinerator_II": {
+      "name": "Spalarnia II",
+      "desc": "Spalarnia II — Ulepszona spalarnia.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_incinerator_III": {
+      "name": "Spalarnia III",
+      "desc": "Spalarnia III — zaawansowana spalarnia.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_phoenix_I": {
+      "name": "Feniks I",
+      "desc": "Feniks I – Ognisty Ptak.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 8"
+    },
+    "w_heat_phoenix_II": {
+      "name": "Feniks II",
+      "desc": "Phoenix II — ulepszony ognisty ptak.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_phoenix_III": {
+      "name": "Feniks III",
+      "desc": "Phoenix III — zaawansowany ognisty ptak.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_heat_hellfire_I": {
+      "name": "Piekielny Ogień I",
+      "desc": "Ogień Piekielny I — Ogień Piekielny.",
+      "special": "15% szans: spal 2 rundy (+20 obrażeń/rundę)",
+      "source": "Pirat 10"
+    },
+    "w_heat_hellfire_II": {
+      "name": "Piekielny Ogień II",
+      "desc": "Hellfire II — ulepszony ogień piekielny.",
+      "special": "20% szans: spal 2 rundy (+35 obrażeń/rundę)",
+      "source": "Przykład 11-15"
+    },
+    "w_heat_hellfire_III": {
+      "name": "Piekielny Ogień III",
+      "desc": "Hellfire III — zaawansowany ogień piekielny.",
+      "special": "30% szans: spal 3 rundy (+50 obrażeń/rundę)",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_pulsar_I": {
+      "name": "Pulsar I",
+      "desc": "Pulsar I — impuls EMP.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_pulsar_II": {
+      "name": "Pulsara II",
+      "desc": "Pulsar II — ulepszony impuls EMP.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_pulsar_III": {
+      "name": "Pulsara III",
+      "desc": "Pulsar III — zaawansowany impuls EMP.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_emp_blast_I": {
+      "name": "Wybuch EMP I",
+      "desc": "Wybuch EMP I — Impuls elektromagnetyczny.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_emp_blast_II": {
+      "name": "Wybuch EMP II",
+      "desc": "Wybuch EMP II — ulepszony podmuch EMP.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_emp_blast_III": {
+      "name": "Wybuch EMP III",
+      "desc": "Wybuch EMP III — Zaawansowany podmuch EMP.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_stasis_beam_I": {
+      "name": "Promień Stazy I",
+      "desc": "Stasis Beam I — Paraliżuje statek.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_stasis_beam_II": {
+      "name": "Promień Stazy II",
+      "desc": "Promień Stazy II — Ulepszony Promień Stazy.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_stasis_beam_III": {
+      "name": "Promień Stazy III",
+      "desc": "Promień Stazy III — Zaawansowany Promień Stazy.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_disruptor_I": {
+      "name": "Zakłócacz I",
+      "desc": "Zakłócacz I — zakłóca systemy.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_disruptor_II": {
+      "name": "Zakłócacz II",
+      "desc": "Zakłócacz II — ulepszony zakłócacz.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_disruptor_III": {
+      "name": "Zakłócacz III",
+      "desc": "Zakłócacz III — Zaawansowany zakłócacz.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_magnetron_I": {
+      "name": "Magnetron I",
+      "desc": "Magnetron I — Pole magnetyczne.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_magnetron_II": {
+      "name": "Magnetron II",
+      "desc": "Magnetron II — ulepszony magnetron.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_magnetron_III": {
+      "name": "Magnetron III",
+      "desc": "Magnetron III — zaawansowany magnetron.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_neutron_wave_I": {
+      "name": "Fala neutronowa I",
+      "desc": "Fala neutronowa I — rozprzestrzenia falę interferencyjną.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_neutron_wave_II": {
+      "name": "II fala neutronowa",
+      "desc": "Fala neutronowa II — ulepszona fala neutronowa.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_neutron_wave_III": {
+      "name": "III fala neutronowa",
+      "desc": "Fala neutronowa III — zaawansowana fala neutronowa.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_cascade_I": {
+      "name": "Kaskada I",
+      "desc": "Kaskada I — reakcja łańcuchowa.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_cascade_II": {
+      "name": "Wodospady II",
+      "desc": "Kaskada II — ulepszona reakcja łańcuchowa.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_cascade_III": {
+      "name": "Kaskada III",
+      "desc": "Kaskada III — zaawansowana reakcja łańcuchowa.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_ion_storm_I": {
+      "name": "Burza Jonowa I",
+      "desc": "Burza jonowa I — burza jonowa.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_ion_storm_II": {
+      "name": "Burza jonowa II",
+      "desc": "Burza jonowa II — Ulepszona burza jonowa.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_ion_storm_III": {
+      "name": "Burza jonowa III",
+      "desc": "Burza jonowa III — zaawansowana burza jonowa.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_magnetosphere_I": {
+      "name": "Magnetosfera I",
+      "desc": "Magnetosfera I — Defensywne pole magnetyczne.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_magnetosphere_II": {
+      "name": "Magnetosfera II",
+      "desc": "Magnetosfera II — ulepszona magnetosfera.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_magnetosphere_III": {
+      "name": "Magnetosfera III",
+      "desc": "Magnetosfera III — zaawansowana magnetosfera.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_magnetic_singularity_I": {
+      "name": "Osobliwość I",
+      "desc": "Osobliwość I — Osobliwość magnetyczna.",
+      "special": "5% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 6-10"
+    },
+    "w_magnetic_singularity_II": {
+      "name": "Osobliwość II",
+      "desc": "Osobliwość II — ulepszona osobliwość.",
+      "special": "10% szans: wyłącz tarczę na 1 rundę",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_singularity_III": {
+      "name": "Osobliwość III",
+      "desc": "Osobliwość III — zaawansowana osobliwość.",
+      "special": "18% szans: wyłącz tarczę na 2 rundy",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_devastator_I": {
+      "name": "Dewastator I",
+      "desc": "Devastator I — niszczy wszystko na swojej drodze.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_devastator_II": {
+      "name": "Dewastator II",
+      "desc": "Devastator II — Ulepszony Devastator.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_devastator_III": {
+      "name": "Dewastator III",
+      "desc": "Devastator III — zaawansowany dewastator.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_annihilator_I": {
+      "name": "Anihilator I",
+      "desc": "Annihilator I — Całkowita anihilacja.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_annihilator_II": {
+      "name": "Niszczyciel II",
+      "desc": "Annihilator II — ulepszony anihilator.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_annihilator_III": {
+      "name": "Niszczyciel III",
+      "desc": "Annihilator III — zaawansowany anihilator.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_maelstrom_I": {
+      "name": "Maelstrom I",
+      "desc": "Maelstrom I — wir eksplozji.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_maelstrom_II": {
+      "name": "Wichura II",
+      "desc": "Maelstrom II — ulepszony wir.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_maelstrom_III": {
+      "name": "Wichura III",
+      "desc": "Maelstrom III — zaawansowany wir.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_cataclysm_I": {
+      "name": "Kataklizm I",
+      "desc": "Kataklizm I — eksplozja kataklizmiczna.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_cataclysm_II": {
+      "name": "Kataklizm II",
+      "desc": "Kataklizm II — ulepszony kataklizm.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_cataclysm_III": {
+      "name": "Kataklizm III",
+      "desc": "Kataklizm III — Zaawansowany kataklizm.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_oblivion_I": {
+      "name": "Zapomnienie I",
+      "desc": "Oblivion I — usuwa cel z istnienia.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_oblivion_II": {
+      "name": "Zapomnienie II",
+      "desc": "Oblivion II — ulepszone zapomnienie.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_oblivion_III": {
+      "name": "Zapomnienie III",
+      "desc": "Oblivion III — zaawansowane zapomnienie.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_earthshaker_I": {
+      "name": "Ziemianina I",
+      "desc": "Earthshaker I — Wstrząsa polem bitwy.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_earthshaker_II": {
+      "name": "Wstrząsacz Ziemi II",
+      "desc": "Earthshaker II — ulepszony Earthshaker.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_earthshaker_III": {
+      "name": "Wstrząsacz Ziemi III",
+      "desc": "Earthshaker III — zaawansowany Earthshaker.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_nova_I": {
+      "name": "Nowa I",
+      "desc": "Nova I — Gwiezdna eksplozja mocy.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_nova_II": {
+      "name": "Nowa II",
+      "desc": "Nova II — ulepszona nowa.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_nova_III": {
+      "name": "Nowa III",
+      "desc": "Nova III — zaawansowana nowa.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_armageddon_I": {
+      "name": "Armagedon I",
+      "desc": "Armagedon I – Dzień Sądu.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_armageddon_II": {
+      "name": "Armagedon II",
+      "desc": "Armageddon II — Ulepszony Armageddon.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_armageddon_III": {
+      "name": "Armagedon III",
+      "desc": "Armageddon III — zaawansowany armagedon.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_apocalypse_I": {
+      "name": "Apokalipsa I",
+      "desc": "Apokalipsa I — Apokalipsa.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_apocalypse_II": {
+      "name": "Apokalipsa II",
+      "desc": "Apocalypse II — Ulepszona apokalipsa.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_apocalypse_III": {
+      "name": "Apokalipsa III",
+      "desc": "Apokalipsa III — zaawansowana apokalipsa.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_explosive_crusher_I": {
+      "name": "Kruszarka I",
+      "desc": "Crusher I — niszczy zbroję.",
+      "special": "10% szans: obrażenia obszarowe (trafia w 1 dodatkowy statek)",
+      "source": "Przykład 6-10"
+    },
+    "w_explosive_crusher_II": {
+      "name": "Kruszarka II",
+      "desc": "Crusher II — Ulepszona kruszarka.",
+      "special": "15% szans: obrażenia obszarowe (trafia w 2 dodatkowe statki)",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_crusher_III": {
+      "name": "Kruszarka III",
+      "desc": "Crusher III — Zaawansowana kruszarka.",
+      "special": "25% szans: obrażenia obszarowe (trafia w 3 dodatkowe statki)",
+      "source": "Ograniczone 1-3"
+    },
+    "w_kinetic_railgun_beam_I": {
+      "name": "Promień działa szynowego I",
+      "desc": "Promień działa szynowego I — promień kinetyczny. +10% krytyka.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Przykład 1"
+    },
+    "w_kinetic_railgun_beam_II": {
+      "name": "Promień działa szynowego II",
+      "desc": "Railgun Beam II — Ulepszony promień kinetyczny.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_railgun_beam_III": {
+      "name": "Promień działa szynowego III",
+      "desc": "Railgun Beam III — zaawansowana wiązka kinetyczna.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_gauss_cannon_beam_I": {
+      "name": "Promień Działka Gaussa I",
+      "desc": "Promień Działka Gaussa I — wiązka elektromagnetyczna.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Przypadek 22"
+    },
+    "w_kinetic_gauss_cannon_beam_II": {
+      "name": "Promień Działka Gaussa II",
+      "desc": "Promień Działka Gaussa II — ulepszona wiązka elektromagnetyczna.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_gauss_cannon_beam_III": {
+      "name": "Promień Działka Gaussa III",
+      "desc": "Promień Działka Gaussa III — zaawansowana wiązka elektromagnetyczna.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_mass_driver_beam_I": {
+      "name": "Masowa wiązka kierowcy I",
+      "desc": "Masowa wiązka sterująca I — Masowa wiązka sterująca.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Instancja 7"
+    },
+    "w_kinetic_mass_driver_beam_II": {
+      "name": "Masowa wiązka kierowcy II",
+      "desc": "Mass Driver Beam II — Ulepszona masowa wiązka kierowcy.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_mass_driver_beam_III": {
+      "name": "Masowa wiązka sterująca III",
+      "desc": "Mass Driver Beam III — zaawansowana masowa wiązka sterująca.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_shredder_beam_I": {
+      "name": "Niszczarka Belka I",
+      "desc": "Shredder Beam I — Promień niszczący zbroję.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Przypadek 17"
+    },
+    "w_kinetic_shredder_beam_II": {
+      "name": "Wiązka niszcząca II",
+      "desc": "Shredder Beam II — Ulepszona belka niszcząca.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_shredder_beam_III": {
+      "name": "Promień Niszczarki III",
+      "desc": "Shredder Beam III — Zaawansowana belka niszcząca.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_penetrator_beam_I": {
+      "name": "Promień penetrujący I",
+      "desc": "Promień penetrujący I — promień penetrujący.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Przypadek 26"
+    },
+    "w_kinetic_penetrator_beam_II": {
+      "name": "Promień penetrujący II",
+      "desc": "Promień penetrujący II — ulepszony promień penetrujący.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_penetrator_beam_III": {
+      "name": "Promień penetrujący III",
+      "desc": "Promień penetrujący III — zaawansowana wiązka penetracyjna.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_accelerator_beam_I": {
+      "name": "Belka przyspieszająca I",
+      "desc": "Wiązka akceleratora I — wiązka przyspieszenia.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Humanoid 10"
+    },
+    "w_kinetic_accelerator_beam_II": {
+      "name": "Wiązka przyspieszająca II",
+      "desc": "Accelerator Beam II — ulepszona przyspieszona wiązka.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_accelerator_beam_III": {
+      "name": "Wiązka przyspieszająca III",
+      "desc": "Accelerator Beam III — zaawansowana wiązka przyspieszona.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_ripper_beam_I": {
+      "name": "Ripper Beam I",
+      "desc": "Belka Zrywaka I — Belka Zrywaka.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 2"
+    },
+    "w_kinetic_ripper_beam_II": {
+      "name": "Promień Rozpruwacza II",
+      "desc": "Wiązka Zrywaka II — Ulepszona wiązka Zrywaka.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_ripper_beam_III": {
+      "name": "Promień Rozpruwacza III",
+      "desc": "Belka Zrywaka III — zaawansowana belka Zrywaka.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_hailstorm_beam_I": {
+      "name": "Promień gradobicia I",
+      "desc": "Promień gradobicia I — Promień gradobicia.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 4"
+    },
+    "w_kinetic_hailstorm_beam_II": {
+      "name": "Promień gradobicia II",
+      "desc": "Wiązka gradobicia II — Ulepszona wiązka burzy gradowej.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_hailstorm_beam_III": {
+      "name": "Promień gradobicia III",
+      "desc": "Wiązka gradobicia III — zaawansowana wiązka burzy gradowej.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_obliterator_beam_I": {
+      "name": "Promień Obliteratora I",
+      "desc": "Promień Obliteratora I — Promień Obliteratora.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 7"
+    },
+    "w_kinetic_obliterator_beam_II": {
+      "name": "Promień Obliteratora II",
+      "desc": "Wiązka Obliteratora II — Ulepszona wiązka Obliteratora.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_obliterator_beam_III": {
+      "name": "Promień Obliteratora III",
+      "desc": "Wiązka Obliteratora III — Zaawansowana wiązka Obliteratora.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_annihilator_beam_I": {
+      "name": "Promień Anihilatora I",
+      "desc": "Promień Anihilatora I — Promień Anihilacji.",
+      "special": "+10% szansy na trafienie krytyczne",
+      "source": "Próba 9"
+    },
+    "w_kinetic_annihilator_beam_II": {
+      "name": "Promień Niszczyciela II",
+      "desc": "Promień Anihilatora II — Ulepszony promień Anihilatora.",
+      "special": "+15% szansy na trafienie krytyczne",
+      "source": "Przykład 11-16"
+    },
+    "w_kinetic_annihilator_beam_III": {
+      "name": "Promień Niszczyciela III",
+      "desc": "Promień Anihilatora III — Zaawansowany promień Anihilatora.",
+      "special": "+22% szansy na trafienie krytyczne",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_inferno_beam_I": {
+      "name": "Inferno Promień I",
+      "desc": "Inferno Beam I — Piekielny Promień.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Instancja 2"
+    },
+    "w_heat_inferno_beam_II": {
+      "name": "Inferno Promień II",
+      "desc": "Inferno Beam II — Ulepszony Piekielny Promień.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_inferno_beam_III": {
+      "name": "Inferno Promień III",
+      "desc": "Inferno Beam III — zaawansowany piekielny promień.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_scorch_beam_I": {
+      "name": "Palący Promień I",
+      "desc": "Palący Promień I — Palący Promień.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 6"
+    },
+    "w_heat_scorch_beam_II": {
+      "name": "Promień ognia II",
+      "desc": "Scorch Beam II — Ulepszony promień spalania.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_scorch_beam_III": {
+      "name": "Promień ognia III",
+      "desc": "Promień ognia III — Zaawansowany promień ognia.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_molten_core_beam_I": {
+      "name": "Belka stopionego rdzenia I",
+      "desc": "Belka stopionego rdzenia I — Belka stopionego rdzenia.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 11"
+    },
+    "w_heat_molten_core_beam_II": {
+      "name": "Belka stopionego rdzenia II",
+      "desc": "Wiązka stopionego rdzenia II — ulepszona wiązka stopionego rdzenia.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_molten_core_beam_III": {
+      "name": "Belka stopionego rdzenia III",
+      "desc": "Molten Core Beam III — zaawansowana wiązka stopionego rdzenia.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_pyro_blast_beam_I": {
+      "name": "Promień pirotechnicznego I",
+      "desc": "Promień Pyro Wybuchu I — Promień Kuli Ognia.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 16"
+    },
+    "w_heat_pyro_blast_beam_II": {
+      "name": "Promień Pyro Wybuchu II",
+      "desc": "Pyro Blast Beam II — Ulepszony promień Pyro Blast.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_pyro_blast_beam_III": {
+      "name": "Promień Pyro Wybuchu III",
+      "desc": "Pyro Blast Beam III — Zaawansowany Pyro Blast Beam.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_thermal_lance_beam_I": {
+      "name": "Promień lancy termicznej I",
+      "desc": "Promień lancy termicznej I — wiązka termiczna.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 27"
+    },
+    "w_heat_thermal_lance_beam_II": {
+      "name": "Promień lancy termicznej II",
+      "desc": "Thermal Lance Beam II — Ulepszona wiązka termiczna.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_thermal_lance_beam_III": {
+      "name": "Promień lancy termicznej III",
+      "desc": "Thermal Lance Beam III — zaawansowana wiązka termiczna.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_sunflare_beam_I": {
+      "name": "Promień Słoneczny I",
+      "desc": "Promień rozbłysków słonecznych I — promień rozbłysków słonecznych.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 12"
+    },
+    "w_heat_sunflare_beam_II": {
+      "name": "Promień Słoneczny II",
+      "desc": "Promień rozbłysków słonecznych II — Ulepszony promień rozbłysków słonecznych.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_sunflare_beam_III": {
+      "name": "Promień Słoneczny III",
+      "desc": "Promień rozbłysków słonecznych III — Zaawansowany promień rozbłysków słonecznych.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_magma_beam_I": {
+      "name": "Promień Magmy I",
+      "desc": "Promień Magmy I — Promień Magmy.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Przypadek 21"
+    },
+    "w_heat_magma_beam_II": {
+      "name": "Promień Magmy II",
+      "desc": "Magma Beam II — Ulepszony promień magmy.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_magma_beam_III": {
+      "name": "Promień Magmy III",
+      "desc": "Magma Beam III — zaawansowana wiązka magmy.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_incinerator_beam_I": {
+      "name": "Belka spalarni I",
+      "desc": "Belka spalająca I — Belka spalająca.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Humanoid 1"
+    },
+    "w_heat_incinerator_beam_II": {
+      "name": "Belka spalarni II",
+      "desc": "Wiązka spalająca II — ulepszona wiązka spalająca.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_incinerator_beam_III": {
+      "name": "Belka spalarni III",
+      "desc": "Wiązka spalająca III — zaawansowana wiązka spalająca.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_phoenix_beam_I": {
+      "name": "Promień Feniksa I",
+      "desc": "Promień Feniksa I — Promień Feniksa.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Humanoid 4"
+    },
+    "w_heat_phoenix_beam_II": {
+      "name": "Promień Feniksa II",
+      "desc": "Promień Feniksa II — Ulepszony Promień Feniksa.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_phoenix_beam_III": {
+      "name": "Promień Feniksa III",
+      "desc": "Promień Feniksa III — Zaawansowany Promień Feniksa.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_hellfire_beam_I": {
+      "name": "Promień Piekielnego Ognia I",
+      "desc": "Promień Piekielnego Ognia I — Promień Piekielnego Ognia.",
+      "special": "Topi zbroję: -10% do def 1 rundy",
+      "source": "Próba 1"
+    },
+    "w_heat_hellfire_beam_II": {
+      "name": "Promień Piekielnego Ognia II",
+      "desc": "Hellfire Beam II — Ulepszony promień piekielnego ognia.",
+      "special": "Topi zbroję: -15% do def 2 rund",
+      "source": "Przykład 11-16"
+    },
+    "w_heat_hellfire_beam_III": {
+      "name": "Promień Piekielnego Ognia III",
+      "desc": "Hellfire Beam III — Zaawansowany promień piekielnego ognia.",
+      "special": "Topi zbroję: -22% na 3 rundy",
+      "source": "Przypadek 21-26"
+    },
+    "w_magnetic_pulsar_beam_I": {
+      "name": "Pulsar Beam I",
+      "desc": "Pulsar Beam I — wiązka impulsów EMP.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_pulsar_beam_II": {
+      "name": "Promień Pulsarowy II",
+      "desc": "Pulsar Beam II — Ulepszona wiązka pulsarów.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_pulsar_beam_III": {
+      "name": "Promień Pulsarowy III",
+      "desc": "Pulsar Beam III — zaawansowana wiązka pulsarowa.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_emp_blast_beam_I": {
+      "name": "Promień Wybuchowy EMP I",
+      "desc": "Wiązka wybuchowa EMP I — wiązka EMP.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_emp_blast_beam_II": {
+      "name": "Promień Wybuchu EMP II",
+      "desc": "Wybuchowy promień EMP II — ulepszony promień EMP.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_emp_blast_beam_III": {
+      "name": "Promień Wybuchu EMP III",
+      "desc": "Wybuchowy promień EMP III — zaawansowana wiązka EMP.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_stasis_beam_beam_I": {
+      "name": "Promień Stazy I",
+      "desc": "Promień stazy — promień zamrażania.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_stasis_beam_beam_II": {
+      "name": "Promień Stazy II",
+      "desc": "Promień Stazy II — Ulepszony Promień Stazy.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_stasis_beam_beam_III": {
+      "name": "Promień Stazy III",
+      "desc": "Promień Stazy III — Zaawansowany Promień Stazy.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_disruptor_beam_I": {
+      "name": "Promień Zakłócający I",
+      "desc": "Promień zakłócający I — promień zakłócający.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_disruptor_beam_II": {
+      "name": "Promień Zakłócający II",
+      "desc": "Promień zakłócający II — Ulepszony promień zakłócający.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_disruptor_beam_III": {
+      "name": "Promień Zakłócający III",
+      "desc": "Promień zakłócający III — Zaawansowany promień zakłócający.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_magnetron_beam_I": {
+      "name": "Wiązka magnetronowa I",
+      "desc": "Wiązka magnetronu I — wiązka magnetronu.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_magnetron_beam_II": {
+      "name": "Wiązka magnetronu II",
+      "desc": "Wiązka magnetronowa II — ulepszona wiązka magnetronowa.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_magnetron_beam_III": {
+      "name": "Wiązka magnetronu III",
+      "desc": "Wiązka magnetronowa III — zaawansowana wiązka magnetronowa.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_neutron_wave_beam_I": {
+      "name": "Wiązka fal neutronowych I",
+      "desc": "Wiązka fal neutronowych I — wiązka fal neutronowych.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_neutron_wave_beam_II": {
+      "name": "Wiązka fal neutronowych II",
+      "desc": "Wiązka fal neutronowych II — ulepszona wiązka fal neutronowych.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_neutron_wave_beam_III": {
+      "name": "Wiązka fal neutronowych III",
+      "desc": "Wiązka fal neutronowych III — zaawansowana wiązka fal neutronowych.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_cascade_beam_I": {
+      "name": "Belka Kaskadowa I",
+      "desc": "Belka Kaskadowa I — Belka Kaskadowa.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_cascade_beam_II": {
+      "name": "Belka Kaskadowa II",
+      "desc": "Wiązka kaskadowa II — ulepszona wiązka kaskadowa.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_cascade_beam_III": {
+      "name": "Belka Kaskadowa III",
+      "desc": "Cascade Beam III — zaawansowana belka kaskadowa.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_ion_storm_beam_I": {
+      "name": "Promień Burzy Jonowej I",
+      "desc": "Promień burzy jonowej I — promień burzy jonowej.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_ion_storm_beam_II": {
+      "name": "Promień Burzy Jonowej II",
+      "desc": "Ion Storm Beam II — Ulepszony promień burzy jonowej.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_ion_storm_beam_III": {
+      "name": "Promień Burzy Jonowej III",
+      "desc": "Ion Storm Beam III — Zaawansowany promień burzy jonowej.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_magnetosphere_beam_I": {
+      "name": "Promień magnetosfery I",
+      "desc": "Wiązka magnetosfery I — wiązka magnetosfery.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_magnetosphere_beam_II": {
+      "name": "Promień magnetosfery II",
+      "desc": "Wiązka magnetosfery II — ulepszona wiązka magnetosfery.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_magnetosphere_beam_III": {
+      "name": "Promień magnetosfery III",
+      "desc": "Wiązka magnetosfery III — zaawansowana wiązka magnetosfery.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_magnetic_singularity_beam_I": {
+      "name": "Promień Osobliwości I",
+      "desc": "Promień Osobliwości I — Promień Osobliwości.",
+      "special": "10% szans: wyłącz broń na 1 rundę",
+      "source": "Przykład 11-15"
+    },
+    "w_magnetic_singularity_beam_II": {
+      "name": "Promień Osobliwości II",
+      "desc": "Promień osobliwości II — Ulepszony promień osobliwości.",
+      "special": "18% szans: wyłącz broń na 2 rundy",
+      "source": "Przykład 16-20"
+    },
+    "w_magnetic_singularity_beam_III": {
+      "name": "Promień Osobliwości III",
+      "desc": "Singularity Beam III — zaawansowana wiązka osobliwości.",
+      "special": "28% szans: wyłącz broń na 2 rundy",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_devastator_beam_I": {
+      "name": "Promień Dewastatora I",
+      "desc": "Promień Dewastatora I — Niszczycielski promień.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_devastator_beam_II": {
+      "name": "Promień Dewastatora II",
+      "desc": "Devastator Beam II — ulepszony niszczycielski promień.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_devastator_beam_III": {
+      "name": "Promień Dewastatora III",
+      "desc": "Devastator Beam III — Zaawansowany niszczycielski promień.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_annihilator_beam_I": {
+      "name": "Promień Anihilatora I",
+      "desc": "Promień Anihilatora I — Promień Anihilacji.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_annihilator_beam_II": {
+      "name": "Promień Niszczyciela II",
+      "desc": "Promień Anihilatora II — Ulepszony promień Anihilatora.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_annihilator_beam_III": {
+      "name": "Promień Niszczyciela III",
+      "desc": "Promień Anihilatora III — Zaawansowany promień Anihilatora.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_maelstrom_beam_I": {
+      "name": "Promień Wiru I",
+      "desc": "Promień Wiru I — Promień Wiru.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_maelstrom_beam_II": {
+      "name": "Promień Wiru II",
+      "desc": "Wiązka Wiru II — Ulepszona Wiązka Wiru.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_maelstrom_beam_III": {
+      "name": "Promień Wiru III",
+      "desc": "Wiązka Maelstrom III — Zaawansowana wiązka Wiru.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_cataclysm_beam_I": {
+      "name": "Promień Kataklizmu I",
+      "desc": "Promień Kataklizmu I — Promień Kataklizmu.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_cataclysm_beam_II": {
+      "name": "Promień Kataklizmu II",
+      "desc": "Promień kataklizmu II — ulepszony promień kataklizmu.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_cataclysm_beam_III": {
+      "name": "Promień Kataklizmu III",
+      "desc": "Promień kataklizmu III — Zaawansowany promień kataklizmu.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_oblivion_beam_I": {
+      "name": "Promień Zapomnienia I",
+      "desc": "Promień Zapomnienia I — Promień Zapomnienia.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_oblivion_beam_II": {
+      "name": "Promień Zapomnienia II",
+      "desc": "Promień Oblivion II — ulepszony promień zapomnienia.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_oblivion_beam_III": {
+      "name": "Promień Zapomnienia III",
+      "desc": "Promień Oblivion III — Zaawansowany promień zapomnienia.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_earthshaker_beam_I": {
+      "name": "Promień wstrząsający ziemią I",
+      "desc": "Promień Wstrząsacza Ziemi I — Promień Wstrząsacza Ziemi.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_earthshaker_beam_II": {
+      "name": "Promień wstrząsający ziemią II",
+      "desc": "Earthshaker Beam II — Ulepszony Earthshaker Beam.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_earthshaker_beam_III": {
+      "name": "Promień wstrząsający ziemią III",
+      "desc": "Earthshaker Beam III — Zaawansowany Earthshaker Beam.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_nova_beam_I": {
+      "name": "Nowy Promień I",
+      "desc": "Promień Nova I — Promień Nova.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_nova_beam_II": {
+      "name": "Nowy Promień II",
+      "desc": "Nova Beam II — Ulepszony promień nowej.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_nova_beam_III": {
+      "name": "Promień Nowej III",
+      "desc": "Nova Beam III — zaawansowana wiązka nowej.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_armageddon_beam_I": {
+      "name": "Belka Armageddonu I",
+      "desc": "Promień Armageddonu I — Promień Armageddonu.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_armageddon_beam_II": {
+      "name": "Promień Armageddonu II",
+      "desc": "Promień Armageddonu II — Ulepszony promień Armageddonu.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_armageddon_beam_III": {
+      "name": "Promień Armageddonu III",
+      "desc": "Promień Armageddonu III — Zaawansowany promień Armageddonu.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_apocalypse_beam_I": {
+      "name": "Promień Apokalipsy I",
+      "desc": "Promień Apokalipsy I — Promień Apokalipsy.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_apocalypse_beam_II": {
+      "name": "Promień Apokalipsy II",
+      "desc": "Promień Apokalipsy II — Ulepszony promień apokalipsy.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_apocalypse_beam_III": {
+      "name": "Promień Apokalipsy III",
+      "desc": "Promień Apokalipsy III — Zaawansowany promień apokalipsy.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_explosive_crusher_beam_I": {
+      "name": "Promień Kruszarki I",
+      "desc": "Belka krusząca I — Belka krusząca.",
+      "special": "+20% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 11-15"
+    },
+    "w_explosive_crusher_beam_II": {
+      "name": "Promień Kruszarki II",
+      "desc": "Crusher Beam II — Ulepszona belka krusząca.",
+      "special": "+30% obrażeń bezpośrednio przez tarczę",
+      "source": "Przykład 16-20"
+    },
+    "w_explosive_crusher_beam_III": {
+      "name": "Promień Kruszarki III",
+      "desc": "Crusher Beam III — Zaawansowana belka krusząca.",
+      "special": "+45% obrażeń bezpośrednio przez tarczę",
+      "source": "Ograniczone 4-6"
+    },
+    "w_kinetic_railgun_missile_I": {
+      "name": "Pocisk Railgun I",
+      "desc": "Railgun Missile I — pocisk kierowany. Zawsze trafia.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_railgun_missile_II": {
+      "name": "Pocisk Railgun II",
+      "desc": "Railgun Missile II — ulepszony pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_railgun_missile_III": {
+      "name": "Pocisk Railgun III",
+      "desc": "Railgun Missile III — elitarny pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia +10% dodatkowych obrażeń",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_gauss_cannon_missile_I": {
+      "name": "Pocisk z armatą Gaussa I",
+      "desc": "Pocisk z działem Gaussa I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_gauss_cannon_missile_II": {
+      "name": "Pocisk z armatą Gaussa II",
+      "desc": "Pocisk z działem Gaussa II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_gauss_cannon_missile_III": {
+      "name": "Pocisk z armatą Gaussa III",
+      "desc": "Gauss Cannon Missile III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_mass_driver_missile_I": {
+      "name": "Pocisk Masowego Kierowcy I",
+      "desc": "Mass Driver Missile I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_mass_driver_missile_II": {
+      "name": "Pocisk Mass Driver II",
+      "desc": "Mass Driver Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_mass_driver_missile_III": {
+      "name": "Pocisk masowy III",
+      "desc": "Pocisk Mass Driver III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_shredder_missile_I": {
+      "name": "Pocisk niszczący I",
+      "desc": "Shredder Missile I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_shredder_missile_II": {
+      "name": "Pocisk niszczący II",
+      "desc": "Shredder Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_shredder_missile_III": {
+      "name": "Pocisk niszczący III",
+      "desc": "Shredder Missile III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_penetrator_missile_I": {
+      "name": "Pocisk penetrujący I",
+      "desc": "Pocisk penetrujący I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_penetrator_missile_II": {
+      "name": "Pocisk penetrujący II",
+      "desc": "Pocisk penetrujący II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_penetrator_missile_III": {
+      "name": "Pocisk penetrujący III",
+      "desc": "Pocisk penetrujący III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_accelerator_missile_I": {
+      "name": "Pocisk akceleracyjny I",
+      "desc": "Pocisk akceleracyjny I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_accelerator_missile_II": {
+      "name": "Pocisk akceleracyjny II",
+      "desc": "Accelerator Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_accelerator_missile_III": {
+      "name": "Pocisk akceleracyjny III",
+      "desc": "Accelerator Missile III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_ripper_missile_I": {
+      "name": "Pocisk Rozpruwacz I",
+      "desc": "Ripper Missile I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_ripper_missile_II": {
+      "name": "Pocisk Rozpruwacz II",
+      "desc": "Ripper Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_ripper_missile_III": {
+      "name": "Pocisk Rozpruwacza III",
+      "desc": "Ripper Missile III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_hailstorm_missile_I": {
+      "name": "Pocisk gradowy I",
+      "desc": "Hailstorm Missile I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_hailstorm_missile_II": {
+      "name": "Pocisk gradowy II",
+      "desc": "Hailstorm Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_hailstorm_missile_III": {
+      "name": "Pocisk gradowy III",
+      "desc": "Pocisk Hailstorm III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_obliterator_missile_I": {
+      "name": "Pocisk Obliterator I",
+      "desc": "Pocisk Obliterator I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_obliterator_missile_II": {
+      "name": "Pocisk Niszczycielski II",
+      "desc": "Pocisk Obliterator II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_obliterator_missile_III": {
+      "name": "Pocisk Niszczycielski III",
+      "desc": "Pocisk Obliterator III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_kinetic_annihilator_missile_I": {
+      "name": "Pocisk Annihilator I",
+      "desc": "Pocisk Annihilator I — pocisk kierowany.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przykład 16-20"
+    },
+    "w_kinetic_annihilator_missile_II": {
+      "name": "Pocisk Niszczyciel II",
+      "desc": "Annihilator Missile II — ulepszony pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia",
+      "source": "Przypadek 21-26"
+    },
+    "w_kinetic_annihilator_missile_III": {
+      "name": "Pocisk Niszczyciel III",
+      "desc": "Pocisk Annihilator III — elitarny pocisk.",
+      "special": "Z przewodnikiem — 100% trafienia + 10% premii",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_inferno_missile_I": {
+      "name": "Pocisk Inferno I",
+      "desc": "Inferno Missile I — pocisk kierowany termicznie.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_inferno_missile_II": {
+      "name": "Pocisk Inferno II",
+      "desc": "Inferno Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_inferno_missile_III": {
+      "name": "Piekło Pocisk III",
+      "desc": "Inferno Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_scorch_missile_I": {
+      "name": "Pocisk Scorch I",
+      "desc": "Pocisk Scorch I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_scorch_missile_II": {
+      "name": "Pocisk Spalający II",
+      "desc": "Scorch Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_scorch_missile_III": {
+      "name": "Pocisk Spalający III",
+      "desc": "Scorch Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_molten_core_missile_I": {
+      "name": "Pocisk ze stopionym rdzeniem I",
+      "desc": "Pocisk ze stopionym rdzeniem I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_molten_core_missile_II": {
+      "name": "Pocisk ze stopionym rdzeniem II",
+      "desc": "Molten Core Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_molten_core_missile_III": {
+      "name": "Pocisk ze stopionym rdzeniem III",
+      "desc": "Molten Core Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_pyro_blast_missile_I": {
+      "name": "Pocisk piro-wybuchowy I",
+      "desc": "Pyro Blast Missile I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_pyro_blast_missile_II": {
+      "name": "Pocisk ognioodporny II",
+      "desc": "Pyro Blast Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_pyro_blast_missile_III": {
+      "name": "Pocisk ognioodporny III",
+      "desc": "Pyro Blast Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_thermal_lance_missile_I": {
+      "name": "Pocisk termiczny I",
+      "desc": "Pocisk termiczny I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_thermal_lance_missile_II": {
+      "name": "Pocisk termiczny II",
+      "desc": "Thermal Lance Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_thermal_lance_missile_III": {
+      "name": "Pocisk termiczny III",
+      "desc": "Thermal Lance Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_sunflare_missile_I": {
+      "name": "Pocisk Słoneczny I",
+      "desc": "Pocisk Sunflare I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_sunflare_missile_II": {
+      "name": "Pocisk słoneczny II",
+      "desc": "Sunflare Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_sunflare_missile_III": {
+      "name": "Pocisk Słoneczny III",
+      "desc": "Sunflare Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_magma_missile_I": {
+      "name": "Pocisk magmowy I",
+      "desc": "Magma Missile I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_magma_missile_II": {
+      "name": "Pocisk magmowy II",
+      "desc": "Magma Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_magma_missile_III": {
+      "name": "Pocisk magmowy III",
+      "desc": "Magma Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_incinerator_missile_I": {
+      "name": "Pocisk spalający I",
+      "desc": "Pocisk spalający I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_incinerator_missile_II": {
+      "name": "Pocisk spalający II",
+      "desc": "Pocisk spalający II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_incinerator_missile_III": {
+      "name": "Pocisk spalający III",
+      "desc": "Pocisk spalający III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_phoenix_missile_I": {
+      "name": "Pocisk Phoenix I",
+      "desc": "Pocisk Phoenix I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_phoenix_missile_II": {
+      "name": "Pocisk Feniks II",
+      "desc": "Pocisk Phoenix II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_phoenix_missile_III": {
+      "name": "Pocisk Feniks III",
+      "desc": "Phoenix Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_heat_hellfire_missile_I": {
+      "name": "Pocisk Piekielnego Ognia I",
+      "desc": "Hellfire Missile I — pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (15 obrażeń/rundę)",
+      "source": "Przykład 16-20"
+    },
+    "w_heat_hellfire_missile_II": {
+      "name": "Pocisk Piekielnego Ognia II",
+      "desc": "Hellfire Missile II — ulepszony pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 2 rundy (28 obrażeń/rundę)",
+      "source": "Przypadek 21-26"
+    },
+    "w_heat_hellfire_missile_III": {
+      "name": "Pocisk Piekielnego Ognia III",
+      "desc": "Hellfire Missile III — elitarny pocisk termiczny.",
+      "special": "Z przewodnikiem + spalenie 3 rundy (45 obrażeń/rundę)",
+      "source": "Ograniczone 6-8"
+    },
+    "w_magnetic_pulsar_missile_I": {
+      "name": "Pocisk Pulsar I",
+      "desc": "Pulsar Missile I — rakieta kierowana magnetycznie.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_pulsar_missile_II": {
+      "name": "Pocisk Pulsar II",
+      "desc": "Pulsar Missile II — ulepszony pocisk magnetyczny.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_pulsar_missile_III": {
+      "name": "Pocisk Pulsar III",
+      "desc": "Pulsar Missile III — elitarny pocisk magnetyczny.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_emp_blast_missile_I": {
+      "name": "Pocisk wybuchowy EMP I",
+      "desc": "Pocisk wybuchowy EMP I — pocisk EMP.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_emp_blast_missile_II": {
+      "name": "Pocisk wybuchowy EMP II",
+      "desc": "EMP Blast Missile II — ulepszony pocisk EMP.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_emp_blast_missile_III": {
+      "name": "Pocisk wybuchowy EMP III",
+      "desc": "EMP Blast Missile III — elitarny pocisk EMP.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_stasis_beam_missile_I": {
+      "name": "Pocisk statyczny I",
+      "desc": "Pocisk statyczny I — pocisk statyczny.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_stasis_beam_missile_II": {
+      "name": "Pocisk statyczny II",
+      "desc": "Pocisk statyczny II — ulepszony pocisk statyczny.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_stasis_beam_missile_III": {
+      "name": "Pocisk statyczny III",
+      "desc": "Stasis Missile III — elitarny pocisk statyczny.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_disruptor_missile_I": {
+      "name": "Pocisk zakłócający I",
+      "desc": "Pocisk zakłócający I — Pocisk zakłócający.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_disruptor_missile_II": {
+      "name": "Pocisk zakłócający II",
+      "desc": "Pocisk zakłócający II — ulepszony pocisk zakłócający.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_disruptor_missile_III": {
+      "name": "Pocisk zakłócający III",
+      "desc": "Pocisk zakłócający III — elitarny pocisk zakłócający.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_magnetron_missile_I": {
+      "name": "Pocisk magnetronowy I",
+      "desc": "Pocisk magnetronowy I — pocisk magnetronowy.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_magnetron_missile_II": {
+      "name": "Pocisk magnetronowy II",
+      "desc": "Pocisk magnetronowy II — ulepszony pocisk magnetronowy.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_magnetron_missile_III": {
+      "name": "Pocisk magnetronowy III",
+      "desc": "Pocisk magnetronowy III — elitarny pocisk magnetronowy.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_neutron_wave_missile_I": {
+      "name": "Pocisk na fali neutronowej I",
+      "desc": "Pocisk neutronowy I — pocisk neutronowy.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_neutron_wave_missile_II": {
+      "name": "Pocisk na fali neutronowej II",
+      "desc": "Pocisk neutronowy II — ulepszony pocisk neutronowy.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_neutron_wave_missile_III": {
+      "name": "Pocisk na fali neutronowej III",
+      "desc": "Pocisk Neutron Wave III — elitarny pocisk neutronowy.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_cascade_missile_I": {
+      "name": "Pocisk kaskadowy I",
+      "desc": "Pocisk kaskadowy I — pocisk kaskadowy.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_cascade_missile_II": {
+      "name": "Pocisk kaskadowy II",
+      "desc": "Cascade Missile II — ulepszony pocisk kaskadowy.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_cascade_missile_III": {
+      "name": "Pocisk kaskadowy III",
+      "desc": "Cascade Missile III — elitarny pocisk kaskadowy.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_ion_storm_missile_I": {
+      "name": "Pocisk Burzy Jonowej I",
+      "desc": "Pocisk Burzy Ionowej I — pocisk jonowy.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_ion_storm_missile_II": {
+      "name": "Pocisk Burzy Jonowej II",
+      "desc": "Ion Storm Missile II — ulepszony pocisk jonowy.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_ion_storm_missile_III": {
+      "name": "Pocisk Burzy Jonowej III",
+      "desc": "Ion Storm Missile III — elitarny pocisk jonowy.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_magnetosphere_missile_I": {
+      "name": "Pocisk magnetosferyczny I",
+      "desc": "Pocisk magnetosferyczny I — rakieta magnetosferyczna.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_magnetosphere_missile_II": {
+      "name": "Pocisk magnetosferyczny II",
+      "desc": "Pocisk magnetosferyczny II — ulepszony pocisk magnetosferyczny.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_magnetosphere_missile_III": {
+      "name": "Pocisk magnetosferyczny III",
+      "desc": "Pocisk magnetosferyczny III — elitarny pocisk magnetosferyczny.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_magnetic_singularity_missile_I": {
+      "name": "Pocisk Osobliwości I",
+      "desc": "Pocisk Singularity I — pocisk Singularity.",
+      "special": "Z przewodnikiem + 15% szansy: wyłącz silnik na 1 rundę",
+      "source": "Przypadek 21-25"
+    },
+    "w_magnetic_singularity_missile_II": {
+      "name": "Pocisk Osobliwości II",
+      "desc": "Pocisk Singularity II — ulepszony pocisk osobliwości.",
+      "special": "Z przewodnikiem + 25% szansy: wyłącz silnik na 2 rundy",
+      "source": "Ograniczone 3-5"
+    },
+    "w_magnetic_singularity_missile_III": {
+      "name": "Pocisk Osobliwości III",
+      "desc": "Pocisk Singularity III — elitarny pocisk osobliwości.",
+      "special": "Z przewodnikiem + 38% szansy: wyłącz silnik na 2 rundy",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_devastator_missile_I": {
+      "name": "Pocisk Dewastator I",
+      "desc": "Pocisk Dewastatora I — niszczycielski pocisk.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_devastator_missile_II": {
+      "name": "Pocisk Dewastator II",
+      "desc": "Pocisk Devastator II — ulepszony niszczycielski pocisk.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_devastator_missile_III": {
+      "name": "Pocisk Dewastator III",
+      "desc": "Pocisk Devastator III – elitarny niszczycielski pocisk.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_annihilator_missile_I": {
+      "name": "Pocisk Annihilator I",
+      "desc": "Annihilator Missile I — niszczycielski pocisk.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_annihilator_missile_II": {
+      "name": "Pocisk Niszczyciel II",
+      "desc": "Annihilator Missile II — ulepszony pocisk anihilujący.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_annihilator_missile_III": {
+      "name": "Pocisk Niszczyciel III",
+      "desc": "Annihilator Missile III — elitarny pocisk anihilujący.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_maelstrom_missile_I": {
+      "name": "Pocisk wirowy I",
+      "desc": "Pocisk Maelstrom I — pocisk Maelstrom.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_maelstrom_missile_II": {
+      "name": "Pocisk wirowy II",
+      "desc": "Maelstrom Missile II — ulepszony pocisk Maelstrom.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_maelstrom_missile_III": {
+      "name": "Pocisk wirowy III",
+      "desc": "Pocisk Maelstrom III — elitarny pocisk wirowy.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_cataclysm_missile_I": {
+      "name": "Pocisk kataklizmu I",
+      "desc": "Pocisk kataklizmowy I — pocisk kataklizmowy.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_cataclysm_missile_II": {
+      "name": "Pocisk kataklizmu II",
+      "desc": "Pocisk kataklizmowy II — ulepszony pocisk kataklizmiczny.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_cataclysm_missile_III": {
+      "name": "Pocisk kataklizmu III",
+      "desc": "Pocisk kataklizmowy III — elitarny pocisk kataklizmiczny.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_oblivion_missile_I": {
+      "name": "Pocisk Zapomnienia I",
+      "desc": "Pocisk Oblivion I — pocisk Oblivion.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_oblivion_missile_II": {
+      "name": "Pocisk Zapomnienia II",
+      "desc": "Pocisk Oblivion II — ulepszony pocisk Oblivion.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_oblivion_missile_III": {
+      "name": "Pocisk Zapomnienia III",
+      "desc": "Pocisk Oblivion III — elitarny pocisk zapomnienia.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_earthshaker_missile_I": {
+      "name": "Pocisk Earthshaker I",
+      "desc": "Pocisk Earthshaker I — rakieta Earthshaker.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_earthshaker_missile_II": {
+      "name": "Pocisk Wstrząsający Ziemią II",
+      "desc": "Pocisk Earthshaker II — ulepszony pocisk Earthshaker.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_earthshaker_missile_III": {
+      "name": "Pocisk Wstrząsający Ziemią III",
+      "desc": "Pocisk Earthshaker III — elitarny pocisk Earthshaker.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_nova_missile_I": {
+      "name": "Pocisk Nowa I",
+      "desc": "Pocisk Nova I — pocisk Nova.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_nova_missile_II": {
+      "name": "Pocisk Nowa II",
+      "desc": "Nova Missile II — ulepszony pocisk Nova.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_nova_missile_III": {
+      "name": "Pocisk Nowa III",
+      "desc": "Nova Missile III — elitarny pocisk Nova.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_armageddon_missile_I": {
+      "name": "Pocisk Armageddon I",
+      "desc": "Pocisk Armageddon I — pocisk Armageddon.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_armageddon_missile_II": {
+      "name": "Pocisk Armageddon II",
+      "desc": "Pocisk Armageddon II — ulepszony pocisk Armageddon.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_armageddon_missile_III": {
+      "name": "Pocisk Armageddon III",
+      "desc": "Pocisk Armageddon III — elitarny pocisk Armageddon.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_apocalypse_missile_I": {
+      "name": "Pocisk Apokalipsy I",
+      "desc": "Pocisk Apokalipsy I — pocisk apokaliptyczny.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_apocalypse_missile_II": {
+      "name": "Pocisk Apokalipsy II",
+      "desc": "Pocisk Apokaliptyczny II — ulepszony pocisk apokaliptyczny.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_apocalypse_missile_III": {
+      "name": "Pocisk Apokalipsy III",
+      "desc": "Apocalypse Missile III — elitarny apokaliptyczny pocisk.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_explosive_crusher_missile_I": {
+      "name": "Pocisk kruszący I",
+      "desc": "Pocisk kruszący I — pocisk kruszący.",
+      "special": "Z przewodnikiem + 5% szansy: zniszcz moduł",
+      "source": "Przypadek 21-25"
+    },
+    "w_explosive_crusher_missile_II": {
+      "name": "Pocisk kruszący II",
+      "desc": "Crusher Missile II — ulepszony pocisk kruszący.",
+      "special": "Z przewodnikiem + 10% szansy: zniszcz moduł",
+      "source": "Ograniczone 3-5"
+    },
+    "w_explosive_crusher_missile_III": {
+      "name": "Pocisk kruszący III",
+      "desc": "Crusher Missile III — elitarny pocisk kruszący.",
+      "special": "Z przewodnikiem + 18% szansy: zniszcz moduł + obszar",
+      "source": "Próba 1-3"
+    },
+    "w_light_fighters_I": {
+      "name": "Lekkie myśliwce I",
+      "desc": "Lekkie myśliwce. Szybki i zwinny.",
+      "special": "Atakuje 1 cel +20% uniku",
+      "source": "Przypadek 26-28"
+    },
+    "w_light_fighters_II": {
+      "name": "Lekkie myśliwce II",
+      "desc": "Zaawansowane lekkie myśliwce.",
+      "special": "Atakuje 1 cel +28% uniku",
+      "source": "Próba 1-3"
+    },
+    "w_light_fighters_III": {
+      "name": "Lekkie myśliwce III",
+      "desc": "Elitarne lekkie myśliwce.",
+      "special": "Atakuje 2 cele +35% uniku",
+      "source": "Próba 5-7"
+    },
+    "w_heavy_fighters_I": {
+      "name": "Ciężkie myśliwce I",
+      "desc": "Ciężkie myśliwce. Wolniejsze, ale mocniejsze uderzenie.",
+      "special": "+15% całkowitych obrażeń",
+      "source": "Przykład 29-30"
+    },
+    "w_heavy_fighters_II": {
+      "name": "Ciężkie myśliwce II",
+      "desc": "Zaawansowane myśliwce ciężkie.",
+      "special": "+22% całkowitych obrażeń",
+      "source": "Próba 2-4"
+    },
+    "w_heavy_fighters_III": {
+      "name": "Ciężkie myśliwce III",
+      "desc": "Elitarne myśliwce ciężkie.",
+      "special": "+35% całkowitych obrażeń + podpalenie",
+      "source": "Próba 6-8"
+    },
+    "w_magnetic_fighters_I": {
+      "name": "Myśliwce magnetyczne I",
+      "desc": "Magnetyczne myśliwce. Pole EMP.",
+      "special": "15% szans: ogłuszenie (przegrywa rundę)",
+      "source": "Ograniczone 5-7"
+    },
+    "w_magnetic_fighters_II": {
+      "name": "Myśliwce magnetyczne II",
+      "desc": "Zaawansowane myśliwce magnetyczne.",
+      "special": "25% szans: ogłuszenie (przegrywa rundę)",
+      "source": "Próba 3-5"
+    },
+    "w_magnetic_fighters_III": {
+      "name": "Myśliwce magnetyczne III",
+      "desc": "Elitarne myśliwce magnetyczne.",
+      "special": "35% szans: ogłuszenie 2 rundy + wyłączenie tarczy",
+      "source": "Próba 8-10"
+    },
+    "w_bomber_squadron_I": {
+      "name": "Dywizjon Bombowy I",
+      "desc": "Bombowce. Uderza w wiele celów.",
+      "special": "Obrażenia obszarowe — atakuje 1-3 cele",
+      "source": "Ograniczone 6-8"
+    },
+    "w_bomber_squadron_II": {
+      "name": "Dywizjon Bombowy II",
+      "desc": "Zaawansowane bombowce.",
+      "special": "Obrażenia obszarowe — atakuje 1-4 cele",
+      "source": "Próba 4-6"
+    },
+    "w_bomber_squadron_III": {
+      "name": "Dywizjon Bombowy III",
+      "desc": "Elitarni bombowcy.",
+      "special": "Obrażenia obszarowe — atakuje 1-5 celów + możliwe zniszczenie",
+      "source": "Wydarzenie z szefem"
+    },
+    "w_elite_squadron_I": {
+      "name": "Elitarna Eskadra I",
+      "desc": "Elitarna eskadra.",
+      "special": "Atakuje 2 cele — miesza rodzaje obrażeń",
+      "source": "Ograniczone 8-10"
+    },
+    "w_elite_squadron_II": {
+      "name": "Elitarna Eskadra II",
+      "desc": "Zaawansowana elitarna eskadra.",
+      "special": "Atakuje 3 cele — obrażenia adaptacyjne",
+      "source": "Próba 7-9"
+    },
+    "w_elite_squadron_III": {
+      "name": "Elitarna Eskadra III",
+      "desc": "Najlepsza elitarna eskadra.",
+      "special": "Atakuje 4 cele — wybiera najsłabszy pancerz",
+      "source": "Wydarzenie z szefem"
+    }
+  },
+  "shield": {
+    "sh_nano_veil_I": {
+      "name": "Nano Veil I",
+      "desc": "Bariera z nanofilamentu. Podstawowa ochrona scouta.",
+      "source": "Instancja 3"
+    },
+    "sh_nano_veil_II": {
+      "name": "Nano Veil II",
+      "desc": "Ulepszona bariera nanofilamentowa.",
+      "source": "Ograniczone 1"
+    },
+    "sh_nano_veil_III": {
+      "name": "Nano Veil III",
+      "desc": "Zaawansowana bariera nanofilamentowa dla lekkich statków.",
+      "source": "Ograniczone 6"
+    },
+    "sh_iron_guard_I": {
+      "name": "Żelazna Gwardia I",
+      "desc": "Stalowa osłona ochronna. Niezawodny i tani.",
+      "source": "Przypadek 6"
+    },
+    "sh_iron_guard_II": {
+      "name": "Żelazna Gwardia II",
+      "desc": "Ulepszona stalowa osłona ochronna.",
+      "source": "Przypadek 18"
+    },
+    "sh_iron_guard_III": {
+      "name": "Żelazna Gwardia III",
+      "desc": "Zaawansowana tarcza stalowa dla wojowników i zwiadowców.",
+      "source": "Ograniczone 9"
+    },
+    "sh_photon_barrier_I": {
+      "name": "Bariera Fotonowa I",
+      "desc": "Bariera energetyczna fotonu. Wyposażenie standardowe.",
+      "source": "Instancja 9"
+    },
+    "sh_photon_barrier_II": {
+      "name": "Bariera Fotonowa II",
+      "desc": "Ulepszona bariera fotonowa.",
+      "source": "Ograniczone 7"
+    },
+    "sh_photon_barrier_III": {
+      "name": "Bariera Fotonowa III",
+      "desc": "Zaawansowana bariera fotonowa.",
+      "source": "Próba 3"
+    },
+    "sh_pulse_ward_I": {
+      "name": "Oddział Pulsacyjny I",
+      "desc": "Warstwa chroniąca przed pulsacją, która pochłania uderzenia.",
+      "source": "Przypadek 12"
+    },
+    "sh_pulse_ward_II": {
+      "name": "Oddział Pulsacyjny II",
+      "desc": "Ulepszona warstwa chroniąca puls.",
+      "source": "Przypadek 30"
+    },
+    "sh_pulse_ward_III": {
+      "name": "Oddział Pulsacyjny III",
+      "desc": "Zaawansowana tarcza impulsowa dla okrętów średniego poziomu.",
+      "source": "Próba 7"
+    },
+    "sh_quartz_shell_I": {
+      "name": "Powłoka kwarcowa I",
+      "desc": "Kryształowa skorupa kwarcowa. Dobra baza wypadowa dla cruiserów.",
+      "source": "Przypadek 15"
+    },
+    "sh_quartz_shell_II": {
+      "name": "Powłoka kwarcowa II",
+      "desc": "Ulepszona powłoka kwarcowa.",
+      "source": "Ograniczone 10"
+    },
+    "sh_quartz_shell_III": {
+      "name": "Powłoka kwarcowa III",
+      "desc": "Zaawansowana powłoka kwarcowa.",
+      "source": "Próba 9"
+    },
+    "sh_flux_buffer_I": {
+      "name": "Bufor strumieniowy I",
+      "desc": "Bufor strumienia równoważący pola energetyczne.",
+      "source": "Ograniczone 3"
+    },
+    "sh_flux_buffer_II": {
+      "name": "Bufor strumieniowy II",
+      "desc": "Ulepszony bufor strumienia.",
+      "source": "Próba 1"
+    },
+    "sh_flux_buffer_III": {
+      "name": "Bufor strumieniowy III",
+      "desc": "Zaawansowany bufor strumienia. Dobre dla cruiserów.",
+      "source": "Humanoid 2"
+    },
+    "sh_alloy_plate_I": {
+      "name": "Płyta ze stopu I",
+      "desc": "Płyta ze stopu kompozytowego. Ciężki, ale trwały.",
+      "source": "Ograniczone 5"
+    },
+    "sh_alloy_plate_II": {
+      "name": "Płyta ze stopu II",
+      "desc": "Ulepszona płyta kompozytowa.",
+      "source": "Próba 4"
+    },
+    "sh_alloy_plate_III": {
+      "name": "Płyta ze stopu III",
+      "desc": "Zaawansowana płyta kompozytowa do pancerników.",
+      "source": "Humanoid 5"
+    },
+    "sh_carbon_shell_I": {
+      "name": "Powłoka węglowa I",
+      "desc": "Powłoka z nanowłókien węglowych. Lekki i mocny.",
+      "source": "Przypadek 21"
+    },
+    "sh_carbon_shell_II": {
+      "name": "Powłoka węglowa II",
+      "desc": "Ulepszona skorupa węglowa.",
+      "source": "Próba 6"
+    },
+    "sh_carbon_shell_III": {
+      "name": "Powłoka węglowa III",
+      "desc": "Zaawansowana skorupa węglowa.",
+      "source": "Humanoid 8"
+    },
+    "sh_mesh_barrier_I": {
+      "name": "Bariera siatkowa I",
+      "desc": "Siatkowa bariera energetyczna. Rozdziela wpływy.",
+      "source": "Przypadek 24"
+    },
+    "sh_mesh_barrier_II": {
+      "name": "Bariera siatkowa II",
+      "desc": "Ulepszona bariera siatkowa.",
+      "source": "Próba 8"
+    },
+    "sh_mesh_barrier_III": {
+      "name": "Bariera siatkowa III",
+      "desc": "Zaawansowana bariera siatkowa dla przewoźników.",
+      "source": "Konstelacja 2"
+    },
+    "sh_void_plate_I": {
+      "name": "Płyta Pustki I",
+      "desc": "Płyta tarczy ciemnej materii. Solidna wspólna tarcza.",
+      "source": "Przypadek 27"
+    },
+    "sh_void_plate_II": {
+      "name": "Płyta Pustki II",
+      "desc": "Ulepszona płyta ciemnej materii.",
+      "source": "Próba 10"
+    },
+    "sh_void_plate_III": {
+      "name": "Płyta Pustki III",
+      "desc": "Zaawansowana płyta ciemnej materii. Górna wspólna tarcza.",
+      "source": "Konstelacja 3"
+    },
+    "sh_srednji_I": {
+      "name": "Średnia Tarcza I",
+      "desc": "Standardowa średnia tarcza. Zrównoważona ochrona.",
+      "source": "Ograniczone 2"
+    },
+    "sh_srednji_II": {
+      "name": "Średnia Tarcza II",
+      "desc": "Ulepszona średnia tarcza.",
+      "source": "Ograniczone 8"
+    },
+    "sh_srednji_III": {
+      "name": "Średnia Tarcza III",
+      "desc": "Zaawansowana średnia tarcza. Solidne, powszechne dla średniego poziomu.",
+      "source": "Próba 5"
+    },
+    "sh_jaki_I": {
+      "name": "Silna Tarcza I",
+      "desc": "Wzmocniona wspólna tarcza. Dobry dla zaawansowanych wojowników.",
+      "source": "Ograniczone 4"
+    },
+    "sh_jaki_II": {
+      "name": "Silna Tarcza II",
+      "desc": "Ulepszona mocna tarcza.",
+      "source": "Próba 2"
+    },
+    "sh_jaki_III": {
+      "name": "Silna Tarcza III",
+      "desc": "Zaawansowana silna tarcza. Top wspólny dla wysokiego poziomu.",
+      "source": "Konstelacja 1"
+    },
+    "sh_phase_curtain_I": {
+      "name": "Kurtyna fazowa I",
+      "desc": "Kurtyna fazowa. Szansa na całkowite zablokowanie ataków.",
+      "special": "10% szans: całkowicie blokuje atak",
+      "source": "Przypadek 18"
+    },
+    "sh_phase_curtain_II": {
+      "name": "Kurtyna fazowa II",
+      "desc": "Ulepszona kurtyna fazowa.",
+      "special": "10% szans: całkowicie blokuje atak",
+      "source": "Przypadek 22"
+    },
+    "sh_phase_curtain_III": {
+      "name": "Kurtyna fazowa III",
+      "desc": "Zaawansowana kurtyna fazowa.",
+      "special": "10% szans: całkowicie blokuje atak",
+      "source": "Przypadek 26"
+    },
+    "sh_particle_veil_I": {
+      "name": "Zasłona cząstek I",
+      "desc": "Zasłona cząstek. Szansa na ogłuszenie wroga.",
+      "special": "3% szansy: ogłusza atakującego na 1 rundę",
+      "source": "Przypadek 19"
+    },
+    "sh_particle_veil_II": {
+      "name": "Zasłona cząstek II",
+      "desc": "Ulepszona zasłona cząstek.",
+      "special": "3% szansy: ogłusza atakującego na 1 rundę",
+      "source": "Przypadek 23"
+    },
+    "sh_particle_veil_III": {
+      "name": "Zasłona cząstek III",
+      "desc": "Zaawansowana zasłona cząstek.",
+      "special": "3% szansy: ogłusza atakującego na 1 rundę",
+      "source": "Przypadek 27"
+    },
+    "sh_ballistic_ward_I": {
+      "name": "Oddział Balistyczny I",
+      "desc": "Oddział balistyczny. Odporny na pociski kinetyczne.",
+      "special": "+20% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 20"
+    },
+    "sh_ballistic_ward_II": {
+      "name": "Oddział Balistyczny II",
+      "desc": "Ulepszona osłona balistyczna.",
+      "special": "+20% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 24"
+    },
+    "sh_ballistic_ward_III": {
+      "name": "Oddział Balistyczny III",
+      "desc": "Zaawansowany oddział balistyczny.",
+      "special": "+20% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 28"
+    },
+    "sh_thermal_guard_I": {
+      "name": "Straż Termiczna I",
+      "desc": "Warstwa termoochronna. Odporny na ataki ciepła.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 21"
+    },
+    "sh_thermal_guard_II": {
+      "name": "Osłona termiczna II",
+      "desc": "Ulepszona osłona termiczna.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 25"
+    },
+    "sh_thermal_guard_III": {
+      "name": "Straż termiczna III",
+      "desc": "Zaawansowana osłona termiczna.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 29"
+    },
+    "sh_mag_field_I": {
+      "name": "Pole Mag I",
+      "desc": "Osłona pola magnetycznego. Odporny na ataki magnetyczne.",
+      "special": "+20% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 22"
+    },
+    "sh_mag_field_II": {
+      "name": "Pole Mag II",
+      "desc": "Ulepszone pole magnetyczne.",
+      "special": "+20% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 26"
+    },
+    "sh_mag_field_III": {
+      "name": "Pole Mag III",
+      "desc": "Zaawansowana tarcza magnetyczna.",
+      "special": "+20% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 30"
+    },
+    "sh_blast_barrier_I": {
+      "name": "Bariera przeciwwybuchowa I",
+      "desc": "Bariera wybuchowa. Odporny na broń wybuchową.",
+      "special": "+20% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Przypadek 23"
+    },
+    "sh_blast_barrier_II": {
+      "name": "Bariera przeciwwybuchowa II",
+      "desc": "Ulepszona bariera przeciwwybuchowa.",
+      "special": "+20% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Przypadek 27"
+    },
+    "sh_blast_barrier_III": {
+      "name": "Bariera Wybuchowa III",
+      "desc": "Zaawansowana bariera przeciwwybuchowa.",
+      "special": "+20% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Ograniczone 1"
+    },
+    "sh_deflector_web_I": {
+      "name": "Sieć deflektora I",
+      "desc": "Sieć deflektora. Większa szansa na blokowanie ataków.",
+      "special": "12% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 1"
+    },
+    "sh_deflector_web_II": {
+      "name": "Wstęga deflektora II",
+      "desc": "Ulepszona siatka deflektora.",
+      "special": "12% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 3"
+    },
+    "sh_deflector_web_III": {
+      "name": "Sieć deflektora III",
+      "desc": "Zaawansowana siatka deflektora.",
+      "special": "12% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 5"
+    },
+    "sh_ionic_shell_I": {
+      "name": "Powłoka jonowa I",
+      "desc": "Powłoka jonowa o wysokim ładunku. Ogłusza atakujących.",
+      "special": "5% szans: ogłusza atakującego na 1 rundę",
+      "source": "Ograniczone 2"
+    },
+    "sh_ionic_shell_II": {
+      "name": "Powłoka jonowa II",
+      "desc": "Ulepszona powłoka jonowa.",
+      "special": "5% szans: ogłusza atakującego na 1 rundę",
+      "source": "Ograniczone 4"
+    },
+    "sh_ionic_shell_III": {
+      "name": "Powłoka jonowa III",
+      "desc": "Zaawansowana powłoka jonowa.",
+      "special": "5% szans: ogłusza atakującego na 1 rundę",
+      "source": "Ograniczone 6"
+    },
+    "sh_ember_diffuser_I": {
+      "name": "Dyfuzor Żaru I",
+      "desc": "Dyfuzor żaru. Rozprasza fale termiczne.",
+      "special": "+28% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 22"
+    },
+    "sh_ember_diffuser_II": {
+      "name": "Dyfuzor Żaru II",
+      "desc": "Ulepszony dyfuzor żaru.",
+      "special": "+28% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 26"
+    },
+    "sh_ember_diffuser_III": {
+      "name": "Dyfuzor Żaru III",
+      "desc": "Zaawansowany dyfuzor ember.",
+      "special": "+28% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 30"
+    },
+    "sh_pulse_nullifier_I": {
+      "name": "Nullifier impulsów I",
+      "desc": "Zerowanie impulsów. Pochłania uderzenia magnetyczne.",
+      "special": "+28% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 23"
+    },
+    "sh_pulse_nullifier_II": {
+      "name": "Nullifier impulsów II",
+      "desc": "Ulepszony zerownik impulsów.",
+      "special": "+28% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Przypadek 27"
+    },
+    "sh_pulse_nullifier_III": {
+      "name": "Nullifier impulsów III",
+      "desc": "Zaawansowany zerownik impulsów.",
+      "special": "+28% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Ograniczone 7"
+    },
+    "sh_mirror_plate_I": {
+      "name": "Talerz Lustrzany I",
+      "desc": "Talerz lustrzany. Odbija część obrażeń atakującego.",
+      "special": "8% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Ograniczone 3"
+    },
+    "sh_mirror_plate_II": {
+      "name": "Talerz Lustrzany II",
+      "desc": "Ulepszona płyta lustrzana.",
+      "special": "8% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Ograniczone 5"
+    },
+    "sh_mirror_plate_III": {
+      "name": "Talerz Lustrzany III",
+      "desc": "Zaawansowana płyta lustrzana.",
+      "special": "8% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Ograniczone 8"
+    },
+    "sh_heat_diff_I": {
+      "name": "Dyfuzor ciepła I",
+      "desc": "Dyfuzor ciepła. Rozprasza ataki cieplne.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 21"
+    },
+    "sh_heat_diff_II": {
+      "name": "Dyfuzor ciepła II",
+      "desc": "Ulepszony dyfuzor ciepła.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 25"
+    },
+    "sh_heat_diff_III": {
+      "name": "Rozpraszacz ciepła III",
+      "desc": "Zaawansowany dyfuzor ciepła. Świetne na późny poziom.",
+      "special": "+20% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Przypadek 28"
+    },
+    "sh_charge_acc_I": {
+      "name": "Naładuj akumulator I",
+      "desc": "Naładuj akumulator. Przyspiesza regenerację tarczy.",
+      "special": "+30% szybsza regeneracja tarczy",
+      "source": "Ograniczone 4"
+    },
+    "sh_charge_acc_II": {
+      "name": "Naładuj akumulator II",
+      "desc": "Ulepszony akumulator ładowania.",
+      "special": "+30% szybsza regeneracja tarczy",
+      "source": "Ograniczone 6"
+    },
+    "sh_charge_acc_III": {
+      "name": "Naładuj akumulator III",
+      "desc": "Zaawansowany akumulator ładowania. Świetne na długie bitwy.",
+      "special": "+30% szybsza regeneracja tarczy",
+      "source": "Ograniczone 9"
+    },
+    "sh_quantum_veil_I": {
+      "name": "Kwantowa zasłona I",
+      "desc": "Welon kwantowy. Duża szansa na zablokowanie ataków.",
+      "special": "15% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 2"
+    },
+    "sh_quantum_veil_II": {
+      "name": "Kwantowa zasłona II",
+      "desc": "Ulepszona zasłona kwantowa.",
+      "special": "15% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 4"
+    },
+    "sh_quantum_veil_III": {
+      "name": "Kwantowa zasłona III",
+      "desc": "Zaawansowana zasłona kwantowa.",
+      "special": "15% szans: całkowicie blokuje atak",
+      "source": "Ograniczone 6"
+    },
+    "sh_nova_barrier_I": {
+      "name": "Nowa Bariera I",
+      "desc": "Bariera Nowa. Czasami odpowiada eksplozją.",
+      "special": "5% szans: kontrwybuch po trafieniu",
+      "source": "Ograniczone 7"
+    },
+    "sh_nova_barrier_II": {
+      "name": "Nowa Bariera II",
+      "desc": "Ulepszona bariera nowa.",
+      "special": "5% szans: kontrwybuch po trafieniu",
+      "source": "Ograniczone 9"
+    },
+    "sh_nova_barrier_III": {
+      "name": "Nowa Bariera III",
+      "desc": "Zaawansowana bariera nowa.",
+      "special": "5% szans: kontrwybuch po trafieniu",
+      "source": "Próba 2"
+    },
+    "sh_kinetic_fortress_I": {
+      "name": "Twierdza Kinetyczna I",
+      "desc": "Twierdza kinetyczna. Silna odporność na pociski.",
+      "special": "+35% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Ograniczone 3"
+    },
+    "sh_kinetic_fortress_II": {
+      "name": "Twierdza Kinetyczna II",
+      "desc": "Ulepszona forteca kinetyczna.",
+      "special": "+35% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Ograniczone 5"
+    },
+    "sh_kinetic_fortress_III": {
+      "name": "Twierdza Kinetyczna III",
+      "desc": "Zaawansowana forteca kinetyczna.",
+      "special": "+35% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Próba 3"
+    },
+    "sh_plasma_guard_I": {
+      "name": "Strażnik Plazmy I",
+      "desc": "Strażnik plazmowy. Silna odporność na ataki termiczne.",
+      "special": "+35% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Ograniczone 4"
+    },
+    "sh_plasma_guard_II": {
+      "name": "Strażnik Plazmy II",
+      "desc": "Ulepszona osłona plazmowa.",
+      "special": "+35% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Ograniczone 6"
+    },
+    "sh_plasma_guard_III": {
+      "name": "Strażnik Plazmy III",
+      "desc": "Zaawansowana osłona plazmowa.",
+      "special": "+35% odporności na obrażenia od ciepła, gdy tarcza jest aktywna",
+      "source": "Próba 4"
+    },
+    "sh_void_field_I": {
+      "name": "Puste pole I",
+      "desc": "Puste pola. Silna odporność na ataki magnetyczne.",
+      "special": "+35% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Ograniczone 7"
+    },
+    "sh_void_field_II": {
+      "name": "Puste pole II",
+      "desc": "Ulepszone puste pola.",
+      "special": "+35% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Ograniczone 9"
+    },
+    "sh_void_field_III": {
+      "name": "Pole Pustki III",
+      "desc": "Zaawansowane puste pola.",
+      "special": "+35% odporności na obrażenia magnetyczne, gdy tarcza jest aktywna",
+      "source": "Próba 5"
+    },
+    "sh_shockwave_shell_I": {
+      "name": "Powłoka fali uderzeniowej I",
+      "desc": "Skorupa fali uderzeniowej. Silna odporność na materiały wybuchowe.",
+      "special": "+35% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Ograniczone 8"
+    },
+    "sh_shockwave_shell_II": {
+      "name": "Powłoka fali uderzeniowej II",
+      "desc": "Ulepszona skorupa fali uderzeniowej.",
+      "special": "+35% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Ograniczone 10"
+    },
+    "sh_shockwave_shell_III": {
+      "name": "Powłoka fali uderzeniowej III",
+      "desc": "Zaawansowana skorupa fali uderzeniowej.",
+      "special": "+35% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Próba 6"
+    },
+    "sh_echo_mirror_I": {
+      "name": "Lustro Echa I",
+      "desc": "Lustro echa. Odzwierciedla obrażenia zadane atakującemu.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Próba 1"
+    },
+    "sh_echo_mirror_II": {
+      "name": "Lustro Echa II",
+      "desc": "Ulepszone lustro echa.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Próba 4"
+    },
+    "sh_echo_mirror_III": {
+      "name": "Lustro Echa III",
+      "desc": "Zaawansowane lustro echa.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Próba 7"
+    },
+    "sh_phoenix_shell_I": {
+      "name": "Powłoka Feniksa I",
+      "desc": "Skorupa Feniksa. Szybka regeneracja tarczy.",
+      "special": "+55% szybsza regeneracja tarczy",
+      "source": "Próba 2"
+    },
+    "sh_phoenix_shell_II": {
+      "name": "Powłoka Feniksa II",
+      "desc": "Ulepszona skorupa feniksa.",
+      "special": "+55% szybsza regeneracja tarczy",
+      "source": "Próba 5"
+    },
+    "sh_phoenix_shell_III": {
+      "name": "Skorupa Feniksa III",
+      "desc": "Zaawansowana skorupa feniksa.",
+      "special": "+55% szybsza regeneracja tarczy",
+      "source": "Próba 8"
+    },
+    "sh_titan_core_I": {
+      "name": "Rdzeń Tytana I",
+      "desc": "Rdzeń Tytana. Zwiększa całkowitą pojemność tarczy.",
+      "special": "+28% maksymalnej wydajności tarczy",
+      "source": "Ograniczone 8"
+    },
+    "sh_titan_core_II": {
+      "name": "Rdzeń Tytana II",
+      "desc": "Ulepszony rdzeń tytanu.",
+      "special": "+28% maksymalnej wydajności tarczy",
+      "source": "Próba 3"
+    },
+    "sh_titan_core_III": {
+      "name": "Rdzeń Tytana III",
+      "desc": "Zaawansowany rdzeń tytanowy.",
+      "special": "+28% maksymalnej wydajności tarczy",
+      "source": "Próba 6"
+    },
+    "sh_storm_absorber_I": {
+      "name": "Pochłaniacz burzy I",
+      "desc": "Pochłaniacz burzy. Zamienia część obrażeń w regenerację.",
+      "special": "Pochłania 20% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Ograniczone 9"
+    },
+    "sh_storm_absorber_II": {
+      "name": "Pochłaniacz burzy II",
+      "desc": "Ulepszony pochłaniacz burzy.",
+      "special": "Pochłania 20% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Próba 2"
+    },
+    "sh_storm_absorber_III": {
+      "name": "Pochłaniacz burzy III",
+      "desc": "Zaawansowany pochłaniacz burzy.",
+      "special": "Pochłania 20% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Próba 5"
+    },
+    "sh_flash_gate_I": {
+      "name": "Błyskawiczna Brama I",
+      "desc": "Bramka błyskowa. Szansa na natychmiastowe odzyskanie tarczy.",
+      "special": "5% szans: natychmiast przywraca pełną tarczę",
+      "source": "Ograniczone 10"
+    },
+    "sh_flash_gate_II": {
+      "name": "Bramka Flash II",
+      "desc": "Ulepszona bramka flash.",
+      "special": "5% szans: natychmiast przywraca pełną tarczę",
+      "source": "Próba 4"
+    },
+    "sh_flash_gate_III": {
+      "name": "Flash Gate III",
+      "desc": "Zaawansowana bramka flash.",
+      "special": "5% szans: natychmiast przywraca pełną tarczę",
+      "source": "Próba 7"
+    },
+    "sh_arc_deflector_I": {
+      "name": "Deflektor łuku I",
+      "desc": "Deflektor łuku. Połączenie bloku i odbicia.",
+      "special": "12% bloku + 15% odbicia obrażeń",
+      "source": "Próba 1"
+    },
+    "sh_arc_deflector_II": {
+      "name": "Odbłyśnik łuku II",
+      "desc": "Ulepszony deflektor łuku.",
+      "special": "12% bloku + 15% odbicia obrażeń",
+      "source": "Próba 4"
+    },
+    "sh_arc_deflector_III": {
+      "name": "Odbłyśnik łuku III",
+      "desc": "Zaawansowany deflektor łuku.",
+      "special": "12% bloku + 15% odbicia obrażeń",
+      "source": "Próba 7"
+    },
+    "sh_cryo_ward_I": {
+      "name": "Oddział Cryo I",
+      "desc": "Oddział kriogeniczny. Zamraża atakującego z szansą.",
+      "special": "7% szans: ogłusza atakującego na 1 rundę",
+      "source": "Ograniczone 8"
+    },
+    "sh_cryo_ward_II": {
+      "name": "Oddział Cryo II",
+      "desc": "Ulepszony oddział kriogeniczny.",
+      "special": "7% szans: ogłusza atakującego na 1 rundę",
+      "source": "Próba 3"
+    },
+    "sh_cryo_ward_III": {
+      "name": "Oddział Cryo III",
+      "desc": "Zaawansowany oddział kriogeniczny.",
+      "special": "7% szans: ogłusza atakującego na 1 rundę",
+      "source": "Próba 6"
+    },
+    "sh_detonator_field_I": {
+      "name": "Pole Detonacyjne I",
+      "desc": "Pole detonatora. Częsty licznik materiałów wybuchowych.",
+      "special": "10% szans: kontrwybuch przy trafieniu",
+      "source": "Próba 2"
+    },
+    "sh_detonator_field_II": {
+      "name": "Pole Detonacyjne II",
+      "desc": "Ulepszone pole detonatora.",
+      "special": "10% szans: kontrwybuch przy trafieniu",
+      "source": "Próba 5"
+    },
+    "sh_detonator_field_III": {
+      "name": "Pole detonacyjne III",
+      "desc": "Zaawansowane pole detonacyjne.",
+      "special": "10% szans: kontrwybuch przy trafieniu",
+      "source": "Próba 8"
+    },
+    "sh_aegis_prime_I": {
+      "name": "Aegis Prime I",
+      "desc": "Aegis Prime. Ostateczna szansa na zablokowanie ataków.",
+      "special": "22% szans: całkowicie blokuje atak",
+      "source": "Próba 5"
+    },
+    "sh_aegis_prime_II": {
+      "name": "Grasz w Prime II",
+      "desc": "Ulepszony Aegis Prime.",
+      "special": "22% szans: całkowicie blokuje atak",
+      "source": "Próba 7"
+    },
+    "sh_aegis_prime_III": {
+      "name": "Czy grasz w Prime III?",
+      "desc": "Zaawansowany Aegis Prime. Jedna z najsilniejszych tarcz blokowych.",
+      "special": "22% szans: całkowicie blokuje atak",
+      "source": "Próba 10"
+    },
+    "sh_eternal_fortress_I": {
+      "name": "Wieczna Twierdza I",
+      "desc": "Wieczna forteca. Ogromna pojemność tarczy.",
+      "special": "+42% maksymalnej wydajności tarczy",
+      "source": "Próba 6"
+    },
+    "sh_eternal_fortress_II": {
+      "name": "Wieczna Twierdza II",
+      "desc": "Ulepszona Wieczna Forteca.",
+      "special": "+42% maksymalnej wydajności tarczy",
+      "source": "Próba 8"
+    },
+    "sh_eternal_fortress_III": {
+      "name": "Wieczna Twierdza III",
+      "desc": "Zaawansowana Wieczna Forteca. Legendarna twierdza.",
+      "special": "+42% maksymalnej wydajności tarczy",
+      "source": "Wydarzenie z szefem"
+    },
+    "sh_bulwark_prime_I": {
+      "name": "Bulwark Prime I",
+      "desc": "Główny bastion. Prawie odporny na ataki kinetyczne.",
+      "special": "+50% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Próba 5"
+    },
+    "sh_bulwark_prime_II": {
+      "name": "Bulwark Prime II",
+      "desc": "Ulepszony Bastion Prime.",
+      "special": "+50% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Próba 7"
+    },
+    "sh_bulwark_prime_III": {
+      "name": "Bastion Prime III",
+      "desc": "Zaawansowany Bulwark Prime. Legendarna tarcza kinetyczna.",
+      "special": "+50% odporności na obrażenia kinetyczne, gdy tarcza jest aktywna",
+      "source": "Próba 10"
+    },
+    "sh_celestial_mirror_I": {
+      "name": "Niebiańskie Lustro I",
+      "desc": "Niebiańskie lustro. Odbija dużą ilość obrażeń.",
+      "special": "22% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Próba 6"
+    },
+    "sh_celestial_mirror_II": {
+      "name": "Niebiańskie Lustro II",
+      "desc": "Ulepszone lustro niebieskie.",
+      "special": "22% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Próba 8"
+    },
+    "sh_celestial_mirror_III": {
+      "name": "Niebiańskie Lustro III",
+      "desc": "Zaawansowane lustro niebieskie. Ekskluzywna konstelacja.",
+      "special": "22% szans: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Konstelacja"
+    },
+    "sh_supernova_shell_I": {
+      "name": "Powłoka Supernowej I",
+      "desc": "Powłoka supernowej. Częsty wybuchowy odwet.",
+      "special": "15% szans: potężna kontrwybuch przy trafieniu",
+      "source": "Próba 6"
+    },
+    "sh_supernova_shell_II": {
+      "name": "Powłoka supernowej II",
+      "desc": "Ulepszona powłoka supernowej.",
+      "special": "15% szans: potężna kontrwybuch przy trafieniu",
+      "source": "Próba 9"
+    },
+    "sh_supernova_shell_III": {
+      "name": "Powłoka supernowej III",
+      "desc": "Zaawansowana powłoka supernowej.",
+      "special": "15% szans: potężna kontrwybuch przy trafieniu",
+      "source": "Wydarzenie z szefem"
+    },
+    "sh_detonation_ward_I": {
+      "name": "Oddział Wybuchowy I",
+      "desc": "Oddział detonacyjny. Prawie odporny na materiały wybuchowe.",
+      "special": "+50% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Próba 6"
+    },
+    "sh_detonation_ward_II": {
+      "name": "Oddział Detonacyjny II",
+      "desc": "Ulepszony totem detonacyjny.",
+      "special": "+50% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Próba 9"
+    },
+    "sh_detonation_ward_III": {
+      "name": "Oddział Detonacyjny III",
+      "desc": "Zaawansowany oddział detonacyjny. Ekskluzywne wydarzenie z bossem.",
+      "special": "+50% odporności na obrażenia wybuchowe, gdy tarcza jest aktywna",
+      "source": "Wydarzenie z szefem"
+    },
+    "sh_infinity_regen_I": {
+      "name": "Nieskończoność Regen I",
+      "desc": "Nieskończona regeneracja. Niezwykle szybka regeneracja.",
+      "special": "+85% szybsza regeneracja tarczy — prawie ciągłe odnawianie",
+      "source": "Próba 7"
+    },
+    "sh_infinity_regen_II": {
+      "name": "Nieskończoność Regeneracja II",
+      "desc": "Ulepszona nieskończona regeneracja.",
+      "special": "+85% szybsza regeneracja tarczy — prawie ciągłe odnawianie",
+      "source": "Próba 9"
+    },
+    "sh_infinity_regen_III": {
+      "name": "Nieskończoność Regeneracja III",
+      "desc": "Zaawansowana nieskończona regeneracja. Ekskluzywna konstelacja.",
+      "special": "+85% szybsza regeneracja tarczy — prawie ciągłe odnawianie",
+      "source": "Konstelacja"
+    },
+    "sh_omega_absorber_I": {
+      "name": "Absorber Omega I",
+      "desc": "Absorber Omega. Zamienia duże obrażenia w regenerację.",
+      "special": "Pochłania 38% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Próba 5"
+    },
+    "sh_omega_absorber_II": {
+      "name": "Absorber Omega II",
+      "desc": "Ulepszony absorber omega.",
+      "special": "Pochłania 38% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Próba 8"
+    },
+    "sh_omega_absorber_III": {
+      "name": "Absorber Omega III",
+      "desc": "Zaawansowany absorber omega. Ekskluzywne wydarzenie z bossem.",
+      "special": "Pochłania 38% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Wydarzenie z szefem"
+    },
+    "sh_phoenix_core_I": {
+      "name": "Rdzeń Phoenix I",
+      "desc": "Rdzeń Feniksa. Szansa na natychmiastowe odzyskanie tarczy.",
+      "special": "8% szans: natychmiast przywraca pełną tarczę",
+      "source": "Próba 6"
+    },
+    "sh_phoenix_core_II": {
+      "name": "Rdzeń Feniksa II",
+      "desc": "Ulepszony rdzeń feniksa.",
+      "special": "8% szans: natychmiast przywraca pełną tarczę",
+      "source": "Próba 9"
+    },
+    "sh_phoenix_core_III": {
+      "name": "Rdzeń Feniksa III",
+      "desc": "Zaawansowany rdzeń feniksa. Ekskluzywna konstelacja.",
+      "special": "8% szans: natychmiast przywraca pełną tarczę",
+      "source": "Konstelacja"
+    },
+    "sh_spacetime_I": {
+      "name": "Tarcza Czasoprzestrzeni I",
+      "desc": "Tarcza czasoprzestrzeni. Wypacza przestrzeń wokół statku.",
+      "special": "18% szans: całkowicie blokuje atak",
+      "source": "Przypadek 30"
+    },
+    "sh_spacetime_II": {
+      "name": "Tarcza Czasoprzestrzeni II",
+      "desc": "Ulepszona tarcza czasoprzestrzeni.",
+      "special": "18% szans: całkowicie blokuje atak",
+      "source": "Przypadek 30"
+    },
+    "sh_spacetime_III": {
+      "name": "Tarcza Czasoprzestrzeni III",
+      "desc": "Zaawansowana tarcza czasoprzestrzenna.",
+      "special": "18% szans: całkowicie blokuje atak",
+      "source": "Elitarna instancja"
+    },
+    "sh_eos_I": {
+      "name": "Tarcza Eosa I",
+      "desc": "Tarcza Eosa. Promienna energia odbicia.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Elitarna instancja"
+    },
+    "sh_eos_II": {
+      "name": "Tarcza Eosa II",
+      "desc": "Ulepszona tarcza Eos.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Elitarna instancja"
+    },
+    "sh_eos_III": {
+      "name": "Tarcza Eosa III",
+      "desc": "Zaawansowana tarcza Eos. Ostateczna refleksja.",
+      "special": "15% szansy: odzwierciedla 30% nadchodzących obrażeń",
+      "source": "Elitarna instancja"
+    },
+    "sh_fortress_I": {
+      "name": "Tarcza Twierdzy I",
+      "desc": "Tarcza twierdzy. Ogromna pojemność tarczy.",
+      "special": "+35% maksymalnej wydajności tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_fortress_II": {
+      "name": "Tarcza Twierdzy II",
+      "desc": "Ulepszona tarcza Fortecy.",
+      "special": "+35% maksymalnej wydajności tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_fortress_III": {
+      "name": "Tarcza Twierdzy III",
+      "desc": "Zaawansowana tarcza Fortecy.",
+      "special": "+35% maksymalnej wydajności tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_immortal_I": {
+      "name": "Nieśmiertelna Tarcza I",
+      "desc": "Nieśmiertelna tarcza. Prawie niezniszczalny.",
+      "special": "Pochłania 30% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_immortal_II": {
+      "name": "Nieśmiertelna Tarcza II",
+      "desc": "Ulepszona nieśmiertelna tarcza.",
+      "special": "Pochłania 30% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_immortal_III": {
+      "name": "Nieśmiertelna Tarcza III",
+      "desc": "Zaawansowana nieśmiertelna tarcza. Legendarna ochrona.",
+      "special": "Pochłania 30% otrzymywanych obrażeń, zamienia się w regenerację tarczy",
+      "source": "Elitarna instancja"
+    },
+    "sh_divine_I": {
+      "name": "Boski I",
+      "desc": "Boska tarcza. 50% blokady. Tylko wydarzenie z bossem. Maksymalnie 1 na gracza.",
+      "special": "50% szans na zablokowanie KAŻDEGO ataku",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    },
+    "sh_divine_II": {
+      "name": "Boski II",
+      "desc": "Ulepszona Boska Tarcza. Najrzadszy przedmiot w grze.",
+      "special": "50% szans na zablokowanie KAŻDEGO ataku",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    },
+    "sh_divine_III": {
+      "name": "Boski III",
+      "desc": "Ostateczna Boska Tarcza. Mityczne, legendarne, wyjątkowe. Tylko najlepsze.",
+      "special": "50% szans na zablokowanie KAŻDEGO ataku",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    }
+  },
+  "engine": {
+    "eng_basic_I": {
+      "name": "Napęd podstawowy I",
+      "desc": "Standardowy napęd dla początkujących.",
+      "source": "Przypadek 5"
+    },
+    "eng_basic_II": {
+      "name": "Napęd podstawowy II",
+      "desc": "Ulepszony standardowy napęd.",
+      "source": "Instancja 10"
+    },
+    "eng_basic_III": {
+      "name": "Napęd podstawowy III",
+      "desc": "Zaawansowany napęd standardowy.",
+      "source": "Przypadek 15"
+    },
+    "eng_tactical_I": {
+      "name": "Napęd Taktyczny I",
+      "desc": "Napęd taktyczny. Skoncentruj się na zwrotności.",
+      "source": "Przypadek 20"
+    },
+    "eng_tactical_II": {
+      "name": "Napęd Taktyczny II",
+      "desc": "Ulepszony napęd taktyczny.",
+      "source": "Przypadek 25"
+    },
+    "eng_tactical_III": {
+      "name": "Napęd taktyczny III",
+      "desc": "Zaawansowany napęd taktyczny. Idealny dla wojowników.",
+      "source": "Przypadek 30"
+    },
+    "eng_scout_I": {
+      "name": "Napęd harcerski I",
+      "desc": "Napęd harcerski. Skup się na szybkim uniku.",
+      "source": "Ograniczone 1"
+    },
+    "eng_scout_II": {
+      "name": "Napęd harcerski II",
+      "desc": "Ulepszony napęd zwiadowczy.",
+      "source": "Ograniczone 2"
+    },
+    "eng_scout_III": {
+      "name": "Napęd harcerski III",
+      "desc": "Zaawansowany napęd zwiadowczy.",
+      "source": "Ograniczone 3"
+    },
+    "eng_nano_I": {
+      "name": "Nano Drive I",
+      "desc": "Napęd nanocząsteczkowy. Zrównoważone podejście.",
+      "source": "Ograniczone 4"
+    },
+    "eng_nano_II": {
+      "name": "Nano Drive II",
+      "desc": "Ulepszony napęd nano.",
+      "source": "Ograniczone 5"
+    },
+    "eng_nano_III": {
+      "name": "Nanonapęd III",
+      "desc": "Zaawansowany napęd nano.",
+      "source": "Ograniczone 6"
+    },
+    "eng_pulse_I": {
+      "name": "Napęd impulsowy I",
+      "desc": "Napęd impulsowy. Regeneruje HP co rundę.",
+      "special": "Przywraca 15 HP w każdej rundzie",
+      "source": "Ograniczone 7"
+    },
+    "eng_pulse_II": {
+      "name": "Napęd impulsowy II",
+      "desc": "Ulepszony napęd impulsowy.",
+      "special": "Przywraca 28 HP w każdej rundzie",
+      "source": "Ograniczone 8"
+    },
+    "eng_pulse_III": {
+      "name": "Napęd impulsowy III",
+      "desc": "Zaawansowany napęd impulsowy. Stała regeneracja HP.",
+      "special": "Przywraca 45 HP w każdej rundzie",
+      "source": "Ograniczone 9"
+    },
+    "eng_endurance_I": {
+      "name": "Napęd wytrzymałościowy I",
+      "desc": "Napęd wytrzymałościowy. Szybsze odzyskiwanie HP.",
+      "special": "Przywraca 25 HP w każdej rundzie",
+      "source": "Ograniczone 10"
+    },
+    "eng_endurance_II": {
+      "name": "Napęd wytrzymałościowy II",
+      "desc": "Poprawiony napęd wytrzymałościowy.",
+      "special": "Przywraca 45 HP w każdej rundzie",
+      "source": "Konstelacja 1"
+    },
+    "eng_endurance_III": {
+      "name": "Napęd wytrzymałościowy III",
+      "desc": "Zaawansowany napęd wytrzymałościowy.",
+      "special": "Przywraca 72 HP w każdej rundzie",
+      "source": "Konstelacja 2"
+    },
+    "eng_heavy_I": {
+      "name": "Ciężki napęd I",
+      "desc": "Ciężki napęd. Zmniejsza otrzymywane obrażenia.",
+      "special": "-8% otrzymywanych obrażeń",
+      "source": "Konstelacja 3"
+    },
+    "eng_heavy_II": {
+      "name": "Ciężki napęd II",
+      "desc": "Ulepszony ciężki napęd.",
+      "special": "-14% otrzymywanych obrażeń",
+      "source": "Pirat 2"
+    },
+    "eng_heavy_III": {
+      "name": "Ciężki napęd III",
+      "desc": "Zaawansowany, ciężki napęd.",
+      "special": "-20% otrzymywanych obrażeń",
+      "source": "Pirat 4"
+    },
+    "eng_stabilizer_I": {
+      "name": "Napęd stabilizatora I",
+      "desc": "Napęd stabilizatora. Wzmacnia zbroję.",
+      "special": "-12% otrzymywanych obrażeń",
+      "source": "Pirat 6"
+    },
+    "eng_stabilizer_II": {
+      "name": "Napęd stabilizatora II",
+      "desc": "Ulepszony napęd stabilizatora.",
+      "special": "-18% otrzymywanych obrażeń",
+      "source": "Pirat 8"
+    },
+    "eng_stabilizer_III": {
+      "name": "Napęd stabilizatora III",
+      "desc": "Zaawansowany napęd stabilizatora.",
+      "special": "-25% otrzymywanych obrażeń",
+      "source": "Pirat 10"
+    },
+    "eng_sprint_I": {
+      "name": "Jazda sprinterska I",
+      "desc": "Jazda sprinterska. Gwarantuje inicjatywę.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Przypadek 20"
+    },
+    "eng_sprint_II": {
+      "name": "Bieg sprinterski II",
+      "desc": "Ulepszony napęd sprinterski.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Przypadek 24"
+    },
+    "eng_sprint_III": {
+      "name": "Jazda sprinterska III",
+      "desc": "Zaawansowany napęd sprinterski. Maksymalna inicjatywa.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Ograniczone 2"
+    },
+    "eng_surge_I": {
+      "name": "Napęd udarowy I",
+      "desc": "Natarcie szturmowe z inicjatywą strajkową.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Przypadek 21"
+    },
+    "eng_surge_II": {
+      "name": "Napęd udarowy II",
+      "desc": "Ulepszony napęd szturmowy.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Przypadek 25"
+    },
+    "eng_surge_III": {
+      "name": "Napęd udarowy III",
+      "desc": "Zaawansowany napęd szturmowy.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Ograniczone 3"
+    },
+    "eng_combat_I": {
+      "name": "Napęd bojowy I",
+      "desc": "Napęd bojowy. Szansa na podwójny atak.",
+      "special": "8% szans na drugi atak",
+      "source": "Przypadek 22"
+    },
+    "eng_combat_II": {
+      "name": "Napęd bojowy II",
+      "desc": "Ulepszony napęd bojowy.",
+      "special": "12% szans na drugi atak",
+      "source": "Przypadek 26"
+    },
+    "eng_combat_III": {
+      "name": "Napęd bojowy III",
+      "desc": "Zaawansowany napęd bojowy.",
+      "special": "16% szans na drugi atak",
+      "source": "Ograniczone 4"
+    },
+    "eng_phantom_I": {
+      "name": "Napęd fantomowy I",
+      "desc": "Napęd fantomowy. Neguje nadchodzące ataki.",
+      "special": "10% szans: neguje nadchodzący atak",
+      "source": "Przypadek 23"
+    },
+    "eng_phantom_II": {
+      "name": "Napęd fantomowy II",
+      "desc": "Ulepszony napęd fantomowy.",
+      "special": "15% szans: neguje nadchodzący atak",
+      "source": "Przypadek 27"
+    },
+    "eng_phantom_III": {
+      "name": "Napęd fantomowy III",
+      "desc": "Zaawansowany napęd fantomowy.",
+      "special": "20% szans: neguje nadchodzący atak",
+      "source": "Ograniczone 5"
+    },
+    "eng_reactive_I": {
+      "name": "Napęd reaktywny I",
+      "desc": "Napęd reaktywny. Aktywuje się, gdy statek zostaje uszkodzony.",
+      "special": "Gdy HP < 50%, na stałe +20% DPS",
+      "source": "Przypadek 20"
+    },
+    "eng_reactive_II": {
+      "name": "Napęd reaktywny II",
+      "desc": "Ulepszony napęd reaktywny.",
+      "special": "Gdy HP < 50%, trwale +28% DPS",
+      "source": "Przypadek 24"
+    },
+    "eng_reactive_III": {
+      "name": "Napęd reaktywny III",
+      "desc": "Zaawansowany napęd reaktywny.",
+      "special": "Gdy HP < 50%, trwale +36% DPS",
+      "source": "Ograniczone 6"
+    },
+    "eng_adaptive_I": {
+      "name": "Napęd adaptacyjny I",
+      "desc": "Napęd adaptacyjny. Silniejsza zdolność reaktywna.",
+      "special": "Gdy HP < 50%, trwale +25% DPS",
+      "source": "Przypadek 21"
+    },
+    "eng_adaptive_II": {
+      "name": "Napęd adaptacyjny II",
+      "desc": "Ulepszony napęd adaptacyjny.",
+      "special": "Gdy HP < 50%, trwale +35% DPS",
+      "source": "Przypadek 25"
+    },
+    "eng_adaptive_III": {
+      "name": "Napęd adaptacyjny III",
+      "desc": "Zaawansowany napęd adaptacyjny.",
+      "special": "Gdy HP < 50%, trwale +45% DPS",
+      "source": "Ograniczone 7"
+    },
+    "eng_pulse_regen_I": {
+      "name": "Regeneracja impulsów I",
+      "desc": "Napęd Regen. Stała i silna regeneracja HP.",
+      "special": "Przywraca 65 HP w każdej rundzie",
+      "source": "Przypadek 22"
+    },
+    "eng_pulse_regen_II": {
+      "name": "Regeneracja impulsów II",
+      "desc": "Ulepszony napęd regeneracji.",
+      "special": "Przywraca 125 HP w każdej rundzie",
+      "source": "Przypadek 26"
+    },
+    "eng_pulse_regen_III": {
+      "name": "Regeneracja Pulsu III",
+      "desc": "Zaawansowany napęd regeneracyjny.",
+      "special": "Przywraca 200 HP w każdej rundzie",
+      "source": "Ograniczone 8"
+    },
+    "eng_fortified_I": {
+      "name": "Wzmocniony napęd I",
+      "desc": "Wzmocniony napęd. Silna redukcja obrażeń.",
+      "special": "-18% otrzymywanych obrażeń",
+      "source": "Przypadek 23"
+    },
+    "eng_fortified_II": {
+      "name": "Wzmocniony napęd II",
+      "desc": "Ulepszony wzmocniony napęd.",
+      "special": "-26% otrzymywanych obrażeń",
+      "source": "Przypadek 27"
+    },
+    "eng_fortified_III": {
+      "name": "Wzmocniony napęd III",
+      "desc": "Zaawansowany wzmocniony napęd.",
+      "special": "-34% otrzymywanych obrażeń",
+      "source": "Ograniczone 9"
+    },
+    "eng_stealth_I": {
+      "name": "Ukryty napęd I",
+      "desc": "Ukryty napęd. Duża szansa na unik.",
+      "special": "12% szans: wróg pudłuje",
+      "source": "Przypadek 22"
+    },
+    "eng_stealth_II": {
+      "name": "Ukryty napęd II",
+      "desc": "Ulepszony dysk ukryty.",
+      "special": "18% szans: wróg pudłuje",
+      "source": "Przypadek 25"
+    },
+    "eng_stealth_III": {
+      "name": "Ukryty napęd III",
+      "desc": "Zaawansowany dysk ukryty. Prawie niewidoczny.",
+      "special": "24% szans: wróg pudłuje",
+      "source": "Ograniczone 8"
+    },
+    "eng_he3_saver_I": {
+      "name": "He3 Saver I",
+      "desc": "Wydajny napęd He3. Oszczędza paliwo podczas bitwy.",
+      "special": "-25% zużycia he3",
+      "source": "Przypadek 20"
+    },
+    "eng_he3_saver_II": {
+      "name": "He3 Saver II",
+      "desc": "Ulepszony moduł oszczędzający He3.",
+      "special": "-35% zużycia he3",
+      "source": "Przypadek 24"
+    },
+    "eng_he3_saver_III": {
+      "name": "He3 Wygaszacz III",
+      "desc": "Zaawansowany oszczędzacz He3. Drastycznie oszczędza paliwo.",
+      "special": "-45% zużycia he3",
+      "source": "Ograniczone 7"
+    },
+    "eng_quantum_I": {
+      "name": "Napęd Kwantowy I",
+      "desc": "Napęd kwantowy. Duża szansa na zanegowanie ataków.",
+      "special": "18% szans: neguje nadchodzący atak",
+      "source": "Ograniczone 2"
+    },
+    "eng_quantum_II": {
+      "name": "Napęd kwantowy II",
+      "desc": "Ulepszony napęd kwantowy.",
+      "special": "25% szans: neguje nadchodzący atak",
+      "source": "Ograniczone 4"
+    },
+    "eng_quantum_III": {
+      "name": "Napęd kwantowy III",
+      "desc": "Zaawansowany napęd kwantowy. Prawie niemożliwe do trafienia.",
+      "special": "32% szans: neguje nadchodzący atak",
+      "source": "Ograniczone 6"
+    },
+    "eng_berserker_I": {
+      "name": "Napęd Berserkera I",
+      "desc": "Napęd Berserkera. Agresywny podwójny atak.",
+      "special": "18% szans na drugi atak",
+      "source": "Ograniczone 3"
+    },
+    "eng_berserker_II": {
+      "name": "Napęd Berserkera II",
+      "desc": "Ulepszony popęd berserkera.",
+      "special": "24% szans na drugi atak",
+      "source": "Ograniczone 5"
+    },
+    "eng_berserker_III": {
+      "name": "Napęd Berserkera III",
+      "desc": "Zaawansowany popęd berserkera.",
+      "special": "30% szans na drugi atak",
+      "source": "Ograniczone 7"
+    },
+    "eng_sentinel_I": {
+      "name": "Napęd Strażniczy I",
+      "desc": "Napęd wartowniczy. Ogromna redukcja obrażeń.",
+      "special": "-28% otrzymywanych obrażeń",
+      "source": "Ograniczone 3"
+    },
+    "eng_sentinel_II": {
+      "name": "Napęd Strażniczy II",
+      "desc": "Ulepszony napęd wartowniczy.",
+      "special": "-38% otrzymywanych obrażeń",
+      "source": "Ograniczone 5"
+    },
+    "eng_sentinel_III": {
+      "name": "Napęd Strażniczy III",
+      "desc": "Zaawansowany napęd wartowniczy. Prawie nieprzenikniony pancerz.",
+      "special": "-48% otrzymywanych obrażeń",
+      "source": "Ograniczone 7"
+    },
+    "eng_void_I": {
+      "name": "Napęd Pustki I",
+      "desc": "Pusty napęd. Rzadka szansa na całkowitą odporność.",
+      "special": "5% szans: całkowita odporność w tej rundzie",
+      "source": "Ograniczone 4"
+    },
+    "eng_void_II": {
+      "name": "Napęd Pustki II",
+      "desc": "Ulepszony napęd pusty.",
+      "special": "8% szans: całkowita odporność w tej rundzie",
+      "source": "Ograniczone 6"
+    },
+    "eng_void_III": {
+      "name": "Napęd Pustki III",
+      "desc": "Zaawansowany napęd próżniowy.",
+      "special": "12% szans: całkowita odporność w tej rundzie",
+      "source": "Ograniczone 8"
+    },
+    "eng_predator_I": {
+      "name": "Napęd Predatora I",
+      "desc": "Napęd drapieżnika. Zawsze pierwsza inicjatywa.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Ograniczone 5"
+    },
+    "eng_predator_II": {
+      "name": "Napęd Predatora II",
+      "desc": "Ulepszony napęd drapieżnika.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Ograniczone 7"
+    },
+    "eng_predator_III": {
+      "name": "Napęd Predatora III",
+      "desc": "Zaawansowany napęd drapieżnika.",
+      "special": "Zawsze atakuje jako pierwszy w każdej rundzie",
+      "source": "Ograniczone 9"
+    },
+    "eng_phoenix_core_I": {
+      "name": "Rdzeń Phoenix I",
+      "desc": "Dysk główny Phoenix. Ogromna regeneracja HP.",
+      "special": "Przywraca 250 HP w każdej rundzie",
+      "source": "Próba 1"
+    },
+    "eng_phoenix_core_II": {
+      "name": "Rdzeń Feniksa II",
+      "desc": "Ulepszony napęd rdzeniowy Phoenix.",
+      "special": "Przywraca 450 HP w każdej rundzie",
+      "source": "Próba 4"
+    },
+    "eng_phoenix_core_III": {
+      "name": "Rdzeń Feniksa III",
+      "desc": "Zaawansowany dysk z rdzeniem Phoenix.",
+      "special": "Przywraca 700 HP w każdej rundzie",
+      "source": "Próba 7"
+    },
+    "eng_fleet_sync_I": {
+      "name": "Synchronizacja floty I",
+      "desc": "Napęd Flet Sync. Wzmacnia całą flotę.",
+      "special": "Wszyscy sojusznicy +5 do zręczności na początku",
+      "source": "Próba 2"
+    },
+    "eng_fleet_sync_II": {
+      "name": "Synchronizacja floty II",
+      "desc": "Ulepszony napęd Fleet Sync.",
+      "special": "Wszyscy sojusznicy +8 do zręczności na początku",
+      "source": "Próba 5"
+    },
+    "eng_fleet_sync_III": {
+      "name": "Synchronizacja floty III",
+      "desc": "Zaawansowany napęd Flet Sync.",
+      "special": "Wszyscy sojusznicy +12 do zręczności na początku",
+      "source": "Próba 8"
+    },
+    "eng_apex_I": {
+      "name": "Apex Drive I",
+      "desc": "Napęd Apex. Duża szansa na podwójne uderzenie.",
+      "special": "22% szans na drugi atak",
+      "source": "Próba 3"
+    },
+    "eng_apex_II": {
+      "name": "Napęd Apex II",
+      "desc": "Ulepszony napęd wierzchołkowy.",
+      "special": "30% szans na drugi atak",
+      "source": "Próba 6"
+    },
+    "eng_apex_III": {
+      "name": "Napęd Apex III",
+      "desc": "Zaawansowany napęd wierzchołkowy.",
+      "special": "38% szans na drugi atak",
+      "source": "Próba 9"
+    },
+    "eng_hyperdrive_I": {
+      "name": "Hipernapęd I",
+      "desc": "Hipernapęd. Potężny podwójny atak.",
+      "special": "35% szans na drugi atak",
+      "source": "Próba 3"
+    },
+    "eng_hyperdrive_II": {
+      "name": "Hipernapęd II",
+      "desc": "Ulepszony hipernapęd.",
+      "special": "45% szans na drugi atak",
+      "source": "Próba 6"
+    },
+    "eng_hyperdrive_III": {
+      "name": "Hipernapęd III",
+      "desc": "Zaawansowany hipernapęd. Dominacja w grze.",
+      "special": "55% szans na drugi atak",
+      "source": "Próba 9"
+    },
+    "eng_voidwarp_I": {
+      "name": "Voidwarp I",
+      "desc": "Napęd Voidwarpa. Częsta pełna odporność.",
+      "special": "15% szans: całkowita odporność w tej rundzie",
+      "source": "Pirat 3"
+    },
+    "eng_voidwarp_II": {
+      "name": "Voidwarp II",
+      "desc": "Ulepszony napęd voidwarp.",
+      "special": "22% szans: całkowita odporność w tej rundzie",
+      "source": "Pirat 6"
+    },
+    "eng_voidwarp_III": {
+      "name": "Voidwarp III",
+      "desc": "Zaawansowany voidwarp. Ekskluzywny pirat.",
+      "special": "30% szans: całkowita odporność w tej rundzie",
+      "source": "Pirat 9"
+    },
+    "eng_celestial_I": {
+      "name": "Niebiański napęd I",
+      "desc": "Niebiański napęd. Wzmacnia całą flotę.",
+      "special": "Wszyscy sojusznicy +15 do zręczności na początku",
+      "source": "Konstelacja 1"
+    },
+    "eng_celestial_II": {
+      "name": "Niebiański napęd II",
+      "desc": "Ulepszony napęd niebieski.",
+      "special": "Wszyscy sojusznicy +22 do zręczności na początku",
+      "source": "Konstelacja 2"
+    },
+    "eng_celestial_III": {
+      "name": "Niebiański napęd III",
+      "desc": "Zaawansowany niebiański. Ekskluzywna konstelacja.",
+      "special": "Wszyscy sojusznicy +30 do zręczności na początku",
+      "source": "Konstelacja 3"
+    },
+    "eng_titan_I": {
+      "name": "Napęd Tytana I",
+      "desc": "Napęd Tytana. Ogromna redukcja obrażeń.",
+      "special": "-55% otrzymywanych obrażeń",
+      "source": "Próba 5"
+    },
+    "eng_titan_II": {
+      "name": "Napęd Tytana II",
+      "desc": "Ulepszony napęd tytana.",
+      "special": "-70% otrzymywanych obrażeń",
+      "source": "Próba 8"
+    },
+    "eng_titan_III": {
+      "name": "Napęd Tytana III",
+      "desc": "Zaawansowany tytan. Prawie niezniszczalny pancerz.",
+      "special": "-85% otrzymywanych obrażeń",
+      "source": "Próba 10"
+    },
+    "eng_annihilator_I": {
+      "name": "Anihilator I",
+      "desc": "Napęd anihilatora. Szybciej niż cokolwiek innego.",
+      "special": "Zawsze atakuje pierwszy + najwyższa zwinność",
+      "source": "Próba 4"
+    },
+    "eng_annihilator_II": {
+      "name": "Niszczyciel II",
+      "desc": "Ulepszony napęd anihilatora.",
+      "special": "Zawsze atakuje pierwszy + najwyższa zwinność",
+      "source": "Próba 7"
+    },
+    "eng_annihilator_III": {
+      "name": "Niszczyciel III",
+      "desc": "Zaawansowany anihilator. Ostateczna inicjatywa.",
+      "special": "Zawsze atakuje pierwszy + najwyższa zwinność",
+      "source": "Próba 10"
+    },
+    "eng_divine_I": {
+      "name": "Boski Napęd I",
+      "desc": "Boski napęd. Inicjatywa + faza próżni + aura. Tylko wydarzenie z bossem.",
+      "special": "Zawsze atakuje pierwszy + 20% fazy pustki + wszyscy sojusznicy +5 zręczności",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    },
+    "eng_divine_II": {
+      "name": "Boski Napęd II",
+      "desc": "Ulepszony boski napęd. Najrzadszy napęd w grze.",
+      "special": "Zawsze atakuje pierwszy + 25% fazy pustki + wszyscy sojusznicy +8 zręczności",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    },
+    "eng_divine_III": {
+      "name": "Boski napęd III",
+      "desc": "Ostateczny boski napęd. Mityczny, niepowtarzalny. Tylko najlepsze.",
+      "special": "Zawsze atakuje pierwszy + 30% fazy pustki + wszyscy sojusznicy +12 zręczności",
+      "source": "Wydarzenie z bossem (tylko upuszczenie)"
+    }
+  },
+  "building": {
+    "hq": {
+      "name": "Siedziba",
+      "desc": "Centrum dowodzenia. Określa maksymalny poziom wszystkich pozostałych budynków.",
+      "milestone": {
+        "25": {
+          "label": "Zaawansowane polecenie",
+          "bonus": "Wszystkie budynki -10% kosztu ulepszeń"
+        },
+        "50": {
+          "label": "Centrum strategiczne",
+          "bonus": "Licznik czasu budowy -25% dla wszystkich budynków"
+        },
+        "75": {
+          "label": "Siedziba Galaktyki",
+          "bonus": "Wszystkie budynki -20% kosztu ulepszeń"
+        },
+        "100": {
+          "label": "LEGENDARNA POLECENIE",
+          "bonus": "Czas budowy -50%, koszt wszystkich budynków -30%."
+        }
+      }
+    },
+    "metal_mine": {
+      "name": "Kopalnia Metalu",
+      "desc": "Produkuje metal. Każdy poziom +0,01/s.",
+      "milestone": {
+        "25": {
+          "label": "Głębokie wiercenie",
+          "bonus": "+25% produkcji metalu"
+        },
+        "50": {
+          "label": "Zautomatyzowana kopalnia",
+          "bonus": "+50% produkcji metalu"
+        },
+        "75": {
+          "label": "Nanoekstrakcja",
+          "bonus": "+100% produkcji metalu"
+        },
+        "100": {
+          "label": "KOPALNIA TYTANU",
+          "bonus": "+200% produkcji metalu + -50% zużycia energii"
+        }
+      }
+    },
+    "crystal_mine": {
+      "name": "Kopalnia Kryształów",
+      "desc": "Wytwarza kryształ. Każdy poziom +0,007/s.",
+      "milestone": {
+        "25": {
+          "label": "Kryształowy rezonans",
+          "bonus": "+25% do produkcji kryształów"
+        },
+        "50": {
+          "label": "Cięcie laserowe częstotliwości",
+          "bonus": "+50% do produkcji kryształów"
+        },
+        "75": {
+          "label": "Ekstrakcja kwantowa",
+          "bonus": "+100% produkcji kryształów"
+        },
+        "100": {
+          "label": "MATRYCA KRYSZTAŁOWA",
+          "bonus": "+200% produkcja kryształów + kopalnia metalu +10%"
+        }
+      }
+    },
+    "he3_refinery": {
+      "name": "Rafineria He3",
+      "desc": "Wytwarza He3. Każdy poziom +0,003/s.",
+      "milestone": {
+        "25": {
+          "label": "Filtracja fuzyjna",
+          "bonus": "+25% produkcji He3"
+        },
+        "50": {
+          "label": "Separator plazmowy",
+          "bonus": "+50% produkcji He3"
+        },
+        "75": {
+          "label": "Destylacja izotopowa",
+          "bonus": "+100% produkcji He3"
+        },
+        "100": {
+          "label": "WYJĄTKOWA RAFINERIA",
+          "bonus": "+200% He3 + budynki energetyczne +10%"
+        }
+      }
+    },
+    "depot": {
+      "name": "Magazyn",
+      "desc": "Magazyn zasobów. Gracz musi zbierać zasoby. Jeśli jest pełny – produkcja zostaje zatrzymana.",
+      "milestone": {
+        "25": {
+          "label": "Rozszerzona pamięć",
+          "bonus": "+10% pojemności"
+        },
+        "50": {
+          "label": "Magazyn przemysłowy",
+          "bonus": "+25% pojemności"
+        },
+        "75": {
+          "label": "Kontenery kwantowe",
+          "bonus": "+50% pojemności"
+        },
+        "100": {
+          "label": "MEGA MAGAZYN",
+          "bonus": "+100% pojemności"
+        }
+      }
+    },
+    "ship_factory": {
+      "name": "Fabryka Statków",
+      "desc": "Stocznia. Odblokowuje klasy statków i przyspiesza budowę.",
+      "milestone": {
+        "25": {
+          "label": "Linia automatyczna",
+          "bonus": "+5% szybkości budowy, -5% kosztu"
+        },
+        "50": {
+          "label": "Zaawansowana stocznia",
+          "bonus": "+10% szybkości, -10% kosztu"
+        },
+        "75": {
+          "label": "Mega fabryka",
+          "bonus": "+15% szybkości, -15% kosztu"
+        },
+        "100": {
+          "label": "ARSENAL GALAKTYCZNY",
+          "bonus": "+25% szybkości, -20% kosztu, wszystkie statki +5% statystyk"
+        }
+      }
+    },
+    "solar": {
+      "name": "Panel słoneczny",
+      "desc": "Generuje energię. Każdy poziom +4 MWh/s.",
+      "milestone": {
+        "25": {
+          "label": "Sieć fotowoltaiczna",
+          "bonus": "+25% wytwarzania energii słonecznej"
+        },
+        "50": {
+          "label": "Kolektory orbitalne",
+          "bonus": "+50% wytwarzania energii słonecznej"
+        },
+        "75": {
+          "label": "Pierścień Słoneczny",
+          "bonus": "+100% wytwarzania energii słonecznej"
+        },
+        "100": {
+          "label": "KULA DYSONA",
+          "bonus": "+200% energia słoneczna + wszystkie budynki energetyczne +15%"
+        }
+      }
+    },
+    "fusion": {
+      "name": "Reaktor fuzyjny",
+      "desc": "Potężna energia. Każdy poziom +12 MWh/s, wydajność +1 MWh.",
+      "milestone": {
+        "25": {
+          "label": "Klatka magnetyczna",
+          "bonus": "+25% generacji fuzji"
+        },
+        "50": {
+          "label": "Optymalizacja tokamaka",
+          "bonus": "+50% generacji fuzji"
+        },
+        "75": {
+          "label": "Wzmocnienie Antymaterii",
+          "bonus": "+100% generowania fuzji"
+        },
+        "100": {
+          "label": "GWIAZDOWE SERCA",
+          "bonus": "+200% fuzji + pojemność x3"
+        }
+      }
+    },
+    "battery": {
+      "name": "Blok baterii",
+      "desc": "Przechowuje energię. Każdy poziom +1 MWh/s, wydajność +97 MWh.",
+      "milestone": {
+        "25": {
+          "label": "Superkondensator",
+          "bonus": "+25% pojemności"
+        },
+        "50": {
+          "label": "Nanokomórki",
+          "bonus": "+50% pojemności"
+        },
+        "75": {
+          "label": "Bateria kwantowa",
+          "bonus": "+100% pojemności"
+        },
+        "100": {
+          "label": "NIEUSTANNIE MOBILNY",
+          "bonus": "+200% pojemności + nie może spaść poniżej 20%"
+        }
+      }
+    },
+    "grid": {
+      "name": "Sieć energetyczna",
+      "desc": "Optymalizuje dystrybucję energii. Każdy poziom -0,5% drenażu ze wszystkich budynków. Lv100 = -50% zużycia.",
+      "milestone": {
+        "25": {
+          "label": "Zoptymalizowana siatka",
+          "bonus": "-12,5% drenażu ze wszystkich budynków"
+        },
+        "50": {
+          "label": "Nadprzewodnik",
+          "bonus": "-25% drenażu na wszystkich budynkach"
+        },
+        "75": {
+          "label": "Dystrybucja kwantowa",
+          "bonus": "-37,5% drenażu ze wszystkich budynków"
+        },
+        "100": {
+          "label": "NIESKOŃCZONA WYDAJNOŚĆ",
+          "bonus": "-50% drenażu na wszystkich budynkach"
+        }
+      }
+    },
+    "turret": {
+      "name": "Wieżyczka Laserowa",
+      "desc": "Podstawowa obrona bazy. Każdy poziom +80 obrony.",
+      "milestone": {
+        "25": {
+          "label": "Automatyczne kierowanie",
+          "bonus": "Flota: +10% ataku"
+        },
+        "50": {
+          "label": "Działo plazmowe",
+          "bonus": "Flota: +20% ataku, +5% trafienia krytycznego"
+        },
+        "75": {
+          "label": "Broń antykapitalna",
+          "bonus": "Flota: +35% ataku, +10% trafienia krytycznego"
+        },
+        "100": {
+          "label": "DZIAŁKO ORBITALNE",
+          "bonus": "Flota: +50% ataku, +20% trafienia krytycznego"
+        }
+      }
+    },
+    "missile_bat": {
+      "name": "Bateria rakietowa",
+      "desc": "Obrona przeciwrakietowa. Każdy poziom +80 obrony.",
+      "milestone": {
+        "25": {
+          "label": "Rakiety wielostopniowe",
+          "bonus": "Blokuje szpiegostwo w bazie"
+        },
+        "50": {
+          "label": "Głowice nuklearne",
+          "bonus": "Blokuje szpiegostwo, flota: +5 do uników"
+        },
+        "75": {
+          "label": "Orbitalny przechwytywacz",
+          "bonus": "Blokuje szpiegostwo, flota: +10 do uników, +1 do szybkości"
+        },
+        "100": {
+          "label": "APOKALIPSA",
+          "bonus": "Blokuje szpiegostwo, flota: +15 do uników, +2 do szybkości"
+        }
+      }
+    },
+    "shield_gen": {
+      "name": "Generator Tarczy",
+      "desc": "Tarcza energetyczna dla podstawy. Każdy poziom +80 obrony.",
+      "milestone": {
+        "25": {
+          "label": "Tarcza Fazowa",
+          "bonus": "Flota: +10% tarczy"
+        },
+        "50": {
+          "label": "Tarcza Harmoniczna",
+          "bonus": "Flota: +20% tarczy, +10% regeneracji tarczy"
+        },
+        "75": {
+          "label": "Tarcza Kwantowa",
+          "bonus": "Flota: +35% tarczy, +20% regeneracji tarczy"
+        },
+        "100": {
+          "label": "NIEPRZEPUSZCZALNA TARCZA",
+          "bonus": "Flota: +50% tarczy, +30% regeneracji, +5% redukcji obrażeń"
+        }
+      }
+    },
+    "sensor": {
+      "name": "Wieża Sensoryczna",
+      "desc": "Wykrywanie wroga. Każdy poziom +80 obrony.",
+      "milestone": {
+        "25": {
+          "label": "Głębokie skanowanie",
+          "bonus": "+25% szansy na szpiegostwo"
+        },
+        "50": {
+          "label": "Czujniki kwantowe",
+          "bonus": "+50% szansy na szpiegostwo, +1 poziom ujawnienia"
+        },
+        "75": {
+          "label": "Radar galaktyczny",
+          "bonus": "+75% szansy na szpiegostwo, +1 poziom ujawnienia"
+        },
+        "100": {
+          "label": "WSZYSTKOWIEDZĄCE OKO",
+          "bonus": "+100% szansy na szpiegostwo, +2 poziomy ujawnienia"
+        }
+      }
+    },
+    "jump_gate": {
+      "name": "Brama skoków",
+      "desc": "Transportuje statki do kolonii. Każdy poziom +1 zasięg systemowy.",
+      "milestone": {
+        "25": {
+          "label": "Stabilny korytarz",
+          "bonus": "+1 maks. kolonia, szybszy transport"
+        },
+        "50": {
+          "label": "Sieć tuneli czasoprzestrzennych",
+          "bonus": "+2 maks. kolonie, natychmiastowy tranzyt"
+        },
+        "75": {
+          "label": "Portale Galaktyczne",
+          "bonus": "+3 maks. kolonie"
+        },
+        "100": {
+          "label": "NIESKOŃCZONY SKOK",
+          "bonus": "+5 maks. kolonii + teleport w dowolne miejsce"
+        }
+      }
+    },
+    "laboratory": {
+      "name": "Laboratorium",
+      "desc": "Ogranicza maksymalny poziom badań. Lv1 = Badania Lv1, Lv100 = Badania Lv100.",
+      "milestone": {
+        "25": {
+          "label": "Zaawansowane laboratorium",
+          "bonus": "Badania -20% kosztu"
+        },
+        "50": {
+          "label": "Laboratorium Kwantowe",
+          "bonus": "Badania -35% kosztu"
+        },
+        "75": {
+          "label": "Centrum Xenotecha",
+          "bonus": "Badania -50% kosztu"
+        },
+        "100": {
+          "label": "OSOBLIWOŚĆ",
+          "bonus": "Wszystkie badania natychmiastowe + -75% kosztu"
+        }
+      }
+    },
+    "recycler": {
+      "name": "Recykler",
+      "desc": "Przetwarza statki w celu uzyskania zasobów. Lv1=20%, Lv100=100% pierwotnego kosztu.",
+      "milestone": {
+        "25": {
+          "label": "Zaawansowany recykling",
+          "bonus": "Zwrot +5% premii (powyżej podstawy)"
+        },
+        "50": {
+          "label": "Nano-deasembler",
+          "bonus": "Zwrot +10% premii + szybki recykling"
+        },
+        "75": {
+          "label": "Reprocesor atomowy",
+          "bonus": "Zwrot +15% bonusu"
+        },
+        "100": {
+          "label": "RECYKLATOR MATERIAŁÓW",
+          "bonus": "100% zwrotu + szansa na fragment planu"
+        }
+      }
+    }
+  },
+  "ui": {
+    "yes": "Tak",
+    "no": "Nie",
+    "ok": "OK",
+    "cancel": "Anuluj",
+    "close": "Zamknij",
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces",
+    "warning": "Ostrzeżenie",
+    "info": "Info",
+    "unknown": "Nieznane",
+    "none": "Brak",
+    "all": "Wszystkie",
+    "level": "Poziom {n}",
+    "rank": "Ranga #{n}",
+    "player": "Gracz",
+    "you": "Ty"
+  }
+}
