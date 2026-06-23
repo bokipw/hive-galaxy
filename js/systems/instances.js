@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // HIVE GALAXY — js/systems/instances.js
 // Instance sistem — odabir, borba, nagrade
 // ============================================================
@@ -328,24 +328,24 @@ function renderInstanceCard(inst, playerPower) {
 
       <!-- Header -->
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;margin-top:18px">
-        <div style="font-size:1.5rem">${inst.icon}</div>
+        <div style="font-size:1.5rem">${typeInfo.icon || '🌌'}</div>
         <div>
           <div style="font-size:0.85rem;font-weight:700;color:${typeInfo.color || 'white'}">
-            ${inst.name}
+            ${dn(inst)}
           </div>
-          <div style="font-size:0.62rem;color:#6a90b8">${typeInfo.name || ''}</div>
+          <div style="font-size:0.62rem;color:#6a90b8">${dn(typeInfo)}</div>
         </div>
       </div>
 
       <!-- Težina -->
       <div style="font-size:0.72rem;margin-bottom:6px">
-        ${diff.label}
+        ${dl(diff)}
         <span style="font-size:0.6rem;color:#6a90b8;margin-left:6px">Težina ${inst.difficulty}/10</span>
       </div>
 
       <!-- Boss -->
       <div style="font-size:0.68rem;color:#6a90b8;margin-bottom:6px">
-        👾 Boss: <span style="color:white">${inst.boss}</span>
+        👾 Boss: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span>
       </div>
       ${({'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]) ? `
       <div style="font-size:0.65rem;color:#00ff88;margin-bottom:6px">
@@ -565,9 +565,9 @@ function openInstanceModal(instId) {
       <div>
         <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">INSTANCA INFO</div>
         <div style="font-size:0.68rem;line-height:1.8;font-family:'Share Tech Mono',monospace">
-          <div>⚡ Tip: <span style="color:${typeInfo.color||'white'}">${typeInfo.name}</span></div>
-          <div>⚡ Težina: ${diff.label}</div>
-          <div>👾 Boss: <span style="color:white">${inst.boss}</span></div>
+          <div>⚡ Tip: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
+          <div>⚡ Težina: ${dl(diff)}</div>
+          <div>👾 Boss: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
           ${({'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]) ? `<div>🎁 Garant drop: <span style="color:#00ff88;font-weight:700">${{'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]} itema</span></div>` : ''}
           <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ Energija: ${energyCost} MWh</div>
@@ -685,7 +685,7 @@ function openInstanceModal(instId) {
         💥 NEPRIJATELJI (×${mode.enemyMult} j×Tina)
       </div>
       <div style="font-size:0.65rem;color:#6a90b8">
-        ${inst.enemies.join(', ')} + Boss: ${inst.boss}
+        ${inst.enemies.join(', ')} + Boss: ${t(inst.bossKey || '') || inst.boss}
       </div>
     </div>
 
@@ -694,7 +694,7 @@ function openInstanceModal(instId) {
     </div>
   `;
 
-  openModal(`⚔️ ${inst.name}`, body, [
+  openModal(`⚔️ ${dn(inst)}`, body, [
     {
       label: `⚔️ NAPADNI! (-${energyCost} MWh)`,
       cls:   'btn-r',
@@ -845,7 +845,7 @@ function startBattle(inst, instant = false) {
       if (!window._instProgress) window._instProgress = {};
       window._instProgress[progKey] = prog2;
 
-      addLog(`⚡ ${inst.name} [${mode.label}] Završena! +${fmt(rewards.metal)} metal`);
+      addLog(`⚡ ${dn(inst)} [${mode.label}] Završena! +${fmt(rewards.metal)} metal`);
       if (typeof trackDailyInstance  === 'function') trackDailyInstance();
       if (typeof trackWeeklyInstance === 'function') trackWeeklyInstance();
       // Komandir XP se daje automatski kroz addExp() hook u commander.js
@@ -864,7 +864,7 @@ function startBattle(inst, instant = false) {
     } else if (battle.status === 'defeat') {
       // Resetuj streak pri porazu
       window._instanceStreak = 0;
-      addLog(`⚡ Poraz u ${inst.name} [${mode.label}]. Pokušaj ponovo.`);
+      addLog(`⚡ Poraz u ${dn(inst)} [${mode.label}]. Pokušaj ponovo.`);
     }
 
     applyPlayerLosses(battle);
@@ -1154,7 +1154,7 @@ function generateEnemies(inst) {
       // Boss count: 1 na inst1 easy, skalirano gore
       const bossCount = Math.max(1, Math.floor((1 + instNumber * 0.3) * instScale * 0.4));
       groups.push({
-        name:    inst.boss,
+        name:    t(inst.bossKey || '') || inst.boss,
         count:   bossCount,
         hp:      (boss.armor_val + (boss.shield || 0) + (boss.structure || 0)) * bossCount * 2.5,
         shield:  (boss.shield || 0) * bossCount * 2.5,
