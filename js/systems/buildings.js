@@ -44,8 +44,8 @@ function tickBuildQueue() {
       addLog('🎁 Carrier Harbinger I blueprint otključan (Ship Factory Lv.24)');
     }
 
-    toast(`✅ ${b?.name} → Lv.${item.targetLevel} završeno!`, 'ok');
-    addLog(`⬆️ ${b?.name} → Lv.${item.targetLevel}`);
+    toast(`✅ ${dn(b)} → Lv.${item.targetLevel} završeno!`, 'ok');
+    addLog(`⬆️ ${dn(b)} → Lv.${item.targetLevel}`);
     if (typeof trackDailyBuild === 'function') trackDailyBuild();
 
     // Depot: +1 ključ po levelu, +5 bonus na 25/50/75/100
@@ -69,21 +69,22 @@ function tickBuildQueue() {
   if (milestoneHit) {
     const m = milestoneHit.data;
     setTimeout(() => {
-      toast(`🎯 MILESTONE! ${buildingsData[milestoneHit.key]?.name} Lv.${milestoneHit.level} — ${m.label}!`, 'ok');
-      addLog(`🎯 Milestone dostignut: ${m.label} — ${m.bonus}`);
+      const mBld = buildingsData[milestoneHit.key];
+      toast(`🎯 MILESTONE! ${dn(mBld)} Lv.${milestoneHit.level} — ${dl(m)}!`, 'ok');
+      addLog(`🎯 Milestone dostignut: ${dl(m)} — ${db(m)}`);
       openModal(
         `🎯 MILESTONE DOSTIGNUT!`,
         `<div style="text-align:center;padding:16px">
-          <div style="font-size:3rem;margin-bottom:10px">${buildingsData[milestoneHit.key]?.icon}</div>
+          <div style="font-size:3rem;margin-bottom:10px">${mBld?.icon}</div>
           <div style="font-family:'Orbitron',monospace;font-size:1rem;color:#ffcc44;margin-bottom:6px">
-            ${m.label}
+            ${dl(m)}
           </div>
           <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:12px">
-            ${buildingsData[milestoneHit.key]?.name} → Lv.${milestoneHit.level}
+            ${dn(mBld)} → Lv.${milestoneHit.level}
           </div>
           <div style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);
             border-radius:8px;padding:12px;font-size:0.82rem;color:white">
-            ✨ ${m.bonus}
+            ✨ ${db(m)}
           </div>
         </div>`,
         [{ label: '🎯 Odlično!', cls: 'btn-gold', fn: closeModal }]
@@ -140,13 +141,13 @@ function upgradeBuilding(key) {
   const milestones   = getBuildingMilestones(key);
   const nextMilestone = milestones[currentLevel + 1];
   if (nextMilestone) {
-    addLog(`🎯 Gradi se ka milestoneu: ${nextMilestone.label} (Lv.${currentLevel + 1})`);
+    addLog(`🎯 Gradi se ka milestoneu: ${dl(nextMilestone)} (Lv.${currentLevel + 1})`);
   }
 
   updateResUI();
   renderBase();
-  addLog(`🔨 ${b.name} u izgradnji → Lv.${currentLevel + 1} (${formatTimer(timerSec)})`);
-  toast(`🔨 ${b.name} gradi se ${formatTimer(timerSec)}...`, 'inf');
+  addLog(`🔨 ${dn(b)} u izgradnji → Lv.${currentLevel + 1} (${formatTimer(timerSec)})`);
+  toast(`🔨 ${dn(b)} gradi se ${formatTimer(timerSec)}...`, 'inf');
   saveGame();
 }
 
@@ -155,7 +156,7 @@ function boostBuilding(key) {
   const item = buildQueue.find(q => q.key === key);
   if (!item) return;
   const cost    = item.boostCost || getBuildingBoostCost(key);
-  const bName   = buildingsData[key]?.name || key;
+  const bName   = dn(buildingsData[key]) || key;
   const hasBPW  = (R.spCard || 0) >= cost;
   const timeLeft = Math.max(0, Math.ceil((item.finishAt - Date.now()) / 1000));
 
@@ -456,7 +457,7 @@ function renderBuildingGrid(containerId, keys) {
     div.className = 'card';
     div.innerHTML = `
       <div class="card-icon">${b.icon}</div>
-      <div class="card-title" style="color:${nameColor};text-align:center">${b.name}</div>
+      <div class="card-title" style="color:${nameColor};text-align:center">${dn(b)}</div>
       <div class="lv-badge" style="display:block;text-align:center;margin:4px 0">Lv. ${currentLevel} / 100</div>
       ${extra}
       <div class="cost-block" style="text-align:center;margin-top:8px">
@@ -678,7 +679,7 @@ function renderShipBuildGrid() {
     return `
       <div class="card" style="border-color:${cls?.color || '#00d4ff'}33">
         <div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'};margin-bottom:2px">${d.name}</div>
-        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:8px">${ship.name} · ${cls?.name || ''}</div>
+        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:8px">${ship.name} · ${dn(cls) || ''}</div>
         
         <!-- Statistike jednog broda (izračunate sa opremom) -->
         <div style="background:rgba(0,0,0,0.2);border-radius:4px;padding:4px 6px;margin-bottom:8px;font-size:0.6rem;font-family:'Share Tech Mono',monospace">
