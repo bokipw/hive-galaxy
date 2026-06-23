@@ -4436,5 +4436,264 @@
     "rank": "Rang #{n}",
     "player": "Igrač",
     "you": "Ti"
+  },
+  "index": {
+    "title": "HIVE GALAXY - Osvoji Galaksiju",
+    "nav": {
+      "logo": "⬡ HIVE GALAXY",
+      "features": "Funkcije",
+      "ships": "Brodovi",
+      "tokens": "Tokeni",
+      "howtoplay": "Kako igrati",
+      "faq": "FAQ",
+      "playnow": "\u25B6 Igraj Sada"
+    },
+    "hero": {
+      "badge": "\u2B21 Galaktička MMO Strategija \u00B7 Blockchain Powered",
+      "title": {
+        "hive": "HIVE",
+        "galaxy": "GALAXY"
+      },
+      "subtitle": "Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igrač. Svaka odluka. Svaka bitka \u2014 na lancu.",
+      "playfree": "\u25B6 IGRAJ BESPLATNO",
+      "premium": "\u2605 PREMIUM \u2014 10\u20AC",
+      "stats": {
+        "blueprints_val": "715+",
+        "blueprints_lbl": "BLUEPRINTA",
+        "instances_val": "11",
+        "instances_lbl": "TIPOVA INSTANCE",
+        "commanders_val": "300",
+        "commanders_lbl": "KOMANDIRA",
+        "tokens_val": "3",
+        "tokens_lbl": "BCM TOKENA"
+      },
+      "scroll": "\u25BC SCROLL \u25BC"
+    },
+    "section": {
+      "features": {
+        "label": "// Ključne funkcije",
+        "title": "Sve sto trebaš za<br>galaktičku dominaciju"
+      },
+      "ships": {
+        "label": "// Klase brodova",
+        "title": "6 klasa. Stotine konfiguracija.<br>Jedna strategija pobeđuje.",
+        "desc": "Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Miješana flota uvijek pobeđuje mono flotu istog troška."
+      },
+      "tokens": {
+        "label": "// HIVE Blockchain Ekonomija",
+        "title": "Tri tokena. Jedan ekosistem.<br>beskrajna vrednost.",
+        "desc": "Svaki token ima specifičnu ulogu. Igraj, gledaj stream, drži tokene \u2014 sve se nagrađuje na blockchainu."
+      },
+      "howtoplay": {
+        "label": "// Kako početi",
+        "title": "Od nule do admirala<br>za 5 minuta"
+      },
+      "login": {
+        "label": ""
+      },
+      "faq": {
+        "label": "// Česta pitanja",
+        "title": "FAQ"
+      }
+    },
+    "features": {
+      "base": {
+        "title": "Izgradnja Baze",
+        "desc": "Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je ključno za efikasnu produkciju."
+      },
+      "pvp": {
+        "title": "PvP Borba",
+        "desc": "Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima štete, oklop otpornošću i Shield-Armor-Structure slojevima."
+      },
+      "designer": {
+        "title": "Dizajner Brodova",
+        "desc": "Dizajniraj vlastite brodove. Odaberi šasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija."
+      },
+      "instances": {
+        "title": "Instance Dungeoni",
+        "desc": "30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas \u2014 strateška borba s ekskluzivnim nagradama."
+      },
+      "galaxy": {
+        "title": "Galaksijska Mapa",
+        "desc": "Osvajaj zvjezdane sisteme, širi imperiju i napadaj protivničke baze. Svaka galaksija je živi ratni teatar."
+      },
+      "blockchain": {
+        "title": "Blockchain Ekonomija",
+        "desc": "BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave \u2014 razmjenljive i vrijedne."
+      }
+    },
+    "ships": {
+      "scout": {
+        "name": "IZVIĐAČ",
+        "role": "Stealth \u00B7 Detection"
+      },
+      "fighter": {
+        "name": "LOVAC",
+        "role": "Agility \u00B7 Crit"
+      },
+      "cruiser": {
+        "name": "KRSTARICA",
+        "role": "Shield \u00B7 Cover"
+      },
+      "battleship": {
+        "name": "BOJNI BROD",
+        "role": "Power \u00B7 Barrage"
+      },
+      "carrier": {
+        "name": "NOSAČ",
+        "role": "Strategic \u00B7 Launch"
+      },
+      "flagship": {
+        "name": "FLAGSHIP",
+        "role": "Command \u00B7 +100 Stack"
+      }
+    },
+    "tokens": {
+      "bcm": {
+        "badge": "HIVE-ENGINE",
+        "name": "BCM",
+        "label": "BO CRYPTO MINER",
+        "price": "1 BCM = 10\u20AC STABLE",
+        "items": {
+          "0": "Gaming licenca (1 BCM)",
+          "1": "Premium blueprinti i sadržaj",
+          "2": "Klanski i sezonski pristup",
+          "3": "Pasivni prihod: 144 BoCrypto/dan po mineru",
+          "4": "In-game premium kupovine"
+        }
+      },
+      "boc": {
+        "badge": "TWITCH REWARD",
+        "name": "BoCrypto",
+        "label": "BOCRYPTO TOKEN",
+        "price": "0.001 min \u00B7 3 decimale",
+        "items": {
+          "0": "Twitch: 1 token / 10 min gledanja",
+          "1": "Subscribers: 3x bonus tokena",
+          "2": "In-game resursi i kozmetika brodova",
+          "3": "Instance retry i daily boost",
+          "4": "SP Card zamjena u igri"
+        }
+      },
+      "bpw": {
+        "badge": "MICRO REWARDS",
+        "name": "BPW",
+        "label": "BPW TOKEN",
+        "price": "0.00000001 min \u00B7 8 decimala",
+        "items": {
+          "0": "Dnevni login: +5 satoshi",
+          "1": "Završena misija: 10-50 satoshi",
+          "2": "Instance nagrada: 100-500 satoshi",
+          "3": "PvP pobjeda i rang lista nagrade",
+          "4": "Faucet: x5 satoshi / 24h"
+        }
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Registruj se",
+        "desc": "Email registracija \u2014 besplatno, bez kreditne kartice. Odmah igraš."
+      },
+      "2": {
+        "title": "Dobij galaksiju",
+        "desc": "Server te smješta u galaksiju. Tvoja baza čeka \u2014 počni graditi odmah."
+      },
+      "3": {
+        "title": "Osvajaj",
+        "desc": "Gradi flotu, biji instance, farmaj blueprinte, PvP dominacija."
+      },
+      "4": {
+        "title": "Postani Premium",
+        "desc": "HIVE Keychain ili crypto \u2014 otključaj blockchain zarade i ekskluzivni sadržaj."
+      }
+    },
+    "login": {
+      "free": {
+        "badge": "BESPLATNO",
+        "title": "\uD83C\uDFAE PLAY 2 FREE",
+        "sub": "Registruj se emailom i igraj odmah. Bez plaćanja, bez kreditne kartice.",
+        "email_label": "EMAIL ADRESA",
+        "email_placeholder": "tvoj@email.com",
+        "pass_label": "LOZINKA",
+        "pass_placeholder": "Minimalno 8 znakova",
+        "btn": "\u25B6 REGISTRUJ SE BESPLATNO",
+        "login_link": "Već Imaš nalog?",
+        "login_cta": "Prijavi se \u2192",
+        "features": "\u2713 Sve instance i sadržaj\n\u2713 300 komandira\n\u2713 PvP i galaksija\n\u2717 Blockchain zarade",
+        "check1": "✓ Sve instance i sadržaj",
+        "check2": "✓ 300 komandira",
+        "check3": "✓ PvP i galaksija",
+        "check4": "✗ Blockchain zarade"
+      },
+      "hive": {
+        "badge": "INSTANT PREMIUM",
+        "title": "\u26D3 HIVE KEYCHAIN",
+        "sub": "Imaš HIVE nalog? Prijavi se putem Keychaina i kupi Premium status \u2014 10\u20AC jednokratno ili 1 BCM.",
+        "btn": "CONNECTUJ HIVE KEYCHAIN",
+        "pay_label": "Premium plaćanje (odaberi):",
+        "pay_hive": "HIVE",
+        "pay_hbd": "HBD (~10 HBD)",
+        "pay_bcm": "BCM (1 BCM)",
+        "features": "\u2713 Sve Free opcije\n\u2713 BPW token zarade\n\u2713 BCM i BoCrypto\n\u2713 Ekskluzivni sadržaj",
+        "no_account": "Nemaš HIVE nalog?",
+        "register": "Registruj se besplatno \u2192",
+        "check1": "✓ Sve Free opcije",
+        "check2": "✓ BPW token zarade",
+        "check3": "✓ BCM i BoCrypto",
+        "check4": "✓ Ekskluzivni sadržaj"
+      },
+      "crypto": {
+        "badge": "PREMIUM \u00B7 10\u20AC",
+        "title": "\uD83D\uDC8E CRYPTO PREMIUM",
+        "sub": "Već Imaš Free nalog? Nadogradi na Premium plaćanjem kriptovalutom.",
+        "pay_btc": "Bitcoin",
+        "pay_usdt": "USDT",
+        "pay_ltc": "Litecoin",
+        "pay_hbd": "HBD",
+        "price_label": "Cijena:",
+        "price": "10\u20AC",
+        "price_note": "\u00B7 Jednokratno \u00B7 Doživotni pristup",
+        "btn": "\u25B6 KUPI PREMIUM",
+        "features": "\u2713 Sve Free opcije\n\u2713 BPW token zarade\n\u2713 BCM i BoCrypto\n\u2713 Ekskluzivni sadržaj",
+        "check1": "✓ Sve Free opcije",
+        "check2": "✓ BPW token zarade",
+        "check3": "✓ BCM i BoCrypto",
+        "check4": "✓ Ekskluzivni sadržaj"
+      }
+    },
+    "faq": {
+      "q1": "Je li igra besplatna?",
+      "a1": "Da \u2014 igra je besplatna za sve. Registruj se emailom i igraš odmah. Premium status (10\u20AC jednokratno) otključava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadržaj. Nema pretplate, nema skrivenih troškova.",
+      "q2": "Je li igra pay-to-win?",
+      "a2": "Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci \u2014 novac ih ne može kupiti. Vještina i vrijeme uvijek pobjeduju.",
+      "q3": "Sta je HIVE Keychain i kako ga instaliram?",
+      "a3": "HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako Imaš HIVE nalog, možeš platiti Premium putem Keychain-a \u2014 10\u20AC ili 1 BCM. Instaliraj na hive-keychain.com.",
+      "q4": "Kako zaraditi prave tokene igrajući?",
+      "a4": "Premium igrači zaraduju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.",
+      "q5": "Da li postoji zaštita za nove igrače?",
+      "a5": "Da \u2014 prvih 72 sata od registracije igraš pod mirovnim štitom. Nitko te ne može napasti dok se ne etabliraš. Nakon toga postaje pravi PvP."
+    },
+    "donate": {
+      "label": "// PODRŽI RAZVOJ",
+      "title": "Sviđa ti se igra?",
+      "desc": "Svaka donacija pomaže razvoju novih sadržaja i servera.",
+      "btn": "\uD83D\uDCB3 DONIRAJ PUTEM PAYPALA"
+    },
+    "footer": {
+      "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
+      "developed": "Developed by",
+      "links": {
+        "discord": "Discord",
+        "twitch": "Twitch",
+        "blog": "HIVE Blog",
+        "github": "GitHub"
+      },
+      "logo": "⬡ HIVE GALAXY",
+      "author": "@bokica80",
+      "twitch_link": "twitch/bokipw",
+      "bcm": "BCM",
+      "bocrypto": "BoCrypto",
+      "bpw": "BPW"
+    }
   }
 }
