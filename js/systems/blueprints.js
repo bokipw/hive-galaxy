@@ -39,12 +39,12 @@ function getBpFragmentCost(rarity) {
 function getBpName(itemId) {
   for (const cls in SHIPS) {
     const s = (SHIPS[cls] || []).find(x => x.id === itemId);
-    if (s) return s.name;
+    if (s) return dn(s);
   }
   for (const arr of [WEAPONS, SHIELDS, ENGINES, RECON_MODULES, SPECIAL_MODULES]) {
     if (!arr) continue;
     const i = arr.find(x => x.id === itemId);
-    if (i) return i.name;
+    if (i) return dn(i);
   }
   return itemId;
 }
@@ -156,7 +156,7 @@ function renderSubcats() {
       const active = _bpSubcat === sub;
       return '<button class="btn ' + (active?'btn-g':'') + '" style="font-size:0.72rem;padding:4px 12px;border-color:' +
         (active ? (cls?.color||'#00ff88') : 'rgba(0,212,255,0.15)') + '" onclick="_bpSubcat=\'' + sub + '\';renderBlueprints()">' +
-        (cls?.icon||'') + ' ' + (cls?.name||sub) + '</button>';
+        (cls?.icon||'') + ' ' + (dn(cls)||sub) + '</button>';
     }).join('') + '</div>';
 }
 
@@ -225,7 +225,7 @@ function renderShipBps() {
 
     // Generički prikaz broda
     let shipHtml = '';
-    shipHtml += '<div>🛡️ Oklop tip: ' + (ship.armor || 'Light') + '</div>';
+    shipHtml += '<div>🛡️ ' + t('armor.' + (ship.armor || 'light')) + '</div>';
     shipHtml += '<div>🔩 Armor: ' + ship.armor_val + '</div>';
     shipHtml += '<div>💠 Shield: ' + ship.shield + '</div>';
     shipHtml += '<div>❤️ HP: ' + ship.structure + '</div>';
@@ -248,14 +248,14 @@ function renderShipBps() {
       (!owned ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:2;font-size:2rem">🔒</div>' : '') +
       (isLegendary ? '<div style="position:absolute;top:-5px;right:-5px;background:linear-gradient(135deg,#ffaa00,#ff6600);color:black;font-size:0.55rem;font-weight:700;padding:2px 12px;border-radius:0 8px 0 8px;z-index:3">⭐ LEGENDARY</div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
-        '<div style="font-size:0.82rem;font-weight:700;color:' + (owned?(cls?.color||'white'):'#6a90b8') + '">' + ship.name + '</div>' +
+        '<div style="font-size:0.82rem;font-weight:700;color:' + (owned?(cls?.color||'white'):'#6a90b8') + '">' + dn(ship) + '</div>' +
         '<span class="lv-badge" style="color:' + rarColor + ';border-color:' + rarColor + '44;font-weight:700">' + displayText + '</span>' +
       '</div>' +
       '<div style="display:flex; flex:1;">' +
         '<div style="flex:1;">' +
           '<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">' + shipHtml + '</div>' +
           '<div style="font-size:0.62rem;padding:4px 8px;border-radius:4px;background:' + (owned?'rgba(0,255,136,0.08)':'rgba(255,255,255,0.04)') + ';color:' + (owned?'#00ff88':'#6a90b8') + '">' +
-            (owned ? '✅ Otključan' : '🔒 ' + (ship.source||'Nepoznato') + ' &nbsp;' + getRarityModeLabel(rarityLetter)) +
+            (owned ? '✅ Otključan' : '🔒 ' + (t(ship.sourceKey || '') || ship.source || 'Nepoznato') + ' &nbsp;' + getRarityModeLabel(rarityLetter)) +
           '</div>' +
           fragBar +
           (owned ? '<button class="btn btn-g" style="width:100%;margin-top:8px;font-size:0.68rem" onclick="showPanel(\'designer\')">🔧 Koristi u Designeru</button>' : '') +
@@ -299,7 +299,7 @@ function renderItemBpCard(item) {
     if (item.range)    effectHtml += '<div>📏 Domet: ' + item.range.min + '-' + item.range.max + '</div>';
     if (item.cooldown !== undefined) effectHtml += '<div>⏱️ Cooldown: ' + item.cooldown + ' runde</div>';
     if (item.dps)      effectHtml += '<div>⚔️ DPS: ' + item.dps + '</div>';
-    if (item.special)  effectHtml += '<div>✨ ' + (item.special.desc || '') + '</div>';
+    if (item.special)  effectHtml += '<div>✨ ' + (t(item.special.specialKey || '') || item.special.desc || '') + '</div>';
   }
   // Štitovi
   else if (item.shield !== undefined) {
@@ -319,10 +319,10 @@ function renderItemBpCard(item) {
     effectHtml += '<div>🛡️ Kapacitet: ' + item.shield + '</div>';
     effectHtml += '<div>⚡ Regen/rundi: ' + item.regen + '</div>';
     // Ostali specijali
-    if (item.special && !resistInfo) effectHtml += '<div>✨ ' + (item.special.desc || '') + '</div>';
+    if (item.special && !resistInfo) effectHtml += '<div>✨ ' + (t(item.special.specialKey || '') || item.special.desc || '') + '</div>';
     if (!item.special)               effectHtml += '<div style="opacity:0.5">✨ Bez specijalnog efekta</div>';
     if (item.who)                    effectHtml += '<div>🚀 Koriste: ' + item.who + '</div>';
-    if (item.desc)                   effectHtml += '<div style="opacity:0.7;font-style:italic">' + item.desc + '</div>';
+    if (item.desc)                   effectHtml += '<div style="opacity:0.7;font-style:italic">' + dd(item) + '</div>';
   }
   // Motori
   else if (item.speed !== undefined) {
@@ -347,14 +347,14 @@ function renderItemBpCard(item) {
     effectHtml += '<div>🚀 Brzina: ' + item.speed + '</div>';
     if (item.agility_bonus) effectHtml += '<div>💨 Agilnost: +' + item.agility_bonus + '</div>';
     if (item.evasion_bonus) effectHtml += '<div>👻 Izbjegavanje: +' + item.evasion_bonus + '%</div>';
-    if (item.special && !engSpec) effectHtml += '<div>✨ ' + (item.special.desc || '') + '</div>';
+    if (item.special && !engSpec) effectHtml += '<div>✨ ' + (t(item.special.specialKey || '') || item.special.desc || '') + '</div>';
     if (!item.special)            effectHtml += '<div style="opacity:0.5">✨ Bez specijalnog efekta</div>';
     if (item.who)                 effectHtml += '<div style="opacity:0.6">🔧 Koriste: ' + item.who + '</div>';
-    if (item.desc)                effectHtml += '<div style="opacity:0.7;font-style:italic">' + item.desc + '</div>';
+    if (item.desc)                effectHtml += '<div style="opacity:0.7;font-style:italic">' + dd(item) + '</div>';
   }
   // Moduli
   else if (item.effect) {
-    effectHtml += '<div>⚙️ ' + (item.effect.desc || '') + '</div>';
+    effectHtml += '<div>⚙️ ' + (t(item.effectKey || '') || item.effect.desc || '') + '</div>';
   }
   
   if (!effectHtml) effectHtml = '<div style="opacity:0.5">Bez opisa</div>';
@@ -373,12 +373,12 @@ function renderItemBpCard(item) {
     (!owned ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:2;font-size:2rem">🔒</div>' : '') +
     (isLegendary ? '<div style="position:absolute;top:-5px;right:-5px;background:linear-gradient(135deg,#ffaa00,#ff6600);color:black;font-size:0.55rem;font-weight:700;padding:2px 12px;border-radius:0 8px 0 8px;z-index:3">⭐ LEGENDARY</div>' : '') +
     '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">' +
-      '<div style="font-size:0.78rem;font-weight:700;color:' + (owned?rarColor:'#6a90b8') + '">' + item.name + '</div>' +
+      '<div style="font-size:0.78rem;font-weight:700;color:' + (owned?rarColor:'#6a90b8') + '">' + dn(item) + '</div>' +
       '<span class="lv-badge" style="color:' + rarColor + ';border-color:' + rarColor + '44;font-size:0.58rem">' + (item.rarity||'C') + '</span>' +
     '</div>' +
     '<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;line-height:1.6">' + effectHtml + '</div>' +
     '<div style="font-size:0.6rem;padding:3px 6px;border-radius:4px;background:' + (owned?'rgba(0,255,136,0.08)':'rgba(255,255,255,0.04)') + ';color:' + (owned?'#00ff88':'#6a90b8') + '">' +
-      (owned ? '✅ Otključan' : '🔒 ' + (item.source||'Nepoznato') + ' &nbsp;' + getRarityModeLabel(item.rarity||'C')) +
+      (owned ? '✅ Otključan' : '🔒 ' + (t(item.sourceKey) || item.source || 'Nepoznato') + ' &nbsp;' + getRarityModeLabel(item.rarity||'C')) +
     '</div>' + fragBar + '</div>';
 }
 
@@ -437,7 +437,7 @@ function renderCraftCard(item, isOwned) {
   }
 
   return '<div class="card" style="border-color:' + rarColor + '44">' +
-    '<div style="font-size:0.8rem;font-weight:700;color:' + rarColor + ';margin-bottom:4px">' + item.name + '</div>' +
+    '<div style="font-size:0.8rem;font-weight:700;color:' + rarColor + ';margin-bottom:4px">' + dn(item) + '</div>' +
     '<div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px">' + rarName + (isOwned ? ' · ✅ Već posjeduješ' : '') + '</div>' +
     '<div style="display:flex;justify-content:space-between;margin-bottom:4px">' +
       '<span style="font-size:0.65rem;color:#6a90b8">Fragmenti</span>' +
