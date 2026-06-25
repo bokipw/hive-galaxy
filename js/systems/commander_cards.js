@@ -1168,14 +1168,17 @@ function calcFleetBonuses() {
     if (shipSynergy) bonuses[slot.bonus] += 5;
   });
 
-  // Faction synergy: 3+ iste frakcije u floti → +10% svim bonusima
+  // Faction synergy: broji iz slotova i deployovanih komandira
   const factionCount = {};
+  const countFaction = id => {
+    const def = allCmds.find(c => c.id === id);
+    if (def) factionCount[def.faction] = (factionCount[def.faction] || 0) + 1;
+  };
   FLEET_SLOTS.slice(0, cap).forEach(slot => {
     const cmdId = window._cmdFleet[slot.id];
-    if (!cmdId) return;
-    const def = allCmds.find(c => c.id === cmdId);
-    if (def) factionCount[def.faction] = (factionCount[def.faction] || 0) + 1;
+    if (cmdId) countFaction(cmdId);
   });
+  (window._deployedCommanders || []).forEach(id => countFaction(id));
   const hasFactionBonus = Object.values(factionCount).some(v => v >= 3);
   if (hasFactionBonus) {
     Object.keys(bonuses).forEach(k => { bonuses[k] = Math.floor(bonuses[k] * 1.1); });
