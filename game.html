@@ -82,7 +82,7 @@
     window._loginType = 'hive';
     window._supaSession = null;
 
-    // Prijavi se na Supabase Auth preko Edge Function
+    // Pokreni auth + upsert kao jedan tok
     (async () => {
       try {
         // Očisti staru sesiju iz localStorage (npr. od admin logina)
@@ -109,13 +109,12 @@
           }
         }
       } catch(e) { console.error('[hive-auth] Error:', e); }
-    })();
 
-    // Kreiraj ili dohvati HIVE profil u Supabase (anon key — koristi hive_user kolonu)
-    _sb.from('hive_profiles').upsert({
-      hive_user:  hiveUser,
-      last_seen:  new Date().toISOString()
-    }, { onConflict: 'hive_user' }).then(async () => {
+      // Kreiraj ili dohvati HIVE profil — sad je auth gotov, nema 401
+      _sb.from('hive_profiles').upsert({
+        hive_user:  hiveUser,
+        last_seen:  new Date().toISOString()
+      }, { onConflict: 'hive_user' }).then(async () => {
       // Dohvati profil — premium status, ključevi
       const { data } = await _sb.from('hive_profiles')
         .select('is_premium, keys, boosters')
@@ -190,8 +189,9 @@
         window._chainBOC = get('BOCRYPTO', 3);
         window._chainBPW = get('BPW', 8);
       }).catch(() => {});
-    });
-    return;
+      });
+      return;
+    })();
   }
 
   _sb.auth.getSession().then(async ({ data }) => {
