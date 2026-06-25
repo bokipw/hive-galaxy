@@ -15,6 +15,11 @@
                 "artifacts":  "アーティファクト",
                 "designer":  "デザイナー",
                 "formations":  "編成",
+                "depot":  "貯蔵庫",
+                "shipfactory":  "造船所",
+                "recycler":  "リサイクラー",
+                "hangar":  "格納庫",
+                "instances":  "インスタンス",
                 "achievements":  "実績",
                 "cards":  "カード"
             },
