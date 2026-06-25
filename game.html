@@ -10,7 +10,8 @@
 (function() {
   const _sb = supabase.createClient(
     'https://kjgfouzyqcnlwbsyipxp.supabase.co',
-    'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+    'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5',
+    { auth: { persistSession: false } }
   );
   window._supa = _sb;
   window._supaAnonKey = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
@@ -84,6 +85,9 @@
     // Prijavi se na Supabase Auth preko Edge Function
     (async () => {
       try {
+        // Očisti staru sesiju iz localStorage (npr. od admin logina)
+        await _sb.auth.signOut({ scope: 'local' });
+
         console.log('[hive-auth] Calling Edge Function for:', hiveUser);
         const resp = await fetch('https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/hive-auth', {
           method: 'POST',
@@ -99,6 +103,7 @@
           });
           console.log('[hive-auth] signIn result:', error ? 'ERROR' : 'OK', error);
           if (!error && data.session) {
+            await _sb.auth.setSession(data.session);
             window._supaSession = data.session;
             console.log('[hive-auth] Session set, uid:', _getSaveId ? _getSaveId() : 'N/A');
           }
