@@ -15,6 +15,11 @@
     "artifacts": "Artifacts",
     "designer": "Designer",
     "formations": "Formations",
+    "depot": "Depot",
+    "shipfactory": "Ship Factory",
+    "recycler": "Recycler",
+    "hangar": "Hangar",
+    "instances": "Instances",
     "achievements": "Achievements",
     "cards": "Cards"
   },
@@ -4475,4 +4480,3 @@
     }
   }
 }
-
