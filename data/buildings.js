@@ -228,7 +228,7 @@ const buildingsData = {
   },
 
   shield_gen: {
-    name:     'Shield Generator',
+    name:     'Generator štita',
     nameKey:  'building.shield_gen.name',
     icon:     '🛡️',
     baseCost: 420,
@@ -265,7 +265,7 @@ const buildingsData = {
 
   // ── SPECIJALNE ZGRADE ──
   jump_gate: {
-    name:     'Jump Gate',
+    name:     'Kapija skoka',
     nameKey:  'building.jump_gate.name',
     icon:     '🌀',
     baseCost: 800,
@@ -282,12 +282,12 @@ const buildingsData = {
   },
 
   laboratory: {
-    name:     'Laboratory',
+    name:     'Laboratorija',
     nameKey:  'building.laboratory.name',
     icon:     '🔬',
     baseCost: 600,
     category: 'special',
-    desc:     'Limitira max nivo istraživanja. Lv1 = Research Lv1, Lv100 = Research Lv100.',
+    desc:     'Limitira max nivo istraživanja. Lv1 = Istraživanje Lv1, Lv100 = Istraživanje Lv100.',
     descKey:  'building.laboratory.desc',
     energyDrain: 4,
     milestones: {
@@ -299,12 +299,12 @@ const buildingsData = {
   },
 
   recycler: {
-    name:     'Recycler',
+    name:     'Recikler',
     nameKey:  'building.recycler.name',
     icon:     '♻️',
     baseCost: 450,
     category: 'special',
-    desc:     'Reciklira brodove za resurse. Lv1=20%, Lv100=100% original cijene.',
+    desc:     'Reciklira brodove za resurse. Lv1=20%, Lv100=100% originalne cene.',
     descKey:  'building.recycler.desc',
     energyDrain: 3,
     milestones: {
