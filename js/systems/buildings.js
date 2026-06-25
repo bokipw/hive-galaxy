@@ -318,10 +318,10 @@ function renderBuildingGrid(containerId, keys) {
       const nextUnlock      = Object.entries(buildingsData.ship_factory.unlocks)
         .find(([lvl]) => parseInt(lvl) > currentLevel);
       extra = `
-        <div class="prod-rate">🚀 OTKLJUČANE KLASE: ${unlockedClasses.length > 0 ? unlockedClasses.join(', ') : 'Nijedna'}</div>
+        <div class="prod-rate">🚀 OTKLJUČANE KLASE: ${unlockedClasses.length > 0 ? unlockedClasses.map(id => dn(SHIP_CLASSES[id]) || id).join(', ') : 'Nijedna'}</div>
         <div class="prod-rate" style="color:#00ff88">⚡ BRZINA GRADNJE: +${speedBonus}%</div>
         <div class="prod-rate" style="color:#ffcc44">💰 POPUST: -${discount}%</div>
-        ${nextUnlock ? `<div style="font-size:0.62rem;color:#6a90b8">🔓 Lv.${nextUnlock[0]}: ${nextUnlock[1].join(', ')}</div>` : ''}
+        ${nextUnlock ? `<div style="font-size:0.62rem;color:#6a90b8">🔓 Lv.${nextUnlock[0]}: ${nextUnlock[1].map(id => dn(SHIP_CLASSES[id]) || id).join(', ')}</div>` : ''}
         <div style="font-size:0.62rem;color:#ff6644">⚡ TROŠI: -${currentLevel * 4} → -${nextLevel * 4} MWh/s</div>
         ${renderMilestoneBar(key)}`;
     }
@@ -554,7 +554,7 @@ function renderShipFactory() {
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
         <div style="font-size:3rem">🏭</div>
         <div style="flex:1">
-          <div style="font-size:1rem;font-weight:700;color:${nameColor}">Ship Factory</div>
+          <div style="font-size:1rem;font-weight:700;color:${nameColor}">Fabrika brodova</div>
           <div class="lv-badge">Lv. ${level} / 100</div>
         </div>
         ${nextMilestone ? `<div style="font-size:0.62rem;color:#ffcc44;text-align:right">
