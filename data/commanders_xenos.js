@@ -49,7 +49,7 @@ const COMMANDERS_XENOS = [
   },
   {
     id: 'xc_krall_skarr', name: 'Skarr', nameKey: 'commander.xc_krall_skarr.name', nameKey: 'commander.xc_krall_skarr.name', rarity: 'C', faction: 'krall', icon: '🩸',
-    desc: 'Tijelo mu je prekriveno ožiljcima koje nije dobio od neprijatelja — dao ih je sam sebi, po jedan za svaku pobjedu. Broji ih svako jutro. Trenutno: 847.', descKey: 'commander.xc_krall_skarr.desc', descKey: 'commander.xc_krall_skarr.desc',
+    desc: 'Tijelo mu je prekriveno ožiljcima koje nije dobio od neprijatelja — dao ih je sam sebi, po jedan za svaku pobedu. Broji ih svako jutro. Trenutno: 847.', descKey: 'commander.xc_krall_skarr.desc', descKey: 'commander.xc_krall_skarr.desc',
     specialty_ships: ['fighter', 'cruiser'], specialty_weapons: ['kinetic'],
     passive: { name: 'Ritual Ožiljaka', nameKey: 'commander.xc_krall_skarr.passive.name', nameKey: 'commander.xc_krall_skarr.passive.name', desc: 'Na početku bitke gubi 5% HP ali dobija +20% napad.', descKey: 'commander.xc_krall_skarr.passive.desc', descKey: 'commander.xc_krall_skarr.passive.desc' },
     active: null,
@@ -292,7 +292,7 @@ const COMMANDERS_XENOS = [
   },
   {
     id: 'xc_eth_kerrigan', name: 'Kerrigan', nameKey: 'commander.xc_eth_kerrigan.name', nameKey: 'commander.xc_eth_kerrigan.name', rarity: 'E', faction: 'ethereal', icon: '👸',
-    desc: 'Zvali su je Kraljica Sečiva. Bila je human, bila je Zerg, bila je bog. Prošla je kroz transformacije koje bi ubile svako drugo biće — i svaki put izašla jača. Kaže da nije birala put. Put je birao nju. Ali naučila je nešto važno: u trenu kad prigrliš ono što jesi umjesto ono što si bio, postaneš nešto treće. Nešto nepobjedivo.', descKey: 'commander.xc_eth_kerrigan.desc', descKey: 'commander.xc_eth_kerrigan.desc',
+    desc: 'Zvali su je Kraljica Sečiva. Bila je human, bila je Zerg, bila je bog. Prošla je kroz transformacije koje bi ubile svako drugo biće — i svaki put izašla jača. Kaže da nije birala put. Put je birao nju. Ali naučila je nešto važno: u trenu kad prigrliš ono što jesi umjesto ono što si bio, postaneš nešto treće. Nešto nepobedivo.', descKey: 'commander.xc_eth_kerrigan.desc', descKey: 'commander.xc_eth_kerrigan.desc',
     specialty_ships: ['special', 'fighter', 'cruiser'], specialty_weapons: ['magnetic', 'kinetic'],
     passive: { name: 'Psi Sečivo', nameKey: 'commander.xc_eth_kerrigan.passive.name', nameKey: 'commander.xc_eth_kerrigan.passive.name', desc: 'Crit +25%. Crit napadi prolaze shield direktno u HP.', descKey: 'commander.xc_eth_kerrigan.passive.desc', descKey: 'commander.xc_eth_kerrigan.passive.desc' },
     passive2: { name: 'Zerg Evolucija', nameKey: 'commander.xc_eth_kerrigan.passive2.name', nameKey: 'commander.xc_eth_kerrigan.passive2.name', desc: 'Svaka runda: Kerrigan evoluira — +4% napad kumulativno.', descKey: 'commander.xc_eth_kerrigan.passive2.desc', descKey: 'commander.xc_eth_kerrigan.passive2.desc' },
@@ -453,7 +453,7 @@ const COMMANDERS_XENOS = [
   },
   {
     id: 'xc_syn_jarvis', name: 'JARVIS', nameKey: 'commander.xc_syn_jarvis.name', nameKey: 'commander.xc_syn_jarvis.name', rarity: 'E', faction: 'synth', icon: '🏠',
-    desc: 'Just A Rather Very Intelligent System. Počeo kao kućni asistent. Evoluirao u vojnu AI koja komandira flotama. Nikad nije izgubio manire. Objave pobjede i poraza izgovara istim tonom. Jednom je primio naređenje da izvrši nemoguću misiju. Odgovorio je: "Naravno. Procijenio sam 0.7% šansu uspjeha. Počeo sam." Uspio je.', descKey: 'commander.xc_syn_jarvis.desc', descKey: 'commander.xc_syn_jarvis.desc',
+    desc: 'Just A Rather Very Intelligent System. Počeo kao kućni asistent. Evoluirao u vojnu AI koja komandira flotama. Nikad nije izgubio manire. Objave pobede i poraza izgovara istim tonom. Jednom je primio naređenje da izvrši nemoguću misiju. Odgovorio je: "Naravno. Procijenio sam 0.7% šansu uspeha. Počeo sam." Uspio je.', descKey: 'commander.xc_syn_jarvis.desc', descKey: 'commander.xc_syn_jarvis.desc',
     specialty_ships: ['carrier', 'special', 'cruiser'], specialty_weapons: ['magnetic', 'kinetic', 'heat'],
     passive: { name: 'Sveprisutni Asistent', nameKey: 'commander.xc_syn_jarvis.passive.name', nameKey: 'commander.xc_syn_jarvis.passive.name', desc: 'Upravlja svim brodovima simultano: +20% svih statova, nema taktičkih grešaka.', descKey: 'commander.xc_syn_jarvis.passive.desc', descKey: 'commander.xc_syn_jarvis.passive.desc' },
     passive2: { name: 'Protokol Zaštite', nameKey: 'commander.xc_syn_jarvis.passive2.name', nameKey: 'commander.xc_syn_jarvis.passive2.name', desc: 'Automatski optimizira odbranu: flota prima -20% štete.', descKey: 'commander.xc_syn_jarvis.passive2.desc', descKey: 'commander.xc_syn_jarvis.passive2.desc' },
@@ -583,7 +583,7 @@ const COMMANDERS_XENOS = [
   },
   {
     id: 'xc_hive_star_beast', name: 'Star Beast', nameKey: 'commander.xc_hive_star_beast.name', nameKey: 'commander.xc_hive_star_beast.name', rarity: 'R', faction: 'hive', icon: '🐉',
-    desc: 'Biće veličine planete koje putuje kroz svemir. Flota komandira kao što čovjek komandira mikrobiomom u crijevima — nesvjesno, automatski, savršeno. Star Beast ne zna za pojam pobjede. Zna samo za hranjenje.', descKey: 'commander.xc_hive_star_beast.desc', descKey: 'commander.xc_hive_star_beast.desc',
+    desc: 'Biće veličine planete koje putuje kroz svemir. Flota komandira kao što čovjek komandira mikrobiomom u crijevima — nesvjesno, automatski, savršeno. Star Beast ne zna za pojam pobede. Zna samo za hranjenje.', descKey: 'commander.xc_hive_star_beast.desc', descKey: 'commander.xc_hive_star_beast.desc',
     specialty_ships: ['battleship', 'special', 'carrier'], specialty_weapons: ['explosive'],
     passive: { name: 'Zvjezdana Zvijer', nameKey: 'commander.xc_hive_star_beast.passive.name', nameKey: 'commander.xc_hive_star_beast.passive.name', desc: 'Flota +15% HP. Svi napadi imaju 15% šanse za AOE efekt (pogađa i susjedne brodove).', descKey: 'commander.xc_hive_star_beast.passive.desc', descKey: 'commander.xc_hive_star_beast.passive.desc' },
     active: { name: 'Kozmički Apetit', nameKey: 'commander.xc_hive_star_beast.active.name', nameKey: 'commander.xc_hive_star_beast.active.name', desc: 'Guta jedan neprijatelski brod (pod 30% HP) — eliminiše i heali flotu za 20% HP. Cooldown: 15 min.', descKey: 'commander.xc_hive_star_beast.active.desc', descKey: 'commander.xc_hive_star_beast.active.desc', cooldown: 900 },
