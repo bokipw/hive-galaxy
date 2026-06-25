@@ -538,7 +538,7 @@ function triggerFleetRecoveryMission(planetId, planet, fleetSlots, battle) {
     return;
   }
 
-  // % povrata po distanci (1=100%, 2=80%, 3=60%, 4=40%, 5=20%)
+  // % povraćaja po distanci (1=100%, 2=80%, 3=60%, 4=40%, 5=20%)
   const RECOVERY_PCT = { 1: 1.0, 2: 0.8, 3: 0.6, 4: 0.4, 5: 0.2 };
   const pct = RECOVERY_PCT[planet.distance || 1] || 0.5;
 
