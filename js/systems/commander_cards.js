@@ -1594,7 +1594,7 @@ function renderFleetCommanders() {
 
   el.innerHTML = `
     ${headerHtml}
-    ${bonusHtml}
+    ${synHtml}
     ${deployedHtml}
     <div style="font-size:0.6rem;color:#00d4ff;font-family:'Orbitron',monospace;
       letter-spacing:2px;margin-bottom:10px;padding-bottom:6px;
