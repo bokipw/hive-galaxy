@@ -4049,7 +4049,7 @@
       "milestone": {
         "25": {
           "label": "Napredna komanda",
-          "bonus": "Sve zgrade -10% cijena nadogradnje"
+          "bonus": "Sve zgrade -10% cena nadogradnje"
         },
         "50": {
           "label": "Strateški centar",
@@ -4057,11 +4057,11 @@
         },
         "75": {
           "label": "Galaktički štab",
-          "bonus": "Sve zgrade -20% cijena nadogradnje"
+          "bonus": "Sve zgrade -20% cena nadogradnje"
         },
         "100": {
           "label": "LEGENDARNI KOMAND",
-          "bonus": "Build timer -50%, sve zgrade -30% cijena"
+          "bonus": "Build timer -50%, sve zgrade -30% cena"
         }
       }
     },
@@ -4140,7 +4140,7 @@
           "bonus": "+10% kapacitet"
         },
         "50": {
-          "label": "Industrijska pohrana",
+          "label": "Industrijsko skladište",
           "bonus": "+25% kapacitet"
         },
         "75": {
@@ -4154,24 +4154,24 @@
       }
     },
     "ship_factory": {
-      "name": "Ship Factory",
+      "name": "Fabrika brodova",
       "desc": "Brodogradilište. Otključava klase brodova i ubrzava gradnju.",
       "milestone": {
         "25": {
           "label": "Automatizovana linija",
-          "bonus": "+5% brzina gradnje, -5% cijena"
+          "bonus": "+5% brzina gradnje, -5% cena"
         },
         "50": {
           "label": "Napredno brodogradilište",
-          "bonus": "+10% brzina, -10% cijena"
+          "bonus": "+10% brzina, -10% cena"
         },
         "75": {
           "label": "Mega fabrika",
-          "bonus": "+15% brzina, -15% cijena"
+          "bonus": "+15% brzina, -15% cena"
         },
         "100": {
           "label": "GALAKTIČKI ARSENAL",
-          "bonus": "+25% brzina, -20% cijena, svi brodovi +5% stats"
+          "bonus": "+25% brzina, -20% cena, svi brodovi +5% stats"
         }
       }
     },
@@ -4308,7 +4308,7 @@
       }
     },
     "shield_gen": {
-      "name": "Shield Generator",
+      "name": "Generator štita",
       "desc": "Energetski štit baze. Svaki level +80 odbrana.",
       "milestone": {
         "25": {
@@ -4352,7 +4352,7 @@
       }
     },
     "jump_gate": {
-      "name": "Jump Gate",
+      "name": "Kapija skoka",
       "desc": "Prebacuje brodove na kolonije. Svaki level +1 sistem dometa.",
       "milestone": {
         "25": {
@@ -4374,30 +4374,30 @@
       }
     },
     "laboratory": {
-      "name": "Laboratory",
-      "desc": "Limitira max nivo istraživanja. Lv1 = Research Lv1, Lv100 = Research Lv100.",
+      "name": "Laboratorija",
+      "desc": "Limitira max nivo istraživanja. Lv1 = Istraživanje Lv1, Lv100 = Istraživanje Lv100.",
       "milestone": {
         "25": {
           "label": "Napredni lab",
-          "bonus": "Istraživanje -20% cijena"
+          "bonus": "Istraživanje -20% cena"
         },
         "50": {
           "label": "Kvantni lab",
-          "bonus": "Istraživanje -35% cijena"
+          "bonus": "Istraživanje -35% cena"
         },
         "75": {
           "label": "Xenotehnološki centar",
-          "bonus": "Istraživanje -50% cijena"
+          "bonus": "Istraživanje -50% cena"
         },
         "100": {
           "label": "SINGULARNOST",
-          "bonus": "Sva istraživanja instant + -75% cijena"
+          "bonus": "Sva istraživanja instant + -75% cena"
         }
       }
     },
     "recycler": {
-      "name": "Recycler",
-      "desc": "Reciklira brodove za resurse. Lv1=20%, Lv100=100% original cijene.",
+      "name": "Recikler",
+      "desc": "Reciklira brodove za resurse. Lv1=20%, Lv100=100% originalne cene.",
       "milestone": {
         "25": {
           "label": "Napredna reciklaža",
@@ -4477,7 +4477,7 @@
       "ships": {
         "label": "// Klase brodova",
         "title": "6 klasa. Stotine konfiguracija.<br>Jedna strategija pobeđuje.",
-        "desc": "Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Miješana flota uvijek pobeđuje mono flotu istog troška."
+        "desc": "Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Mešana flota uvek pobeđuje mono flotu istog troška."
       },
       "tokens": {
         "label": "// HIVE Blockchain Ekonomija",
@@ -4519,7 +4519,7 @@
       },
       "blockchain": {
         "title": "Blockchain Ekonomija",
-        "desc": "BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave \u2014 razmjenljive i vrijedne."
+        "desc": "BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave \u2014 razmenljive i vredne."
       }
     },
     "ships": {
@@ -4665,7 +4665,7 @@
       "q1": "Je li igra besplatna?",
       "a1": "Da \u2014 igra je besplatna za sve. Registruj se emailom i igraš odmah. Premium status (10\u20AC jednokratno) otključava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadržaj. Nema pretplate, nema skrivenih troškova.",
       "q2": "Je li igra pay-to-win?",
-      "a2": "Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci \u2014 novac ih ne može kupiti. Vještina i vrijeme uvijek pobjeduju.",
+      "a2": "Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci \u2014 novac ih ne može kupiti. Veština i vreme uvek pobeđuju.",
       "q3": "Sta je HIVE Keychain i kako ga instaliram?",
       "a3": "HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako Imaš HIVE nalog, možeš platiti Premium putem Keychain-a \u2014 10\u20AC ili 1 BCM. Instaliraj na hive-keychain.com.",
       "q4": "Kako zaraditi prave tokene igrajući?",
