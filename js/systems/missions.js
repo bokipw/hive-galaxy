@@ -591,7 +591,15 @@ const STORYLINE_MISSIONS = [
     id: 'story_3', tier: 2,
     name: 'Brodogradnja', icon: '🏭',
     desc: 'Bez flote nema preživljavanja. Napravi prve brodove i rasporedi ih u flotu.',
-    check: () => fleet.some(s => s !== null),
+    check: () => {
+      const globalHas = fleet.some(s => s !== null);
+      if (globalHas) return true;
+      const deployed = window._deployedCommanders || [];
+      return deployed.some(cmdId => {
+        const cFleet = getCmdFleet(cmdId);
+        return cFleet.some(s => s !== null);
+      });
+    },
     reward: { metal: 10000, crystal: 5000, he3: 2500, xp: 500, instanceKeys: 3 },
     requires: 'story_2',
   },
