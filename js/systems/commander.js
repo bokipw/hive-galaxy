@@ -83,7 +83,7 @@ const COMMANDER_ABILITIES = [
     id:    'galactic_presence',
     name:  'Galaktičko Prisustvo',
     icon:  '🌌',
-    desc:  'PvP rating ne može pasti ispod 800. +10% nagrade za PvP pobjedu.',
+    desc:  'PvP rating ne može pasti ispod 800. +10% nagrade za PvP pobedu.',
     type:  'passive',
   },
   {
