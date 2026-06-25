@@ -1133,7 +1133,7 @@ function applyWeaponEffect(attacker, target, battle, round) {
     // Ovdje: tier III high_damage dodaje burn
     if (spec.type === 'high_damage' && spec.bonus >= 35) {
       target.effects.push({ type: 'burn', duration: 1, dmgPerRound: 30 });
-      battle.log.push({ round, type: 'effect', msg: `💥🔥 High Damage gorenje: ${target.name} -30 HP sljedeću rundu` });
+      battle.log.push({ round, type: 'effect', msg: `💥🔥 High Damage gorenje: ${target.name} -30 HP sledeću rundu` });
     }
 
     // MULTI_TARGET — napada više meta (FighterBay Light/Heavy)
