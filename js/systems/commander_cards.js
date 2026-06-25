@@ -1345,48 +1345,53 @@ function renderFleetCommanders() {
       </div>
     </div>`;
 
-  // ── FLEET BONUSI (sa faction synergy) ──
+  // ── FACTION SYNERGY panel (tutorial-style) ──
   const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
-  const anyBonus = fb && Object.values(fb.bonuses).some(v => v > 0);
-  const bonusHtml = `
-    <div style="margin-bottom:12px;padding:12px 14px;border-radius:8px;
-      background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1)">
-      <div style="display:flex;align-items:center;gap:8px;width:100%;margin-bottom:8px">
-        <span style="font-size:0.78rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:1px">📊 FLEET BONUSI</span>
-        <span title="Svaki komandir pripada nekoj frakciji (npr. Revenant, Tomb Keeper, Krall...). Ako 3+ komandira u floti imaju ISTU frakciju, aktivira se Faction Synergy i uvećava sve bonuse za +10%."
-          style="cursor:help;font-size:0.65rem;color:#6a90b8;background:rgba(255,255,255,0.06);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center">?</span>
+  const factionCt = fb ? Object.entries(fb.factionCount) : [];
+  const hasSyn = fb?.hasFactionBonus;
+  const nearSyn = factionCt.find(([,c]) => c === 2);
+  const noDeploy = factionCt.length === 0;
+  const synHtml = `
+    <div style="margin-bottom:12px;padding:14px 16px;border-radius:8px;
+      background:${hasSyn ? 'rgba(255,204,68,0.06)' : 'rgba(0,212,255,0.04)'};
+      border:1px solid ${hasSyn ? 'rgba(255,204,68,0.2)' : 'rgba(0,212,255,0.1)'}">
+      <div style="font-size:0.85rem;font-weight:700;color:${hasSyn ? '#ffcc44' : '#00d4ff'};
+        font-family:'Orbitron',monospace;margin-bottom:8px">
+        ${hasSyn ? '🔗 FACTION SYNERGY AKTIVNA! +10%' : '🔗 FACTION SYNERGY'}
       </div>
-      ${anyBonus ? `
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-          ${Object.entries(fb.bonuses).filter(([,v]) => v > 0).map(([k, v]) => {
-            const bi = FLEET_BONUS_LABELS[k] || { label: k, color: '#aaa', icon: '?' };
-            return `<div style="font-size:0.72rem;color:${bi.color};background:${bi.color}15;
-              padding:4px 12px;border-radius:4px;border:1px solid ${bi.color}33">
-              ${bi.icon} ${bi.label} <strong>+${v}%</strong>
-            </div>`;
+      <div style="font-size:0.8rem;color:#c8d8e8;margin-bottom:10px;line-height:1.5">
+        ${hasSyn
+          ? 'Svi bonusi flote su uvećani za <strong>+10%</strong> jer imaš 3+ komandira iste frakcije.'
+          : noDeploy
+            ? 'Svaki komandir pripada nekoj frakciji. Ako deployuješ <strong>3 komandira iste frakcije</strong>, dobijaš <strong>+10%</strong> na sve bonuse.'
+            : 'Deployuj <strong>još 1 komandira</strong> iste frakcije da aktiviraš Faction Synergy i dobiješ <strong>+10%</strong> na sve bonuse.'}
+      </div>
+      ${factionCt.length > 0 ? `
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:${noDeploy ? '0' : '6px'}">
+          ${factionCt.map(([f, c]) => {
+            const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
+              || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
+              || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
+              || null;
+            const icon = (ff?.icon && ff.icon !== '??' && ff.icon !== '???' ? ff.icon : '');
+            const isTarget = c >= 3 || nearSyn?.[0] === f;
+            return `<span style="font-size:0.8rem;background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;
+              color:${c >= 3 ? '#ffcc44' : '#8ab0d8'};border:1px solid ${c >= 3 ? '#ffcc4433' : 'transparent'}">
+              ${icon} ${ff?.name||f}: ${c} ${c >= 3 ? '⭐' : nearSyn?.[0] === f ? '🔜' : ''}
+            </span>`;
           }).join('')}
         </div>` : ''}
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px">
-        ${Object.entries(fb?.factionCount || {}).map(([f, c]) => {
-          const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
-            || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
-            || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
-            || null;
-          const icon = ff?.icon || '❓';
-          return `<span style="font-size:0.72rem;background:rgba(255,255,255,0.06);padding:3px 10px;border-radius:4px;
-            color:${c >= 3 ? '#ffcc44' : '#8ab0d8'};border:1px solid ${c >= 3 ? '#ffcc4433' : 'transparent'}">
-            ${icon} ${ff?.name||f}: ${c}${c >= 3 ? ' ⭐' : ''}
-          </span>`;
-        }).join('')}
-        ${fb?.hasFactionBonus ? `
-          <span style="font-size:0.78rem;font-weight:700;color:#ffcc44;background:#ffcc4418;padding:4px 12px;border-radius:4px;border:1px solid #ffcc44">
-            🔗 FACTION SYNERGY +10%</span>` : (fb && Object.keys(fb.factionCount).length > 0 ? `
-          <span style="font-size:0.65rem;color:#6a90b8">(3+ iste frakcije → +10%)</span>` : '')}
+      <div style="font-size:0.8rem;color:#6a90b8;margin-top:4px">
+        <span style="background:rgba(255,255,255,0.04);padding:4px 10px;border-radius:4px;display:inline-block">
+          💡 ${hasSyn
+            ? 'Odlično! Drži 3+ komandira ove frakcije u floti da synergy ostane aktivna.'
+            : nearSyn
+              ? 'Fali ti još 1 komandir u toj frakciji — deployuj ga sa liste ispod!'
+              : noDeploy
+                ? 'Deployuj komandire preko dugmeta 🚀 Deploy ispod, pa gledaj ovde.'
+                : 'Trenutno nijedna frakcija nema 3+ komandira. Deployuj još komandira iste frakcije!'}
+        </span>
       </div>
-      ${!anyBonus && !fb?.hasFactionBonus ? `
-        <div style="font-size:0.7rem;color:#6a90b8;font-style:italic;margin-top:6px">
-          Deployuj 3 komandira iste frakcije za Faction Synergy +10%.
-        </div>` : ''}
     </div>`;
 
   // ── DEPLOYED KOMANDIRI (gore — pregled aktivnih) ──
@@ -1442,7 +1447,7 @@ function renderFleetCommanders() {
               <div style="font-size:0.62rem;font-weight:700;color:${rc};
                 white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${def.name}</div>
               <div style="font-size:0.65rem;color:#6a90b8;margin:3px 0">
-                <span title="${fDef?.name || def.faction}" style="cursor:default;font-size:0.7rem">${fDef?.icon || '❓'}</span>
+                <span title="${fDef?.name || def.faction}" style="cursor:default;font-size:0.7rem">${(fDef?.icon && fDef.icon !== '??' && fDef.icon !== '???' ? fDef.icon : '')}</span>
                 Lv.${entry.level} · ${filled}/9 brodova</div>
               <div style="display:flex;gap:4px;justify-content:center;margin-top:6px">
                 ${!isLead ? `<button class="btn" style="font-size:0.5rem;padding:2px 6px"
@@ -1545,22 +1550,27 @@ function renderFleetCommanders() {
           const cFleet     = typeof getCmdFleet === 'function' ? getCmdFleet(def.id) : [];
           const filled     = cFleet.filter(Boolean).length;
           const xpPct      = Math.min(100, ((entry.xp||0) / getCardXpForLevel(entry.level||1)) * 100);
+          const oFdef = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[def.faction]
+            || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[def.faction]
+            || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[def.faction]
+            || null;
           return `
             <div style="border-radius:8px;border:${isDeployed ? `2px solid ${rc}` : `1px solid rgba(255,255,255,0.07)`};
               background:${isDeployed ? rc+'0d' : 'rgba(0,0,0,0.25)'};
               padding:10px;position:relative;text-align:center">
-              ${isLead ? `<div style="position:absolute;top:3px;left:3px;font-size:0.42rem;
-                color:#ffcc44;background:#ffcc4422;border-radius:3px;padding:1px 4px;
+              ${isLead ? `<div style="position:absolute;top:3px;left:3px;font-size:0.55rem;
+                color:#ffcc44;background:#ffcc4422;border-radius:3px;padding:1px 5px;
                 font-family:'Orbitron',monospace">★ LEAD</div>` : ''}
-              ${isDeployed ? `<div style="position:absolute;top:3px;right:3px;font-size:0.42rem;
-                color:${rc};background:${rc}22;border-radius:3px;padding:1px 4px;
+              ${isDeployed ? `<div style="position:absolute;top:3px;right:3px;font-size:0.5rem;
+                color:${rc};background:${rc}22;border-radius:3px;padding:1px 5px;
                 font-family:'Orbitron',monospace">AKTIVAN</div>` : ''}
               <div style="font-size:1.6rem;filter:drop-shadow(0 0 6px ${rc}66);margin-bottom:3px">${def.icon}</div>
-              <div style="font-size:0.6rem;font-weight:700;color:${rc};
-                white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:1px">${def.name}</div>
-              <div style="font-size:0.5rem;color:#6a90b8;margin-bottom:4px">
-                Lv.${entry.level} · ${def.rarity} · ${filled}/9 🚀
+              <div style="font-size:0.72rem;font-weight:700;color:${rc};
+                white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px">${def.name}</div>
+              <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:2px">
+                ${(oFdef?.icon && oFdef.icon !== '??' && oFdef.icon !== '???' ? oFdef.icon : '')} ${oFdef?.name || def.faction} · Lv.${entry.level}
               </div>
+              <div style="font-size:0.55rem;color:#6a90b8;margin-bottom:4px">${filled}/9 🚀</div>
               <div class="pbar" style="height:2px;margin-bottom:6px">
                 <div class="pbar-fill" style="width:${xpPct}%;background:${rc}"></div>
               </div>
