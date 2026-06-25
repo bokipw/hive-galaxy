@@ -1342,6 +1342,41 @@ function renderFleetCommanders() {
       </div>
     </div>`;
 
+  // ── FLEET BONUSI (sa faction synergy) ──
+  const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
+  const bonusHtml = fb ? `
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:10px 12px;
+      border-radius:8px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05)">
+      <div style="font-size:0.55rem;color:#6a90b8;font-family:'Orbitron',monospace;
+        letter-spacing:1px;width:100%;margin-bottom:4px">📊 FLEET BONUSI</div>
+      ${Object.entries(fb.bonuses).filter(([,v]) => v > 0).map(([k, v]) => {
+        const bi = FLEET_BONUS_LABELS[k] || { label: k, color: '#aaa', icon: '?' };
+        return `<div style="font-size:0.6rem;color:${bi.color};background:${bi.color}11;
+          padding:2px 8px;border-radius:4px;border:1px solid ${bi.color}22">
+          ${bi.icon} ${bi.label} <strong>+${v}%</strong>
+        </div>`;
+      }).join('')}
+      ${fb.hasFactionBonus ? `
+        <div style="font-size:0.55rem;color:#ffcc44;background:#ffcc4411;
+          padding:2px 8px;border-radius:4px;border:1px solid #ffcc4422;width:100%;margin-top:2px;
+          display:flex;align-items:center;gap:4px">
+          🔗 Faction Synergy aktivna! 3+ iste frakcije → <strong>+10%</strong> svim bonusima
+        </div>` : `
+        <div style="font-size:0.5rem;color:#6a90b8;width:100%;margin-top:2px;display:flex;gap:6px;flex-wrap:wrap">
+          ${Object.entries(fb.factionCount).map(([f, c]) => {
+            const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
+              || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
+              || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
+              || null;
+            const icon = ff?.icon || '❓';
+            return `<span style="background:rgba(255,255,255,0.04);padding:1px 6px;border-radius:3px">
+              ${icon} ${ff?.name||f}: ${c}${c >= 3 ? ' ⭐' : ''}
+            </span>`;
+          }).join('')}
+          <span style="color:#6a90b8;opacity:0.6">| 3+ iste frakcije → +10%</span>
+        </div>`}
+    </div>` : '';
+
   // ── DEPLOYED KOMANDIRI (gore — pregled aktivnih) ──
   if (!window._deployedCmdFilter) window._deployedCmdFilter = 'all';
   const depFlt = window._deployedCmdFilter;
@@ -1531,6 +1566,7 @@ function renderFleetCommanders() {
 
   el.innerHTML = `
     ${headerHtml}
+    ${bonusHtml}
     ${deployedHtml}
     <div style="font-size:0.6rem;color:#00d4ff;font-family:'Orbitron',monospace;
       letter-spacing:2px;margin-bottom:10px;padding-bottom:6px;
