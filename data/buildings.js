@@ -15,10 +15,10 @@ const buildingsData = {
     desc:     'Komandni centar. Određuje max nivo svih ostalih zgrada.',
     descKey:  'building.hq.desc',
     milestones: {
-      25:  { label: 'Napredna komanda',   labelKey: 'building.hq.milestone.25.label',   bonus: 'Sve zgrade -10% cijena nadogradnje',      bonusKey: 'building.hq.milestone.25.bonus',      cmdProdBonus: 10 },
+      25:  { label: 'Napredna komanda',   labelKey: 'building.hq.milestone.25.label',   bonus: 'Sve zgrade -10% cena nadogradnje',      bonusKey: 'building.hq.milestone.25.bonus',      cmdProdBonus: 10 },
       50:  { label: 'Strateški centar',   labelKey: 'building.hq.milestone.50.label',   bonus: 'Build timer -25% za sve zgrade',          bonusKey: 'building.hq.milestone.50.bonus',      buildSpeedBonus: 25 },
-      75:  { label: 'Galaktički štab',    labelKey: 'building.hq.milestone.75.label',   bonus: 'Sve zgrade -20% cijena nadogradnje',      bonusKey: 'building.hq.milestone.75.bonus',      cmdProdBonus: 20 },
-      100: { label: 'LEGENDARNI KOMAND',  labelKey: 'building.hq.milestone.100.label',  bonus: 'Build timer -50%, sve zgrade -30% cijena', bonusKey: 'building.hq.milestone.100.bonus',     buildSpeedBonus: 50, cmdProdBonus: 30 },
+      75:  { label: 'Galaktički štab',    labelKey: 'building.hq.milestone.75.label',   bonus: 'Sve zgrade -20% cena nadogradnje',      bonusKey: 'building.hq.milestone.75.bonus',      cmdProdBonus: 20 },
+      100: { label: 'LEGENDARNI KOMAND',  labelKey: 'building.hq.milestone.100.label',  bonus: 'Build timer -50%, sve zgrade -30% cena', bonusKey: 'building.hq.milestone.100.bonus',     buildSpeedBonus: 50, cmdProdBonus: 30 },
     },
   },
 
@@ -94,7 +94,7 @@ const buildingsData = {
   },
 
   ship_factory: {
-    name:     'Ship Factory',
+    name:     'Fabrika brodova',
     nameKey:  'building.ship_factory.name',
     icon:     '🏭',
     baseCost: 400,
@@ -111,10 +111,10 @@ const buildingsData = {
       6:  ['special'],
     },
     milestones: {
-      25:  { label: 'Automatizovana linija', labelKey: 'building.ship_factory.milestone.25.label', bonus: '+5% brzina gradnje, -5% cijena',   bonusKey: 'building.ship_factory.milestone.25.bonus',   speedBonus: 5,  discountBonus: 5  },
-      50:  { label: 'Napredno brodogradilište', labelKey: 'building.ship_factory.milestone.50.label', bonus: '+10% brzina, -10% cijena',      bonusKey: 'building.ship_factory.milestone.50.bonus',  speedBonus: 10, discountBonus: 10 },
-      75:  { label: 'Mega fabrika',          labelKey: 'building.ship_factory.milestone.75.label', bonus: '+15% brzina, -15% cijena',         bonusKey: 'building.ship_factory.milestone.75.bonus',  speedBonus: 15, discountBonus: 15 },
-      100: { label: 'GALAKTIČKI ARSENAL',    labelKey: 'building.ship_factory.milestone.100.label', bonus: '+25% brzina, -20% cijena, svi brodovi +5% stats', bonusKey: 'building.ship_factory.milestone.100.bonus', speedBonus: 25, discountBonus: 20, shipStatBonus: 5 },
+      25:  { label: 'Automatizovana linija', labelKey: 'building.ship_factory.milestone.25.label', bonus: '+5% brzina gradnje, -5% cena',   bonusKey: 'building.ship_factory.milestone.25.bonus',   speedBonus: 5,  discountBonus: 5  },
+      50:  { label: 'Napredno brodogradilište', labelKey: 'building.ship_factory.milestone.50.label', bonus: '+10% brzina, -10% cena',      bonusKey: 'building.ship_factory.milestone.50.bonus',  speedBonus: 10, discountBonus: 10 },
+      75:  { label: 'Mega fabrika',          labelKey: 'building.ship_factory.milestone.75.label', bonus: '+15% brzina, -15% cena',         bonusKey: 'building.ship_factory.milestone.75.bonus',  speedBonus: 15, discountBonus: 15 },
+      100: { label: 'GALAKTIČKI ARSENAL',    labelKey: 'building.ship_factory.milestone.100.label', bonus: '+25% brzina, -20% cena, svi brodovi +5% stats', bonusKey: 'building.ship_factory.milestone.100.bonus', speedBonus: 25, discountBonus: 20, shipStatBonus: 5 },
     },
   },
 
@@ -291,10 +291,10 @@ const buildingsData = {
     descKey:  'building.laboratory.desc',
     energyDrain: 4,
     milestones: {
-      25:  { label: 'Napredni lab',           labelKey: 'building.laboratory.milestone.25.label',      bonus: 'Istraživanje -20% cijena',         bonusKey: 'building.laboratory.milestone.25.bonus',      researchDiscount: 20 },
-      50:  { label: 'Kvantni lab',            labelKey: 'building.laboratory.milestone.50.label',       bonus: 'Istraživanje -35% cijena',         bonusKey: 'building.laboratory.milestone.50.bonus',       researchDiscount: 35 },
-      75:  { label: 'Xenotehnološki centar',  labelKey: 'building.laboratory.milestone.75.label', bonus: 'Istraživanje -50% cijena',         bonusKey: 'building.laboratory.milestone.75.bonus', researchDiscount: 50 },
-      100: { label: 'SINGULARNOST',           labelKey: 'building.laboratory.milestone.100.label',      bonus: 'Sva istraživanja instant + -75% cijena', bonusKey: 'building.laboratory.milestone.100.bonus', researchDiscount: 75, researchInstant: true },
+      25:  { label: 'Napredni lab',           labelKey: 'building.laboratory.milestone.25.label',      bonus: 'Istraživanje -20% cena',         bonusKey: 'building.laboratory.milestone.25.bonus',      researchDiscount: 20 },
+      50:  { label: 'Kvantni lab',            labelKey: 'building.laboratory.milestone.50.label',       bonus: 'Istraživanje -35% cena',         bonusKey: 'building.laboratory.milestone.50.bonus',       researchDiscount: 35 },
+      75:  { label: 'Xenotehnološki centar',  labelKey: 'building.laboratory.milestone.75.label', bonus: 'Istraživanje -50% cena',         bonusKey: 'building.laboratory.milestone.75.bonus', researchDiscount: 50 },
+      100: { label: 'SINGULARNOST',           labelKey: 'building.laboratory.milestone.100.label',      bonus: 'Sva istraživanja instant + -75% cena', bonusKey: 'building.laboratory.milestone.100.bonus', researchDiscount: 75, researchInstant: true },
     },
   },
 
