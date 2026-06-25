@@ -723,7 +723,7 @@ const COMMANDERS_XENOS = [
   // ── Rare ──
   {
     id: 'xc_anc_thrall', name: 'Thrall', nameKey: 'commander.xc_anc_thrall.name', nameKey: 'commander.xc_anc_thrall.name', rarity: 'R', faction: 'ancient', icon: '⚡',
-    desc: 'Go\', descKey: 'commander.xc_anc_thrall.desc', descKey: 'commander.xc_anc_thrall.desc'el — sin Durotan-a. Nije birao da bude šaman ni ratni vođa — okolnosti su birale za njega. Ali naučio je da razlika između vladara i tiranina nije moć — to je razlog zašto koristiš moć. Thrall je moć koristio da zaštiti one koji je nemaju. I naučio da je to teže od svakog rata.',
+    desc: 'Go\'el — sin Durotan-a. Nije birao da bude šaman ni ratni vođa — okolnosti su birale za njega. Ali naučio je da razlika između vladara i tiranina nije moć — to je razlog zašto koristiš moć. Thrall je moć koristio da zaštiti one koji je nemaju. I naučio da je to teže od svakog rata.', descKey: 'commander.xc_anc_thrall.desc',
     specialty_ships: ['special', 'battleship', 'carrier'], specialty_weapons: ['magnetic', 'kinetic'],
     passive: { name: 'Elementalna Komanda', nameKey: 'commander.xc_anc_thrall.passive.name', nameKey: 'commander.xc_anc_thrall.passive.name', desc: 'Kontroliše elemente: Magnetic +20% šteta. Flota +15% HP.', descKey: 'commander.xc_anc_thrall.passive.desc', descKey: 'commander.xc_anc_thrall.passive.desc' },
     active: { name: 'Munja Bure', nameKey: 'commander.xc_anc_thrall.active.name', nameKey: 'commander.xc_anc_thrall.active.name', desc: 'Priziva oluju: AOE Magnetic napad svim neprijateljima + EMP efekt. Cooldown: 12 min.', descKey: 'commander.xc_anc_thrall.active.desc', descKey: 'commander.xc_anc_thrall.active.desc', cooldown: 720 },
