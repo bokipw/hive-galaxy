@@ -763,7 +763,7 @@ function renderDesignList() {
       </div>
       ${maxSlots < DESIGN_SLOTS_MAX ? `
         <button class="btn btn-gold" style="width:100%;font-size:0.62rem;padding:3px" onclick="buyDesignSlots()">
-          💰 Kupi još slotova (sljedeći: ${(DESIGN_SLOT_PACKAGES[window._designSlotsBought||0]?.price||0).toLocaleString()} BPW)
+          💰 Kupi još slotova (sledeći: ${(DESIGN_SLOT_PACKAGES[window._designSlotsBought||0]?.price||0).toLocaleString()} BPW)
         </button>` : `
         <div style="font-size:0.6rem;color:#00ff88;text-align:center">✅ Maksimum slotova (100)</div>`}
     </div>`;
