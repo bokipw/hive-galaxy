@@ -1122,7 +1122,7 @@ function getFleetCapacity() {
   return 1;
 }
 
-// Sljedeći unlock
+// Sledeći unlock
 function getNextFleetUnlock() {
   const lvl = commander.level || 1;
   if (lvl < 25) return { at: 25, slots: 3 };
@@ -1333,7 +1333,7 @@ function renderFleetCommanders() {
           </div>
           ${nextUnlockLvl ? `
             <div style="font-size:0.55rem;color:#6a90b8;margin-top:4px">
-              🔒 Sljedeći unlock na Komandir Lv.<strong style="color:#aa44ff">${nextUnlockLvl}</strong>
+              🔒 Sledeći unlock na Komandir Lv.<strong style="color:#aa44ff">${nextUnlockLvl}</strong>
             </div>` : `
             <div style="font-size:0.55rem;color:#00ff88;margin-top:4px">✅ Maksimalna formacija!</div>`}
         </div>
