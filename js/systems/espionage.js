@@ -110,7 +110,7 @@ function openSendDronesModal(opponentIdx) {
 
     <div style="margin-top:12px;font-size:0.65rem;color:#ff3355;background:rgba(255,51,85,0.05);
       border:1px solid rgba(255,51,85,0.2);padding:8px;border-radius:6px">
-      ⚠️ Ako špijunaža neuspješna — svi poslani dronovi su izgubljeni!
+      ⚠️ Ako špijunaža neuspešna — svi poslani dronovi su izgubljeni!
     </div>
   `;
 
@@ -150,7 +150,7 @@ function updateDroneModal(opponentIdx) {
     <div>🔬 Research bonus: <span style="color:#4488ff">+${(getEspionageLevel() * 0.5).toFixed(1)}%</span></div>
     ${targetEspLvl > 0 ? `<div>🛡️ Protivnik penalizuje: <span style="color:#ff3355">-${(targetEspLvl * 0.3).toFixed(1)}%</span></div>` : ''}
     <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.05)">
-      🎯 Šansa uspjeha: <span style="color:${chanceColor};font-size:1rem;font-weight:700">${chance.toFixed(1)}%</span>
+      🎯 Šansa uspeha: <span style="color:${chanceColor};font-size:1rem;font-weight:700">${chance.toFixed(1)}%</span>
     </div>
     <div>👁️ Otkriva: <span style="color:#ffcc44">${
       revealLevel === 0 ? 'Power + Rating' :
@@ -193,12 +193,12 @@ function espionageTarget(opponent, numDrones) {
   if (espReports.length > 20) espReports.pop();
 
   if (success) {
-    toast(`✅ Špijunaža uspješna! (${dronesToSend} dronova, ${successChance.toFixed(0)}% šansa)`, 'ok');
-    addLog(`🕵️ Špijunaža uspješna: ${opponent.name} — ${dronesToSend} dronova potrošeno`);
+    toast(`✅ Špijunaža uspešna! (${dronesToSend} dronova, ${successChance.toFixed(0)}% šansa)`, 'ok');
+    addLog(`🕵️ Špijunaža uspešna: ${opponent.name} — ${dronesToSend} dronova potrošeno`);
     if (typeof trackDailyEsp === 'function') trackDailyEsp();;
   } else {
-    toast(`❌ Špijunaža neuspješna! ${dronesToSend} dronova izgubljeno.`, 'err');
-    addLog(`❌ Špijunaža neuspješna: ${opponent.name} — ${dronesToSend} dronova izgubljeno`);
+    toast(`❌ Špijunaža neuspešna! ${dronesToSend} dronova izgubljeno.`, 'err');
+    addLog(`❌ Špijunaža neuspešna: ${opponent.name} — ${dronesToSend} dronova izgubljeno`);
   }
 
   updateResUI();
@@ -280,7 +280,7 @@ function showEspReport(report) {
   ` : `
     <div style="text-align:center;padding:20px">
       <div style="font-size:2rem;margin-bottom:8px">❌</div>
-      <div style="font-size:0.85rem;color:#ff3355;margin-bottom:8px">Špijunaža neuspješna!</div>
+      <div style="font-size:0.85rem;color:#ff3355;margin-bottom:8px">Špijunaža neuspešna!</div>
       <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">
         ${report.dronesSent} dronova izgubljeno. Šansa bila: ${report.chance?.toFixed(0)}%
       </div>
@@ -366,8 +366,8 @@ function renderEspionage() {
             <span style="color:#6a90b8"> / dron</span>
           </div>
           <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:8px">
-            💡 Svaki dron = +1% šansa uspjeha (max +${ESP_DRONE_MAX_BONUS}%)<br>
-            ⚠️ Neuspjeh = svi poslani dronovi izgubljeni
+            💡 Svaki dron = +1% šansa uspeha (max +${ESP_DRONE_MAX_BONUS}%)<br>
+            ⚠️ Neuspeh = svi poslani dronovi izgubljeni
           </div>
           <div style="display:flex;gap:6px">
             ${[1,5,10].map(n => {
@@ -412,7 +412,7 @@ function renderEspionage() {
       <div>
         <div class="page-title" style="font-size:0.85rem">📋 IZVJEŠTAJI</div>
         ${espReports.length === 0
-          ? '<div class="card" style="text-align:center;color:#6a90b8;padding:20px">Nema izvještaja.</div>'
+          ? '<div class="card" style="text-align:center;color:#6a90b8;padding:20px">Nema izveštaja.</div>'
           : espReports.map(r => `
             <div class="card" style="margin-bottom:8px;cursor:pointer;
               border-color:${r.success ? 'rgba(0,255,136,0.2)' : 'rgba(255,51,85,0.2)'}"
