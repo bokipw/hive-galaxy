@@ -15,6 +15,11 @@
                 "artifacts":  "Artefakty",
                 "designer":  "Projektant",
                 "formations":  "Formacje",
+                "depot":  "Skład",
+                "shipfactory":  "Fabryka statków",
+                "recycler":  "Recykler",
+                "hangar":  "Hangar",
+                "instances":  "Instancje",
                 "achievements":  "Osiągnięcia",
                 "cards":  "Karty"
             },
