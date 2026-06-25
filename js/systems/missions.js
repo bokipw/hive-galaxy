@@ -628,7 +628,7 @@ const STORYLINE_MISSIONS = [
   {
     id: 'story_7', tier: 4,
     name: 'Inteligencija', icon: '🕵️',
-    desc: 'Neprijatelji se okupljaju. Pošalji špijune — uspješno špijuniraj prvog protivnika.',
+    desc: 'Neprijatelji se okupljaju. Pošalji špijune — uspešno špijuniraj prvog protivnika.',
     check: () => espReports.some(r => r.success),
     reward: { metal: 30000, crystal: 15000, he3: 7500, xp: 2000, instanceKeys: 5, bpw: 150 },
     requires: 'story_6',
@@ -644,7 +644,7 @@ const STORYLINE_MISSIONS = [
   {
     id: 'story_9', tier: 5,
     name: 'Moć Artefakata', icon: '💠',
-    desc: 'Drevni artefakti skrivaju nevjerovatnu moć. Otključaj prvi artefakt i proučavaj ga.',
+    desc: 'Drevni artefakti skrivaju neverovatnu moć. Otključaj prvi artefakt i proučavaj ga.',
     check: () => (window.artifactState?.unlocked?.length || 0) >= 1,
     reward: { metal: 40000, crystal: 20000, he3: 10000, xp: 3000, instanceKeys: 10, bpw: 300, art_fragment: 'R' },
     requires: 'story_8',
