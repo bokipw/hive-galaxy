@@ -15,6 +15,11 @@
                 "artifacts":  "Artefatos",
                 "designer":  "Projetista",
                 "formations":  "Formações",
+                "depot":  "Depósito",
+                "shipfactory":  "Fábrica de naves",
+                "recycler":  "Reciclador",
+                "hangar":  "Hangar",
+                "instances":  "Instâncias",
                 "achievements":  "Conquistas",
                 "cards":  "Cartas"
             },
