@@ -790,7 +790,7 @@ function forceRecycleOrphan(designId) {
   if (!h) return;
 
   const count = h.count;
-  // Daj minimalni povrat resursa (20% od prosjecne cijene broda)
+  // Daj minimalni povraćaj resursa (20% od prosečne cene broda)
   const metalReturn   = count * 500;
   const crystalReturn = count * 250;
 
@@ -799,7 +799,7 @@ function forceRecycleOrphan(designId) {
   hangar     = hangar.filter(h => h.design_id !== designId);
 
   toast(`♻️ Reciklirano ${count} brodova: +${fmt(metalReturn)} Metal, +${fmt(crystalReturn)} Crystal`, 'ok');
-  addLog(`♻️ Obrisani dizajn — ${count} brodova reciklirano za minimalni povrat.`);
+  addLog(`♻️ Obrisani dizajn — ${count} brodova reciklirano za minimalni povraćaj.`);
   updateResUI();
   renderHangar();
   saveGame();
