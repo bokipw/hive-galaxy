@@ -1398,7 +1398,7 @@ function renderRecoveryMissions() {
             <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
               <span style="font-size:0.78rem;font-weight:700;color:${claimed?'#ffcc44':'#ff8833'}">${m.name}</span>
               <span style="font-size:0.58rem;padding:1px 5px;border-radius:3px;
-                background:#ff883322;border:1px solid #ff883344;color:#ff8833">${m._pct}% povrat</span>
+                background:#ff883322;border:1px solid #ff883344;color:#ff8833">${m._pct}% povraćaj</span>
             </div>
             <div style="font-size:0.65rem;color:#8ab0c8;margin-bottom:6px;line-height:1.5">${m.desc}</div>
             <div style="font-size:0.6rem;color:#6a90b8;line-height:1.6">
