@@ -79,6 +79,32 @@
   if(hiveUser) {
     window._hiveUser = hiveUser;
     window._loginType = 'hive';
+    window._supaSession = null;
+
+    // Prijavi se na Supabase Auth preko Edge Function
+    (async () => {
+      try {
+        console.log('[hive-auth] Calling Edge Function for:', hiveUser);
+        const resp = await fetch('https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/hive-auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: hiveUser })
+        });
+        const authData = await resp.json();
+        console.log('[hive-auth] Edge response:', authData);
+        if (authData.email && authData.password) {
+          const { data, error } = await _sb.auth.signInWithPassword({
+            email: authData.email,
+            password: authData.password
+          });
+          console.log('[hive-auth] signIn result:', error ? 'ERROR' : 'OK', error);
+          if (!error && data.session) {
+            window._supaSession = data.session;
+            console.log('[hive-auth] Session set, uid:', _getSaveId ? _getSaveId() : 'N/A');
+          }
+        }
+      } catch(e) { console.error('[hive-auth] Error:', e); }
+    })();
 
     // Kreiraj ili dohvati HIVE profil u Supabase (anon key — koristi hive_user kolonu)
     _sb.from('hive_profiles').upsert({
@@ -977,7 +1003,7 @@ async function submitWithdraw(symbol) {
     R.spCard = (R.spCard || 0) - amtRaw;
   }
 
-  const uid = window._supaSession ? window._supaSession.user.id : 'hive_' + window._hiveUser;
+  const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? 'hive_' + window._hiveUser : window._supaSession?.user?.id);
   const username = window._hiveUser || window._supaSession?.user?.email?.split('@')[0] || 'unknown';
 
   const { error } = await window._supa.from('withdrawals').insert({

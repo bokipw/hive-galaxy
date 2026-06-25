@@ -4,18 +4,33 @@
 // ============================================================
 
 function _getSaveId() {
-  if(window._supaSession) return window._supaSession.user.id;
+  if(window._supaSession) {
+    const meta = window._supaSession.user.user_metadata;
+    if (meta && meta.hive_username) return 'hive_' + meta.hive_username;
+    return window._supaSession.user.id;
+  }
   if(window._hiveUser)    return 'hive_' + window._hiveUser;
   return null;
 }
 
 async function _cloudSave(saveData) {
   if(!window._supa) return;
+
+  // Ako je HIVE igrac bez auth sesije, sacekaj da se auth zavrsi
+  var _authDone = false;
+  if (window._hiveUser && !window._supaSession) {
+    for (var _i = 0; _i < 30; _i++) {
+      await new Promise(function(r) { setTimeout(r, 200); });
+      if (window._supaSession) { _authDone = true; break; }
+    }
+  }
+  console.log('[cloudSave] Auth:', _authDone, 'isEmail:', !!window._supaSession, 'uid:', _getSaveId ? _getSaveId() : 'N/A');
+
   const isEmail = !!window._supaSession;
   const isHive  = !!window._hiveUser;
   if(!isEmail && !isHive) return;
 
-  const uid      = isEmail ? window._supaSession.user.id : 'hive_' + window._hiveUser;
+  const uid      = _getSaveId();
   const username = isEmail
     ? (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown')
     : window._hiveUser;
@@ -214,16 +229,28 @@ function saveGame() {
 }
 
 async function loadGameCloud() {
+  // Ako je HIVE igrac bez auth sesije, sacekaj da se auth zavrsi
+  var authWaited = false;
+  if (window._hiveUser && !window._supaSession) {
+    console.log('[loadGameCloud] Cekam HIVE auth...');
+    for (var i = 0; i < 30; i++) {
+      await new Promise(function(r) { setTimeout(r, 200); });
+      if (window._supaSession) { authWaited = true; break; }
+    }
+    console.log('[loadGameCloud] Auth completed:', authWaited, !!window._supaSession);
+  }
+
   // Provjeri sezonu
   var serverSeason = 1;
   try {
     const { data: sys } = await window._supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
     if (sys && sys.keys != null) serverSeason = sys.keys;
     window._serverSeason = serverSeason;
-  } catch(e) {}
+  } catch(e) {} 
 
   // Ucitaj iz Supabase
-  const uid = window._supaSession ? window._supaSession.user.id : (window._hiveUser ? 'hive_' + window._hiveUser : null);
+  const uid = _getSaveId();
+  console.log('[loadGameCloud] uid:', uid, 'supaSession:', !!window._supaSession);
   if (!uid) return false;
 
   try {
