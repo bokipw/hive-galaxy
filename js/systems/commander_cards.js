@@ -1344,38 +1344,47 @@ function renderFleetCommanders() {
 
   // ── FLEET BONUSI (sa faction synergy) ──
   const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
-  const bonusHtml = fb ? `
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:10px 12px;
-      border-radius:8px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05)">
-      <div style="font-size:0.55rem;color:#6a90b8;font-family:'Orbitron',monospace;
-        letter-spacing:1px;width:100%;margin-bottom:4px">📊 FLEET BONUSI</div>
-      ${Object.entries(fb.bonuses).filter(([,v]) => v > 0).map(([k, v]) => {
-        const bi = FLEET_BONUS_LABELS[k] || { label: k, color: '#aaa', icon: '?' };
-        return `<div style="font-size:0.6rem;color:${bi.color};background:${bi.color}11;
-          padding:2px 8px;border-radius:4px;border:1px solid ${bi.color}22">
-          ${bi.icon} ${bi.label} <strong>+${v}%</strong>
-        </div>`;
-      }).join('')}
-      ${fb.hasFactionBonus ? `
-        <div style="font-size:0.55rem;color:#ffcc44;background:#ffcc4411;
-          padding:2px 8px;border-radius:4px;border:1px solid #ffcc4422;width:100%;margin-top:2px;
-          display:flex;align-items:center;gap:4px">
-          🔗 Faction Synergy aktivna! 3+ iste frakcije → <strong>+10%</strong> svim bonusima
+  const anyBonus = fb && Object.values(fb.bonuses).some(v => v > 0);
+  const bonusHtml = `
+    <div style="margin-bottom:12px;padding:10px 12px;border-radius:8px;
+      background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1)">
+      <div style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:${anyBonus||fb?.hasFactionBonus ? '6px' : '0'}">
+        <span style="font-size:0.6rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:1px">📊 FLEET BONUSI</span>
+        <span title="Svaki komandir u slotu daje bonus koji zavisi od njegovog nivoa i rariteta. Ako 3+ komandira imaju istu frakciju, svi bonusi se uvećavaju za 10% (Faction Synergy)."
+          style="cursor:help;font-size:0.5rem;color:#6a90b8;background:rgba(255,255,255,0.06);border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center">?</span>
+      </div>
+      ${anyBonus ? `
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          ${Object.entries(fb.bonuses).filter(([,v]) => v > 0).map(([k, v]) => {
+            const bi = FLEET_BONUS_LABELS[k] || { label: k, color: '#aaa', icon: '?' };
+            return `<div style="font-size:0.6rem;color:${bi.color};background:${bi.color}15;
+              padding:3px 10px;border-radius:4px;border:1px solid ${bi.color}33">
+              ${bi.icon} ${bi.label} <strong>+${v}%</strong>
+            </div>`;
+          }).join('')}
         </div>` : `
-        <div style="font-size:0.5rem;color:#6a90b8;width:100%;margin-top:2px;display:flex;gap:6px;flex-wrap:wrap">
+        <div style="font-size:0.55rem;color:#6a90b8;font-style:italic">
+          Nema aktivnih bonusa — postavi komandire u slotove iznad.
+        </div>`}
+      ${fb && Object.keys(fb.factionCount).length > 0 ? `
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.05)">
           ${Object.entries(fb.factionCount).map(([f, c]) => {
             const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
               || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
               || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
               || null;
             const icon = ff?.icon || '❓';
-            return `<span style="background:rgba(255,255,255,0.04);padding:1px 6px;border-radius:3px">
+            return `<span style="font-size:0.5rem;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:3px;
+              color:${c >= 3 ? '#ffcc44' : '#8ab0d8'}">
               ${icon} ${ff?.name||f}: ${c}${c >= 3 ? ' ⭐' : ''}
             </span>`;
           }).join('')}
-          <span style="color:#6a90b8;opacity:0.6">| 3+ iste frakcije → +10%</span>
-        </div>`}
-    </div>` : '';
+          ${fb.hasFactionBonus ? `
+            <span style="font-size:0.55rem;color:#ffcc44;background:#ffcc4418;padding:2px 8px;border-radius:4px;border:1px solid #ffcc4433">
+              🔗 Faction Synergy: <strong>+10%</strong></span>` : `
+            <span style="font-size:0.48rem;color:#6a90b8;opacity:0.7">(3+ iste → +10%)</span>`}
+        </div>` : ''}
+    </div>`;
 
   // ── DEPLOYED KOMANDIRI (gore — pregled aktivnih) ──
   if (!window._deployedCmdFilter) window._deployedCmdFilter = 'all';
