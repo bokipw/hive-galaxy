@@ -359,7 +359,7 @@ function renderDesignerForm(prefill = {}) {
         <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
         <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem" onchange="refreshDesignerSlots()">
           <option value="">-- Odaberi brod --</option>
-          ${allShips.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} (${SHIP_CLASSES[s.cls]?.name || s.cls})</option>`).join('')}
+          ${allShips.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} (${dn(SHIP_CLASSES[s.cls]) || s.cls})</option>`).join('')}
         </select>
       </div>
       
@@ -409,7 +409,7 @@ function renderEquipInfo(type, id) {
     const c = rc[w.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${w.icon} ${w.name}</span>
+        <span style="color:${c};font-weight:700">${w.icon} ${dn(w)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${w.rarity}</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
@@ -418,9 +418,9 @@ function renderEquipInfo(type, id) {
         <span style="color:#6a90b8">${st.icon||''} ${w.subtype}</span>
         <span style="color:#6a90b8">📏 Domet: ${w.range?.min}-${w.range?.max}</span>
       </div>
-      ${w.special ? `<div style="color:#ffcc44">✨ ${w.special.desc}</div>` : ''}
-      <div style="color:#6a90b8;margin-top:2px">${w.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${w.source}</div>
+      ${w.special ? `<div style="color:#ffcc44">✨ ${t(w.specialKey || '') || w.special.desc}</div>` : ''}
+      <div style="color:#6a90b8;margin-top:2px">${dd(w)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(w.sourceKey || '') || w.source}</div>
     </div>`;
   }
 
@@ -430,16 +430,16 @@ function renderEquipInfo(type, id) {
     const c = rc[s.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${s.icon} ${s.name}</span>
+        <span style="color:${c};font-weight:700">${s.icon} ${dn(s)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${s.rarity}</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
         <span style="color:#00d4ff">🛡️ Shield: <strong>${s.shield}</strong></span>
         <span style="color:#00ff88">♻️ Regen: <strong>${s.regen}/s</strong></span>
       </div>
-      ${s.special ? `<div style="color:#ffcc44">✨ ${s.special.desc || JSON.stringify(s.special)}</div>` : ''}
-      <div style="color:#6a90b8">${s.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${s.source}</div>
+      ${s.special ? `<div style="color:#ffcc44">✨ ${t(s.specialKey || '') || s.special.desc || JSON.stringify(s.special)}</div>` : ''}
+      <div style="color:#6a90b8">${dd(s)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(s.sourceKey || '') || s.source}</div>
     </div>`;
   }
 
@@ -449,7 +449,7 @@ function renderEquipInfo(type, id) {
     const c = rc[e.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${e.icon} ${e.name}</span>
+        <span style="color:${c};font-weight:700">${e.icon} ${dn(e)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${e.rarity}</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
@@ -457,9 +457,9 @@ function renderEquipInfo(type, id) {
         ${e.agility_bonus ? `<span style="color:#00ff88">🏃 Agility: <strong>+${e.agility_bonus}</strong></span>` : ''}
         ${e.evasion_bonus ? `<span style="color:#00d4ff">💫 Evasion: <strong>+${e.evasion_bonus}%</strong></span>` : ''}
       </div>
-      ${e.special ? `<div style="color:#ffcc44">✨ ${e.special.desc || e.special.type}</div>` : ''}
-      <div style="color:#6a90b8">${e.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${e.source}</div>
+      ${e.special ? `<div style="color:#ffcc44">✨ ${t(e.specialKey || '') || e.special.desc || e.special.type}</div>` : ''}
+      <div style="color:#6a90b8">${dd(e)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(e.sourceKey || '') || e.source}</div>
     </div>`;
   }
 
@@ -469,12 +469,12 @@ function renderEquipInfo(type, id) {
     const c = rc[m.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${m.name}</span>
+        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
       </div>
-      <div style="color:#aaaaaa;margin-bottom:4px">⚙️ ${m.effect.desc}</div>
-      <div style="color:#6a90b8">${m.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${m.source}</div>
+      <div style="color:#aaaaaa;margin-bottom:4px">⚙️ ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source}</div>
     </div>`;
   }
 
@@ -484,12 +484,12 @@ function renderEquipInfo(type, id) {
     const c = rc[m.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${m.name}</span>
+        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
       </div>
-      <div style="color:#aa44ff;margin-bottom:4px">⭐ ${m.effect.desc}</div>
-      <div style="color:#6a90b8">${m.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${m.source} &nbsp;|&nbsp; 🔒 ${m.shipClass || 'special'}</div>
+      <div style="color:#aa44ff;margin-bottom:4px">⭐ ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 ${m.shipClass || 'special'}</div>
     </div>`;
   }
 
@@ -499,12 +499,12 @@ function renderEquipInfo(type, id) {
     const c = rc[m.rarity] || '#aaaaaa';
     return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${m.name}</span>
+        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
         <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
       </div>
-      <div style="color:#00e5ff;margin-bottom:4px">🛸 ${m.effect.desc}</div>
-      <div style="color:#6a90b8">${m.desc}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${m.source} &nbsp;|&nbsp; 🔒 Samo Izviđači</div>
+      <div style="color:#00e5ff;margin-bottom:4px">🛸 ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 Samo Izviđači</div>
     </div>`;
   }
 
@@ -527,7 +527,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         <select id="dWeapon${i}" style="width:100%;background:#070c1a;border:1px solid rgba(255,68,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateSlotVisual();updateEquipInfo('weapon',${i},this.value)">
           <option value="">-- Bez oružja --</option>
-          ${myWeapons.map(w => `<option value="${w.id}" ${val === w.id ? 'selected' : ''}>${w.name} (${w.rarity}) ⚔️${w.dps} | ${w.dmgType} | ${w.subtype}</option>`).join('')}
+          ${myWeapons.map(w => `<option value="${w.id}" ${val === w.id ? 'selected' : ''}>${dn(w)} (${w.rarity}) ⚔️${w.dps} | ${w.dmgType} | ${w.subtype}</option>`).join('')}
         </select>
         <div id="info_weapon_${i}">${renderEquipInfo('weapon', val)}</div>
       </div>`;
@@ -541,7 +541,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         <select id="dShield${i}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateSlotVisual();updateEquipInfo('shield',${i},this.value)">
           <option value="">-- Bez štita --</option>
-          ${myShields.map(s => `<option value="${s.id}" ${val === s.id ? 'selected' : ''}>${s.name} (${s.rarity}) 🛡️${s.shield} | Regen:${s.regen}</option>`).join('')}
+          ${myShields.map(s => `<option value="${s.id}" ${val === s.id ? 'selected' : ''}>${dn(s)} (${s.rarity}) 🛡️${s.shield} | Regen:${s.regen}</option>`).join('')}
         </select>
         <div id="info_shield_${i}">${renderEquipInfo('shield', val)}</div>
       </div>`;
@@ -554,7 +554,7 @@ function renderDynamicSlots(cls, slots, prefill) {
       <select id="dEngine1" style="width:100%;background:#070c1a;border:1px solid rgba(255,204,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
         onchange="updateSlotVisual();updateEquipInfo('engine',1,this.value)">
         <option value="">-- Bez motora --</option>
-        ${myEngines.map(e => `<option value="${e.id}" ${engVal === e.id ? 'selected' : ''}>${e.name} (${e.rarity}) 💨+${e.speed} | Agility:+${e.agility_bonus}</option>`).join('')}
+        ${myEngines.map(e => `<option value="${e.id}" ${engVal === e.id ? 'selected' : ''}>${dn(e)} (${e.rarity}) 💨+${e.speed} | Agility:+${e.agility_bonus}</option>`).join('')}
       </select>
       <div id="info_engine_1">${renderEquipInfo('engine', engVal)}</div>
     </div>`;
@@ -569,7 +569,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         <select id="dModule1" style="width:100%;background:#070c1a;border:1px solid rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateEquipInfo('module',1,this.value)">
           <option value="">-- Bez modula --</option>
-          ${myMods.map(m => `<option value="${m.id}" ${modVal === m.id ? 'selected' : ''}>${m.icon} ${m.name} (${m.rarity}) — ${m.effect.desc}</option>`).join('')}
+          ${myMods.map(m => `<option value="${m.id}" ${modVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
         </select>
         <div id="info_module_1">${renderEquipInfo('module', modVal)}</div>
       </div>`;
@@ -584,7 +584,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         <select id="dRecon1" style="width:100%;background:#070c1a;border:1px solid rgba(0,229,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateEquipInfo('recon',1,this.value)">
           <option value="">-- Bez recon modula --</option>
-          ${myRecon.map(m => `<option value="${m.id}" ${reconVal === m.id ? 'selected' : ''}>${m.icon} ${m.name} (${m.rarity}) — ${m.effect.desc}</option>`).join('')}
+          ${myRecon.map(m => `<option value="${m.id}" ${reconVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
         </select>
         <div id="info_recon_1">${renderEquipInfo('recon', reconVal)}</div>
       </div>`;
@@ -602,7 +602,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         <select id="dSpecial${i}" style="width:100%;background:#070c1a;border:1px solid rgba(170,68,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateEquipInfo('special',${i},this.value)">
           <option value="">-- Bez special modula --</option>
-          ${mySpecial.map(m => `<option value="${m.id}" ${specialVal === m.id ? 'selected' : ''}>${m.icon} ${m.name} (${m.rarity}) — ${m.effect.desc}</option>`).join('')}
+          ${mySpecial.map(m => `<option value="${m.id}" ${specialVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
         </select>
         <div id="info_special_${i}">${renderEquipInfo('special', specialVal)}</div>
       </div>`;
@@ -646,7 +646,7 @@ function getShipPreviewHTML(shipId) {
   const ship = getShipById(shipId);
   if (!ship) return '';
   const cls = SHIP_CLASSES[getShipClass(shipId)];
-  return `<span style="color:${cls?.color || 'white'};font-weight:700">${ship.name}</span> · ${ship.armor} oklop<br>🛡️ Armor: ${ship.armor_val} &nbsp; 💠 Shield: ${ship.shield} &nbsp; ❤️ HP: ${ship.structure}<br>⚡ Agility: ${ship.agility} &nbsp; 💨 Speed: ${ship.movement} &nbsp; 🏆 Stability: ${ship.stability}`;
+  return `<span style="color:${cls?.color || 'white'};font-weight:700">${ship.name}</span> · ${t('armor.' + (ship.armor || 'light'))}<br>🛡️ Armor: ${ship.armor_val} &nbsp; 💠 Shield: ${ship.shield} &nbsp; ❤️ HP: ${ship.structure}<br>⚡ Agility: ${ship.agility} &nbsp; 💨 Speed: ${ship.movement} &nbsp; 🏆 Stability: ${ship.stability}`;
 }
 
 // ── SAČUVAJ DIZAJN ──
@@ -763,7 +763,7 @@ function renderDesignList() {
       </div>
       ${maxSlots < DESIGN_SLOTS_MAX ? `
         <button class="btn btn-gold" style="width:100%;font-size:0.62rem;padding:3px" onclick="buyDesignSlots()">
-          💰 Kupi još slotova (sljedeći: ${(DESIGN_SLOT_PACKAGES[window._designSlotsBought||0]?.price||0).toLocaleString()} BPW)
+          💰 Kupi još slotova (sledeći: ${(DESIGN_SLOT_PACKAGES[window._designSlotsBought||0]?.price||0).toLocaleString()} BPW)
         </button>` : `
         <div style="font-size:0.6rem;color:#00ff88;text-align:center">✅ Maksimum slotova (100)</div>`}
     </div>`;
@@ -779,7 +779,7 @@ function renderDesignList() {
     for (let i = 1; i <= slots.weapon; i++) if (d[`weapon_${i}`]) equipLines += `⚔️ ${d[`weapon_${i}`]}<br>`;
     for (let i = 1; i <= slots.shield; i++) if (d[`shield_${i}`]) equipLines += `🛡️ ${d[`shield_${i}`]}<br>`;
     if (d.engine_1) equipLines += `🔩 ${d.engine_1}`;
-    return `<div class="card" style="margin-bottom:8px;border-color:${cls?.color || '#00d4ff'}33"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px"><div><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'}">${d.name}</div><div style="font-size:0.65rem;color:#6a90b8">${ship?.name || d.ship_id} · ${cls?.name || ''}</div></div><div style="display:flex;gap:4px"><button class="btn" style="font-size:0.6rem;padding:2px 6px" onclick="editDesign('${d.id}')">✏️</button><button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px" onclick="deleteDesign('${d.id}')">🗑️</button></div></div><div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;padding:4px 6px;background:rgba(0,0,0,0.2);border-radius:4px">🛡️${stats.shield} ❤️${stats.hp} 💨${stats.speed} ⚔️${stats.dps}</div><div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">${equipLines || '<span style="opacity:0.5">Bez opreme</span>'}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.65rem;color:#6a90b8">🏠 Hangar: <strong style="color:white">${fmt(hangarCount)}</strong></span><button class="btn btn-gold" style="font-size:0.65rem" onclick="openBuildModal('${d.id}')">🏭 Gradi</button></div></div>`;
+    return `<div class="card" style="margin-bottom:8px;border-color:${cls?.color || '#00d4ff'}33"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px"><div><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'}">${d.name}</div><div style="font-size:0.65rem;color:#6a90b8">${ship?.name || d.ship_id} · ${dn(cls) || ''}</div></div><div style="display:flex;gap:4px"><button class="btn" style="font-size:0.6rem;padding:2px 6px" onclick="editDesign('${d.id}')">✏️</button><button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px" onclick="deleteDesign('${d.id}')">🗑️</button></div></div><div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;padding:4px 6px;background:rgba(0,0,0,0.2);border-radius:4px">🛡️${stats.shield} ❤️${stats.hp} 💨${stats.speed} ⚔️${stats.dps}</div><div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">${equipLines || '<span style="opacity:0.5">Bez opreme</span>'}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.65rem;color:#6a90b8">🏠 Hangar: <strong style="color:white">${fmt(hangarCount)}</strong></span><button class="btn btn-gold" style="font-size:0.65rem" onclick="openBuildModal('${d.id}')">🏭 Gradi</button></div></div>`;
   }).join('');
 }
 
@@ -790,7 +790,7 @@ function forceRecycleOrphan(designId) {
   if (!h) return;
 
   const count = h.count;
-  // Daj minimalni povrat resursa (20% od prosjecne cijene broda)
+  // Daj minimalni povraćaj resursa (20% od prosečne cene broda)
   const metalReturn   = count * 500;
   const crystalReturn = count * 250;
 
@@ -799,7 +799,7 @@ function forceRecycleOrphan(designId) {
   hangar     = hangar.filter(h => h.design_id !== designId);
 
   toast(`♻️ Reciklirano ${count} brodova: +${fmt(metalReturn)} Metal, +${fmt(crystalReturn)} Crystal`, 'ok');
-  addLog(`♻️ Obrisani dizajn — ${count} brodova reciklirano za minimalni povrat.`);
+  addLog(`♻️ Obrisani dizajn — ${count} brodova reciklirano za minimalni povraćaj.`);
   updateResUI();
   renderHangar();
   saveGame();
@@ -822,7 +822,7 @@ function renderHangarList() {
     const ship = getShipById(design.ship_id);
     const cls = SHIP_CLASSES[design.cls || getShipClass(design.ship_id)];
     const inFleet = fleet.reduce((a, s) => a + (s?.design_id === design.id ? (s.count || 0) : 0), 0);
-    return `<div class="card" style="border-color:${cls?.color || '#00d4ff'}33"><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'};margin-bottom:2px">${design.name}</div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:10px">${ship?.name || ''} · ${cls?.name || ''}</div><div style="font-size:1.6rem;font-family:'Orbitron',monospace;color:white;text-align:center;margin-bottom:4px">${fmt(h.count)}</div><div style="font-size:0.62rem;color:#6a90b8;text-align:center;margin-bottom:10px">brodova u hangaru<br><span style="color:#ffcc44">⚔️ ${fmt(inFleet)} u floti</span></div><button class="btn btn-g" style="width:100%;font-size:0.72rem" onclick="deployToFleet('${h.design_id}')">🚀 Rasporedi u flotu</button></div>`;
+    return `<div class="card" style="border-color:${cls?.color || '#00d4ff'}33"><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'};margin-bottom:2px">${design.name}</div><div style="font-size:0.65rem;color:#6a90b8;margin-bottom:10px">${ship?.name || ''} · ${dn(cls) || ''}</div><div style="font-size:1.6rem;font-family:'Orbitron',monospace;color:white;text-align:center;margin-bottom:4px">${fmt(h.count)}</div><div style="font-size:0.62rem;color:#6a90b8;text-align:center;margin-bottom:10px">brodova u hangaru<br><span style="color:#ffcc44">⚔️ ${fmt(inFleet)} u floti</span></div><button class="btn btn-g" style="width:100%;font-size:0.72rem" onclick="deployToFleet('${h.design_id}')">🚀 Rasporedi u flotu</button></div>`;
   }).join('') + `</div>`;
 }
 

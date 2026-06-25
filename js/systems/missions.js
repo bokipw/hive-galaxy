@@ -628,7 +628,7 @@ const STORYLINE_MISSIONS = [
   {
     id: 'story_7', tier: 4,
     name: 'Inteligencija', icon: '🕵️',
-    desc: 'Neprijatelji se okupljaju. Pošalji špijune — uspješno špijuniraj prvog protivnika.',
+    desc: 'Neprijatelji se okupljaju. Pošalji špijune — uspešno špijuniraj prvog protivnika.',
     check: () => espReports.some(r => r.success),
     reward: { metal: 30000, crystal: 15000, he3: 7500, xp: 2000, instanceKeys: 5, bpw: 150 },
     requires: 'story_6',
@@ -644,7 +644,7 @@ const STORYLINE_MISSIONS = [
   {
     id: 'story_9', tier: 5,
     name: 'Moć Artefakata', icon: '💠',
-    desc: 'Drevni artefakti skrivaju nevjerovatnu moć. Otključaj prvi artefakt i proučavaj ga.',
+    desc: 'Drevni artefakti skrivaju neverovatnu moć. Otključaj prvi artefakt i proučavaj ga.',
     check: () => (window.artifactState?.unlocked?.length || 0) >= 1,
     reward: { metal: 40000, crystal: 20000, he3: 10000, xp: 3000, instanceKeys: 10, bpw: 300, art_fragment: 'R' },
     requires: 'story_8',
@@ -1398,7 +1398,7 @@ function renderRecoveryMissions() {
             <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
               <span style="font-size:0.78rem;font-weight:700;color:${claimed?'#ffcc44':'#ff8833'}">${m.name}</span>
               <span style="font-size:0.58rem;padding:1px 5px;border-radius:3px;
-                background:#ff883322;border:1px solid #ff883344;color:#ff8833">${m._pct}% povrat</span>
+                background:#ff883322;border:1px solid #ff883344;color:#ff8833">${m._pct}% povraćaj</span>
             </div>
             <div style="font-size:0.65rem;color:#8ab0c8;margin-bottom:6px;line-height:1.5">${m.desc}</div>
             <div style="font-size:0.6rem;color:#6a90b8;line-height:1.6">

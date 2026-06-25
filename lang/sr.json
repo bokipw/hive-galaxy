@@ -1,0 +1,4704 @@
+{
+  "nav": {
+    "base": "Baza",
+    "fleet": "Flota",
+    "galaxy": "Galaksija",
+    "colonies": "Kolonije",
+    "pvp": "PvP",
+    "research": "Istraživanje",
+    "missions": "Misije",
+    "shop": "Šop",
+    "leaderboard": "Lider",
+    "blueprints": "Planovi",
+    "commanders": "Komandanti",
+    "espionage": "Špijunaža",
+    "artifacts": "Artefakti",
+    "designer": "Dizajner",
+    "formations": "Formacije",
+    "depot": "Depot",
+    "shipfactory": "Fabrika brodova",
+    "recycler": "Recikler",
+    "hangar": "Hangar",
+    "instances": "Instance",
+    "achievements": "Dostignuća",
+    "cards": "Karte"
+  },
+  "tab": {
+    "log": "📋 Log",
+    "events": "📡 Događaji",
+    "pvp": "⚔️ PvP"
+  },
+  "btn": {
+    "save": "💾 Sačuvaj",
+    "saved": "✅ Sačuvano",
+    "attack": "⚔️ Napadni",
+    "scan": "🔍 Skeniraj",
+    "buy": "Kupi",
+    "upgrade": "Nadogradi",
+    "build": "Izgradi",
+    "cancel": "Otkaži",
+    "confirm": "Potvrdi",
+    "close": "Zatvori",
+    "back": "Natrag",
+    "collect": "Skupi",
+    "research": "Istraži",
+    "equip": "Opremi",
+    "unequip": "Skini",
+    "deploy": "Rasporedi",
+    "recruit": "Regrutuj",
+    "open": "Otvori",
+    "send": "Pošalji",
+    "activate": "Aktiviraj",
+    "deactivate": "Deaktiviraj"
+  },
+  "res": {
+    "metal": "Metal",
+    "crystal": "Kristal",
+    "he3": "He-3",
+    "energy": "Energija",
+    "bocrypto": "BoCrypto",
+    "score": "Poeni",
+    "keys": "Ključevi",
+    "instanceKeys": "Inst. ključevi"
+  },
+  "pvp": {
+    "title": "⚔️ PvP ARENA",
+    "searching": "Tražim protivnike...",
+    "loaded": "Protivnici učitani!",
+    "noOpponents": "Nema dostupnih protivnika.",
+    "cannotLoad": "Nije moguće učitati protivnike.",
+    "shieldActive": "Shield je aktivan - ne možeš napadati!",
+    "noFleet": "Nemaš brodova u floti!",
+    "enemyNoFleet": "Protivnik nema raspoređenu flotu!",
+    "enemyNoValidFleet": "Protivnik nema validnu flotu!",
+    "notEnoughEnergy": "Nedovoljno energije! Treba {cost}",
+    "notEnoughBocrypto": "Nedovoljno BOCRYPTO! Treba {cost}",
+    "attacking": "Napadam {name}...",
+    "victory": "Pobeda nad {name}!",
+    "defeat": "Poraz od {name}",
+    "lootGained": "Plen: {metal} Metal, {crystal} Kristal, {he3} He-3, {boc} BoCrypto",
+    "ratingGain": "+{n} rating",
+    "ratingLoss": "{n} rating",
+    "shieldBought": "Shield aktivan {hours}h!",
+    "notEnoughBocShield": "Nedovoljno BoCrypto! Treba {cost} BOCRYPTO",
+    "energyCost": "Cena: {energy} energije + {boc} BoCrypto",
+    "rank": "Rang",
+    "rating": "Rating",
+    "power": "Snaga",
+    "level": "Nivo",
+    "wins": "Pobede",
+    "losses": "Porazi",
+    "yourRating": "Tvoj Rating",
+    "shieldStatus": "Shield Status",
+    "shieldInactive": "Neaktivan",
+    "shieldActiveUntil": "Aktivan do {time}",
+    "buyShield": "Kupi Shield",
+    "findOpponents": "Nađi protivnike"
+  },
+  "galaxy": {
+    "title": "🌌 GALAKSIJA",
+    "loading": "Učitavanje galaksije...",
+    "playerBase": "Baza igrača",
+    "neutralSystem": "Neutralni sistem",
+    "espionage": "🔍 Izviđanje",
+    "attack": "⚔️ Napadni bazu",
+    "attackCost": "Cena napada: {energy} energije + {boc} BoCrypto",
+    "attackVictory": "Pobeda! Ukradeno {metal} metala, {crystal} kristala, {he3} He-3!",
+    "attackDefeat": "Poraz! Odbrana je bila jača.",
+    "attackNoFleet": "Nemaš brodove u floti!",
+    "attackNotEnoughEnergy": "Nedovoljno energije! Treba {cost}",
+    "attackNotEnoughBoc": "Nedovoljno BoCrypto! Treba {cost}",
+    "espResources": "Resursi: {metal} Metal | {crystal} Kristal | {he3} He-3",
+    "espNoData": "Nema podataka o resursima."
+  },
+  "shop": {
+    "title": "🏪 SVEMIRSKI ŠOP",
+    "premium": "⭐ PREMIUM",
+    "purchaseConfirm": "Potvrdi kupovinu",
+    "purchaseSuccess": "Kupovina uspešna!",
+    "purchaseFailed": "Kupovina neuspešna.",
+    "notEnoughBoc": "Nedovoljno BoCrypto! Imaš {have}, treba {need}",
+    "bocBalance": "BoCrypto stanje: {amount}",
+    "buyWithBoc": "Kupi za {cost} BoCrypto",
+    "ikeys100": "100 Instance Ključeva",
+    "keys10": "10 Komandantskih Ključeva"
+  },
+  "base": {
+    "title": "🏰 BAZA",
+    "buildQueue": "Red gradnje",
+    "recycleQueue": "Red recikliranja",
+    "queueFull": "Red je pun!",
+    "notEnoughRes": "Nedovoljno resursa!",
+    "buildStarted": "Gradnja pokrenuta!",
+    "buildComplete": "Gradnja završena: {name}",
+    "maxLevel": "Maksimalni nivo",
+    "upgrading": "Nadogradnja...",
+    "recycling": "Recikliranje..."
+  },
+  "research": {
+    "title": "🔬 ISTRAŽIVANJE",
+    "researchStarted": "Istraživanje pokrenuto: {name}",
+    "researchComplete": "Istraživanje završeno: {name}",
+    "maxLevel": "Maksimalni nivo",
+    "notEnoughRes": "Nedovoljno resursa!"
+  },
+  "fleet": {
+    "title": "🚀 FLOTA",
+    "noShips": "Nemaš brodove",
+    "deployedFleet": "Raspoređena flota",
+    "hangar": "Hangar",
+    "recruit": "Regrutuj brodove",
+    "totalPower": "Ukupna snaga",
+    "shipAdded": "{count}x {name} dodato u flotu!",
+    "notEnoughRes": "Nedovoljno resursa!"
+  },
+  "missions": {
+    "title": "📡 MISIJE",
+    "daily": "Dnevne misije",
+    "weekly": "Sedmične misije",
+    "story": "Priča",
+    "completed": "Završeno",
+    "claimed": "Preuzeto",
+    "claimReward": "Preuzmi nagradu",
+    "rewardClaimed": "Nagrada preuzeta!",
+    "progress": "Napredak"
+  },
+  "colonies": {
+    "title": "🪐 KOLONIJE",
+    "loading": "Učitavanje kolonija...",
+    "noColonies": "Nemaš kolonija. Osvoji planete u galaksiji!",
+    "phalanxScan": "Falanks sken",
+    "scanComplete": "Sken završen! {count} sistema skenirano.",
+    "scanCost": "Cena: {cost} He-3",
+    "notEnoughHe3": "Nedovoljno He-3 za sken! Treba {cost}",
+    "enemyBase": "Baza protivnika",
+    "rating": "Rating: {rating}",
+    "power": "Snaga: {power}"
+  },
+  "commanders": {
+    "title": "👨‍✈️ KOMANDANTI",
+    "owned": "Moji komandanti",
+    "active": "Aktivan",
+    "deploy": "Rasporedi",
+    "recall": "Povuci",
+    "stats": "Statistike",
+    "openPack": "Otvori paket",
+    "noCommanders": "Nemaš komandanata."
+  },
+  "blueprints": {
+    "title": "📐 PLANOVI",
+    "owned": "Posedovani planovi",
+    "fragments": "Fragmenti",
+    "craft": "Napravi",
+    "craftSuccess": "Plan napravljen: {name}!",
+    "notEnoughFragments": "Nedovoljno fragmenata!"
+  },
+  "espionage": {
+    "title": "🕵️ ŠPIJUNAŽA",
+    "sendDrone": "Pošalji dron",
+    "dronesSent": "{count} dronova poslato!",
+    "reportReady": "Izveštaj spreman!",
+    "noDrones": "Nemaš dronova!",
+    "targetInfo": "Info o meti"
+  },
+  "artifacts": {
+    "title": "🏺 ARTEFAKTI",
+    "fragments": "Fragmenti artefakta",
+    "assemble": "Sklopiti",
+    "assembled": "Artefakt sklopljen!",
+    "notEnoughFragments": "Nedovoljno fragmenata!"
+  },
+  "toast": {
+    "saveOk": "✅ Igra sačuvana!",
+    "saveFail": "❌ Čuvanje neuspešno!",
+    "loginOk": "✅ Prijava uspešna!",
+    "loginFail": "❌ Prijava neuspešna!",
+    "loading": "⏳ Učitavam...",
+    "error": "❌ Greška: {msg}",
+    "notEnoughRes": "❌ Nedovoljno resursa!",
+    "maxLevel": "✅ Maksimalni nivo!",
+    "featureWip": "🚧 Uskoro..."
+  },
+  "confirm": {
+    "resetGame": "⚠️ SIGURNO? Ovo će obrisati SAV napredak!",
+    "buyItem": "Kupiti {name} za {cost}?",
+    "attack": "Napasti {name}? Cena: {cost}"
+  },
+  "season": {
+    "label": "Sezona",
+    "reset": "Reset sezone",
+    "rank": "Rang sezone"
+  },
+  "premium": {
+    "label": "⭐ PREMIUM",
+    "active": "Premium aktivan",
+    "inactive": "Nisi premium",
+    "benefits": "Premium benefiti",
+    "getit": "Postani Premium"
+  },
+  "armor": {
+    "nano": "Nano",
+    "neutralizing": "Neutralizacija",
+    "chrome": "Hrom",
+    "regen": "Regen",
+    "light": "Laki"
+  },
+  "ship_class": {
+    "scout": {
+      "name": "Izviđač",
+      "desc": "Brz i nevidljiv. Idealan za izviđanje i kontru Lovaca."
+    },
+    "fighter": {
+      "name": "Lovac",
+      "desc": "Svestran borbeni brod. Idealan kao osnova svake flote."
+    },
+    "cruiser": {
+      "name": "Krstarica",
+      "desc": "Teška odbrana. Štiti manje brodove u floti."
+    },
+    "battleship": {
+      "name": "Bojni Brod",
+      "desc": "Maksimalna vatrena moć. Spor ali devastirajući."
+    },
+    "carrier": {
+      "name": "Nosač",
+      "desc": "Strateški brod. Lansira fighter eskadrone u borbu."
+    },
+    "special": {
+      "name": "Flagship",
+      "desc": "Komandni brod flote. Daje bonus svim brodovima."
+    }
+  },
+  "damage_type": {
+    "Kinetic": {
+      "name": "Kinetic",
+      "desc": "Fizičko oštećenje. Visok DPS, bez posebnog efekta."
+    },
+    "Heat": {
+      "name": "Toplota",
+      "desc": "Termičko oštećenje. Efekat spaljivanja — oštećenje tokom Ks rundi."
+    },
+    "Magnetic": {
+      "name": "Magnetic",
+      "desc": "EMP oštećenja. Šansa da omamite ili onemogućite oružje/motor."
+    },
+    "Explosive": {
+      "name": "Eksplozivno",
+      "desc": "Oštećenje područja. Pogađa više brodova odjednom."
+    },
+    "Mixed": {
+      "name": "Miked",
+      "desc": "Kombinovana šteta. Elite Fighter Bai jedinice."
+    }
+  },
+  "weapon_subtype": {
+    "Ballistic": {
+      "name": "balistički",
+      "desc": "Direktna vatra. Najveći DPS, kratak domet."
+    },
+    "Directional": {
+      "name": "Directional",
+      "desc": "Usmereni snop. Srednji DPS, srednji domet, +10% krit."
+    },
+    "Missile": {
+      "name": "Raketa",
+      "desc": "Navođena raketa. Nikada ne promašuje. Veliki domet."
+    },
+    "FighterBay": {
+      "name": "Fighter Bai",
+      "desc": "Lansira borbeni brod. Samo prevoznici i vodeći brodovi. Multi-target."
+    }
+  },
+  "weapon": {
+    "w_kinetic_railgun_I": {
+      "name": "Railgun I",
+      "desc": "Railgun I — Osnovno kinetičko oružje. +10% šanse za krit.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Upgrade Ship Factori II"
+    },
+    "w_kinetic_railgun_II": {
+      "name": "Railgun II",
+      "desc": "Railgun II — Poboljšani kinetički top. +15% krit.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_railgun_III": {
+      "name": "Railgun III",
+      "desc": "Railgun III — Napredni kinetički top. +22% krit.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_gauss_cannon_I": {
+      "name": "Gausov top I",
+      "desc": "Gausov top I — Elektromagnetni top. +10% krit.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Ogled 6"
+    },
+    "w_kinetic_gauss_cannon_II": {
+      "name": "Gausov top II",
+      "desc": "Gausov top II — Poboljšani elektromagnetni top.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_gauss_cannon_III": {
+      "name": "Gausov top III",
+      "desc": "Gausov top III — Napredni elektromagnetni top.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_mass_driver_I": {
+      "name": "Masovni vozač I",
+      "desc": "Mass Driver I — Ispaljuje masivne projektile.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Suđenje 10"
+    },
+    "w_kinetic_mass_driver_II": {
+      "name": "Mass Driver II",
+      "desc": "Mass Driver II — Poboljšani pokretač mase.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_mass_driver_III": {
+      "name": "Masovni vozač III",
+      "desc": "Mass Driver III — Napredni pokretač mase.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_shredder_I": {
+      "name": "Šreder I",
+      "desc": "Shredder I — Kise oklop sa metalnim fragmentima.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "gusar 2"
+    },
+    "w_kinetic_shredder_II": {
+      "name": "Shredder II",
+      "desc": "Shredder II — Unapređena drobilica.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_shredder_III": {
+      "name": "Shredder III",
+      "desc": "Shredder III — Napredni šreder.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_penetrator_I": {
+      "name": "Penetrator I",
+      "desc": "Penetrator I — Probija debeli oklop.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "gusar 4"
+    },
+    "w_kinetic_penetrator_II": {
+      "name": "Penetrator II",
+      "desc": "Penetrator II — Poboljšan penetrator.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_penetrator_III": {
+      "name": "Penetrator III",
+      "desc": "Penetrator III — Napredni penetrator.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_accelerator_I": {
+      "name": "Akcelerator I",
+      "desc": "Akcelerator I — Ubrzava projektile.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "gusar 6"
+    },
+    "w_kinetic_accelerator_II": {
+      "name": "Accelerator II",
+      "desc": "Akcelerator II — Poboljšan akcelerator.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_accelerator_III": {
+      "name": "Accelerator III",
+      "desc": "Accelerator III — Napredni akcelerator.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_ripper_I": {
+      "name": "Trbosek I",
+      "desc": "Ripper I — Suze mete na komade.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "gusar 9"
+    },
+    "w_kinetic_ripper_II": {
+      "name": "Ripper II",
+      "desc": "Ripper II — Poboljšani riper.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_ripper_III": {
+      "name": "Ripper III",
+      "desc": "Ripper III — Napredni riper.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_hailstorm_I": {
+      "name": "Tuča I",
+      "desc": "Hailstorm I — Kiša projektila.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Sazvežđe 3"
+    },
+    "w_kinetic_hailstorm_II": {
+      "name": "Hailstorm II",
+      "desc": "Hailstorm II — Poboljšana kiša projektila.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_hailstorm_III": {
+      "name": "Hailstorm III",
+      "desc": "Hailstorm III — Napredna kiša projektila.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_obliterator_I": {
+      "name": "Obliterator I",
+      "desc": "Obliterator I — Potpuno uništenje.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Sazvežđe 2"
+    },
+    "w_kinetic_obliterator_II": {
+      "name": "Obliterator II",
+      "desc": "Obliterator II — Poboljšani obliterator.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_obliterator_III": {
+      "name": "Obliterator III",
+      "desc": "Obliterator III — Napredni obliterator.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_kinetic_annihilator_I": {
+      "name": "Annihilator I",
+      "desc": "Annihilator I — Potpuno iskorenjivanje cilja.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Sazvežđe 1"
+    },
+    "w_kinetic_annihilator_II": {
+      "name": "Annihilator II",
+      "desc": "Annihilator II — Poboljšani anihilator.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-15"
+    },
+    "w_kinetic_annihilator_III": {
+      "name": "Annihilator III",
+      "desc": "Annihilator III — Napredni anihilator.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-25"
+    },
+    "w_heat_inferno_I": {
+      "name": "Inferno I",
+      "desc": "Inferno I — Hellfire.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "Humanoid 7"
+    },
+    "w_heat_inferno_II": {
+      "name": "Inferno II",
+      "desc": "Inferno II — Poboljšana paklena vatra.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_inferno_III": {
+      "name": "Inferno III",
+      "desc": "Inferno III — Napredna paklena vatra.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_scorch_I": {
+      "name": "Scorch I",
+      "desc": "Scorch I — Spaljuje površinu broda.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "Ogled 3"
+    },
+    "w_heat_scorch_II": {
+      "name": "Scorch II",
+      "desc": "Scorch II — Poboljšana scorch.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_scorch_III": {
+      "name": "Scorch III",
+      "desc": "Scorch III — Advanced scorch.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_molten_core_I": {
+      "name": "Otopljeno jezgro I",
+      "desc": "Rastopljeno jezgro I — Ratopljeno jezgro.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "Ogled 5"
+    },
+    "w_heat_molten_core_II": {
+      "name": "Molten Core II",
+      "desc": "Molten Core II — Poboljšano rastopljeno jezgro.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_molten_core_III": {
+      "name": "Molten Core III",
+      "desc": "Molten Core III — Napredno rastopljeno jezgro.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_pyro_blast_I": {
+      "name": "Piro eksplozija I",
+      "desc": "Piro Blast I — Eksplozivna vatrena lopta.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "Ogled 8"
+    },
+    "w_heat_pyro_blast_II": {
+      "name": "Piro Blast II",
+      "desc": "Piro Blast II — Poboljšana vatrena lopta.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_pyro_blast_III": {
+      "name": "Piro Blast III",
+      "desc": "Piro Blast III — Napredna vatrena lopta.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_thermal_lance_I": {
+      "name": "Termalno lance I",
+      "desc": "Thermal Lance I — Fokusirani termalni snop.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 1"
+    },
+    "w_heat_thermal_lance_II": {
+      "name": "Thermal Lance II",
+      "desc": "Thermal Lance II — Poboljšani termalni snop.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_thermal_lance_III": {
+      "name": "Thermal Lance III",
+      "desc": "Thermal Lance III — Napredni termalni snop.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_sunflare_I": {
+      "name": "Sunflare I",
+      "desc": "Sunflare I — Eksplozija solarne energije.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 3"
+    },
+    "w_heat_sunflare_II": {
+      "name": "Breathing II",
+      "desc": "Sunflare II — Unapređeno sunčanje.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_sunflare_III": {
+      "name": "Sunflare III",
+      "desc": "Sunflare III — Napredno sunčanje.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_magma_I": {
+      "name": "Magma I",
+      "desc": "Magma I — Rastopljena stena.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 5"
+    },
+    "w_heat_magma_II": {
+      "name": "Magma II",
+      "desc": "Magma II — Poboljšana magma.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_magma_III": {
+      "name": "Magma III",
+      "desc": "Magma III — Napredna magma.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_incinerator_I": {
+      "name": "Spalionica I",
+      "desc": "Spalionica I — Spaljuje sve do temelja.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 7"
+    },
+    "w_heat_incinerator_II": {
+      "name": "Spalionica II",
+      "desc": "Insinerator II — Unapređena spalionica.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_incinerator_III": {
+      "name": "Spalionica III",
+      "desc": "Insinerator III — Napredna spalionica.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_phoenix_I": {
+      "name": "Feniks I",
+      "desc": "Phoenik I — Firebird.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 8"
+    },
+    "w_heat_phoenix_II": {
+      "name": "Phoenik II",
+      "desc": "Feniks II — Poboljšana vatrena ptica.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_phoenix_III": {
+      "name": "Phoenik III",
+      "desc": "Phoenik III — Advanced firebird.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_heat_hellfire_I": {
+      "name": "Paklena vatra I",
+      "desc": "Hellfire I — Hellfire.",
+      "special": "15% šanse: spali 2 runde (+20 štete/runda)",
+      "source": "gusar 10"
+    },
+    "w_heat_hellfire_II": {
+      "name": "Hellfire II",
+      "desc": "Hellfire II — Poboljšana paklena vatra.",
+      "special": "20% šanse: spali 2 runde (+35 štete/runda)",
+      "source": "Primer 11-15"
+    },
+    "w_heat_hellfire_III": {
+      "name": "Hellfire III",
+      "desc": "Hellfire III — Advanced Hellfire.",
+      "special": "30% šanse: spali 3 runde (+50 štete/runda)",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_pulsar_I": {
+      "name": "Pulsar I",
+      "desc": "Pulsar I — EMP puls.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_pulsar_II": {
+      "name": "Pulsar II",
+      "desc": "Pulsar II — Poboljšan EMP puls.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_pulsar_III": {
+      "name": "Pulsar III",
+      "desc": "Pulsar III — Napredni EMP puls.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_emp_blast_I": {
+      "name": "EMP Blast I",
+      "desc": "EMP Blast I — Elektromagnetni impuls.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_emp_blast_II": {
+      "name": "EMP Blast II",
+      "desc": "EMP Blast II — Poboljšana EMP eksplozija.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_emp_blast_III": {
+      "name": "EMP Blast III",
+      "desc": "EMP Blast III — Napredno EMP blast.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_stasis_beam_I": {
+      "name": "Stasis Beam I",
+      "desc": "Stasis Beam I — Paralizuje brod.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_stasis_beam_II": {
+      "name": "Stasis Beam II",
+      "desc": "Stasis Beam II — Poboljšan stasis zrak.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_stasis_beam_III": {
+      "name": "Stasis Beam III",
+      "desc": "Stasis Beam III — Napredni stasis zrak.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_disruptor_I": {
+      "name": "Disruptor I",
+      "desc": "Disruptor I — Ometa sisteme.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_disruptor_II": {
+      "name": "Disruptor II",
+      "desc": "Disruptor II — Poboljšani disruptor.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_disruptor_III": {
+      "name": "Disruptor III",
+      "desc": "Disruptor III — Napredni disruptor.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_magnetron_I": {
+      "name": "Magnetron I",
+      "desc": "Magnetron I — Magnetno polje.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_magnetron_II": {
+      "name": "Magnetron II",
+      "desc": "Magnetron II — Poboljšani magnetron.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_magnetron_III": {
+      "name": "Magnetron III",
+      "desc": "Magnetron III — Napredni magnetron.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_neutron_wave_I": {
+      "name": "Neutronski talas I",
+      "desc": "Neutronski talas I — širi talas interferencije.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_neutron_wave_II": {
+      "name": "Neutron Vave II",
+      "desc": "Neutron Vave II — Poboljšani neutronski talas.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_neutron_wave_III": {
+      "name": "Neutron Vave III",
+      "desc": "Neutron Vave III — Napredni neutronski talas.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_cascade_I": {
+      "name": "Kaskada I",
+      "desc": "Kaskada I — Lančana reakcija.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_cascade_II": {
+      "name": "Vodopadi II",
+      "desc": "Cascade II — Poboljšana lančana reakcija.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_cascade_III": {
+      "name": "Cascade III",
+      "desc": "Cascade III — Napredna lančana reakcija.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_ion_storm_I": {
+      "name": "Jonska oluja I",
+      "desc": "Ion Storm I — Jonska oluja.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_ion_storm_II": {
+      "name": "Jonska oluja II",
+      "desc": "Ion Storm II — Poboljšana jonska oluja.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_ion_storm_III": {
+      "name": "Jonska oluja III",
+      "desc": "Ion Storm III — Napredna jonska oluja.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_magnetosphere_I": {
+      "name": "Magnetosfera I",
+      "desc": "Magnetosfera I — Odbrambeno magnetno polje.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_magnetosphere_II": {
+      "name": "Magnetosphere II",
+      "desc": "Magnetosfera II — Poboljšana magnetosfera.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_magnetosphere_III": {
+      "name": "Magnetosphere III",
+      "desc": "Magnetosfera III — Napredna magnetosfera.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_magnetic_singularity_I": {
+      "name": "Singularnost I",
+      "desc": "Singularnost I — Magnetna singularnost.",
+      "special": "5% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 6-10"
+    },
+    "w_magnetic_singularity_II": {
+      "name": "Singularnost II",
+      "desc": "Singularnost II — Poboljšana singularnost.",
+      "special": "10% šanse: onemogućite štit 1 rundu",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_singularity_III": {
+      "name": "Singularnost III",
+      "desc": "Singularnost III — Napredna singularnost.",
+      "special": "18% šanse: onemogućite štit 2 runde",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_devastator_I": {
+      "name": "Devastator I",
+      "desc": "Devastator I — Uništava sve na svom putu.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_devastator_II": {
+      "name": "Devastator II",
+      "desc": "Devastator II — Poboljšani devastator.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_devastator_III": {
+      "name": "Devastator III",
+      "desc": "Devastator III — Napredni devastator.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_annihilator_I": {
+      "name": "Annihilator I",
+      "desc": "Annihilator I — Potpuno uništenje.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_annihilator_II": {
+      "name": "Annihilator II",
+      "desc": "Annihilator II — Poboljšani anihilator.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_annihilator_III": {
+      "name": "Annihilator III",
+      "desc": "Annihilator III — Napredni anihilator.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_maelstrom_I": {
+      "name": "Maelstrom I",
+      "desc": "Maelstrom I — Vrtlog eksplozija.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_maelstrom_II": {
+      "name": "Maelstrom II",
+      "desc": "Maelstrom II — Poboljšani vrtlog.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_maelstrom_III": {
+      "name": "Maelstrom III",
+      "desc": "Maelstrom III — Napredni vrtlog.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_cataclysm_I": {
+      "name": "Kataklizma I",
+      "desc": "Kataklizma I — Kataklizmička eksplozija.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_cataclysm_II": {
+      "name": "Kataklizma II",
+      "desc": "Kataklizma II — Poboljšana kataklizma.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_cataclysm_III": {
+      "name": "Kataklizma III",
+      "desc": "Kataklizma III — Napredna kataklizma.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_oblivion_I": {
+      "name": "Zaborav I",
+      "desc": "Oblivion I — Briše metu iz postojanja.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_oblivion_II": {
+      "name": "Oblivion II",
+      "desc": "Oblivion II — Poboljšan zaborav.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_oblivion_III": {
+      "name": "Oblivion III",
+      "desc": "Oblivion III — Napredni zaborav.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_earthshaker_I": {
+      "name": "Earthshaker I",
+      "desc": "Earthshaker I — Trese bojno polje.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_earthshaker_II": {
+      "name": "Earthshaker II",
+      "desc": "Earthshaker II — Poboljšani zemljotresnik.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_earthshaker_III": {
+      "name": "Earthshaker III",
+      "desc": "Earthshaker III — Napredni zemljotresnik.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_nova_I": {
+      "name": "Nova I",
+      "desc": "Nova I — Eksplozija zvezdane moći.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_nova_II": {
+      "name": "Nova II",
+      "desc": "Nova II — Poboljšana nova.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_nova_III": {
+      "name": "Nova III",
+      "desc": "Nova III — Napredna nova.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_armageddon_I": {
+      "name": "Armagedon I",
+      "desc": "Armagedon I — Sudnji dan.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_armageddon_II": {
+      "name": "Armagedon II",
+      "desc": "Armagedon II — Poboljšani armagedon.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_armageddon_III": {
+      "name": "Armagedon III",
+      "desc": "Armagedon III — Napredni armagedon.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_apocalypse_I": {
+      "name": "Apokalipsa I",
+      "desc": "Apokalipsa I — Apokalipsa.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_apocalypse_II": {
+      "name": "Apokalipsa II",
+      "desc": "Apokalipsa II — Poboljšana apokalipsa.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_apocalypse_III": {
+      "name": "Apokalipsa III",
+      "desc": "Apokalipsa III — Napredna apokalipsa.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_explosive_crusher_I": {
+      "name": "Crusher I",
+      "desc": "Crusher I — Razbija oklop.",
+      "special": "10% šanse: oštećenje područja (pogodi 1 dodatni brod)",
+      "source": "Primer 6-10"
+    },
+    "w_explosive_crusher_II": {
+      "name": "Crusher II",
+      "desc": "Crusher II — Unapređena drobilica.",
+      "special": "15% šanse: oštećenje područja (pogodi 2 dodatna broda)",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_crusher_III": {
+      "name": "Crusher III",
+      "desc": "Crusher III — Napredna drobilica.",
+      "special": "25% šanse: oštećenje područja (pogodi 3 dodatna broda)",
+      "source": "Ograničeno 1-3"
+    },
+    "w_kinetic_railgun_beam_I": {
+      "name": "Railgun Beam I",
+      "desc": "Railgun Beam I — Kinetički snop. +10% krit.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Primer 1"
+    },
+    "w_kinetic_railgun_beam_II": {
+      "name": "Railgun Beam II",
+      "desc": "Railgun Beam II — Poboljšana kinetička zraka.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_railgun_beam_III": {
+      "name": "Railgun Beam III",
+      "desc": "Railgun Beam III — Napredni kinetički snop.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_gauss_cannon_beam_I": {
+      "name": "Gausov topovski snop I",
+      "desc": "Gauss Cannon Beam I — Elektromagnetni snop.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Primer 22"
+    },
+    "w_kinetic_gauss_cannon_beam_II": {
+      "name": "Gauss Cannon Beam II",
+      "desc": "Gauss Cannon Beam II — Poboljšani elektromagnetni snop.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_gauss_cannon_beam_III": {
+      "name": "Gauss Cannon Beam III",
+      "desc": "Gauss Cannon Beam III — Napredni elektromagnetni snop.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_mass_driver_beam_I": {
+      "name": "Masa pokretačkog snopa I",
+      "desc": "Mass Driver Beam I — Masa vozačkog snopa.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Primer 7"
+    },
+    "w_kinetic_mass_driver_beam_II": {
+      "name": "Mass Driver Beam II",
+      "desc": "Mass Driver Beam II — Poboljšana masa pokretačkog snopa.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_mass_driver_beam_III": {
+      "name": "Mass Driver Beam III",
+      "desc": "Mass Driver Beam III — Napredna masa vozačkog snopa.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_shredder_beam_I": {
+      "name": "Shredder Beam I",
+      "desc": "Shredder Beam I — Greda koja seče oklop.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Primer 17"
+    },
+    "w_kinetic_shredder_beam_II": {
+      "name": "Shredder Beam II",
+      "desc": "Shredder Beam II — Poboljšana greda drobilice.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_shredder_beam_III": {
+      "name": "Shredder Beam III",
+      "desc": "Shredder Beam III — Napredni snop drobilice.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_penetrator_beam_I": {
+      "name": "Penetrator Beam I",
+      "desc": "Penetrator Beam I — Penetrator Beam.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Primer 26"
+    },
+    "w_kinetic_penetrator_beam_II": {
+      "name": "Penetrator Beam II",
+      "desc": "Penetrator Beam II — Poboljšani penetratorski snop.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_penetrator_beam_III": {
+      "name": "Penetrator Beam III",
+      "desc": "Penetrator Beam III — Napredni penetratorski snop.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_accelerator_beam_I": {
+      "name": "Accelerator Beam I",
+      "desc": "Accelerator Beam I — Ubrzani snop.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Humanoid 10"
+    },
+    "w_kinetic_accelerator_beam_II": {
+      "name": "Accelerator Beam II",
+      "desc": "Accelerator Beam II — Poboljšan ubrzani snop.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_accelerator_beam_III": {
+      "name": "Accelerator Beam III",
+      "desc": "Accelerator Beam III — Napredni ubrzani snop.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_ripper_beam_I": {
+      "name": "Ripper Beam I",
+      "desc": "Ripper Beam I — Ripper Beam.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Ogled 2"
+    },
+    "w_kinetic_ripper_beam_II": {
+      "name": "Ripper Beam II",
+      "desc": "Ripper Beam II — Poboljšana greda ripera.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_ripper_beam_III": {
+      "name": "Ripper Beam III",
+      "desc": "Ripper Beam III — Napredna greda ripera.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_hailstorm_beam_I": {
+      "name": "Greda tuče I",
+      "desc": "Hailstorm Beam I — Hailstorm Beam.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Ogled 4"
+    },
+    "w_kinetic_hailstorm_beam_II": {
+      "name": "Hailstorm Beam II",
+      "desc": "Hailstorm Beam II — Poboljšani snop tuče.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_hailstorm_beam_III": {
+      "name": "Hailstorm Beam III",
+      "desc": "Hailstorm Beam III — Napredni snop protiv tuče.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_obliterator_beam_I": {
+      "name": "Obliterator Beam I",
+      "desc": "Obliteratorski snop I — Obliteratorski snop.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Ogled 7"
+    },
+    "w_kinetic_obliterator_beam_II": {
+      "name": "Obliterator Beam II",
+      "desc": "Obliterator Beam II — Poboljšan snop obliteratora.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_obliterator_beam_III": {
+      "name": "Obliterator Beam III",
+      "desc": "Obliterator Beam III — Napredni snop obliteratora.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_annihilator_beam_I": {
+      "name": "Annihilator Beam I",
+      "desc": "Annihilator Beam I — Annihilator Beam.",
+      "special": "+10% šanse za kritični pogodak",
+      "source": "Suđenje 9"
+    },
+    "w_kinetic_annihilator_beam_II": {
+      "name": "Annihilator Beam II",
+      "desc": "Annihilator Beam II — Poboljšani snop anihilatora.",
+      "special": "+15% šanse za kritični pogodak",
+      "source": "Primer 11-16"
+    },
+    "w_kinetic_annihilator_beam_III": {
+      "name": "Annihilator Beam III",
+      "desc": "Annihilator Beam III — Napredni snop anihilatora.",
+      "special": "+22% šanse za kritični pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_heat_inferno_beam_I": {
+      "name": "Inferno Beam I",
+      "desc": "Inferno Beam I — Infernal Beam.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 2"
+    },
+    "w_heat_inferno_beam_II": {
+      "name": "Inferno Beam II",
+      "desc": "Inferno Beam II — Poboljšan pakleni snop.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_inferno_beam_III": {
+      "name": "Inferno Beam III",
+      "desc": "Inferno Beam III — Napredni pakleni snop.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_scorch_beam_I": {
+      "name": "Scorch Beam I",
+      "desc": "Scorch Beam I — Scorch Beam.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 6"
+    },
+    "w_heat_scorch_beam_II": {
+      "name": "Scorch Beam II",
+      "desc": "Scorch Beam II — Poboljšana scorch zraka.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_scorch_beam_III": {
+      "name": "Scorch Beam III",
+      "desc": "Scorch Beam III — Napredni snop scorch.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_molten_core_beam_I": {
+      "name": "Greda rastopljenog jezgra I",
+      "desc": "Greda sa rastopljenim jezgrom I — Greda sa rastopljenim jezgrom.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 11"
+    },
+    "w_heat_molten_core_beam_II": {
+      "name": "Molten Core Beam II",
+      "desc": "Molten Core Beam II — Poboljšana greda rastopljenog jezgra.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_molten_core_beam_III": {
+      "name": "Greda rastopljenog jezgra III",
+      "desc": "Molten Core Beam III — Napredna greda rastopljenog jezgra.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_pyro_blast_beam_I": {
+      "name": "Piro Blast Beam I",
+      "desc": "Piro Blast Beam I — Vatrena lopta.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 16"
+    },
+    "w_heat_pyro_blast_beam_II": {
+      "name": "Piro Blast Beam II",
+      "desc": "Piro Blast Beam II — Poboljšani snop piro eksplozije.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_pyro_blast_beam_III": {
+      "name": "Piro Blast Beam III",
+      "desc": "Piro Blast Beam III — Napredni snop piro eksplozije.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_thermal_lance_beam_I": {
+      "name": "Thermal Lance Beam I",
+      "desc": "Thermal Lance Beam I — Termalni snop.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 27"
+    },
+    "w_heat_thermal_lance_beam_II": {
+      "name": "Thermal Lance Beam II",
+      "desc": "Thermal Lance Beam II — Poboljšani termalni snop.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_thermal_lance_beam_III": {
+      "name": "Thermal Lance Beam III",
+      "desc": "Thermal Lance Beam III — Napredni termalni snop.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_sunflare_beam_I": {
+      "name": "Sunflare Beam I",
+      "desc": "Sunflare Beam I — Solarni snop baklje.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 12"
+    },
+    "w_heat_sunflare_beam_II": {
+      "name": "Sunflare Beam II",
+      "desc": "Sunflare Beam II — Unapređeni sunčev snop.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_sunflare_beam_III": {
+      "name": "Sunflare Beam III",
+      "desc": "Sunflare Beam III — Napredni sunčev snop.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_magma_beam_I": {
+      "name": "Magma Beam I",
+      "desc": "Magma Beam I — Magma snop.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Primer 21"
+    },
+    "w_heat_magma_beam_II": {
+      "name": "Magma Beam II",
+      "desc": "Magma Beam II — Poboljšani snop magme.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_magma_beam_III": {
+      "name": "Magma Beam III",
+      "desc": "Magma Beam III — Napredni snop magme.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_incinerator_beam_I": {
+      "name": "Greda za spaljivanje I",
+      "desc": "Greda spalionice I — Greda spalionice.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Humanoid 1"
+    },
+    "w_heat_incinerator_beam_II": {
+      "name": "Greda za spaljivanje II",
+      "desc": "Insinerator Beam II — Poboljšana greda spalionice.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_incinerator_beam_III": {
+      "name": "Greda za spaljivanje III",
+      "desc": "Insinerator Beam III — Napredna greda za spaljivanje.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_phoenix_beam_I": {
+      "name": "Phoenik Beam I",
+      "desc": "Phoenik Beam I — Phoenik Beam.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Humanoid 4"
+    },
+    "w_heat_phoenix_beam_II": {
+      "name": "Phoenik Beam II",
+      "desc": "Phoenik Beam II — Poboljšani feniks zrak.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_phoenix_beam_III": {
+      "name": "Phoenik Beam III",
+      "desc": "Phoenik Beam III — Napredni feniks zrak.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_heat_hellfire_beam_I": {
+      "name": "Hellfire Beam I",
+      "desc": "Hellfire Beam I — Hellfire Beam.",
+      "special": "Topi oklop: -10% def 1 runda",
+      "source": "Ogled 1"
+    },
+    "w_heat_hellfire_beam_II": {
+      "name": "Hellfire Beam II",
+      "desc": "Hellfire Beam II — Poboljšani snop paklene vatre.",
+      "special": "Topi oklop: -15% def 2 runde",
+      "source": "Primer 11-16"
+    },
+    "w_heat_hellfire_beam_III": {
+      "name": "Hellfire Beam III",
+      "desc": "Hellfire Beam III — Napredni snop paklene vatre.",
+      "special": "Topi oklop: -22% def 3 runde",
+      "source": "Primer 21-26"
+    },
+    "w_magnetic_pulsar_beam_I": {
+      "name": "Pulsarski zrak I",
+      "desc": "Pulsar Beam I — EMP pulsni snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_pulsar_beam_II": {
+      "name": "Pulsar Beam II",
+      "desc": "Pulsar Beam II — Poboljšan pulsar zrak.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_pulsar_beam_III": {
+      "name": "Pulsar Beam III",
+      "desc": "Pulsar Beam III — Napredni pulsarni snop.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_emp_blast_beam_I": {
+      "name": "EMP Blast Beam I",
+      "desc": "EMP Blast Beam I — EMP zrak.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_emp_blast_beam_II": {
+      "name": "EMP Blast Beam II",
+      "desc": "EMP Blast Beam II — Poboljšani EMP zrak.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_emp_blast_beam_III": {
+      "name": "EMP Blast Beam III",
+      "desc": "EMP Blast Beam III — Napredni EMP zrak.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_stasis_beam_beam_I": {
+      "name": "Stasis Beam I",
+      "desc": "Stasis Beam — Zamrzni zrak.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_stasis_beam_beam_II": {
+      "name": "Stasis Beam II",
+      "desc": "Stasis Beam II — Poboljšan stasis zrak.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_stasis_beam_beam_III": {
+      "name": "Stasis Beam III",
+      "desc": "Stasis Beam III — Napredni stasis zrak.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_disruptor_beam_I": {
+      "name": "Disruptor Beam I",
+      "desc": "Disruptor Beam I — Jammer snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_disruptor_beam_II": {
+      "name": "Disruptor Beam II",
+      "desc": "Disruptor Beam II — Poboljšan disruptor snop.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_disruptor_beam_III": {
+      "name": "Disruptor Beam III",
+      "desc": "Disruptor Beam III — Napredni disruptor snop.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_magnetron_beam_I": {
+      "name": "Magnetronski snop I",
+      "desc": "Magnetronski snop I — Magnetronski snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_magnetron_beam_II": {
+      "name": "Magnetron Beam II",
+      "desc": "Magnetron Beam II — Poboljšani magnetronski snop.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_magnetron_beam_III": {
+      "name": "Magnetron Beam III",
+      "desc": "Magnetron Beam III — Napredni magnetronski snop.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_neutron_wave_beam_I": {
+      "name": "Neutronski talasni snop I",
+      "desc": "Neutron Vave Beam I — Neutronski talasni snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_neutron_wave_beam_II": {
+      "name": "Neutron Vave Beam II",
+      "desc": "Neutron Vave Beam II — Poboljšani snop neutronskih talasa.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_neutron_wave_beam_III": {
+      "name": "Neutron Vave Beam III",
+      "desc": "Neutron Vave Beam III — Napredni snop neutronskih talasa.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_cascade_beam_I": {
+      "name": "Cascade Beam I",
+      "desc": "Cascade Beam I — Kaskadni snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_cascade_beam_II": {
+      "name": "Cascade Beam II",
+      "desc": "Cascade Beam II — Poboljšani kaskadni snop.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_cascade_beam_III": {
+      "name": "Cascade Beam III",
+      "desc": "Cascade Beam III — Napredni kaskadni snop.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_ion_storm_beam_I": {
+      "name": "Jonski olujni snop I",
+      "desc": "Ion Storm Beam I — Jonski olujni snop.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_ion_storm_beam_II": {
+      "name": "Ion Storm Beam II",
+      "desc": "Ion Storm Beam II — Poboljšani snop jonske oluje.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_ion_storm_beam_III": {
+      "name": "Ion Storm Beam III",
+      "desc": "Ion Storm Beam III — Napredni snop jonske oluje.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_magnetosphere_beam_I": {
+      "name": "Snop magnetosfere I",
+      "desc": "Magnetosferni snop I — Zrak magnetosfere.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_magnetosphere_beam_II": {
+      "name": "Magnetosphere Beam II",
+      "desc": "Magnetosphere Beam II — Poboljšani snop magnetosfere.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_magnetosphere_beam_III": {
+      "name": "Magnetosphere Beam III",
+      "desc": "Magnetosphere Beam III — Napredni snop magnetosfere.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_magnetic_singularity_beam_I": {
+      "name": "Singularni snop I",
+      "desc": "Singulariti Beam I — Singulariti Beam.",
+      "special": "10% šanse: onemogućite oružje 1 rundu",
+      "source": "Primer 11-15"
+    },
+    "w_magnetic_singularity_beam_II": {
+      "name": "Singulariti Beam II",
+      "desc": "Singulariti Beam II — Poboljšani snop singularnosti.",
+      "special": "18% šanse: onemogućite oružje 2 runde",
+      "source": "Primer 16-20"
+    },
+    "w_magnetic_singularity_beam_III": {
+      "name": "Singulariti Beam III",
+      "desc": "Singulariti Beam III — Napredni snop singularnosti.",
+      "special": "28% šanse: onemogućite oružje 2 runde",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_devastator_beam_I": {
+      "name": "Devastator Beam I",
+      "desc": "Devastator Beam I — Razorni snop.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_devastator_beam_II": {
+      "name": "Devastator Beam II",
+      "desc": "Devastator Beam II — Poboljšan razorni snop.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_devastator_beam_III": {
+      "name": "Devastator Beam III",
+      "desc": "Devastator Beam III — Napredni razorni zrak.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_annihilator_beam_I": {
+      "name": "Annihilator Beam I",
+      "desc": "Annihilator Beam I — Annihilator Beam.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_annihilator_beam_II": {
+      "name": "Annihilator Beam II",
+      "desc": "Annihilator Beam II — Poboljšani snop anihilatora.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_annihilator_beam_III": {
+      "name": "Annihilator Beam III",
+      "desc": "Annihilator Beam III — Napredni snop anihilatora.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_maelstrom_beam_I": {
+      "name": "Maelstrom Beam I",
+      "desc": "Maelstrom Beam I — Vrtložna greda.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_maelstrom_beam_II": {
+      "name": "Maelstrom Beam II",
+      "desc": "Maelstrom Beam II — Poboljšani snop vrtloga.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_maelstrom_beam_III": {
+      "name": "Maelstrom Beam III",
+      "desc": "Maelstrom Beam III — Napredni snop vrtloga.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_cataclysm_beam_I": {
+      "name": "Cataclism Beam I",
+      "desc": "Cataclism Beam I — Kataklizmički snop.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_cataclysm_beam_II": {
+      "name": "Cataclism Beam II",
+      "desc": "Cataclism Beam II — Poboljšani kataklizmički snop.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_cataclysm_beam_III": {
+      "name": "Cataclism Beam III",
+      "desc": "Cataclism Beam III — Napredni kataklizmički snop.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_oblivion_beam_I": {
+      "name": "Oblivion Beam I",
+      "desc": "Oblivion Beam I — Greda zaborava.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_oblivion_beam_II": {
+      "name": "Oblivion Beam II",
+      "desc": "Oblivion Beam II — Poboljšana greda zaborava.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_oblivion_beam_III": {
+      "name": "Oblivion Beam III",
+      "desc": "Oblivion Beam III — Napredni snop zaborava.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_earthshaker_beam_I": {
+      "name": "Earthshaker Beam I",
+      "desc": "Earthshaker Beam I — Earthshaker Beam.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_earthshaker_beam_II": {
+      "name": "Earthshaker Beam II",
+      "desc": "Earthshaker Beam II — Poboljšani snop zemljotresa.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_earthshaker_beam_III": {
+      "name": "Earthshaker Beam III",
+      "desc": "Earthshaker Beam III — Napredni Earthshaker zrak.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_nova_beam_I": {
+      "name": "Nova Beam I",
+      "desc": "Nova Beam I — Nova greda.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_nova_beam_II": {
+      "name": "Nova Beam II",
+      "desc": "Nova Beam II — Poboljšana nova zraka.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_nova_beam_III": {
+      "name": "Nova Beam III",
+      "desc": "Nova Beam III — Napredni novi zrak.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_armageddon_beam_I": {
+      "name": "Armagedon Beam I",
+      "desc": "Armagedonska greda I — Armagedonska greda.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_armageddon_beam_II": {
+      "name": "Armagedon Beam II",
+      "desc": "Armageddon Beam II — Unapređena armagedonska greda.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_armageddon_beam_III": {
+      "name": "Armagedon Beam III",
+      "desc": "Armageddon Beam III — Napredna greda armagedona.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_apocalypse_beam_I": {
+      "name": "Beam Apokalipse I",
+      "desc": "Apocalipse Beam I — Apokaliptični snop.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_apocalypse_beam_II": {
+      "name": "Apocalipse Beam II",
+      "desc": "Apocalipse Beam II — Poboljšan apokaliptički snop.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_apocalypse_beam_III": {
+      "name": "Apocalipse Beam III",
+      "desc": "Apocalipse Beam III — Napredni apokaliptički snop.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_explosive_crusher_beam_I": {
+      "name": "Crusher Beam I",
+      "desc": "Drobilica Greda I — Greda drobilice.",
+      "special": "+20% štete direktno kroz štit",
+      "source": "Primer 11-15"
+    },
+    "w_explosive_crusher_beam_II": {
+      "name": "Crusher Beam II",
+      "desc": "Crusher Beam II — Poboljšana greda drobilice.",
+      "special": "+30% štete direktno kroz štit",
+      "source": "Primer 16-20"
+    },
+    "w_explosive_crusher_beam_III": {
+      "name": "Crusher Beam III",
+      "desc": "Crusher Beam III — Napredna greda drobilice.",
+      "special": "+45% štete direktno kroz štit",
+      "source": "Ograničeno 4-6"
+    },
+    "w_kinetic_railgun_missile_I": {
+      "name": "Railgun raketa I",
+      "desc": "Railgun Missile I — Vođena raketa. Uvek hitovi.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_railgun_missile_II": {
+      "name": "Railgun Missile II",
+      "desc": "Railgun Missile II — Poboljšana vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_railgun_missile_III": {
+      "name": "Railgun Missile III",
+      "desc": "Railgun Missile III — Elitna vođena raketa.",
+      "special": "Vođen — 100% pogodaka +10% bonus štete",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_gauss_cannon_missile_I": {
+      "name": "Gausov top projektil I",
+      "desc": "Gauss Cannon Missile I — vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_gauss_cannon_missile_II": {
+      "name": "Gausov topovski projektil II",
+      "desc": "Gauss Cannon Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_gauss_cannon_missile_III": {
+      "name": "Gausov top projektila III",
+      "desc": "Gauss Cannon Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_mass_driver_missile_I": {
+      "name": "Masovni pokretač rakete I",
+      "desc": "Mass Driver Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_mass_driver_missile_II": {
+      "name": "Mass Driver Missile II",
+      "desc": "Mass Driver Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_mass_driver_missile_III": {
+      "name": "Mass Driver Missile III",
+      "desc": "Mass Driver Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_shredder_missile_I": {
+      "name": "Shredder Missile I",
+      "desc": "Shredder Missile I — vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_shredder_missile_II": {
+      "name": "Shredder Missile II",
+      "desc": "Shredder Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_shredder_missile_III": {
+      "name": "Shredder Missile III",
+      "desc": "Shredder Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_penetrator_missile_I": {
+      "name": "Probojna raketa I",
+      "desc": "Penetrator Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_penetrator_missile_II": {
+      "name": "Penetrator Missile II",
+      "desc": "Penetrator Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_penetrator_missile_III": {
+      "name": "Penetrator Missile III",
+      "desc": "Penetrator Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_accelerator_missile_I": {
+      "name": "Ubrzivačka raketa I",
+      "desc": "Accelerator Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_accelerator_missile_II": {
+      "name": "Accelerator Missile II",
+      "desc": "Accelerator Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_accelerator_missile_III": {
+      "name": "Accelerator Missile III",
+      "desc": "Accelerator Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_ripper_missile_I": {
+      "name": "Ripper raketa I",
+      "desc": "Ripper Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_ripper_missile_II": {
+      "name": "Ripper Missile II",
+      "desc": "Ripper Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_ripper_missile_III": {
+      "name": "Ripper Missile III",
+      "desc": "Ripper Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_hailstorm_missile_I": {
+      "name": "Raketa Hailstorm I",
+      "desc": "Hailstorm Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_hailstorm_missile_II": {
+      "name": "Hailstorm Missile II",
+      "desc": "Hailstorm Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_hailstorm_missile_III": {
+      "name": "Hailstorm Missile III",
+      "desc": "Hailstorm Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_obliterator_missile_I": {
+      "name": "Obliteratorska raketa I",
+      "desc": "Obliterator Missile I — Vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_obliterator_missile_II": {
+      "name": "Obliterator Missile II",
+      "desc": "Obliterator Missile II — Poboljšana raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_obliterator_missile_III": {
+      "name": "Obliteratorski projektil III",
+      "desc": "Obliterator Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_kinetic_annihilator_missile_I": {
+      "name": "Raketa Annihilator I",
+      "desc": "Annihilator Missile I — vođena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 16-20"
+    },
+    "w_kinetic_annihilator_missile_II": {
+      "name": "Annihilator Missile II",
+      "desc": "Annihilator Missile II — Unapređena raketa.",
+      "special": "Vođen — 100% pogodak",
+      "source": "Primer 21-26"
+    },
+    "w_kinetic_annihilator_missile_III": {
+      "name": "Annihilator Missile III",
+      "desc": "Annihilator Missile III — Elitna raketa.",
+      "special": "Vođen — 100% pogodak +10% bonus",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_inferno_missile_I": {
+      "name": "Inferno raketa I",
+      "desc": "Inferno Missile I — Termo vođena raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_inferno_missile_II": {
+      "name": "Inferno Missile II",
+      "desc": "Inferno Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_inferno_missile_III": {
+      "name": "Inferno Missile III",
+      "desc": "Inferno Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_scorch_missile_I": {
+      "name": "Scorch raketa I",
+      "desc": "Scorch Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_scorch_missile_II": {
+      "name": "Scorch Missile II",
+      "desc": "Scorch Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_scorch_missile_III": {
+      "name": "Scorch Missile III",
+      "desc": "Scorch Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_molten_core_missile_I": {
+      "name": "Raketa sa rastopljenim jezgrom I",
+      "desc": "Rastopljena jezgra raketa I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_molten_core_missile_II": {
+      "name": "Rastopljena jezgra raketa II",
+      "desc": "Molten Core Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_molten_core_missile_III": {
+      "name": "Rastopljena jezgra raketa III",
+      "desc": "Molten Core Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_pyro_blast_missile_I": {
+      "name": "Piro blast raketa I",
+      "desc": "Piro Blast Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_pyro_blast_missile_II": {
+      "name": "Piro blast raketa II",
+      "desc": "Piro Blast Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_pyro_blast_missile_III": {
+      "name": "Piro blast raketa III",
+      "desc": "Piro Blast Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_thermal_lance_missile_I": {
+      "name": "Thermal Lance Missile I",
+      "desc": "Thermal Lance Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_thermal_lance_missile_II": {
+      "name": "Thermal Lance Missile II",
+      "desc": "Thermal Lance Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_thermal_lance_missile_III": {
+      "name": "Thermal Lance Missile III",
+      "desc": "Thermal Lance Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_sunflare_missile_I": {
+      "name": "Sunflare raketa I",
+      "desc": "Sunflare Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_sunflare_missile_II": {
+      "name": "Sunflare Missile II",
+      "desc": "Sunflare Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_sunflare_missile_III": {
+      "name": "Sunflare Missile III",
+      "desc": "Sunflare Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_magma_missile_I": {
+      "name": "Magma raketa I",
+      "desc": "Magma Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_magma_missile_II": {
+      "name": "Magma Missile II",
+      "desc": "Magma Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_magma_missile_III": {
+      "name": "Magma Missile III",
+      "desc": "Magma Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_incinerator_missile_I": {
+      "name": "Raketa za spaljivanje I",
+      "desc": "Raketa za spaljivanje I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_incinerator_missile_II": {
+      "name": "Raketa za spaljivanje II",
+      "desc": "Insinerator Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_incinerator_missile_III": {
+      "name": "Raketa za spaljivanje III",
+      "desc": "Insinerator Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_phoenix_missile_I": {
+      "name": "Phoenik Missile I",
+      "desc": "Phoenik Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_phoenix_missile_II": {
+      "name": "Phoenik Missile II",
+      "desc": "Phoenik Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_phoenix_missile_III": {
+      "name": "Phoenik Missile III",
+      "desc": "Phoenik Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_heat_hellfire_missile_I": {
+      "name": "Raketa pakla I",
+      "desc": "Hellfire Missile I — Termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (15 oštećenja/runda)",
+      "source": "Primer 16-20"
+    },
+    "w_heat_hellfire_missile_II": {
+      "name": "Hellfire Missile II",
+      "desc": "Hellfire Missile II — Poboljšana termalna raketa.",
+      "special": "Vođeno + spaljivanje 2 metka (28 oštećenja/runda)",
+      "source": "Primer 21-26"
+    },
+    "w_heat_hellfire_missile_III": {
+      "name": "Hellfire Missile III",
+      "desc": "Hellfire Missile III — Elitna termalna raketa.",
+      "special": "Vođeno + spaljivanje 3 metka (45 oštećenja/runda)",
+      "source": "Ograničeno 6-8"
+    },
+    "w_magnetic_pulsar_missile_I": {
+      "name": "Pulsar raketa I",
+      "desc": "Pulsar Missile I — Magnetna vođena raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_pulsar_missile_II": {
+      "name": "Pulsar raketa II",
+      "desc": "Pulsar Missile II — Poboljšana magnetna raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_pulsar_missile_III": {
+      "name": "Pulsar raketa III",
+      "desc": "Pulsar Missile III — Elitna magnetna raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_emp_blast_missile_I": {
+      "name": "EMP eksplozivna raketa I",
+      "desc": "EMP blast raketa I — EMP raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_emp_blast_missile_II": {
+      "name": "EMP blast raketa II",
+      "desc": "EMP Blast Missile II — Poboljšana EMP raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_emp_blast_missile_III": {
+      "name": "EMP eksplozivna raketa III",
+      "desc": "EMP Blast Missile III — Elitna EMP raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_stasis_beam_missile_I": {
+      "name": "Stazis raketa I",
+      "desc": "Stasis raketa I — Stasis raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_stasis_beam_missile_II": {
+      "name": "Stasis raketa II",
+      "desc": "Stasis raketa II — Poboljšana stazisna raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_stasis_beam_missile_III": {
+      "name": "Stasis Missile III",
+      "desc": "Stasis Missile III — Elitna stazisna raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_disruptor_missile_I": {
+      "name": "Disruptor raketa I",
+      "desc": "Disruptor Missile I — Disruptor raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_disruptor_missile_II": {
+      "name": "Disruptor Missile II",
+      "desc": "Disruptor Missile II — Poboljšana raketa disruptor.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_disruptor_missile_III": {
+      "name": "Disruptor Missile III",
+      "desc": "Disruptor Missile III — Elitna raketa disruptor.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_magnetron_missile_I": {
+      "name": "Magnetron raketa I",
+      "desc": "Magnetron Missile I — Magnetron raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_magnetron_missile_II": {
+      "name": "Magnetron raketa II",
+      "desc": "Magnetron Missile II — Poboljšana raketa magnetron.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_magnetron_missile_III": {
+      "name": "Magnetron Missile III",
+      "desc": "Magnetron Missile III — Elitna magnetronska raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_neutron_wave_missile_I": {
+      "name": "Neutronski talas raketa I",
+      "desc": "Neutron Vave Missile I — Neutronska raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_neutron_wave_missile_II": {
+      "name": "Neutron Vave Missile II",
+      "desc": "Neutron Vave Missile II — Poboljšana neutronska raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_neutron_wave_missile_III": {
+      "name": "Neutron Vave Missile III",
+      "desc": "Neutron Vave Missile III — Elitna neutronska raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_cascade_missile_I": {
+      "name": "Kaskada raketa I",
+      "desc": "Kaskada raketa I — Kaskada raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_cascade_missile_II": {
+      "name": "Kaskada raketa II",
+      "desc": "Kaskadna raketa II — Poboljšana kaskadna raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_cascade_missile_III": {
+      "name": "Kaskada raketa III",
+      "desc": "Cascade Missile III — Elitna kaskada raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_ion_storm_missile_I": {
+      "name": "Jonska oluja raketa I",
+      "desc": "Ion Storm Missile I — Jonska raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_ion_storm_missile_II": {
+      "name": "Ion Storm Missile II",
+      "desc": "Ion Storm Missile II — Poboljšana jonska raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_ion_storm_missile_III": {
+      "name": "Ion Storm Missile III",
+      "desc": "Ion Storm Missile III — Elitna jonska raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_magnetosphere_missile_I": {
+      "name": "Magnetosferna raketa I",
+      "desc": "Magnetosphere Missile I — raketa Magnetosphere.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_magnetosphere_missile_II": {
+      "name": "Magnetosphere Missile II",
+      "desc": "Magnetosphere Missile II — Unapređena raketa magnetosfere.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_magnetosphere_missile_III": {
+      "name": "Magnetosphere Missile III",
+      "desc": "Magnetosphere Missile III — Elitna raketa magnetosfere.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_magnetic_singularity_missile_I": {
+      "name": "Singularitetna raketa I",
+      "desc": "Singulariti Missile I — Singulariti raketa.",
+      "special": "Vođeno + 15% šanse: onemogućite motor 1 rundu",
+      "source": "Primer 21-25"
+    },
+    "w_magnetic_singularity_missile_II": {
+      "name": "Singulariti Missile II",
+      "desc": "Singulariti Missile II — Unapređena singularna raketa.",
+      "special": "Vođeno + 25% šanse: onemogućite motor 2 runde",
+      "source": "Ograničeno 3-5"
+    },
+    "w_magnetic_singularity_missile_III": {
+      "name": "Singulariti Missile III",
+      "desc": "Singulariti Missile III — Elitna singularna raketa.",
+      "special": "Vođeno + 38% šanse: onemogućite motor 2 runde",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_devastator_missile_I": {
+      "name": "Devastator raketa I",
+      "desc": "Devastator Missile I — Razorna raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_devastator_missile_II": {
+      "name": "Devastator Missile II",
+      "desc": "Devastator Missile II — Poboljšana razorna raketa.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_devastator_missile_III": {
+      "name": "Devastator Missile III",
+      "desc": "Devastator Missile III - Elitna razorna raketa.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_annihilator_missile_I": {
+      "name": "Raketa Annihilator I",
+      "desc": "Annihilator Missile I — Uništavajuća raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_annihilator_missile_II": {
+      "name": "Annihilator Missile II",
+      "desc": "Annihilator Missile II — Poboljšana raketa za uništavanje.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_annihilator_missile_III": {
+      "name": "Annihilator Missile III",
+      "desc": "Annihilator Missile III — Elitna raketa za uništavanje.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_maelstrom_missile_I": {
+      "name": "Maelstrom raketa I",
+      "desc": "Maelstrom Missile I — projektil Maelstrom.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_maelstrom_missile_II": {
+      "name": "Maelstrom Missile II",
+      "desc": "Maelstrom Missile II — Poboljšana projektila maelstrom.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_maelstrom_missile_III": {
+      "name": "Maelstrom Missile III",
+      "desc": "Maelstrom Missile III — Elitna raketa vrtloga.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_cataclysm_missile_I": {
+      "name": "Kataklizmska raketa I",
+      "desc": "Cataclism Missile I — Kataklizmična raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_cataclysm_missile_II": {
+      "name": "Cataclism Missile II",
+      "desc": "Cataclism Missile II — Poboljšana kataklizmička raketa.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_cataclysm_missile_III": {
+      "name": "Cataclism Missile III",
+      "desc": "Cataclism Missile III — Elitna kataklizmička raketa.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_oblivion_missile_I": {
+      "name": "Zaboravljena raketa I",
+      "desc": "Oblivion Missile I — Oblivion raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_oblivion_missile_II": {
+      "name": "Oblivion Missile II",
+      "desc": "Oblivion Missile II — Poboljšana raketa Oblivion.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_oblivion_missile_III": {
+      "name": "Oblivion Missile III",
+      "desc": "Oblivion Missile III — Elitna zaboravna raketa.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_earthshaker_missile_I": {
+      "name": "Earthshaker Missile I",
+      "desc": "Earthshaker Missile I — Earthshaker raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_earthshaker_missile_II": {
+      "name": "Earthshaker Missile II",
+      "desc": "Earthshaker Missile II — Poboljšana raketa Earthshaker.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_earthshaker_missile_III": {
+      "name": "Earthshaker Missile III",
+      "desc": "Earthshaker Missile III — Elitna raketa Earthshaker.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_nova_missile_I": {
+      "name": "Nova raketa I",
+      "desc": "Nova raketa I — raketa Nova.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_nova_missile_II": {
+      "name": "Nova raketa II",
+      "desc": "Nova raketa II — Poboljšana nova raketa.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_nova_missile_III": {
+      "name": "Nova raketa III",
+      "desc": "Nova raketa III — Elitna nova raketa.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_armageddon_missile_I": {
+      "name": "Armagedon raketa I",
+      "desc": "Armagedon raketa I — Armagedon raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_armageddon_missile_II": {
+      "name": "Armagedon raketa II",
+      "desc": "Armagedon Missile II — Poboljšana raketa Armagedon.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_armageddon_missile_III": {
+      "name": "Armagedon Missile III",
+      "desc": "Armagedon Missile III — Elitna raketa Armagedon.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_apocalypse_missile_I": {
+      "name": "Raketa Apokalipse I",
+      "desc": "Apokalipsa raketa I — Apokaliptična raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_apocalypse_missile_II": {
+      "name": "Apocalipse Missile II",
+      "desc": "Apocalipse Missile II — Poboljšana apokaliptička raketa.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_apocalypse_missile_III": {
+      "name": "Apocalipse Missile III",
+      "desc": "Apocalipse Missile III — Elitna apokaliptična raketa.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_explosive_crusher_missile_I": {
+      "name": "Crusher Missile I",
+      "desc": "Crusher Missile I — Crusher raketa.",
+      "special": "Vođeni + 5% šanse: uništite modul",
+      "source": "Primer 21-25"
+    },
+    "w_explosive_crusher_missile_II": {
+      "name": "Crusher Missile II",
+      "desc": "Crusher Missile II — Unapređena raketa crusher.",
+      "special": "Vođeno + 10% šanse: uništite modul",
+      "source": "Ograničeno 3-5"
+    },
+    "w_explosive_crusher_missile_III": {
+      "name": "Crusher Missile III",
+      "desc": "Crusher Missile III — Elitna raketa crusher.",
+      "special": "Vođeno + 18% šanse: uništi modul + oblast",
+      "source": "Ogled 1-3"
+    },
+    "w_light_fighters_I": {
+      "name": "Laki borci I",
+      "desc": "Laki borci. Brz i okretan.",
+      "special": "Napada 1 cilj +20% izbegavanja",
+      "source": "Primer 26-28"
+    },
+    "w_light_fighters_II": {
+      "name": "Light Fighters II",
+      "desc": "Napredni laki lovci.",
+      "special": "Napada 1 cilj +28% izbegavanja",
+      "source": "Ogled 1-3"
+    },
+    "w_light_fighters_III": {
+      "name": "Light Fighters III",
+      "desc": "Elitni laki lovci.",
+      "special": "Napada 2 mete +35% izbegavanja",
+      "source": "Ogled 5-7"
+    },
+    "w_heavy_fighters_I": {
+      "name": "Teški borci I",
+      "desc": "Teški borci. Sporije ali jače udaranje.",
+      "special": "+15% ukupne štete",
+      "source": "Primer 29-30"
+    },
+    "w_heavy_fighters_II": {
+      "name": "Heavi Fighters II",
+      "desc": "Napredni teški borci.",
+      "special": "+22% ukupne štete",
+      "source": "Ogled 2-4"
+    },
+    "w_heavy_fighters_III": {
+      "name": "Heavi Fighters III",
+      "desc": "Elitni teški borci.",
+      "special": "+35% ukupne štete + opekotine",
+      "source": "Ogled 6-8"
+    },
+    "w_magnetic_fighters_I": {
+      "name": "Magnetski borci I",
+      "desc": "Magnetski lovci. EMP polje.",
+      "special": "15% šanse: omamljivanje (gubi rundu)",
+      "source": "Ograničeno 5-7"
+    },
+    "w_magnetic_fighters_II": {
+      "name": "Magnetic Fighters II",
+      "desc": "Napredni magnetni lovci.",
+      "special": "25% šanse: omamljivanje (gubi rundu)",
+      "source": "Ogled 3-5"
+    },
+    "w_magnetic_fighters_III": {
+      "name": "Magnetic Fighters III",
+      "desc": "Elitni magnetni borci.",
+      "special": "35% šanse: omamljivanje 2 runde + onemogućavanje štita",
+      "source": "Ogled 8-10"
+    },
+    "w_bomber_squadron_I": {
+      "name": "Eskadrila bombardera I",
+      "desc": "Bombaši. Pogađa više meta.",
+      "special": "Oštećenje područja — napada 1-3 mete",
+      "source": "Ograničeno 6-8"
+    },
+    "w_bomber_squadron_II": {
+      "name": "Bombarderska eskadrila II",
+      "desc": "Napredni bombarderi.",
+      "special": "Oštećenje područja — napada 1-4 mete",
+      "source": "Ogled 4-6"
+    },
+    "w_bomber_squadron_III": {
+      "name": "Bombarderska eskadrila III",
+      "desc": "Elitni bombarderi.",
+      "special": "Oštećenje područja — napada 1-5 ciljeva + moguće uništavanje",
+      "source": "Boss Event"
+    },
+    "w_elite_squadron_I": {
+      "name": "Elitna eskadrila I",
+      "desc": "Elitna eskadrila.",
+      "special": "Napada 2 mete — meša vrste oštećenja",
+      "source": "Ograničeno 8-10"
+    },
+    "w_elite_squadron_II": {
+      "name": "Elitna eskadrila II",
+      "desc": "Napredna elitna eskadrila.",
+      "special": "Napada 3 mete — adaptivno oštećenje",
+      "source": "Ogled 7-9"
+    },
+    "w_elite_squadron_III": {
+      "name": "Elitna eskadrila III",
+      "desc": "Ultimativna elitna eskadrila.",
+      "special": "Napada 4 mete — bira najslabiji oklop",
+      "source": "Boss Event"
+    }
+  },
+  "shield": {
+    "sh_nano_veil_I": {
+      "name": "Nano Veil I",
+      "desc": "Nanofilamentna barijera. Osnovna zaštita izviđača.",
+      "source": "Primer 3"
+    },
+    "sh_nano_veil_II": {
+      "name": "Nano Veil II",
+      "desc": "Poboljšana barijera od nanofilamenta.",
+      "source": "Ograničeno 1"
+    },
+    "sh_nano_veil_III": {
+      "name": "Nano Veil III",
+      "desc": "Napredna nanofilamentna barijera za lake brodove.",
+      "source": "Ograničeno 6"
+    },
+    "sh_iron_guard_I": {
+      "name": "Gvozdena straža I",
+      "desc": "Čelični zaštitni ekran. Pouzdan i jeftin.",
+      "source": "Primer 6"
+    },
+    "sh_iron_guard_II": {
+      "name": "Gvozdena straža II",
+      "desc": "Poboljšani čelični zaštitni ekran.",
+      "source": "Primer 18"
+    },
+    "sh_iron_guard_III": {
+      "name": "Gvozdena straža III",
+      "desc": "Napredni čelični štit za borce i izviđače.",
+      "source": "Ograničeno 9"
+    },
+    "sh_photon_barrier_I": {
+      "name": "Fotonska barijera I",
+      "desc": "Energetska barijera fotona. Standardna oprema.",
+      "source": "Primer 9"
+    },
+    "sh_photon_barrier_II": {
+      "name": "Fotonska barijera II",
+      "desc": "Poboljšana fotonska barijera.",
+      "source": "Ograničeno 7"
+    },
+    "sh_photon_barrier_III": {
+      "name": "Fotonska barijera III",
+      "desc": "Napredna fotonska barijera.",
+      "source": "Ogled 3"
+    },
+    "sh_pulse_ward_I": {
+      "name": "Pulsno odeljenje I",
+      "desc": "Impulsni zaštitni sloj koji apsorbuje udarce.",
+      "source": "Primer 12"
+    },
+    "sh_pulse_ward_II": {
+      "name": "Pulsno odeljenje II",
+      "desc": "Poboljšan zaštitni sloj za puls.",
+      "source": "Primer 30"
+    },
+    "sh_pulse_ward_III": {
+      "name": "Pulsno odeljenje III",
+      "desc": "Napredni pulsni štit za brodove srednjeg nivoa.",
+      "source": "Ogled 7"
+    },
+    "sh_quartz_shell_I": {
+      "name": "Kvarcna školjka I",
+      "desc": "Kristalna kvarcna školjka. Dobra baza za krstarice.",
+      "source": "Primer 15"
+    },
+    "sh_quartz_shell_II": {
+      "name": "Kuartz Shell II",
+      "desc": "Poboljšana kvarcna školjka.",
+      "source": "Ograničeno 10"
+    },
+    "sh_quartz_shell_III": {
+      "name": "Kuartz Shell III",
+      "desc": "Napredna kvarcna školjka.",
+      "source": "Suđenje 9"
+    },
+    "sh_flux_buffer_I": {
+      "name": "Pufer za fluks I",
+      "desc": "Pufer fluksa koji balansira energetska polja.",
+      "source": "Ograničeno 3"
+    },
+    "sh_flux_buffer_II": {
+      "name": "Fluk Buffer II",
+      "desc": "Poboljšan bafer fluksa.",
+      "source": "Ogled 1"
+    },
+    "sh_flux_buffer_III": {
+      "name": "Fluk Buffer III",
+      "desc": "Napredni bafer fluksa. Dobro za kruzere.",
+      "source": "Humanoid 2"
+    },
+    "sh_alloy_plate_I": {
+      "name": "Legirana ploča I",
+      "desc": "Ploča od kompozitne legure. Težak ali izdržljiv.",
+      "source": "Ograničeno 5"
+    },
+    "sh_alloy_plate_II": {
+      "name": "Legirana ploča II",
+      "desc": "Poboljšana kompozitna ploča.",
+      "source": "Ogled 4"
+    },
+    "sh_alloy_plate_III": {
+      "name": "Legirana ploča III",
+      "desc": "Napredna kompozitna ploča za bojne brodove.",
+      "source": "Humanoid 5"
+    },
+    "sh_carbon_shell_I": {
+      "name": "Karbonska školjka I",
+      "desc": "Školjka od ugljeničnih nanovlakna. Lagana i jaka.",
+      "source": "Primer 21"
+    },
+    "sh_carbon_shell_II": {
+      "name": "Carbon Shell II",
+      "desc": "Poboljšana karbonska školjka.",
+      "source": "Ogled 6"
+    },
+    "sh_carbon_shell_III": {
+      "name": "Carbon Shell III",
+      "desc": "Napredna karbonska školjka.",
+      "source": "Humanoid 8"
+    },
+    "sh_mesh_barrier_I": {
+      "name": "Mrežasta barijera I",
+      "desc": "Mrežasta energetska barijera. Raspoređuje uticaje.",
+      "source": "Primer 24"
+    },
+    "sh_mesh_barrier_II": {
+      "name": "Mrežasta barijera II",
+      "desc": "Poboljšana mrežasta barijera.",
+      "source": "Ogled 8"
+    },
+    "sh_mesh_barrier_III": {
+      "name": "Mrežasta barijera III",
+      "desc": "Napredna mrežasta barijera za nosače.",
+      "source": "Sazvežđe 2"
+    },
+    "sh_void_plate_I": {
+      "name": "Praznina ploča I",
+      "desc": "Štitna ploča tamne materije. Čvrsti zajednički štit.",
+      "source": "Primer 27"
+    },
+    "sh_void_plate_II": {
+      "name": "Praznina ploča II",
+      "desc": "Poboljšana ploča tamne materije.",
+      "source": "Suđenje 10"
+    },
+    "sh_void_plate_III": {
+      "name": "Praznina ploča III",
+      "desc": "Napredna ploča tamne materije. Gornji zajednički štit.",
+      "source": "Sazvežđe 3"
+    },
+    "sh_srednji_I": {
+      "name": "Srednji štit I",
+      "desc": "Standardni srednji štit. Uravnotežena zaštita.",
+      "source": "Ograničeno 2"
+    },
+    "sh_srednji_II": {
+      "name": "Srednji štit II",
+      "desc": "Poboljšan srednji štit.",
+      "source": "Ograničeno 8"
+    },
+    "sh_srednji_III": {
+      "name": "Srednji štit III",
+      "desc": "Napredni srednji štit. Čvrsta uobičajena za srednji nivo.",
+      "source": "Ogled 5"
+    },
+    "sh_jaki_I": {
+      "name": "Jaki štit I",
+      "desc": "Ojačani zajednički štit. Dobro za napredne borce.",
+      "source": "Ograničeno 4"
+    },
+    "sh_jaki_II": {
+      "name": "Strong Shield II",
+      "desc": "Poboljšan jak štit.",
+      "source": "Ogled 2"
+    },
+    "sh_jaki_III": {
+      "name": "Jaki štit III",
+      "desc": "Napredni jak štit. Top uobičajen za visok nivo.",
+      "source": "Sazvežđe 1"
+    },
+    "sh_phase_curtain_I": {
+      "name": "Fazna zavesa I",
+      "desc": "Fazna zavesa. Šansa da potpuno blokirate napade.",
+      "special": "10% šanse: potpuno blokira napad",
+      "source": "Primer 18"
+    },
+    "sh_phase_curtain_II": {
+      "name": "Fazna zavesa II",
+      "desc": "Poboljšana fazna zavesa.",
+      "special": "10% šanse: potpuno blokira napad",
+      "source": "Primer 22"
+    },
+    "sh_phase_curtain_III": {
+      "name": "Fazna zavesa III",
+      "desc": "Napredna fazna zavesa.",
+      "special": "10% šanse: potpuno blokira napad",
+      "source": "Primer 26"
+    },
+    "sh_particle_veil_I": {
+      "name": "Veo čestica I",
+      "desc": "Čestica veo. Šansa da omamite neprijatelja.",
+      "special": "3% šanse: omamljuje napadača u 1 rundi",
+      "source": "Primer 19"
+    },
+    "sh_particle_veil_II": {
+      "name": "Particle Veil II",
+      "desc": "Poboljšani veo od čestica.",
+      "special": "3% šanse: omamljuje napadača u 1 rundi",
+      "source": "Primer 23"
+    },
+    "sh_particle_veil_III": {
+      "name": "Particle Veil III",
+      "desc": "Napredni veo čestica.",
+      "special": "3% šanse: omamljuje napadača u 1 rundi",
+      "source": "Primer 27"
+    },
+    "sh_ballistic_ward_I": {
+      "name": "Balističko odeljenje I",
+      "desc": "Balističko odeljenje. Otporan na kinetičke projektile.",
+      "special": "+20% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Primer 20"
+    },
+    "sh_ballistic_ward_II": {
+      "name": "Balističko odeljenje II",
+      "desc": "Poboljšano balističko odeljenje.",
+      "special": "+20% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Primer 24"
+    },
+    "sh_ballistic_ward_III": {
+      "name": "Balističko odeljenje III",
+      "desc": "Napredno balističko odeljenje.",
+      "special": "+20% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Primer 28"
+    },
+    "sh_thermal_guard_I": {
+      "name": "Termalni čuvar I",
+      "desc": "Toplotni zaštitni sloj. Otporan na toplotne napade.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 21"
+    },
+    "sh_thermal_guard_II": {
+      "name": "Thermal Guard II",
+      "desc": "Poboljšana termalna zaštita.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 25"
+    },
+    "sh_thermal_guard_III": {
+      "name": "Termalni čuvar III",
+      "desc": "Napredna termalna zaštita.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 29"
+    },
+    "sh_mag_field_I": {
+      "name": "Mag-Field I",
+      "desc": "Štit od magnetnog polja. Otporan na magnetne napade.",
+      "special": "+20% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Primer 22"
+    },
+    "sh_mag_field_II": {
+      "name": "Mag-Field II",
+      "desc": "Poboljšano magnetno polje.",
+      "special": "+20% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Primer 26"
+    },
+    "sh_mag_field_III": {
+      "name": "Mag-Field III",
+      "desc": "Napredni magnetni štit.",
+      "special": "+20% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Primer 30"
+    },
+    "sh_blast_barrier_I": {
+      "name": "Barijera od eksplozije I",
+      "desc": "Barijera od eksplozije. Otporan na eksplozivno oružje.",
+      "special": "+20% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Primer 23"
+    },
+    "sh_blast_barrier_II": {
+      "name": "Blast Barrier II",
+      "desc": "Poboljšana barijera od eksplozije.",
+      "special": "+20% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Primer 27"
+    },
+    "sh_blast_barrier_III": {
+      "name": "Blast Barrier III",
+      "desc": "Napredna barijera od eksplozije.",
+      "special": "+20% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Ograničeno 1"
+    },
+    "sh_deflector_web_I": {
+      "name": "Deflektor Veb I",
+      "desc": "Deflector veb. Bolja šansa za blokiranje napada.",
+      "special": "12% šanse: potpuno blokira napad",
+      "source": "Ograničeno 1"
+    },
+    "sh_deflector_web_II": {
+      "name": "Deflector Veb II",
+      "desc": "Poboljšana mreža deflektora.",
+      "special": "12% šanse: potpuno blokira napad",
+      "source": "Ograničeno 3"
+    },
+    "sh_deflector_web_III": {
+      "name": "Deflector Veb III",
+      "desc": "Napredna mreža deflektora.",
+      "special": "12% šanse: potpuno blokira napad",
+      "source": "Ograničeno 5"
+    },
+    "sh_ionic_shell_I": {
+      "name": "Jonska školjka I",
+      "desc": "Jonska školjka sa visokim nabojem. Omamljuje napadače.",
+      "special": "5% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ograničeno 2"
+    },
+    "sh_ionic_shell_II": {
+      "name": "Jonska školjka II",
+      "desc": "Poboljšana jonska školjka.",
+      "special": "5% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ograničeno 4"
+    },
+    "sh_ionic_shell_III": {
+      "name": "Jonska školjka III",
+      "desc": "Napredna jonska školjka.",
+      "special": "5% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ograničeno 6"
+    },
+    "sh_ember_diffuser_I": {
+      "name": "Ember difuzor I",
+      "desc": "Ember difuzor. Raspršuje toplotne talase.",
+      "special": "+28% otpornosti na oštećenje od toplote dok je štit aktivan",
+      "source": "Primer 22"
+    },
+    "sh_ember_diffuser_II": {
+      "name": "Ember Diffuser II",
+      "desc": "Poboljšan difuzor žara.",
+      "special": "+28% otpornosti na oštećenje od toplote dok je štit aktivan",
+      "source": "Primer 26"
+    },
+    "sh_ember_diffuser_III": {
+      "name": "Ember Diffuser III",
+      "desc": "Napredni difuzor žara.",
+      "special": "+28% otpornosti na oštećenje od toplote dok je štit aktivan",
+      "source": "Primer 30"
+    },
+    "sh_pulse_nullifier_I": {
+      "name": "Nulifikator pulsa I",
+      "desc": "Nulifikator pulsa. Apsorbuje magnetne udare.",
+      "special": "+28% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Primer 23"
+    },
+    "sh_pulse_nullifier_II": {
+      "name": "Pulse Nullifier II",
+      "desc": "Poboljšan nulifikator pulsa.",
+      "special": "+28% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Primer 27"
+    },
+    "sh_pulse_nullifier_III": {
+      "name": "Pulse Nullifier III",
+      "desc": "Napredni poništavač pulsa.",
+      "special": "+28% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Ograničeno 7"
+    },
+    "sh_mirror_plate_I": {
+      "name": "Ogledalo ploča I",
+      "desc": "Ogledalo ploča. Odražava određenu štetu napadaču.",
+      "special": "8% šanse: odražava 30% dolazeće štete",
+      "source": "Ograničeno 3"
+    },
+    "sh_mirror_plate_II": {
+      "name": "Mirror Plate II",
+      "desc": "Poboljšana ploča ogledala.",
+      "special": "8% šanse: odražava 30% dolazeće štete",
+      "source": "Ograničeno 5"
+    },
+    "sh_mirror_plate_III": {
+      "name": "Mirror Plate III",
+      "desc": "Napredna ploča ogledala.",
+      "special": "8% šanse: odražava 30% dolazeće štete",
+      "source": "Ograničeno 8"
+    },
+    "sh_heat_diff_I": {
+      "name": "Difuzor toplote I",
+      "desc": "Difuzor toplote. Raspršuje toplotne napade.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 21"
+    },
+    "sh_heat_diff_II": {
+      "name": "Difuzor toplote II",
+      "desc": "Poboljšan difuzor toplote.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 25"
+    },
+    "sh_heat_diff_III": {
+      "name": "Difuzor toplote III",
+      "desc": "Napredni difuzor toplote. Odlično za kasni nivo.",
+      "special": "+20% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Primer 28"
+    },
+    "sh_charge_acc_I": {
+      "name": "Akumulator punjenja I",
+      "desc": "Akumulator punjenja. Ubrzava oporavak štita.",
+      "special": "+30% brže regenerisanje štita",
+      "source": "Ograničeno 4"
+    },
+    "sh_charge_acc_II": {
+      "name": "Akumulator punjenja II",
+      "desc": "Poboljšan akumulator punjenja.",
+      "special": "+30% brže regenerisanje štita",
+      "source": "Ograničeno 6"
+    },
+    "sh_charge_acc_III": {
+      "name": "Akumulator punjenja III",
+      "desc": "Napredni akumulator punjenja. Odlično za duge bitke.",
+      "special": "+30% brže regenerisanje štita",
+      "source": "Ograničeno 9"
+    },
+    "sh_quantum_veil_I": {
+      "name": "Kvantni veo I",
+      "desc": "Kvantni veo. Velika šansa za blokiranje napada.",
+      "special": "15% šanse: potpuno blokira napad",
+      "source": "Ograničeno 2"
+    },
+    "sh_quantum_veil_II": {
+      "name": "Kuantum Veil II",
+      "desc": "Poboljšani kvantni veo.",
+      "special": "15% šanse: potpuno blokira napad",
+      "source": "Ograničeno 4"
+    },
+    "sh_quantum_veil_III": {
+      "name": "Kuantum Veil III",
+      "desc": "Napredni kvantni veo.",
+      "special": "15% šanse: potpuno blokira napad",
+      "source": "Ograničeno 6"
+    },
+    "sh_nova_barrier_I": {
+      "name": "Nova barijera I",
+      "desc": "Nova barijera. Ponekad uzvraća eksplozijom.",
+      "special": "5% šanse: kontra-eksplozija kada se udari",
+      "source": "Ograničeno 7"
+    },
+    "sh_nova_barrier_II": {
+      "name": "Nova barijera II",
+      "desc": "Poboljšana nova barijera.",
+      "special": "5% šanse: kontra-eksplozija kada se udari",
+      "source": "Ograničeno 9"
+    },
+    "sh_nova_barrier_III": {
+      "name": "Nova barijera III",
+      "desc": "Napredna nova barijera.",
+      "special": "5% šanse: kontra-eksplozija kada se udari",
+      "source": "Ogled 2"
+    },
+    "sh_kinetic_fortress_I": {
+      "name": "Kinetička tvrđava I",
+      "desc": "Kinetička tvrđava. Jaka otpornost na projektile.",
+      "special": "+35% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Ograničeno 3"
+    },
+    "sh_kinetic_fortress_II": {
+      "name": "Kinetička tvrđava II",
+      "desc": "Poboljšana kinetička tvrđava.",
+      "special": "+35% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Ograničeno 5"
+    },
+    "sh_kinetic_fortress_III": {
+      "name": "Kinetička tvrđava III",
+      "desc": "Napredna kinetička tvrđava.",
+      "special": "+35% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Ogled 3"
+    },
+    "sh_plasma_guard_I": {
+      "name": "Plasma Guard I",
+      "desc": "Plasma guard. Jaka otpornost na termičke napade.",
+      "special": "+35% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Ograničeno 4"
+    },
+    "sh_plasma_guard_II": {
+      "name": "Plasma Guard II",
+      "desc": "Poboljšana zaštita plazme.",
+      "special": "+35% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Ograničeno 6"
+    },
+    "sh_plasma_guard_III": {
+      "name": "Plasma Guard III",
+      "desc": "Napredni štitnik plazme.",
+      "special": "+35% otpornosti na oštećenja od toplote dok je štit aktivan",
+      "source": "Ogled 4"
+    },
+    "sh_void_field_I": {
+      "name": "Prazno polje I",
+      "desc": "Praznina polja. Jaka otpornost na magnetne napade.",
+      "special": "+35% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Ograničeno 7"
+    },
+    "sh_void_field_II": {
+      "name": "Polje praznine II",
+      "desc": "Poboljšana praznina.",
+      "special": "+35% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Ograničeno 9"
+    },
+    "sh_void_field_III": {
+      "name": "Polje praznine III",
+      "desc": "Napredna praznina polja.",
+      "special": "+35% otpornosti na magnetna oštećenja dok je štit aktivan",
+      "source": "Ogled 5"
+    },
+    "sh_shockwave_shell_I": {
+      "name": "Shockvave Shell I",
+      "desc": "Shockvave shell. Jaka otpornost na eksploziv.",
+      "special": "+35% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Ograničeno 8"
+    },
+    "sh_shockwave_shell_II": {
+      "name": "Shockvave Shell II",
+      "desc": "Poboljšana školjka udarnog talasa.",
+      "special": "+35% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Ograničeno 10"
+    },
+    "sh_shockwave_shell_III": {
+      "name": "Shockvave Shell III",
+      "desc": "Napredna školjka udarnog talasa.",
+      "special": "+35% otpornosti na eksploziju dok je štit aktivan",
+      "source": "Ogled 6"
+    },
+    "sh_echo_mirror_I": {
+      "name": "Eho ogledalo I",
+      "desc": "Eho ogledalo. Odražava štetu napadaču.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Ogled 1"
+    },
+    "sh_echo_mirror_II": {
+      "name": "Echo Mirror II",
+      "desc": "Poboljšano eho ogledalo.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Ogled 4"
+    },
+    "sh_echo_mirror_III": {
+      "name": "Echo Mirror III",
+      "desc": "Napredno eho ogledalo.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Ogled 7"
+    },
+    "sh_phoenix_shell_I": {
+      "name": "Phoenik Shell I",
+      "desc": "Phoenik shell. Brza regeneracija štita.",
+      "special": "+55% brže regenerisanje štita",
+      "source": "Ogled 2"
+    },
+    "sh_phoenix_shell_II": {
+      "name": "Phoenik Shell II",
+      "desc": "Poboljšana školjka feniksa.",
+      "special": "+55% brže regenerisanje štita",
+      "source": "Ogled 5"
+    },
+    "sh_phoenix_shell_III": {
+      "name": "Phoenik Shell III",
+      "desc": "Napredna školjka feniksa.",
+      "special": "+55% brže regenerisanje štita",
+      "source": "Ogled 8"
+    },
+    "sh_titan_core_I": {
+      "name": "Titan Core I",
+      "desc": "Titan jezgro. Povećava ukupan kapacitet štita.",
+      "special": "+28% maksimalni kapacitet štita",
+      "source": "Ograničeno 8"
+    },
+    "sh_titan_core_II": {
+      "name": "Titan Core II",
+      "desc": "Poboljšano titan jezgro.",
+      "special": "+28% maksimalni kapacitet štita",
+      "source": "Ogled 3"
+    },
+    "sh_titan_core_III": {
+      "name": "Titan Core III",
+      "desc": "Napredno titan jezgro.",
+      "special": "+28% maksimalni kapacitet štita",
+      "source": "Ogled 6"
+    },
+    "sh_storm_absorber_I": {
+      "name": "Storm Absorber I",
+      "desc": "Upijač oluje. Pretvara neku štetu u regen.",
+      "special": "Apsorbuje 20% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Ograničeno 9"
+    },
+    "sh_storm_absorber_II": {
+      "name": "Storm Absorber II",
+      "desc": "Poboljšan apsorber oluje.",
+      "special": "Apsorbuje 20% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Ogled 2"
+    },
+    "sh_storm_absorber_III": {
+      "name": "Storm Absorber III",
+      "desc": "Napredni amortizer oluje.",
+      "special": "Apsorbuje 20% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Ogled 5"
+    },
+    "sh_flash_gate_I": {
+      "name": "Flash kapija I",
+      "desc": "Flash kapija. Šansa za trenutni oporavak štita.",
+      "special": "5% šanse: odmah vraća pun štit",
+      "source": "Ograničeno 10"
+    },
+    "sh_flash_gate_II": {
+      "name": "Flash Gate II",
+      "desc": "Poboljšana fleš kapija.",
+      "special": "5% šanse: odmah vraća pun štit",
+      "source": "Ogled 4"
+    },
+    "sh_flash_gate_III": {
+      "name": "Flash Gate III",
+      "desc": "Napredna fleš kapija.",
+      "special": "5% šanse: odmah vraća pun štit",
+      "source": "Ogled 7"
+    },
+    "sh_arc_deflector_I": {
+      "name": "Deflektor luka I",
+      "desc": "Deflektor luka. Kombinacija bloka i refleksije.",
+      "special": "12% blok + 15% reflektuje štetu nazad",
+      "source": "Ogled 1"
+    },
+    "sh_arc_deflector_II": {
+      "name": "Deflektor luka II",
+      "desc": "Poboljšan deflektor luka.",
+      "special": "12% blok + 15% reflektuje štetu nazad",
+      "source": "Ogled 4"
+    },
+    "sh_arc_deflector_III": {
+      "name": "Deflektor luka III",
+      "desc": "Napredni deflektor luka.",
+      "special": "12% blok + 15% reflektuje štetu nazad",
+      "source": "Ogled 7"
+    },
+    "sh_cryo_ward_I": {
+      "name": "Krio odeljenje I",
+      "desc": "Krio odeljenje. Zamrzava napadača sa šansom.",
+      "special": "7% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ograničeno 8"
+    },
+    "sh_cryo_ward_II": {
+      "name": "Crio Vard II",
+      "desc": "Poboljšano krio odeljenje.",
+      "special": "7% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ogled 3"
+    },
+    "sh_cryo_ward_III": {
+      "name": "Crio Vard III",
+      "desc": "Odeljenje za napredno krio.",
+      "special": "7% šanse: omamljuje napadača u 1 rundi",
+      "source": "Ogled 6"
+    },
+    "sh_detonator_field_I": {
+      "name": "Detonatorsko polje I",
+      "desc": "Detonatorsko polje. Česta kontra eksploziva.",
+      "special": "10% šanse: kontra-eksplozija kada se udari",
+      "source": "Ogled 2"
+    },
+    "sh_detonator_field_II": {
+      "name": "Detonatorsko polje II",
+      "desc": "Poboljšano polje detonatora.",
+      "special": "10% šanse: kontra-eksplozija kada se udari",
+      "source": "Ogled 5"
+    },
+    "sh_detonator_field_III": {
+      "name": "Detonatorsko polje III",
+      "desc": "Napredno polje detonatora.",
+      "special": "10% šanse: kontra-eksplozija kada se udari",
+      "source": "Ogled 8"
+    },
+    "sh_aegis_prime_I": {
+      "name": "Aegis Prime I",
+      "desc": "Aegis Prime. Krajnja šansa za blokiranje napada.",
+      "special": "22% šanse: potpuno blokira napad",
+      "source": "Ogled 5"
+    },
+    "sh_aegis_prime_II": {
+      "name": "Igrate Prime II",
+      "desc": "Poboljšana Aegis Prime.",
+      "special": "22% šanse: potpuno blokira napad",
+      "source": "Ogled 7"
+    },
+    "sh_aegis_prime_III": {
+      "name": "Da li igrate Prime III?",
+      "desc": "Advanced Aegis Prime. Jedan od najjačih blok štitova.",
+      "special": "22% šanse: potpuno blokira napad",
+      "source": "Suđenje 10"
+    },
+    "sh_eternal_fortress_I": {
+      "name": "Večna tvrđava I",
+      "desc": "Večna tvrđava. Ogroman kapacitet štita.",
+      "special": "+42% maksimalni kapacitet štita",
+      "source": "Ogled 6"
+    },
+    "sh_eternal_fortress_II": {
+      "name": "Večna tvrđava II",
+      "desc": "Poboljšana večna tvrđava.",
+      "special": "+42% maksimalni kapacitet štita",
+      "source": "Ogled 8"
+    },
+    "sh_eternal_fortress_III": {
+      "name": "Večna tvrđava III",
+      "desc": "Napredna večna tvrđava. Legendarna tvrđava.",
+      "special": "+42% maksimalni kapacitet štita",
+      "source": "Boss Event"
+    },
+    "sh_bulwark_prime_I": {
+      "name": "Bedem Prime I",
+      "desc": "Glavni bedem. Skoro imun na kinetičke napade.",
+      "special": "+50% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Ogled 5"
+    },
+    "sh_bulwark_prime_II": {
+      "name": "Bulvark Prime II",
+      "desc": "Unapređeni Bulvark Prime.",
+      "special": "+50% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Ogled 7"
+    },
+    "sh_bulwark_prime_III": {
+      "name": "Bulvark Prime III",
+      "desc": "Advanced Bulvark Prime. Legendarni kinetički štit.",
+      "special": "+50% otpornosti na kinetičko oštećenje dok je štit aktivan",
+      "source": "Suđenje 10"
+    },
+    "sh_celestial_mirror_I": {
+      "name": "Nebesko ogledalo I",
+      "desc": "Nebesko ogledalo. Odražava veliku količinu oštećenja.",
+      "special": "22% šanse: odražava 30% dolazeće štete",
+      "source": "Ogled 6"
+    },
+    "sh_celestial_mirror_II": {
+      "name": "Nebesko ogledalo II",
+      "desc": "Poboljšano nebesko ogledalo.",
+      "special": "22% šanse: odražava 30% dolazeće štete",
+      "source": "Ogled 8"
+    },
+    "sh_celestial_mirror_III": {
+      "name": "Nebesko ogledalo III",
+      "desc": "Napredno nebesko ogledalo. Ekskluzivno sazvežđe.",
+      "special": "22% šanse: odražava 30% dolazeće štete",
+      "source": "Constellation"
+    },
+    "sh_supernova_shell_I": {
+      "name": "Supernova Shell I",
+      "desc": "Supernova školjka. Česte eksplozivne odmazde.",
+      "special": "15% šanse: masivna kontra-eksplozija kada se udari",
+      "source": "Ogled 6"
+    },
+    "sh_supernova_shell_II": {
+      "name": "Supernova Shell II",
+      "desc": "Poboljšana ljuska supernove.",
+      "special": "15% šanse: masivna kontra-eksplozija kada se udari",
+      "source": "Suđenje 9"
+    },
+    "sh_supernova_shell_III": {
+      "name": "Supernova Shell III",
+      "desc": "Napredna školjka supernove.",
+      "special": "15% šanse: masivna kontra-eksplozija kada se udari",
+      "source": "Boss Event"
+    },
+    "sh_detonation_ward_I": {
+      "name": "Detonaciono odeljenje I",
+      "desc": "Detonaciono odeljenje. Skoro imun na eksploziv.",
+      "special": "+50% otpornosti na štetu od eksplozije dok je štit aktivan",
+      "source": "Ogled 6"
+    },
+    "sh_detonation_ward_II": {
+      "name": "Detonaciono odeljenje II",
+      "desc": "Poboljšano odeljenje za detonaciju.",
+      "special": "+50% otpornosti na štetu od eksplozije dok je štit aktivan",
+      "source": "Suđenje 9"
+    },
+    "sh_detonation_ward_III": {
+      "name": "Detonaciono odeljenje III",
+      "desc": "Odeljenje za napredne detonacije. Ekskluzivno za Boss Event.",
+      "special": "+50% otpornosti na štetu od eksplozije dok je štit aktivan",
+      "source": "Boss Event"
+    },
+    "sh_infinity_regen_I": {
+      "name": "Infiniti Regen I",
+      "desc": "Infinite regen. Izuzetno brza regeneracija.",
+      "special": "+85% brža regeneracija štita — skoro konstantno obnavljanje",
+      "source": "Ogled 7"
+    },
+    "sh_infinity_regen_II": {
+      "name": "Infiniti Regen II",
+      "desc": "Poboljšana beskonačna regeneracija.",
+      "special": "+85% brža regeneracija štita — skoro konstantno obnavljanje",
+      "source": "Suđenje 9"
+    },
+    "sh_infinity_regen_III": {
+      "name": "Infiniti Regen III",
+      "desc": "Napredna beskonačna regeneracija. Ekskluzivno sazvežđe.",
+      "special": "+85% brža regeneracija štita — skoro konstantno obnavljanje",
+      "source": "Constellation"
+    },
+    "sh_omega_absorber_I": {
+      "name": "Omega apsorber I",
+      "desc": "Omega apsorber. Pretvara veliku štetu u regen.",
+      "special": "Apsorbuje 38% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Ogled 5"
+    },
+    "sh_omega_absorber_II": {
+      "name": "Omega Absorber II",
+      "desc": "Poboljšani apsorber omega.",
+      "special": "Apsorbuje 38% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Ogled 8"
+    },
+    "sh_omega_absorber_III": {
+      "name": "Omega Absorber III",
+      "desc": "Napredni omega apsorber. Ekskluzivno za Boss Event.",
+      "special": "Apsorbuje 38% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Boss Event"
+    },
+    "sh_phoenix_core_I": {
+      "name": "Phoenik Core I",
+      "desc": "Phoenik core. Šansa za trenutni oporavak štita.",
+      "special": "Šansa od 8%: odmah vraća pun štit",
+      "source": "Ogled 6"
+    },
+    "sh_phoenix_core_II": {
+      "name": "Phoenik Core II",
+      "desc": "Poboljšano feniks jezgro.",
+      "special": "Šansa od 8%: odmah vraća pun štit",
+      "source": "Suđenje 9"
+    },
+    "sh_phoenix_core_III": {
+      "name": "Phoenik Core III",
+      "desc": "Napredno feniks jezgro. Ekskluzivno sazvežđe.",
+      "special": "Šansa od 8%: odmah vraća pun štit",
+      "source": "Constellation"
+    },
+    "sh_spacetime_I": {
+      "name": "Prostor-vremenski štit I",
+      "desc": "Spacetime shield. Iskrivljuje prostor oko broda.",
+      "special": "18% šanse: potpuno blokira napad",
+      "source": "Primer 30"
+    },
+    "sh_spacetime_II": {
+      "name": "Spacetime Shield II",
+      "desc": "Poboljšan prostor-vremenski štit.",
+      "special": "18% šanse: potpuno blokira napad",
+      "source": "Primer 30"
+    },
+    "sh_spacetime_III": {
+      "name": "Spacetime Shield III",
+      "desc": "Napredni prostor-vremenski štit.",
+      "special": "18% šanse: potpuno blokira napad",
+      "source": "Elitna instanca"
+    },
+    "sh_eos_I": {
+      "name": "Eos štit I",
+      "desc": "Eos štit. Reflektivna energija zračenja.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Elitna instanca"
+    },
+    "sh_eos_II": {
+      "name": "Eos Shield II",
+      "desc": "Poboljšan Eos štit.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Elitna instanca"
+    },
+    "sh_eos_III": {
+      "name": "Eos Shield III",
+      "desc": "Napredni Eos štit. Ultimativni odraz.",
+      "special": "15% šanse: odražava 30% dolazeće štete",
+      "source": "Elitna instanca"
+    },
+    "sh_fortress_I": {
+      "name": "Štit tvrđave I",
+      "desc": "Štit tvrđave. Ogroman kapacitet štita.",
+      "special": "+35% maksimalni kapacitet štita",
+      "source": "Elitna instanca"
+    },
+    "sh_fortress_II": {
+      "name": "Štit tvrđave II",
+      "desc": "Poboljšan štit tvrđave.",
+      "special": "+35% maksimalni kapacitet štita",
+      "source": "Elitna instanca"
+    },
+    "sh_fortress_III": {
+      "name": "Štit tvrđave III",
+      "desc": "Napredni štit tvrđave.",
+      "special": "+35% maksimalni kapacitet štita",
+      "source": "Elitna instanca"
+    },
+    "sh_immortal_I": {
+      "name": "Besmrtni štit I",
+      "desc": "Besmrtni štit. Skoro neuništiva.",
+      "special": "Apsorbuje 30% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Elitna instanca"
+    },
+    "sh_immortal_II": {
+      "name": "Immortal Shield II",
+      "desc": "Poboljšan besmrtni štit.",
+      "special": "Apsorbuje 30% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Elitna instanca"
+    },
+    "sh_immortal_III": {
+      "name": "Immortal Shield III",
+      "desc": "Napredni besmrtni štit. Legendarna zaštita.",
+      "special": "Apsorbuje 30% dolazeće štete, pretvara se u regeneraciju štita",
+      "source": "Elitna instanca"
+    },
+    "sh_divine_I": {
+      "name": "Božanski I",
+      "desc": "Božanski štit. 50% blok. Samo za Boss Event. Maksimalno 1 po igraču.",
+      "special": "50% šanse da blokirate BILO KOJI napad",
+      "source": "Boss događaj (samo ispuštanje)"
+    },
+    "sh_divine_II": {
+      "name": "Divine II",
+      "desc": "Poboljšan božanski štit. Najređa stavka u igri.",
+      "special": "50% šanse da blokirate BILO KOJI napad",
+      "source": "Boss događaj (samo ispuštanje)"
+    },
+    "sh_divine_III": {
+      "name": "Divine III",
+      "desc": "Ultimativni božanski štit. Mitski, legendarni, jedinstveni. Samo najbolje.",
+      "special": "50% šanse da blokirate BILO KOJI napad",
+      "source": "Boss događaj (samo ispuštanje)"
+    }
+  },
+  "engine": {
+    "eng_basic_I": {
+      "name": "Osnovni pogon I",
+      "desc": "Standardni pogon za početnike.",
+      "source": "Primer 5"
+    },
+    "eng_basic_II": {
+      "name": "Osnovni pogon II",
+      "desc": "Poboljšan standardni pogon.",
+      "source": "Primer 10"
+    },
+    "eng_basic_III": {
+      "name": "Osnovni pogon III",
+      "desc": "Napredni standardni pogon.",
+      "source": "Primer 15"
+    },
+    "eng_tactical_I": {
+      "name": "Taktički pogon I",
+      "desc": "Taktički pogon. Fokusirajte se na upravljivost.",
+      "source": "Primer 20"
+    },
+    "eng_tactical_II": {
+      "name": "Tactical Drive II",
+      "desc": "Poboljšan taktički pogon.",
+      "source": "Primer 25"
+    },
+    "eng_tactical_III": {
+      "name": "Tactical Drive III",
+      "desc": "Napredni taktički pogon. Idealno za borce.",
+      "source": "Primer 30"
+    },
+    "eng_scout_I": {
+      "name": "Scout Drive I",
+      "desc": "Scout drive. Fokusirajte se na brzo izbegavanje.",
+      "source": "Ograničeno 1"
+    },
+    "eng_scout_II": {
+      "name": "Scout Drive II",
+      "desc": "Poboljšan izviđački pogon.",
+      "source": "Ograničeno 2"
+    },
+    "eng_scout_III": {
+      "name": "Scout Drive III",
+      "desc": "Napredni izviđački pogon.",
+      "source": "Ograničeno 3"
+    },
+    "eng_nano_I": {
+      "name": "Nano Drive I",
+      "desc": "Nano-molekularni pogon. Balansiran pristup.",
+      "source": "Ograničeno 4"
+    },
+    "eng_nano_II": {
+      "name": "Nano Drive II",
+      "desc": "Poboljšani nano pogon.",
+      "source": "Ograničeno 5"
+    },
+    "eng_nano_III": {
+      "name": "Nano Drive III",
+      "desc": "Napredni nano drajv.",
+      "source": "Ograničeno 6"
+    },
+    "eng_pulse_I": {
+      "name": "Pulsni pogon I",
+      "desc": "Pulsni pogon. Regeneriše HP svaki krug.",
+      "special": "Vraća 15 HP svake runde",
+      "source": "Ograničeno 7"
+    },
+    "eng_pulse_II": {
+      "name": "Pulse Drive II",
+      "desc": "Poboljšan impulsni pogon.",
+      "special": "Vraća 28 HP svake runde",
+      "source": "Ograničeno 8"
+    },
+    "eng_pulse_III": {
+      "name": "Pulse Drive III",
+      "desc": "Napredni impulsni pogon. Konstantna regeneracija HP.",
+      "special": "Vraća 45 HP svake runde",
+      "source": "Ograničeno 9"
+    },
+    "eng_endurance_I": {
+      "name": "Endurance Drive I",
+      "desc": "Pogon izdržljivosti. Brži oporavak HP-a.",
+      "special": "Vraća 25 HP svake runde",
+      "source": "Ograničeno 10"
+    },
+    "eng_endurance_II": {
+      "name": "Endurance Drive II",
+      "desc": "Poboljšan pogon izdržljivosti.",
+      "special": "Vraća 45 HP svake runde",
+      "source": "Sazvežđe 1"
+    },
+    "eng_endurance_III": {
+      "name": "Endurance Drive III",
+      "desc": "Napredni pogon izdržljivosti.",
+      "special": "Vraća 72 HP svake runde",
+      "source": "Sazvežđe 2"
+    },
+    "eng_heavy_I": {
+      "name": "Teški pogon I",
+      "desc": "Teška vožnja. Smanjuje dolaznu štetu.",
+      "special": "-8% dolazeće štete",
+      "source": "Sazvežđe 3"
+    },
+    "eng_heavy_II": {
+      "name": "Heavi Drive II",
+      "desc": "Poboljšan teški pogon.",
+      "special": "-14% ulazne štete",
+      "source": "gusar 2"
+    },
+    "eng_heavy_III": {
+      "name": "Heavi Drive III",
+      "desc": "Napredni teški pogon.",
+      "special": "-20% dolazeće štete",
+      "source": "gusar 4"
+    },
+    "eng_stabilizer_I": {
+      "name": "Pogon stabilizatora I",
+      "desc": "Pogon stabilizatora. Pojačava oklop.",
+      "special": "-12% ulazne štete",
+      "source": "gusar 6"
+    },
+    "eng_stabilizer_II": {
+      "name": "Pogon stabilizatora II",
+      "desc": "Poboljšan pogon stabilizatora.",
+      "special": "-18% dolazeće štete",
+      "source": "gusar 8"
+    },
+    "eng_stabilizer_III": {
+      "name": "Pogon stabilizatora III",
+      "desc": "Napredni stabilizator pogon.",
+      "special": "-25% dolazeće štete",
+      "source": "gusar 10"
+    },
+    "eng_sprint_I": {
+      "name": "Sprint Drive I",
+      "desc": "Sprint drive. Inicijativa za garancije.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Primer 20"
+    },
+    "eng_sprint_II": {
+      "name": "Sprint Drive II",
+      "desc": "Poboljšan sprint pogon.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Primer 24"
+    },
+    "eng_sprint_III": {
+      "name": "Sprint Drive III",
+      "desc": "Napredni sprint pogon. Maksimalna inicijativa.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Ograničeno 2"
+    },
+    "eng_surge_I": {
+      "name": "Surge Drive I",
+      "desc": "Jurišna vožnja sa udarnom inicijativom.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Primer 21"
+    },
+    "eng_surge_II": {
+      "name": "Surge Drive II",
+      "desc": "Poboljšan napad.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Primer 25"
+    },
+    "eng_surge_III": {
+      "name": "Surge Drive III",
+      "desc": "Napredni jurišni pogon.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Ograničeno 3"
+    },
+    "eng_combat_I": {
+      "name": "Borbeni pogon I",
+      "desc": "Borbeni pogon. Šansa za dvostruki napad.",
+      "special": "8% šanse za drugi napad",
+      "source": "Primer 22"
+    },
+    "eng_combat_II": {
+      "name": "Combat Drive II",
+      "desc": "Poboljšan borbeni pogon.",
+      "special": "12% šanse za drugi napad",
+      "source": "Primer 26"
+    },
+    "eng_combat_III": {
+      "name": "Combat Drive III",
+      "desc": "Napredni borbeni pogon.",
+      "special": "16% šanse za drugi napad",
+      "source": "Ograničeno 4"
+    },
+    "eng_phantom_I": {
+      "name": "Fantomski pogon I",
+      "desc": "Fantomski pogon. Negira dolazne napade.",
+      "special": "10% šanse: negira dolazeći napad",
+      "source": "Primer 23"
+    },
+    "eng_phantom_II": {
+      "name": "Phantom Drive II",
+      "desc": "Poboljšan fantomski pogon.",
+      "special": "15% šanse: negira dolazeći napad",
+      "source": "Primer 27"
+    },
+    "eng_phantom_III": {
+      "name": "Phantom Drive III",
+      "desc": "Napredni fantomski pogon.",
+      "special": "20% šanse: negira dolazeći napad",
+      "source": "Ograničeno 5"
+    },
+    "eng_reactive_I": {
+      "name": "Reaktivni pogon I",
+      "desc": "Reaktivni pogon. Aktivira se kada je brod oštećen.",
+      "special": "Kada je HP < 50%, trajno +20% DPS",
+      "source": "Primer 20"
+    },
+    "eng_reactive_II": {
+      "name": "Reaktivni pogon II",
+      "desc": "Poboljšan reaktivni pogon.",
+      "special": "Kada je HP < 50%, trajno +28% DPS",
+      "source": "Primer 24"
+    },
+    "eng_reactive_III": {
+      "name": "Reaktivni pogon III",
+      "desc": "Napredni reaktivni pogon.",
+      "special": "Kada je HP < 50%, trajno +36% DPS",
+      "source": "Ograničeno 6"
+    },
+    "eng_adaptive_I": {
+      "name": "Adaptivni pogon I",
+      "desc": "Adaptivni pogon. Jača reaktivna sposobnost.",
+      "special": "Kada je HP < 50%, trajno +25% DPS",
+      "source": "Primer 21"
+    },
+    "eng_adaptive_II": {
+      "name": "Adaptive Drive II",
+      "desc": "Poboljšan adaptivni pogon.",
+      "special": "Kada je HP < 50%, trajno +35% DPS",
+      "source": "Primer 25"
+    },
+    "eng_adaptive_III": {
+      "name": "Adaptive Drive III",
+      "desc": "Napredni adaptivni pogon.",
+      "special": "Kada je HP < 50%, trajno +45% DPS",
+      "source": "Ograničeno 7"
+    },
+    "eng_pulse_regen_I": {
+      "name": "Puls Regen I",
+      "desc": "Regen drive. Konstantna i jaka regeneracija HP.",
+      "special": "Vraća 65 HP svake runde",
+      "source": "Primer 22"
+    },
+    "eng_pulse_regen_II": {
+      "name": "Pulse Regen II",
+      "desc": "Poboljšan pogon za regeneraciju.",
+      "special": "Vraća 125 HP svake runde",
+      "source": "Primer 26"
+    },
+    "eng_pulse_regen_III": {
+      "name": "Pulse Regen III",
+      "desc": "Napredni pogon za regeneraciju.",
+      "special": "Vraća 200 HP svake runde",
+      "source": "Ograničeno 8"
+    },
+    "eng_fortified_I": {
+      "name": "Utvrđeni pogon I",
+      "desc": "Utvrđeni pogon. Snažno smanjenje štete.",
+      "special": "-18% dolazeće štete",
+      "source": "Primer 23"
+    },
+    "eng_fortified_II": {
+      "name": "Utvrđeni pogon II",
+      "desc": "Poboljšan ojačani pogon.",
+      "special": "-26% dolazeće štete",
+      "source": "Primer 27"
+    },
+    "eng_fortified_III": {
+      "name": "Utvrđeni pogon III",
+      "desc": "Napredni ojačani pogon.",
+      "special": "-34% ulazne štete",
+      "source": "Ograničeno 9"
+    },
+    "eng_stealth_I": {
+      "name": "Stealth Drive I",
+      "desc": "Stealth drive. Velika šansa za izbegavanje.",
+      "special": "12% šanse: neprijatelj promaši",
+      "source": "Primer 22"
+    },
+    "eng_stealth_II": {
+      "name": "Stealth Drive II",
+      "desc": "Poboljšan prikriveni pogon.",
+      "special": "18% šanse: neprijatelj promaši",
+      "source": "Primer 25"
+    },
+    "eng_stealth_III": {
+      "name": "Stealth Drive III",
+      "desc": "Napredni stelt pogon. Skoro nevidljiv.",
+      "special": "24% šanse: neprijatelj promaši",
+      "source": "Ograničeno 8"
+    },
+    "eng_he3_saver_I": {
+      "name": "He3 Saver I",
+      "desc": "He3-efikasan pogon. Štedi gorivo u borbi.",
+      "special": "-25% potrošnje he3",
+      "source": "Primer 20"
+    },
+    "eng_he3_saver_II": {
+      "name": "He3 Saver II",
+      "desc": "Poboljšan He3 Saver.",
+      "special": "-35% potrošnje he3",
+      "source": "Primer 24"
+    },
+    "eng_he3_saver_III": {
+      "name": "He3 Saver III",
+      "desc": "Advanced He3 Saver. Drastično štedi gorivo.",
+      "special": "-45% potrošnje he3",
+      "source": "Ograničeno 7"
+    },
+    "eng_quantum_I": {
+      "name": "Kvantni pogon I",
+      "desc": "Kvantni pogon. Velika šansa za negiranje napada.",
+      "special": "18% šanse: negira dolazeći napad",
+      "source": "Ograničeno 2"
+    },
+    "eng_quantum_II": {
+      "name": "Kuantum Drive II",
+      "desc": "Poboljšan kvantni pogon.",
+      "special": "25% šanse: negira dolazeći napad",
+      "source": "Ograničeno 4"
+    },
+    "eng_quantum_III": {
+      "name": "Kuantum Drive III",
+      "desc": "Napredni kvantni pogon. Skoro nemoguće pogoditi.",
+      "special": "32% šanse: negira dolazeći napad",
+      "source": "Ograničeno 6"
+    },
+    "eng_berserker_I": {
+      "name": "Berserker Drive I",
+      "desc": "Berserker drive. Agresivan dvostruki napad.",
+      "special": "18% šanse za drugi napad",
+      "source": "Ograničeno 3"
+    },
+    "eng_berserker_II": {
+      "name": "Berserker Drive II",
+      "desc": "Poboljšan pogon berserka.",
+      "special": "24% šanse za drugi napad",
+      "source": "Ograničeno 5"
+    },
+    "eng_berserker_III": {
+      "name": "Berserker Drive III",
+      "desc": "Napredni berserker pogon.",
+      "special": "30% šanse za drugi napad",
+      "source": "Ograničeno 7"
+    },
+    "eng_sentinel_I": {
+      "name": "Sentinel Drive I",
+      "desc": "Sentinel drive. Ogromno smanjenje štete.",
+      "special": "-28% dolazeće štete",
+      "source": "Ograničeno 3"
+    },
+    "eng_sentinel_II": {
+      "name": "Sentinel Drive II",
+      "desc": "Poboljšan nadzorni pogon.",
+      "special": "-38% dolazeće štete",
+      "source": "Ograničeno 5"
+    },
+    "eng_sentinel_III": {
+      "name": "Sentinel Drive III",
+      "desc": "Napredni nadzorni pogon. Skoro neprobojan oklop.",
+      "special": "-48% dolazeće štete",
+      "source": "Ograničeno 7"
+    },
+    "eng_void_I": {
+      "name": "Void Drive I",
+      "desc": "Void drive. Retka šansa za potpuni imunitet.",
+      "special": "5% šanse: potpuni imunitet u tom krugu",
+      "source": "Ograničeno 4"
+    },
+    "eng_void_II": {
+      "name": "Void Drive II",
+      "desc": "Poboljšan void pogon.",
+      "special": "Šansa od 8%: potpuni imunitet tog kruga",
+      "source": "Ograničeno 6"
+    },
+    "eng_void_III": {
+      "name": "Void Drive III",
+      "desc": "Napredni void disk.",
+      "special": "12% šanse: potpuni imunitet u tom krugu",
+      "source": "Ograničeno 8"
+    },
+    "eng_predator_I": {
+      "name": "Predator Drive I",
+      "desc": "Predator drive. Uvek prva inicijativa.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Ograničeno 5"
+    },
+    "eng_predator_II": {
+      "name": "Predator Drive II",
+      "desc": "Poboljšan pogon predatora.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Ograničeno 7"
+    },
+    "eng_predator_III": {
+      "name": "Predator Drive III",
+      "desc": "Napredni pogon predatora.",
+      "special": "Uvek napada prvi u svakoj rundi",
+      "source": "Ograničeno 9"
+    },
+    "eng_phoenix_core_I": {
+      "name": "Phoenik Core I",
+      "desc": "Phoenik core drive. Masivna HP regeneracija.",
+      "special": "Vraća 250 HP svake runde",
+      "source": "Ogled 1"
+    },
+    "eng_phoenix_core_II": {
+      "name": "Phoenik Core II",
+      "desc": "Poboljšan feniks jezgro.",
+      "special": "Vraća 450 HP svake runde",
+      "source": "Ogled 4"
+    },
+    "eng_phoenix_core_III": {
+      "name": "Phoenik Core III",
+      "desc": "Napredni feniks jezgro drajv.",
+      "special": "Vraća 700 HP svake runde",
+      "source": "Ogled 7"
+    },
+    "eng_fleet_sync_I": {
+      "name": "Fleet Sinc I",
+      "desc": "Fleet Sinc pogon. Povećava celu flotu.",
+      "special": "Svi saveznici +5 agilnosti na početku",
+      "source": "Ogled 2"
+    },
+    "eng_fleet_sync_II": {
+      "name": "Fleet Sinc II",
+      "desc": "Poboljšan pogon za sinhronizaciju voznog parka.",
+      "special": "Svi saveznici +8 agilnosti na početku",
+      "source": "Ogled 5"
+    },
+    "eng_fleet_sync_III": {
+      "name": "Fleet Sinc III",
+      "desc": "Drive Advanced Fleet Sinc.",
+      "special": "Svi saveznici +12 agilnosti na početku",
+      "source": "Ogled 8"
+    },
+    "eng_apex_I": {
+      "name": "Apek Drive I",
+      "desc": "Apek drive. Velika šansa za dvostruki udarac.",
+      "special": "22% šanse za drugi napad",
+      "source": "Ogled 3"
+    },
+    "eng_apex_II": {
+      "name": "Apek Drive II",
+      "desc": "Poboljšan apeks pogon.",
+      "special": "30% šanse za drugi napad",
+      "source": "Ogled 6"
+    },
+    "eng_apex_III": {
+      "name": "Apek Drive III",
+      "desc": "Napredni apek pogon.",
+      "special": "38% šanse za drugi napad",
+      "source": "Suđenje 9"
+    },
+    "eng_hyperdrive_I": {
+      "name": "Hiperdrive I",
+      "desc": "Hiperdrive. Masivan dvostruki napad.",
+      "special": "35% šanse za drugi napad",
+      "source": "Ogled 3"
+    },
+    "eng_hyperdrive_II": {
+      "name": "Hiperdrive II",
+      "desc": "Poboljšan hiperpogon.",
+      "special": "45% šanse za drugi napad",
+      "source": "Ogled 6"
+    },
+    "eng_hyperdrive_III": {
+      "name": "Hiperdrive III",
+      "desc": "Napredni hiperpogon. Dominantan pogon u igri.",
+      "special": "55% šanse za drugi napad",
+      "source": "Suđenje 9"
+    },
+    "eng_voidwarp_I": {
+      "name": "Voidvarp I",
+      "desc": "Voidvarp pogon. Česti potpuni imunitet.",
+      "special": "15% šanse: potpuni imunitet u tom krugu",
+      "source": "gusar 3"
+    },
+    "eng_voidwarp_II": {
+      "name": "Voidvarp II",
+      "desc": "Poboljšan voidvarp pogon.",
+      "special": "22% šanse: potpuni imunitet u tom krugu",
+      "source": "gusar 6"
+    },
+    "eng_voidwarp_III": {
+      "name": "Voidvarp III",
+      "desc": "Advanced voidvarp. Gusarska ekskluziva.",
+      "special": "30% šanse: potpuni imunitet u tom krugu",
+      "source": "gusar 9"
+    },
+    "eng_celestial_I": {
+      "name": "Nebeski pogon I",
+      "desc": "Nebeski pogon. Povećava celu flotu.",
+      "special": "Svi saveznici +15 agilnosti na početku",
+      "source": "Sazvežđe 1"
+    },
+    "eng_celestial_II": {
+      "name": "Celestial Drive II",
+      "desc": "Poboljšan nebeski pogon.",
+      "special": "Svi saveznici +22 agilnosti na početku",
+      "source": "Sazvežđe 2"
+    },
+    "eng_celestial_III": {
+      "name": "Celestial Drive III",
+      "desc": "Napredni nebeski. Ekskluzivno sazvežđe.",
+      "special": "Svi saveznici +30 agilnosti na početku",
+      "source": "Sazvežđe 3"
+    },
+    "eng_titan_I": {
+      "name": "Titan Drive I",
+      "desc": "Titan drive. Ogromno smanjenje štete.",
+      "special": "-55% dolazeće štete",
+      "source": "Ogled 5"
+    },
+    "eng_titan_II": {
+      "name": "Titan Drive II",
+      "desc": "Poboljšan titan pogon.",
+      "special": "-70% dolazeće štete",
+      "source": "Ogled 8"
+    },
+    "eng_titan_III": {
+      "name": "Titan Drive III",
+      "desc": "Napredni titan. Skoro neranjivi oklop.",
+      "special": "-85% dolazeće štete",
+      "source": "Suđenje 10"
+    },
+    "eng_annihilator_I": {
+      "name": "Annihilator I",
+      "desc": "Pogon za anihilator. Brže od svega.",
+      "special": "Uvek napada prvi + vrhunska agilnost",
+      "source": "Ogled 4"
+    },
+    "eng_annihilator_II": {
+      "name": "Annihilator II",
+      "desc": "Poboljšan pogon anihilatora.",
+      "special": "Uvek napada prvi + vrhunska agilnost",
+      "source": "Ogled 7"
+    },
+    "eng_annihilator_III": {
+      "name": "Annihilator III",
+      "desc": "Napredni anihilator. Krajnja inicijativa.",
+      "special": "Uvek napada prvi + vrhunska agilnost",
+      "source": "Suđenje 10"
+    },
+    "eng_divine_I": {
+      "name": "Božanski pogon I",
+      "desc": "Božanski pogon. Inicijativa + faza praznine + aura. Samo za Boss Event.",
+      "special": "Uvek prvi napadi + 20% void_phase + svi saveznici +5 agilnosti",
+      "source": "Boss događaj (samo ispuštanje)"
+    },
+    "eng_divine_II": {
+      "name": "Divine Drive II",
+      "desc": "Poboljšan božanski pogon. Najređi pogon u igri.",
+      "special": "Uvek prvi napada + 25% void_phase + svi saveznici +8 agilnosti",
+      "source": "Boss događaj (samo ispuštanje)"
+    },
+    "eng_divine_III": {
+      "name": "Divine Drive III",
+      "desc": "Ultimativni božanski pogon. Mitsko, jedinstveno. Samo najbolje.",
+      "special": "Uvek napada prvi + 30% void_phase + svi saveznici +12 agilnosti",
+      "source": "Boss događaj (samo ispuštanje)"
+    }
+  },
+  "building": {
+    "hq": {
+      "name": "HQ",
+      "desc": "Komandni centar. Određuje max nivo svih ostalih zgrada.",
+      "milestone": {
+        "25": {
+          "label": "Napredna komanda",
+          "bonus": "Sve zgrade -10% cena nadogradnje"
+        },
+        "50": {
+          "label": "Strateški centar",
+          "bonus": "Build timer -25% za sve zgrade"
+        },
+        "75": {
+          "label": "Galaktički štab",
+          "bonus": "Sve zgrade -20% cena nadogradnje"
+        },
+        "100": {
+          "label": "LEGENDARNI KOMAND",
+          "bonus": "Build timer -50%, sve zgrade -30% cena"
+        }
+      }
+    },
+    "metal_mine": {
+      "name": "Metal Rudnik",
+      "desc": "Proizvodi metal. Svaki level +0.01/s.",
+      "milestone": {
+        "25": {
+          "label": "Duboko bušenje",
+          "bonus": "+25% metal produkcija"
+        },
+        "50": {
+          "label": "Automatizovani rudnik",
+          "bonus": "+50% metal produkcija"
+        },
+        "75": {
+          "label": "Nano-ekstrakcija",
+          "bonus": "+100% metal produkcija"
+        },
+        "100": {
+          "label": "TITAN RUDNIK",
+          "bonus": "+200% metal produkcija + -50% energija drain"
+        }
+      }
+    },
+    "crystal_mine": {
+      "name": "Crystal Rudnik",
+      "desc": "Proizvodi crystal. Svaki level +0.007/s.",
+      "milestone": {
+        "25": {
+          "label": "Kristalna rezonanca",
+          "bonus": "+25% crystal produkcija"
+        },
+        "50": {
+          "label": "Frekventni laserski rez",
+          "bonus": "+50% crystal produkcija"
+        },
+        "75": {
+          "label": "Kvantna ekstrakcija",
+          "bonus": "+100% crystal produkcija"
+        },
+        "100": {
+          "label": "KRISTALNA MATRICA",
+          "bonus": "+200% crystal produkcija + metal rudnik +10%"
+        }
+      }
+    },
+    "he3_refinery": {
+      "name": "He3 Rafinerija",
+      "desc": "Proizvodi He3. Svaki level +0.003/s.",
+      "milestone": {
+        "25": {
+          "label": "Fuzijska filtracija",
+          "bonus": "+25% He3 produkcija"
+        },
+        "50": {
+          "label": "Plazmatski separator",
+          "bonus": "+50% He3 produkcija"
+        },
+        "75": {
+          "label": "Izotopska destilacija",
+          "bonus": "+100% He3 produkcija"
+        },
+        "100": {
+          "label": "SINGULARNA RAFINERIJA",
+          "bonus": "+200% He3 + energetske zgrade +10%"
+        }
+      }
+    },
+    "depot": {
+      "name": "Depot",
+      "desc": "Magacin resursa. Igrač mora pokupiti resurse. Ako je pun — produkcija staje.",
+      "milestone": {
+        "25": {
+          "label": "Prošireni magacin",
+          "bonus": "+10% kapacitet"
+        },
+        "50": {
+          "label": "Industrijsko skladište",
+          "bonus": "+25% kapacitet"
+        },
+        "75": {
+          "label": "Kvantni kontejneri",
+          "bonus": "+50% kapacitet"
+        },
+        "100": {
+          "label": "MEGA DEPOT",
+          "bonus": "+100% kapacitet"
+        }
+      }
+    },
+    "ship_factory": {
+      "name": "Fabrika brodova",
+      "desc": "Brodogradilište. Otključava klase brodova i ubrzava gradnju.",
+      "milestone": {
+        "25": {
+          "label": "Automatizovana linija",
+          "bonus": "+5% brzina gradnje, -5% cena"
+        },
+        "50": {
+          "label": "Napredno brodogradilište",
+          "bonus": "+10% brzina, -10% cena"
+        },
+        "75": {
+          "label": "Mega fabrika",
+          "bonus": "+15% brzina, -15% cena"
+        },
+        "100": {
+          "label": "GALAKTIČKI ARSENAL",
+          "bonus": "+25% brzina, -20% cena, svi brodovi +5% stats"
+        }
+      }
+    },
+    "solar": {
+      "name": "Solarni Panel",
+      "desc": "Generiše energiju. Svaki level +4 MWh/s.",
+      "milestone": {
+        "25": {
+          "label": "Fotonaponska mreža",
+          "bonus": "+25% solarna generacija"
+        },
+        "50": {
+          "label": "Orbitalni kolektori",
+          "bonus": "+50% solarna generacija"
+        },
+        "75": {
+          "label": "Solarni prsten",
+          "bonus": "+100% solarna generacija"
+        },
+        "100": {
+          "label": "DYSON SFERA",
+          "bonus": "+200% solarna + sve energetske zgrade +15%"
+        }
+      }
+    },
+    "fusion": {
+      "name": "Fuzijski Reaktor",
+      "desc": "Snažna energija. Svaki level +12 MWh/s, +1 MWh kapacitet.",
+      "milestone": {
+        "25": {
+          "label": "Magnetna kavez",
+          "bonus": "+25% fuzijska generacija"
+        },
+        "50": {
+          "label": "Tokamak optimizacija",
+          "bonus": "+50% fuzijska generacija"
+        },
+        "75": {
+          "label": "Antimaterija boost",
+          "bonus": "+100% fuzijska generacija"
+        },
+        "100": {
+          "label": "ZVJEZDANA SRCA",
+          "bonus": "+200% fuzijska + kapacitet x3"
+        }
+      }
+    },
+    "battery": {
+      "name": "Baterijski Blok",
+      "desc": "Skladišti energiju. Svaki level +1 MWh/s, +97 MWh kapacitet.",
+      "milestone": {
+        "25": {
+          "label": "Superkondenzator",
+          "bonus": "+25% kapacitet"
+        },
+        "50": {
+          "label": "Nano-ćelije",
+          "bonus": "+50% kapacitet"
+        },
+        "75": {
+          "label": "Kvantna baterija",
+          "bonus": "+100% kapacitet"
+        },
+        "100": {
+          "label": "PERPETUUM MOBILE",
+          "bonus": "+200% kapacitet + ne može pasti ispod 20%"
+        }
+      }
+    },
+    "grid": {
+      "name": "Električna Mreža",
+      "desc": "Optimizuje distribuciju energije. Svaki level -0.5% drain svih zgrada. Lv100 = -50% drain.",
+      "milestone": {
+        "25": {
+          "label": "Optimizovana mreža",
+          "bonus": "-12.5% drain svih zgrada"
+        },
+        "50": {
+          "label": "Supravodič",
+          "bonus": "-25% drain svih zgrada"
+        },
+        "75": {
+          "label": "Kvantna distribucija",
+          "bonus": "-37.5% drain svih zgrada"
+        },
+        "100": {
+          "label": "BESKONAČNA EFIKASNOST",
+          "bonus": "-50% drain svih zgrada"
+        }
+      }
+    },
+    "turret": {
+      "name": "Laserski Top",
+      "desc": "Osnovna odbrana baze. Svaki level +80 odbrana.",
+      "milestone": {
+        "25": {
+          "label": "Automatsko ciljanje",
+          "bonus": "Flota: +10% napad"
+        },
+        "50": {
+          "label": "Plazmeni top",
+          "bonus": "Flota: +20% napad, +5% kritični udarac"
+        },
+        "75": {
+          "label": "Anti-capital oružje",
+          "bonus": "Flota: +35% napad, +10% kritični udarac"
+        },
+        "100": {
+          "label": "ORBITALNI KANON",
+          "bonus": "Flota: +50% napad, +20% kritični udarac"
+        }
+      }
+    },
+    "missile_bat": {
+      "name": "Raketna Baterija",
+      "desc": "Protivraketna odbrana. Svaki level +80 odbrana.",
+      "milestone": {
+        "25": {
+          "label": "Višestepene rakete",
+          "bonus": "Blokira špijunažu na bazu"
+        },
+        "50": {
+          "label": "Nuklearni bojevi",
+          "bonus": "Blokira špijunažu, flota: +5 izbjegavanje"
+        },
+        "75": {
+          "label": "Orbitalni interceptor",
+          "bonus": "Blokira špijunažu, flota: +10 izbjegavanje, +1 brzina"
+        },
+        "100": {
+          "label": "APOKALIPSA",
+          "bonus": "Blokira špijunažu, flota: +15 izbjegavanje, +2 brzina"
+        }
+      }
+    },
+    "shield_gen": {
+      "name": "Generator štita",
+      "desc": "Energetski štit baze. Svaki level +80 odbrana.",
+      "milestone": {
+        "25": {
+          "label": "Fazni štit",
+          "bonus": "Flota: +10% shield"
+        },
+        "50": {
+          "label": "Harmonični štit",
+          "bonus": "Flota: +20% shield, +10% regeneracija shielda"
+        },
+        "75": {
+          "label": "Kvantni štit",
+          "bonus": "Flota: +35% shield, +20% regeneracija shielda"
+        },
+        "100": {
+          "label": "NEPROBOJAN ŠTIT",
+          "bonus": "Flota: +50% shield, +30% regen, +5% redukcija štete"
+        }
+      }
+    },
+    "sensor": {
+      "name": "Senzorski Toranj",
+      "desc": "Detekcija neprijatelja. Svaki level +80 odbrana.",
+      "milestone": {
+        "25": {
+          "label": "Dubok sken",
+          "bonus": "+25% šansa špijunaže"
+        },
+        "50": {
+          "label": "Kvantni senzori",
+          "bonus": "+50% šansa špijunaže, +1 nivo otkrivanja"
+        },
+        "75": {
+          "label": "Galaktički radar",
+          "bonus": "+75% šansa špijunaže, +1 nivo otkrivanja"
+        },
+        "100": {
+          "label": "SVEVIDEĆE OKO",
+          "bonus": "+100% šansa špijunaže, +2 nivoa otkrivanja"
+        }
+      }
+    },
+    "jump_gate": {
+      "name": "Kapija skoka",
+      "desc": "Prebacuje brodove na kolonije. Svaki level +1 sistem dometa.",
+      "milestone": {
+        "25": {
+          "label": "Stabilni koridor",
+          "bonus": "+1 max kolonija, brži transit"
+        },
+        "50": {
+          "label": "Wormhole mreža",
+          "bonus": "+2 max kolonije, instant transit"
+        },
+        "75": {
+          "label": "Galaktički portali",
+          "bonus": "+3 max kolonije"
+        },
+        "100": {
+          "label": "BESKONAČNI SKOK",
+          "bonus": "+5 max kolonija + teleport svuda"
+        }
+      }
+    },
+    "laboratory": {
+      "name": "Laboratorija",
+      "desc": "Limitira max nivo istraživanja. Lv1 = Istraživanje Lv1, Lv100 = Istraživanje Lv100.",
+      "milestone": {
+        "25": {
+          "label": "Napredni lab",
+          "bonus": "Istraživanje -20% cena"
+        },
+        "50": {
+          "label": "Kvantni lab",
+          "bonus": "Istraživanje -35% cena"
+        },
+        "75": {
+          "label": "Xenotehnološki centar",
+          "bonus": "Istraživanje -50% cena"
+        },
+        "100": {
+          "label": "SINGULARNOST",
+          "bonus": "Sva istraživanja instant + -75% cena"
+        }
+      }
+    },
+    "recycler": {
+      "name": "Recikler",
+      "desc": "Reciklira brodove za resurse. Lv1=20%, Lv100=100% originalne cene.",
+      "milestone": {
+        "25": {
+          "label": "Napredna reciklaža",
+          "bonus": "Povrat +5% bonus (iznad osnovnog)"
+        },
+        "50": {
+          "label": "Nano-rastavljač",
+          "bonus": "Povrat +10% bonus + brza reciklaža"
+        },
+        "75": {
+          "label": "Atomski reprocessor",
+          "bonus": "Povrat +15% bonus"
+        },
+        "100": {
+          "label": "MATERIJA RECIKLER",
+          "bonus": "Povrat 100% + šansa za blueprint fragment"
+        }
+      }
+    }
+  },
+  "ui": {
+    "yes": "Da",
+    "no": "Ne",
+    "ok": "OK",
+    "cancel": "Otkaži",
+    "close": "Zatvori",
+    "loading": "Učitavanje...",
+    "error": "Greška",
+    "success": "Uspeh",
+    "warning": "Upozorenje",
+    "info": "Info",
+    "unknown": "Nepoznato",
+    "none": "Nema",
+    "all": "Sve",
+    "level": "Nivo {n}",
+    "rank": "Rang #{n}",
+    "player": "Igrač",
+    "you": "Ti"
+  },
+  "index": {
+    "title": "HIVE GALAXY - Osvoji Galaksiju",
+    "nav": {
+      "logo": "⬡ HIVE GALAXY",
+      "features": "Funkcije",
+      "ships": "Brodovi",
+      "tokens": "Tokeni",
+      "howtoplay": "Kako igrati",
+      "faq": "FAQ",
+      "playnow": "\u25B6 Igraj Sada"
+    },
+    "hero": {
+      "badge": "\u2B21 Galaktička MMO Strategija \u00B7 Blockchain Powered",
+      "title": {
+        "hive": "HIVE",
+        "galaxy": "GALAXY"
+      },
+      "subtitle": "Osvoji galaksiju. Izgradi flotu. Dominantno PvP iskustvo s blockchain ekonomijom. Svaki igrač. Svaka odluka. Svaka bitka \u2014 na lancu.",
+      "playfree": "\u25B6 IGRAJ BESPLATNO",
+      "premium": "\u2605 PREMIUM \u2014 10\u20AC",
+      "stats": {
+        "blueprints_val": "715+",
+        "blueprints_lbl": "BLUEPRINTA",
+        "instances_val": "11",
+        "instances_lbl": "TIPOVA INSTANCE",
+        "commanders_val": "300",
+        "commanders_lbl": "KOMANDIRA",
+        "tokens_val": "3",
+        "tokens_lbl": "BCM TOKENA"
+      },
+      "scroll": "\u25BC SCROLL \u25BC"
+    },
+    "section": {
+      "features": {
+        "label": "// Ključne funkcije",
+        "title": "Sve sto trebaš za<br>galaktičku dominaciju"
+      },
+      "ships": {
+        "label": "// Klase brodova",
+        "title": "6 klasa. Stotine konfiguracija.<br>Jedna strategija pobeđuje.",
+        "desc": "Svaki brod ima fiksni oklop, definisane slotove i klasni bonus. Mešana flota uvek pobeđuje mono flotu istog troška."
+      },
+      "tokens": {
+        "label": "// HIVE Blockchain Ekonomija",
+        "title": "Tri tokena. Jedan ekosistem.<br>beskrajna vrednost.",
+        "desc": "Svaki token ima specifičnu ulogu. Igraj, gledaj stream, drži tokene \u2014 sve se nagrađuje na blockchainu."
+      },
+      "howtoplay": {
+        "label": "// Kako početi",
+        "title": "Od nule do admirala<br>za 5 minuta"
+      },
+      "login": {
+        "label": ""
+      },
+      "faq": {
+        "label": "// Česta pitanja",
+        "title": "FAQ"
+      }
+    },
+    "features": {
+      "base": {
+        "title": "Izgradnja Baze",
+        "desc": "Gradi rudnike, energetske sisteme i odbrambene strukture. Balansiranje energije je ključno za efikasnu produkciju."
+      },
+      "pvp": {
+        "title": "PvP Borba",
+        "desc": "Pravi borbeni sistem s Kinetic/Heat/Magnetic/Explosive tipovima štete, oklop otpornošću i Shield-Armor-Structure slojevima."
+      },
+      "designer": {
+        "title": "Dizajner Brodova",
+        "desc": "Dizajniraj vlastite brodove. Odaberi šasiju, instaliraj module iz blueprinta. Svaki brod je tvoja kreacija i strategija."
+      },
+      "instances": {
+        "title": "Instance Dungeoni",
+        "desc": "30 normalnih + Restricted, Trial, Pirate, Humanoid i Constellation instance. Talas po talas \u2014 strateška borba s ekskluzivnim nagradama."
+      },
+      "galaxy": {
+        "title": "Galaksijska Mapa",
+        "desc": "Osvajaj zvezdane sisteme, širi imperiju i napadaj protivničke baze. Svaka galaksija je živi ratni teatar."
+      },
+      "blockchain": {
+        "title": "Blockchain Ekonomija",
+        "desc": "BCM, BoCrypto i BPW tokeni na HIVE blockchainu. Zarade iz igre su prave \u2014 razmenljive i vredne."
+      }
+    },
+    "ships": {
+      "scout": {
+        "name": "IZVIĐAČ",
+        "role": "Stealth \u00B7 Detection"
+      },
+      "fighter": {
+        "name": "LOVAC",
+        "role": "Agility \u00B7 Crit"
+      },
+      "cruiser": {
+        "name": "KRSTARICA",
+        "role": "Shield \u00B7 Cover"
+      },
+      "battleship": {
+        "name": "BOJNI BROD",
+        "role": "Power \u00B7 Barrage"
+      },
+      "carrier": {
+        "name": "NOSAČ",
+        "role": "Strategic \u00B7 Launch"
+      },
+      "flagship": {
+        "name": "FLAGSHIP",
+        "role": "Command \u00B7 +100 Stack"
+      }
+    },
+    "tokens": {
+      "bcm": {
+        "badge": "HIVE-ENGINE",
+        "name": "BCM",
+        "label": "BO CRYPTO MINER",
+        "price": "1 BCM = 10\u20AC STABLE",
+        "items": {
+          "0": "Gaming licenca (1 BCM)",
+          "1": "Premium blueprinti i sadržaj",
+          "2": "Klanski i sezonski pristup",
+          "3": "Pasivni prihod: 144 BoCrypto/dan po mineru",
+          "4": "In-game premium kupovine"
+        }
+      },
+      "boc": {
+        "badge": "TWITCH REWARD",
+        "name": "BoCrypto",
+        "label": "BOCRYPTO TOKEN",
+        "price": "0.001 min \u00B7 3 decimale",
+        "items": {
+          "0": "Twitch: 1 token / 10 min gledanja",
+          "1": "Subscribers: 3x bonus tokena",
+          "2": "In-game resursi i kozmetika brodova",
+          "3": "Instance retry i daily boost",
+          "4": "SP Card zamjena u igri"
+        }
+      },
+      "bpw": {
+        "badge": "MICRO REWARDS",
+        "name": "BPW",
+        "label": "BPW TOKEN",
+        "price": "0.00000001 min \u00B7 8 decimala",
+        "items": {
+          "0": "Dnevni login: +5 satoshi",
+          "1": "Završena misija: 10-50 satoshi",
+          "2": "Instance nagrada: 100-500 satoshi",
+          "3": "PvP pobeda i rang lista nagrade",
+          "4": "Faucet: x5 satoshi / 24h"
+        }
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Registruj se",
+        "desc": "Email registracija \u2014 besplatno, bez kreditne kartice. Odmah igraš."
+      },
+      "2": {
+        "title": "Dobij galaksiju",
+        "desc": "Server te smješta u galaksiju. Tvoja baza čeka \u2014 počni graditi odmah."
+      },
+      "3": {
+        "title": "Osvajaj",
+        "desc": "Gradi flotu, biji instance, farmaj blueprinte, PvP dominacija."
+      },
+      "4": {
+        "title": "Postani Premium",
+        "desc": "HIVE Keychain ili crypto \u2014 otključaj blockchain zarade i ekskluzivni sadržaj."
+      }
+    },
+    "login": {
+      "free": {
+        "badge": "BESPLATNO",
+        "title": "\uD83C\uDFAE PLAY 2 FREE",
+        "sub": "Registruj se emailom i igraj odmah. Bez plaćanja, bez kreditne kartice.",
+        "email_label": "EMAIL ADRESA",
+        "email_placeholder": "tvoj@email.com",
+        "pass_label": "LOZINKA",
+        "pass_placeholder": "Minimalno 8 znakova",
+        "btn": "\u25B6 REGISTRUJ SE BESPLATNO",
+        "login_link": "Već Imaš nalog?",
+        "login_cta": "Prijavi se \u2192",
+        "features": "\u2713 Sve instance i sadržaj\n\u2713 300 komandira\n\u2713 PvP i galaksija\n\u2717 Blockchain zarade",
+        "check1": "✓ Sve instance i sadržaj",
+        "check2": "✓ 300 komandira",
+        "check3": "✓ PvP i galaksija",
+        "check4": "✗ Blockchain zarade"
+      },
+      "hive": {
+        "badge": "INSTANT PREMIUM",
+        "title": "\u26D3 HIVE KEYCHAIN",
+        "sub": "Imaš HIVE nalog? Prijavi se putem Keychaina i kupi Premium status \u2014 10\u20AC jednokratno ili 1 BCM.",
+        "btn": "CONNECTUJ HIVE KEYCHAIN",
+        "pay_label": "Premium plaćanje (odaberi):",
+        "pay_hive": "HIVE",
+        "pay_hbd": "HBD (~10 HBD)",
+        "pay_bcm": "BCM (1 BCM)",
+        "features": "\u2713 Sve Free opcije\n\u2713 BPW token zarade\n\u2713 BCM i BoCrypto\n\u2713 Ekskluzivni sadržaj",
+        "no_account": "Nemaš HIVE nalog?",
+        "register": "Registruj se besplatno \u2192",
+        "check1": "✓ Sve Free opcije",
+        "check2": "✓ BPW token zarade",
+        "check3": "✓ BCM i BoCrypto",
+        "check4": "✓ Ekskluzivni sadržaj"
+      },
+      "crypto": {
+        "badge": "PREMIUM \u00B7 10\u20AC",
+        "title": "\uD83D\uDC8E CRYPTO PREMIUM",
+        "sub": "Već Imaš Free nalog? Nadogradi na Premium plaćanjem kriptovalutom.",
+        "pay_btc": "Bitcoin",
+        "pay_usdt": "USDT",
+        "pay_ltc": "Litecoin",
+        "pay_hbd": "HBD",
+        "price_label": "Cijena:",
+        "price": "10\u20AC",
+        "price_note": "\u00B7 Jednokratno \u00B7 Doživotni pristup",
+        "btn": "\u25B6 KUPI PREMIUM",
+        "features": "\u2713 Sve Free opcije\n\u2713 BPW token zarade\n\u2713 BCM i BoCrypto\n\u2713 Ekskluzivni sadržaj",
+        "check1": "✓ Sve Free opcije",
+        "check2": "✓ BPW token zarade",
+        "check3": "✓ BCM i BoCrypto",
+        "check4": "✓ Ekskluzivni sadržaj"
+      }
+    },
+    "faq": {
+      "q1": "Je li igra besplatna?",
+      "a1": "Da \u2014 igra je besplatna za sve. Registruj se emailom i igraš odmah. Premium status (10\u20AC jednokratno) otključava blockchain zarade (BPW, BoCrypto tokeni) i ekskluzivni sadržaj. Nema pretplate, nema skrivenih troškova.",
+      "q2": "Je li igra pay-to-win?",
+      "a2": "Ne. Premium status ne daje prednost u borbi. Ekskluzivni blueprinti se dobijaju samo farmanjem instanci \u2014 novac ih ne može kupiti. Veština i vreme uvek pobeđuju.",
+      "q3": "Sta je HIVE Keychain i kako ga instaliram?",
+      "a3": "HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako Imaš HIVE nalog, možeš platiti Premium putem Keychain-a \u2014 10\u20AC ili 1 BCM. Instaliraj na hive-keychain.com.",
+      "q4": "Kako zaraditi prave tokene igrajući?",
+      "a4": "Premium igrači zaraduju BPW tokene kroz misije, instance i PvP pobede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmenjivati za kriptovalute.",
+      "q5": "Da li postoji zaštita za nove igrače?",
+      "a5": "Da \u2014 prvih 72 sata od registracije igraš pod mirovnim štitom. Nitko te ne može napasti dok se ne etabliraš. Nakon toga postaje pravi PvP."
+    },
+    "donate": {
+      "label": "// PODRŽI RAZVOJ",
+      "title": "Sviđa ti se igra?",
+      "desc": "Svaka donacija pomaže razvoju novih sadržaja i servera.",
+      "btn": "\uD83D\uDCB3 DONIRAJ PUTEM PAYPALA"
+    },
+    "footer": {
+      "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
+      "developed": "Developed by",
+      "links": {
+        "discord": "Discord",
+        "twitch": "Twitch",
+        "blog": "HIVE Blog",
+        "github": "GitHub"
+      },
+      "logo": "⬡ HIVE GALAXY",
+      "author": "@bokica80",
+      "twitch_link": "twitch/bokipw",
+      "bcm": "BCM",
+      "bocrypto": "BoCrypto",
+      "bpw": "BPW"
+    }
+  }
+}

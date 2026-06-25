@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sr">
 <head>
 <meta charset="UTF-8">
@@ -163,9 +163,16 @@
     return;
   }
 
-  _sb.auth.getSession().then(({ data }) => {
-    if(data.session) { window._supaSession = data.session; window._loginType = 'email'; }
-    else { window.location.href = 'index.html'; }
+  _sb.auth.getSession().then(async ({ data }) => {
+    if(data.session) {
+      window._supaSession = data.session;
+      window._loginType = 'email';
+      const email = data.session.user.email?.toLowerCase();
+      if (email) {
+        const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).single();
+        window._playerPremium = !!(pu && pu.is_premium);
+      }
+    } else { window.location.href = 'index.html'; }
   });
 })();
 </script>
@@ -204,6 +211,7 @@
       <button onclick="showPanel('shop')" style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🛒 Shop</button>
       <button onclick="window.open('leaderboards.html','_blank')" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🏆 Leaderboard</button>
       <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>
+      <div id="langPickerContainer" style="display:inline-block"></div>
     </div>
   </div>
 
@@ -213,90 +221,90 @@
     <!-- ── LEFT NAV ── -->
     <div id="nav">
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-baza')" data-grp="grp-baza">
-        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> BAZA
+        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> <span data-i18n="nav.base">Baza</span>
       </div>
       <div class="nav-group" id="grp-baza">
         <button class="nav-btn active" onclick="showPanel('base')" data-panel="base">
-          <span class="icon">🏰</span> Baza
+          <span class="icon">🏰</span> <span data-i18n="nav.base">Baza</span>
         </button>
         <button class="nav-btn" onclick="showPanel('shipfactory')" data-panel="shipfactory">
-          <span class="icon">🏭</span> Ship Factory
+          <span class="icon">🏭</span> <span data-i18n="nav.shipfactory">Ship Factory</span>
         </button>
         <button class="nav-btn" onclick="showPanel('depot')" data-panel="depot">
-          <span class="icon">📦</span> Depot
+          <span class="icon">📦</span> <span data-i18n="nav.depot">Depot</span>
         </button>
         <button class="nav-btn" onclick="showPanel('recycler')" data-panel="recycler">
-          <span class="icon">♻️</span> Recycler
+          <span class="icon">♻️</span> <span data-i18n="nav.recycler">Recycler</span>
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-flota')" data-grp="grp-flota">
-        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> FLOTA
+        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> <span data-i18n="nav.fleet">Flota</span>
       </div>
       <div class="nav-group" id="grp-flota">
         <button class="nav-btn" onclick="showPanel('designer')" data-panel="designer">
-          <span class="icon">🔧</span> Designer
+          <span class="icon">🔧</span> <span data-i18n="nav.designer">Designer</span>
         </button>
         <button class="nav-btn" onclick="showPanel('hangar')" data-panel="hangar">
-          <span class="icon">🏠</span> Hangar
+          <span class="icon">🏠</span> <span data-i18n="nav.hangar">Hangar</span>
         </button>
         <button class="nav-btn" onclick="showPanel('fleet')" data-panel="fleet">
-          <span class="icon">🚀</span> Flota
+          <span class="icon">🚀</span> <span data-i18n="nav.fleet">Flota</span>
         </button>
         <button class="nav-btn" onclick="showPanel('formations')" data-panel="formations">
-          <span class="icon">⬛</span> Formacije
+          <span class="icon">⬛</span> <span data-i18n="nav.formations">Formacije</span>
         </button>
         <button class="nav-btn" onclick="showPanel('blueprints')" data-panel="blueprints">
-          <span class="icon">📋</span> Blueprinti
+          <span class="icon">📋</span> <span data-i18n="nav.blueprints">Blueprinti</span>
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-galaksija')" data-grp="grp-galaksija">
-        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> GALAKSIJA
+        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> <span data-i18n="nav.galaxy">Galaksija</span>
       </div>
       <div class="nav-group" id="grp-galaksija">
         <button class="nav-btn" onclick="showPanel('galaxy')" data-panel="galaxy">
-          <span class="icon">🗺️</span> Galaksija
+          <span class="icon">🗺️</span> <span data-i18n="nav.galaxy">Galaksija</span>
         </button>
         <button class="nav-btn" onclick="showPanel('instances')" data-panel="instances">
-          <span class="icon">🌌</span> Instance
+          <span class="icon">🌌</span> <span data-i18n="nav.instances">Instance</span>
         </button>
         <button class="nav-btn" onclick="showPanel('colonies')" data-panel="colonies">
-          <span class="icon">🪐</span> Kolonije
+          <span class="icon">🪐</span> <span data-i18n="nav.colonies">Kolonije</span>
         </button>
         <button class="nav-btn" onclick="showPanel('pvp')" data-panel="pvp">
-          <span class="icon">⚔️</span> PvP
+          <span class="icon">⚔️</span> <span data-i18n="nav.pvp">PvP</span>
         </button>
         <button class="nav-btn" onclick="showPanel('espionage')" data-panel="espionage">
-          <span class="icon">🕵️</span> Špijunaža
+          <span class="icon">🕵️</span> <span data-i18n="nav.espionage">Špijunaža</span>
         </button>
       </div>
 
       <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-napredak')" data-grp="grp-napredak">
-        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> NAPREDAK
+        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> <span data-i18n="nav.research">Istraživanje</span>
       </div>
       <div class="nav-group" id="grp-napredak">
         <button class="nav-btn" onclick="showPanel('research')" data-panel="research">
-          <span class="icon">🔬</span> Istraživanje
+          <span class="icon">🔬</span> <span data-i18n="nav.research">Istraživanje</span>
         </button>
         <button class="nav-btn" onclick="showPanel('missions')" data-panel="missions" style="position:relative">
-          <span class="icon">📡</span> Misije
+          <span class="icon">📡</span> <span data-i18n="nav.missions">Misije</span>
           <span id="missionsBadge" style="display:none;position:absolute;top:4px;right:4px;
             background:#ff3355;color:white;font-size:0.55rem;font-weight:700;
             padding:1px 5px;border-radius:8px;min-width:16px;text-align:center;
             line-height:1.4;pointer-events:none"></span>
         </button>
         <button class="nav-btn" onclick="showPanel('artifacts')" data-panel="artifacts">
-          <span class="icon">💠</span> Artefakti
+          <span class="icon">💠</span> <span data-i18n="nav.artifacts">Artefakti</span>
         </button>
         <button class="nav-btn" onclick="showPanel('achievements')" data-panel="achievements">
-          <span class="icon">🏆</span> Dostignuća
+          <span class="icon">🏆</span> <span data-i18n="nav.achievements">Dostignuća</span>
         </button>
         <button class="nav-btn" onclick="showPanel('commander')" data-panel="commander">
-          <span class="icon">🎖️</span> Komandir
+          <span class="icon">🎖️</span> <span data-i18n="nav.commanders">Komandir</span>
         </button>
         <button class="nav-btn" onclick="showPanel('commander-cards')" data-panel="commander-cards">
-          <span class="icon">🃏</span> Karte
+          <span class="icon">🃏</span> <span data-i18n="nav.cards">Karte</span>
         </button>
       </div>
     </div>
@@ -320,7 +328,7 @@
 
       <!-- SHIP FACTORY -->
       <div id="panel-shipfactory" class="panel">
-        <div class="page-title">🏭 SHIP FACTORY</div>
+        <div class="page-title">🏭 FABRIKA BRODOVA</div>
         <div id="shipFactoryCard"></div>
         <div class="page-title" style="margin-top:20px">🚀 GRADNJA PO DIZAJNU</div>
         <div id="shipBuildGrid"></div>
@@ -334,13 +342,13 @@
 
       <!-- RECYCLER -->
       <div id="panel-recycler" class="panel">
-        <div class="page-title">♻️ RECYCLER</div>
+        <div class="page-title">♻️ RECIKLER</div>
         <div id="recyclerContent"></div>
       </div>
 
       <!-- DESIGNER -->
       <div id="panel-designer" class="panel">
-        <div class="page-title">🔧 SHIP DESIGNER</div>
+        <div class="page-title">🔧 DIZAJNER BRODOVA</div>
         <div id="designerContent"></div>
       </div>
 
@@ -442,7 +450,7 @@
 
       <!-- SHOP -->
       <div id="panel-shop" class="panel">
-        <div class="page-title">💎 SHOP</div>
+        <div class="page-title">💎 ŠOP</div>
         <div id="shopContent"></div>
       </div>
 
@@ -618,6 +626,9 @@
 <script src="data/commanders_xenos.js"></script>
 <script src="data/commanders_undead.js"></script>
 <script src="data/passive_bonuses.js"></script>
+
+<!-- 1b. I18N -->
+<script src="js/i18n.js"></script>
 
 <!-- 2. STATE -->
 <script src="js/state.js"></script>
@@ -815,6 +826,186 @@ function refreshHiveWallet() {
   const el = document.getElementById('hiveWalletModal');
   if (el) el.remove();
   openHiveWalletModal();
+}
+
+async function walletWithdraw(symbol) {
+  if (!window._hiveUser) { toast('Prijavi se sa HIVE Keychain!', 'warn'); return; }
+  if (!window._playerPremium) { toast('Potreban je Premium za withdraw!', 'warn'); return; }
+  if (!window._supa) return;
+
+  const cfg = {
+    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,      gas: null,  gasFlat: 1000, gasCurrency: 'bocrypto', decimals: 0 },
+    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000,   gas: 0.01,  gasFlat: null, gasCurrency: 'bocrypto', decimals: 3 },
+    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,    gas: 0.01,  gasFlat: null, gasCurrency: 'spCard',   decimals: 8, satoshi: true },
+  }[symbol];
+  if (!cfg) return;
+
+  const gameAmt = cfg.satoshi ? (R[cfg.key] || 0) : (R[cfg.key] || 0);
+  const gameDisplay = cfg.satoshi ? (gameAmt / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)) + ' ' + cfg.label;
+  const minDisplay = cfg.satoshi ? (cfg.min / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? cfg.min : cfg.min.toFixed ? cfg.min.toFixed(cfg.decimals) : cfg.min) + ' ' + cfg.label;
+
+  // Provjeri minimum
+  if (gameAmt < cfg.min) {
+    toast('Minimum za withdraw: ' + minDisplay + ' (imaš ' + gameDisplay + ')', 'warn');
+    return;
+  }
+
+  // Gas info string
+  let gasInfo = '';
+  if (cfg.gasFlat) {
+    gasInfo = `Gas fee: <strong style="color:#ff6600">${cfg.gasFlat.toLocaleString()} BoCrypto</strong> (flat)`;
+  } else {
+    const gasPct = (cfg.gas * 100) + '%';
+    gasInfo = `Gas fee: <strong style="color:#ff6600">${gasPct}</strong> od iznosa`;
+  }
+
+  // Modal za unos iznosa
+  const modalEl = document.createElement('div');
+  modalEl.id = 'withdrawModal';
+  modalEl.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,5,15,0.95);display:flex;align-items:center;justify-content:center';
+  modalEl.innerHTML = `
+    <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,100,0,0.3);border-radius:14px;
+      width:min(480px,94vw);padding:28px;box-shadow:0 0 60px rgba(255,100,0,0.15)">
+      <div style="font-family:'Orbitron',monospace;font-size:1rem;color:#ff6600;letter-spacing:2px;margin-bottom:6px">⬆ WITHDRAW ${symbol}</div>
+      <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:20px">U igrici: <strong style="color:white">${gameDisplay}</strong> · Min: <strong style="color:#ffcc44">${minDisplay}</strong></div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:0.7rem;color:#6a90b8;display:block;margin-bottom:6px">Iznos za withdraw</label>
+        <input id="witAmt" type="number" step="${cfg.satoshi ? '0.00000001' : cfg.decimals === 0 ? '1' : '0.001'}"
+          min="${cfg.satoshi ? (cfg.min/1e8) : cfg.min}"
+          max="${cfg.satoshi ? (gameAmt/1e8) : gameAmt}"
+          value="${cfg.satoshi ? (gameAmt/1e8).toFixed(8) : cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)}"
+          style="width:100%;box-sizing:border-box;padding:10px 14px;background:rgba(0,0,0,0.4);
+            border:1px solid rgba(255,100,0,0.3);border-radius:6px;color:white;font-size:0.85rem;
+            font-family:'Share Tech Mono',monospace"
+          oninput="updateWitPreview('${symbol}')">
+      </div>
+
+      <div id="witPreview" style="background:rgba(255,100,0,0.06);border:1px solid rgba(255,100,0,0.2);
+        border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.72rem;line-height:2">
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('withdrawModal').remove()"
+          style="flex:1;padding:10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);
+            color:#ff3355;border-radius:6px;cursor:pointer;font-size:0.75rem">✕ Otkaži</button>
+        <button onclick="submitWithdraw('${symbol}')"
+          style="flex:2;padding:10px;background:rgba(255,100,0,0.15);border:1px solid rgba(255,100,0,0.4);
+            color:#ff6600;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:700">⬆ Pošalji zahtev</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modalEl);
+  updateWitPreview(symbol);
+}
+
+function updateWitPreview(symbol) {
+  const cfg = {
+    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,    gas: null, gasFlat: 1000, gasCurrency: 'BoCrypto', satoshi: false },
+    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000, gas: 0.01, gasFlat: null, gasCurrency: 'BoCrypto', satoshi: false },
+    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,  gas: 0.01, gasFlat: null, gasCurrency: 'BPW',      satoshi: true },
+  }[symbol];
+  const input = document.getElementById('witAmt');
+  const preview = document.getElementById('witPreview');
+  if (!input || !preview || !cfg) return;
+
+  const amt = parseFloat(input.value) || 0;
+  let gas = 0, net = 0, gasLabel = '', netLabel = '', valid = true, errMsg = '';
+
+  if (symbol === 'BCM') {
+    gas = 1000; // flat BoCrypto
+    net = Math.floor(amt);
+    const bocBal = R.bocrypto || 0;
+    if (bocBal < gas) { valid = false; errMsg = 'Nemaš dovoljno BoCrypto za gas fee (treba 1,000)!'; }
+    if (net < 1) { valid = false; errMsg = 'Minimum 1 BCM!'; }
+    gasLabel = `1,000 BoCrypto (flat)`;
+    netLabel = `${net} BCM`;
+  } else if (symbol === 'BOCRYPTO') {
+    gas = Math.ceil(amt * 0.01);
+    net = amt - gas;
+    if (amt < 1000) { valid = false; errMsg = 'Minimum 1,000 BoCrypto!'; }
+    if (net <= 0) { valid = false; errMsg = 'Iznos je premali!'; }
+    gasLabel = `${gas.toLocaleString()} BoCrypto (1%)`;
+    netLabel = `${net.toFixed(3)} BoCrypto`;
+  } else if (symbol === 'BPW') {
+    const amtSat = Math.round(amt * 1e8);
+    gas = Math.ceil(amtSat * 0.01);
+    net = amtSat - gas;
+    if (amtSat < 1e7) { valid = false; errMsg = 'Minimum 0.1 BPW!'; }
+    gasLabel = `${(gas/1e8).toFixed(8)} BPW (1%)`;
+    netLabel = `${(net/1e8).toFixed(8)} BPW`;
+  }
+
+  preview.innerHTML = valid
+    ? `<div>Iznos: <strong style="color:white">${symbol === 'BPW' ? amt.toFixed(8)+' BPW' : symbol==='BCM' ? Math.floor(amt)+' BCM' : amt.toFixed(3)+' BoCrypto'}</strong></div>
+       <div>Gas fee: <strong style="color:#ff6600">${gasLabel}</strong></div>
+       <div>Dobijaš: <strong style="color:#00ff88">${netLabel}</strong></div>
+       <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Zahtev je vidljiv u admin panelu</div>`
+    : `<div style="color:#ff3355">⚠ ${errMsg}</div>`;
+  document.getElementById('withdrawModal').querySelector('button:last-child').disabled = !valid;
+  document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.4';
+}
+
+async function submitWithdraw(symbol) {
+  if (!window._supa) return;
+  const cfg = {
+    BCM:      { key: 'bcm',    min: 1,    gas: null, gasFlat: 1000, satoshi: false },
+    BOCRYPTO: { key: 'bocrypto', min: 1000, gas: 0.01, gasFlat: null, satoshi: false },
+    BPW:      { key: 'spCard', min: 1e7,  gas: 0.01, gasFlat: null, satoshi: true },
+  }[symbol];
+  const input = document.getElementById('witAmt');
+  if (!input || !cfg) return;
+
+  const amt = parseFloat(input.value) || 0;
+  let amtRaw = cfg.satoshi ? Math.round(amt * 1e8) : amt;
+  let gas = 0, net = 0;
+
+  if (symbol === 'BCM') {
+    gas = 1000; net = Math.floor(amtRaw);
+    if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas!', 'warn'); return; }
+    if (net < 1) return;
+    R.bocrypto = (R.bocrypto || 0) - gas;
+    R.bcm = (R.bcm || 0) - net;
+  } else if (symbol === 'BOCRYPTO') {
+    gas = Math.ceil(amtRaw * 0.01);
+    net = amtRaw - gas;
+    if ((R.bocrypto || 0) < amtRaw) { toast('Nema dovoljno BoCrypto!', 'warn'); return; }
+    R.bocrypto = (R.bocrypto || 0) - amtRaw;
+  } else if (symbol === 'BPW') {
+    gas = Math.ceil(amtRaw * 0.01);
+    net = amtRaw - gas;
+    if ((R.spCard || 0) < amtRaw) { toast('Nema dovoljno BPW!', 'warn'); return; }
+    R.spCard = (R.spCard || 0) - amtRaw;
+  }
+
+  const uid = window._supaSession ? window._supaSession.user.id : 'hive_' + window._hiveUser;
+  const username = window._hiveUser || window._supaSession?.user?.email?.split('@')[0] || 'unknown';
+
+  const { error } = await window._supa.from('withdrawals').insert({
+    player_id: uid,
+    username,
+    hive_account: window._hiveUser || null,
+    token: symbol,
+    amount: cfg.satoshi ? amtRaw : amtRaw,
+    gas_amount: gas,
+    net_amount: net,
+    status: 'pending',
+    requested_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    // Vrati resurse ako insert falio
+    if (symbol === 'BCM') { R.bocrypto += 1000; R.bcm += net; }
+    else if (symbol === 'BOCRYPTO') R.bocrypto += amtRaw;
+    else if (symbol === 'BPW') R.spCard += amtRaw;
+    toast('Greška pri slanju zahteva: ' + error.message, 'err');
+    return;
+  }
+
+  if (typeof updateResUI === 'function') updateResUI();
+  if (typeof saveGame === 'function') saveGame();
+  document.getElementById('withdrawModal')?.remove();
+  document.getElementById('hiveWalletModal')?.remove();
+  toast('✅ Withdraw zahtev poslat! Obrada 24-48h.', 'ok');
 }
 
 function walletDeposit(symbol) {

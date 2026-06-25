@@ -151,6 +151,7 @@ function updateHangarStatus() {
 
 // ── NAVIGACIJA ──
 function showPanel(panelId) {
+  window._currentPanel = panelId;
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   if (typeof ensureNavGroupVisible === 'function') ensureNavGroupVisible(panelId);

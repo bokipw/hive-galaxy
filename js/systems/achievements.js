@@ -173,9 +173,9 @@ function generateCollectionAchievements() {
           category: 'collection',
           id: `${className}_${rarity}_${percent}`,
           tier: idx + 1,
-          name: `${SHIP_CLASSES[className]?.name || className} ${rarity} kolekcija`,
+          name: `${dn(SHIP_CLASSES[className]) || className} ${rarity} kolekcija`,
           icon: SHIP_CLASSES[className]?.icon || '🚀',
-          desc: `Skupi ${percent}% ${rarity} ${SHIP_CLASSES[className]?.name || className} brodova (${count}/${totalCount})`,
+          desc: `Skupi ${percent}% ${rarity} ${dn(SHIP_CLASSES[className]) || className} brodova (${count}/${totalCount})`,
           check: () => {
             const ships = SHIPS[className] || [];
             const owned = ships.filter(s => s.rarity === rarity && ownedBlueprints[s.id]).length;
@@ -839,7 +839,7 @@ const SPECIAL_ACHS = [
       'solar','fusion','battery','grid','turret','missile_bat','shield_gen','sensor','jump_gate','laboratory','recycler'
     ].every(k => (buildings[k]?.level || 0) >= 50),
     reward: { bpw: 1000, xp: 20000, instanceKeys: 15, art_fragment: 'E', fullBlueprint: true } },
-  { id: 'all_bld_lv100',       name: 'Nepobjediva Baza',          icon: '🌆', desc: 'Digni SVE zgrade na Lv.100',
+  { id: 'all_bld_lv100',       name: 'Nepobediva Baza',          icon: '🌆', desc: 'Digni SVE zgrade na Lv.100',
     check: () => ['hq','metal_mine','crystal_mine','he3_refinery','depot','ship_factory',
       'solar','fusion','battery','grid','turret','missile_bat','shield_gen','sensor','jump_gate','laboratory','recycler'
     ].every(k => (buildings[k]?.level || 0) >= 100),

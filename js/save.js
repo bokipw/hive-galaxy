@@ -68,6 +68,11 @@ async function _cloudSave(saveData) {
       level, power: typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
       fleet: deployedFleet, commanders,
       is_premium: window._playerPremium || false,
+      resources: {
+        metal:   typeof R !== 'undefined' ? (R.metal   || 0) : 0,
+        crystal: typeof R !== 'undefined' ? (R.crystal || 0) : 0,
+        he3:     typeof R !== 'undefined' ? (R.he3     || 0) : 0,
+      },
       updated_at: new Date().toISOString()
     });
     if (error) console.error('cloudSave pvp_snapshots:', error);
@@ -142,6 +147,8 @@ function _applyGameState(s) {
     if (!window._jumpGateCooldowns) window._jumpGateCooldowns = {};
     if (s.dropPity)              window._dropPity             = s.dropPity;
     if (!window._dropPity)       window._dropPity             = {};
+    if (s.bossCooldowns)         window._bossCooldowns        = s.bossCooldowns;
+    if (!window._bossCooldowns)  window._bossCooldowns        = {};
     window._fleetPosition = s.fleetPosition || null;
     if (s.dynamicStoryMissions) window._dynamicStoryMissions = s.dynamicStoryMissions;
     if (!window._dynamicStoryMissions) window._dynamicStoryMissions = [];
@@ -188,6 +195,7 @@ function saveGame() {
       conqueredPlanets:   window._conqueredPlanets   || [],
       colonyFleetReward:  window._colonyFleetReward  || {},
       jumpGateCooldowns:  window._jumpGateCooldowns  || {},
+      bossCooldowns:      window._bossCooldowns      || {},
       fleetPosition:      window._fleetPosition      || null,
       dropPity:           window._dropPity           || {},
       dynamicStoryMissions: window._dynamicStoryMissions || [],
@@ -199,7 +207,7 @@ function saveGame() {
     };
     _cloudSave(saveData);
     const btn = document.getElementById('saveBtn');
-    if (btn) { btn.textContent = '✅ Sačuvano'; setTimeout(() => btn.textContent = '💾 Sačuvaj', 1500); }
+    if (btn) { btn.textContent = t('btn.saved'); setTimeout(() => btn.textContent = t('btn.save'), 1500); }
   } catch(e) {
     console.error('Save error:', e);
   }
@@ -236,7 +244,7 @@ function loadGame() {
 }
 
 function resetGame() {
-  if (confirm('⚠️ SIGURNO? Ovo će obrisati SAV napredak!')) {
+  if (confirm(t('confirm.resetGame'))) {
     const uid = _getSaveId();
     if (uid && window._supa) {
       window._supa.from('saves').delete().eq('id', uid).then(() => location.reload());
@@ -247,13 +255,17 @@ function resetGame() {
 }
 
 function addTestResources() {
-  R.metal   += 10055555500;
-  R.crystal += 200555555500;
-  R.he3     += 1055555000;
+  if (!window._devMode) {
+    if (typeof toast === 'function') toast('❌ Nije dostupno u produkciji!', 'err');
+    return;
+  }
+  R.metal   += 1000;
+  R.crystal += 2005;
+  R.he3     += 1055;
   R.energy   = getEnergyMax();
-  R.instanceKeys = (R.instanceKeys || 0) + 100;
-  R.keys = (R.keys || 0) + 500;
+  R.instanceKeys = (R.instanceKeys || 0) + 10;
+  R.keys = (R.keys || 0) + 50;
   if (typeof updateResUI === 'function') updateResUI();
-  if (typeof toast === 'function') toast('➕ Test resursi + 100 inst. ključeva + 500 🗝️ za karte!', 'ok');
+  if (typeof toast === 'function') toast('➕ Test resursi + 10 inst. ključeva + 50 🗝️ za karte!', 'ok');
   saveGame();
 }

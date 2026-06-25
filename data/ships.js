@@ -6,11 +6,11 @@
 
 // ── TIPOVI OKLOPA ──
 const ARMOR_TYPES = {
-  Nano:         { name: 'Nano',         color: '#00aaff' },
-  Neutralizing: { name: 'Neutralizing', color: '#44ff88' },
-  Chrome:       { name: 'Chrome',       color: '#aaaaff' },
-  Regen:        { name: 'Regen',        color: '#ffaa00' },
-  Light:        { name: 'Light',        color: '#ffffff' },
+  Nano:         { name: 'Nano',         nameKey: 'armor.nano',         color: '#00aaff' },
+  Neutralizing: { name: 'Neutralizing', nameKey: 'armor.neutralizing', color: '#44ff88' },
+  Chrome:       { name: 'Chrome',       nameKey: 'armor.chrome',       color: '#aaaaff' },
+  Regen:        { name: 'Regen',        nameKey: 'armor.regen',        color: '#ffaa00' },
+  Light:        { name: 'Light',        nameKey: 'armor.light',        color: '#ffffff' },
 };
 
 // ── OKLOP OTPORNOSTI (% primljene štete) ──
@@ -27,6 +27,7 @@ const SHIP_CLASSES = {
   scout: {
     id:       'scout',
     name:     'Izviđač',
+    nameKey:  'ship_class.scout.name',
     icon:     '🛸',
     color:    '#00e5ff',
     slots: { weapon: 2, shield: 1, engine: 1, recon: 1, special: 0 },
@@ -34,10 +35,12 @@ const SHIP_CLASSES = {
     atkBonus: 0.30, defBonus: 0.20,
     specials: ['Detection +50%', '+1% Crit', 'Movement 1'],
     desc: 'Brz i nevidljiv. Idealan za izviđanje i kontru Lovaca.',
+    descKey: 'ship_class.scout.desc',
   },
   fighter: {
     id:       'fighter',
     name:     'Lovac',
+    nameKey:  'ship_class.fighter.name',
     icon:     '⚔️',
     color:    '#ff4444',
     slots: { weapon: 3, shield: 2, engine: 1, recon: 0, special: 0, module: 1 },
@@ -45,10 +48,12 @@ const SHIP_CLASSES = {
     atkBonus: 0.25, defBonus: 0.15,
     specials: ['+1% Crit', 'Intercept', 'Agility +15%'],
     desc: 'Svestran borbeni brod. Idealan kao osnova svake flote.',
+    descKey: 'ship_class.fighter.desc',
   },
   cruiser: {
     id:       'cruiser',
     name:     'Krstarica',
+    nameKey:  'ship_class.cruiser.name',
     icon:     '🛡️',
     color:    '#00ff88',
     slots: { weapon: 3, shield: 3, engine: 1, recon: 0, special: 0, module: 1 },
@@ -56,10 +61,12 @@ const SHIP_CLASSES = {
     atkBonus: 0.20, defBonus: 0.30,
     specials: ['Cover Fire', 'Shield +30%', 'He3 skladište'],
     desc: 'Teška odbrana. Štiti manje brodove u floti.',
+    descKey: 'ship_class.cruiser.desc',
   },
   battleship: {
     id:       'battleship',
     name:     'Bojni Brod',
+    nameKey:  'ship_class.battleship.name',
     icon:     '💥',
     color:    '#ffaa00',
     slots: { weapon: 4, shield: 3, engine: 1, recon: 0, special: 1 },
@@ -67,10 +74,12 @@ const SHIP_CLASSES = {
     atkBonus: 0.35, defBonus: 0.15,
     specials: ['Barrage', 'Armor +15%', 'Max slotovi'],
     desc: 'Maksimalna vatrena moć. Spor ali devastirajući.',
+    descKey: 'ship_class.battleship.desc',
   },
   carrier: {
     id:       'carrier',
     name:     'Nosač',
+    nameKey:  'ship_class.carrier.name',
     icon:     '🌌',
     color:    '#9933ff',
     slots: { weapon: 2, shield: 3, engine: 1, recon: 0, special: 1 },
@@ -78,10 +87,12 @@ const SHIP_CLASSES = {
     atkBonus: 0.25, defBonus: 0.20,
     specials: ['Launch Fighters', 'HP +20%', 'Može nositi 1-3 broda'],
     desc: 'Strateški brod. Lansira fighter eskadrone u borbu.',
+    descKey: 'ship_class.carrier.desc',
   },
   special: {
     id:       'special',
     name:     'Flagship',
+    nameKey:  'ship_class.special.name',
     icon:     '👑',
     color:    '#ffcc33',
     slots: { weapon: 'unique', shield: 'unique', engine: 1, recon: 0, special: 2 },
@@ -89,6 +100,7 @@ const SHIP_CLASSES = {
     atkBonus: 0.15, defBonus: 0.0,
     specials: ['Fleet Command', '+100 Effective Stack', 'Unikatne sposobnosti'],
     desc: 'Komandni brod flote. Daje bonus svim brodovima.',
+    descKey: 'ship_class.special.desc',
   },
 };
 

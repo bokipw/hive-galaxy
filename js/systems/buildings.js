@@ -3,7 +3,7 @@
 // Render i logika zgrada — upgrade, renderBase, energy bilans
 // ============================================================
 
-// ── TIMER TICK — provjeri buildQueue svaku sekundu ──
+// ── TIMER TICK — proveri buildQueue svaku sekundu ──
 function tickBuildQueue() {
   if (!buildQueue || buildQueue.length === 0) return;
   const now      = Date.now();
@@ -19,7 +19,7 @@ function tickBuildQueue() {
     const b = buildingsData[item.key];
     R.score += item.targetLevel * 50;
 
-    // Provjeri milestone
+    // Proveri milestone
     const milestones = getBuildingMilestones(item.key);
     if (milestones[item.targetLevel]) {
       milestoneHit = { key: item.key, level: item.targetLevel, data: milestones[item.targetLevel] };
@@ -44,8 +44,8 @@ function tickBuildQueue() {
       addLog('🎁 Carrier Harbinger I blueprint otključan (Ship Factory Lv.24)');
     }
 
-    toast(`✅ ${b?.name} → Lv.${item.targetLevel} završeno!`, 'ok');
-    addLog(`⬆️ ${b?.name} → Lv.${item.targetLevel}`);
+    toast(`✅ ${dn(b)} → Lv.${item.targetLevel} završeno!`, 'ok');
+    addLog(`⬆️ ${dn(b)} → Lv.${item.targetLevel}`);
     if (typeof trackDailyBuild === 'function') trackDailyBuild();
 
     // Depot: +1 ključ po levelu, +5 bonus na 25/50/75/100
@@ -69,21 +69,22 @@ function tickBuildQueue() {
   if (milestoneHit) {
     const m = milestoneHit.data;
     setTimeout(() => {
-      toast(`🎯 MILESTONE! ${buildingsData[milestoneHit.key]?.name} Lv.${milestoneHit.level} — ${m.label}!`, 'ok');
-      addLog(`🎯 Milestone dostignut: ${m.label} — ${m.bonus}`);
+      const mBld = buildingsData[milestoneHit.key];
+      toast(`🎯 MILESTONE! ${dn(mBld)} Lv.${milestoneHit.level} — ${dl(m)}!`, 'ok');
+      addLog(`🎯 Milestone dostignut: ${dl(m)} — ${db(m)}`);
       openModal(
         `🎯 MILESTONE DOSTIGNUT!`,
         `<div style="text-align:center;padding:16px">
-          <div style="font-size:3rem;margin-bottom:10px">${buildingsData[milestoneHit.key]?.icon}</div>
+          <div style="font-size:3rem;margin-bottom:10px">${mBld?.icon}</div>
           <div style="font-family:'Orbitron',monospace;font-size:1rem;color:#ffcc44;margin-bottom:6px">
-            ${m.label}
+            ${dl(m)}
           </div>
           <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:12px">
-            ${buildingsData[milestoneHit.key]?.name} → Lv.${milestoneHit.level}
+            ${dn(mBld)} → Lv.${milestoneHit.level}
           </div>
           <div style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);
             border-radius:8px;padding:12px;font-size:0.82rem;color:white">
-            ✨ ${m.bonus}
+            ✨ ${db(m)}
           </div>
         </div>`,
         [{ label: '🎯 Odlično!', cls: 'btn-gold', fn: closeModal }]
@@ -136,17 +137,17 @@ function upgradeBuilding(key) {
 
   buildQueue.push({ key, targetLevel: currentLevel + 1, finishAt, boostCost });
 
-  // Provjeri da li je sljedeći level milestone
+  // Proveri da li je sledeći level milestone
   const milestones   = getBuildingMilestones(key);
   const nextMilestone = milestones[currentLevel + 1];
   if (nextMilestone) {
-    addLog(`🎯 Gradi se ka milestoneu: ${nextMilestone.label} (Lv.${currentLevel + 1})`);
+    addLog(`🎯 Gradi se ka milestoneu: ${dl(nextMilestone)} (Lv.${currentLevel + 1})`);
   }
 
   updateResUI();
   renderBase();
-  addLog(`🔨 ${b.name} u izgradnji → Lv.${currentLevel + 1} (${formatTimer(timerSec)})`);
-  toast(`🔨 ${b.name} gradi se ${formatTimer(timerSec)}...`, 'inf');
+  addLog(`🔨 ${dn(b)} u izgradnji → Lv.${currentLevel + 1} (${formatTimer(timerSec)})`);
+  toast(`🔨 ${dn(b)} gradi se ${formatTimer(timerSec)}...`, 'inf');
   saveGame();
 }
 
@@ -155,7 +156,7 @@ function boostBuilding(key) {
   const item = buildQueue.find(q => q.key === key);
   if (!item) return;
   const cost    = item.boostCost || getBuildingBoostCost(key);
-  const bName   = buildingsData[key]?.name || key;
+  const bName   = dn(buildingsData[key]) || key;
   const hasBPW  = (R.spCard || 0) >= cost;
   const timeLeft = Math.max(0, Math.ceil((item.finishAt - Date.now()) / 1000));
 
@@ -234,7 +235,7 @@ function renderBuildingGrid(containerId, keys) {
       const next  = (nextLevel   * 0.01 * multiplier).toFixed(4);
       extra = `
         <div class="prod-rate">📈 TRENUTNO: +${cur}/s metal</div>
-        <div class="prod-rate" style="color:#00ff88">⬆️ SLJEDEĆI: +${next}/s metal</div>
+        <div class="prod-rate" style="color:#00ff88">⬆️ SLEDEĆI: +${next}/s metal</div>
         ${milestoneBonus > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">✨ Milestone bonus: +${milestoneBonus}%</div>` : ''}
         <div style="font-size:0.62rem;color:#ff6644">⚡ TROŠI: -${currentLevel * 2} → -${nextLevel * 2} MWh/s</div>
         ${renderMilestoneBar(key)}`;
@@ -248,7 +249,7 @@ function renderBuildingGrid(containerId, keys) {
       const next  = (nextLevel   * 0.007 * multiplier).toFixed(4);
       extra = `
         <div class="prod-rate">📈 TRENUTNO: +${cur}/s crystal</div>
-        <div class="prod-rate" style="color:#00ff88">⬆️ SLJEDEĆI: +${next}/s crystal</div>
+        <div class="prod-rate" style="color:#00ff88">⬆️ SLEDEĆI: +${next}/s crystal</div>
         ${milestoneBonus > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">✨ Milestone bonus: +${milestoneBonus}%</div>` : ''}
         <div style="font-size:0.62rem;color:#ff6644">⚡ TROŠI: -${currentLevel * 2} → -${nextLevel * 2} MWh/s</div>
         ${renderMilestoneBar(key)}`;
@@ -262,7 +263,7 @@ function renderBuildingGrid(containerId, keys) {
       const next  = (nextLevel   * 0.003 * multiplier).toFixed(4);
       extra = `
         <div class="prod-rate">📈 TRENUTNO: +${cur}/s He3</div>
-        <div class="prod-rate" style="color:#00ff88">⬆️ SLJEDEĆI: +${next}/s He3</div>
+        <div class="prod-rate" style="color:#00ff88">⬆️ SLEDEĆI: +${next}/s He3</div>
         ${milestoneBonus > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">✨ Milestone bonus: +${milestoneBonus}%</div>` : ''}
         <div style="font-size:0.62rem;color:#ff6644">⚡ TROŠI: -${currentLevel * 3} → -${nextLevel * 3} MWh/s</div>
         ${renderMilestoneBar(key)}`;
@@ -277,7 +278,7 @@ function renderBuildingGrid(containerId, keys) {
       const curCap  = (capMap[key] || 0) * currentLevel;
       const nextCap = (capMap[key] || 0) * nextLevel;
       extra = `
-        <div class="prod-rate" style="color:#00ff88">⚡ GENERIRA: +${curGen} → +${nextGen} MWh/s</div>`;
+        <div class="prod-rate" style="color:#00ff88">⚡ GENERIŠE: +${curGen} → +${nextGen} MWh/s</div>`;
       if (capMap[key]) {
         extra += `<div style="font-size:0.62rem;color:#00d4ff">🔋 KAPACITET: +${curCap} → +${nextCap} MWh</div>`;
       }
@@ -317,10 +318,10 @@ function renderBuildingGrid(containerId, keys) {
       const nextUnlock      = Object.entries(buildingsData.ship_factory.unlocks)
         .find(([lvl]) => parseInt(lvl) > currentLevel);
       extra = `
-        <div class="prod-rate">🚀 OTKLJUČANE KLASE: ${unlockedClasses.length > 0 ? unlockedClasses.join(', ') : 'Nijedna'}</div>
+        <div class="prod-rate">🚀 OTKLJUČANE KLASE: ${unlockedClasses.length > 0 ? unlockedClasses.map(id => dn(SHIP_CLASSES[id]) || id).join(', ') : 'Nijedna'}</div>
         <div class="prod-rate" style="color:#00ff88">⚡ BRZINA GRADNJE: +${speedBonus}%</div>
         <div class="prod-rate" style="color:#ffcc44">💰 POPUST: -${discount}%</div>
-        ${nextUnlock ? `<div style="font-size:0.62rem;color:#6a90b8">🔓 Lv.${nextUnlock[0]}: ${nextUnlock[1].join(', ')}</div>` : ''}
+        ${nextUnlock ? `<div style="font-size:0.62rem;color:#6a90b8">🔓 Lv.${nextUnlock[0]}: ${nextUnlock[1].map(id => dn(SHIP_CLASSES[id]) || id).join(', ')}</div>` : ''}
         <div style="font-size:0.62rem;color:#ff6644">⚡ TROŠI: -${currentLevel * 4} → -${nextLevel * 4} MWh/s</div>
         ${renderMilestoneBar(key)}`;
     }
@@ -345,9 +346,9 @@ function renderBuildingGrid(containerId, keys) {
       })();
       extra = `
         <div class="prod-rate">🏛️ MAX nivo zgrada: ${currentLevel}</div>
-        <div class="prod-rate" style="color:#00ff88">⬆️ SLJEDEĆI: max nivo ${nextLevel}</div>
+        <div class="prod-rate" style="color:#00ff88">⬆️ SLEDEĆI: max nivo ${nextLevel}</div>
         ${buildSpeedBonus > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">⚡ Build speed: -${buildSpeedBonus}%</div>` : ''}
-        ${costReduction > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">💰 Cijena zgrada: -${costReduction}%</div>` : ''}
+        ${costReduction > 0 ? `<div style="font-size:0.6rem;color:#ffcc44">💰 Cena zgrada: -${costReduction}%</div>` : ''}
         ${renderMilestoneBar(key)}`;
     }
 
@@ -443,7 +444,7 @@ function renderBuildingGrid(containerId, keys) {
     let btnText     = '⬆️ Nadogradi';
     let btnDisabled = !affordable;
 
-    // Provjeri je li sljedeći level milestone
+    // Proveri je li sledeći level milestone
     const milestones    = getBuildingMilestones(key);
     const isMilestoneNext = !!milestones[nextLevel];
 
@@ -456,7 +457,7 @@ function renderBuildingGrid(containerId, keys) {
     div.className = 'card';
     div.innerHTML = `
       <div class="card-icon">${b.icon}</div>
-      <div class="card-title" style="color:${nameColor};text-align:center">${b.name}</div>
+      <div class="card-title" style="color:${nameColor};text-align:center">${dn(b)}</div>
       <div class="lv-badge" style="display:block;text-align:center;margin:4px 0">Lv. ${currentLevel} / 100</div>
       ${extra}
       <div class="cost-block" style="text-align:center;margin-top:8px">
@@ -492,13 +493,13 @@ function updateEnergyBalanceCard() {
   el.innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
       <div>
-        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">POHRANA</div>
+        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">KAPACITET</div>
         <div style="font-size:1.4rem;font-family:'Orbitron',monospace;color:#00d4ff">${cur}</div>
         <div style="font-size:0.65rem;color:#6a90b8">/ ${max} MWh</div>
         <div class="pbar" style="margin-top:6px"><div class="pbar-fill" style="width:${pct}%"></div></div>
       </div>
       <div>
-        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">GENERACIJA</div>
+        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">GENERISANJE</div>
         <div style="font-size:1.4rem;font-family:'Orbitron',monospace;color:#00ff88">${gen}</div>
         <div style="font-size:0.65rem;color:#6a90b8">MWh/s</div>
       </div>
@@ -553,7 +554,7 @@ function renderShipFactory() {
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
         <div style="font-size:3rem">🏭</div>
         <div style="flex:1">
-          <div style="font-size:1rem;font-weight:700;color:${nameColor}">Ship Factory</div>
+          <div style="font-size:1rem;font-weight:700;color:${nameColor}">Fabrika brodova</div>
           <div class="lv-badge">Lv. ${level} / 100</div>
         </div>
         ${nextMilestone ? `<div style="font-size:0.62rem;color:#ffcc44;text-align:right">
@@ -598,7 +599,7 @@ function renderShipFactory() {
   renderShipBuildGrid();
 }
 
-// ── SLJEDEĆI MILESTONE ZA SHIP FACTORY ──
+// ── SLEDEĆI MILESTONE ZA SHIP FACTORY ──
 function getNextShipFactoryMilestone(level) {
   const milestones = buildingsData.ship_factory.milestones;
   const next       = Object.keys(milestones).map(Number).sort((a, b) => a - b).find(lvl => lvl > level);
@@ -606,7 +607,7 @@ function getNextShipFactoryMilestone(level) {
   const data = milestones[next];
   return `<div style="font-size:0.72rem;color:#6a90b8">
     Lv.${next}: <span style="color:#ffcc44">+${data.speedBonus}% brzina</span>,
-    <span style="color:#ffcc44">-${data.discountBonus}% cijena</span>
+    <span style="color:#ffcc44">-${data.discountBonus}% cena</span>
     <span style="color:#6a90b8">(još ${next - level} levela)</span>
   </div>`;
 }
@@ -678,7 +679,7 @@ function renderShipBuildGrid() {
     return `
       <div class="card" style="border-color:${cls?.color || '#00d4ff'}33">
         <div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'};margin-bottom:2px">${d.name}</div>
-        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:8px">${ship.name} · ${cls?.name || ''}</div>
+        <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:8px">${ship.name} · ${dn(cls) || ''}</div>
         
         <!-- Statistike jednog broda (izračunate sa opremom) -->
         <div style="background:rgba(0,0,0,0.2);border-radius:4px;padding:4px 6px;margin-bottom:8px;font-size:0.6rem;font-family:'Share Tech Mono',monospace">
@@ -697,7 +698,7 @@ function renderShipBuildGrid() {
           🏠 U hangaru: <strong style="color:white">${fmt(hangarCount)}</strong>
         </div>
         <div class="cost-block" style="margin-bottom:8px">
-          <div style="font-size:0.6rem;color:#6a90b8">Cijena po brodu:</div>
+          <div style="font-size:0.6rem;color:#6a90b8">Cena po brodu:</div>
           <span class="${affordable ? 'ck' : 'cn'}">🔩${fmt(cost.metal)}</span>
           <span class="${affordable ? 'ck' : 'cn'}"> 💎${fmt(cost.crystal)}</span>
           <span class="${affordable ? 'ck' : 'cn'}"> ⛽${fmt(cost.he3)}</span>
@@ -775,7 +776,7 @@ function renderDepot() {
       ${renderMilestoneBar('depot')}
 
       <div style="font-size:0.68rem;color:#6a90b8;margin:8px 0 12px">
-        Sljedeći nivo kapacitet: ${fmt(nextCap)} resursa
+        Sledeći nivo kapacitet: ${fmt(nextCap)} resursa
       </div>
 
       <div class="cost-block" style="margin-bottom:8px">
@@ -843,7 +844,7 @@ function renderRecycler() {
           <div class="lv-badge">Lv. ${lvl} / 100</div>
         </div>
         <div style="text-align:right">
-          <div style="font-size:0.65rem;color:#6a90b8">Povrat resursa</div>
+          <div style="font-size:0.65rem;color:#6a90b8">Povraćaj resursa</div>
           <div style="font-size:1.5rem;font-family:'Orbitron',monospace;color:#ff8833">${rate.toFixed(1)}%</div>
         </div>
       </div>
@@ -869,7 +870,7 @@ function renderRecycler() {
                   </div>
                   <div style="font-size:0.62rem;color:#6a90b8;margin-bottom:6px">×${fmt(h.count)} u hangaru</div>
                   <div style="font-size:0.6rem;color:#ffcc44;margin-bottom:8px">
-                    ⚠️ Dizajn je obrisan — minimalni povrat resursa
+                    ⚠️ Dizajn je obrisan — minimalni povraćaj resursa
                   </div>
                   <button class="btn btn-r" style="width:100%;font-size:0.65rem"
                     onclick="forceRecycleOrphan('${h.design_id}')">
@@ -886,7 +887,7 @@ function renderRecycler() {
                 </div>
                 <div style="font-size:0.62rem;color:#6a90b8;margin-bottom:6px">×${fmt(h.count)} u hangaru</div>
                 <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px">
-                  💰 Povrat: 🔩${fmt(res.metal)} 💎${fmt(res.crystal)} ⛽${fmt(res.he3)}
+                  💰 Povraćaj: 🔩${fmt(res.metal)} 💎${fmt(res.crystal)} ⛽${fmt(res.he3)}
                 </div>
                 <div style="display:flex;gap:4px;align-items:center;margin-bottom:6px">
                   <input id="recycleCount_${idx}" type="number" min="1" max="${h.count}" value="${h.count}"
@@ -910,7 +911,7 @@ function renderRecycler() {
       ${recycleQueue.length > 0 ? `
         <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);
           border-radius:6px;padding:10px;margin-top:10px;margin-bottom:10px">
-          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">UKUPNI POVRAT:</div>
+          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:4px">UKUPNI POVRAĆAJ:</div>
           <div style="font-size:0.78rem;font-family:'Share Tech Mono',monospace;color:#00ff88">
             🔩${fmt(totalRes.metal)} 💎${fmt(totalRes.crystal)} ⛽${fmt(totalRes.he3)}
           </div>
