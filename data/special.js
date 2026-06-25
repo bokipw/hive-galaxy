@@ -797,7 +797,7 @@ const SPECIAL_MODULES = [
     cost: { metal: 120000, crystal: 95000, he3: 58000 },
     source: 'Constellation 3',
     sourceKey: 'module.mod_titan_carrier_III.source',
-    desc: 'Napredni titan carrier. Nepobjedivi nosač.',
+    desc: 'Napredni titan carrier. Nepobedivi nosač.',
     descKey: 'module.mod_titan_carrier_III.desc',
   },
 
