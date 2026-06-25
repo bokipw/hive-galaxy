@@ -15,6 +15,11 @@
     "artifacts": "Artefakti",
     "designer": "Dizajner",
     "formations": "Formacije",
+    "depot": "Depot",
+    "shipfactory": "Fabrika brodova",
+    "recycler": "Recikler",
+    "hangar": "Hangar",
+    "instances": "Instance",
     "achievements": "Dostignuća",
     "cards": "Karte"
   },
@@ -4515,7 +4520,7 @@
       },
       "galaxy": {
         "title": "Galaksijska Mapa",
-        "desc": "Osvajaj zvjezdane sisteme, širi imperiju i napadaj protivničke baze. Svaka galaksija je živi ratni teatar."
+        "desc": "Osvajaj zvezdane sisteme, širi imperiju i napadaj protivničke baze. Svaka galaksija je živi ratni teatar."
       },
       "blockchain": {
         "title": "Blockchain Ekonomija",
@@ -4584,7 +4589,7 @@
           "0": "Dnevni login: +5 satoshi",
           "1": "Završena misija: 10-50 satoshi",
           "2": "Instance nagrada: 100-500 satoshi",
-          "3": "PvP pobjeda i rang lista nagrade",
+          "3": "PvP pobeda i rang lista nagrade",
           "4": "Faucet: x5 satoshi / 24h"
         }
       }
@@ -4669,7 +4674,7 @@
       "q3": "Sta je HIVE Keychain i kako ga instaliram?",
       "a3": "HIVE Keychain je besplatna browser ekstenzija (poput MetaMask-a) za HIVE blockchain. Ako Imaš HIVE nalog, možeš platiti Premium putem Keychain-a \u2014 10\u20AC ili 1 BCM. Instaliraj na hive-keychain.com.",
       "q4": "Kako zaraditi prave tokene igrajući?",
-      "a4": "Premium igrači zaraduju BPW tokene kroz misije, instance i PvP pobjede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmjenjivati za kriptovalute.",
+      "a4": "Premium igrači zaraduju BPW tokene kroz misije, instance i PvP pobede. BoCrypto tokeni se dobijaju gledanjem Twitch streama. Oba tokena su na HIVE-Engine i mogu se razmenjivati za kriptovalute.",
       "q5": "Da li postoji zaštita za nove igrače?",
       "a5": "Da \u2014 prvih 72 sata od registracije igraš pod mirovnim štitom. Nitko te ne može napasti dok se ne etabliraš. Nakon toga postaje pravi PvP."
     },
