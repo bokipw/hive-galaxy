@@ -664,7 +664,7 @@ function renderFleetSlot(slot, idx) {
           <div style="font-size:0.8rem;font-weight:700;color:${cls?.color || 'white'}">
             ${design?.name || ship.name}
           </div>
-          <div style="font-size:0.62rem;color:#6a90b8">${ship.name} · ${cls?.name || ''}</div>
+          <div style="font-size:0.62rem;color:#6a90b8">${ship.name} · ${dn(cls) || ''}</div>
         </div>
         <button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px"
           title="Vrati sve u hangar"
@@ -842,7 +842,7 @@ function openShipSelector(slotIdx) {
           <div class="card" style="cursor:pointer;border-color:${cls?.color || '#00d4ff'}44"
             onclick="selectHangarForSlot(${slotIdx},'${h.design_id}')">
             <div style="font-size:0.78rem;font-weight:700;color:${cls?.color || 'white'}">${design.name}</div>
-            <div style="font-size:0.65rem;color:#6a90b8">${ship?.name || ''} · ${cls?.name || ''}</div>
+            <div style="font-size:0.65rem;color:#6a90b8">${ship?.name || ''} · ${dn(cls) || ''}</div>
             <div style="font-size:0.72rem;color:white;margin-top:4px">🏠 ${fmt(h.count)} dostupno</div>
           </div>`;
       }).join('')}
