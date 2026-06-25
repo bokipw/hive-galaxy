@@ -10,7 +10,7 @@ const PLANET_TYPES = {
   gas:      { name: 'Plinski',    icon: '🌫️', color: '#00ff88', metalBonus: 5,  crystalBonus: 5,  he3Bonus: 30, desc: 'Atmosfera bogata He3. Strateški važan za brodove.' },
   balanced: { name: 'Balansiran', icon: '🌍', color: '#00d4ff', metalBonus: 15, crystalBonus: 15, he3Bonus: 15, desc: 'Ravnomjerna distribucija resursa. Fleksibilan razvoj.' },
   barren:   { name: 'Pustošan',   icon: '🏜️', color: '#ffcc44', metalBonus: 10, crystalBonus: 10, he3Bonus: 10, desc: 'Oskudna tla. Niski prinos, ali bez konkurencije.' },
-  volcanic: { name: 'Vulkanski',  icon: '🌋', color: '#ff4444', metalBonus: 40, crystalBonus: 0,  he3Bonus: 20, desc: 'Magma bogata metalima. Opasno, ali izuzetno vrijedno.' },
+  volcanic: { name: 'Vulkanski',  icon: '🌋', color: '#ff4444', metalBonus: 40, crystalBonus: 0,  he3Bonus: 20, desc: 'Magma bogata metalima. Opasno, ali izuzetno vredno.' },
   frozen:   { name: 'Zaleđen',    icon: '❄️', color: '#aaddff', metalBonus: 0,  crystalBonus: 40, he3Bonus: 10, desc: 'Led konzervira kristalne strukture. Tehničarska zlatna jama.' },
   nebula:   { name: 'Maglinska',  icon: '🌌', color: '#aa44ff', metalBonus: 10, crystalBonus: 20, he3Bonus: 40, desc: 'Ionizovana magla puna He3. Rijetka i moćna lokacija.' },
 };
@@ -57,7 +57,7 @@ const COLONY_BUILDINGS = {
     cost: (lv) => ({ metal: Math.floor(1800 * Math.pow(1.5, lv)), crystal: Math.floor(700  * Math.pow(1.5, lv)), he3: Math.floor(300  * Math.pow(1.5, lv)) }),
   },
   shield_gen: {
-    name: 'Shield Generator', icon: '🛡️', maxLevel: 10,
+    name: 'Generator štita', icon: '🛡️', maxLevel: 10,
     desc: (lv) => `+${lv * 80} odbrana kolonije`,
     effect: (lv) => ({ defenseBonus: lv * 80 }),
     cost: (lv) => ({ metal: Math.floor(2000 * Math.pow(1.5, lv)), crystal: Math.floor(1200 * Math.pow(1.5, lv)), he3: Math.floor(400  * Math.pow(1.5, lv)) }),
