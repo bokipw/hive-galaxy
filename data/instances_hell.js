@@ -1,25 +1,23 @@
-// ============================================================
-// HIVE GALAXY � data/instances_easy.js
-// Normal instance data � R tier blueprinti, 3 flote
+﻿// ============================================================
+// HIVE GALAXY — data/instances_easy.js
+// Normal instance data — R tier blueprinti, 3 flote
 // ============================================================
 
 const INSTANCES_HELL = [
 
-  // ============================================
+  // ════════════════════════════════════════════
   // STANDARDNE INSTANCE (1-30)
-  // ============================================
+  // ════════════════════════════════════════════
 
   {
     id: 'inst_1', name: 'Instanca 1', type: 'standard', number: 1,
-    nameKey: 'instance.inst_1.name',
     difficulty: 1,
     min_power: 100000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Alpha Drone',
-    bossKey: 'instance.inst_1.boss',
-  bossShip: {"name":"Alpha Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
+  bossShip: {"name":"Alpha Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -35,21 +33,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
-    desc: 'Prva instanca. Savr�ena za po�etnike i Common opremu.',
+    desc: 'Prva instanca. Savršena za početnike i Common opremu.',
     unlock: 'Dostupna od starta',
   },
 
   {
     id: 'inst_2', name: 'Instanca 2', type: 'standard', number: 2,
-    nameKey: 'instance.inst_2.name',
     difficulty: 1,
     min_power: 100000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Beta Drone',
-    bossKey: 'instance.inst_2.boss',
-  bossShip: {"name":"Beta Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
+  bossShip: {"name":"Beta Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -66,21 +62,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [250, 600], crystal: [120, 350], he3: [60, 180] },
-    desc: 'Nastavak po�etne zone. Mali �tit I garantirani drop.',
-    unlock: 'Instanca 1 zavr�ena',
+    desc: 'Nastavak početne zone. Mali Štit I garantirani drop.',
+    unlock: 'Instanca 1 završena',
   },
 
   {
     id: 'inst_3', name: 'Instanca 3', type: 'standard', number: 3,
-    nameKey: 'instance.inst_3.name',
     difficulty: 1,
     min_power: 100000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Gamma Drone',
-    bossKey: 'instance.inst_3.boss',
-  bossShip: {"name":"Gamma Drone","structure":108000,"shield":36000,"armor_val":18000,"dps":17100,"agility":5,"speed":2},
+  bossShip: {"name":"Gamma Drone","structure":2560,"shield":840,"armor_val":320,"dps":144,"agility":3,"speed":2},
     drops: {
       guaranteed: [],
       chance: [
@@ -102,21 +96,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [300, 700], crystal: [150, 400], he3: [70, 200] },
-    desc: 'Takti�ki pogon garantiran. Dobra za early armor buildup.',
-    unlock: 'Instanca 2 zavr�ena',
+    desc: 'Taktički pogon garantiran. Dobra za early armor buildup.',
+    unlock: 'Instanca 2 završena',
   },
 
   {
     id: 'inst_4', name: 'Instanca 4', type: 'standard', number: 4,
-    nameKey: 'instance.inst_4.name',
     difficulty: 2,
     min_power: 220000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Delta Commander',
-    bossKey: 'instance.inst_4.boss',
-  bossShip: {"name":"Delta Commander","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
+  bossShip: {"name":"Delta Commander","structure":3840,"shield":1260,"armor_val":480,"dps":216,"agility":4,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -135,21 +127,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [400, 900], crystal: [200, 500], he3: [90, 250] },
-    desc: 'Srednji �tit I uvijek pada. Prijelaz u mid-tier opremu.',
-    unlock: 'Instanca 3 zavr�ena',
+    desc: 'Srednji Štit I uvijek pada. Prijelaz u mid-tier opremu.',
+    unlock: 'Instanca 3 završena',
   },
 
   {
     id: 'inst_5', name: 'Instanca 5', type: 'standard', number: 5,
-    nameKey: 'instance.inst_5.name',
     difficulty: 2,
     min_power: 220000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Marauder Fighter I', 'Rogue Drones III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Epsilon Warlord',
-    bossKey: 'instance.inst_5.boss',
-  bossShip: {"name":"Epsilon Warlord","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
+  bossShip: {"name":"Epsilon Warlord","structure":5120,"shield":1680,"armor_val":640,"dps":288,"agility":4,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -172,21 +162,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [500, 1100], crystal: [250, 600], he3: [110, 300] },
-    desc: 'Te�ki Drive I garantiran. Dobar za Lovce i Krstarice.',
-    unlock: 'Instanca 4 zavr�ena',
+    desc: 'Teški Drive I garantiran. Dobar za Lovce i Krstarice.',
+    unlock: 'Instanca 4 završena',
   },
 
   {
     id: 'inst_6', name: 'Instanca 6', type: 'standard', number: 6,
-    nameKey: 'instance.inst_6.name',
     difficulty: 2,
     min_power: 220000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Marauder Fighter I', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Zeta Commander',
-    bossKey: 'instance.inst_6.boss',
-  bossShip: {"name":"Zeta Commander","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
+  bossShip: {"name":"Zeta Commander","structure":6400,"shield":2100,"armor_val":800,"dps":360,"agility":4,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -209,21 +197,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [600, 1300], crystal: [300, 700], he3: [130, 360] },
-    desc: 'Jaki �tit I. Klju�na instanca za Krstarice i Bojne Brodove.',
-    unlock: 'Instanca 5 zavr�ena',
+    desc: 'Jaki Štit I. Ključna instanca za Krstarice i Bojne Brodove.',
+    unlock: 'Instanca 5 završena',
   },
 
   {
     id: 'inst_7', name: 'Instanca 7', type: 'standard', number: 7,
-    nameKey: 'instance.inst_7.name',
     difficulty: 2,
     min_power: 220000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Marauder Fighter II', 'Vex Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Eta Overlord',
-    bossKey: 'instance.inst_7.boss',
-  bossShip: {"name":"Eta Overlord","structure":225000,"shield":72000,"armor_val":36000,"dps":39600,"agility":6,"speed":3},
+  bossShip: {"name":"Eta Overlord","structure":8000,"shield":2625,"armor_val":1000,"dps":450,"agility":4,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -242,20 +228,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [700, 1500], crystal: [350, 800], he3: [150, 420] },
     desc: 'Basic Drive II garantiran. Dobar za early farming.',
-    unlock: 'Instanca 6 zavr�ena',
+    unlock: 'Instanca 6 završena',
   },
 
   {
     id: 'inst_8', name: 'Instanca 8', type: 'standard', number: 8,
-    nameKey: 'instance.inst_8.name',
     difficulty: 3,
     min_power: 484000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Vex Cruiser I', 'Marauder Fighter II'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Theta Admiral',
-    bossKey: 'instance.inst_8.boss',
-  bossShip: {"name":"Theta Admiral","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
+  bossShip: {"name":"Theta Admiral","structure":9600,"shield":3150,"armor_val":1200,"dps":540,"agility":5,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -273,21 +257,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [800, 1800], crystal: [400, 950], he3: [180, 500] },
-    desc: 'Mali �tit II garantiran. Prelazak u mid-tier instance.',
-    unlock: 'Instanca 7 zavr�ena',
+    desc: 'Mali Štit II garantiran. Prelazak u mid-tier instance.',
+    unlock: 'Instanca 7 završena',
   },
 
   {
     id: 'inst_9', name: 'Instanca 9', type: 'standard', number: 9,
-    nameKey: 'instance.inst_9.name',
     difficulty: 3,
     min_power: 484000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Shadow_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Iota Warlord',
-    bossKey: 'instance.inst_9.boss',
-  bossShip: {"name":"Iota Warlord","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
+  bossShip: {"name":"Iota Warlord","structure":11520,"shield":3780,"armor_val":1440,"dps":648,"agility":5,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -310,21 +292,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [900, 2000], crystal: [450, 1100], he3: [200, 560] },
-    desc: 'Takti�ki Drive II garantiran. Uvod u Magnetic oru�ja.',
-    unlock: 'Instanca 8 zavr�ena',
+    desc: 'Taktički Drive II garantiran. Uvod u Magnetic oružja.',
+    unlock: 'Instanca 8 završena',
   },
 
   {
     id: 'inst_10', name: 'Instanca 10', type: 'standard', number: 10,
-    nameKey: 'instance.inst_10.name',
     difficulty: 3,
     min_power: 484000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Kappa Commander',
-    bossKey: 'instance.inst_10.boss',
-  bossShip: {"name":"Kappa Commander","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
+  bossShip: {"name":"Kappa Commander","structure":13440,"shield":4410,"armor_val":1680,"dps":756,"agility":5,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -346,21 +326,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1100, 2400], crystal: [550, 1300], he3: [240, 660] },
-    desc: 'Srednji �tit II garantiran. Solid mid-game instanca.',
-    unlock: 'Instanca 9 zavr�ena',
+    desc: 'Srednji Štit II garantiran. Solid mid-game instanca.',
+    unlock: 'Instanca 9 završena',
   },
 
   {
     id: 'inst_11', name: 'Instanca 11', type: 'standard', number: 11,
-    nameKey: 'instance.inst_11.name',
     difficulty: 3,
     min_power: 484000,
-    icon: '??',
+    icon: '🌌',
     enemies: ['Khal Battleship I', 'Vex Cruiser III'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Lambda Dreadnought',
-    bossKey: 'instance.inst_11.boss',
-  bossShip: {"name":"Lambda Dreadnought","structure":540000,"shield":162000,"armor_val":81000,"dps":80100,"agility":7,"speed":4},
+  bossShip: {"name":"Lambda Dreadnought","structure":16000,"shield":5250,"armor_val":2000,"dps":900,"agility":5,"speed":3},
     drops: {
       guaranteed: [],
       chance: [
@@ -382,21 +360,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1300, 2800], crystal: [650, 1500], he3: [280, 760] },
-    desc: 'Kinetic Cannon II garantiran. Va�na instanca za DPS buildove.',
-    unlock: 'Instanca 10 zavr�ena',
+    desc: 'Kinetic Cannon II garantiran. Važna instanca za DPS buildove.',
+    unlock: 'Instanca 10 završena',
   },
 
   {
     id: 'inst_12', name: 'Instanca 12', type: 'standard', number: 12,
-    nameKey: 'instance.inst_12.name',
     difficulty: 4,
-    min_power: 1064800,
-    icon: '??',
+    min_power: 1065000,
+    icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Mu Overlord',
-    bossKey: 'instance.inst_12.boss',
-  bossShip: {"name":"Mu Overlord","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Mu Overlord","structure":19200,"shield":6300,"armor_val":2400,"dps":1080,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -425,21 +401,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1600, 3500], crystal: [800, 1900], he3: [350, 950] },
-    desc: 'Jaki �tit II garantiran. Uvod u Rare-tier opremu.',
-    unlock: 'Instanca 11 zavr�ena',
+    desc: 'Jaki Štit II garantiran. Uvod u Rare-tier opremu.',
+    unlock: 'Instanca 11 završena',
   },
 
   {
     id: 'inst_13', name: 'Instanca 13', type: 'standard', number: 13,
-    nameKey: 'instance.inst_13.name',
     difficulty: 4,
-    min_power: 1064800,
-    icon: '??',
+    min_power: 1065000,
+    icon: '🌌',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_PhantomX_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Nu Admiral',
-    bossKey: 'instance.inst_13.boss',
-  bossShip: {"name":"Nu Admiral","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Nu Admiral","structure":22400,"shield":7350,"armor_val":2800,"dps":1260,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -464,20 +438,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [1900, 4200], crystal: [950, 2200], he3: [420, 1100] },
     desc: 'Basic Drive III garantiran. Dobar za sve klase.',
-    unlock: 'Instanca 12 zavr�ena',
+    unlock: 'Instanca 12 završena',
   },
 
   {
     id: 'inst_14', name: 'Instanca 14', type: 'standard', number: 14,
-    nameKey: 'instance.inst_14.name',
     difficulty: 4,
-    min_power: 1064800,
-    icon: '??',
+    min_power: 1065000,
+    icon: '🌌',
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Xi Warlord',
-    bossKey: 'instance.inst_14.boss',
-  bossShip: {"name":"Xi Warlord","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Xi Warlord","structure":25600,"shield":8400,"armor_val":3200,"dps":1440,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -497,21 +469,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [2200, 4800], crystal: [1100, 2600], he3: [500, 1300] },
-    desc: 'Mali �tit III garantiran. Klju�an za Izvi�a�e.',
-    unlock: 'Instanca 13 zavr�ena',
+    desc: 'Mali Štit III garantiran. Ključan za Izviđače.',
+    unlock: 'Instanca 13 završena',
   },
 
   {
     id: 'inst_15', name: 'Instanca 15', type: 'standard', number: 15,
-    nameKey: 'instance.inst_15.name',
     difficulty: 4,
-    min_power: 1064800,
-    icon: '??',
+    min_power: 1065000,
+    icon: '🌌',
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":3}],
     boss: 'Omicron Dreadnought',
-    bossKey: 'instance.inst_15.boss',
-  bossShip: {"name":"Omicron Dreadnought","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Omicron Dreadnought","structure":30400,"shield":9975,"armor_val":3800,"dps":1710,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -551,21 +521,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [2600, 5500], crystal: [1300, 3000], he3: [580, 1550] },
-    desc: 'Takti�ki Drive III garantiran. Kraj early-mid game zone.',
-    unlock: 'Instanca 14 zavr�ena',
+    desc: 'Taktički Drive III garantiran. Kraj early-mid game zone.',
+    unlock: 'Instanca 14 završena',
   },
 
   {
     id: 'inst_16', name: 'Instanca 16', type: 'standard', number: 16,
-    nameKey: 'instance.inst_16.name',
     difficulty: 5,
-    min_power: 2342560,
-    icon: '??',
+    min_power: 2343000,
+    icon: '🌌',
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Pi Commander',
-    bossKey: 'instance.inst_16.boss',
-  bossShip: {"name":"Pi Commander","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Pi Commander","structure":35200,"shield":11550,"armor_val":4400,"dps":1980,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -588,21 +556,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [3000, 6500], crystal: [1500, 3500], he3: [680, 1800] },
-    desc: 'Srednji �tit III garantiran. Ulazak u late-mid game.',
-    unlock: 'Instanca 15 zavr�ena',
+    desc: 'Srednji Štit III garantiran. Ulazak u late-mid game.',
+    unlock: 'Instanca 15 završena',
   },
 
   {
     id: 'inst_17', name: 'Instanca 17', type: 'standard', number: 17,
-    nameKey: 'instance.inst_17.name',
     difficulty: 5,
-    min_power: 2342560,
-    icon: '??',
+    min_power: 2343000,
+    icon: '🌌',
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Rho Admiral',
-    bossKey: 'instance.inst_17.boss',
-  bossShip: {"name":"Rho Admiral","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Rho Admiral","structure":41600,"shield":13650,"armor_val":5200,"dps":2340,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -622,21 +588,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [3500, 7500], crystal: [1750, 4000], he3: [800, 2100] },
-    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosa�e.',
-    unlock: 'Instanca 16 zavr�ena',
+    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosače.',
+    unlock: 'Instanca 16 završena',
   },
 
   {
     id: 'inst_18', name: 'Instanca 18', type: 'standard', number: 18,
-    nameKey: 'instance.inst_18.name',
     difficulty: 5,
-    min_power: 2342560,
-    icon: '??',
+    min_power: 2343000,
+    icon: '🌌',
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
   enemyGroups: [{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Sigma Warlord',
-    bossKey: 'instance.inst_18.boss',
-  bossShip: {"name":"Sigma Warlord","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Sigma Warlord","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -666,21 +630,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [4000, 8500], crystal: [2000, 4600], he3: [920, 2400] },
-    desc: 'Jaki �tit III garantiran. Kraj standardnih instanci mid-tiera.',
-    unlock: 'Instanca 17 zavr�ena',
+    desc: 'Jaki Štit III garantiran. Kraj standardnih instanci mid-tiera.',
+    unlock: 'Instanca 17 završena',
   },
 
   {
     id: 'inst_19', name: 'Instanca 19', type: 'standard', number: 19,
-    nameKey: 'instance.inst_19.name',
     difficulty: 6,
-    min_power: 5153632,
-    icon: '??',
+    min_power: 5154000,
+    icon: '🌌',
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Tau Overlord',
-    bossKey: 'instance.inst_19.boss',
-  bossShip: {"name":"Tau Overlord","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Tau Overlord","structure":57600,"shield":18900,"armor_val":7200,"dps":3240,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -697,21 +659,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [4800, 10000], crystal: [2400, 5500], he3: [1100, 2900] },
-    desc: 'Ulazak u Rare zonu. �ansa za Phase �tit i Stealth Drive.',
-    unlock: 'Instanca 18 zavr�ena',
+    desc: 'Ulazak u Rare zonu. Šansa za Phase Štit i Stealth Drive.',
+    unlock: 'Instanca 18 završena',
   },
 
   {
     id: 'inst_20', name: 'Instanca 20', type: 'standard', number: 20,
-    nameKey: 'instance.inst_20.name',
     difficulty: 6,
-    min_power: 5153632,
-    icon: '??',
+    min_power: 5154000,
+    icon: '🌌',
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Upsilon Dreadnought',
-    bossKey: 'instance.inst_20.boss',
-  bossShip: {"name":"Upsilon Dreadnought","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Upsilon Dreadnought","structure":67200,"shield":22050,"armor_val":8400,"dps":3780,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -739,21 +699,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [5500, 12000], crystal: [2750, 6500], he3: [1300, 3400] },
-    desc: 'Sprint Drive I garantiran. Particle �tit �ansa.',
-    unlock: 'Instanca 19 zavr�ena',
+    desc: 'Sprint Drive I garantiran. Particle Štit šansa.',
+    unlock: 'Instanca 19 završena',
   },
 
   {
     id: 'inst_21', name: 'Instanca 21', type: 'standard', number: 21,
-    nameKey: 'instance.inst_21.name',
     difficulty: 6,
-    min_power: 5153632,
-    icon: '??',
+    min_power: 5154000,
+    icon: '🌌',
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":3}],
     boss: 'Phi Commander',
-    bossKey: 'instance.inst_21.boss',
-  bossShip: {"name":"Phi Commander","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Phi Commander","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -787,21 +745,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [6500, 14000], crystal: [3250, 7500], he3: [1550, 4000] },
-    desc: 'Heat Diffusion �tit I garantiran. Ulazak u visoke standard instance.',
-    unlock: 'Instanca 20 zavr�ena',
+    desc: 'Heat Diffusion Štit I garantiran. Ulazak u visoke standard instance.',
+    unlock: 'Instanca 20 završena',
   },
 
   {
     id: 'inst_22', name: 'Instanca 22', type: 'standard', number: 22,
-    nameKey: 'instance.inst_22.name',
     difficulty: 7,
-    min_power: 11337990,
-    icon: '??',
+    min_power: 11338000,
+    icon: '🌌',
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Chi Warlord',
-    bossKey: 'instance.inst_22.boss',
-  bossShip: {"name":"Chi Warlord","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Chi Warlord","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -824,21 +780,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [4000, 9000], he3: [1900, 4800] },
-    desc: 'Stealth Drive I garantiran. �ansa za Quantum Lance.',
-    unlock: 'Instanca 21 zavr�ena',
+    desc: 'Stealth Drive I garantiran. Šansa za Quantum Lance.',
+    unlock: 'Instanca 21 završena',
   },
 
   {
     id: 'inst_23', name: 'Instanca 23', type: 'standard', number: 23,
-    nameKey: 'instance.inst_23.name',
     difficulty: 7,
-    min_power: 11337990,
-    icon: '??',
+    min_power: 11338000,
+    icon: '🌌',
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Psi Admiral',
-    bossKey: 'instance.inst_23.boss',
-  bossShip: {"name":"Psi Admiral","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Psi Admiral","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -865,21 +819,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [9500, 20000], crystal: [4750, 10500], he3: [2200, 5600] },
-    desc: 'Uvod u endgame standardnih instanci. �ansa za Rare-Epic opremu.',
-    unlock: 'Instanca 22 zavr�ena',
+    desc: 'Uvod u endgame standardnih instanci. Šansa za Rare-Epic opremu.',
+    unlock: 'Instanca 22 završena',
   },
 
   {
     id: 'inst_24', name: 'Instanca 24', type: 'standard', number: 24,
-    nameKey: 'instance.inst_24.name',
     difficulty: 7,
-    min_power: 11337990,
-    icon: '??',
+    min_power: 11338000,
+    icon: '🌌',
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
   enemyGroups: [{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Omega Warlord',
-    bossKey: 'instance.inst_24.boss',
-  bossShip: {"name":"Omega Warlord","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Omega Warlord","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -918,20 +870,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [11000, 23000], crystal: [5500, 12500], he3: [2600, 6600] },
     desc: 'Sprint Drive II garantiran.',
-    unlock: 'Instanca 23 zavr�ena',
+    unlock: 'Instanca 23 završena',
   },
 
   {
     id: 'inst_25', name: 'Instanca 25', type: 'standard', number: 25,
-    nameKey: 'instance.inst_25.name',
     difficulty: 8,
-    min_power: 24943579,
-    icon: '??',
+    min_power: 24944000,
+    icon: '🌌',
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Omega Admiral',
-    bossKey: 'instance.inst_25.boss',
-  bossShip: {"name":"Omega Admiral","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Omega Admiral","structure":153600,"shield":50400,"armor_val":19200,"dps":8640,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -965,20 +915,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [13000, 28000], crystal: [6500, 15000], he3: [3100, 7900] },
     desc: 'Heat Diffusion II garantiran. Kraj mid standardnih instanci.',
-    unlock: 'Instanca 24 zavr�ena',
+    unlock: 'Instanca 24 završena',
   },
 
   {
     id: 'inst_26', name: 'Instanca 26', type: 'standard', number: 26,
-    nameKey: 'instance.inst_26.name',
     difficulty: 8,
-    min_power: 24943579,
-    icon: '??',
+    min_power: 24944000,
+    icon: '🌌',
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Haven_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Titan Warlord',
-    bossKey: 'instance.inst_26.boss',
-  bossShip: {"name":"Titan Warlord","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Titan Warlord","structure":185600,"shield":60900,"armor_val":23200,"dps":10440,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1015,20 +963,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [16000, 34000], crystal: [8000, 18000], he3: [3800, 9500] },
     desc: 'Stealth Drive II garantiran. Ulazak u endgame standardnih instanci.',
-    unlock: 'Instanca 25 zavr�ena',
+    unlock: 'Instanca 25 završena',
   },
 
   {
     id: 'inst_27', name: 'Instanca 27', type: 'standard', number: 27,
-    nameKey: 'instance.inst_27.name',
     difficulty: 8,
-    min_power: 24943579,
-    icon: '??',
+    min_power: 24944000,
+    icon: '🌌',
     enemies: ['Omega Carrier II', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Colossus Commander',
-    bossKey: 'instance.inst_27.boss',
-  bossShip: {"name":"Colossus Commander","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Colossus Commander","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1065,21 +1011,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [19000, 40000], crystal: [9500, 21500], he3: [4500, 11500] },
-    desc: 'Te�ka instanca. Dobar izvor Epic komponenti.',
-    unlock: 'Instanca 26 zavr�ena',
+    desc: 'Teška instanca. Dobar izvor Epic komponenti.',
+    unlock: 'Instanca 26 završena',
   },
 
   {
     id: 'inst_28', name: 'Instanca 28', type: 'standard', number: 28,
-    nameKey: 'instance.inst_28.name',
     difficulty: 9,
-    min_power: 54875874,
-    icon: '??',
+    min_power: 54876000,
+    icon: '🌌',
     enemies: ['Void Flagship I', 'Omega Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Destroyer Prime',
-    bossKey: 'instance.inst_28.boss',
-  bossShip: {"name":"Destroyer Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Destroyer Prime","structure":272000,"shield":89250,"armor_val":34000,"dps":15300,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1116,21 +1060,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [23000, 48000], crystal: [11500, 26000], he3: [5500, 14000] },
-    desc: 'Particle Stun III garantiran. �ansa za Quantum Drive.',
-    unlock: 'Instanca 27 zavr�ena',
+    desc: 'Particle Stun III garantiran. Šansa za Quantum Drive.',
+    unlock: 'Instanca 27 završena',
   },
 
   {
     id: 'inst_29', name: 'Instanca 29', type: 'standard', number: 29,
-    nameKey: 'instance.inst_29.name',
     difficulty: 9,
-    min_power: 54875874,
-    icon: '??',
+    min_power: 54876000,
+    icon: '🌌',
     enemies: ['Omega Carrier III', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":3}],
     boss: 'Annihilator Prime',
-    bossKey: 'instance.inst_29.boss',
-  bossShip: {"name":"Annihilator Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Annihilator Prime","structure":320000,"shield":105000,"armor_val":40000,"dps":18000,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1158,20 +1100,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [28000, 58000], crystal: [14000, 31000], he3: [6600, 17000] },
     desc: 'Heat Diffusion III garantiran. Predposljednja standardna instanca.',
-    unlock: 'Instanca 28 zavr�ena',
+    unlock: 'Instanca 28 završena',
   },
 
   {
     id: 'inst_30', name: 'Instanca 30', type: 'standard', number: 30,
-    nameKey: 'instance.inst_30.name',
     difficulty: 10,
-    min_power: 120726922,
-    icon: '??',
+    min_power: 120727000,
+    icon: '🌌',
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Goliath_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
     boss: 'Omega Supreme',
-    bossKey: 'instance.inst_30.boss',
-  bossShip: {"name":"Omega Supreme","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Omega Supreme","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1220,24 +1160,22 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [35000, 72000], crystal: [17500, 37000], he3: [8500, 21000] },
     desc: 'Posljednja standardna instanca. Quantum Drive garantiran. Prolaz za Restricted.',
-    unlock: 'Instanca 29 zavr�ena',
+    unlock: 'Instanca 29 završena',
   },
 
-  // ============================================
+  // ════════════════════════════════════════════
   // RESTRICTED INSTANCE (1-10)
-  // ============================================
+  // ════════════════════════════════════════════
 
   {
     id: 'rest_1', name: 'Restricted 1', type: 'restricted', number: 1,
-    nameKey: 'instance.rest_1.name',
     difficulty: 5,
-    min_power: 3045328,
-    icon: '??',
+    min_power: 20000,
+    icon: '🔒',
     enemies: ['Elite Marauder I', 'Phase Hunter I'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Razor_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_PhantomX_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Phase Lord I',
-    bossKey: 'instance.rest_1.boss',
-  bossShip: {"name":"Phase Lord I","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Phase Lord I","structure":64000,"shield":21000,"armor_val":8000,"dps":3600,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -1262,21 +1200,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [5000, 11000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Prva Restricted instanca. Phase �tit I garantiran.',
-    unlock: 'Instanca 15+ zavr�ena',
+    desc: 'Prva Restricted instanca. Phase Štit I garantiran.',
+    unlock: 'Instanca 15+ završena',
   },
 
   {
     id: 'rest_2', name: 'Restricted 2', type: 'restricted', number: 2,
-    nameKey: 'instance.rest_2.name',
     difficulty: 6,
-    min_power: 6699722,
-    icon: '??',
+    min_power: 30000,
+    icon: '🔒',
     enemies: ['Elite Marauder II', 'Quantum Hunter I'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Quantum Lord I',
-    bossKey: 'instance.rest_2.boss',
-  bossShip: {"name":"Quantum Lord I","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Quantum Lord I","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1301,21 +1237,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
-    desc: 'Space-Time Magnetic �tit I garantiran. Epic Motori �ansa.',
-    unlock: 'Restricted 1 zavr�ena',
+    desc: 'Space-Time Magnetic Štit I garantiran. Epic Motori šansa.',
+    unlock: 'Restricted 1 završena',
   },
 
   {
     id: 'rest_3', name: 'Restricted 3', type: 'restricted', number: 3,
-    nameKey: 'instance.rest_3.name',
     difficulty: 6,
-    min_power: 6699722,
-    icon: '??',
+    min_power: 40000,
+    icon: '🔒',
     enemies: ['Elite Cruiser I', 'Phase Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Phase Lord II',
-    bossKey: 'instance.rest_3.boss',
-  bossShip: {"name":"Phase Lord II","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Phase Lord II","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1340,21 +1274,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [11000, 23000], crystal: [7000, 15000], he3: [3500, 9000] },
-    desc: 'Phase �tit II garantiran.',
-    unlock: 'Restricted 2 zavr�ena',
+    desc: 'Phase Štit II garantiran.',
+    unlock: 'Restricted 2 završena',
   },
 
   {
     id: 'rest_4', name: 'Restricted 4', type: 'restricted', number: 4,
-    nameKey: 'instance.rest_4.name',
     difficulty: 7,
-    min_power: 14739388,
-    icon: '??',
+    min_power: 55000,
+    icon: '🔒',
     enemies: ['Elite Battleship I', 'Quantum Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":3}],
     boss: 'Quantum Lord II',
-    bossKey: 'instance.rest_4.boss',
-  bossShip: {"name":"Quantum Lord II","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Quantum Lord II","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1381,20 +1313,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [15000, 32000], crystal: [9500, 20000], he3: [4800, 12000] },
     desc: 'Space-Time Magnetic II garantiran. Epic zone.',
-    unlock: 'Restricted 3 zavr�ena',
+    unlock: 'Restricted 3 završena',
   },
 
   {
     id: 'rest_5', name: 'Restricted 5', type: 'restricted', number: 5,
-    nameKey: 'instance.rest_5.name',
     difficulty: 7,
-    min_power: 14739388,
-    icon: '??',
+    min_power: 70000,
+    icon: '🔒',
     enemies: ['Elite Carrier I', 'Phase Dreadnought I'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":3}],
     boss: 'Phase Dreadnought Alpha',
-    bossKey: 'instance.rest_5.boss',
-  bossShip: {"name":"Phase Dreadnought Alpha","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Phase Dreadnought Alpha","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -1422,21 +1352,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 27000], he3: [6500, 16500] },
-    desc: 'Phase �tit III garantiran. Polovina Restricted zone.',
-    unlock: 'Restricted 4 zavr�ena',
+    desc: 'Phase Štit III garantiran. Polovina Restricted zone.',
+    unlock: 'Restricted 4 završena',
   },
 
   {
     id: 'rest_6', name: 'Restricted 6', type: 'restricted', number: 6,
-    nameKey: 'instance.rest_6.name',
     difficulty: 8,
-    min_power: 32426653,
-    icon: '??',
+    min_power: 90000,
+    icon: '🔒',
     enemies: ['Elite Battleship II', 'Void Hunter I'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Void Hunter Prime',
-    bossKey: 'instance.rest_6.boss',
-  bossShip: {"name":"Void Hunter Prime","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Void Hunter Prime","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1466,20 +1394,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [26000, 55000], crystal: [16500, 35000], he3: [8200, 21000] },
     desc: 'Space-Time Magnetic III garantiran. Ulazak u endgame Restricted.',
-    unlock: 'Restricted 5 zavr�ena',
+    unlock: 'Restricted 5 završena',
   },
 
   {
     id: 'rest_7', name: 'Restricted 7', type: 'restricted', number: 7,
-    nameKey: 'instance.rest_7.name',
     difficulty: 8,
-    min_power: 32426653,
-    icon: '??',
+    min_power: 115000,
+    icon: '🔒',
     enemies: ['Elite Carrier II', 'Void Hunter II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Void Destroyer',
-    bossKey: 'instance.rest_7.boss',
-  bossShip: {"name":"Void Destroyer","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Void Destroyer","structure":368000,"shield":120750,"armor_val":46000,"dps":20700,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1508,20 +1434,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [33000, 69000], crystal: [21000, 44000], he3: [10500, 27000] },
     desc: 'Berserker Drive III garantiran. Visoka Restricted zona.',
-    unlock: 'Restricted 6 zavr�ena',
+    unlock: 'Restricted 6 završena',
   },
 
   {
     id: 'rest_8', name: 'Restricted 8', type: 'restricted', number: 8,
-    nameKey: 'instance.rest_8.name',
     difficulty: 9,
-    min_power: 71338636,
-    icon: '??',
+    min_power: 145000,
+    icon: '🔒',
     enemies: ['Apex Battleship I', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Apex Destroyer I',
-    bossKey: 'instance.rest_8.boss',
-  bossShip: {"name":"Apex Destroyer I","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Apex Destroyer I","structure":464000,"shield":152250,"armor_val":58000,"dps":26100,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1550,21 +1474,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Eos Phase �tit I garantiran. Pristup Carrier brodovima.',
-    unlock: 'Restricted 7 zavr�ena',
+    desc: 'Eos Phase Štit I garantiran. Pristup Carrier brodovima.',
+    unlock: 'Restricted 7 završena',
   },
 
   {
     id: 'rest_9', name: 'Restricted 9', type: 'restricted', number: 9,
-    nameKey: 'instance.rest_9.name',
     difficulty: 9,
-    min_power: 71338636,
-    icon: '??',
+    min_power: 185000,
+    icon: '🔒',
     enemies: ['Apex Battleship II', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Apex Destroyer II',
-    bossKey: 'instance.rest_9.boss',
-  bossShip: {"name":"Apex Destroyer II","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Apex Destroyer II","structure":592000,"shield":194250,"armor_val":74000,"dps":33300,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -1594,20 +1516,18 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [55000, 115000], crystal: [34000, 72000], he3: [17000, 44000] },
     desc: 'Eos Phase II garantiran. Predposljednja Restricted instanca.',
-    unlock: 'Restricted 8 zavr�ena',
+    unlock: 'Restricted 8 završena',
   },
 
   {
     id: 'rest_10', name: 'Restricted 10', type: 'restricted', number: 10,
-    nameKey: 'instance.rest_10.name',
     difficulty: 10,
-    min_power: 156944998,
-    icon: '??',
+    min_power: 240000,
+    icon: '🔒',
     enemies: ['Apex Carrier I', 'Omega Flagship I'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Omega Apex Supreme',
-    bossKey: 'instance.rest_10.boss',
-  bossShip: {"name":"Omega Apex Supreme","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Omega Apex Supreme","structure":768000,"shield":252000,"armor_val":96000,"dps":43200,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -1640,27 +1560,25 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [70000, 145000], crystal: [44000, 92000], he3: [22000, 57000] },
-    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Klju� za Trial.',
-    unlock: 'Restricted 9 zavr�ena',
+    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Ključ za Trial.',
+    unlock: 'Restricted 9 završena',
   },
 
-  // ============================================
-  // TRIAL INSTANCE (1-10) � timed, ranked
-  // ============================================
+  // ════════════════════════════════════════════
+  // TRIAL INSTANCE (1-10) — timed, ranked
+  // ════════════════════════════════════════════
 
   {
     id: 'trial_1', name: 'Trial 1', type: 'trial', number: 1,
-    nameKey: 'instance.trial_1.name',
     difficulty: 6,
-    min_power: 8761174,
-    icon: '??',
+    min_power: 50000,
+    icon: '⚔️',
     time_limit_minutes: 30,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Drone Wave I', 'Trial Cruiser I'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Nemesis_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Commander Alpha',
-    bossKey: 'instance.trial_1.boss',
-  bossShip: {"name":"Trial Commander Alpha","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Trial Commander Alpha","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
     drops: {
       rank_S: ['mod_crit_amp_III', 'eng_sprint_III'],
       rank_A: ['mod_shield_booster_III', 'eng_he3_saver_III'],
@@ -1684,22 +1602,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [15000, 35000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Prva Trial instanca. Zahtijeva brzinu. S rank = Epic modul.',
-    unlock: 'Restricted 5 zavr�ena',
+    unlock: 'Restricted 5 završena',
   },
 
   {
     id: 'trial_2', name: 'Trial 2', type: 'trial', number: 2,
-    nameKey: 'instance.trial_2.name',
     difficulty: 7,
-    min_power: 19274584,
-    icon: '??',
+    min_power: 70000,
+    icon: '⚔️',
     time_limit_minutes: 28,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Fighter Wave I', 'Trial Battleship I'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Admiral Beta',
-    bossKey: 'instance.trial_2.boss',
-  bossShip: {"name":"Trial Admiral Beta","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Admiral Beta","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
     drops: {
       rank_S: ['mod_overload_III', 'eng_berserker_III'],
       rank_A: ['mod_emp_burst_II', 'eng_quantum_II'],
@@ -1722,22 +1638,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [20000, 44000], crystal: [13000, 29000], he3: [6500, 17000] },
     desc: 'Trial 2. Overload III i Berserker III za S rank.',
-    unlock: 'Trial 1 zavr�ena',
+    unlock: 'Trial 1 završena',
   },
 
   {
     id: 'trial_3', name: 'Trial 3', type: 'trial', number: 3,
-    nameKey: 'instance.trial_3.name',
     difficulty: 7,
-    min_power: 19274584,
-    icon: '??',
+    min_power: 90000,
+    icon: '⚔️',
     time_limit_minutes: 25,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Carrier Wave I', 'Trial Battleship II'],
   enemyGroups: [{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Trial Overlord Gamma',
-    bossKey: 'instance.trial_3.boss',
-  bossShip: {"name":"Trial Overlord Gamma","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Overlord Gamma","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
     drops: {
       rank_S: ['eng_hyperdrive_I', 'mod_annihilator_I'],
       rank_A: ['eng_quantum_III', 'mod_chrono_matrix_I'],
@@ -1762,22 +1676,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [27000, 56000], crystal: [17000, 37000], he3: [8500, 22000] },
     desc: 'Trial 3. Hyperdrive I i Annihilator I za S rank.',
-    unlock: 'Trial 2 zavr�ena',
+    unlock: 'Trial 2 završena',
   },
 
   {
     id: 'trial_4', name: 'Trial 4', type: 'trial', number: 4,
-    nameKey: 'instance.trial_4.name',
     difficulty: 8,
-    min_power: 42404084,
-    icon: '??',
+    min_power: 120000,
+    icon: '⚔️',
     time_limit_minutes: 22,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Flagship Wave I', 'Trial Carrier II'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Warlord Delta',
-    bossKey: 'instance.trial_4.boss',
-  bossShip: {"name":"Trial Warlord Delta","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Warlord Delta","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":9,"speed":6},
     drops: {
       rank_S: ['mod_annihilator_I', 'eng_voidwarp_II'],
       rank_A: ['eng_hyperdrive_II', 'mod_chrono_matrix_II'],
@@ -1802,22 +1714,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [36000, 74000], crystal: [22500, 47000], he3: [11000, 28000] },
     desc: 'Trial 4. Mid-tier Trial. Brodovi klase special pojavljuju se.',
-    unlock: 'Trial 3 zavr�ena',
+    unlock: 'Trial 3 završena',
   },
 
   {
     id: 'trial_5', name: 'Trial 5', type: 'trial', number: 5,
-    nameKey: 'instance.trial_5.name',
     difficulty: 8,
-    min_power: 42404084,
-    icon: '??',
+    min_power: 155000,
+    icon: '⚔️',
     time_limit_minutes: 20,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Dreadnought I', 'Trial Carrier III'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Dreadnought Alpha',
-    bossKey: 'instance.trial_5.boss',
-  bossShip: {"name":"Trial Dreadnought Alpha","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Trial Dreadnought Alpha","structure":496000,"shield":162750,"armor_val":62000,"dps":27900,"agility":9,"speed":6},
     drops: {
       rank_S: ['eng_hyperdrive_II', 'sh_void_field_I'],
       rank_A: ['mod_annihilator_II', 'eng_celestial_I'],
@@ -1847,23 +1757,21 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [46000, 96000], crystal: [29000, 62000], he3: [14500, 37000] },
-    desc: 'Trial 5. Hyperdrive II �ansa za S rank.',
-    unlock: 'Trial 4 zavr�ena',
+    desc: 'Trial 5. Hyperdrive II šansa za S rank.',
+    unlock: 'Trial 4 završena',
   },
 
   {
     id: 'trial_6', name: 'Trial 6', type: 'trial', number: 6,
-    nameKey: 'instance.trial_6.name',
     difficulty: 9,
-    min_power: 93288985,
-    icon: '??',
+    min_power: 200000,
+    icon: '⚔️',
     time_limit_minutes: 18,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Flagship II', 'Trial Dreadnought II'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Flagship Commander',
-    bossKey: 'instance.trial_6.boss',
-  bossShip: {"name":"Trial Flagship Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Flagship Commander","structure":640000,"shield":210000,"armor_val":80000,"dps":36000,"agility":10,"speed":6},
     drops: {
       rank_S: ['eng_hyperdrive_III', 'sh_fortress_II'],
       rank_A: ['mod_chrono_matrix_I', 'eng_voidwarp_II'],
@@ -1890,23 +1798,21 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [60000, 125000], crystal: [38000, 80000], he3: [19000, 48000] },
-    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona po�inje.',
-    unlock: 'Trial 5 zavr�ena',
+    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona počinje.',
+    unlock: 'Trial 5 završena',
   },
 
   {
     id: 'trial_7', name: 'Trial 7', type: 'trial', number: 7,
-    nameKey: 'instance.trial_7.name',
     difficulty: 9,
-    min_power: 93288985,
-    icon: '??',
+    min_power: 260000,
+    icon: '⚔️',
     time_limit_minutes: 15,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Omega Carrier I', 'Trial Flagship III'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Omega Warlord',
-    bossKey: 'instance.trial_7.boss',
-  bossShip: {"name":"Trial Omega Warlord","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Omega Warlord","structure":832000,"shield":273000,"armor_val":104000,"dps":46800,"agility":10,"speed":6},
     drops: {
       rank_S: ['eng_celestial_II', 'mod_fleet_commander_I'],
       rank_A: ['sh_void_field_II', 'eng_hyperdrive_III'],
@@ -1933,22 +1839,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [78000, 162000], crystal: [49000, 103000], he3: [24500, 62000] },
     desc: 'Trial 7. Celestial II i Fleet Commander I za S rank.',
-    unlock: 'Trial 6 zavr�ena',
+    unlock: 'Trial 6 završena',
   },
 
   {
     id: 'trial_8', name: 'Trial 8', type: 'trial', number: 8,
-    nameKey: 'instance.trial_8.name',
     difficulty: 9,
-    min_power: 93288985,
-    icon: '??',
+    min_power: 330000,
+    icon: '⚔️',
     time_limit_minutes: 12,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Apex Carrier I', 'Trial Omega Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Protector_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":3}],
     boss: 'Trial Apex Commander',
-    bossKey: 'instance.trial_8.boss',
-  bossShip: {"name":"Trial Apex Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Apex Commander","structure":1056000,"shield":346500,"armor_val":132000,"dps":59400,"agility":10,"speed":6},
     drops: {
       rank_S: ['mod_chrono_matrix_II', 'eng_voidwarp_III'],
       rank_A: ['mod_fortress_core_III', 'sh_void_field_III'],
@@ -1976,22 +1880,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [100000, 210000], crystal: [63000, 133000], he3: [31500, 80000] },
     desc: 'Trial 8. Chrono Matrix II i VoidWarp III za S rank.',
-    unlock: 'Trial 7 zavr�ena',
+    unlock: 'Trial 7 završena',
   },
 
   {
     id: 'trial_9', name: 'Trial 9', type: 'trial', number: 9,
-    nameKey: 'instance.trial_9.name',
     difficulty: 10,
-    min_power: 205235767,
-    icon: '??',
+    min_power: 420000,
+    icon: '⚔️',
     time_limit_minutes: 10,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Apex Flagship I', 'Trial Omega Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'Trial Supreme Alpha',
-    bossKey: 'instance.trial_9.boss',
-  bossShip: {"name":"Trial Supreme Alpha","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Trial Supreme Alpha","structure":1344000,"shield":441000,"armor_val":168000,"dps":75600,"agility":10,"speed":7},
     drops: {
       rank_S: ['eng_celestial_III', 'sh_immortal_III'],
       rank_A: ['mod_chrono_matrix_III', 'eng_hyperdrive_III'],
@@ -2019,23 +1921,21 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [130000, 270000], crystal: [82000, 172000], he3: [41000, 104000] },
-    desc: 'Trial 9. Celestial III za S rank. Gotovo nemogu�e bez endgame opreme.',
-    unlock: 'Trial 8 zavr�ena',
+    desc: 'Trial 9. Celestial III za S rank. Gotovo nemoguće bez endgame opreme.',
+    unlock: 'Trial 8 završena',
   },
 
   {
     id: 'trial_10', name: 'Trial 10', type: 'trial', number: 10,
-    nameKey: 'instance.trial_10.name',
     difficulty: 10,
-    min_power: 205235767,
-    icon: '??',
+    min_power: 540000,
+    icon: '⚔️',
     time_limit_minutes: 8,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Supreme Flagship', 'Trial Apex Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
-    boss: 'Trial Supreme Omega � Final Boss',
-    bossKey: 'instance.trial_10.boss',
-  bossShip: {"name":"Trial Supreme Omega � Final Boss","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+    boss: 'Trial Supreme Omega — Final Boss',
+  bossShip: {"name":"Trial Supreme Omega — Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_fleet_commander_III', 'mod_chrono_matrix_III'],
       rank_A: ['eng_celestial_III', 'sh_void_field_III'],
@@ -2069,22 +1969,20 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [170000, 350000], crystal: [107000, 225000], he3: [53000, 135000] },
     desc: 'Zadnja Trial instanca. Fleet Commander III za S rank. Samo endgame elite.',
-    unlock: 'Trial 9 zavr�ena',
+    unlock: 'Trial 9 završena',
   },
 
-  // ============================================
+  // ════════════════════════════════════════════
   // HUMANOID INSTANCE (1-10)
-  // ============================================
+  // ════════════════════════════════════════════
 
   {
     id: 'human_1', name: 'Humanoid 1', type: 'humanoid', number: 1,
-    nameKey: 'instance.human_1.name',
-    difficulty: 4, min_power: 2129600, icon: '??',
+    difficulty: 4, min_power: 15000, icon: '👤',
     enemies: ['Humanoid Militia', 'Humanoid Light Cruiser'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":3}],
     boss: 'Commander Rook',
-    bossKey: 'instance.human_1.boss',
-  bossShip: {"name":"Commander Rook","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Commander Rook","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2107,18 +2005,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Uvod u Humanoid zone. Aegis Shield I garantiran.',
-    unlock: 'Instanca 15 zavr�ena',
+    unlock: 'Instanca 15 završena',
   },
 
   {
     id: 'human_2', name: 'Humanoid 2', type: 'humanoid', number: 2,
-    nameKey: 'instance.human_2.name',
-    difficulty: 5, min_power: 4685120, icon: '??',
+    difficulty: 5, min_power: 25000, icon: '👤',
     enemies: ['Humanoid Marine Squad', 'Humanoid Destroyer'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Fortress_III","count":10000,"row":3,"col":3}],
     boss: 'Admiral Vance',
-    bossKey: 'instance.human_2.boss',
-  bossShip: {"name":"Admiral Vance","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Admiral Vance","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2143,18 +2039,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [8000, 18000], crystal: [5000, 12000], he3: [2500, 6500] },
     desc: 'Sentinel Drive I garantiran.',
-    unlock: 'Humanoid 1 zavr�ena',
+    unlock: 'Humanoid 1 završena',
   },
 
   {
     id: 'human_3', name: 'Humanoid 3', type: 'humanoid', number: 3,
-    nameKey: 'instance.human_3.name',
-    difficulty: 6, min_power: 10307264, icon: '??',
+    difficulty: 6, min_power: 40000, icon: '👤',
     enemies: ['Humanoid Fighter Squadron', 'Humanoid Cruiser Wing'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Humanoid Admiral Kara',
-    bossKey: 'instance.human_3.boss',
-  bossShip: {"name":"Humanoid Admiral Kara","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Humanoid Admiral Kara","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2175,19 +2069,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [12000, 26000], crystal: [8000, 17000], he3: [4000, 10500] },
-    desc: 'Aegis �tit I garantiran. �ansa za Independence Flagship.',
-    unlock: 'Humanoid 2 zavr�ena',
+    desc: 'Aegis Štit I garantiran. Šansa za Independence Flagship.',
+    unlock: 'Humanoid 2 završena',
   },
 
   {
     id: 'human_4', name: 'Humanoid 4', type: 'humanoid', number: 4,
-    nameKey: 'instance.human_4.name',
-    difficulty: 6, min_power: 10307264, icon: '??',
+    difficulty: 6, min_power: 55000, icon: '👤',
     enemies: ['Humanoid Battlegroup', 'Humanoid Carrier Wing'],
   enemyGroups: [{"ship_id":"battleship_Leviathan_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Fleet Admiral Seras',
-    bossKey: 'instance.human_4.boss',
-  bossShip: {"name":"Fleet Admiral Seras","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Fleet Admiral Seras","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2207,18 +2099,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [16000, 34000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Aegis II garantiran.',
-    unlock: 'Humanoid 3 zavr�ena',
+    unlock: 'Humanoid 3 završena',
   },
 
   {
     id: 'human_5', name: 'Humanoid 5', type: 'humanoid', number: 5,
-    nameKey: 'instance.human_5.name',
-    difficulty: 7, min_power: 22675981, icon: '??',
+    difficulty: 7, min_power: 65000, icon: '👤',
     enemies: ['Humanoid Battleship Wing', 'Humanoid Carrier'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Fortress_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":3}],
     boss: 'Humanoid Warlord Vex',
-    bossKey: 'instance.human_5.boss',
-  bossShip: {"name":"Humanoid Warlord Vex","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Humanoid Warlord Vex","structure":208000,"shield":68250,"armor_val":26000,"dps":11700,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2244,19 +2134,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 28000], he3: [6500, 17000] },
-    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship �ansa.',
-    unlock: 'Humanoid 4 zavr�ena',
+    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship šansa.',
+    unlock: 'Humanoid 4 završena',
   },
 
   {
     id: 'human_6', name: 'Humanoid 6', type: 'humanoid', number: 6,
-    nameKey: 'instance.human_6.name',
-    difficulty: 7, min_power: 22675981, icon: '??',
+    difficulty: 7, min_power: 90000, icon: '👤',
     enemies: ['Humanoid Heavy Battleship', 'Humanoid Flagship'],
   enemyGroups: [{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":2,"col":1},{"ship_id":"cruiser_Citadel_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Grand Admiral Kael',
-    bossKey: 'instance.human_6.boss',
-  bossShip: {"name":"Grand Admiral Kael","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Grand Admiral Kael","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2278,18 +2166,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [28000, 58000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Sentinel II garantiran.',
-    unlock: 'Humanoid 5 zavr�ena',
+    unlock: 'Humanoid 5 završena',
   },
 
   {
     id: 'human_7', name: 'Humanoid 7', type: 'humanoid', number: 7,
-    nameKey: 'instance.human_7.name',
-    difficulty: 8, min_power: 49887158, icon: '??',
+    difficulty: 8, min_power: 140000, icon: '👤',
     enemies: ['Humanoid Apex Carrier', 'Humanoid Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":3}],
     boss: 'Supreme Commander Voss',
-    bossKey: 'instance.human_7.boss',
-  bossShip: {"name":"Supreme Commander Voss","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Supreme Commander Voss","structure":448000,"shield":147000,"armor_val":56000,"dps":25200,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2308,19 +2194,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Aegis III garantiran. Independence II �ansa.',
-    unlock: 'Humanoid 6 zavr�ena',
+    desc: 'Aegis III garantiran. Independence II šansa.',
+    unlock: 'Humanoid 6 završena',
   },
 
   {
     id: 'human_8', name: 'Humanoid 8', type: 'humanoid', number: 8,
-    nameKey: 'instance.human_8.name',
-    difficulty: 9, min_power: 109751747, icon: '??',
+    difficulty: 9, min_power: 180000, icon: '👤',
     enemies: ['Humanoid Apex Carrier', 'Humanoid Supreme Flagship'],
   enemyGroups: [{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":3}],
     boss: 'Humanoid Supreme Commander',
-    bossKey: 'instance.human_8.boss',
-  bossShip: {"name":"Humanoid Supreme Commander","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Humanoid Supreme Commander","structure":576000,"shield":189000,"armor_val":72000,"dps":32400,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2347,19 +2231,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [55000, 115000], crystal: [35000, 73000], he3: [17500, 44500] },
-    desc: 'Aegis III garantiran. Quick Assault Flagship �ansa.',
-    unlock: 'Humanoid 7 zavr�ena',
+    desc: 'Aegis III garantiran. Quick Assault Flagship šansa.',
+    unlock: 'Humanoid 7 završena',
   },
 
   {
     id: 'human_9', name: 'Humanoid 9', type: 'humanoid', number: 9,
-    nameKey: 'instance.human_9.name',
-    difficulty: 9, min_power: 109751747, icon: '??',
+    difficulty: 9, min_power: 260000, icon: '👤',
     enemies: ['Humanoid Omega Fleet', 'Humanoid Colossus'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":3}],
     boss: 'Emperor Valerius',
-    bossKey: 'instance.human_9.boss',
-  bossShip: {"name":"Emperor Valerius","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Emperor Valerius","structure":832000,"shield":273000,"armor_val":104000,"dps":46800,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2383,18 +2265,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [80000, 166000], crystal: [50000, 106000], he3: [25000, 64000] },
     desc: 'Sentinel III garantiran.',
-    unlock: 'Humanoid 8 zavr�ena',
+    unlock: 'Humanoid 8 završena',
   },
 
   {
     id: 'human_10', name: 'Humanoid 10', type: 'humanoid', number: 10,
-    nameKey: 'instance.human_10.name',
-    difficulty: 10, min_power: 241453844, icon: '??',
+    difficulty: 10, min_power: 400000, icon: '👤',
     enemies: ['Humanoid Ultimate Fleet', 'Humanoid God Flagship'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
     boss: 'God-Emperor Hyperion',
-    bossKey: 'instance.human_10.boss',
-  bossShip: {"name":"God-Emperor Hyperion","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"God-Emperor Hyperion","structure":1280000,"shield":420000,"armor_val":160000,"dps":72000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2404,23 +2284,21 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [120000, 250000], crystal: [76000, 160000], he3: [38000, 96000] },
-    desc: 'Kraj Humanoid zone. Quick Assault II �ansa.',
-    unlock: 'Humanoid 9 zavr�ena',
+    desc: 'Kraj Humanoid zone. Quick Assault II šansa.',
+    unlock: 'Humanoid 9 završena',
   },
 
-  // ============================================
+  // ════════════════════════════════════════════
   // PIRATE INSTANCE (1-10)
-  // ============================================
+  // ════════════════════════════════════════════
 
   {
     id: 'pirate_1', name: 'Pirate 1', type: 'pirate', number: 1,
-    nameKey: 'instance.pirate_1.name',
-    difficulty: 4, min_power: 2662000, icon: '?????',
+    difficulty: 4, min_power: 15000, icon: '🏴‍☠️',
     enemies: ['Raider Corvette', 'Marauder Frigate'],
   enemyGroups: [{"ship_id":"fighter_Nemesis_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":3,"col":3}],
     boss: 'Captain Scar',
-    bossKey: 'instance.pirate_1.boss',
-  bossShip: {"name":"Captain Scar","structure":1170000,"shield":360000,"armor_val":180000,"dps":181800,"agility":8,"speed":4},
+  bossShip: {"name":"Captain Scar","structure":48000,"shield":15750,"armor_val":6000,"dps":2700,"agility":6,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2438,18 +2316,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Void Shield I garantiran.',
-    unlock: 'Instanca 15 zavr�ena',
+    unlock: 'Instanca 15 završena',
   },
 
   {
     id: 'pirate_2', name: 'Pirate 2', type: 'pirate', number: 2,
-    nameKey: 'instance.pirate_2.name',
-    difficulty: 5, min_power: 5856400, icon: '?????',
+    difficulty: 5, min_power: 25000, icon: '🏴‍☠️',
     enemies: ['Pirate Destroyer', 'Raider Cruiser'],
   enemyGroups: [{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Specter_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Specter_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Striker_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":3}],
     boss: 'Commodore Blackfang',
-    bossKey: 'instance.pirate_2.boss',
-  bossShip: {"name":"Commodore Blackfang","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Commodore Blackfang","structure":80000,"shield":26250,"armor_val":10000,"dps":4500,"agility":7,"speed":4},
     drops: {
       guaranteed: [],
       chance: [
@@ -2469,18 +2345,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
     desc: 'Voidwarp I garantiran.',
-    unlock: 'Pirate 1 zavr�ena',
+    unlock: 'Pirate 1 završena',
   },
 
   {
     id: 'pirate_3', name: 'Pirate 3', type: 'pirate', number: 3,
-    nameKey: 'instance.pirate_3.name',
-    difficulty: 6, min_power: 12884080, icon: '?????',
+    difficulty: 6, min_power: 40000, icon: '🏴‍☠️',
     enemies: ['Pirate Raider Squadron', 'Pirate Battlecruiser'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Corsair_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Captain Void',
-    bossKey: 'instance.pirate_3.boss',
-  bossShip: {"name":"Captain Void","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Captain Void","structure":128000,"shield":42000,"armor_val":16000,"dps":7200,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2501,19 +2375,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [12000, 25000], crystal: [8000, 17000], he3: [4000, 10000] },
-    desc: 'Void �tit I garantiran. �ansa za 3 razli�ita Pirate Flagship.',
-    unlock: 'Pirate 2 zavr�ena',
+    desc: 'Void Štit I garantiran. Šansa za 3 različita Pirate Flagship.',
+    unlock: 'Pirate 2 završena',
   },
 
   {
     id: 'pirate_4', name: 'Pirate 4', type: 'pirate', number: 4,
-    nameKey: 'instance.pirate_4.name',
-    difficulty: 6, min_power: 12884080, icon: '?????',
+    difficulty: 6, min_power: 55000, icon: '🏴‍☠️',
     enemies: ['Pirate Battleship', 'Raider Carrier'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Goliath_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":3}],
     boss: 'Admiral Bloodmoon',
-    bossKey: 'instance.pirate_4.boss',
-  bossShip: {"name":"Admiral Bloodmoon","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Admiral Bloodmoon","structure":176000,"shield":57750,"armor_val":22000,"dps":9900,"agility":7,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2533,18 +2405,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [16000, 33000], crystal: [10000, 21000], he3: [5000, 13000] },
     desc: 'Void II garantiran.',
-    unlock: 'Pirate 3 zavr�ena',
+    unlock: 'Pirate 3 završena',
   },
 
   {
     id: 'pirate_5', name: 'Pirate 5', type: 'pirate', number: 5,
-    nameKey: 'instance.pirate_5.name',
-    difficulty: 7, min_power: 28344976, icon: '?????',
+    difficulty: 7, min_power: 90000, icon: '🏴‍☠️',
     enemies: ['Pirate Dreadnought', 'Raider Flagship'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":1,"col":2},{"ship_id":"battleship_Annihilator_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":15000,"row":3,"col":1},{"ship_id":"battleship_Annihilator_III","count":15000,"row":3,"col":2},{"ship_id":"battleship_Leviathan_III","count":15000,"row":3,"col":3}],
     boss: 'Warlord Ironhook',
-    bossKey: 'instance.pirate_5.boss',
-  bossShip: {"name":"Warlord Ironhook","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Warlord Ironhook","structure":288000,"shield":94500,"armor_val":36000,"dps":16200,"agility":8,"speed":5},
     drops: {
       guaranteed: [],
       chance: [
@@ -2566,18 +2436,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [28000, 59000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Voidwarp II garantiran.',
-    unlock: 'Pirate 4 zavr�ena',
+    unlock: 'Pirate 4 završena',
   },
 
   {
     id: 'pirate_6', name: 'Pirate 6', type: 'pirate', number: 6,
-    nameKey: 'instance.pirate_6.name',
-    difficulty: 8, min_power: 62358947, icon: '?????',
+    difficulty: 8, min_power: 120000, icon: '🏴‍☠️',
     enemies: ['Pirate Elite Carrier', 'Pirate Apex Battleship'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Dominion_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Goliath_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":3}],
     boss: 'Admiral Blackvoid',
-    bossKey: 'instance.pirate_6.boss',
-  bossShip: {"name":"Admiral Blackvoid","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Admiral Blackvoid","structure":384000,"shield":126000,"armor_val":48000,"dps":21600,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2599,19 +2467,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [36000, 76000], crystal: [23000, 49000], he3: [11500, 29500] },
-    desc: 'Void �tit II garantiran. Voidwarp Engine �ansa.',
-    unlock: 'Pirate 5 zavr�ena',
+    desc: 'Void Štit II garantiran. Voidwarp Engine šansa.',
+    unlock: 'Pirate 5 završena',
   },
 
   {
     id: 'pirate_7', name: 'Pirate 7', type: 'pirate', number: 7,
-    nameKey: 'instance.pirate_7.name',
-    difficulty: 8, min_power: 62358947, icon: '?????',
+    difficulty: 8, min_power: 180000, icon: '🏴‍☠️',
     enemies: ['Pirate Colossus', 'Raider Titan'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Overlord Nightwind',
-    bossKey: 'instance.pirate_7.boss',
-  bossShip: {"name":"Overlord Nightwind","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Overlord Nightwind","structure":576000,"shield":189000,"armor_val":72000,"dps":32400,"agility":9,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2634,18 +2500,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 41000] },
     desc: 'Void III garantiran.',
-    unlock: 'Pirate 6 zavr�ena',
+    unlock: 'Pirate 6 završena',
   },
 
   {
     id: 'pirate_8', name: 'Pirate 8', type: 'pirate', number: 8,
-    nameKey: 'instance.pirate_8.name',
-    difficulty: 9, min_power: 137189684, icon: '?????',
+    difficulty: 9, min_power: 250000, icon: '🏴‍☠️',
     enemies: ['Pirate Omega Fleet', 'Raider Apocalypse'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Annihilator_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Emperor Blackvoid',
-    bossKey: 'instance.pirate_8.boss',
-  bossShip: {"name":"Emperor Blackvoid","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Emperor Blackvoid","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -2668,18 +2532,16 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [78000, 163000], crystal: [49000, 104000], he3: [24500, 63000] },
     desc: 'Voidwarp III garantiran.',
-    unlock: 'Pirate 7 zavr�ena',
+    unlock: 'Pirate 7 završena',
   },
 
   {
     id: 'pirate_9', name: 'Pirate 9', type: 'pirate', number: 9,
-    nameKey: 'instance.pirate_9.name',
-    difficulty: 10, min_power: 301817304, icon: '?????',
+    difficulty: 10, min_power: 350000, icon: '🏴‍☠️',
     enemies: ['Pirate Supreme Carrier', 'Pirate Omega Flagship'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'Supreme Pirate Overlord',
-    bossKey: 'instance.pirate_9.boss',
-  bossShip: {"name":"Supreme Pirate Overlord","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Supreme Pirate Overlord","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2698,19 +2560,17 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [105000, 220000], crystal: [66000, 140000], he3: [33000, 84000] },
-    desc: 'Void III garantiran. Voidwarp III �ansa. Piratski ekskluziv.',
-    unlock: 'Pirate 8 zavr�ena',
+    desc: 'Void III garantiran. Voidwarp III šansa. Piratski ekskluziv.',
+    unlock: 'Pirate 8 završena',
   },
 
   {
     id: 'pirate_10', name: 'Pirate 10', type: 'pirate', number: 10,
-    nameKey: 'instance.pirate_10.name',
-    difficulty: 10, min_power: 301817304, icon: '?????',
+    difficulty: 10, min_power: 500000, icon: '🏴‍☠️',
     enemies: ['Pirate Ultimate Fleet', 'Pirate God Emperor'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":3}],
     boss: 'The Pirate God-King',
-    bossKey: 'instance.pirate_10.boss',
-  bossShip: {"name":"The Pirate God-King","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"The Pirate God-King","structure":1600000,"shield":525000,"armor_val":200000,"dps":90000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -2737,27 +2597,25 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [160000, 335000], crystal: [100000, 210000], he3: [50000, 126000] },
-    desc: 'Final Pirate instance. Fleet Commander III �ansa.',
-    unlock: 'Pirate 9 zavr�ena',
+    desc: 'Final Pirate instance. Fleet Commander III šansa.',
+    unlock: 'Pirate 9 završena',
   },
 
-  // ============================================
+  // ════════════════════════════════════════════
   // BOSS SISTEM (6 RARE + 3 EPIC + 1 LEGENDARY)
-  // ============================================
+  // ════════════════════════════════════════════
 
   // ---- 6 RARE BOSSOVA (R1-R6) ----
   {
     id: 'boss_r1', name: 'Void Scavenger', type: 'boss_rare', number: 1,
-    nameKey: 'instance.boss_r1.name',
-    difficulty: 5, min_power: 8198960, icon: '??',
+    difficulty: 5, min_power: 30000, icon: '💀',
     xp: 5000,
-    cooldown_hours: 8,
+    cooldown_hours: 4,
     boss_ability: 'scavenger',
     enemies: ['Void Scavenger Drones', 'Scavenger Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":1,"col":3},{"ship_id":"fighter_Nemesis_III","count":10000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":3,"col":3}],
     boss: 'Void Scavenger',
-    bossKey: 'instance.boss_r1.boss',
-  bossShip: {"name":"Void Scavenger","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Void Scavenger","structure":96000,"shield":31500,"armor_val":12000,"dps":5400,"agility":7,"speed":4},
     boss_stats: { hp: 15000, shield: 5000, dps: 800, agility: 20, speed: 2, armor: 'Light' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -3002,22 +2860,20 @@ const INSTANCES_HELL = [
       { item: 'scout_Wisp_I', rate: 15 },
     ] },
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Void Scavenger � krade resurse! Izgubi borbu = -10% nagrade.',
+    desc: 'Void Scavenger — krade resurse! Izgubi borbu = -10% nagrade.',
     unlock: 'Min 30k power',
   },
 
   {
     id: 'boss_r2', name: 'Corsair Marauder', type: 'boss_rare', number: 2,
-    nameKey: 'instance.boss_r2.name',
-    difficulty: 5, min_power: 8198960, icon: '??',
+    difficulty: 5, min_power: 35000, icon: '💀',
     xp: 5000,
-    cooldown_hours: 8,
+    cooldown_hours: 4,
     boss_ability: 'spawn_reinforcements',
     enemies: ['Corsair Escort', 'Corsair Marauder Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":1},{"ship_id":"cruiser_Fortress_III","count":10000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":10000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":10000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":10000,"row":2,"col":3},{"ship_id":"cruiser_Protector_III","count":10000,"row":3,"col":1},{"ship_id":"cruiser_Haven_III","count":10000,"row":3,"col":2},{"ship_id":"cruiser_Sentinel_III","count":10000,"row":3,"col":3}],
     boss: 'Corsair Marauder',
-    bossKey: 'instance.boss_r2.boss',
-  bossShip: {"name":"Corsair Marauder","structure":2700000,"shield":810000,"armor_val":405000,"dps":382500,"agility":8,"speed":5},
+  bossShip: {"name":"Corsair Marauder","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":7,"speed":4},
     boss_stats: { hp: 18000, shield: 6000, dps: 900, agility: 18, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_gauss_cannon_missile_III', rate: 15 },
@@ -3260,22 +3116,20 @@ const INSTANCES_HELL = [
       { item: 'scout_Specter_I', rate: 15 },
     ] },
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Corsair Marauder � poziva 2 pomo�na broda u rundi 3!',
+    desc: 'Corsair Marauder — poziva 2 pomoćna broda u rundi 3!',
     unlock: 'Min 35k power',
   },
 
   {
     id: 'boss_r3', name: 'Nebula Stalker', type: 'boss_rare', number: 3,
-    nameKey: 'instance.boss_r3.name',
-    difficulty: 6, min_power: 18037712, icon: '??',
+    difficulty: 6, min_power: 45000, icon: '💀',
     xp: 6000,
-    cooldown_hours: 8,
+    cooldown_hours: 6,
     boss_ability: 'stealth_first_round',
     enemies: ['Nebula Shadow Drones', 'Nebula Stalker Pack'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Nemesis_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":3}],
     boss: 'Nebula Stalker',
-    bossKey: 'instance.boss_r3.boss',
-  bossShip: {"name":"Nebula Stalker","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Nebula Stalker","structure":144000,"shield":47250,"armor_val":18000,"dps":8100,"agility":7,"speed":5},
     boss_stats: { hp: 20000, shield: 8000, dps: 1100, agility: 35, speed: 3, armor: 'Nano' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_mass_driver_missile_III', rate: 15 },
@@ -3516,22 +3370,20 @@ const INSTANCES_HELL = [
       { item: 'fighter_Reaper_I', rate: 15 },
     ] },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Nebula Stalker � nevidljiv u prvoj rundi! Igra� ne mo�e napadati.',
+    desc: 'Nebula Stalker — nevidljiv u prvoj rundi! Igrač ne može napadati.',
     unlock: 'Min 45k power',
   },
 
   {
     id: 'boss_r4', name: 'Solar Predator', type: 'boss_rare', number: 4,
-    nameKey: 'instance.boss_r4.name',
-    difficulty: 6, min_power: 18037712, icon: '??',
+    difficulty: 6, min_power: 50000, icon: '💀',
     xp: 6000,
-    cooldown_hours: 8,
+    cooldown_hours: 6,
     boss_ability: 'aoe_damage',
     enemies: ['Solar Drone Swarm', 'Solar Predator Pack'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Tempest_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":3,"col":3}],
     boss: 'Solar Predator',
-    bossKey: 'instance.boss_r4.boss',
-  bossShip: {"name":"Solar Predator","structure":6300000,"shield":1980000,"armor_val":990000,"dps":864000,"agility":9,"speed":5},
+  bossShip: {"name":"Solar Predator","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
     boss_stats: { hp: 22000, shield: 7000, dps: 1200, agility: 15, speed: 2, armor: 'Light' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_shredder_missile_III', rate: 15 },
@@ -3769,22 +3621,20 @@ const INSTANCES_HELL = [
       { item: 'fighter_Ravager_I', rate: 15 },
     ] },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Solar Predator � AoE napadi! Svaki hit poga�a sve tvoje slotove za 20%.',
+    desc: 'Solar Predator — AoE napadi! Svaki hit pogađa sve tvoje slotove za 20%.',
     unlock: 'Min 50k power',
   },
 
   {
     id: 'boss_r5', name: 'Frost Reaver', type: 'boss_rare', number: 5,
-    nameKey: 'instance.boss_r5.name',
-    difficulty: 7, min_power: 39682966, icon: '??',
+    difficulty: 7, min_power: 70000, icon: '💀',
     xp: 7000,
     cooldown_hours: 8,
     boss_ability: 'freeze_slot',
     enemies: ['Frost Drone Pack', 'Frost Reaver Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Protector_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Tempest_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Frost Reaver',
-    bossKey: 'instance.boss_r5.boss',
-  bossShip: {"name":"Frost Reaver","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Frost Reaver","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
     boss_stats: { hp: 28000, shield: 10000, dps: 1400, agility: 20, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_penetrator_missile_III', rate: 15 },
@@ -4021,22 +3871,20 @@ const INSTANCES_HELL = [
       { item: 'cruiser_Rampart_I', rate: 15 },
     ] },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Frost Reaver � zamrzava random slot! Taj slot preska�e 1 rundu.',
+    desc: 'Frost Reaver — zamrzava random slot! Taj slot preskače 1 rundu.',
     unlock: 'Min 70k power',
   },
 
   {
     id: 'boss_r6', name: 'Plasma Wraith', type: 'boss_rare', number: 6,
-    nameKey: 'instance.boss_r6.name',
-    difficulty: 7, min_power: 39682966, icon: '??',
+    difficulty: 7, min_power: 80000, icon: '💀',
     xp: 7000,
     cooldown_hours: 8,
     boss_ability: 'death_explosion',
     enemies: ['Plasma Ghost Pack', 'Plasma Wraith Fleet'],
   enemyGroups: [{"ship_id":"cruiser_Haven_III","count":15000,"row":1,"col":1},{"ship_id":"cruiser_Sentinel_III","count":15000,"row":1,"col":2},{"ship_id":"cruiser_Citadel_III","count":15000,"row":1,"col":3},{"ship_id":"fighter_Striker_III","count":15000,"row":2,"col":1},{"ship_id":"fighter_Striker_III","count":18000,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Corsair_III","count":15000,"row":2,"col":3},{"ship_id":"cruiser_Fortress_III","count":15000,"row":3,"col":1},{"ship_id":"cruiser_Citadel_III","count":15000,"row":3,"col":2},{"ship_id":"cruiser_Haven_III","count":15000,"row":3,"col":3}],
     boss: 'Plasma Wraith',
-    bossKey: 'instance.boss_r6.boss',
-  bossShip: {"name":"Plasma Wraith","structure":13050000,"shield":4140000,"armor_val":2070000,"dps":1854000,"agility":9,"speed":6},
+  bossShip: {"name":"Plasma Wraith","structure":256000,"shield":84000,"armor_val":32000,"dps":14400,"agility":8,"speed":5},
     boss_stats: { hp: 30000, shield: 12000, dps: 1500, agility: 22, speed: 2, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_accelerator_missile_III', rate: 15 },
@@ -4271,23 +4119,21 @@ const INSTANCES_HELL = [
       { item: 'carrier_Atlas_I', rate: 15 },
     ] },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Plasma Wraith � eksplodira kad umre! 20% �tete svim tvojim brodovima.',
+    desc: 'Plasma Wraith — eksplodira kad umre! 20% štete svim tvojim brodovima.',
     unlock: 'Min 80k power',
   },
 
   // ---- 3 EPIC BOSSOVA (E1-E3) ----
   {
     id: 'boss_e1', name: 'Quantum Hydra', type: 'boss_epic', number: 1,
-    nameKey: 'instance.boss_e1.name',
-    difficulty: 8, min_power: 112246105, icon: '??',
+    difficulty: 8, min_power: 150000, icon: '👹',
     xp: 8000,
-    cooldown_hours: 48,
+    cooldown_hours: 24,
     boss_ability: 'hydra_respawn',
     enemies: ['Hydra Head Alpha', 'Hydra Head Beta', 'Hydra Head Gamma'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Protector_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Annihilator_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Quantum Hydra',
-    bossKey: 'instance.boss_e1.boss',
-  bossShip: {"name":"Quantum Hydra","structure":28800000,"shield":9180000,"armor_val":4590000,"dps":4068000,"agility":9,"speed":6},
+  bossShip: {"name":"Quantum Hydra","structure":480000,"shield":157500,"armor_val":60000,"dps":27000,"agility":9,"speed":6},
     boss_stats: { hp: 80000, shield: 30000, dps: 3000, agility: 15, speed: 2, armor: 'Chrome' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -4740,22 +4586,20 @@ const INSTANCES_HELL = [
       { item: 'scout_Specter_I', rate: 15 },
     ] },
     resources: { metal: [30000, 65000], crystal: [19000, 41000], he3: [9500, 24000] },
-    desc: 'Quantum Hydra � 3 glave! Respawnuje jednom na 30% HP.',
+    desc: 'Quantum Hydra — 3 glave! Respawnuje jednom na 30% HP.',
     unlock: 'Pobijedi R1+R2+R3',
   },
 
   {
     id: 'boss_e2', name: 'Chrono Warden', type: 'boss_epic', number: 2,
-    nameKey: 'instance.boss_e2.name',
-    difficulty: 9, min_power: 246941431, icon: '??',
+    difficulty: 9, min_power: 250000, icon: '👹',
     xp: 9000,
-    cooldown_hours: 48,
+    cooldown_hours: 24,
     boss_ability: 'hp_reset',
     enemies: ['Time Guardian I', 'Chrono Sentinel'],
   enemyGroups: [{"ship_id":"battleship_Dreadnought_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Goliath_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Sentinel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Sentinel_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Haven_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Goliath_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Chrono Warden',
-    bossKey: 'instance.boss_e2.boss',
-  bossShip: {"name":"Chrono Warden","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Chrono Warden","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
     boss_stats: { hp: 100000, shield: 40000, dps: 4000, agility: 12, speed: 1, armor: 'Regen' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_gauss_cannon_missile_III', rate: 15 },
@@ -5205,22 +5049,20 @@ const INSTANCES_HELL = [
       { item: 'fighter_Ravager_I', rate: 15 },
     ] },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 40000] },
-    desc: 'Chrono Warden � vra�a HP! Jednom u borbi resetuje HP na 50%.',
+    desc: 'Chrono Warden — vraća HP! Jednom u borbi resetuje HP na 50%.',
     unlock: 'Pobijedi R4+R5+R6',
   },
 
   {
     id: 'boss_e3', name: 'Dreadnought Titan', type: 'boss_epic', number: 3,
-    nameKey: 'instance.boss_e3.name',
-    difficulty: 9, min_power: 246941431, icon: '??',
+    difficulty: 9, min_power: 350000, icon: '👹',
     xp: 9000,
     cooldown_hours: 48,
     boss_ability: 'titan_rage',
     enemies: ['Titan Escort Fleet', 'Dreadnought Titan'],
   enemyGroups: [{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":1},{"ship_id":"battleship_Annihilator_III","count":20000,"row":1,"col":2},{"ship_id":"battleship_Leviathan_III","count":20000,"row":1,"col":3},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":1},{"ship_id":"cruiser_Fortress_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Citadel_III","count":20000,"row":2,"col":3},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":1},{"ship_id":"battleship_Leviathan_III","count":20000,"row":3,"col":2},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":3,"col":3}],
     boss: 'Dreadnought Titan',
-    bossKey: 'instance.boss_e3.boss',
-  bossShip: {"name":"Dreadnought Titan","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Dreadnought Titan","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":6},
     boss_stats: { hp: 150000, shield: 60000, dps: 5000, agility: 5, speed: 1, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_mass_driver_missile_III', rate: 15 },
@@ -5666,29 +5508,27 @@ const INSTANCES_HELL = [
       { item: 'carrier_Atlas_I', rate: 15 },
     ] },
     resources: { metal: [80000, 168000], crystal: [50000, 106000], he3: [25000, 63000] },
-    desc: 'Dreadnought Titan � Titan Rage! Svaki pre�ivljeni napad +10% boss DPS.',
+    desc: 'Dreadnought Titan — Titan Rage! Svaki preživljeni napad +10% boss DPS.',
     unlock: 'Pobijedi E1+E2',
   },
 
   // ---- 1 LEGENDARY BOSS (L1) ----
   {
     id: 'boss_l1', name: 'Galaxy Eater', type: 'boss_legendary', number: 1,
-    nameKey: 'instance.boss_l1.name',
-    difficulty: 10, min_power: 724361531, icon: '??',
+    difficulty: 10, min_power: 700000, icon: '🌑',
     xp: 10000,
     cooldown_hours: 168,
     boss_ability: 'four_phases',
     boss_phases: [
-      { name: 'Phase 1 � Awakening', hp_pct: 100, ability: 'normal' },
-      { name: 'Phase 2 � Devouring', hp_pct: 75, ability: 'aoe_damage' },
-      { name: 'Phase 3 � Consuming', hp_pct: 50, ability: 'ship_absorb' },
-      { name: 'Phase 4 � Ascension', hp_pct: 25, ability: 'self_heal' },
+      { name: 'Phase 1 — Awakening', hp_pct: 100, ability: 'normal' },
+      { name: 'Phase 2 — Devouring', hp_pct: 75, ability: 'aoe_damage' },
+      { name: 'Phase 3 — Consuming', hp_pct: 50, ability: 'ship_absorb' },
+      { name: 'Phase 4 — Ascension', hp_pct: 25, ability: 'self_heal' },
     ],
     enemies: ['Galaxy Eater Void Spawn', 'Galaxy Eater Core'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Galaxy Eater',
-    bossKey: 'instance.boss_l1.boss',
-  bossShip: {"name":"Galaxy Eater","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Galaxy Eater","structure":2240000,"shield":735000,"armor_val":280000,"dps":126000,"agility":10,"speed":7},
     boss_stats: { hp: 600000, shield: 200000, dps: 8000, agility: 8, speed: 1, armor: 'Neutralizing' },
     drops: { guaranteed: [], chance: [
         { item: 'w_kinetic_railgun_missile_III', rate: 15 },
@@ -6953,25 +6793,23 @@ const INSTANCES_HELL = [
       { item: 'carrier_Atlas_I', rate: 15 },
     ] },
     resources: { metal: [250000, 530000], crystal: [158000, 334000], he3: [79000, 167000] },
-    desc: 'Galaxy Eater � 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
+    desc: 'Galaxy Eater — 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
     unlock: 'Pobijedi E1+E2+E3',
   },
 
-  // ============================================
+  // ════════════════════════════════════════════
   // CONSTELLATION (1-3)
-  // ============================================
+  // ════════════════════════════════════════════
 
   {
     id: 'const_1', name: 'Constellation 1', type: 'constellation', number: 1,
-    nameKey: 'instance.const_1.name',
     difficulty: 9,
-    min_power: 164627621,
-    icon: '?',
+    min_power: 500000,
+    icon: '⭐',
     enemies: ['Constellation Guardian I', 'Star Dreadnought I'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":20000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":20000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":24000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Dreadnought_III","count":20000,"row":2,"col":3},{"ship_id":"carrier_Sanctuary_III","count":20000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":20000,"row":3,"col":3}],
     boss: 'Constellation Prime',
-    bossKey: 'instance.const_1.boss',
-  bossShip: {"name":"Constellation Prime","structure":63000000,"shield":20160000,"armor_val":10080000,"dps":8910000,"agility":10,"speed":7},
+  bossShip: {"name":"Constellation Prime","structure":1600000,"shield":525000,"armor_val":200000,"dps":90000,"agility":10,"speed":6},
     drops: {
       guaranteed: [],
       chance: [
@@ -7016,21 +6854,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [150000, 320000], crystal: [95000, 200000], he3: [47500, 120000] },
-    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral �ansa.',
-    unlock: 'Trial 8 zavr�ena + min 500k power',
+    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral šansa.',
+    unlock: 'Trial 8 završena + min 500k power',
   },
 
   {
     id: 'const_2', name: 'Constellation 2', type: 'constellation', number: 2,
-    nameKey: 'instance.const_2.name',
     difficulty: 10,
-    min_power: 362180765,
-    icon: '?',
+    min_power: 750000,
+    icon: '⭐',
     enemies: ['Constellation Guardian II', 'Star Carrier I'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":3}],
     boss: 'Constellation Overlord',
-    bossKey: 'instance.const_2.boss',
-  bossShip: {"name":"Constellation Overlord","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Constellation Overlord","structure":2400000,"shield":787500,"armor_val":300000,"dps":135000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -7075,21 +6911,19 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [220000, 460000], crystal: [140000, 295000], he3: [70000, 178000] },
-    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II �ansa.',
-    unlock: 'Constellation 1 zavr�ena',
+    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II šansa.',
+    unlock: 'Constellation 1 završena',
   },
 
   {
     id: 'const_3', name: 'Constellation 3', type: 'constellation', number: 3,
-    nameKey: 'instance.const_3.name',
     difficulty: 10,
-    min_power: 362180765,
-    icon: '?',
+    min_power: 1000000,
+    icon: '⭐',
     enemies: ['Constellation Supreme', 'Star Flagship'],
   enemyGroups: [{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Leviathan_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Goliath_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
     boss: 'Constellation God-Emperor',
-    bossKey: 'instance.const_3.boss',
-  bossShip: {"name":"Constellation God-Emperor","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"Constellation God-Emperor","structure":3200000,"shield":1050000,"armor_val":400000,"dps":180000,"agility":10,"speed":7},
     drops: {
       guaranteed: [],
       chance: [
@@ -7138,28 +6972,26 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [320000, 670000], crystal: [202000, 425000], he3: [101000, 255000] },
-    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III �ansa.',
-    unlock: 'Constellation 2 zavr�ena',
+    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III šansa.',
+    unlock: 'Constellation 2 završena',
   },
 
-  // ============================================
-  // MASTER BOSS � THE HIVE GOD
-  // ============================================
+  // ════════════════════════════════════════════
+  // MASTER BOSS — THE HIVE GOD
+  // ════════════════════════════════════════════
 
   {
     id: 'boss_master', name: 'THE HIVE GOD', type: 'boss_master', number: 0,
-    nameKey: 'instance.boss_master.name',
     difficulty: 10,
-    min_power: 965815374,
-    icon: '??',
+    min_power: 1000000,
+    icon: '👑',
     xp: 100000,
-    cooldown_hours: 336,
+    cooldown_hours: 168,
     boss_ability: 'all_abilities',
     enemies: ['Hive God Spawn Wave 1', 'Hive God Spawn Wave 2', 'Hive God Core'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":3}],
     boss: 'THE HIVE GOD',
-    bossKey: 'instance.boss_master.boss',
-  bossShip: {"name":"THE HIVE GOD","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"THE HIVE GOD","structure":3200000,"shield":1050000,"armor_val":400000,"dps":180000,"agility":10,"speed":7},
     boss_stats: { hp: 1000000, shield: 400000, dps: 12000, agility: 10, speed: 2, armor: 'Neutralizing' },
     drops: {
       guaranteed: [],
@@ -8427,34 +8259,31 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'THE HIVE GOD � Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
+    desc: 'THE HIVE GOD — Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
     unlock: 'Min 1M power + pobijedi Galaxy Eater',
     respawn: 'weekly',
   },
 
-  // ============================================
-  // BOSS EVENT (globalni, rijedak) � LEGACY
-  // ============================================
+  // ════════════════════════════════════════════
+  // BOSS EVENT (globalni, rijedak) — LEGACY
+  // ════════════════════════════════════════════
 
   {
     id: 'boss_event', name: 'Boss Event', type: 'boss', number: null,
-    nameKey: 'instance.boss_event.name',
     difficulty: 10,
-    min_power: 1327996140,
-    icon: '??',
-    cooldown_hours: 672,
+    min_power: 800000,
+    icon: '👹',
     xp: 1000000,
     enemies: ['Global Boss Phase 1', 'Global Boss Phase 2', 'Global Boss Phase 3'],
     boss: 'THE HIVE GOD',
-    bossKey: 'instance.boss_event.boss',
-  bossShip: {"name":"THE HIVE GOD","structure":139500000,"shield":45900000,"armor_val":22950000,"dps":19980000,"agility":10,"speed":7},
+  bossShip: {"name":"THE HIVE GOD","structure":2560000,"shield":840000,"armor_val":320000,"dps":144000,"agility":10,"speed":7},
     drops: {
       participation: ['sh_divine_I', 'mod_divine_core_I', 'eng_divine_I', 'w_bomber_squadron_III', 'w_elite_squadron_III'],
-      note: 'Drop only � ne mo�e se craftati. Max 1 divine komponenta po igra�u per event.',
+      note: 'Drop only — ne može se craftati. Max 1 divine komponenta po igraču per event.',
     },
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igra�i napadaju isti boss.',
-    unlock: 'Min 800k power. Event se pojavljuje jednom sedmi�no.',
+    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igrači napadaju isti boss.',
+    unlock: 'Min 800k power. Event se pojavljuje jednom sedmično.',
     respawn: 'weekly',
   },
 ];

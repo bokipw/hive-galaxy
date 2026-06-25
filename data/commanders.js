@@ -159,7 +159,7 @@ const COMMANDERS_DATA = [
   // ── Legendary ──
   {
     id: 'cmd_ragnarok', name: 'Ragnarok', nameKey: 'commander.cmd_ragnarok.name', nameKey: 'commander.cmd_ragnarok.name', rarity: 'L', faction: 'vanguard', icon: '🌋',
-    desc: 'Kraj svega. Pobjednička vojska koja nije stala ni pred bogovima.', descKey: 'commander.cmd_ragnarok.desc', descKey: 'commander.cmd_ragnarok.desc',
+    desc: 'Kraj svega. Pobednička vojska koja nije stala ni pred bogovima.', descKey: 'commander.cmd_ragnarok.desc', descKey: 'commander.cmd_ragnarok.desc',
     specialty_ships: ['battleship', 'cruiser', 'carrier', 'special'], specialty_weapons: ['kinetic', 'explosive', 'heat', 'magnetic'],
     passive: { name: 'Apokalipsa', nameKey: 'commander.cmd_ragnarok.passive.name', nameKey: 'commander.cmd_ragnarok.passive.name', desc: 'Flota +25% napad. Explosive oružja +30% šteta.', descKey: 'commander.cmd_ragnarok.passive.desc', descKey: 'commander.cmd_ragnarok.passive.desc' },
     passive2: { name: 'Posljednja Borba', nameKey: 'commander.cmd_ragnarok.passive2.name', nameKey: 'commander.cmd_ragnarok.passive2.name', desc: 'Kad flota padne ispod 20% HP, svi brodovi dobijaju +100% napad.', descKey: 'commander.cmd_ragnarok.passive2.desc', descKey: 'commander.cmd_ragnarok.passive2.desc' },
