@@ -1349,42 +1349,42 @@ function renderFleetCommanders() {
   const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
   const anyBonus = fb && Object.values(fb.bonuses).some(v => v > 0);
   const bonusHtml = `
-    <div style="margin-bottom:12px;padding:10px 12px;border-radius:8px;
+    <div style="margin-bottom:12px;padding:12px 14px;border-radius:8px;
       background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1)">
-      <div style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:6px">
-        <span style="font-size:0.6rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:1px">📊 FLEET BONUSI</span>
+      <div style="display:flex;align-items:center;gap:8px;width:100%;margin-bottom:8px">
+        <span style="font-size:0.78rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:1px">📊 FLEET BONUSI</span>
         <span title="Svaki komandir pripada nekoj frakciji (npr. Revenant, Tomb Keeper, Krall...). Ako 3+ komandira u floti imaju ISTU frakciju, aktivira se Faction Synergy i uvećava sve bonuse za +10%."
-          style="cursor:help;font-size:0.5rem;color:#6a90b8;background:rgba(255,255,255,0.06);border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center">?</span>
+          style="cursor:help;font-size:0.65rem;color:#6a90b8;background:rgba(255,255,255,0.06);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center">?</span>
       </div>
       ${anyBonus ? `
-        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
           ${Object.entries(fb.bonuses).filter(([,v]) => v > 0).map(([k, v]) => {
             const bi = FLEET_BONUS_LABELS[k] || { label: k, color: '#aaa', icon: '?' };
-            return `<div style="font-size:0.6rem;color:${bi.color};background:${bi.color}15;
-              padding:3px 10px;border-radius:4px;border:1px solid ${bi.color}33">
+            return `<div style="font-size:0.72rem;color:${bi.color};background:${bi.color}15;
+              padding:4px 12px;border-radius:4px;border:1px solid ${bi.color}33">
               ${bi.icon} ${bi.label} <strong>+${v}%</strong>
             </div>`;
           }).join('')}
         </div>` : ''}
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px">
         ${Object.entries(fb?.factionCount || {}).map(([f, c]) => {
           const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
             || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
             || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
             || null;
           const icon = ff?.icon || '❓';
-          return `<span style="font-size:0.55rem;background:rgba(255,255,255,0.06);padding:2px 8px;border-radius:4px;
+          return `<span style="font-size:0.72rem;background:rgba(255,255,255,0.06);padding:3px 10px;border-radius:4px;
             color:${c >= 3 ? '#ffcc44' : '#8ab0d8'};border:1px solid ${c >= 3 ? '#ffcc4433' : 'transparent'}">
             ${icon} ${ff?.name||f}: ${c}${c >= 3 ? ' ⭐' : ''}
           </span>`;
         }).join('')}
         ${fb?.hasFactionBonus ? `
-          <span style="font-size:0.6rem;font-weight:700;color:#ffcc44;background:#ffcc4418;padding:3px 10px;border-radius:4px;border:1px solid #ffcc44">
+          <span style="font-size:0.78rem;font-weight:700;color:#ffcc44;background:#ffcc4418;padding:4px 12px;border-radius:4px;border:1px solid #ffcc44">
             🔗 FACTION SYNERGY +10%</span>` : (fb && Object.keys(fb.factionCount).length > 0 ? `
-          <span style="font-size:0.5rem;color:#6a90b8">(3+ iste frakcije → +10%)</span>` : '')}
+          <span style="font-size:0.65rem;color:#6a90b8">(3+ iste frakcije → +10%)</span>` : '')}
       </div>
       ${!anyBonus && !fb?.hasFactionBonus ? `
-        <div style="font-size:0.52rem;color:#6a90b8;font-style:italic;margin-top:4px">
+        <div style="font-size:0.7rem;color:#6a90b8;font-style:italic;margin-top:6px">
           Deployuj 3 komandira iste frakcije za Faction Synergy +10%.
         </div>` : ''}
     </div>`;
@@ -1441,8 +1441,8 @@ function renderFleetCommanders() {
               <div style="font-size:1.8rem;filter:drop-shadow(0 0 8px ${rc}88);margin-bottom:4px">${def.icon}</div>
               <div style="font-size:0.62rem;font-weight:700;color:${rc};
                 white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${def.name}</div>
-              <div style="font-size:0.52rem;color:#6a90b8;margin:2px 0">
-                <span title="${fDef?.name || def.faction}" style="cursor:default">${fDef?.icon || '❓'}</span>
+              <div style="font-size:0.65rem;color:#6a90b8;margin:3px 0">
+                <span title="${fDef?.name || def.faction}" style="cursor:default;font-size:0.7rem">${fDef?.icon || '❓'}</span>
                 Lv.${entry.level} · ${filled}/9 brodova</div>
               <div style="display:flex;gap:4px;justify-content:center;margin-top:6px">
                 ${!isLead ? `<button class="btn" style="font-size:0.5rem;padding:2px 6px"
