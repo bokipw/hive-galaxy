@@ -1353,7 +1353,7 @@ function renderFleetCommanders() {
       background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1)">
       <div style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:${anyBonus||fb?.hasFactionBonus ? '6px' : '0'}">
         <span style="font-size:0.6rem;color:#00d4ff;font-family:'Orbitron',monospace;letter-spacing:1px">📊 FLEET BONUSI</span>
-        <span title="Svaki komandir u slotu daje bonus koji zavisi od njegovog nivoa i rariteta. Ako 3+ komandira imaju istu frakciju, svi bonusi se uvećavaju za 10% (Faction Synergy)."
+        <span title="Svaki komandir pripada nekoj frakciji (npr. Revenant, Tomb Keeper, Krall...). Ako 3+ komandira u floti imaju ISTU frakciju, aktivira se Faction Synergy i uvećava sve bonuse za +10%."
           style="cursor:help;font-size:0.5rem;color:#6a90b8;background:rgba(255,255,255,0.06);border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center">?</span>
       </div>
       ${anyBonus ? `
@@ -1367,7 +1367,7 @@ function renderFleetCommanders() {
           }).join('')}
         </div>` : `
         <div style="font-size:0.55rem;color:#6a90b8;font-style:italic">
-          Nema aktivnih bonusa — postavi komandire u slotove iznad.
+          Nema aktivnih bonusa — deploy komandiri daju faction synergy, slotovi daju stat bonuse.
         </div>`}
       ${fb && Object.keys(fb.factionCount).length > 0 ? `
         <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.05)">
@@ -1427,6 +1427,10 @@ function renderFleetCommanders() {
           const isLead = cmdId === window._activeCommander;
           const cFleet = typeof getCmdFleet === 'function' ? getCmdFleet(cmdId) : [];
           const filled = cFleet.filter(Boolean).length;
+          const fDef = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[def.faction]
+            || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[def.faction]
+            || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[def.faction]
+            || null;
           return `
             <div style="flex:1;min-width:120px;max-width:180px;border-radius:8px;
               border:1px solid ${rc}55;background:rgba(0,0,0,0.3);padding:10px;
@@ -1437,7 +1441,9 @@ function renderFleetCommanders() {
               <div style="font-size:1.8rem;filter:drop-shadow(0 0 8px ${rc}88);margin-bottom:4px">${def.icon}</div>
               <div style="font-size:0.62rem;font-weight:700;color:${rc};
                 white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${def.name}</div>
-              <div style="font-size:0.52rem;color:#6a90b8;margin:2px 0">Lv.${entry.level} · ${filled}/9 brodova</div>
+              <div style="font-size:0.52rem;color:#6a90b8;margin:2px 0">
+                <span title="${fDef?.name || def.faction}" style="cursor:default">${fDef?.icon || '❓'}</span>
+                Lv.${entry.level} · ${filled}/9 brodova</div>
               <div style="display:flex;gap:4px;justify-content:center;margin-top:6px">
                 ${!isLead ? `<button class="btn" style="font-size:0.5rem;padding:2px 6px"
                   onclick="window._activeCommander='${cmdId}';renderFleetCommanders();saveGame()">★ Lead</button>` : ''}
