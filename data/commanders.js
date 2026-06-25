@@ -152,7 +152,7 @@ const COMMANDERS_DATA = [
     desc: 'Legenda stara kao svemirsko osvajanje. Neće stati.', descKey: 'commander.cmd_titan_cmd.desc', descKey: 'commander.cmd_titan_cmd.desc',
     specialty_ships: ['battleship', 'carrier'], specialty_weapons: ['kinetic', 'explosive'],
     passive: { name: 'Titanska Sila', nameKey: 'commander.cmd_titan_cmd.passive.name', nameKey: 'commander.cmd_titan_cmd.passive.name', desc: 'Battleship i Carrier +20% napad i +20% HP.', descKey: 'commander.cmd_titan_cmd.passive.desc', descKey: 'commander.cmd_titan_cmd.passive.desc' },
-    passive2: { name: 'Nepobjediivost', nameKey: 'commander.cmd_titan_cmd.passive2.name', nameKey: 'commander.cmd_titan_cmd.passive2.name', desc: 'Flota ne može biti ubita ispod 1 HP u prvoj rundi.', descKey: 'commander.cmd_titan_cmd.passive2.desc', descKey: 'commander.cmd_titan_cmd.passive2.desc' },
+    passive2: { name: 'Nepobediivost', nameKey: 'commander.cmd_titan_cmd.passive2.name', nameKey: 'commander.cmd_titan_cmd.passive2.name', desc: 'Flota ne može biti ubita ispod 1 HP u prvoj rundi.', descKey: 'commander.cmd_titan_cmd.passive2.desc', descKey: 'commander.cmd_titan_cmd.passive2.desc' },
     active: { name: 'Titansko Udiranje', nameKey: 'commander.cmd_titan_cmd.active.name', nameKey: 'commander.cmd_titan_cmd.active.name', desc: 'Sve Battleship klase napadaju 3× u jednoj rundi. Cooldown: 20 min.', descKey: 'commander.cmd_titan_cmd.active.desc', descKey: 'commander.cmd_titan_cmd.active.desc', cooldown: 1200 },
   },
 
@@ -277,7 +277,7 @@ const COMMANDERS_DATA = [
   },
   {
     id: 'cmd_phalanx', name: 'Phalanx', nameKey: 'commander.cmd_phalanx.name', nameKey: 'commander.cmd_phalanx.name', rarity: 'R', faction: 'sentinel', icon: '⚔️',
-    desc: 'Antički borbeni red. Zajedno nepobjedivi.', descKey: 'commander.cmd_phalanx.desc', descKey: 'commander.cmd_phalanx.desc',
+    desc: 'Antički borbeni red. Zajedno nepobedivi.', descKey: 'commander.cmd_phalanx.desc', descKey: 'commander.cmd_phalanx.desc',
     specialty_ships: ['cruiser', 'battleship'], specialty_weapons: ['kinetic', 'explosive'],
     passive: { name: 'Borbena Formacija', nameKey: 'commander.cmd_phalanx.passive.name', nameKey: 'commander.cmd_phalanx.passive.name', desc: 'Što više brodova u floti, svaki prima manje štete (do -25%).', descKey: 'commander.cmd_phalanx.passive.desc', descKey: 'commander.cmd_phalanx.passive.desc' },
     active: { name: 'Falanga', nameKey: 'commander.cmd_phalanx.active.name', nameKey: 'commander.cmd_phalanx.active.name', desc: 'Svi brodovi se grupišu — šteta podijeljena ravnomjerno 3 runde. Cooldown: 12 min.', descKey: 'commander.cmd_phalanx.active.desc', descKey: 'commander.cmd_phalanx.active.desc', cooldown: 720 },
@@ -760,7 +760,7 @@ const COMMANDERS_DATA = [
   },
   {
     id: 'cmd_radiant', name: 'Radiant', nameKey: 'commander.cmd_radiant.name', nameKey: 'commander.cmd_radiant.name', rarity: 'R', faction: 'solar', icon: '✨',
-    desc: 'Sija i u pobjedi i u porazu. Niko ne ostaje ravnodušan.', descKey: 'commander.cmd_radiant.desc', descKey: 'commander.cmd_radiant.desc',
+    desc: 'Sija i u pobedi i u porazu. Niko ne ostaje ravnodušan.', descKey: 'commander.cmd_radiant.desc', descKey: 'commander.cmd_radiant.desc',
     specialty_ships: ['cruiser', 'carrier'], specialty_weapons: ['heat', 'explosive'],
     passive: { name: 'Radijacija Snage', nameKey: 'commander.cmd_radiant.passive.name', nameKey: 'commander.cmd_radiant.passive.name', desc: 'Flota +10% svega. Healing +20%.', descKey: 'commander.cmd_radiant.passive.desc', descKey: 'commander.cmd_radiant.passive.desc' },
     active: { name: 'Radijantni Val', nameKey: 'commander.cmd_radiant.active.name', nameKey: 'commander.cmd_radiant.active.name', desc: 'Heal 20% HP + +30% napad svim brodovima 2 runde. Cooldown: 15 min.', descKey: 'commander.cmd_radiant.active.desc', descKey: 'commander.cmd_radiant.active.desc', cooldown: 900 },
