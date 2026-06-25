@@ -186,7 +186,7 @@ function simulatePvpBattle(fleetA, fleetB) {
     });
     const pAlive = alive('player').length > 0, eAlive = alive('enemy').length > 0;
     if (!eAlive && !pAlive) { log.push({ type:'info', msg:'⚖️ Nerijaseno!' }); return { status:'draw',    round:round, log:log }; }
-    if (!eAlive)            { log.push({ type:'info', msg:'🏆 Pobjeda!' });     return { status:'victory', round:round, log:log }; }
+    if (!eAlive)            { log.push({ type:'info', msg:'🏆 Pobeda!' });     return { status:'victory', round:round, log:log }; }
     if (!pAlive)            { log.push({ type:'info', msg:'💀 Poraz!' });      return { status:'defeat',  round:round, log:log }; }
   }
   log.push({ type:'info', msg:'⏱️ Maks. rundi - nerijaseno.' });
@@ -350,12 +350,12 @@ function renderPvp() {
   el.innerHTML =
     '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">' +
       '<div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,204,68,0.15)"><div style="font-size:1.2rem;font-family:Orbitron,monospace;color:#ffcc44">'+(pvp.rating||1000)+'</div><div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">RATING</div></div>' +
-      '<div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(0,212,255,0.15)"><div style="font-size:1.2rem;font-family:Orbitron,monospace;color:#00d4ff">'+(pvp.wins||0)+'</div><div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">POBJEDE</div></div>' +
+      '<div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(0,212,255,0.15)"><div style="font-size:1.2rem;font-family:Orbitron,monospace;color:#00d4ff">'+(pvp.wins||0)+'</div><div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">POBEDE</div></div>' +
       '<div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,51,85,0.15)"><div style="font-size:1.2rem;font-family:Orbitron,monospace;color:#ff3355">'+(pvp.losses||0)+'</div><div style="font-size:0.55rem;color:#6a90b8;margin-top:2px">PORAZI</div></div>' +
     '</div>' +
     (sa
       ? '<div style="padding:10px 14px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:0.7rem;color:#00d4ff">Shield aktivan - '+sl+' min</span><button onclick="deactivatePvpShield()" style="font-size:0.6rem;padding:3px 10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:4px;cursor:pointer">Deaktiviraj</button></div>'
-      : '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"><button onclick="activatePvpShield(4,300)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 4h (300 BOCRYPTO)</button><button onclick="activatePvpShield(12,600)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 12h (600 BOCRYPTO)</button><button onclick="activatePvpShield(24,1000)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 24h (1000 BOCRYPTO)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.6rem">Osvjezi</button></div>'
+      : '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"><button onclick="activatePvpShield(4,300)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 4h (300 BOCRYPTO)</button><button onclick="activatePvpShield(12,600)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 12h (600 BOCRYPTO)</button><button onclick="activatePvpShield(24,1000)" class="btn" style="flex:1;font-size:0.6rem">🛡️ 24h (1000 BOCRYPTO)</button><button onclick="refreshOpponents()" class="btn btn-g" style="flex:1;font-size:0.6rem">Osveži</button></div>'
     ) +
     '<div style="padding:8px 12px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px;margin-bottom:14px;font-size:0.65rem;color:#00ff88">⚔️ PvP MATCH DUELS — brodovi se ne gube nakon bitke</div>' +
     '<div style="font-size:0.6rem;color:#ff3355;font-family:Orbitron,monospace;letter-spacing:2px;margin-bottom:10px">PROTIVNICI</div>' +
