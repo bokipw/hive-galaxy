@@ -82,26 +82,11 @@ function isDifficultyModeAvailable(mode) {
 
 // ── ENERGIJA PO INSTANCI (skalirana po modu) ──
 function getInstanceEnergyCost(inst) {
-  const n    = inst.number || 1;
   const mode = INST_DIFFICULTY_MODES[_instDifficultyMode] || INST_DIFFICULTY_MODES.easy;
-  let base;
-  switch(inst.type) {
-    case 'standard':      base = 7  + (n - 1) * 2;   break;
-    case 'restricted':    base = 70 + (n - 1) * 10;  break;
-    case 'trial':         base = 100 + (n - 1) * 15; break;
-    case 'humanoid':      base = 80 + (n - 1) * 10;  break;
-    case 'pirate':        base = 75 + (n - 1) * 10;  break;
-    case 'constellation': base = 200 + (n - 1) * 50; break;
-    case 'boss':          base = 300;                 break;
-    case 'boss_rare':     base = 40;                  break;
-    case 'boss_epic':     base = 80;                  break;
-    case 'boss_legendary':base = 150;                 break;
-    case 'boss_master':   base = 300;                 break;
-    default:              base = 50;
-  }
+  const diff = inst.difficulty || 1;
   // Energy Lv100 — nema gubitka energije u instanci
   if (typeof isEnergyFreeInstance === 'function' && isEnergyFreeInstance()) return 0;
-  return Math.floor(base * mode.energyMult);
+  return Math.floor(diff * 100 * mode.energyMult);
 }
 
 // ── MIN POWER SKALIRAN PO MODU ──
