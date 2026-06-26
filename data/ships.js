@@ -339,42 +339,55 @@ const CARRIERS = [
 // 👑 FLAGSHIP (special) — većinom Legendary, neki Epic
 // ═══════════════════════════════════════════════════════════
 const SPECIALS = [
-  { id:'special_Independence_I',     name:'Independence I',     rarity:'L', armor:'Light', armor_val:500,  shield:15000, structure:5000, slots:6,  agility:15, stability:50, movement:2, source:'Humanoid 3' },
-  { id:'special_BlackHole_I',        name:'Black Hole I',        rarity:'L', armor:'Light', armor_val:600,  shield:12000, structure:6000, slots:6,  agility:12, stability:45, movement:2, source:'Pirate 3' },
-  { id:'special_Conquistador_I',     name:'Conquistador I',     rarity:'L', armor:'Light', armor_val:550,  shield:13000, structure:5500, slots:7,  agility:14, stability:48, movement:2, source:'Pirate 3' },
-  { id:'special_IntrepidNexus_I',    name:'Intrepid Nexus I',    rarity:'E', armor:'Light', armor_val:520,  shield:11000, structure:4800, slots:6,  agility:16, stability:44, movement:2, source:'Humanoid 5' },
-  { id:'special_GrimReaper_I',       name:'Grim Reaper I',       rarity:'L', armor:'Light', armor_val:580,  shield:14000, structure:5200, slots:6,  agility:13, stability:46, movement:2, source:'Humanoid 5' },
+  // Alliance Admiral (support flagship)
   { id:'special_AllianceAdmiral_I',  name:'Alliance Admiral I',  rarity:'L', armor:'Light', armor_val:650,  shield:16000, structure:6500, slots:8,  agility:10, stability:55, movement:1, source:'Constellation 1' },
-  { id:'special_PresidioOfGlory_I',  name:'Presidio of Glory I',  rarity:'L', armor:'Light', armor_val:700,  shield:18000, structure:7000, slots:8,  agility:9,  stability:58, movement:1, source:'Constellation 1' },
-  { id:'special_AggressiveWarlord_I',name:'Aggressive Warlord I',rarity:'E', armor:'Light', armor_val:620,  shield:13500, structure:5800, slots:7,  agility:11, stability:47, movement:2, source:'Pirate 3' },
-  { id:'special_QuickAssault_I',     name:'Quick Assault I',     rarity:'L', armor:'Light', armor_val:560,  shield:12500, structure:5100, slots:6,  agility:18, stability:42, movement:3, source:'Humanoid 8' },
-  { id:'special_StrikingSword_I',    name:'Striking Sword I',    rarity:'L', armor:'Light', armor_val:590,  shield:13800, structure:5400, slots:7,  agility:14, stability:49, movement:2, source:'Constellation 3' },
+  { id:'special_AllianceAdmiral_II', name:'Alliance Admiral II', rarity:'L', armor:'Light', armor_val:1040, shield:25600, structure:10400, slots:9,  agility:12, stability:60, movement:1, source:'Elite instanca' },
+  { id:'special_AllianceAdmiral_III',name:'Alliance Admiral III',rarity:'L', armor:'Light', armor_val:1664, shield:40960, structure:16640, slots:10, agility:14, stability:65, movement:1, source:'Hell boss' },
 
-  // II varijante flagship brodova
-  { id:'special_Independence_II',    name:'Independence II',     rarity:'L', armor:'Light', armor_val:800,  shield:24000, structure:8000, slots:7,  agility:17, stability:55, movement:2, source:'Elite instanca' },
+  // Black Hole (glass cannon flagship)
+  { id:'special_BlackHole_I',        name:'Black Hole I',        rarity:'L', armor:'Light', armor_val:600,  shield:12000, structure:6000, slots:6,  agility:12, stability:45, movement:2, source:'Pirate 3' },
+  { id:'special_BlackHole_II',       name:'Black Hole II',       rarity:'L', armor:'Light', armor_val:960,  shield:19200, structure:9600, slots:7,  agility:14, stability:50, movement:2, source:'Elite instanca' },
+  { id:'special_BlackHole_III',      name:'Black Hole III',      rarity:'L', armor:'Light', armor_val:1536, shield:30720, structure:15360, slots:8,  agility:16, stability:55, movement:2, source:'Hell boss' },
+
+  // Conquistador (balanced flagship)
+  { id:'special_Conquistador_I',     name:'Conquistador I',     rarity:'L', armor:'Light', armor_val:550,  shield:13000, structure:5500, slots:7,  agility:14, stability:48, movement:2, source:'Pirate 3' },
+  { id:'special_Conquistador_II',    name:'Conquistador II',    rarity:'L', armor:'Light', armor_val:880,  shield:20800, structure:8800, slots:8,  agility:16, stability:53, movement:2, source:'Elite instanca' },
+  { id:'special_Conquistador_III',   name:'Conquistador III',   rarity:'L', armor:'Light', armor_val:1408, shield:33280, structure:14080, slots:9,  agility:18, stability:58, movement:2, source:'Hell boss' },
+
+  // Grim Reaper (glass cannon flagship)
+  { id:'special_GrimReaper_I',       name:'Grim Reaper I',       rarity:'L', armor:'Light', armor_val:580,  shield:14000, structure:5200, slots:6,  agility:13, stability:46, movement:2, source:'Humanoid 5' },
+  { id:'special_GrimReaper_II',      name:'Grim Reaper II',      rarity:'L', armor:'Light', armor_val:928,  shield:22400, structure:8320, slots:7,  agility:15, stability:51, movement:2, source:'Elite instanca' },
+  { id:'special_GrimReaper_III',     name:'Grim Reaper III',     rarity:'L', armor:'Light', armor_val:1485, shield:35840, structure:13312, slots:8,  agility:17, stability:56, movement:2, source:'Hell boss' },
+
+  // Independence (balanced flagship)
+  { id:'special_Independence_I',     name:'Independence I',     rarity:'L', armor:'Light', armor_val:500,  shield:15000, structure:5000, slots:6,  agility:15, stability:50, movement:2, source:'Humanoid 3' },
+  { id:'special_Independence_II',    name:'Independence II',    rarity:'L', armor:'Light', armor_val:800,  shield:24000, structure:8000, slots:7,  agility:17, stability:55, movement:2, source:'Elite instanca' },
+  { id:'special_Independence_III',   name:'Independence III',   rarity:'L', armor:'Light', armor_val:1280, shield:38400, structure:12800, slots:8,  agility:19, stability:60, movement:2, source:'Hell boss' },
+
+  // Intrepid Nexus (speed flagship)
+  { id:'special_IntrepidNexus_I',    name:'Intrepid Nexus I',    rarity:'E', armor:'Light', armor_val:520,  shield:11000, structure:4800, slots:6,  agility:16, stability:44, movement:2, source:'Humanoid 5' },
   { id:'special_IntrepidNexus_II',   name:'Intrepid Nexus II',   rarity:'L', armor:'Light', armor_val:832,  shield:17600, structure:7680, slots:7,  agility:18, stability:49, movement:2, source:'Elite instanca' },
+  { id:'special_IntrepidNexus_III',  name:'Intrepid Nexus III',  rarity:'L', armor:'Light', armor_val:1331, shield:28160, structure:12288, slots:8,  agility:20, stability:54, movement:2, source:'Hell boss' },
+
+  // Presidio of Glory (balanced flagship)
+  { id:'special_PresidioOfGlory_I',  name:'Presidio of Glory I',  rarity:'L', armor:'Light', armor_val:700,  shield:18000, structure:7000, slots:8,  agility:9,  stability:58, movement:1, source:'Constellation 1' },
+  { id:'special_PresidioOfGlory_II', name:'Presidio of Glory II', rarity:'L', armor:'Light', armor_val:1120, shield:28800, structure:11200, slots:9,  agility:11, stability:63, movement:1, source:'Elite instanca' },
+  { id:'special_PresidioOfGlory_III',name:'Presidio of Glory III',rarity:'L', armor:'Light', armor_val:1792, shield:46080, structure:17920, slots:10, agility:13, stability:68, movement:1, source:'Hell boss' },
+
+  // Warlord (glass cannon flagship)
+  { id:'special_AggressiveWarlord_I',name:'Aggressive Warlord I', rarity:'E', armor:'Light', armor_val:620,  shield:13500, structure:5800, slots:7,  agility:11, stability:47, movement:2, source:'Pirate 3' },
   { id:'special_AggressiveWarlord_II',name:'Aggressive Warlord II',rarity:'L',armor:'Light', armor_val:992,  shield:21600, structure:9280, slots:8,  agility:13, stability:52, movement:2, source:'Elite instanca' },
-  { id:'special_QuickAssault_II',    name:'Quick Assault II',    rarity:'L', armor:'Light', armor_val:896,  shield:20000, structure:8160, slots:7,  agility:21, stability:47, movement:3, source:'Elite instanca' },
-
-  // -- II varijante (preostale) --
-  { id:'special_BlackHole_II',        name:'Black Hole II',        rarity:'L', armor:'Light', armor_val:960,  shield:19200, structure:9600, slots:7,  agility:14, stability:50, movement:2, source:'Elite instanca' },
-  { id:'special_Conquistador_II',     name:'Conquistador II',     rarity:'L', armor:'Light', armor_val:880,  shield:20800, structure:8800, slots:8,  agility:16, stability:53, movement:2, source:'Elite instanca' },
-  { id:'special_GrimReaper_II',       name:'Grim Reaper II',       rarity:'L', armor:'Light', armor_val:928,  shield:22400, structure:8320, slots:7,  agility:15, stability:51, movement:2, source:'Elite instanca' },
-  { id:'special_AllianceAdmiral_II',  name:'Alliance Admiral II',  rarity:'L', armor:'Light', armor_val:1040, shield:25600, structure:10400, slots:9,  agility:12, stability:60, movement:1, source:'Elite instanca' },
-  { id:'special_PresidioOfGlory_II',  name:'Presidio of Glory II',  rarity:'L', armor:'Light', armor_val:1120, shield:28800, structure:11200, slots:9,  agility:11, stability:63, movement:1, source:'Elite instanca' },
-  { id:'special_StrikingSword_II',    name:'Striking Sword II',    rarity:'L', armor:'Light', armor_val:944,  shield:22080, structure:8640, slots:8,  agility:16, stability:54, movement:2, source:'Elite instanca' },
-
-  // -- III varijante --
-  { id:'special_Independence_III',    name:'Independence III',     rarity:'L', armor:'Light', armor_val:1280, shield:38400, structure:12800, slots:8,  agility:19, stability:60, movement:2, source:'Hell boss' },
-  { id:'special_BlackHole_III',       name:'Black Hole III',       rarity:'L', armor:'Light', armor_val:1536, shield:30720, structure:15360, slots:8,  agility:16, stability:55, movement:2, source:'Hell boss' },
-  { id:'special_Conquistador_III',    name:'Conquistador III',     rarity:'L', armor:'Light', armor_val:1408, shield:33280, structure:14080, slots:9,  agility:18, stability:58, movement:2, source:'Hell boss' },
-  { id:'special_IntrepidNexus_III',   name:'Intrepid Nexus III',   rarity:'L', armor:'Light', armor_val:1331, shield:28160, structure:12288, slots:8,  agility:20, stability:54, movement:2, source:'Hell boss' },
-  { id:'special_GrimReaper_III',      name:'Grim Reaper III',      rarity:'L', armor:'Light', armor_val:1485, shield:35840, structure:13312, slots:8,  agility:17, stability:56, movement:2, source:'Hell boss' },
-  { id:'special_AllianceAdmiral_III', name:'Alliance Admiral III', rarity:'L', armor:'Light', armor_val:1664, shield:40960, structure:16640, slots:10, agility:14, stability:65, movement:1, source:'Hell boss' },
-  { id:'special_PresidioOfGlory_III', name:'Presidio of Glory III', rarity:'L', armor:'Light', armor_val:1792, shield:46080, structure:17920, slots:10, agility:13, stability:68, movement:1, source:'Hell boss' },
   { id:'special_AggressiveWarlord_III',name:'Aggressive Warlord III',rarity:'L',armor:'Light', armor_val:1587, shield:34560, structure:14848, slots:9,  agility:15, stability:57, movement:2, source:'Hell boss' },
-  { id:'special_QuickAssault_III',    name:'Quick Assault III',    rarity:'L', armor:'Light', armor_val:1434, shield:32000, structure:13056, slots:8,  agility:24, stability:52, movement:3, source:'Hell boss' },
-  { id:'special_StrikingSword_III',   name:'Striking Sword III',   rarity:'L', armor:'Light', armor_val:1510, shield:35328, structure:13824, slots:9,  agility:18, stability:59, movement:2, source:'Hell boss' },
+
+  // Quick Assault (speed flagship)
+  { id:'special_QuickAssault_I',     name:'Quick Assault I',     rarity:'L', armor:'Light', armor_val:560,  shield:12500, structure:5100, slots:6,  agility:18, stability:42, movement:3, source:'Humanoid 8' },
+  { id:'special_QuickAssault_II',    name:'Quick Assault II',    rarity:'L', armor:'Light', armor_val:896,  shield:20000, structure:8160, slots:7,  agility:21, stability:47, movement:3, source:'Elite instanca' },
+  { id:'special_QuickAssault_III',   name:'Quick Assault III',   rarity:'L', armor:'Light', armor_val:1434, shield:32000, structure:13056, slots:8,  agility:24, stability:52, movement:3, source:'Hell boss' },
+
+  // Striking Sword (balanced flagship)
+  { id:'special_StrikingSword_I',    name:'Striking Sword I',    rarity:'L', armor:'Light', armor_val:590,  shield:13800, structure:5400, slots:7,  agility:14, stability:49, movement:2, source:'Constellation 3' },
+  { id:'special_StrikingSword_II',   name:'Striking Sword II',   rarity:'L', armor:'Light', armor_val:944,  shield:22080, structure:8640, slots:8,  agility:16, stability:54, movement:2, source:'Elite instanca' },
+  { id:'special_StrikingSword_III',  name:'Striking Sword III',  rarity:'L', armor:'Light', armor_val:1510, shield:35328, structure:13824, slots:9,  agility:18, stability:59, movement:2, source:'Hell boss' },
 ];
 
 // ── SPREMANJE SVIH BRODOVA U JEDAN OBJEKAT ──
