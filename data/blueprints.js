@@ -485,7 +485,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 1500, ehp: 55000, speed: 3, evasion: 60 },
     tips: 'Ultimate build. Sve divine komponente. 50% blok + uvijek prvi + +50% DPS. Boss Event drop potreban.',
     tipsKey: 'blueprint.bp_special_ultimate.tips',
-    source_req: 'Boss Event, Constellation 3, Trial 10',
+    source_req: 'Restricted 4 Hell, Boss Event, Constellation 3, Trial 10',
     sourceKey: 'blueprint.bp_special_ultimate.source',
   },
 ];
