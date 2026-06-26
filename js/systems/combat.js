@@ -1427,7 +1427,10 @@ function calculateRewards(battle, instanceData, prog) {
   const artFragChance = ART_FRAG_CHANCE[modeName] || 60;
   if (!rewards.artifactFragments) rewards.artifactFragments = [];
   artifactDrops.forEach(id => {
-    if (typeof isArtifactUnlocked === 'function' && isArtifactUnlocked(id)) return;
+    if (typeof ARTIFACTS_DATA !== 'undefined' && window.artifactState?.fragments) {
+      const art = ARTIFACTS_DATA.find(a => a.id === id);
+      if (art && (window.artifactState.fragments[id] || 0) >= art.fragments) return;
+    }
     if (Math.random() * 100 < artFragChance) {
       rewards.artifactFragments.push(id);
     }
@@ -1560,7 +1563,10 @@ function calculateRewards(battle, instanceData, prog) {
       instance.drops.chance.forEach(c => {
         if (!c.item || seenIds.has(c.item)) return;
         if (ownedBlueprints[c.item]) return;
-        if (c.item.startsWith('art_') && typeof isArtifactUnlocked === 'function' && isArtifactUnlocked(c.item)) return;
+        if (c.item.startsWith('art_') && typeof ARTIFACTS_DATA !== 'undefined' && window.artifactState?.fragments) {
+          const art = ARTIFACTS_DATA.find(a => a.id === c.item);
+          if (art && (window.artifactState.fragments[c.item] || 0) >= art.fragments) return;
+        }
         if (c.minMode && MODE_ORDER.indexOf(modeName) < MODE_ORDER.indexOf(c.minMode)) return;
         seenIds.add(c.item);
         const rar = getBlueprintRarity(c.item);
@@ -1582,6 +1588,12 @@ function calculateRewards(battle, instanceData, prog) {
       // Svaki drop — isti sistem kao opšti dropovi:
       // roll za puni blueprint (MODE_BP_CHANCE), ako ne — fragment (MODE_FRAG_CHANCE), ako ni to — fragment anyway
       bossDrops.forEach(id => {
+        // Artifakti idu u artifact sistem, ne u blueprint sistem
+        if (id.startsWith('art_')) {
+          if (!rewards.artifactFragments) rewards.artifactFragments = [];
+          if (!rewards.artifactFragments.includes(id)) rewards.artifactFragments.push(id);
+          return;
+        }
         const item   = allItems.find(x => x.id === id);
         const rar    = item?.rarity || 'C';
         const bpRoll = Math.random() * 100;
