@@ -227,16 +227,18 @@ function finishPvpBattle() {
   window._dailyPvpCount = (window._dailyPvpCount||0)+1;
   if (isVictory) window._weeklyPvpCount = (window._weeklyPvpCount||0)+1;
   if (isVictory) window._dailyPvpWinCount = (window._dailyPvpWinCount||0)+1;
-  var loot = { metal:0, crystal:0, he3:0, bocrypto:0 };
+  var loot = { metal:0, crystal:0, he3:0, bocrypto:0, xp:0 };
   if (isVictory) {
     loot.metal    = 100000;
     loot.crystal  = 100000;
     loot.he3      = 100000;
     loot.bocrypto = 1100;
+    loot.xp       = 100;
     R.metal    += loot.metal;
     R.crystal  += loot.crystal;
     R.he3      += loot.he3;
     R.bocrypto  = (R.bocrypto || 0) + loot.bocrypto;
+    if (typeof addExp === 'function') addExp(loot.xp);
   }
   if (!pvp.log) pvp.log = [];
   pvp.log.unshift({ time:Date.now(), opponent:opp.name, rating:opp.rating, result:result.status, rounds:result.round, ratingChange:ratingChange, loot:loot });
