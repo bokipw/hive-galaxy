@@ -236,28 +236,6 @@ const BLUEPRINTS = [
   },
 
   {
-    id: 'bp_cruiser_balanced',
-    name: 'Cruiser — Iron Fist',
-    nameKey: 'blueprint.bp_cruiser_balanced.name',
-    shipClass: 'cruiser',
-    role: 'balanced',
-    tier: 'mid',
-    icon: '⚖️',
-    ship: 'cruiser_Aegis_II',
-    loadout: {
-      weapons: ['w_kinetic_railgun_II', 'w_explosive_devastator_II', 'w_kinetic_railgun_beam_II'],
-      shield:  'sh_void_field_II',
-      engine:  'eng_sentinel_II',
-      modules: ['mod_fortress_core_I', 'mod_repair_nano_II', 'mod_targeting_II'],
-    },
-    stats_estimate: { dps: 395, ehp: 13000, speed: 1, evasion: 7 },
-    tips: 'Balansirana krstarica. Dobra odbrana + solidan DPS. Idealna za dugačke borbe.',
-    tipsKey: 'blueprint.bp_cruiser_balanced.tips',
-    source_req: 'Restricted 3-6',
-    sourceKey: 'blueprint.bp_cruiser_balanced.source',
-  },
-
-  {
     id: 'bp_cruiser_endgame',
     name: 'Cruiser — Immortal Bastion',
     nameKey: 'blueprint.bp_cruiser_endgame.name',
@@ -303,28 +281,6 @@ const BLUEPRINTS = [
     tipsKey: 'blueprint.bp_battleship_starter.tips',
     source_req: 'Instanca 6-10',
     sourceKey: 'blueprint.bp_battleship_starter.source',
-  },
-
-  {
-    id: 'bp_battleship_glass',
-    name: 'Battleship — Death Star',
-    nameKey: 'blueprint.bp_battleship_glass.name',
-    shipClass: 'battleship',
-    role: 'glass_cannon',
-    tier: 'mid',
-    icon: '💀',
-    ship: 'battleship_Devastator_II',
-    loadout: {
-      weapons: ['w_kinetic_railgun_III', 'w_heat_inferno_III', 'w_magnetic_pulsar_II', 'w_heat_hellfire_beam_II'],
-      shield:  'sh_phase_curtain_I',
-      engine:  'eng_berserker_III',
-      modules: ['mod_overload_III', 'mod_crit_amp_II'],
-    },
-    stats_estimate: { dps: 1150, ehp: 8500, speed: 2, evasion: 5 },
-    tips: 'Maksimalni DPS. Overload III + berserker = prva runda je gotova. Nije za dugo.',
-    tipsKey: 'blueprint.bp_battleship_glass.tips',
-    source_req: 'Restricted 5-8',
-    sourceKey: 'blueprint.bp_battleship_glass.source',
   },
 
   {
