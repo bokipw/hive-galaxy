@@ -81,7 +81,7 @@ const BLUEPRINTS = [
     role: 'speed',
     tier: 'mid',
     icon: '⚡',
-    ship: 'scout_Spectre_II',
+    ship: 'scout_Specter_II',
     loadout: {
       weapons: ['w_kinetic_railgun_II', 'w_heat_inferno_II'],
       shield:  'sh_particle_veil_II',
@@ -120,72 +120,6 @@ const BLUEPRINTS = [
   // ════════════════════════════════════════════
   // ⚔️ LOVAC BLUEPRINTI
   // ════════════════════════════════════════════
-
-  {
-    id: 'bp_fighter_starter',
-    name: 'Fighter — Starter Build',
-    nameKey: 'blueprint.bp_fighter_starter.name',
-    shipClass: 'fighter',
-    role: 'balanced',
-    tier: 'starter',
-    icon: '⚔️',
-    ship: 'fighter_Falcon_I',
-    loadout: {
-      weapons: ['w_kinetic_railgun_I', 'w_heat_inferno_I', 'w_kinetic_railgun_I'],
-      shield:  'sh_quartz_shell_I',
-      engine:  'eng_tactical_I',
-      modules: ['mod_targeting_I', 'mod_armor_plating_I'],
-    },
-    stats_estimate: { dps: 235, ehp: 2100, speed: 1, evasion: 4 },
-    tips: 'Pouzdani starter lovac. Tri oružna slota čine razliku od prvog dana.',
-    tipsKey: 'blueprint.bp_fighter_starter.tips',
-    source_req: 'Instanca 1-6',
-    sourceKey: 'blueprint.bp_fighter_starter.source',
-  },
-
-  {
-    id: 'bp_fighter_glass',
-    name: 'Fighter — Glass Cannon',
-    nameKey: 'blueprint.bp_fighter_glass.name',
-    shipClass: 'fighter',
-    role: 'glass_cannon',
-    tier: 'mid',
-    icon: '💥',
-    ship: 'fighter_Raven_II',
-    loadout: {
-      weapons: ['w_kinetic_railgun_III', 'w_heat_inferno_II', 'w_kinetic_railgun_beam_II'],
-      shield:  'sh_particle_veil_I',
-      engine:  'eng_berserker_II',
-      modules: ['mod_crit_amp_II', 'mod_overload_I'],
-    },
-    stats_estimate: { dps: 620, ehp: 3200, speed: 2, evasion: 9 },
-    tips: 'Maksimalni DPS. Overload + berserker = razoran u prvim rundama. Rizičan.',
-    tipsKey: 'blueprint.bp_fighter_glass.tips',
-    source_req: 'Restricted 2-5',
-    sourceKey: 'blueprint.bp_fighter_glass.source',
-  },
-
-  {
-    id: 'bp_fighter_balanced',
-    name: 'Fighter — All-Rounder',
-    nameKey: 'blueprint.bp_fighter_balanced.name',
-    shipClass: 'fighter',
-    role: 'balanced',
-    tier: 'mid',
-    icon: '⚖️',
-    ship: 'fighter_Harrier_II',
-    loadout: {
-      weapons: ['w_magnetic_pulsar_II', 'w_heat_inferno_II', 'w_explosive_devastator_II'],
-      shield:  'sh_phase_curtain_II',
-      engine:  'eng_sprint_II',
-      modules: ['mod_crit_amp_I', 'mod_repair_nano_II'],
-    },
-    stats_estimate: { dps: 380, ehp: 5500, speed: 2, evasion: 12 },
-    tips: 'All-rounder. Solidan u svakoj situaciji. Idealan za PvP i PvE.',
-    tipsKey: 'blueprint.bp_fighter_balanced.tips',
-    source_req: 'Restricted 1-4',
-    sourceKey: 'blueprint.bp_fighter_balanced.source',
-  },
 
   {
     id: 'bp_fighter_endgame',
