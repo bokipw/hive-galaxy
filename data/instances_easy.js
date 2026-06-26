@@ -2738,7 +2738,6 @@ const INSTANCES_EASY = [
     id: 'boss_l1', name: 'Galaxy Eater', type: 'boss_legendary', number: 1,
     difficulty: 10, min_power: 700000, icon: '🌑',
     xp: 50000,
-    cooldown_hours: 168,
     boss_ability: 'four_phases',
     boss_phases: [
       { name: 'Phase 1 — Awakening', hp_pct: 100, ability: 'normal' },
@@ -3026,7 +3025,6 @@ const INSTANCES_EASY = [
     min_power: 1000000,
     icon: '👑',
     xp: 100000,
-    cooldown_hours: 168,
     boss_ability: 'all_abilities',
     enemies: ['Hive God Spawn Wave 1', 'Hive God Spawn Wave 2', 'Hive God Core'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Behemoth_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Imperator_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Colossus_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":3}],
