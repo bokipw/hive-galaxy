@@ -1547,11 +1547,26 @@ function calculateRewards(battle, instanceData, prog) {
     const seenIds  = new Set();
     allItems.forEach(item => {
       if (!item.id || seenIds.has(item.id)) return;
+      if (ownedBlueprints[item.id]) return;
       if (!allowedBossRarities.includes(item.rarity)) return;
       seenIds.add(item.id);
       const w = rarityWeights[item.rarity] || 0;
       for (let i = 0; i < w; i++) bossPool.push(item.id);
     });
+
+    // Dodaj instance-specific dropove u pool
+    if (instance.drops?.chance) {
+      instance.drops.chance.forEach(c => {
+        if (!c.item || seenIds.has(c.item)) return;
+        if (ownedBlueprints[c.item]) return;
+        if (c.minMode && MODE_ORDER.indexOf(modeName) < MODE_ORDER.indexOf(c.minMode)) return;
+        seenIds.add(c.item);
+        const rar = getBlueprintRarity(c.item);
+        if (!allowedBossRarities.includes(rar)) return;
+        const w = rarityWeights[rar] || 1;
+        for (let i = 0; i < w; i++) bossPool.push(c.item);
+      });
+    }
 
     if (bossPool.length > 0) {
       // Odaberi bossDropCount UNIQUE itema (bez ponavljanja)

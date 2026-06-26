@@ -2923,7 +2923,13 @@ const INSTANCES_NORMAL = [
     boss: 'THE HIVE GOD',
   bossShip: {"name":"THE HIVE GOD","structure":320000,"shield":120000,"armor_val":40000,"dps":24000,"agility":10,"speed":7},
     drops: {
-      participation: ['sh_divine_I', 'mod_divine_core_I', 'eng_divine_I', 'w_bomber_squadron_III', 'w_elite_squadron_III'],
+      chance: [
+        { item: 'sh_divine_I', rate: 15 },
+        { item: 'mod_divine_core_I', rate: 15 },
+        { item: 'eng_divine_I', rate: 15 },
+        { item: 'w_bomber_squadron_III', rate: 15 },
+        { item: 'w_elite_squadron_III', rate: 15 },
+      ],
       note: 'Drop only — ne može se craftati. Max 1 divine komponenta po igraču per event.',
     },
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
