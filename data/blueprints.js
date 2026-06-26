@@ -47,7 +47,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 155, ehp: 1200, speed: 1, evasion: 3 },
     tips: 'Idealan za prve misije i farming Common instanci. Fokusiraj se na detekciju.',
     tipsKey: 'blueprint.bp_scout_starter.tips',
-    source_req: 'Instanca 1-5',
+    source_req: 'Instanca 5',
     sourceKey: 'blueprint.bp_scout_starter.source',
   },
 
@@ -69,7 +69,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 260, ehp: 3500, speed: 1, evasion: 27 },
     tips: 'Stealth runner. -45% detekcija. Idealan za izviđanje Restricted zona.',
     tipsKey: 'blueprint.bp_scout_stealth.tips',
-    source_req: 'Restricted 1-4',
+    source_req: 'Instanca 13',
     sourceKey: 'blueprint.bp_scout_stealth.source',
   },
 
@@ -91,7 +91,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 300, ehp: 2800, speed: 2, evasion: 17 },
     tips: 'Uvijek napada prvi. Ubijaš prije nego što te pogode.',
     tipsKey: 'blueprint.bp_scout_speed.tips',
-    source_req: 'Restricted 1-3',
+    source_req: 'Instanca 13, Restricted 3',
     sourceKey: 'blueprint.bp_scout_speed.source',
   },
 
@@ -113,7 +113,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 680, ehp: 7500, speed: 2, evasion: 40 },
     tips: 'Endgame izviđač. Teleport izbjegavanje + enorman DPS. Trial 5+ sadržaj.',
     tipsKey: 'blueprint.bp_scout_endgame.tips',
-    source_req: 'Trial 3-6',
+    source_req: 'Instanca 23',
     sourceKey: 'blueprint.bp_scout_endgame.source',
   },
 
@@ -139,7 +139,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 980, ehp: 9500, speed: 3, evasion: 38 },
     tips: 'Apex endgame lovac. Chrono matrix smanjuje cooldown. Execute + double move.',
     tipsKey: 'blueprint.bp_fighter_endgame.tips',
-    source_req: 'Trial 5-8',
+    source_req: 'Instanca 26, Restricted 7',
     sourceKey: 'blueprint.bp_fighter_endgame.source',
   },
 
@@ -165,7 +165,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 230, ehp: 7500, speed: 1, evasion: 0 },
     tips: 'Tank krstarica. Drži liniju i apsorbuje štetu umjesto slabijih brodova.',
     tipsKey: 'blueprint.bp_cruiser_starter.tips',
-    source_req: 'Instanca 4-8',
+    source_req: 'Instanca 26-28',
     sourceKey: 'blueprint.bp_cruiser_starter.source',
   },
 
@@ -187,7 +187,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 560, ehp: 28000, speed: 1, evasion: 14 },
     tips: 'Gotovo neunišitv. -35% štete + void shield + nano repair. Endgame tanking.',
     tipsKey: 'blueprint.bp_cruiser_endgame.tips',
-    source_req: 'Trial 5-9',
+    source_req: 'Trial 8 (Hell), Hell boss drop',
     sourceKey: 'blueprint.bp_cruiser_endgame.source',
   },
 
@@ -213,7 +213,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 320, ehp: 9000, speed: 1, evasion: 0 },
     tips: 'Solidan starter bojni brod. Četiri oružna slota daju odlični DPS od prvog dana.',
     tipsKey: 'blueprint.bp_battleship_starter.tips',
-    source_req: 'Instanca 6-10',
+    source_req: 'Instanca 15 (Nightmare/Hell)',
     sourceKey: 'blueprint.bp_battleship_starter.source',
   },
 
@@ -235,7 +235,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 1800, ehp: 20000, speed: 3, evasion: 45 },
     tips: 'Endgame boss brod. Chrono matrix + quantum lance = razara sve u 1-2 runde.',
     tipsKey: 'blueprint.bp_battleship_endgame.tips',
-    source_req: 'Trial 8-10',
+    source_req: 'Restricted 5 (Nightmare/Hell)',
     sourceKey: 'blueprint.bp_battleship_endgame.source',
   },
 
@@ -261,7 +261,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 200, ehp: 22000, speed: 1, evasion: 3 },
     tips: 'Starter nosač. Drži se nazad, leti Fighter Bay. Tanki po prirodi.',
     tipsKey: 'blueprint.bp_carrier_starter.tips',
-    source_req: 'Restricted 8',
+    source_req: 'Instanca 6, 30',
     sourceKey: 'blueprint.bp_carrier_starter.source',
   },
 
@@ -283,7 +283,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 480, ehp: 35000, speed: 1, evasion: 6 },
     tips: 'Strike carrier. Bomber squadron pogađa više meta odjednom. Zaključava neprijatelje.',
     tipsKey: 'blueprint.bp_carrier_balanced.tips',
-    source_req: 'Trial 5-8',
+    source_req: 'Trial 3 (Nightmare/Hell)',
     sourceKey: 'blueprint.bp_carrier_balanced.source',
   },
 
@@ -305,7 +305,7 @@ const BLUEPRINTS = [
     stats_estimate: { dps: 700, ehp: 60000, speed: 3, evasion: 15 },
     tips: 'Flagship-grade nosač. Elite squadron bira najslabiji oklop svake mete. Ubojit u floti.',
     tipsKey: 'blueprint.bp_carrier_endgame.tips',
-    source_req: 'Trial 9-10, Constellation',
+    source_req: 'Constellation 2, Hell boss drop',
     sourceKey: 'blueprint.bp_carrier_endgame.source',
   },
 
