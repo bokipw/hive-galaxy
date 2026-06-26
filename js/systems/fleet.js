@@ -127,6 +127,31 @@ function undeployCommander(cmdId) {
   toast('🏠 Komandir povučen iz flote.', 'ok');
 }
 
+// ── SKINI SVE BRODOVE SA KOMANDIRA → hangar ──
+function clearCommanderFleet(cmdId) {
+  const fleetArr = getCmdFleet(cmdId);
+  let totalReturned = 0;
+  for (let i = 0; i < 9; i++) {
+    const slot = fleetArr[i];
+    if (!slot) continue;
+    if (slot.design_id) {
+      const existing = hangar.find(h => h.design_id === slot.design_id);
+      if (existing) existing.count += slot.count;
+      else hangar.push({ design_id: slot.design_id, count: slot.count });
+      totalReturned += slot.count;
+    }
+    fleetArr[i] = null;
+  }
+  renderFleet();
+  if (typeof updateHangarStatus === 'function') updateHangarStatus();
+  saveGame();
+  if (totalReturned > 0) {
+    toast(`📦 ${totalReturned} brodova skinuto sa komandira i vraćeno u hangar.`, 'ok');
+  } else {
+    toast('⚠️ Komandir nema brodova za skidanje.', 'warn');
+  }
+}
+
 // ── CIJENA GRADNJE BRODA (sa Factory discountom) ──
 function getShipBuildCost(ship) {
   const base     = ship.armor_val + ship.shield * 0.3 + ship.structure * 0.5;
@@ -504,6 +529,10 @@ function renderFleet() {
             <button class="btn btn-r" style="font-size:0.6rem;padding:3px 10px"
               onclick="undeployCommander('${viewingId}')">
               🏠 Povuci
+            </button>
+            <button class="btn" style="font-size:0.6rem;padding:3px 10px;background:#b8860b;color:#fff"
+              onclick="if(confirm('Skinuti sve brodove sa ovog komandira i vratiti ih u hangar?'))clearCommanderFleet('${viewingId}')">
+              📦 Skini brodove
             </button>
           </div>
         </div>

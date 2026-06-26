@@ -1454,6 +1454,8 @@ function renderFleetCommanders() {
                   onclick="window._activeCommander='${cmdId}';renderFleetCommanders();saveGame()">★ Lead</button>` : ''}
                 <button class="btn btn-r" style="font-size:0.5rem;padding:2px 6px"
                   onclick="undeployCommander('${cmdId}');renderFleetCommanders()">✕</button>
+                <button class="btn" style="font-size:0.5rem;padding:2px 6px;background:#b8860b;color:#fff"
+                  onclick="if(confirm('Skinuti sve brodove?')){clearCommanderFleet('${cmdId}');renderFleetCommanders()}">📦</button>
               </div>
             </div>`;
         }).join('')}
@@ -1578,6 +1580,10 @@ function renderFleetCommanders() {
                 ? `<button class="btn btn-r" style="width:100%;font-size:0.55rem;padding:3px"
                     onclick="undeployCommander('${def.id}');renderFleetCommanders()">
                     🏠 Povuci
+                  </button>
+                  <button class="btn" style="width:100%;font-size:0.55rem;padding:3px;margin-top:4px;background:#b8860b;color:#fff"
+                    onclick="if(confirm('Skinuti sve brodove sa komandira?')){clearCommanderFleet('${def.id}');renderFleetCommanders()}">
+                    📦 Skini brodove
                   </button>`
                 : isFull
                   ? `<button class="btn" style="width:100%;font-size:0.55rem;padding:3px;opacity:0.4" disabled>
