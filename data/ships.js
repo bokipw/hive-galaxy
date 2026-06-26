@@ -311,7 +311,7 @@ const CARRIERS = [
   { id:'carrier_Titanfall_III', name:'Titanfall III', rarity:'E', armor:'Regen',  armor_val:2556, shield:10224, structure:4038, slots:6,  agility:4, stability:54, movement:1, source:'Trial 8' },
 
   { id:'carrier_Nebula_I',      name:'Nebula I',      rarity:'R', armor:'Chrome', armor_val:2100, shield:8400,  structure:2100, slots:4,  agility:3, stability:38, movement:1, source:'Normal Instanca 15' },
-  { id:'carrier_Nebula_II',     name:'Nebula II',     rarity:'E', armor:'Chrome', armor_val:2394, shield:9576,  structure:3360, slots:5,  agility:4, stability:43, movement:1, source:'Trial 6' },
+  { id:'carrier_Nebula_II',     name:'Nebula II',     rarity:'E', armor:'Chrome', armor_val:2394, shield:9576,  structure:3360, slots:5,  agility:4, stability:43, movement:1, source:'Restricted 10 Hell' },
   { id:'carrier_Nebula_III',    name:'Nebula III',    rarity:'L', armor:'Chrome', armor_val:2824, shield:11296, structure:4463, slots:6,  agility:4, stability:50, movement:1, source:'Trial 9' },
 
   { id:'carrier_Dominion_I',    name:'Dominion I',    rarity:'R', armor:'Regen',  armor_val:2200, shield:8800,  structure:2200, slots:4,  agility:2, stability:44, movement:1, source:'Normal Restricted 9' },
