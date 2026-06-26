@@ -1427,6 +1427,7 @@ function calculateRewards(battle, instanceData, prog) {
   const artFragChance = ART_FRAG_CHANCE[modeName] || 60;
   if (!rewards.artifactFragments) rewards.artifactFragments = [];
   artifactDrops.forEach(id => {
+    if (typeof isArtifactUnlocked === 'function' && isArtifactUnlocked(id)) return;
     if (Math.random() * 100 < artFragChance) {
       rewards.artifactFragments.push(id);
     }
@@ -1559,6 +1560,7 @@ function calculateRewards(battle, instanceData, prog) {
       instance.drops.chance.forEach(c => {
         if (!c.item || seenIds.has(c.item)) return;
         if (ownedBlueprints[c.item]) return;
+        if (c.item.startsWith('art_') && typeof isArtifactUnlocked === 'function' && isArtifactUnlocked(c.item)) return;
         if (c.minMode && MODE_ORDER.indexOf(modeName) < MODE_ORDER.indexOf(c.minMode)) return;
         seenIds.add(c.item);
         const rar = getBlueprintRarity(c.item);
