@@ -897,10 +897,9 @@ function setBuildMax(designId) {
   const ship = getShipById(design.ship_id);
   if (!ship) return;
   const cost = getShipBuildCost(ship);
-  const discount = getShipFactoryDiscount() / 100;
-  const metalCost   = Math.max(1, Math.floor(cost.metal   * (1 - discount)));
-  const crystalCost = Math.max(1, Math.floor(cost.crystal * (1 - discount)));
-  const he3Cost     = Math.max(1, Math.floor(cost.he3     * (1 - discount)));
+  const metalCost   = Math.max(1, cost.metal);
+  const crystalCost = Math.max(1, cost.crystal);
+  const he3Cost     = Math.max(1, cost.he3);
   const maxByMetal   = metalCost   > 0 ? Math.floor(R.metal   / metalCost)   : 9999;
   const maxByCrystal = crystalCost > 0 ? Math.floor(R.crystal / crystalCost) : 9999;
   const maxByHe3     = he3Cost     > 0 ? Math.floor(R.he3     / he3Cost)     : 9999;
