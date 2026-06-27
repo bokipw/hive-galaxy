@@ -137,8 +137,8 @@
             R.bcm          = hp.bcm        || 0;
             R.bocrypto     = hp.bocrypto    || 0;
             R.spCard       = hp.spcard      || 0;
-            R.keys         = hp.keys_cmd    || 0;
-            R.instanceKeys = hp.keys_inst   || 0;
+            R.keys         = Math.floor(hp.keys_cmd) || 0;
+            R.instanceKeys = Math.floor(hp.keys_inst) || 0;
 
             // Primijeni pending boosters od admina
             const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};
@@ -163,6 +163,11 @@
               if(typeof updateResUI === 'function') updateResUI();
               if(typeof saveGame    === 'function') saveGame();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
+            } else {
+              await _sb.from('hive_profiles').update({
+                keys_cmd:  R.keys,
+                keys_inst: R.instanceKeys,
+              }).eq('hive_user', hiveUser);
             }
           }
         } catch(e) { console.error('applyKeys error:', e); }
