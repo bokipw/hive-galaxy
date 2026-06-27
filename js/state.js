@@ -135,7 +135,7 @@ let hangar = [];
 // ── FLAGS ──
 window._storageWarned = false;
 window.artifactState = { fragments: {}, unlocked: [], equipped: [null, null, null] };
-window.achievementState = {};
+window.achievementState = { completed: [], claimed: [] };
 window.missionState = { daily: { date: '' } };
 window._deployedCommanders = [];
 window._formationSlots = Array(9).fill(null);
