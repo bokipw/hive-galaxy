@@ -390,6 +390,7 @@ CREATE INDEX idx_alliance_members_alliance ON alliance_members (alliance_id);
 ALTER TABLE players ENABLE ROW LEVEL SECURITY;
 CREATE POLICY players_select_all ON players FOR SELECT USING (true);
 CREATE POLICY players_update_own ON players FOR UPDATE USING (auth.uid()::text = id);
+CREATE POLICY players_insert_own ON players FOR INSERT TO authenticated WITH CHECK (auth.uid()::text = id);
 
 -- ── PROFILES (email) ──
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
