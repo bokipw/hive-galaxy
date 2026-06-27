@@ -8,3 +8,5 @@ transform*.js
 translate_missing.js
 tmp_*
 lang/index_en_map.json
+
+admin.html
