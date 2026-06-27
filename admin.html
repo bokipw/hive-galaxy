@@ -103,6 +103,7 @@
     </button>
     <div style="color:#2a3a5a;font-size:.65rem;margin-bottom:12px;text-align:center">— ili —</div>
     <input type="password" id="loginPass" placeholder="Admin password" />
+    <input type="password" id="loginKey" placeholder="Service kljuc (ostavi prazno ako je sacuvan)" />
     <button onclick="doLogin()">PRIJAVA SA LOZINKOM</button>
     <div class="login-err" id="loginErr">Pogresna lozinka ili pristup odbijen.</div>
   </div>
@@ -605,8 +606,8 @@ async function deleteCompletedWithdrawals() {
 // CONFIG
 // ============================================================
 const SUPA_URL   = 'https://exmbmwukqssvgmhysamo.supabase.co';
-const ADMIN_PASS    = '585MmOAHkEXTpxJm';
-const SERVICE_KEY   = 'sb_secret_Rd92Ud_hj-ZeeysN_iyr8Q_O7JoodGX';
+const ADMIN_PASS    = localStorage.getItem('hg_admin_pass') || '';
+const SERVICE_KEY   = localStorage.getItem('hg_admin_key') || '';
 const FULL_FILL_AMOUNT = 999999999;
 
 let _supa = null;
@@ -625,6 +626,9 @@ function doHiveLogin() {
     return;
   }
   const msg = 'hive-galaxy-admin-' + Date.now();
+  const k = document.getElementById('loginKey').value.trim();
+  if (k) { localStorage.setItem('hg_admin_key', k); location.reload(); return; }
+  if (!SERVICE_KEY) { document.getElementById('loginErr').textContent = 'Unesi Service kljuc!'; document.getElementById('loginErr').style.display = 'block'; return; }
   window.hive_keychain.requestSignBuffer(ADMIN_HIVE_USER, msg, 'Posting', function(resp) {
     if (resp.success) {
       _supa = supabase.createClient(SUPA_URL, SERVICE_KEY);
@@ -648,18 +652,15 @@ function doHiveLogin() {
 
 function doLogin() {
   const pass = document.getElementById('loginPass').value;
+  const k = document.getElementById('loginKey').value.trim();
+  if (k) { localStorage.setItem('hg_admin_key', k); localStorage.setItem('hg_admin_pass', pass); location.reload(); return; }
+  if (!SERVICE_KEY) { document.getElementById('loginErr').textContent = 'Unesi Service kljuc!'; document.getElementById('loginErr').style.display = 'block'; return; }
+  if (!ADMIN_PASS) { document.getElementById('loginErr').textContent = 'Unesi admin password!'; document.getElementById('loginErr').style.display = 'block'; return; }
   if (pass !== ADMIN_PASS) {
     document.getElementById('loginErr').style.display = 'block';
     return;
   }
   _supa = supabase.createClient(SUPA_URL, SERVICE_KEY);
-  // Uloguj se u Supabase Auth
-  fetch('https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/hive-auth', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username: ADMIN_HIVE_USER })
-  }).then(r => r.json()).then(d => {
-    if (d.email && d.password) _supa.auth.signInWithPassword({ email: d.email, password: d.password });
-  }).catch(() => {});
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('adminApp').style.display = 'block';
   initAdmin();

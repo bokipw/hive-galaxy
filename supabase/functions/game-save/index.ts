@@ -1,6 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const SERVICE_KEY = Deno.env.get('SERVICE_KEY') || 'sb_secret_Rd92Ud_hj-ZeeysN_iyr8Q_O7JoodGX';
+const SERVICE_KEY = Deno.env.get('SERVICE_KEY');
 const SUPA_URL    = Deno.env.get('SUPABASE_URL') || 'https://exmbmwukqssvgmhysamo.supabase.co';
 
 const supa = createClient(SUPA_URL, SERVICE_KEY);
