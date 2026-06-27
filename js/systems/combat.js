@@ -597,12 +597,13 @@ function performAttack(attacker, targets, battle, round) {
     if (!wpn) continue;
     if (battle.distance < wpn.min || battle.distance > wpn.max) continue;
     if (attacker._weaponCDs[wi] > 0) continue;
-    const target = targets.reduce((a, b) => {
+    const alive = targets.filter(t => t.alive);
+    if (alive.length === 0) break;
+    const target = alive.reduce((a, b) => {
       const ai = a.slotIndex ?? 99, bi = b.slotIndex ?? 99;
       if (ai !== bi) return ai < bi ? a : b;
       return a.hp < b.hp ? a : b;
     });
-    if (!target || !target.alive) continue;
     _fireWeapon(attacker, wi, wpn, target, targets, battle, round);
     attacker._weaponCDs[wi] = wpn.cooldown || 0;
   }
