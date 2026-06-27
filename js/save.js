@@ -176,6 +176,7 @@ function _applyGameState(s) {
 
 function saveGame() {
   try {
+    if (typeof commander === 'undefined' || !commander.level) return;
     const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, ...RWithoutTokens } = R;
     const saveData = {
       _savedAt: new Date().toISOString(),
