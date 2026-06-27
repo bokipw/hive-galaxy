@@ -161,13 +161,8 @@
                 keys_inst: R.instanceKeys,
               }).eq('hive_user', hiveUser);
               if(typeof updateResUI === 'function') updateResUI();
-              if(typeof saveGame    === 'function') saveGame();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
-            } else {
-              await _sb.from('hive_profiles').update({
-                keys_cmd:  R.keys,
-                keys_inst: R.instanceKeys,
-              }).eq('hive_user', hiveUser);
+              setTimeout(() => { if(typeof saveGame === 'function') saveGame(); }, 3000);
             }
           }
         } catch(e) { console.error('applyKeys error:', e); }
