@@ -82,35 +82,18 @@
     window._loginType = 'hive';
     window._supaSession = null;
 
-    // Pokreni auth + upsert kao jedan tok
     (async () => {
-      try {
-        // Očisti staru sesiju iz localStorage (npr. od admin logina)
-        await _sb.auth.signOut({ scope: 'local' });
+      // Očisti staru sesiju iz localStorage (npr. od admin logina)
+      await _sb.auth.signOut({ scope: 'local' }).catch(() => {});
 
-        console.log('[hive-auth] Calling Edge Function for:', hiveUser);
-        const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: hiveUser })
-        });
-        const authData = await resp.json();
-        console.log('[hive-auth] Edge response:', authData);
-        if (authData.email && authData.password) {
-          const { data, error } = await _sb.auth.signInWithPassword({
-            email: authData.email,
-            password: authData.password
-          });
-          console.log('[hive-auth] signIn result:', error ? 'ERROR' : 'OK', error);
-          if (!error && data.session) {
-            await _sb.auth.setSession(data.session);
-            window._supaSession = data.session;
-            console.log('[hive-auth] Session set, uid:', _getSaveId ? _getSaveId() : 'N/A');
-          }
-        }
-      } catch(e) { console.error('[hive-auth] Error:', e); }
+      console.log('[hive] upsert players + hive_profiles');
+      fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: hiveUser })
+      }).catch(() => {});
 
-      // Dohvati profil — premium status, ključevi, boosters
+      // Dohvati profil
       const { data } = await _sb.from('hive_profiles')
         .select('is_premium, boosters')
         .eq('id', hiveUser)
@@ -121,14 +104,10 @@
       // Čekaj da se igra inicijalizira pa primijeni boosters i tokene
       const applyKeys = async () => {
         if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
-
-        // Sačekaj da se igra učita pre primene boostera
         if(typeof commander === 'undefined' || !commander.level || typeof ownedBlueprints === 'undefined') {
           setTimeout(applyKeys, 200);
           return;
         }
-
-        // Dohvati tokene iz player_resources + boosters iz hive_profiles
         try {
           const [resPR, resHP] = await Promise.all([
             _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),
@@ -136,40 +115,31 @@
           ]);
           const hpPR = resPR.data;
           const hp   = resHP.data;
-
           if (hpPR) {
-            // Source of truth za tokene (iz player_resources)
             R.bcm          = hpPR.bcm        || 0;
             R.bocrypto     = hpPR.bocrypto    || 0;
             R.spCard       = hpPR.spcard      || 0;
             R.keys         = Math.floor(hpPR.keys_cmd) || 0;
             R.instanceKeys = Math.floor(hpPR.keys_inst) || 0;
           }
-
           if (hp) {
-            // Primijeni pending boosters od admina (iz hive_profiles)
             const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};
-            var msgs = [];
+            const msgs = [];
             if(pending.metal   > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal   + ' metal'); }
             if(pending.crystal > 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
             if(pending.he3     > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3     + ' He3'); }
             if(pending.energy  > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : (R.energy + pending.energy)); msgs.push('+' + pending.energy + ' energija'); }
-            if(pending.bcm     > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;                             msgs.push('+' + pending.bcm      + ' BCM'); }
-            if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto;                        msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
-            if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000);     msgs.push('+' + pending.bpw      + ' BPW'); }
-
+            if(pending.bcm     > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;   msgs.push('+' + pending.bcm      + ' BCM'); }
+            if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
+            if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }
             if(msgs.length > 0) {
-              // Za HIVE igrače — sačuvaj preko edge funkcije (service_role)
               await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   action: 'save',
                   player_id: hiveUser,
-                  data: {
-                    R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys },
-                    _clear_boosters: true
-                  }
+                  data: { R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys }, _clear_boosters: true }
                 })
               }).catch(() => {});
               if(typeof updateResUI === 'function') updateResUI();
@@ -180,18 +150,10 @@
       };
       applyKeys();
 
-      // Fetch chain balances samo za wallet modal (ne diraj R.*)
       fetch('https://api.hive-engine.com/rpc/contracts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          jsonrpc: '2.0', id: 1, method: 'find',
-          params: {
-            contract: 'tokens', table: 'balances',
-            query: { account: hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } },
-            limit: 10
-          }
-        })
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'find', params: { contract: 'tokens', table: 'balances', query: { account: hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } }, limit: 10 } })
       }).then(r => r.json()).then(res => {
         const rows = res.result || [];
         const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.'+'0'.repeat(dec)); };
@@ -199,7 +161,6 @@
         window._chainBOC = get('BOCRYPTO', 3);
         window._chainBPW = get('BPW', 8);
       }).catch(() => {});
-      return;
     })();
   }
 

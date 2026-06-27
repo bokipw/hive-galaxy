@@ -134,6 +134,19 @@ let hangar = [];
 
 // ── FLAGS ──
 window._storageWarned = false;
+window.artifactState = { fragments: {}, unlocked: [], equipped: [null, null, null] };
+window.achievementState = {};
+window.missionState = {};
+window._deployedCommanders = [];
+window._formationSlots = Array(9).fill(null);
+window._conqueredPlanets = [];
+window._colonyFleetReward = {};
+window._jumpGateCooldowns = {};
+window._bossCooldowns = {};
+window._dropPity = {};
+window._dynamicStoryMissions = [];
+window._packPity = {};
+window._packPulls = {};
 
 // INSTANCE PROGRESS — napredak po instanci
 // { [instanceId]: { completed, clear_count, best_rank, best_time } }

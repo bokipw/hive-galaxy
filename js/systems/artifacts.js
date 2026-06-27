@@ -255,6 +255,7 @@ function getArtifactBonuses() {
     hp: 0, resist: 0,
   };
 
+  if (!window.artifactState || !window.artifactState.equipped) return bonuses;
   window.artifactState.equipped.forEach(id => {
     if (!id) return;
     const art = getArtifactById(id);

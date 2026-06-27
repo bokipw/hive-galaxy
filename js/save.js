@@ -131,14 +131,6 @@ async function _cloudSave(saveData) {
   if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number' || saveData.R.metal <= 0) return;
   if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
 
-  var _authDone = false;
-  if (window._hiveUser && !window._supaSession) {
-    for (var _i = 0; _i < 30; _i++) {
-      await new Promise(function(r) { setTimeout(r, 200); });
-      if (window._supaSession) { _authDone = true; break; }
-    }
-  }
-
   const pid = _getPlayerId();
   if (!pid) return;
   const isHive = window._loginType === 'hive';
@@ -187,7 +179,10 @@ function _applyGameState(s) {
     if (s.hangar)                  hangar = s.hangar;
     if (s.instProgress)            window._instProgress = s.instProgress;
     if (s.pvpShield)               window.pvpShield = s.pvpShield;
-    if (s.artifactState)           window.artifactState = s.artifactState;
+    if (s.artifactState) {
+      if (!window.artifactState) window.artifactState = { fragments: {}, unlocked: [], equipped: [null, null, null] };
+      Object.assign(window.artifactState, s.artifactState);
+    }
     if (s.achievementState)        window.achievementState = s.achievementState;
     if (s.missionState)            window.missionState = s.missionState;
     if (s.missionCounters) {
@@ -413,17 +408,9 @@ function saveGame() {
 }
 
 async function loadGameCloud() {
-  var authWaited = false;
-  if (window._hiveUser && !window._supaSession) {
-    for (var i = 0; i < 30; i++) {
-      await new Promise(function(r) { setTimeout(r, 200); });
-      if (window._supaSession) { authWaited = true; break; }
-    }
-  }
-
   var serverSeason = 1;
   try {
-    const { data: sys } = await window._supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+    const { data: sys } = await window._supa.from('hive_profiles').select('boosters').eq('id', '__system__').maybeSingle();
     if (sys && sys.boosters && sys.boosters.season != null) serverSeason = sys.boosters.season;
     window._serverSeason = serverSeason;
   } catch(e) {}
