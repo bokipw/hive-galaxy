@@ -4,10 +4,10 @@
 // ============================================================
 
 const R = {
-  metal:        100000,
-  crystal:      100000,
-  he3:          100000,
-  energy:       100,
+  metal:        1000000,
+  crystal:      1000000,
+  he3:          1000000,
+  energy:       1000,
   score:        0,
   spCard:       0,    // BPW satoshi
   instanceKeys: 0,    // 🗝️ Instance ključevi
