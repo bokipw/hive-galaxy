@@ -441,12 +441,18 @@ function loadGame() {
 function resetGame() {
   if (confirm(t('confirm.resetGame'))) {
     const pid = _getPlayerId();
-    if (pid && window._supa) {
-      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-      Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
-    } else {
-      location.reload();
-    }
+    if (pid) {
+      if (window._loginType === 'hive') {
+        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'reset', player_id: pid })
+        }).then(() => location.reload()).catch(() => location.reload());
+      } else if (window._supa) {
+        const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
+        Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
+      } else { location.reload(); }
+    } else { location.reload(); }
   }
 }
 

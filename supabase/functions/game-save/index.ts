@@ -78,6 +78,18 @@ Deno.serve(async (req: Request) => {
       });
     }
 
+    if (action === 'reset') {
+      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
+      const errors: string[] = [];
+      for (const tbl of tables) {
+        const { error } = await supa.from(tbl).delete().eq('player_id', player_id);
+        if (error) errors.push(`${tbl}: ${error.message}`);
+      }
+      return new Response(JSON.stringify({ success: errors.length === 0, errors }), {
+        headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+      });
+    }
+
     return err('Nepoznata akcija', 400);
   } catch (e) {
     return err('Server error: ' + (e as Error).message, 500);
