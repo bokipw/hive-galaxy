@@ -64,7 +64,10 @@ const CARD_PACKS = {
 // window._packs = { pity_origin: 0, pity_xenos: 0 }
 
 function initCardState() {
-  if (!window.ownedCommanders) window.ownedCommanders = [];
+  if (!window.ownedCommanders) {
+    window.ownedCommanders = [];
+    console.log('[initCardState] ownedCommanders initialized to []');
+  }
   if (!window._activeCommander) window._activeCommander = null;
   if (!window._packPity) window._packPity = { origin: 0, xenos: 0, undead: 0 };
   if (!window._packPulls) window._packPulls = { origin: 0, xenos: 0, undead: 0 };

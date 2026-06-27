@@ -14,6 +14,9 @@ function _getUsername() {
 
 async function _hiveSave(payload) {
   try {
+    const cmdrs = payload.ownedCommanders || [];
+    const total = cmdrs.reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+    console.log(`[hiveSave] brodova: ${total}, commanders: ${cmdrs.length}`, JSON.stringify(cmdrs.map(c => ({ id: c.id, fleet: (c.fleet||[]).map(s => s ? { id: s.ship_id, count: s.count } : null) }))));
     const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -208,7 +211,12 @@ function _applyGameState(s) {
     if (s.totalMetalMined != null) window._totalMetalMined = s.totalMetalMined;
     if (s.totalDepotPickups != null) window._totalDepotPickups = s.totalDepotPickups;
     if (s.ACHIEVES)                ACHIEVES = s.ACHIEVES;
-    if (s.ownedCommanders)    window.ownedCommanders    = s.ownedCommanders;
+    if (s.ownedCommanders) {
+      const _oldTotal = (window.ownedCommanders || []).reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+      window.ownedCommanders    = s.ownedCommanders;
+      const _newTotal = (window.ownedCommanders || []).reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+      console.log(`[load] ownedCommanders: ${_oldTotal} → ${_newTotal} brodova`, JSON.stringify((window.ownedCommanders||[]).map(c => ({ id: c.id, fleet: (c.fleet||[]).map(s => s ? { id: s.ship_id, count: s.count } : null) }))));
+    }
     if (s.activeCommander)    window._activeCommander   = s.activeCommander;
     if (s.deployedCommanders)        window._deployedCommanders = s.deployedCommanders;
     if (s.designExtraSlots  != null) window._designExtraSlots   = s.designExtraSlots;

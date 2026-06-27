@@ -286,8 +286,8 @@ function slotMatches(slot, shipId, loadout) {
 
 // ── DODAJ BRODOVE U FLOTU ──
 function addShipsToFleet(shipId, loadout, count) {
-  // Uvijek koristiti _currentFleet() — komandirov fleet ili globalni ako nema komandira
   const f = _currentFleet();
+  const _before = f.reduce((s, sl) => s + (sl?.count||0), 0);
 
   const existingIdx = f.findIndex(s => slotMatches(s, shipId, loadout));
 
@@ -304,7 +304,6 @@ function addShipsToFleet(shipId, loadout, count) {
 
   const emptyIdx = f.findIndex(s => s === null);
   if (emptyIdx === -1) {
-    // Provjeri je li komandir uopšte odabran
     const viewId = getViewingCmdId();
     if (!viewId) {
       toast('❌ Odaberi komandira u Fleet tabu pa dodaj brodove!', 'err');
@@ -315,6 +314,8 @@ function addShipsToFleet(shipId, loadout, count) {
   }
 
   f[emptyIdx] = { ship_id: shipId, count: Math.min(count, 3000), ...loadout };
+  const _after = f.reduce((s, sl) => s + (sl?.count||0), 0);
+  console.log(`[addShipsToFleet] ${shipId} x${count} → slot ${emptyIdx+1} (bilo: ${_before}, sad: ${_after})`);
   toast(`✅ ${count}x dodano u slot ${emptyIdx + 1}`, 'ok');
   addLog(`🚀 ${count}x ${shipId} dodano u flotu.`);
   renderFleet();
@@ -925,11 +926,14 @@ function selectHangarForSlot(slotIdx, designId) {
         for (let i = 1; i <= (slots.weapon || 4); i++) loadout[`weapon_${i}`] = design[`weapon_${i}`] || null;
         for (let i = 1; i <= (slots.shield || 1); i++) loadout[`shield_${i}`] = design[`shield_${i}`] || null;
 
+        const _bef = f.reduce((s, sl) => s + (sl?.count||0), 0);
         if (existing) {
           f[slotIdx].count = Math.min(3000, existing.count + count);
         } else {
           f[slotIdx] = { ...loadout, ship_id: design.ship_id, count };
         }
+        const _aft = f.reduce((s, sl) => s + (sl?.count||0), 0);
+        console.log(`[sendFromHangar] ${design.name} x${count} → slot ${slotIdx+1} (bilo: ${_bef}, sad: ${_aft})`);
 
         h.count -= count;
         if (h.count <= 0) hangar.splice(hangar.indexOf(h), 1);
