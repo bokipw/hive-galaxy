@@ -183,8 +183,14 @@ function _applyGameState(s) {
       if (!window.artifactState) window.artifactState = { fragments: {}, unlocked: [], equipped: [null, null, null] };
       Object.assign(window.artifactState, s.artifactState);
     }
-    if (s.achievementState)        window.achievementState = s.achievementState;
-    if (s.missionState)            window.missionState = s.missionState;
+    if (s.achievementState) {
+      if (!window.achievementState) window.achievementState = {};
+      Object.assign(window.achievementState, s.achievementState);
+    }
+    if (s.missionState) {
+      if (!window.missionState) window.missionState = { daily: { date: '' } };
+      Object.assign(window.missionState, s.missionState);
+    }
     if (s.missionCounters) {
       const mc = s.missionCounters;
       window._dailyInstCount  = mc.dailyInst  || 0;
