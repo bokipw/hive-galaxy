@@ -764,6 +764,7 @@ function generateDailyMissions() {
 
 // ── GENERIŠI SEDMIČNE MISIJE ──
 function generateWeeklyMissions() {
+  if (!window.missionState || !window.missionState.weekly) window.missionState = { daily: { date: '', missions: [], claimed: [], bonusClaimed: false }, weekly: { week: null, missions: [], claimed: [] }, storyline: { completed: [], claimed: [] } };
   const week = getWeekStr();
   const existing = window.missionState.weekly;
   // Regeneriši ako je novi tjedan ILI ako ima premalo misija (stari save)
