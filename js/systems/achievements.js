@@ -662,7 +662,7 @@ Object.entries(DIFFICULTY_WINS).forEach(([diff, data]) => {
       check: () => (window[`_wins_${diff}`] || 0) >= count,
       reward: { metal: count * 1000, crystal: count * 500, he3: count * 200, xp: count * 100,
                 bpw: count * (diff === 'hell' ? 50 : diff === 'nightmare' ? 20 : diff === 'normal' ? 10 : 5),
-                ...(idx >= 3 ? { art_fragment: diff === 'hell' ? 'L' : 'E', instanceKeys: count / 10 } : {}) },
+                ...(idx >= 3 ? { art_fragment: diff === 'hell' ? 'L' : 'E', instanceKeys: Math.floor(count / 10) } : {}) },
       requires: idx > 0 ? `wins_${diff}_${data.counts[idx-1]}` : null
     });
   });
@@ -766,7 +766,7 @@ Object.entries(WEAPON_TYPE_MILESTONES).forEach(([wtype, data]) => {
     desc: `Craftaj ${count} blueprinta`,
     check: () => (window._totalBpCrafted || 0) >= count,
     reward: { bpw: count * 10, xp: count * 200, metal: count * 2000, crystal: count * 1000, he3: count * 400,
-              ...(count >= 25 ? { art_fragment: count >= 100 ? 'E' : 'R', instanceKeys: count / 5 } : {}) }
+              ...(count >= 25 ? { art_fragment: count >= 100 ? 'E' : 'R', instanceKeys: Math.floor(count / 5) } : {}) }
   });
 });
 
