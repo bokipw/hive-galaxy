@@ -57,8 +57,8 @@ Deno.serve(async (req: Request) => {
 
     const { error } = await supa
       .from('hive_profiles')
-      .update({ is_premium: true, premium_since: new Date().toISOString() })
-      .eq('hive_user', username);
+      .update({ is_premium: true })
+      .eq('id', username);
 
     if (error) return err('Greška pri ažuriranju baze: ' + error.message, 500);
 

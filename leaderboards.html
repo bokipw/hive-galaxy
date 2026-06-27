@@ -857,8 +857,8 @@ const DIVISION_REWARDS = {
 
 // ── SUPABASE ──
 const _supa = supabase.createClient(
-  'https://kjgfouzyqcnlwbsyipxp.supabase.co',
-  'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+  'https://exmbmwukqssvgmhysamo.supabase.co',
+  'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'
 );
 
 let allPlayers = [];
@@ -1113,8 +1113,8 @@ let _currentSeason = 1;
 
 async function loadSeasonInfo() {
   try {
-    const { data } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
-    if (data && data.keys) _currentSeason = data.keys;
+    const { data } = await _supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+    if (data && data.boosters?.season) _currentSeason = data.boosters.season;
   } catch(e) {}
   document.getElementById('seasonLabel').textContent = '⚔ SEZONA ' + _currentSeason;
 

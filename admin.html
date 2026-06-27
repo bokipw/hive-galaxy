@@ -547,20 +547,21 @@ async function approveWithdraw(id, username, token) {
 async function rejectWithdraw(id, playerId, token, amount, gasAmt) {
   if (!confirm('Odbiti zahtev i VRATITI tokene igraču?')) return;
 
-  // Vrati tokene u save igrača
-  const { data: saveRow } = await window._supa.from('saves').select('data').eq('id', playerId).single();
-  if (saveRow && saveRow.data) {
-    const s = saveRow.data;
-    if (!s.R) s.R = {};
+  // Vrati tokene u player_resources
+  const { data: resRow } = await window._supa.from('player_resources').select('*').eq('player_id', playerId).single();
+  if (resRow) {
+    const up = {};
     if (token === 'BCM') {
-      s.R.bcm = (s.R.bcm || 0) + Math.floor(amount);
-      s.R.bocrypto = (s.R.bocrypto || 0) + Number(gasAmt); // vrati gas
+      up.bcm = (resRow.bcm || 0) + Math.floor(amount);
+      up.bocrypto = (resRow.bocrypto || 0) + Number(gasAmt);
     } else if (token === 'BOCRYPTO') {
-      s.R.bocrypto = (s.R.bocrypto || 0) + Number(amount) + Number(gasAmt);
+      up.bocrypto = (resRow.bocrypto || 0) + Number(amount) + Number(gasAmt);
     } else if (token === 'BPW') {
-      s.R.spCard = (s.R.spCard || 0) + Number(amount) + Number(gasAmt);
+      up.spcard = (resRow.spcard || 0) + Number(amount) + Number(gasAmt);
     }
-    await window._supa.from('saves').update({ data: s }).eq('id', playerId);
+    if (Object.keys(up).length > 0) {
+      await window._supa.from('player_resources').update(up).eq('player_id', playerId);
+    }
   }
 
   await window._supa.from('withdrawals').update({
@@ -603,9 +604,9 @@ async function deleteCompletedWithdrawals() {
 // ============================================================
 // CONFIG
 // ============================================================
-const SUPA_URL   = 'https://kjgfouzyqcnlwbsyipxp.supabase.co';
+const SUPA_URL   = 'https://exmbmwukqssvgmhysamo.supabase.co';
 const ADMIN_PASS    = '585MmOAHkEXTpxJm';
-const SERVICE_KEY   = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
+const SERVICE_KEY   = 'sb_secret_Rd92Ud_hj-ZeeysN_iyr8Q_O7JoodGX';
 const FULL_FILL_AMOUNT = 999999999;
 
 let _supa = null;
@@ -628,7 +629,7 @@ function doHiveLogin() {
     if (resp.success) {
       _supa = supabase.createClient(SUPA_URL, SERVICE_KEY);
       // Uloguj se u Supabase Auth
-      fetch('https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/hive-auth', {
+      fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: ADMIN_HIVE_USER })
@@ -700,7 +701,7 @@ function showSection(id) {
 // ============================================================
 async function loadStats() {
   try {
-    const { data: hive } = await _supa.from('hive_profiles').select('hive_user,is_premium,last_seen');
+    const { data: hive } = await _supa.from('hive_profiles').select('id,is_premium,last_seen');
     const { data: lb }   = await _supa.from('leaderboard').select('id');
     const { data: pvp }  = await _supa.from('pvp_snapshots').select('id,updated_at');
 
@@ -748,8 +749,13 @@ async function loadStats() {
 // ============================================================
 async function loadPlayers() {
   try {
-    const { data } = await _supa.from('hive_profiles').select('*').order('last_seen', { ascending: false });
-    _allHiveProfiles = data || [];
+    const [profiles, res] = await Promise.all([
+      _supa.from('hive_profiles').select('*').order('last_seen', { ascending: false }),
+      _supa.from('player_resources').select('*').limit(5000),
+    ]);
+    const resMap = {};
+    if (res.data) res.data.forEach(r => resMap[r.player_id] = r);
+    _allHiveProfiles = (profiles.data || []).map(p => ({ ...p, ...(resMap[p.id] || {}) }));
     renderPlayers(_allHiveProfiles);
     await loadPremium();
   } catch(e) { showToast('Greska: ' + e.message, true); }
@@ -760,7 +766,7 @@ function filterPlayers() {
   const filter = document.getElementById('playerFilter').value;
   const now    = Date.now();
   let list = _allHiveProfiles;
-  if (q) list = list.filter(p => (p.hive_user||'').toLowerCase().includes(q));
+  if (q) list = list.filter(p => (p.id||'').toLowerCase().includes(q));
   if (filter === 'premium') list = list.filter(p => p.is_premium);
   if (filter === 'hive')    list = list; // vec su svi HIVE
   if (filter === 'active')  list = list.filter(p => p.last_seen && now - new Date(p.last_seen).getTime() < 86400000);
@@ -778,7 +784,7 @@ function renderPlayers(list) {
     const seenTxt  = seen ? (isOnline ? 'Online' : timeAgo(seen)) : 'Nikad';
     const dot   = isOnline ? '<span class="online-dot"></span>' : '<span class="offline-dot"></span>';
     return '<tr>' +
-      '<td style="color:#fff;font-weight:600">' + dot + (p.hive_user||'-') + '</td>' +
+      '<td style="color:#fff;font-weight:600">' + dot + (p.id||'-') + '</td>' +
       '<td style="color:#5a8aaa;font-size:.68rem">HIVE</td>' +
       '<td>-</td>' +
       '<td>' + (p.is_premium ? '<span class="premium-badge">PREMIUM</span>' : '-') + '</td>' +
@@ -786,30 +792,32 @@ function renderPlayers(list) {
       '<td style="color:#aa44ff">' + (p.keys_inst||0) + '</td>' +
       '<td style="color:#4a6a8a;font-size:.68rem">' + seenTxt + '</td>' +
       '<td style="display:flex;gap:5px">' +
-        '<button class="btn btn-gold" onclick="openPlayerModal(\'' + p.hive_user + '\')">Upravljaj</button>' +
-        '<button class="btn btn-red" onclick="confirmDelete(\'' + p.hive_user + '\')">Obrisi</button>' +
+        '<button class="btn btn-gold" onclick="openPlayerModal(\'' + p.id + '\')">Upravljaj</button>' +
+        '<button class="btn btn-red" onclick="confirmDelete(\'' + p.id + '\')">Obrisi</button>' +
       '</td>' +
       '</tr>';
   }).join('');
 }
 
-function openPlayerModal(username) {
-  const p = _allHiveProfiles.find(x => x.hive_user === username);
+async function openPlayerModal(username) {
+  const p = _allHiveProfiles.find(x => x.id === username);
   if (!p) return;
-  const bpw = ((p.spcard||0) / 100000000).toFixed(8);
+  const { data: res } = await _supa.from('player_resources').select('*').eq('player_id', username).maybeSingle();
+  const r = res || {};
+  const bpw = ((r.spcard||0) / 100000000).toFixed(8);
   document.getElementById('modalTitle').textContent = username.toUpperCase();
   document.getElementById('modalBody').innerHTML =
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BCM</label>' +
-        '<input type="number" id="mBcm" value="' + (p.bcm||0) + '" step="0.1" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+        '<input type="number" id="mBcm" value="' + (r.bcm||0) + '" step="0.1" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BOCRYPTO</label>' +
-        '<input type="number" id="mBoc" value="' + (p.bocrypto||0) + '" step="0.001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+        '<input type="number" id="mBoc" value="' + (r.bocrypto||0) + '" step="0.001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">BPW</label>' +
         '<input type="number" id="mBpw" value="' + bpw + '" step="0.00000001" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">KLJUCEVI (CMD)</label>' +
-        '<input type="number" id="mKeys" value="' + (p.keys_cmd||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+        '<input type="number" id="mKeys" value="' + (r.keys_cmd||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">KLJUCEVI (INST)</label>' +
-        '<input type="number" id="mIkeys" value="' + (p.keys_inst||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
+        '<input type="number" id="mIkeys" value="' + (r.keys_inst||0) + '" min="0" style="width:100%;background:rgba(0,20,40,.8);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem"/></div>' +
       '<div><label style="color:#6a8aaa;font-size:.65rem;display:block">PREMIUM</label>' +
         '<select id="mPremium" style="width:100%;background:rgba(0,20,40,.9);border:1px solid rgba(0,180,255,.2);color:#c8deff;padding:7px;border-radius:5px;font-size:.8rem">' +
           '<option value="1"' + (p.is_premium?' selected':'') + '>DA</option>' +
@@ -822,7 +830,7 @@ function openPlayerModal(username) {
 }
 
 async function execPlayerAction(username) {
-  const p       = _allHiveProfiles.find(x => x.hive_user === username);
+  const p       = _allHiveProfiles.find(x => x.id === username);
   const bcm     = parseFloat(document.getElementById('mBcm').value)   || 0;
   const bocrypto= parseFloat(document.getElementById('mBoc').value)   || 0;
   const bpw     = parseFloat(document.getElementById('mBpw').value)   || 0;
@@ -830,20 +838,21 @@ async function execPlayerAction(username) {
   const keys_inst = parseInt(document.getElementById('mIkeys').value) || 0;
   const isPremium = document.getElementById('mPremium').value === '1';
 
-  const update = {
-    bcm,
-    bocrypto,
-    spcard:    Math.round(bpw * 100000000),
-    keys_cmd,
-    keys_inst,
-    is_premium: isPremium,
-  };
-  if (isPremium && !p.is_premium) update.premium_since = new Date().toISOString();
-
   try {
-    const { error } = await _supa.from('hive_profiles').update(update).eq('hive_user', username);
-    if (error) throw error;
-    await _supa.from('pvp_snapshots').update({ is_premium: isPremium }).eq('id', 'hive_' + username);
+    // Write tokens to player_resources
+    await _supa.from('player_resources').upsert({
+      player_id: username,
+      bcm,
+      bocrypto,
+      spcard: Math.round(bpw * 100000000),
+      keys_cmd,
+      keys_inst,
+    }, { onConflict: 'player_id' });
+
+    // Write premium to hive_profiles
+    await _supa.from('hive_profiles').update({ is_premium: isPremium }).eq('id', username);
+    await _supa.from('pvp_snapshots').update({ is_premium: isPremium }).eq('id', username);
+
     showToast('Sacuvano za ' + username);
     closeModal();
     loadEconomy();
@@ -857,7 +866,7 @@ function confirmDelete(username) {
 
 async function deletePlayerByName(username) {
   try {
-    await _supa.from('hive_profiles').delete().eq('hive_user', username);
+    await _supa.from('hive_profiles').delete().eq('id', username);
     await _supa.from('pvp_snapshots').delete().eq('id', username);
     showToast('Igrac ' + username + ' obrisan.');
     loadPlayers();
@@ -907,11 +916,15 @@ async function lookupPlayer() {
   const username = document.getElementById('resUsername').value.trim();
   if (!username) return;
   try {
-    const { data } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
+    const [prof, res] = await Promise.all([
+      _supa.from('hive_profiles').select('*').eq('id', username).maybeSingle(),
+      _supa.from('player_resources').select('*').eq('player_id', username).maybeSingle(),
+    ]);
     const info = document.getElementById('resPlayerInfo');
-    if (!data) { info.style.display='block'; info.textContent='Igrac nije pronadjen.'; return; }
+    if (!prof.data) { info.style.display='block'; info.textContent='Igrac nije pronadjen.'; return; }
     info.style.display = 'block';
-    info.innerHTML = '<b style="color:#fff">' + username + '</b> | Premium: <b>' + (data.is_premium?'DA':'NE') + '</b> | Kljucevi: ' + (data.keys_cmd||0) + ' | iKljucevi: ' + (data.keys_inst||0);
+    const r = res.data || {};
+    info.innerHTML = '<b style="color:#fff">' + username + '</b> | Premium: <b>' + (prof.data.is_premium?'DA':'NE') + '</b> | Kljucevi: ' + (r.keys_cmd||0) + ' | iKljucevi: ' + (r.keys_inst||0);
   } catch(e) { showToast('Greska: ' + e.message, true); }
 }
 
@@ -930,7 +943,7 @@ async function sendResources() {
   const bpw       = parseFloat(document.getElementById('resBpw').value)     || 0;
 
   try {
-    const { data: prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
+    const { data: prof } = await _supa.from('hive_profiles').select('*').eq('id', username).single();
     if (!prof) { showToast('Igrac ' + username + ' nije pronadjen.', true); return; }
 
     // Resursi (metal/crystal/he3/energy) idu u boosters — igra ih pokupi pri loginu
@@ -942,16 +955,24 @@ async function sendResources() {
       energy:  (existing.energy  || 0) + energy,
     };
 
-    // Tokeni i ključevi idu direktno u hive_profiles kolone
-    const { error } = await _supa.from('hive_profiles').update({
+    // Tokeni i ključevi idu u player_resources
+    const { data: resRow } = await _supa.from('player_resources').select('*').eq('player_id', username).maybeSingle();
+    const r = resRow || {};
+    const { error: err1 } = await _supa.from('player_resources').upsert({
+      player_id: username,
+      bcm:       (r.bcm      || 0) + bcm,
+      bocrypto:  (r.bocrypto || 0) + bocrypto,
+      spcard:    (r.spcard   || 0) + Math.round(bpw * 100000000),
+      keys_cmd:  (r.keys_cmd  || 0) + keys,
+      keys_inst: (r.keys_inst || 0) + ikeys,
+    }, { onConflict: 'player_id' });
+    if (err1) throw err1;
+
+    // Pending resursi idu u hive_profiles.boosters
+    const { error: err2 } = await _supa.from('hive_profiles').update({
       boosters:  pending,
-      bcm:       (prof.bcm      || 0) + bcm,
-      bocrypto:  (prof.bocrypto || 0) + bocrypto,
-      spcard:    (prof.spcard   || 0) + Math.round(bpw * 100000000),
-      keys_cmd:  (prof.keys_cmd  || 0) + keys,
-      keys_inst: (prof.keys_inst || 0) + ikeys,
-    }).eq('hive_user', username);
-    if (error) throw error;
+    }).eq('id', username);
+    if (err2) throw err2;
 
     showToast('Resursi poslani! Igrac ce ih dobiti pri sledecem loginu.');
   } catch(e) { showToast('Greska: ' + e.message, true); }
@@ -1004,31 +1025,23 @@ function renderEconTable() {
 
 async function loadEconomy() {
   try {
-    const { data: profiles } = await _supa.from('hive_profiles').select('hive_user, bcm, bocrypto, spcard, keys_cmd, keys_inst').neq('hive_user', '__system__').limit(1000);
-    const { data: saves } = await _supa.from('saves').select('id, data').limit(1000);
-    const savesMap = {};
-    if (saves) saves.forEach(s => savesMap[s.id] = s.data || {});
+    const { data: res } = await _supa.from('player_resources').select('*').limit(1000);
     const tbody = document.getElementById('econTbl');
-    if (!profiles || profiles.length === 0) { document.getElementById('econTbl').innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
-    _econData = profiles.map(p => {
-      const uid = 'hive_' + p.hive_user;
-      const gs  = savesMap[uid] || {};
-      const R   = gs.R || {};
-      return {
-        name:     p.hive_user,
-        metal:    R.metal    || 0,
-        crystal:  R.crystal  || 0,
-        he3:      R.he3      || 0,
-        energy:   R.energy   || 0,
-        bocrypto: p.bocrypto || 0,
-        bcm:      p.bcm      || 0,
-        bpw:      p.spcard   || 0,
-        keys:     p.keys_cmd  || 0,
-        ikeys:    p.keys_inst || 0,
-        score:    gs.commander?.score || 0,
-        level:    gs.commander?.level || 1,
-      };
-    });
+    if (!res || res.length === 0) { document.getElementById('econTbl').innerHTML = '<tr><td colspan="12" class="loading">Nema igraca.</td></tr>'; return; }
+    _econData = res.map(r => ({
+      name:     r.player_id,
+      metal:    r.metal || 0,
+      crystal:  r.crystal || 0,
+      he3:      r.he3 || 0,
+      energy:   r.energy || 0,
+      bocrypto: r.bocrypto || 0,
+      bcm:      r.bcm || 0,
+      bpw:      r.spcard || 0,
+      keys:     r.keys_cmd || 0,
+      ikeys:    r.keys_inst || 0,
+      score:    r.score || 0,
+      level:    1,
+    }));
     renderEconTable();
   } catch(e) { showToast('Greska: ' + e.message, true); }
 }
@@ -1038,17 +1051,16 @@ async function loadEconomy() {
 // ============================================================
 async function loadPremium() {
   try {
-    const { data } = await _supa.from('hive_profiles').select('*').eq('is_premium', true).order('premium_since', { ascending: false });
+    const { data: prem } = await _supa.from('premium_users').select('*').order('created_at', { ascending: false }).limit(1000);
     const tbody = document.getElementById('premiumTbl');
-    if (!data || data.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="loading">Nema premium igraca.</td></tr>'; return; }
-    tbody.innerHTML = data.map(p => {
-      const since = p.premium_since ? new Date(p.premium_since).toLocaleDateString() : '-';
+    if (!prem || prem.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="loading">Nema premium igraca.</td></tr>'; return; }
+    tbody.innerHTML = prem.map(p => {
+      const since = p.expires_at ? new Date(p.expires_at).toLocaleDateString() : '-';
       return '<tr>' +
-        '<td style="color:#fff;font-weight:600">' + (p.hive_user||'-') + '</td>' +
+        '<td style="color:#fff;font-weight:600">' + (p.player_id||'-') + '</td>' +
         '<td style="color:#ffc832">' + since + '</td>' +
-        '<td style="color:#00aaff">' + (p.keys_cmd||0) + '</td>' +
-        '<td style="color:#aa44ff">' + (p.keys_inst||0) + '</td>' +
-        '<td><button class="btn btn-red" onclick="removePremium(\'' + p.hive_user + '\')">Oduzmi Premium</button></td>' +
+        '<td colspan="2" style="color:#888">premium</td>' +
+        '<td><button class="btn btn-red" onclick="removePremium(\'' + p.player_id + '\')">Oduzmi Premium</button></td>' +
         '</tr>';
     }).join('');
   } catch(e) {}
@@ -1071,13 +1083,13 @@ async function executeShopAction() {
     };
 
     if (action === 'premium_perm' || premiumDays[action]) {
-      update = { is_premium: true, premium_since: now };
+      update = { is_premium: true };
       pvpUpdate = { is_premium: true };
     } else if (action === 'remove_premium') {
       update = { is_premium: false };
       pvpUpdate = { is_premium: false };
     } else if (boosterDays[action]) {
-      const { data: prof } = await _supa.from('hive_profiles').select('boosters').eq('hive_user', username).single();
+      const { data: prof } = await _supa.from('hive_profiles').select('boosters').eq('id', username).single();
       const existing = (prof && prof.boosters && typeof prof.boosters === 'object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
       const boosterList = Array.isArray(existing._boosters) ? existing._boosters : [];
       const days = boosterDays[action];
@@ -1086,7 +1098,7 @@ async function executeShopAction() {
       update = { boosters: { ...existing, _boosters: boosterList } };
     }
 
-    const { error } = await _supa.from('hive_profiles').update(update).eq('hive_user', username);
+    const { error } = await _supa.from('hive_profiles').update(update).eq('id', username);
     if (error) throw error;
     if (Object.keys(pvpUpdate).length > 0) {
       await _supa.from('pvp_snapshots').update(pvpUpdate).eq('id', username);
@@ -1101,7 +1113,7 @@ async function executeShopAction() {
 async function removePremium(username) {
   if (!confirm('Oduzmi premium od ' + username + '?')) return;
   try {
-    await _supa.from('hive_profiles').update({ is_premium: false }).eq('hive_user', username);
+    await _supa.from('hive_profiles').update({ is_premium: false }).eq('id', username);
     await _supa.from('pvp_snapshots').update({ is_premium: false }).eq('id', username);
     await _supa.from('leaderboard').update({ is_premium: false }).eq('username', username);
     showToast('Premium oduzet od ' + username + '.');
@@ -1117,14 +1129,8 @@ async function loadPlayerBlueprints() {
   const username = document.getElementById('bpUsername').value.trim();
   if (!username) return;
   try {
-    // Pokusaj naci save - za HIVE igraca save je pod hive_user kljucem u hive_profiles, ali ne znamo UUID
-    const { data: prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', username).single();
-    if (!prof) { document.getElementById('bpList').textContent = 'Igrac nije pronadjen.'; return; }
-
-    // Pokusaj naci save po hive_user
-    const { data: saveRow } = await _supa.from('saves').select('data').eq('id', username).maybeSingle();
-    const gs = saveRow ? saveRow.data : null;
-    const bps = gs && gs.blueprints ? gs.blueprints : null;
+    const { data: bpRow } = await _supa.from('player_blueprints').select('owned').eq('player_id', username).maybeSingle();
+    const bps = bpRow ? bpRow.owned : null;
 
     document.getElementById('bpPlayerSave').style.display = 'block';
 
@@ -1157,12 +1163,10 @@ async function unlockBlueprint() {
   const bpId     = document.getElementById('bpId').value.trim();
   if (!username || !bpId) { showToast('Unesi username i blueprint ID!', true); return; }
   try {
-    const { data: saveRow } = await _supa.from('saves').select('id,data').eq('id', username).maybeSingle();
-    if (!saveRow || !saveRow.data) { showToast('Save nije pronadjen u bazi.', true); return; }
-    const gs = saveRow.data;
-    if (!gs.blueprints) gs.blueprints = {};
-    gs.blueprints[bpId] = true;
-    await _supa.from('saves').update({ data: gs, saved_at: new Date().toISOString() }).eq('id', saveRow.id);
+    const { data: bpRow } = await _supa.from('player_blueprints').select('owned').eq('player_id', username).maybeSingle();
+    const owned = (bpRow && bpRow.owned) ? bpRow.owned : {};
+    owned[bpId] = true;
+    await _supa.from('player_blueprints').upsert({ player_id: username, owned }, { onConflict: 'player_id' });
     showToast('Blueprint ' + bpId + ' otklju??an za ' + username + '!');
     loadPlayerBlueprints();
   } catch(e) { showToast('Greska: ' + e.message, true); }
@@ -1174,10 +1178,10 @@ async function unlockBlueprint() {
 async function setMaintenance(on) {
   try {
     await _supa.from('hive_profiles')
-      .upsert({ hive_user: '__system__', is_premium: on }, { onConflict: 'hive_user' });
+      .upsert({ id: '__system__', is_premium: on }, { onConflict: 'id' });
     if (on) {
       // Obriši tajmer kad se ručno uključi
-      await _supa.from('hive_profiles').update({ boosters: {} }).eq('hive_user', '__system__');
+      await _supa.from('hive_profiles').update({ boosters: {} }).eq('id', '__system__');
       cancelMaintTimer();
     }
     document.getElementById('maintStatus').textContent = 'Maintenance: ' + (on ? 'UKLJUCEN' : 'ISKLJUCEN');
@@ -1193,8 +1197,8 @@ async function startMaintTimer() {
   const at   = new Date(Date.now() + mins * 60000).toISOString();
   try {
     await _supa.from('hive_profiles').upsert(
-      { hive_user: '__system__', boosters: { maintenance_at: at } },
-      { onConflict: 'hive_user' }
+      { id: '__system__', boosters: { maintenance_at: at } },
+      { onConflict: 'id' }
     );
     showToast('Tajmer pokrenut — maintenance za ' + mins + ' min');
     _runMaintCountdown(new Date(at));
@@ -1205,7 +1209,7 @@ async function cancelMaintTimer() {
   if (_maintTimerInterval) { clearInterval(_maintTimerInterval); _maintTimerInterval = null; }
   document.getElementById('maintCountdown').textContent = '';
   try {
-    await _supa.from('hive_profiles').update({ boosters: {} }).eq('hive_user', '__system__');
+    await _supa.from('hive_profiles').update({ boosters: {} }).eq('id', '__system__');
   } catch(e) {}
 }
 
@@ -1234,8 +1238,8 @@ async function serverReset() {
   const errors = [];
 
   // Dohvati trenutnu sezonu
-  const { data: sysRow } = await _supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
-  const currentSeason = (sysRow && sysRow.keys) ? sysRow.keys : 1;
+  const { data: sysRow } = await _supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+  const currentSeason = (sysRow && sysRow.boosters?.season) ? sysRow.boosters.season : 1;
 
   // Snimi snapshot u season_archives
   const months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
@@ -1255,7 +1259,7 @@ async function serverReset() {
   if (r3.error) errors.push('pvp_snapshots: ' + r3.error.message);
 
   // Povecaj broj sezone
-  const r5 = await _supa.from('hive_profiles').update({ keys: currentSeason + 1 }).eq('hive_user', '__system__');
+  const r5 = await _supa.from('hive_profiles').update({ boosters: { ...sysRow?.boosters, season: currentSeason + 1 } }).eq('id', '__system__');
   if (r5.error) errors.push('sezona: ' + r5.error.message);
 
   if (errors.length > 0) {
@@ -1388,7 +1392,7 @@ async function loadTop10(idx) {
     const medals = ['🥇','🥈','🥉'];
     tbody.innerHTML = _divTop10[idx].map((p, i) => {
       const r = d.rewards[i] || {};
-      const hiveUser = p.id && p.id.startsWith('hive_') ? p.id.slice(5) : null;
+      const hiveUser = p.id && !p.id.includes('-') ? p.id : null;
       const extraCells = d.cols.map(c => '<td style="font-weight:600;color:'+(c.c||d.color)+'">'+
         (typeof c.f === 'function' ? c.f(d.key==='silver'||d.key==='bronze' ? (r||0) : (r||{})) : '')+'</td>').join('');
       return '<tr>'+
@@ -1434,36 +1438,40 @@ async function distributeRewards(idx) {
     }
 
     try {
-      const up = {};
-      if (r.keys !== undefined) up.keys_cmd = r.keys;
-      if (r.bcm !== undefined) up.bcm = r.bcm;
-      if (r.bocrypto !== undefined) up.bocrypto = r.bocrypto;
-      if (r.ikeys !== undefined) up.keys_inst = r.ikeys;
-      if (d.key==='master' && r.bpw!==undefined) up.spcard = r.bpw;
+      const resUp = {};
+      if (r.keys !== undefined) resUp.keys_cmd = r.keys;
+      if (r.bcm !== undefined) resUp.bcm = r.bcm;
+      if (r.bocrypto !== undefined) resUp.bocrypto = r.bocrypto;
+      if (r.ikeys !== undefined) resUp.keys_inst = r.ikeys;
+      if ((d.key==='master' || d.key==='gold') && r.bpw!==undefined) resUp.spcard = r.bpw;
+      if (d.key==='silver') resUp.spcard = r;
+      if (d.key==='bronze') resUp.keys_inst = r;
+
+      let boosterUp = null;
       if (d.key==='gold') {
-        const { data:prof } = await _supa.from('hive_profiles').select('spcard, boosters').eq('hive_user', hiveUser).single();
-        if (prof) {
-          const existing = (prof.boosters && typeof prof.boosters==='object' && !Array.isArray(prof.boosters)) ? prof.boosters : {};
+        const { data:resRow } = await _supa.from('hive_profiles').select('boosters').eq('id', hiveUser).single();
+        if (resRow) {
+          const existing = (resRow.boosters && typeof resRow.boosters==='object' && !Array.isArray(resRow.boosters)) ? resRow.boosters : {};
           const bl = Array.isArray(existing._boosters) ? existing._boosters : [];
           bl.push({ type:'booster_xp_30d', expires_at: new Date(Date.now()+30*24*3600*1000).toISOString() });
-          up.boosters = { ...existing, _boosters:bl };
-          up.spcard = (prof.spcard||0)+(r.bpw||0);
+          boosterUp = { ...existing, _boosters:bl };
         }
-      }
-      if (d.key==='silver' || d.key==='bronze') {
-        const amt = r;
-        if (d.key==='silver') up.spcard = amt;
-        if (d.key==='bronze') up.keys_inst = amt;
       }
 
-      if (Object.keys(up).length>0) {
-        const { data:prof } = await _supa.from('hive_profiles').select('*').eq('hive_user', hiveUser).single();
-        if (!prof) throw new Error('Profil nije pronađen');
-        for (const k in up) {
-          if (k==='boosters') continue;
-          up[k] = (prof[k]||0) + (up[k]||0);
+      // Write tokens to player_resources
+      if (Object.keys(resUp).length>0) {
+        const { data:resRow } = await _supa.from('player_resources').select('*').eq('player_id', hiveUser).single();
+        if (!resRow) throw new Error('Resursi nisu pronađeni');
+        for (const k in resUp) {
+          resUp[k] = (resRow[k]||0) + (resUp[k]||0);
         }
-        const { error } = await _supa.from('hive_profiles').update(up).eq('hive_user', hiveUser);
+        const { error } = await _supa.from('player_resources').update(resUp).eq('player_id', hiveUser);
+        if (error) throw error;
+      }
+
+      // Write boosters to hive_profiles
+      if (boosterUp) {
+        const { error } = await _supa.from('hive_profiles').update({ boosters: boosterUp }).eq('id', hiveUser);
         if (error) throw error;
       }
 

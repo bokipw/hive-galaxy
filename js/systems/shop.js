@@ -704,7 +704,7 @@ async function buyPremiumWithBCM() {
       toast('⏳ Transakcija poslana, verifikujem... txid: ' + (txid || 'NEMA'), 'info');
 
       try {
-        const fnUrl = 'https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/bright-handler';
+        const fnUrl = 'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/bright-handler';
         const res = await fetch(fnUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },

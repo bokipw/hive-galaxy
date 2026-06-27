@@ -236,7 +236,7 @@ function calcSlotPower(ship, dps, count) {
 // ── STATISTIKE CIJELE FLOTE ──
 function calcFleetStats(fleetSlots) {
   let total = { hp: 0, dps: 0, armor: 0, shield: 0, structure: 0, power: 0, count: 0, he3Cost: 0 };
-  let minSpeed = 99, minAgility = 99;
+  let minSpeed = 99, maxSpeed = 0, minAgility = 99;
 
   fleetSlots.forEach(slot => {
     if (!slot) return;
@@ -250,8 +250,8 @@ function calcFleetStats(fleetSlots) {
     total.power     += s.power;
     total.count     += s.count;
     if (s.speed   < minSpeed)   minSpeed   = s.speed;
+    if (s.speed   > maxSpeed)   maxSpeed   = s.speed;
     if (s.agility < minAgility) minAgility = s.agility;
-    // He3 cost po misiji — uzimamo iz engine definicije
     const engId = slot.engine || (slot.ship && slot.ship.engine);
     if (engId) {
       const engDef = (typeof ENGINES !== 'undefined' ? ENGINES : []).find(e => e.id === engId);
@@ -264,6 +264,9 @@ function calcFleetStats(fleetSlots) {
 
   total.speed   = minSpeed   === 99 ? 0 : minSpeed;
   total.agility = minAgility === 99 ? 0 : minAgility;
+  total.speedRange = (minSpeed === 99 || minSpeed === maxSpeed)
+    ? (minSpeed === 99 ? '0' : String(minSpeed))
+    : minSpeed + '-' + maxSpeed;
   return total;
 }
 
@@ -568,7 +571,7 @@ function renderFleet() {
           { label:'DPS',     val: fmt(stats.dps),                 color:'#ff4444' },
           { label:'SHIELD',  val: fmt(stats.shield),              color:'#4488ff' },
           { label:'BRODOVI', val: fmt(stats.count),               color:'#ffcc44' },
-          { label:'BRZINA',  val: stats.speed || 0,               color:'#aa44ff' },
+          { label:'RANGE',  val: stats.speedRange || '0',         color:'#aa44ff' },
           { label:'⛽/MIS',  val: (stats.he3Cost||0).toFixed(3), color:'#ff9944' },
         ].map(s => `
           <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:6px 3px">

@@ -44,12 +44,12 @@
 <script>
 (function() {
   var _sb = supabase.createClient(
-    'https://kjgfouzyqcnlwbsyipxp.supabase.co',
-    'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+    'https://exmbmwukqssvgmhysamo.supabase.co',
+    'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'
   );
 
   function check() {
-    _sb.from('hive_profiles').select('is_premium').eq('hive_user', '__system__').single().then(function(res) {
+    _sb.from('hive_profiles').select('is_premium').eq('id', '__system__').single().then(function(res) {
       if (!res.error && res.data && res.data.is_premium === true) {
         // Maintenance je jos uvijek ON — provjeri ponovo za 10s
         setTimeout(check, 10000);

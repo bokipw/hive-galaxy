@@ -1,76 +1,95 @@
-// ============================================================
-// HIVE GALAXY — js/save.js
-// Save / Load — Supabase only (no localStorage)
-// ============================================================
-
-function _getSaveId() {
-  if(window._supaSession) {
-    const meta = window._supaSession.user.user_metadata;
-    if (meta && meta.hive_username) return 'hive_' + meta.hive_username;
-    return window._supaSession.user.id;
-  }
-  if(window._hiveUser)    return 'hive_' + window._hiveUser;
+function _getPlayerId() {
+  if (window._loginType === 'hive') return window._hiveUser;
+  if (window._supaSession) return window._supaSession.user.id;
   return null;
 }
-
-async function _cloudSave(saveData) {
-  if(!window._supa) return;
-
-  // Ne dozvoli snimanje praznog/pocetnog stanja
-  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number' || saveData.R.metal <= 0) return;
-  if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
-
-  // Ako je HIVE igrac bez auth sesije, sacekaj da se auth zavrsi
-  var _authDone = false;
-  if (window._hiveUser && !window._supaSession) {
-    for (var _i = 0; _i < 30; _i++) {
-      await new Promise(function(r) { setTimeout(r, 200); });
-      if (window._supaSession) { _authDone = true; break; }
-    }
+function _getUsername() {
+  if (window._hiveUser) return window._hiveUser;
+  if (window._supaSession) {
+    const meta = window._supaSession.user.user_metadata;
+    return meta?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown';
   }
-  console.log('[cloudSave] Auth:', _authDone, 'isEmail:', !!window._supaSession, 'uid:', _getSaveId ? _getSaveId() : 'N/A');
+  return 'Unknown';
+}
 
-  const isEmail = !!window._supaSession;
-  const isHive  = !!window._hiveUser;
-  if(!isEmail && !isHive) return;
-
-  const uid      = _getSaveId();
-  const username = isEmail
-    ? (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0] || 'Unknown')
-    : window._hiveUser;
-  const score = (saveData.R && saveData.R.score) || 0;
-  const level = (saveData.commander && saveData.commander.level) || 1;
-
+async function _hiveSave(payload) {
   try {
-    await window._supa.from('saves').upsert({
-      id: uid,
-      data: saveData,
-      version: (saveData._version || 0) + 1,
-      saved_at: new Date().toISOString()
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: window._hiveUser, data: payload })
     });
-  } catch(e) { console.error('cloudSave saves:', e); }
+    const result = await resp.json();
+    if (!result.success) console.error('[hiveSave] error:', result.errors);
+    return result;
+  } catch(e) { console.error('[hiveSave] exception:', e); }
+}
 
+async function _emailSave(payload) {
+  if (!window._supa) return;
+  const pid = _getPlayerId();
+  const u = (table, data) => window._supa.from(table).upsert(data).then(r => { if(r.error) console.error(table, r.error); });
   try {
-    await window._supa.from('leaderboard').upsert({
-      id: uid, username, score, level,
-      is_premium: window._playerPremium || false,
-      updated_at: new Date().toISOString()
-    });
-  } catch(e) { console.error('cloudSave leaderboard:', e); }
+    const R = payload.R || {};
+    await Promise.all([
+      u('player_resources', { player_id: pid, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: payload.bcm, bocrypto: payload.bocrypto, spcard: payload.spcard, keys_cmd: payload.keys_cmd, keys_inst: payload.keys_inst, storage_buffer: payload.storageBuffer, total_metal_mined: payload.totalMetalMined, total_depot_pickups: payload.totalDepotPickups }),
+      u('player_buildings', { player_id: pid, buildings: payload.buildings }),
+      u('player_research', { player_id: pid, research: payload.research }),
+      u('player_commander', { player_id: pid, level: payload.commander?.level, exp: payload.commander?.exp, next_exp: payload.commander?.nextExp, title: payload.commander?.title }),
+      u('player_fleet', { player_id: pid, fleet: payload.fleet }),
+      u('player_hangar', { player_id: pid, hangar: payload.hangar }),
+      u('player_ship_designs', { player_id: pid, designs: payload.shipDesigns, extra_slots: payload.designExtraSlots, slots_bought: payload.designSlotsBought }),
+      u('player_blueprints', { player_id: pid, owned: payload.ownedBlueprints }),
+      u('player_blueprint_fragments', { player_id: pid, fragments: payload.blueprintFragments }),
+      u('player_commanders', { player_id: pid, owned: payload.ownedCommanders, active_id: payload.activeCommander }),
+      u('player_deployed_commanders', { player_id: pid, deployed: payload.deployedCommanders }),
+      u('player_colonies', { player_id: pid, colonies: payload.colonies }),
+      u('player_instance_progress', { player_id: pid, progress: payload.instProgress }),
+      u('player_missions', { player_id: pid, mission_state: payload.missionState, mission_counters: payload.missionCounters, story_missions: payload.dynamicStoryMissions }),
+      u('player_achievements', { player_id: pid, achieves: payload.ACHIEVES, state: payload.achievementState }),
+      u('player_artifacts', { player_id: pid, fragments: payload.artifactFragments, state: payload.artifactState }),
+      u('player_pvp', { player_id: pid, wins: payload.pvp?.wins, losses: payload.pvp?.losses, rating: payload.pvp?.rating, history: payload.pvp?.history, shield: payload.pvpShield }),
+      u('player_espionage', { player_id: pid, drones: payload.espDrones, reports: payload.espReports }),
+      u('player_formations', { player_id: pid, active_formation: payload.activeFormation, formation_slots: payload.formationSlots }),
+      u('player_recycle_queue', { player_id: pid, queue: payload.recycleQueue }),
+      u('player_build_queue', { player_id: pid, queue: payload.buildQueue }),
+      u('player_pack_pity', { player_id: pid, pity: payload.packPity, pulls: payload.packPulls }),
+      u('player_conquered_planets', { player_id: pid, planets: payload.conqueredPlanets, fleet_reward: payload.colonyFleetReward }),
+      u('player_jump_gate_cooldowns', { player_id: pid, cooldowns: payload.jumpGateCooldowns }),
+      u('player_boss_cooldowns', { player_id: pid, cooldowns: payload.bossCooldowns }),
+      u('player_drop_pity', { player_id: pid, pity: payload.dropPity }),
+      u('player_misc_state', { player_id: pid, starter_given: payload.starterGiven, fleet_position: payload.fleetPosition, viewing_cmd_id: payload.viewingCmdId, card_ability_cooldowns: payload.cardAbilityCooldowns }),
+      u('player_defenses', { player_id: pid, defenses: payload.defenses }),
+    ]);
+  } catch(e) { console.error('[emailSave] exception:', e); }
+}
 
-  try {
-    if (window._hiveUser) {
-      await window._supa.from('hive_profiles').upsert({
-        hive_user: window._hiveUser,
-        bcm:       typeof R !== 'undefined' ? (R.bcm         || 0) : 0,
-        bocrypto:  typeof R !== 'undefined' ? (R.bocrypto     || 0) : 0,
-        spcard:    typeof R !== 'undefined' ? (R.spCard       || 0) : 0,
-        keys_cmd:  typeof R !== 'undefined' ? (R.keys         || 0) : 0,
-        keys_inst: typeof R !== 'undefined' ? (R.instanceKeys || 0) : 0,
-      }, { onConflict: 'hive_user' });
-    }
-  } catch(e) { console.error('cloudSave tokens:', e); }
+async function _saveLeaderboard(score, level) {
+  const pid = _getPlayerId();
+  const username = _getUsername();
+  if (!pid || !window._supa) return;
+  const isHive = window._loginType === 'hive';
+  const isPremium = window._playerPremium || false;
+  if (isHive) {
+    try {
+      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
+      });
+    } catch(e) { console.error('[lbSave]', e); }
+  } else {
+    try {
+      await window._supa.from('leaderboard').upsert({ player_id: pid, username, score, level, is_premium: isPremium, updated_at: new Date().toISOString() });
+    } catch(e) { console.error('[lbSave]', e); }
+  }
+}
 
+async function _savePvpSnapshot(saveData) {
+  const pid = _getPlayerId();
+  const username = _getUsername();
+  if (!pid || !window._supa) return;
+  const isHive = window._loginType === 'hive';
   try {
     const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
       ship_id: u.ship_id, name: u.name, count: u.count, hp: u.hp, dps: u.dps,
@@ -81,21 +100,60 @@ async function _cloudSave(saveData) {
     const commanders = (saveData.deployedCommanders || []).map(c => ({
       id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
     }));
-    const { error } = await window._supa.from('pvp_snapshots').upsert({
-      id: uid, username,
-      rating:     (saveData.pvp && saveData.pvp.rating) || 1000,
+    const score = (saveData.R && saveData.R.score) || 0;
+    const level = (saveData.commander && saveData.commander.level) || 1;
+    const payload = {
+      player_id: pid, username,
+      rating: (saveData.pvp && saveData.pvp.rating) || 1000,
       level, power: typeof calcFleetTotalPower === 'function' ? calcFleetTotalPower() : 0,
       fleet: deployedFleet, commanders,
       is_premium: window._playerPremium || false,
       resources: {
-        metal:   typeof R !== 'undefined' ? (R.metal   || 0) : 0,
+        metal: typeof R !== 'undefined' ? (R.metal || 0) : 0,
         crystal: typeof R !== 'undefined' ? (R.crystal || 0) : 0,
-        he3:     typeof R !== 'undefined' ? (R.he3     || 0) : 0,
+        he3: typeof R !== 'undefined' ? (R.he3 || 0) : 0,
       },
       updated_at: new Date().toISOString()
-    });
-    if (error) console.error('cloudSave pvp_snapshots:', error);
-  } catch(e) { console.error('cloudSave pvp_snapshots exception:', e); }
+    };
+    if (isHive) {
+      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+      });
+    } else {
+      await window._supa.from('pvp_snapshots').upsert(payload);
+    }
+  } catch(e) { console.error('[pvpSave] exception:', e); }
+}
+
+async function _cloudSave(saveData) {
+  if (!window._supa) return;
+  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number' || saveData.R.metal <= 0) return;
+  if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
+
+  var _authDone = false;
+  if (window._hiveUser && !window._supaSession) {
+    for (var _i = 0; _i < 30; _i++) {
+      await new Promise(function(r) { setTimeout(r, 200); });
+      if (window._supaSession) { _authDone = true; break; }
+    }
+  }
+
+  const pid = _getPlayerId();
+  if (!pid) return;
+  const isHive = window._loginType === 'hive';
+
+  const score = (saveData.R && saveData.R.score) || 0;
+  const level = (saveData.commander && saveData.commander.level) || 1;
+
+  if (isHive) {
+    await _hiveSave(saveData);
+  } else {
+    await _emailSave(saveData);
+  }
+
+  await _saveLeaderboard(score, level);
+  await _savePvpSnapshot(saveData);
 }
 
 function _applyGameState(s) {
@@ -181,14 +239,132 @@ function _applyGameState(s) {
   }
 }
 
+async function _loadFromTables() {
+  const pid = _getPlayerId();
+  if (!pid || !window._supa) return null;
+  const isHive = window._loginType === 'hive';
+
+  if (isHive) {
+    try {
+      const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'load', player_id: pid })
+      });
+      const result = await resp.json();
+      if (!result.success || !result.data) return null;
+      return _buildSaveFromTables(result.data);
+    } catch(e) { console.error('[hiveLoad]', e); return null; }
+  } else {
+    try {
+      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
+      const results = {};
+      for (const tbl of tables) {
+        const { data } = await window._supa.from(tbl).select('*').eq('player_id', pid).maybeSingle();
+        if (data) results[tbl] = data;
+      }
+      return _buildSaveFromTables(results);
+    } catch(e) { console.error('[emailLoad]', e); return null; }
+  }
+}
+
+function _buildSaveFromTables(tables) {
+  if (!tables || Object.keys(tables).length === 0) return null;
+  const pr = tables.player_resources || {};
+  const pb = tables.player_buildings || {};
+  const pres = tables.player_research || {};
+  const pc = tables.player_commander || {};
+  const pf = tables.player_fleet || {};
+  const ph = tables.player_hangar || {};
+  const psd = tables.player_ship_designs || {};
+  const pbl = tables.player_blueprints || {};
+  const pbf = tables.player_blueprint_fragments || {};
+  const pcmdrs = tables.player_commanders || {};
+  const pdc = tables.player_deployed_commanders || {};
+  const pcol = tables.player_colonies || {};
+  const pip = tables.player_instance_progress || {};
+  const pm = tables.player_missions || {};
+  const pach = tables.player_achievements || {};
+  const part = tables.player_artifacts || {};
+  const ppvp = tables.player_pvp || {};
+  const pe = tables.player_espionage || {};
+  const pform = tables.player_formations || {};
+  const prq = tables.player_recycle_queue || {};
+  const pbq = tables.player_build_queue || {};
+  const ppp = tables.player_pack_pity || {};
+  const pcp = tables.player_conquered_planets || {};
+  const pjg = tables.player_jump_gate_cooldowns || {};
+  const pbc = tables.player_boss_cooldowns || {};
+  const pdp = tables.player_drop_pity || {};
+  const pdef = tables.player_defenses || {};
+  const pms = tables.player_misc_state || {};
+
+  const saveData = {
+    _savedAt: new Date().toISOString(),
+    _season: window._serverSeason || 1,
+    R: {
+      metal: pr.metal || 0, crystal: pr.crystal || 0, he3: pr.he3 || 0,
+      energy: pr.energy || 100, score: pr.score || 0,
+      D: pdef.defenses || {},
+    },
+    buildings: pb.buildings || {},
+    commander: { level: pc.level || 1, exp: pc.exp || 0, nextExp: pc.next_exp || 1000, title: pc.title || 'Kadet' },
+    research: pres.research || {},
+    fleet: pf.fleet || [null,null,null,null,null,null,null,null,null],
+    ownedBlueprints: pbl.owned || {},
+    blueprintFragments: pbf.fragments || {},
+    colonies: pcol.colonies || [],
+    pvp: { wins: ppvp.wins || 0, losses: ppvp.losses || 0, rating: ppvp.rating || 1000, history: ppvp.history || [] },
+    espDrones: pe.drones || 0,
+    espReports: pe.reports || [],
+    artifactFragments: part.fragments || {},
+    activeFormation: pform.active_formation || 0,
+    starterGiven: pms.starter_given || false,
+    shipDesigns: psd.designs || [],
+    hangar: ph.hangar || [],
+    instProgress: pip.progress || {},
+    pvpShield: ppvp.shield || {},
+    artifactState: part.state || {},
+    achievementState: pach.state || {},
+    missionState: pm.mission_state || {},
+    missionCounters: pm.mission_counters || {},
+    totalMetalMined: pr.total_metal_mined || 0,
+    totalDepotPickups: pr.total_depot_pickups || 0,
+    storageBuffer: pr.storage_buffer || {metal:0,crystal:0,he3:0},
+    buildQueue: pbq.queue || [],
+    recycleQueue: prq.queue || [],
+    ACHIEVES: pach.achieves || [],
+    ownedCommanders: pcmdrs.owned || [],
+    activeCommander: pcmdrs.active_id || null,
+    deployedCommanders: pdc.deployed || [],
+    designExtraSlots: psd.extra_slots || 0,
+    designSlotsBought: psd.slots_bought || 0,
+    formationSlots: pform.formation_slots || [null,null,null,null,null,null,null,null,null],
+    conqueredPlanets: pcp.planets || [],
+    colonyFleetReward: pcp.fleet_reward || {},
+    jumpGateCooldowns: pjg.cooldowns || {},
+    bossCooldowns: pbc.cooldowns || {},
+    fleetPosition: pms.fleet_position || null,
+    dropPity: pdp.pity || {},
+    dynamicStoryMissions: pm.story_missions || [],
+    viewingCmdId: pms.viewing_cmd_id || null,
+    packPity: ppp.pity || {},
+    packPulls: ppp.pulls || {},
+    cardAbilityCooldowns: pms.card_ability_cooldowns || {},
+  };
+  return saveData;
+}
+
 function saveGame() {
   try {
     if (typeof commander === 'undefined' || !commander.level) return;
-    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, ...RWithoutTokens } = R;
+    const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, D: _defenses, ...RWithoutTokens } = R;
     const saveData = {
       _savedAt: new Date().toISOString(),
       _season: window._serverSeason || 1,
       R: RWithoutTokens,
+      bcm: _bcm || 0, bocrypto: _boc || 0, spCard: _sp || 0, keys_cmd: _keys || 0, keys_inst: _ikeys || 0,
+      defenses: _defenses || {},
       buildings, commander, research, fleet,
       ownedBlueprints, blueprintFragments, colonies, pvp,
       espDrones, espReports, artifactFragments, activeFormation,
@@ -209,22 +385,22 @@ function saveGame() {
       totalMetalMined: window._totalMetalMined,
       totalDepotPickups: window._totalDepotPickups,
       storageBuffer, buildQueue, recycleQueue, ACHIEVES,
-      ownedCommanders:    window.ownedCommanders    || [],
-      activeCommander:    window._activeCommander    || null,
+      ownedCommanders: window.ownedCommanders || [],
+      activeCommander: window._activeCommander || null,
       deployedCommanders: window._deployedCommanders || [],
-      designExtraSlots:   window._designExtraSlots   || 0,
-      designSlotsBought:  window._designSlotsBought  || 0,
-      formationSlots:     window._formationSlots     || Array(9).fill(null),
-      conqueredPlanets:   window._conqueredPlanets   || [],
-      colonyFleetReward:  window._colonyFleetReward  || {},
-      jumpGateCooldowns:  window._jumpGateCooldowns  || {},
-      bossCooldowns:      window._bossCooldowns      || {},
-      fleetPosition:      window._fleetPosition      || null,
-      dropPity:           window._dropPity           || {},
+      designExtraSlots: window._designExtraSlots || 0,
+      designSlotsBought: window._designSlotsBought || 0,
+      formationSlots: window._formationSlots || Array(9).fill(null),
+      conqueredPlanets: window._conqueredPlanets || [],
+      colonyFleetReward: window._colonyFleetReward || {},
+      jumpGateCooldowns: window._jumpGateCooldowns || {},
+      bossCooldowns: window._bossCooldowns || {},
+      fleetPosition: window._fleetPosition || null,
+      dropPity: window._dropPity || {},
       dynamicStoryMissions: window._dynamicStoryMissions || [],
-      viewingCmdId:       window._viewingCmdId       || null,
-      packPity:           window._packPity           || {},
-      packPulls:          window._packPulls          || {},
+      viewingCmdId: window._viewingCmdId || null,
+      packPity: window._packPity || {},
+      packPulls: window._packPulls || {},
       cardAbilityCooldowns: Object.keys(window).filter(k=>k.startsWith('_cardAbility_'))
         .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
     };
@@ -237,35 +413,27 @@ function saveGame() {
 }
 
 async function loadGameCloud() {
-  // Ako je HIVE igrac bez auth sesije, sacekaj da se auth zavrsi
   var authWaited = false;
   if (window._hiveUser && !window._supaSession) {
-    console.log('[loadGameCloud] Cekam HIVE auth...');
     for (var i = 0; i < 30; i++) {
       await new Promise(function(r) { setTimeout(r, 200); });
       if (window._supaSession) { authWaited = true; break; }
     }
-    console.log('[loadGameCloud] Auth completed:', authWaited, !!window._supaSession);
   }
 
-  // Provjeri sezonu
   var serverSeason = 1;
   try {
-    const { data: sys } = await window._supa.from('hive_profiles').select('keys').eq('hive_user', '__system__').single();
-    if (sys && sys.keys != null) serverSeason = sys.keys;
+    const { data: sys } = await window._supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+    if (sys && sys.boosters && sys.boosters.season != null) serverSeason = sys.boosters.season;
     window._serverSeason = serverSeason;
-  } catch(e) {} 
+  } catch(e) {}
 
-  // Ucitaj iz Supabase
-  const uid = _getSaveId();
-  console.log('[loadGameCloud] uid:', uid, 'supaSession:', !!window._supaSession);
-  if (!uid) return false;
+  const pid = _getPlayerId();
+  if (!pid) return false;
 
   try {
-    const { data, error } = await window._supa.from('saves').select('data').eq('id', uid).single();
-    if (error || !data || !data.data) return false;
-    const s = data.data;
-    // Ne odbacujemo save zbog stare sezone — season reset resetuje samo rank/leaderboard
+    const s = await _loadFromTables();
+    if (!s) return false;
     return _applyGameState(s);
   } catch(e) {
     console.error('loadGameCloud error:', e);
@@ -273,16 +441,16 @@ async function loadGameCloud() {
   }
 }
 
-// Ostavljena za kompatibilnost — čita iz Supabase ako nema lokalnog
 function loadGame() {
   return false;
 }
 
 function resetGame() {
   if (confirm(t('confirm.resetGame'))) {
-    const uid = _getSaveId();
-    if (uid && window._supa) {
-      window._supa.from('saves').delete().eq('id', uid).then(() => location.reload());
+    const pid = _getPlayerId();
+    if (pid && window._supa) {
+      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
+      Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
     } else {
       location.reload();
     }
@@ -291,7 +459,7 @@ function resetGame() {
 
 function addTestResources() {
   if (!window._devMode) {
-    if (typeof toast === 'function') toast('❌ Nije dostupno u produkciji!', 'err');
+    if (typeof toast === 'function') toast('Nije dostupno u produkciji!', 'err');
     return;
   }
   R.metal   += 1000;
@@ -301,6 +469,6 @@ function addTestResources() {
   R.instanceKeys = (R.instanceKeys || 0) + 10;
   R.keys = (R.keys || 0) + 50;
   if (typeof updateResUI === 'function') updateResUI();
-  if (typeof toast === 'function') toast('➕ Test resursi + 10 inst. ključeva + 50 🗝️ za karte!', 'ok');
+  if (typeof toast === 'function') toast('Test resursi + 10 inst. kljuceva + 50  za karte!', 'ok');
   saveGame();
 }

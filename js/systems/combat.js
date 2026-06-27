@@ -269,6 +269,8 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
         moduleSpecial:  moduleSpec,
         reconSpecial:   reconSpec,
         specialSpecial: specialSpec,
+        _weaponRanges: _getSlotWeaponRanges(slot),
+        _weaponCDs: (() => { const w = _getSlotWeaponRanges(slot); return w.map(() => 0); })(),
         reactiveTriggered: false,
         stealthUsed:   false,            // stealth_round1 se koristi samo u rundi 1
         voidImmune:    false,
@@ -337,6 +339,7 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
 
   // Pripremi neprijatelja
   const enemySide = enemyGroups.map((group, idx) => {
+    const shipClass = group.ship_id ? group.ship_id.split('_')[0] : '';
     return {
       id:        `e_${idx}`,
       slotIndex: group.col ? (group.row - 1) * 3 + (group.col - 1) : idx,
@@ -352,6 +355,8 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
       agility:   group.agility || 0,
       speed:     group.speed || 1,
       armor:     group.armor || 'Light',
+      _weaponRanges: _getClassWeaponRange(shipClass),
+      _weaponCDs: _getClassWeaponRange(shipClass).map(() => 0),
       effects:   [],
       alive:     true,
     };
@@ -369,6 +374,7 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
     enemy:       enemySide,
     round:       0,
     maxRounds:   50,
+    distance:    10,
     log:         [],
     status:      'active',  // active, victory, defeat, draw
     rewards:     null,
@@ -399,10 +405,20 @@ function simulateRound(battle) {
   const round = battle.round;
   battle.log.push({ round, type: 'round', msg: `━━━ RUNDA ${round} ━━━` });
 
+  // ── ZATVARANJE DISTANCE ──
+  const allAlive = [...battle.player, ...battle.enemy].filter(u => u.alive);
+  if (allAlive.length > 0) {
+    const avgSpeed = allAlive.reduce((s, u) => s + (u.speed || 1), 0) / allAlive.length;
+    const closingSpeed = Math.max(1, Math.floor(avgSpeed * 0.5));
+    battle.distance = Math.max(1, battle.distance - closingSpeed);
+    battle.log.push({ round, type: 'effect', msg: `📏 Distance: ${battle.distance} (zatvaranje: ${closingSpeed}/rundi)` });
+  }
+
   // Svi aktivni učesnici
-  const allUnits = [...battle.player, ...battle.enemy].filter(u => u.alive);
+  const allUnits = allAlive;
 
   // Sortiraj po speed — first_strike/divine_speed uvijek idu prvi, onda po speed, pa agility
+  // Range utiče na štetu (falloff van dometa), ne na redoslijed
   allUnits.sort((a, b) => {
     const aFirst = (a.engineSpecial?.type === 'first_strike' || a.engineSpecial?.type === 'divine_speed') ? 1 : 0;
     const bFirst = (b.engineSpecial?.type === 'first_strike' || b.engineSpecial?.type === 'divine_speed') ? 1 : 0;
@@ -427,6 +443,13 @@ function simulateRound(battle) {
 
   for (const attacker of allUnits) {
     if (!attacker.alive) continue;
+
+    // Smanji cooldown naoružanja
+    if (attacker._weaponCDs) {
+      for (let wi = 0; wi < attacker._weaponCDs.length; wi++) {
+        if (attacker._weaponCDs[wi] > 0) attacker._weaponCDs[wi]--;
+      }
+    }
 
     // Procesiraj efekte na početku poteza
     const stunned = processEffects(attacker, battle);
@@ -568,15 +591,109 @@ function simulateRound(battle) {
 
 // ── NAPAD ──
 function performAttack(attacker, targets, battle, round) {
-  // Odaberi primarnu metu — prednji red prvi (najmanji slotIndex), pri jednakosti najmanji HP
-  const target = targets.reduce((a, b) => {
-    const ai = a.slotIndex ?? 99, bi = b.slotIndex ?? 99;
-    if (ai !== bi) return ai < bi ? a : b;
-    return a.hp < b.hp ? a : b;
-  });
+  if (!attacker._weaponRanges || !attacker._weaponCDs) return;
+  for (let wi = 0; wi < attacker._weaponRanges.length; wi++) {
+    const wpn = attacker._weaponRanges[wi];
+    if (!wpn) continue;
+    if (battle.distance < wpn.min || battle.distance > wpn.max) continue;
+    if (attacker._weaponCDs[wi] > 0) continue;
+    const target = targets.reduce((a, b) => {
+      const ai = a.slotIndex ?? 99, bi = b.slotIndex ?? 99;
+      if (ai !== bi) return ai < bi ? a : b;
+      return a.hp < b.hp ? a : b;
+    });
+    if (!target || !target.alive) continue;
+    _fireWeapon(attacker, wi, wpn, target, targets, battle, round);
+    attacker._weaponCDs[wi] = wpn.cooldown || 0;
+  }
+}
 
-  // Izračunaj štetu
-  let dmg = attacker.dps;
+function _calcHitChance(attacker, wpn, target) {
+  const baseHit = 100;
+  const agilityPenalty = (target.agility || 0) * 4;
+  const steeringBonus  = (wpn.steering || 5) * 4;
+  const dodgePenalty   = Math.floor((target.dodge || 0) / 12);
+  const missStackBonus = Math.min(20, (attacker._missStack || 0) * 2);
+  const reconAccuracy  = (attacker.reconSpecial?.type === 'targeting' ? (attacker.reconSpecial.accuracy || 0) : 0);
+  return Math.max(20, Math.min(100, baseHit + steeringBonus + missStackBonus + reconAccuracy - agilityPenalty - dodgePenalty));
+}
+
+function _hasShieldPenetration(wpn) {
+  return wpn.dmgType === 'Kinetic' || wpn.dmgType === 'Heat' || wpn.dmgType === 'Magnetic';
+}
+
+function _checkIntercept(attacker, wpn, target, battle, round) {
+  const interceptorSide = target.side === 'player' ? battle.player : battle.enemy;
+  const interceptors = [];
+  for (const unit of interceptorSide) {
+    if (!unit.alive || unit.id === target.id) continue;
+    const slot = unit._slot;
+    const guns = _getWeaponsByIntercept(slot);
+    for (const g of guns) {
+      interceptors.push({ unit, chance: g.chance });
+    }
+  }
+  if (interceptors.length === 0 && !target._weaponRanges) return false;
+  for (const int of interceptors) {
+    if (Math.random() * 100 < int.chance) {
+      battle.log.push({ round, type: 'miss', msg: `🛡️ ${int.unit.name} presreo projektil ${wpn.id} namijenjen ${target.name}!` });
+      return true;
+    }
+  }
+  // PPC defence — target-ov sopstveni weapon interceptor
+  if (target._weaponRanges) {
+    for (const tw of target._weaponRanges) {
+      if (tw.intercept && Math.random() * 100 < tw.intercept) {
+        battle.log.push({ round, type: 'miss', msg: `🛡️ ${target.name} PPC presreo projektil ${wpn.id}!` });
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function _applyScatter(wi, wpn, attacker, primaryTarget, targets, battle, round, effectiveDmg) {
+  if (wpn.dmgType !== 'Kinetic' && wpn.dmgType !== 'Heat' && wpn.dmgType !== 'Explosive') return;
+  const sameRow = targets.filter(t => t.alive && t.id !== primaryTarget.id && (t.slotIndex ?? 99) === (primaryTarget.slotIndex ?? 99));
+  if (sameRow.length === 0) return;
+  const scatterDmg = Math.floor(effectiveDmg * 0.35);
+  const scatterTargets = sameRow.slice(0, 2);
+  for (const st of scatterTargets) {
+    let stShieldDmg = 0, stHpDmg = 0;
+    if (st.shield > 0) {
+      stShieldDmg = Math.min(st.shield, scatterDmg);
+      st.shield -= stShieldDmg;
+      stHpDmg = scatterDmg - stShieldDmg;
+    } else {
+      stHpDmg = scatterDmg;
+    }
+    st.hp = Math.max(0, st.hp - stHpDmg);
+    battle.log.push({ round, type: 'effect', msg: `💥 SCATTER! ${attacker.name}'s ${wpn.id} pogodio ${st.name} sa ${scatterDmg} štete (${stShieldDmg} shield, ${stHpDmg} HP)!` });
+    if (st.hp <= 0) {
+      st.alive = false;
+      battle.log.push({ round, type: 'destroy', msg: `💀 ${st.name} UNIŠTEN od scatter štete!` });
+    }
+  }
+}
+
+function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
+  const weaponDmgType = wpn.dmgType || 'Kinetic';
+
+  // 1. HIT CHANCE (G2O: agility vs steering)
+  const hitChance = _calcHitChance(attacker, wpn, target);
+  if (Math.random() * 100 >= hitChance) {
+    if (attacker._missStackAtk > 0) {
+      attacker.dps = Math.floor(attacker.dps * (1 + attacker._missStackAtk / 100));
+    }
+    battle.log.push({ round, type: 'miss', msg: `💨 ${attacker.name}'s ${wpn.id} promašio ${target.name}! (${Math.round(hitChance)}% hit)` });
+    return;
+  }
+
+  // 2. INTERCEPT CHECK
+  if (_checkIntercept(attacker, wpn, target, battle, round)) return;
+
+  // 3. Random damage unutar dmgMin-dmgMax
+  let dmg = wpn.dmgMin + Math.floor(Math.random() * (wpn.dmgMax - wpn.dmgMin + 1));
 
   // ── COMMANDER PASSIVE: first_round_atk bonus ──
   if (round === 1 && attacker.side === 'player' && attacker._firstRoundAtkBonus > 0) {
@@ -588,37 +705,36 @@ function performAttack(attacker, targets, battle, round) {
     dmg = Math.floor(dmg * (1 + attacker._berserkerAtk / 100));
   }
 
-  // Oklop otpornost — iz ships.js ARMOR_RESISTANCE (vrijednosti u %)
+  // ── ARMOR RESISTANCE ──
   const armorType     = target.armor || 'Light';
   const resistance    = (typeof ARMOR_RESISTANCE !== 'undefined' && ARMOR_RESISTANCE[armorType])
                         ? ARMOR_RESISTANCE[armorType]
                         : { Kinetic: 100, Heat: 100, Magnetic: 100, Explosive: 100 };
-  const weaponDmgType = getAttackerDmgType(attacker);
   const resistPct     = resistance[weaponDmgType] ?? 100;
   dmg = Math.floor(dmg * (resistPct / 100));
 
-  // ── ENGINE: armor_boost — smanjuje primljenu štetu za X% ──
+  // ── ENGINE: armor_boost ──
   const tEng = target.engineSpecial;
   if (tEng?.type === 'armor_boost' && tEng.bonus > 0) {
     dmg = Math.floor(dmg * (1 - tEng.bonus / 100));
   }
 
-  // ── ENGINE: void_phase — meta je imuna ovu rundu ──
+  // ── ENGINE: void_phase ──
   if (target.voidImmune) {
-    battle.log.push({ round, type: 'miss', msg: `🕳️ ${target.name} u void fazi — napad ${attacker.name} prošao kroz nju!` });
+    battle.log.push({ round, type: 'miss', msg: `🕳️ ${target.name} u void fazi — ${attacker.name}'s ${wpn.id} prošao kroz nju!` });
     return;
   }
 
-  // ── ENGINE: warp_skip — šansa da negira dolazni napad ──
+  // ── ENGINE: warp_skip ──
   const tEngine = target.engineSpecial;
   if (tEngine?.type === 'warp_skip') {
     if (Math.random() * 100 < tEngine.chance) {
-      battle.log.push({ round, type: 'miss', msg: `👻 ${target.name} warp skip — napad od ${attacker.name} negiran!` });
+      battle.log.push({ round, type: 'miss', msg: `👻 ${target.name} warp skip — ${attacker.name}'s ${wpn.id} negiran!` });
       return;
     }
   }
 
-  // ── RECON: Stealth Cloak — u rundi 1 smanjuje primljenu štetu ──
+  // ── RECON: Stealth Cloak ──
   if (target.reconSpecial?.type === 'stealth_round1' && round === 1 && !target.stealthUsed) {
     const red = target.reconSpecial.reduction || 0;
     dmg = Math.floor(dmg * (1 - red / 100));
@@ -626,29 +742,28 @@ function performAttack(attacker, targets, battle, round) {
     battle.log.push({ round, type: 'effect', msg: `👻 ${target.name} STEALTH CLOAK: -${red}% štete u rundi 1!` });
   }
 
-  // ── RECON: Evasion Matrix + Shadow Protocol — dodge šansa ──
+  // ── RECON: Evasion Matrix / Shadow Protocol ──
   const reconEvade = (target.reconSpecial?.type === 'dodge'   ? (target.reconSpecial.chance || 0) : 0)
                    + (target.reconSpecial?.type === 'shadow'  ? (target.reconSpecial.evade  || 0) : 0);
   if (reconEvade > 0 && Math.random() * 100 < reconEvade) {
-    battle.log.push({ round, type: 'miss', msg: `🌀 ${target.name} RECON DODGE — napad izbjegnut! (${reconEvade}%)` });
+    battle.log.push({ round, type: 'miss', msg: `🌀 ${target.name} RECON DODGE — ${attacker.name}'s ${wpn.id} izbjegnut! (${reconEvade}%)` });
     return;
   }
 
-  // ── SPECIAL: Iron Fortress — smanjuje primljenu štetu ──
+  // ── SPECIAL: Iron Fortress ──
   if (target.specialSpecial?.type === 'fortress') {
     const red = target.specialSpecial.reduction || 0;
     dmg = Math.floor(dmg * (1 - red / 100));
   }
 
-  // ── SPECIAL / RECON: opći _dmgReduction flag ──
+  // ── _dmgReduction ──
   if (target._dmgReduction > 0) {
     dmg = Math.floor(dmg * (1 - target._dmgReduction / 100));
   }
 
-  // ── COMMANDER PASSIVE: dodge_chance — potpuni dodge ──
+  // ── COMMANDER PASSIVE: dodge_chance ──
   if (target.side === 'player' && target._dodgeChance > 0) {
     if (Math.random() * 100 < target._dodgeChance) {
-      // miss stack bonus za attacker (miss_stack_atk)
       if (attacker._missStackAtk > 0) {
         attacker.dps = Math.floor(attacker.dps * (1 + attacker._missStackAtk / 100));
         attacker.baseDps = Math.max(attacker.baseDps, attacker.dps);
@@ -658,103 +773,104 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── COMMANDER PASSIVE: first_round_immune — runda 1 imunitet ──
+  // ── COMMANDER: first_round_immune ──
   if (round === 1 && target.side === 'player' && target._firstRoundImmune) {
-    battle.log.push({ round, type: 'miss', msg: `🌑 ${target.name} nevidljiv u rundi 1 — napad prošao!` });
+    battle.log.push({ round, type: 'miss', msg: `🌑 ${target.name} nevidljiv u rundi 1 — ${attacker.name}'s ${wpn.id} promašio!` });
     return;
   }
 
-  // Agility = šansa izbjegavanja (guided oružja ignorišu evade)
+  // ── AGILITY EVADE ──
   const isGuided = getAttackerIsGuided(attacker);
   if (!isGuided) {
     const evadeChance = Math.min(60, target.agility * 0.5);
     if (Math.random() * 100 < evadeChance) {
-      // hp_on_miss (Nyx pasiva) — heal za svaki promašaj
       if (target._hpOnMiss > 0) {
         const hpGain = Math.floor(target.maxHp * target._hpOnMiss / 100);
         target.hp = Math.min(target.maxHp, target.hp + hpGain);
       }
-      battle.log.push({ round, type: 'miss', msg: `💨 ${target.name} izbjegao napad od ${attacker.name}!` });
+      battle.log.push({ round, type: 'miss', msg: `💨 ${target.name} izbjegao ${attacker.name}'s ${wpn.id}!` });
       return;
     }
   }
 
-  // ── SHIELD SPECIAL: BLOCK — potpuno blokira napad ──
+  // ── SHIELD BLOCK ──
   const tShield = target.shieldSpecial;
   if ((tShield?.type === 'block' || tShield?.type === 'block_reflect') && target.shield > 0) {
     const blockChance = tShield.type === 'block_reflect' ? (tShield.block || 0) : tShield.chance;
     if (Math.random() * 100 < blockChance) {
-      battle.log.push({ round, type: 'effect', msg: `🛡️ ${target.name} BLOKIRAO napad od ${attacker.name}!` });
+      battle.log.push({ round, type: 'effect', msg: `🛡️ ${target.name} BLOKIRAO ${attacker.name}'s ${wpn.id}!` });
       return;
     }
   }
 
-  // HIGH_DAMAGE — pasivni bonus štete
+  // ── HIGH_DAMAGE ──
   const highDmgBonus = getAttackerHighDamageBonus(attacker);
   if (highDmgBonus > 0) {
     dmg = Math.floor(dmg * (1 + highDmgBonus / 100));
   }
 
-  // ── SPECIAL: Siege Core — armor penetration (ignoruje dio oklopa) ──
+  // ── SPECIAL: Siege Core ──
   if (attacker.specialSpecial?.type === 'armor_pen') {
     const pen = attacker.specialSpecial.bonus || 0;
-    // Siege core "vraća" dio izgubljene štete od oklopa
-    const lostToDmgType = Math.floor(attacker.dps * (resistPct / 100));
-    const penBonus = Math.floor((attacker.dps - lostToDmgType) * (pen / 100));
+    const lostToDmgType = Math.floor(dmg * (resistPct / 100));
+    const penBonus = Math.floor((dmg - lostToDmgType) * (pen / 100));
     dmg += penBonus;
   }
 
-  // ── RECON: Shadow Protocol — bonus šteta kad napadač ide prvi (ambush) ──
+  // ── RECON: Shadow Protocol ambush ──
   if (attacker.reconSpecial?.type === 'shadow' && attacker.side === 'player') {
     const ambush = attacker.reconSpecial.ambush_dmg || 0;
     if (ambush > 0) dmg = Math.floor(dmg * (1 + ambush / 100));
   }
 
-  // ── RECON: Sprint Drive — first_strike_bonus na prvi napad ──
+  // ── RECON: Sprint Drive first_strike_bonus ──
   if (attacker.reconSpecial?.type === 'initiative' && attacker.reconSpecial.first_strike_bonus && !attacker._firstStrikeDone) {
     dmg = Math.floor(dmg * (1 + attacker.reconSpecial.first_strike_bonus / 100));
     attacker._firstStrikeDone = true;
   }
 
-  // ── RESEARCH: armor damage reduction na meti (ako je player) ──
+  // ── RESEARCH armor reduction ──
   if (target.side === 'player' && (target._resArmorRed || 0) > 0) {
     dmg = Math.floor(dmg * (1 - target._resArmorRed / 100));
   }
 
-  // ── COMMANDER PASSIVE: weapon-type bonus ──
+  // ── COMMANDER weapon-type bonus ──
   if (attacker.side === 'player') {
     const wt = weaponDmgType?.toLowerCase();
     const wBonus = attacker[`_wepBonus_${wt}`] || 0;
     if (wBonus > 0) dmg = Math.floor(dmg * (1 + wBonus / 100));
   }
 
-  // ── COMMANDER PASSIVE: type reduction na meti ──
+  // ── COMMANDER type reduction ──
   if (target.side === 'player') {
     const wt = weaponDmgType?.toLowerCase();
     const tRed = target[`_typeRed_${wt}`] || 0;
     if (tRed > 0) dmg = Math.floor(dmg * (1 - tRed / 100));
   }
 
-  // Kritičan udar (base 5%, +bonus od Directional oružja + research crit bonus)
+  // ── CRIT ──
   let isCrit = false;
   const critBonus = getAttackerCritBonus(attacker) + (attacker._resCritBonus || 0);
-  // Sprint Drive III — garantovani krit na prvi napad
+  const forceCrit = !!attacker._forceCritNext;
+  if (forceCrit) attacker._forceCritNext = false;
   const guaranteedCrit = attacker.reconSpecial?.type === 'initiative' && attacker.reconSpecial.first_strike_bonus >= 30 && !attacker._guaranteedCritDone;
-  if (guaranteedCrit || Math.random() * 100 < (5 + critBonus)) {
-    // ── COMMANDER PASSIVE: crit_dmg bonus ──
+  if (forceCrit || guaranteedCrit || Math.random() * 100 < (5 + critBonus)) {
     const critMult = 1.5 + ((attacker._critDmgBonus || 0) / 100);
-    dmg    = Math.floor(dmg * critMult);
+    dmg = Math.floor(dmg * critMult);
     isCrit = true;
     if (guaranteedCrit) attacker._guaranteedCritDone = true;
   }
 
-  // ARMOR_MELT efekat na meti — smanjuje efektivnu štetu oklopa
+  // ── ARMOR_MELT ──
   const meltEff = target.effects?.find(e => e.type === 'armor_melt');
   if (meltEff) {
     dmg = Math.floor(dmg * (1 + meltEff.value / 100));
   }
 
-  // ── SHIELD SPECIAL: RESIST — smanjuje štetu na shield ──
+  // ── SHIELD PENETRATION (G2O: Ballistic/Directional probijaju shield) ──
+  const shieldPen = _hasShieldPenetration(wpn);
+
+  // ── SHIELD RESIST ──
   let shieldResistPct = 0;
   if (target.shield > 0 && tShield) {
     if (tShield.type === 'kinetic_resist'  && weaponDmgType === 'Kinetic')  shieldResistPct = tShield.bonus || 0;
@@ -764,57 +880,80 @@ function performAttack(attacker, targets, battle, round) {
   }
   const effectiveDmg = shieldResistPct > 0 ? Math.floor(dmg * (1 - shieldResistPct / 100)) : dmg;
 
-  // Primijeni štetu — prvo na shield
+  // ── PRIMIJENI ŠTETU ──
   let shieldDmg = 0;
   let hpDmg     = 0;
 
   if (target.shield > 0) {
-    shieldDmg = Math.min(target.shield, effectiveDmg);
-    target.shield -= shieldDmg;
-    // Research Shields Lv100 — shield ne može pasti na 0
-    if (target._shieldImmune && target.shield <= 0) target.shield = 1;
-    hpDmg = effectiveDmg - shieldDmg;
+    if (shieldPen) {
+      // shieldPen = probija shield, ide direktno na HP
+      hpDmg = effectiveDmg;
+      battle.log.push({ round, type: 'effect', msg: `⚡ ${attacker.name}'s ${wpn.id} probija shield ${target.name}!` });
+    } else {
+      shieldDmg = Math.min(target.shield, effectiveDmg);
+      target.shield -= shieldDmg;
+      if (target._shieldImmune && target.shield <= 0) target.shield = 1;
+      hpDmg = effectiveDmg - shieldDmg;
+    }
   } else {
     hpDmg = effectiveDmg;
   }
 
   target.hp = Math.max(0, target.hp - hpDmg);
 
-  // ── TRACKING: ukupna nanesena šteta ──
+  // ── EOS SHIELD: 30% šansa da apisorbuje duplo ──
+  // (handled by shield special elsewhere, this is a note)
+
+  // ── TRACKING ──
   if (attacker.side === 'player') {
     window._totalDamageDealt = (window._totalDamageDealt || 0) + effectiveDmg;
   }
 
-  // Log
+  // ── STABILITY-BASED DESTRUCTION (G2O) ──
+  // Each ship in stack has structure HP. Stability = ships that must be overkilled
+  // before a ship actually dies. Damage accumulates, then ships die in stability batches.
+  // Only applies if ship survived the raw damage (stability can't "save" a dead fleet).
+  let shipsDestroyed = 0;
+  if (target.hp > 0 && target.structure > 0 && hpDmg > 0) {
+    const stability = target.stability || 999;
+    const shipsBefore = target.count || 1;
+    const rawLoss = Math.floor(hpDmg / Math.max(1, target.structure));
+    if (rawLoss >= stability) {
+      shipsDestroyed = Math.min(shipsBefore - 1, Math.floor(rawLoss / stability));
+    }
+    if (shipsDestroyed > 0) {
+      target.count = Math.max(1, shipsBefore - shipsDestroyed);
+      target.hp = target.count * target.structure;
+    }
+  }
+
+  // LOG
   const critTxt   = isCrit ? ' 💥KRIT!' : '';
   const shldTxt   = shieldDmg > 0 ? ` (${shieldDmg} shield, ${hpDmg} HP)` : '';
   const resistTxt = shieldResistPct > 0 ? ` [-${shieldResistPct}% resist]` : '';
+  const penTxt    = shieldPen ? ' ⚡shield pen' : '';
   battle.log.push({
     round,
     type: 'attack',
-    msg:  `⚔️ ${attacker.name} → ${target.name}: ${effectiveDmg} štete${shldTxt}${resistTxt}${critTxt}`,
+    msg:  `⚔️ ${attacker.name}[${wpn.id}] → ${target.name}: ${effectiveDmg} štete${shldTxt}${resistTxt}${critTxt}${penTxt}`,
     dmg: effectiveDmg, attacker: attacker.id, target: target.id,
-    dmgType: weaponDmgType, isCrit, shieldDmg, hpDmg,
+    dmgType: weaponDmgType, isCrit, shieldDmg, hpDmg, shipsDestroyed,
   });
 
-  // ── SHIELD SPECIAL: REFLECT — vraća štetu napadaču ──
+  // ── SHIELD REFLECT ──
   if (tShield?.type === 'reflect' && shieldDmg > 0) {
     if (Math.random() * 100 < tShield.chance) {
       const reflectDmg = Math.floor(shieldDmg * 0.3);
       attacker.hp = Math.max(0, attacker.hp - reflectDmg);
       battle.log.push({ round, type: 'effect', msg: `🪞 ${target.name} odbio ${reflectDmg} štete nazad na ${attacker.name}!` });
-      if (attacker.hp <= 0) {
-        attacker.alive = false;
-        battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od refleksije!` });
-      }
+      if (attacker.hp <= 0) { attacker.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od refleksije!` }); }
     }
   }
 
-  // ── SHIELD SPECIAL: EXPLOSION_RETALIATE — area kontra-eksplozija ──
+  // ── SHIELD EXPLOSION_RETALIATE ──
   if (tShield?.type === 'explosion_retaliate' && target.shield > 0) {
     if (Math.random() * 100 < tShield.chance) {
-      const counterTargets = (target.side === 'player' ? battle.enemy : battle.player)
-        .filter(u => u.alive).slice(0, 2);
+      const counterTargets = (target.side === 'player' ? battle.enemy : battle.player).filter(u => u.alive).slice(0, 2);
       const counterDmg = Math.floor(dmg * 0.4);
       counterTargets.forEach(ct => {
         ct.hp = Math.max(0, ct.hp - counterDmg);
@@ -824,7 +963,7 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── SHIELD SPECIAL: STUN — šansa da stunuje napadača ──
+  // ── SHIELD STUN ──
   if (tShield?.type === 'stun' && target.shield > 0) {
     if (Math.random() * 100 < tShield.chance) {
       attacker.effects.push({ type: 'stun', duration: 1 });
@@ -832,21 +971,17 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── SHIELD SPECIAL: BLOCK_REFLECT — blok + odbijanje ──
-  // (Blok je već provjeren na početku funkcije; ovdje samo reflect dio)
+  // ── SHIELD BLOCK_REFLECT ──
   if (tShield?.type === 'block_reflect' && shieldDmg > 0) {
     if (Math.random() * 100 < (tShield.reflect || 0)) {
       const reflectDmg = Math.floor(shieldDmg * 0.3);
       attacker.hp = Math.max(0, attacker.hp - reflectDmg);
       battle.log.push({ round, type: 'effect', msg: `🌐 ${target.name} block_reflect: ${reflectDmg} nazad na ${attacker.name}!` });
-      if (attacker.hp <= 0) {
-        attacker.alive = false;
-        battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od block_reflect!` });
-      }
+      if (attacker.hp <= 0) { attacker.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od block_reflect!` }); }
     }
   }
 
-  // ── SHIELD SPECIAL: ABSORB — upija % štete u regen ──
+  // ── SHIELD ABSORB ──
   if (tShield?.type === 'absorb' && hpDmg > 0) {
     const absorbed = Math.floor(hpDmg * (tShield.amount / 100));
     if (absorbed > 0) {
@@ -855,7 +990,7 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── SHIELD SPECIAL: INSTANT_RECOVERY — šansa za trenutni oporavak ──
+  // ── SHIELD INSTANT_RECOVERY ──
   if (tShield?.type === 'instant_recovery' && target.shield < target.maxShield) {
     if (Math.random() * 100 < tShield.chance) {
       target.shield = target.maxShield;
@@ -863,7 +998,7 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── SPECIAL: Iron Fortress — reflect štete nazad ──
+  // ── IRON FORTRESS REFLECT ──
   if (target.specialSpecial?.type === 'fortress' && hpDmg > 0) {
     const reflPct = target.specialSpecial.reflect || 0;
     if (reflPct > 0) {
@@ -874,7 +1009,7 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── SPECIAL: Drone Swarm — šansa za DoT efekat ──
+  // ── DRONE SWARM ──
   if (target.specialSpecial?.type === 'dot_swarm' && attacker.side !== target.side) {
     const sw = target.specialSpecial;
     if (Math.random() * 100 < (sw.chance || 0)) {
@@ -883,7 +1018,7 @@ function performAttack(attacker, targets, battle, round) {
     }
   }
 
-  // ── Execute efekti — Dreadnought / Shadow Protocol ──
+  // ── EXECUTE ──
   const execThresh = Math.max(target._executeThreshold || 0,
     attacker.specialSpecial?.type === 'dreadnought' ? (attacker.specialSpecial.execute || 0) : 0,
     attacker.reconSpecial?.type   === 'shadow'      ? (attacker.reconSpecial.execute   || 0) : 0);
@@ -892,50 +1027,45 @@ function performAttack(attacker, targets, battle, round) {
     battle.log.push({ round, type: 'effect', msg: `💀 EXECUTE! ${target.name} je ispod ${execThresh}% HP — momentalno uništen!` });
   }
 
-  // Specijalni efekti oružja
+  // ── WEAPON SPECIAL EFFECTS ──
   applyWeaponEffect(attacker, target, battle, round);
 
-  // ── COMMANDER PASSIVE: reflect_dmg ──
+  // ── COMMANDER REFLECT ──
   if (target.side === 'player' && target._reflectDmg > 0 && hpDmg > 0 && attacker.alive) {
     const reflectDmg = Math.floor(hpDmg * target._reflectDmg / 100);
     if (reflectDmg > 0) {
       attacker.hp = Math.max(0, attacker.hp - reflectDmg);
       battle.log.push({ round, type: 'effect', msg: `🔄 ${target.name} reflektovao ${reflectDmg} štete nazad!` });
-      if (attacker.hp <= 0) {
-        attacker.alive = false;
-        battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od refleksije!` });
-      }
+      if (attacker.hp <= 0) { attacker.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od refleksije!` }); }
     }
   }
 
-  // Provjeri da li je meta uništena
+  // ── SCATTER ──
+  _applyScatter(wi, wpn, attacker, target, targets, battle, round, effectiveDmg);
+
+  // ── PROVJERA DA LI JE META UNIŠTENA ──
   if (target.hp <= 0) {
-    // ── COMMANDER PASSIVE: revive_chance — šansa da oživi ──
     if (target.side === 'player' && !target._revivedOnce && (target._reviveChance || 0) > 0) {
       if (Math.random() * 100 < target._reviveChance) {
-        target.hp    = Math.floor(target.maxHp * 0.25);
+        target.hp = Math.floor(target.maxHp * 0.25);
         target._revivedOnce = true;
         battle.log.push({ round, type: 'effect', msg: `☠️ REVIVE! ${target.name} oživio sa 25% HP! (${target._reviveChance}%)` });
-        return; // ne uništavaj
+        return;
       }
     }
-
     target.alive = false;
     target.hp    = 0;
     battle.log.push({ round, type: 'destroy', msg: `💀 ${target.name} UNIŠTEN!` });
-
-    // ── COMMANDER PASSIVE: kill_atk_stack — na neprijateljevom killu, ostatak +X% ──
     if (target.side === 'enemy' && attacker.side === 'player') {
       const stackBonus = attacker._killAtkStack || 0;
       if (stackBonus > 0) {
         const side = battle.player.filter(u => u.alive);
         side.forEach(u => {
           const boost = Math.floor(u.baseDps * stackBonus / 100);
-          u.dps = Math.min(u.dps + boost, u.baseDps * 3); // max 3× base
+          u.dps = Math.min(u.dps + boost, u.baseDps * 3);
         });
         battle.log.push({ round, type: 'effect', msg: `⚔️ Kill Stack: flota +${stackBonus}% napad!` });
       }
-      // kill_hp_regen — heal na killu
       const killRegen = attacker._killHpRegen || 0;
       if (killRegen > 0) {
         const side = battle.player.filter(u => u.alive);
@@ -945,16 +1075,77 @@ function performAttack(attacker, targets, battle, round) {
         });
       }
     }
-
-    // ── TRACKING: neprijateljski brodovi uništeni ──
     if (target.side === 'enemy') {
       window._totalShipsDestroyed = (window._totalShipsDestroyed || 0) + (target.count || 1);
     }
   }
 }
 
+// ── WEAPON RANGE POMOĆNE FUNKCIJE ──
+function _getWeaponSteering(subtype, variant) {
+  const base = { Ballistic: 6, Directional: 5, Missile: 4, FighterBay: 7 }[subtype] || 5;
+  const tier = { 'I': 0, 'II': 1, 'III': 2 }[variant] || 0;
+  return base + tier * 0.5;
+}
+
+function _getSlotWeaponRanges(slot) {
+  const ranges = [];
+  for (let i = 1; i <= 4; i++) {
+    const wid = slot[`weapon_${i}`];
+    if (!wid) continue;
+    const wpn = typeof getWeaponById === 'function' ? getWeaponById(wid) : null;
+    if (wpn && wpn.range) {
+      const dmgRange = Math.floor((wpn.dps || 0) * 0.2);
+      ranges.push({
+        slotIdx: i,
+        id: wpn.id,
+        min: wpn.range.min,
+        max: wpn.range.max,
+        dmgMin: Math.max(1, (wpn.dps || 0) - dmgRange),
+        dmgMax: (wpn.dps || 0) + dmgRange,
+        cooldown: wpn.cooldown || 0,
+        dmgType: wpn.dmgType || 'Kinetic',
+        special: wpn.special || null,
+        steering: _getWeaponSteering(wpn.subtype, wpn.variant),
+        intercept: wpn.intercept || 0,
+      });
+    }
+  }
+  return ranges;
+}
+
+function _getClassWeaponRange(shipClass) {
+  const map = {
+    scout:     [{ slotIdx: 1, id: `${shipClass}_weapon`, min: 1, max: 2, dmgMin: 60, dmgMax: 100, cooldown: 0, dmgType: 'Kinetic', special: null, steering: 6, intercept: 0 }],
+    fighter:   [{ slotIdx: 1, id: `${shipClass}_weapon`, min: 1, max: 2, dmgMin: 60, dmgMax: 100, cooldown: 0, dmgType: 'Kinetic', special: null, steering: 6, intercept: 0 }],
+    cruiser:   [{ slotIdx: 1, id: `${shipClass}_weapon`, min: 2, max: 5, dmgMin: 40, dmgMax: 80, cooldown: 1, dmgType: 'Kinetic', special: null, steering: 5, intercept: 0 }],
+    battleship:[{ slotIdx: 1, id: `${shipClass}_weapon`, min: 5, max: 8, dmgMin: 30, dmgMax: 60, cooldown: 2, dmgType: 'Kinetic', special: null, steering: 4, intercept: 0 }],
+    carrier:   [{ slotIdx: 1, id: `${shipClass}_weapon`, min: 6, max: 10, dmgMin: 100, dmgMax: 180, cooldown: 3, dmgType: 'Kinetic', special: null, steering: 7, intercept: 0 }],
+    special:   [{ slotIdx: 1, id: `${shipClass}_weapon`, min: 5, max: 8, dmgMin: 30, dmgMax: 60, cooldown: 2, dmgType: 'Kinetic', special: null, steering: 4, intercept: 0 }],
+  };
+  return map[shipClass] || [{ slotIdx: 1, id: `default_weapon`, min: 1, max: 2, dmgMin: 60, dmgMax: 100, cooldown: 0, dmgType: 'Kinetic', special: null, steering: 6, intercept: 0 }];
+}
+
+function _getInRangeWeapons(weaponRanges, distance) {
+  return (weaponRanges || []).filter(w => distance >= w.min && distance <= w.max);
+}
+
+function _getWeaponsByIntercept(slot) {
+  const interceptors = [];
+  if (!slot) return interceptors;
+  for (const key of ['weapon_1','weapon_2','weapon_3','weapon_4']) {
+    const wid = slot[key];
+    if (!wid) continue;
+    const wpn = typeof getWeaponById === 'function' ? getWeaponById(wid) : null;
+    if (!wpn) continue;
+    if (wpn.intercept) interceptors.push({ chance: wpn.intercept, id: wpn.id });
+  }
+  return interceptors;
+}
+
 // ── TIP ŠTETE NAPADAČA ──
 function getAttackerDmgType(attacker) {
+  if (attacker._activeDmgType) return attacker._activeDmgType;
   if (!attacker.slot) return 'Kinetic';
   const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
   for (const w of weapons) {

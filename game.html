@@ -9,15 +9,15 @@
 <script>
 (function() {
   const _sb = supabase.createClient(
-    'https://kjgfouzyqcnlwbsyipxp.supabase.co',
-    'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5'
+    'https://exmbmwukqssvgmhysamo.supabase.co',
+    'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'
   );
   window._supa = _sb;
-  window._supaAnonKey = 'sb_publishable_9ylfo4iK2sV0p8lLaBqeGw_uohwNJd5';
+  window._supaAnonKey = 'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8';
 
   // Provjeri maintenance mode i tajmer
   document.documentElement.style.visibility = 'hidden';
-  _sb.from('hive_profiles').select('is_premium, boosters').eq('hive_user', '__system__').single().then(({ data, error }) => {
+  _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').single().then(({ data, error }) => {
     if (!error && data && data.is_premium === true) {
       window.location.replace('maintenance.html');
     } else {
@@ -61,7 +61,7 @@
 
   // Poll svakih 30s da provjeri da li je tajmer postavljen
   _maintPollInterval = setInterval(function() {
-    _sb.from('hive_profiles').select('is_premium, boosters').eq('hive_user', '__system__').single().then(function(res) {
+    _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').single().then(function(res) {
       var d = res.data;
       if (!d) return;
       if (d.is_premium) { window.location.replace('maintenance.html'); return; }
@@ -88,7 +88,7 @@
         await _sb.auth.signOut({ scope: 'local' });
 
         console.log('[hive-auth] Calling Edge Function for:', hiveUser);
-        const resp = await fetch('https://kjgfouzyqcnlwbsyipxp.supabase.co/functions/v1/hive-auth', {
+        const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: hiveUser })
@@ -111,13 +111,13 @@
 
       // Kreiraj ili dohvati HIVE profil — sad je auth gotov, nema 401
       _sb.from('hive_profiles').upsert({
-        hive_user:  hiveUser,
+        id:  hiveUser,
         last_seen:  new Date().toISOString()
-      }, { onConflict: 'hive_user' }).then(async () => {
-      // Dohvati profil — premium status, ključevi
+      }, { onConflict: 'id' }).then(async () => {
+      // Dohvati profil — premium status, ključevi, boosters
       const { data } = await _sb.from('hive_profiles')
-        .select('is_premium, keys, boosters')
-        .eq('hive_user', hiveUser)
+        .select('is_premium, boosters')
+        .eq('id', hiveUser)
         .single();
       window._hiveProfile   = data || {};
       window._playerPremium = (data && data.is_premium) || false;
@@ -132,21 +132,26 @@
           return;
         }
 
-        // Dohvati sve iz hive_profiles direktno (tokeni + boosters)
+        // Dohvati tokene iz player_resources + boosters iz hive_profiles
         try {
-          const { data: hp } = await _sb.from('hive_profiles')
-            .select('bcm, bocrypto, spcard, keys_cmd, keys_inst, boosters')
-            .eq('hive_user', hiveUser).single();
+          const [resPR, resHP] = await Promise.all([
+            _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),
+            _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).single()
+          ]);
+          const hpPR = resPR.data;
+          const hp   = resHP.data;
+
+          if (hpPR) {
+            // Source of truth za tokene (iz player_resources)
+            R.bcm          = hpPR.bcm        || 0;
+            R.bocrypto     = hpPR.bocrypto    || 0;
+            R.spCard       = hpPR.spcard      || 0;
+            R.keys         = Math.floor(hpPR.keys_cmd) || 0;
+            R.instanceKeys = Math.floor(hpPR.keys_inst) || 0;
+          }
 
           if (hp) {
-            // Source of truth za tokene
-            R.bcm          = hp.bcm        || 0;
-            R.bocrypto     = hp.bocrypto    || 0;
-            R.spCard       = hp.spcard      || 0;
-            R.keys         = Math.floor(hp.keys_cmd) || 0;
-            R.instanceKeys = Math.floor(hp.keys_inst) || 0;
-
-            // Primijeni pending boosters od admina
+            // Primijeni pending boosters od admina (iz hive_profiles)
             const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};
             var msgs = [];
             if(pending.metal   > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal   + ' metal'); }
@@ -158,14 +163,17 @@
             if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000);     msgs.push('+' + pending.bpw      + ' BPW'); }
 
             if(msgs.length > 0) {
-              await _sb.from('hive_profiles').update({
-                boosters:  {},
-                bcm:       R.bcm,
-                bocrypto:  R.bocrypto,
-                spcard:    R.spCard,
-                keys_cmd:  R.keys,
-                keys_inst: R.instanceKeys,
-              }).eq('hive_user', hiveUser);
+              await Promise.all([
+                _sb.from('player_resources').upsert({
+                  player_id: hiveUser,
+                  bcm:       R.bcm,
+                  bocrypto:  R.bocrypto,
+                  spcard:    R.spCard,
+                  keys_cmd:  R.keys,
+                  keys_inst: R.instanceKeys,
+                }),
+                _sb.from('hive_profiles').update({ boosters: {} }).eq('id', hiveUser),
+              ]);
               if(typeof updateResUI === 'function') updateResUI();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
             }
@@ -1014,7 +1022,7 @@ async function submitWithdraw(symbol) {
     R.spCard = (R.spCard || 0) - amtRaw;
   }
 
-  const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? 'hive_' + window._hiveUser : window._supaSession?.user?.id);
+  const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? window._hiveUser : window._supaSession?.user?.id);
   const username = window._hiveUser || window._supaSession?.user?.email?.split('@')[0] || 'unknown';
 
   const { error } = await window._supa.from('withdrawals').insert({

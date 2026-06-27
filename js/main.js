@@ -8,6 +8,7 @@
 async function init() {
   // Cloud load ako je email igrač sa Supabase sesijom, inače localStorage
   const loaded = (window._supaSession || window._hiveUser) ? await loadGameCloud() : loadGame();
+  window._gameLoaded = true;
 
   // Inicijalizacija energije na max ako je novi igrač
   if (!loaded) {
