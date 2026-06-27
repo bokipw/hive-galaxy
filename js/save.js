@@ -16,6 +16,10 @@ function _getSaveId() {
 async function _cloudSave(saveData) {
   if(!window._supa) return;
 
+  // Ne dozvoli snimanje praznog/pocetnog stanja
+  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number' || saveData.R.metal <= 0) return;
+  if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
+
   // Ako je HIVE igrac bez auth sesije, sacekaj da se auth zavrsi
   var _authDone = false;
   if (window._hiveUser && !window._supaSession) {
@@ -96,6 +100,9 @@ async function _cloudSave(saveData) {
 
 function _applyGameState(s) {
   if (!s) return false;
+  if (!s.R || typeof s.R.metal !== 'number') return false;
+  if (!s.commander || !s.commander.level) return false;
+  if (!s.buildings) return false;
   try {
     if (s.R) {
       const { bcm, bocrypto, spCard, keys, instanceKeys, ...rest } = s.R;

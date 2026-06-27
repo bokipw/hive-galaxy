@@ -126,6 +126,12 @@
       const applyKeys = async () => {
         if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
 
+        // Sačekaj da se igra učita pre primene boostera
+        if(typeof commander === 'undefined' || !commander.level || typeof ownedBlueprints === 'undefined') {
+          setTimeout(applyKeys, 200);
+          return;
+        }
+
         // Dohvati sve iz hive_profiles direktno (tokeni + boosters)
         try {
           const { data: hp } = await _sb.from('hive_profiles')
@@ -162,7 +168,6 @@
               }).eq('hive_user', hiveUser);
               if(typeof updateResUI === 'function') updateResUI();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
-              setTimeout(() => { if(typeof saveGame === 'function') saveGame(); }, 3000);
             }
           }
         } catch(e) { console.error('applyKeys error:', e); }
