@@ -17,7 +17,7 @@
 
   // Provjeri maintenance mode i tajmer
   document.documentElement.style.visibility = 'hidden';
-  _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').single().then(({ data, error }) => {
+   _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(({ data, error }) => {
     if (!error && data && data.is_premium === true) {
       window.location.replace('maintenance.html');
     } else {
@@ -61,7 +61,7 @@
 
   // Poll svakih 30s da provjeri da li je tajmer postavljen
   _maintPollInterval = setInterval(function() {
-    _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').single().then(function(res) {
+    _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(function(res) {
       var d = res.data;
       if (!d) return;
       if (d.is_premium) { window.location.replace('maintenance.html'); return; }
@@ -109,16 +109,11 @@
         }
       } catch(e) { console.error('[hive-auth] Error:', e); }
 
-      // Kreiraj ili dohvati HIVE profil — sad je auth gotov, nema 401
-      _sb.from('hive_profiles').upsert({
-        id:  hiveUser,
-        last_seen:  new Date().toISOString()
-      }, { onConflict: 'id' }).then(async () => {
       // Dohvati profil — premium status, ključevi, boosters
       const { data } = await _sb.from('hive_profiles')
         .select('is_premium, boosters')
         .eq('id', hiveUser)
-        .single();
+        .maybeSingle();
       window._hiveProfile   = data || {};
       window._playerPremium = (data && data.is_premium) || false;
 
@@ -136,7 +131,7 @@
         try {
           const [resPR, resHP] = await Promise.all([
             _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),
-            _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).single()
+            _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).maybeSingle()
           ]);
           const hpPR = resPR.data;
           const hp   = resHP.data;
@@ -163,17 +158,19 @@
             if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000);     msgs.push('+' + pending.bpw      + ' BPW'); }
 
             if(msgs.length > 0) {
-              await Promise.all([
-                _sb.from('player_resources').upsert({
+              // Za HIVE igrače — sačuvaj preko edge funkcije (service_role)
+              await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  action: 'save',
                   player_id: hiveUser,
-                  bcm:       R.bcm,
-                  bocrypto:  R.bocrypto,
-                  spcard:    R.spCard,
-                  keys_cmd:  R.keys,
-                  keys_inst: R.instanceKeys,
-                }),
-                _sb.from('hive_profiles').update({ boosters: {} }).eq('id', hiveUser),
-              ]);
+                  data: {
+                    R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys },
+                    _clear_boosters: true
+                  }
+                })
+              }).catch(() => {});
               if(typeof updateResUI === 'function') updateResUI();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
             }
@@ -213,7 +210,7 @@
         window._loginType = 'email';
         const email = data.session.user.email?.toLowerCase();
         if (email) {
-          const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).single();
+          const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();
           window._playerPremium = !!(pu && pu.is_premium);
         }
       } else { window.location.href = 'index.html'; }

@@ -53,6 +53,9 @@ Deno.serve(async (req: Request) => {
         u('player_defenses', { player_id, defenses: data.defenses }),
       ]);
 
+      if (data._clear_boosters) {
+        await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id);
+      }
       if (data._leaderboard) {
         await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() });
       }

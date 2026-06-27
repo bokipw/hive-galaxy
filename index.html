@@ -535,7 +535,7 @@ const _supa = supabase.createClient(
 
 // Provjeri maintenance mode
 (async function() {
-  const { data, error } = await _supa.from('hive_profiles').select('is_premium').eq('id', '__system__').single();
+  const { data, error } = await _supa.from('hive_profiles').select('is_premium').eq('id', '__system__').maybeSingle();
   if (!error && data && data.is_premium === true) {
     window.location.replace('maintenance.html');
   }
