@@ -692,8 +692,9 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
   // 2. INTERCEPT CHECK
   if (_checkIntercept(attacker, wpn, target, battle, round)) return;
 
-  // 3. Random damage unutar dmgMin-dmgMax
-  let dmg = wpn.dmgMin + Math.floor(Math.random() * (wpn.dmgMax - wpn.dmgMin + 1));
+  // 3. Random damage unutar dmgMin-dmgMax, pomnožen s brojem brodova u slotu
+  const _count = attacker.count || 1;
+  let dmg = (wpn.dmgMin + Math.floor(Math.random() * (wpn.dmgMax - wpn.dmgMin + 1))) * _count;
 
   // ── COMMANDER PASSIVE: first_round_atk bonus ──
   if (round === 1 && attacker.side === 'player' && attacker._firstRoundAtkBonus > 0) {
@@ -900,6 +901,7 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
   }
 
   target.hp = Math.max(0, target.hp - hpDmg);
+  if (target.hp <= 0) { target.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${target.name} UNIŠTEN!` }); }
 
   // ── EOS SHIELD: 30% šansa da apisorbuje duplo ──
   // (handled by shield special elsewhere, this is a note)
