@@ -22,6 +22,7 @@ Deno.serve(async (req: Request) => {
       };
 
       const R = data.R || {};
+      await supa.from('players').upsert({ id: player_id, player_type: 'hive', username: player_id }, { onConflict: 'id' });
       await Promise.all([
         u('player_resources', { player_id, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: data.bcm, bocrypto: data.bocrypto, spcard: data.spCard, keys_cmd: data.keys_cmd, keys_inst: data.keys_inst, storage_buffer: data.storageBuffer, total_metal_mined: data.totalMetalMined, total_depot_pickups: data.totalDepotPickups }),
         u('player_buildings', { player_id, buildings: data.buildings }),
