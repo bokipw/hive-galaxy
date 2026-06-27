@@ -720,6 +720,7 @@ const STORYLINE_MISSIONS = [
 
 // ── GENERIŠI DNEVNE MISIJE ──
 function generateDailyMissions() {
+  if (!window.missionState || !window.missionState.daily) window.missionState = { daily: { date: '', missions: [], claimed: [], bonusClaimed: false }, weekly: { week: null, missions: [], claimed: [] }, storyline: { completed: [], claimed: [] } };
   const today = getTodayStr();
   if (window.missionState.daily.date === today) return;
 
