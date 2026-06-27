@@ -45,10 +45,11 @@ let _galaxyPlayerBases = [];
 
 async function loadGalaxyPlayerBases() {
   if (!window._supa) return Promise.resolve();
-  const myId = typeof _getSaveId === 'function' ? _getSaveId() : null;
+  const myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
+  if (!myId) return Promise.resolve();
   const { data } = await window._supa.from('pvp_snapshots')
     .select('id,username,rating,power,fleet,resources')
-    .neq('id', myId || '')
+    .neq('id', myId)
     .order('rating', { ascending: false })
     .limit(25);
   _galaxyPlayerBases = (data || []).filter(p => p.fleet && p.fleet.length > 0);

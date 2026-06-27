@@ -266,8 +266,9 @@ async function refreshOpponents() {
   var el = document.getElementById('opponentList');
   if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.searching')+'</div>';
   if (!window._supa) { if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.cannotLoad')+'</div>'; return; }
-  var myId = typeof _getSaveId === 'function' ? _getSaveId() : null;
-  var res = await window._supa.from('pvp_snapshots').select('*').neq('id',myId||'').order('rating',{ascending:false}).limit(20);
+  var myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
+  if (!myId) { window._currentOpponents = []; if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.noOpponents')+'</div>'; return; }
+  var res = await window._supa.from('pvp_snapshots').select('*').neq('id',myId).order('rating',{ascending:false}).limit(20);
   var data = res.data, error = res.error;
   if (error || !data || data.length===0) {
     window._currentOpponents = [];

@@ -60,6 +60,9 @@ Deno.serve(async (req: Request) => {
       if (data._leaderboard) {
         await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() });
       }
+      if (data._pvp_snapshot) {
+        await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot, id: player_id }).catch(() => {});
+      }
 
       return new Response(JSON.stringify({ success: true, errors }), {
         headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
