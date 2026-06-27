@@ -28,6 +28,7 @@ Deno.serve(async (req: Request) => {
       user = data.user;
     }
 
+    await supa.from('players').upsert({ id: username }, { onConflict: 'id' });
     await supa.from('hive_profiles').upsert({
       id: username,
       last_seen: new Date().toISOString()

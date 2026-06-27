@@ -208,7 +208,10 @@
       if(data.session) {
         window._supaSession = data.session;
         window._loginType = 'email';
+        const uid = data.session.user.id;
         const email = data.session.user.email?.toLowerCase();
+        // Osiguraj da players red postoji (FK za sve player_* tabele)
+        await _sb.from('players').upsert({ id: uid }).catch(() => {});
         if (email) {
           const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();
           window._playerPremium = !!(pu && pu.is_premium);
