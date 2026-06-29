@@ -1684,7 +1684,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r2', name: 'Corsair Marauder', type: 'boss_rare', number: 2,
-    difficulty: 5, min_power: 35000, icon: '??',
+    difficulty: 6, min_power: 35000, icon: '??',
     xp: 5000,
     boss_ability: 'spawn_reinforcements',
     enemies: ['Corsair Escort', 'Corsair Marauder Fleet'],
@@ -1699,7 +1699,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r3', name: 'Nebula Stalker', type: 'boss_rare', number: 3,
-    difficulty: 6, min_power: 45000, icon: '??',
+    difficulty: 7, min_power: 45000, icon: '??',
     xp: 6000,
     boss_ability: 'stealth_first_round',
     enemies: ['Nebula Shadow Drones', 'Nebula Stalker Pack'],
@@ -1714,7 +1714,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r4', name: 'Solar Predator', type: 'boss_rare', number: 4,
-    difficulty: 6, min_power: 50000, icon: '??',
+    difficulty: 8, min_power: 50000, icon: '??',
     xp: 6000,
     boss_ability: 'aoe_damage',
     enemies: ['Solar Drone Swarm', 'Solar Predator Pack'],
@@ -1729,7 +1729,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r5', name: 'Frost Reaver', type: 'boss_rare', number: 5,
-    difficulty: 7, min_power: 70000, icon: '??',
+    difficulty: 9, min_power: 70000, icon: '??',
     xp: 7000,
     boss_ability: 'freeze_slot',
     enemies: ['Frost Drone Pack', 'Frost Reaver Fleet'],
@@ -1744,7 +1744,7 @@ const INSTANCES_NORMAL = [
 
   {
     id: 'boss_r6', name: 'Plasma Wraith', type: 'boss_rare', number: 6,
-    difficulty: 7, min_power: 80000, icon: '??',
+    difficulty: 10, min_power: 80000, icon: '??',
     xp: 7000,
     boss_ability: 'death_explosion',
     enemies: ['Plasma Ghost Pack', 'Plasma Wraith Fleet'],
