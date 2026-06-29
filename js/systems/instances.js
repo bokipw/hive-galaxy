@@ -585,13 +585,6 @@ function openInstanceModal(instId) {
 
           let html = `<div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px;letter-spacing:1px">ITEM DROPOVI</div>`;
 
-          // Easy rare boss — 1-10 instance keys
-          if (inst.type === 'boss_rare' && (_instDifficultyMode || 'easy') === 'easy') {
-            html += `<div style="background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.25);border-radius:6px;padding:8px 10px;margin-bottom:8px">
-              <div style="font-size:0.62rem;color:#ffaa00">${t('boss_reward.instance_keys')}</div>
-            </div>`;
-          }
-
           const _resolveItemName = id => {
             if (id.startsWith('art_')) {
               const art = typeof ARTIFACTS_DATA !== 'undefined' ? ARTIFACTS_DATA.find(a => a.id === id) : null;
@@ -645,6 +638,9 @@ function openInstanceModal(instId) {
             });
           }
 
+          if (inst.type === 'boss_rare' && (_instDifficultyMode || 'easy') === 'easy') {
+            html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">${t('boss_reward.instance_keys')}</div>`;
+          }
           return html;
         })()}
       </div>

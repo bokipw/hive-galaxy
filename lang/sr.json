@@ -67,7 +67,7 @@
     "loaded": "Protivnici učitani!",
     "noOpponents": "Nema dostupnih protivnika.",
     "cannotLoad": "Nije moguće učitati protivnike.",
-    "shieldActive": "Shield je aktivan - ne možeš napadati!",
+    "shieldActive": "Štit je aktivan - ne možeš napadati!",
     "noFleet": "Nemaš brodova u floti!",
     "enemyNoFleet": "Protivnik nema raspoređenu flotu!",
     "enemyNoValidFleet": "Protivnik nema validnu flotu!",
@@ -79,7 +79,7 @@
     "lootGained": "Plen: {metal} Metal, {crystal} Kristal, {he3} He-3, {boc} BoCrypto",
     "ratingGain": "+{n} rating",
     "ratingLoss": "{n} rating",
-    "shieldBought": "Shield aktivan {hours}h!",
+    "shieldBought": "Štit aktivan {hours}h!",
     "notEnoughBocShield": "Nedovoljno BoCrypto! Treba {cost} BOCRYPTO",
     "energyCost": "Cena: {energy} energije + {boc} BoCrypto",
     "rank": "Rang",
@@ -89,10 +89,10 @@
     "wins": "Pobede",
     "losses": "Porazi",
     "yourRating": "Tvoj Rating",
-    "shieldStatus": "Shield Status",
+    "shieldStatus": "Štit Status",
     "shieldInactive": "Neaktivan",
     "shieldActiveUntil": "Aktivan do {time}",
-    "buyShield": "Kupi Shield",
+    "buyShield": "Kupi Štit",
     "findOpponents": "Nađi protivnike"
   },
   "galaxy": {
@@ -167,7 +167,7 @@
     "title": "🪐 KOLONIJE",
     "loading": "Učitavanje kolonija...",
     "noColonies": "Nemaš kolonija. Osvoji planete u galaksiji!",
-    "phalanxScan": "Falanks sken",
+    "phalanxScan": "Falanga skeniranje",
     "scanComplete": "Sken završen! {count} sistema skenirano.",
     "scanCost": "Cena: {cost} He-3",
     "notEnoughHe3": "Nedovoljno He-3 za sken! Treba {cost}",
@@ -4711,8 +4711,8 @@
       "bocrypto": "BoCrypto",
       "bpw": "BPW"
     },
-  "boss_reward": {
-    "instance_keys": "🗝️ 1-10 instanci ključeva"
-  }
-  }
+    "boss_reward": {
+      "instance_keys": "1-10 instancnih kljuceva",
+      "victory": "+{count} instancnih kljuceva"
+    }
 }

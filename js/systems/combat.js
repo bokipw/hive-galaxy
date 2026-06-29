@@ -1936,7 +1936,7 @@ function renderBattleResult(battle, rewards) {
             }).join('')}
           </div>` : ''}
         <div style="font-size:0.65rem;color:#ffcc44">⭐ +${rewards.xp} XP</div>
-        ${rewards.instanceKeys ? `<div style="font-size:0.65rem;color:#ffaa00;margin-top:4px">🗝️ +${rewards.instanceKeys} instance ključeva</div>` : ''}
+        ${rewards.instanceKeys ? `<div style="font-size:0.65rem;color:#ffaa00;margin-top:4px">${t('boss_reward.victory',{count:rewards.instanceKeys})}</div>` : ''}
       </div>` : ''}
 
     <!-- Gubitci -->

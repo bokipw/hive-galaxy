@@ -1,4 +1,4 @@
-{
+﻿{
     "nav":  {
                 "base":  "基地",
                 "fleet":  "艦隊",
@@ -4710,9 +4710,11 @@
                                  "bcm":  "BCM",
                                  "bocrypto":  "BoCrypto",
                                  "bpw":  "BPW"
-                             },
-    "boss_reward": {
-        "instance_keys": "🗝️ 1〜10のインスタンスキー"
-    }
+                              }
               }
+,
+    "boss_reward": {
+      "instance_keys": "1-10 インスタンスキー",
+      "victory": "+{count} インスタンスキー"
+    }
 }

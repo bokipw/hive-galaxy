@@ -1,4 +1,4 @@
-{
+﻿{
     "nav":  {
                 "base":  "Basis",
                 "fleet":  "Flotte",
@@ -4682,9 +4682,11 @@
                                  "bcm":  "BCM",
                                  "bocrypto":  "BoCrypto",
                                  "bpw":  "BPW"
-                             },
+                              }
+               }
+,
     "boss_reward": {
-        "instance_keys": "🗝️ 1-10 Instanzschlüssel"
+      "instance_keys": "1-10 Instanz-Schlüssel",
+      "victory": "+{count} Instanz-Schlüssel"
     }
-              }
 }
