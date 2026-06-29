@@ -69,13 +69,16 @@ Deno.serve(async (req: Request) => {
       await Promise.all(upserts);
 
       if (data._clear_boosters) {
-        await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id).catch((ex: unknown) => errors.push(`hive_profiles: ${(ex as Error).message}`));
+        try { await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id); }
+        catch (ex: unknown) { errors.push(`hive_profiles: ${(ex as Error).message}`); }
       }
       if (data._leaderboard) {
-        await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() }).catch((ex: unknown) => errors.push(`leaderboard: ${(ex as Error).message}`));
+        try { await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() }); }
+        catch (ex: unknown) { errors.push(`leaderboard: ${(ex as Error).message}`); }
       }
       if (data._pvp_snapshot) {
-        await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot, id: player_id }).catch(() => {});
+        try { await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot, id: player_id }); }
+        catch {}
       }
 
       return new Response(JSON.stringify({ success: true, errors }), {

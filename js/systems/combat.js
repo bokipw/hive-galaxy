@@ -1597,15 +1597,12 @@ function calculateRewards(battle, instanceData, prog) {
     xp:         Math.floor(baseXp * xpMult),
   };
 
-  // Boss instance tipovi koriste novi garantovani drop sistem — skip stari
-  const isBossInst = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'].includes(instance.type);
-
   // Redoslijed modova za minMode provjeru
   const MODE_ORDER = ['easy', 'normal', 'nightmare', 'hell'];
 
   // Svi mogući blueprinti iz instance — filtriraj po allowed rarity i minMode za ovaj mod
   const chanceDrops = instance.drops?.chance || [];
-  const allDrops = isBossInst ? [] : [
+  const allDrops = [
     ...(instance.drops?.guaranteed || []),
     ...chanceDrops
       .filter(c => !c.minMode || MODE_ORDER.indexOf(modeName) >= MODE_ORDER.indexOf(c.minMode))
@@ -1680,155 +1677,6 @@ function calculateRewards(battle, instanceData, prog) {
 
     const remaining = available.filter(id => !rewards.blueprints.includes(id));
     if (remaining.length === 0) rewards.allFound = true;
-  }
-
-  // ── BOSS BONUS DROPOVI ──
-  // R boss = 3 itema, E boss = 6, L boss = 10
-  // Easy = samo fragmenti, Normal+ = puni unlock po raritetu
-  const bossDropCount = {
-    boss_rare:      3,
-    boss_epic:      6,
-    boss_legendary: 10,
-    boss_master:    15,
-    boss:           6,
-  }[instance.type] || 0;
-
-  if (bossDropCount > 0) {
-    // Dozvoljeni rariteti po tipu bossa i modu — prati iste restrikcije kao opšti drop sistem
-    const bossRarityPool = {
-      boss_rare: {
-        easy:      ['C'],
-        normal:    ['C','R'],
-        nightmare: ['C','R'],
-        hell:      ['C','R','R','R'],
-      },
-      boss_epic: {
-        easy:      ['C'],
-        normal:    ['C','R'],
-        nightmare: ['C','R','E'],
-        hell:      ['C','R','E','E'],
-      },
-      boss_legendary: {
-        easy:      ['C'],
-        normal:    ['C','R'],
-        nightmare: ['C','R','E'],
-        hell:      ['C','R','E','L'],
-      },
-      boss_master: {
-        easy:      ['C','R'],
-        normal:    ['C','R','E'],
-        nightmare: ['C','R','E','L'],
-        hell:      ['C','R','E','L','L','L'],
-      },
-      boss: {
-        easy:      ['C'],
-        normal:    ['C','R'],
-        nightmare: ['C','R','E'],
-        hell:      ['C','R','E','L'],
-      },
-    };
-    const allowedBossRarities = (bossRarityPool[instance.type] || {})[modeName] || ['C'];
-
-    // Prikupi sve iteme
-    let allItems = [];
-    if (typeof WEAPONS         !== 'undefined') allItems.push(...WEAPONS.map(x => ({ id: x.id, rarity: x.rarity })));
-    if (typeof SHIELDS         !== 'undefined') allItems.push(...SHIELDS.map(x => ({ id: x.id, rarity: x.rarity })));
-    if (typeof ENGINES         !== 'undefined') allItems.push(...ENGINES.map(x => ({ id: x.id, rarity: x.rarity })));
-    if (typeof RECON_MODULES   !== 'undefined') allItems.push(...RECON_MODULES.map(x => ({ id: x.id, rarity: x.rarity })));
-    if (typeof SPECIAL_MODULES !== 'undefined') allItems.push(...SPECIAL_MODULES.map(x => ({ id: x.id, rarity: x.rarity })));
-
-    console.log('[bossDrop] allowedRarities:', allowedBossRarities, 'mode:', modeName, 'type:', instance.type);
-
-    // Weighted pool — isti weights kao u postojećem sistemu
-    const rarityWeights = { C: 50, R: 30, E: 15, L: 5 };
-
-    // Weighted pool — svaki UNIQUE item jednom, težina određuje vjerovatnost
-    const bossPool = [];
-    const seenIds  = new Set();
-    allItems.forEach(item => {
-      if (!item.id || seenIds.has(item.id)) return;
-      if (ownedBlueprints[item.id]) { console.log('[bossDrop] SKIP owned:', item.id); return; }
-      if (!allowedBossRarities.includes(item.rarity)) { console.log('[bossDrop] SKIP rarity:', item.id, item.rarity); return; }
-      seenIds.add(item.id);
-      const w = rarityWeights[item.rarity] || 0;
-      for (let i = 0; i < w; i++) bossPool.push(item.id);
-    });
-
-    // Dodaj instance-specific dropove u pool
-    if (instance.drops?.chance) {
-      console.log('[bossDrop] drops.chance items:', instance.drops.chance.length);
-      instance.drops.chance.forEach(c => {
-        if (!c.item || seenIds.has(c.item)) return;
-        if (ownedBlueprints[c.item]) { console.log('[bossDrop] SKIP chance owned:', c.item); return; }
-        if (c.item.startsWith('art_') && typeof ARTIFACTS_DATA !== 'undefined' && window.artifactState?.fragments) {
-          const art = ARTIFACTS_DATA.find(a => a.id === c.item);
-          if (art && (window.artifactState.fragments[c.item] || 0) >= art.fragments) { console.log('[bossDrop] SKIP art completed:', c.item); return; }
-        }
-        if (c.minMode && MODE_ORDER.indexOf(modeName) < MODE_ORDER.indexOf(c.minMode)) return;
-        seenIds.add(c.item);
-        const rar = getBlueprintRarity(c.item);
-        if (!allowedBossRarities.includes(rar)) { console.log('[bossDrop] SKIP rarity:', c.item, rar); return; }
-        const w = rarityWeights[rar] || 1;
-        for (let i = 0; i < w; i++) bossPool.push(c.item);
-      });
-    } else {
-      console.log('[bossDrop] NO drops.chance on this instance');
-    }
-
-    console.log('[bossDrop] bossPool size:', bossPool.length, 'unique:', [...new Set(bossPool)]);
-
-    // FALLBACK: ako je pool prazan (npr. svi Common blueprinti vlasnici),
-    // dodaj sve dostupne iteme iz drops.chance direktno
-    if (bossPool.length === 0 && instance.drops?.chance) {
-      console.log('[bossDrop] FALLBACK — pool empty, using drops.chance directly');
-      const fallbackSeen = new Set();
-      instance.drops.chance.forEach(c => {
-        if (!c.item || fallbackSeen.has(c.item)) return;
-        if (ownedBlueprints[c.item]) return;
-        if (c.item.startsWith('art_') && typeof ARTIFACTS_DATA !== 'undefined' && window.artifactState?.fragments) {
-          const art = ARTIFACTS_DATA.find(a => a.id === c.item);
-          if (art && (window.artifactState.fragments[c.item] || 0) >= art.fragments) return;
-        }
-        fallbackSeen.add(c.item);
-        for (let i = 0; i < 10; i++) bossPool.push(c.item);
-      });
-      console.log('[bossDrop] fallback pool size:', bossPool.length, 'unique:', [...new Set(bossPool)]);
-    }
-
-    if (bossPool.length > 0) {
-      // Odaberi bossDropCount UNIQUE itema (bez ponavljanja)
-      const shuffled  = bossPool.slice().sort(() => Math.random() - 0.5);
-      const uniqueIds = [...new Set(shuffled)];
-      const bossDrops = uniqueIds.slice(0, bossDropCount);
-      console.log('[bossDrop] selected:', bossDrops);
-
-      if (!rewards.bossDrops) rewards.bossDrops = [];
-      rewards.bossDrops.push(...bossDrops);
-
-      // Svaki drop — isti sistem kao opšti dropovi:
-      // roll za puni blueprint (MODE_BP_CHANCE), ako ne — fragment (MODE_FRAG_CHANCE), ako ni to — fragment anyway
-      bossDrops.forEach(id => {
-        // Artifakti idu u artifact sistem, ne u blueprint sistem
-        if (id.startsWith('art_')) {
-          if (!rewards.artifactFragments) rewards.artifactFragments = [];
-          if (!rewards.artifactFragments.includes(id)) rewards.artifactFragments.push(id);
-          return;
-        }
-        const item   = allItems.find(x => x.id === id);
-        const rar    = item?.rarity || 'C';
-        const bpRoll = Math.random() * 100;
-
-        if (bpRoll < (bpChance[rar] || 0)) {
-          // Puni blueprint
-          if (!rewards.blueprints.includes(id)) rewards.blueprints.push(id);
-        } else {
-          // Fragment
-          const existing = rewards.fragments.find(f => f.itemId === id);
-          if (existing) existing.count++;
-          else rewards.fragments.push({ itemId: id, count: 1, boss: true });
-        }
-      });
-    }
   }
 
   return rewards;
@@ -2060,54 +1908,19 @@ function renderBattleResult(battle, rewards) {
           <div><div style="font-size:0.62rem;color:#6a90b8">HE3</div>
             <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(rewards.he3)}</div></div>
         </div>
-        ${rewards.bossDrops && rewards.bossDrops.length > 0 ? (() => {
-          const rarColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
-          const rarIcons  = { C:'⚪', R:'🔵', E:'🟣', L:'🌟' };
-          // Grupiši po ID-u (može biti višestruki drop istog itema)
-          const grouped = {};
-          rewards.bossDrops.forEach(id => { grouped[id] = (grouped[id]||0) + 1; });
-          return `
-          <div style="background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.35);
-            border-radius:6px;padding:10px;margin-bottom:8px">
-            <div style="font-size:0.65rem;color:#ffaa00;font-weight:700;margin-bottom:6px">
-              🎰 BOSS DROPS (${rewards.bossDrops.length})
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px">
-              ${Object.entries(grouped).map(([id, cnt]) => {
-                const item = (() => {
-                  if (typeof WEAPONS         !== 'undefined') { const f = WEAPONS.find(x=>x.id===id);         if(f) return f; }
-                  if (typeof SHIELDS         !== 'undefined') { const f = SHIELDS.find(x=>x.id===id);         if(f) return f; }
-                  if (typeof ENGINES         !== 'undefined') { const f = ENGINES.find(x=>x.id===id);         if(f) return f; }
-                  if (typeof RECON_MODULES   !== 'undefined') { const f = RECON_MODULES.find(x=>x.id===id);   if(f) return f; }
-                  if (typeof SPECIAL_MODULES !== 'undefined') { const f = SPECIAL_MODULES.find(x=>x.id===id); if(f) return f; }
-                  return null;
-                })();
-                const art = id.startsWith('art_') && typeof ARTIFACTS_DATA !== 'undefined' ? ARTIFACTS_DATA.find(a => a.id === id) : null;
-                const rarity = art?.rarity || item?.rarity || 'C';
-                const name   = art ? art.name + ' fragment' : (item?.name || id);
-                const col    = rarColors[rarity] || '#aaa';
-                const icon   = rarIcons[rarity]  || '⚪';
-                return `<span style="background:${col}18;border:1px solid ${col}55;
-                  border-radius:4px;padding:3px 8px;font-size:0.62rem;color:${col}">
-                  ${icon} ${name}${cnt > 1 ? ` ×${cnt}` : ''}
-                </span>`;
-              }).join('')}
-            </div>
-          </div>`;
-        })() : ''}
-        ${(rewards.blueprints||[]).filter(id => !(rewards.bossDrops||[]).includes(id)).length > 0 ? `
+        ${(rewards.blueprints||[]).length > 0 ? `
           <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">BLUEPRINTI:</div>
           <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
-            ${rewards.blueprints.filter(id => !(rewards.bossDrops||[]).includes(id)).map(id => `
+            ${rewards.blueprints.map(id => `
               <span style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);
                 border-radius:4px;padding:2px 8px;font-size:0.65rem;color:#00d4ff">
                 📋 ${getBpName(id)}
               </span>`).join('')}
           </div>` : ''}
-        ${(rewards.fragments||[]).filter(f => !f.boss).length > 0 ? `
+        ${(rewards.fragments||[]).length > 0 ? `
           <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">FRAGMENTI:</div>
           <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
-            ${rewards.fragments.filter(f => !f.boss).map(f => {
+            ${rewards.fragments.map(f => {
               const needed  = getBpFragmentCost(getBlueprintRarity(f.itemId));
               const current = (blueprintFragments[f.itemId] || 0);
               return `<span style="background:rgba(170,68,255,0.1);border:1px solid rgba(170,68,255,0.3);
