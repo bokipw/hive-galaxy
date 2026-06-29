@@ -374,7 +374,7 @@ function renderMilestoneBar(key) {
           background:linear-gradient(90deg,#ffcc44aa,#ffcc44);transition:width 0.3s"></div>
       </div>
       <div style="font-size:0.55rem;color:#ffcc4488">${db(m)}</div>
-      <div style="font-size:0.52rem;color:#00d4ff;margin-top:2px">🔑 +1 komandir ključ na Lv.${nextMlvl}</div>`;
+      <div style="font-size:0.52rem;color:#00d4ff;margin-top:2px">🃏 +1 komandir ključ na Lv.${nextMlvl}</div>`;
   }
 
   // Aktivni milestone badge
