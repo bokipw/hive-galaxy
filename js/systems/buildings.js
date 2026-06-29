@@ -68,6 +68,10 @@ function tickBuildQueue() {
 
   if (milestoneHit) {
     const m = milestoneHit.data;
+    // Svaki milestone (25/50/75/100) daje +1 komandir ključ
+    const cmdKeys = 1;
+    R.keys = (R.keys || 0) + cmdKeys;
+    addLog(`🔑 +${cmdKeys} komandir ključ (milestone)`);
     setTimeout(() => {
       const mBld = buildingsData[milestoneHit.key];
       toast(`🎯 MILESTONE! ${dn(mBld)} Lv.${milestoneHit.level} — ${dl(m)}!`, 'ok');
@@ -85,6 +89,9 @@ function tickBuildQueue() {
           <div style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);
             border-radius:8px;padding:12px;font-size:0.82rem;color:white">
             ✨ ${db(m)}
+          </div>
+          <div style="margin-top:12px;font-size:0.7rem;color:#00d4ff">
+            🎁 +${cmdKeys} komandir ključ
           </div>
         </div>`,
         [{ label: '🎯 Odlično!', cls: 'btn-gold', fn: closeModal }]
