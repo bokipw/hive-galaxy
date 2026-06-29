@@ -416,6 +416,11 @@ function renderInstanceCard(inst, playerPower) {
         💎 ${fmt(crystalMin)}-${fmt(crystalMax)}
       </div>
 
+      <!-- 100x commander key reward -->
+      <div style="font-size:0.52rem;color:#00d4ff;margin-bottom:6px">
+        ${t('instance.milestone100.progress', { count: prog.clear_count % 100 })}
+      </div>
+
       <!-- Dugme -->
       <button class="btn ${!locked && hasEnergy ? 'btn-g' : ''}"
         style="width:100%;font-size:0.75rem;border-color:${!locked && hasEnergy ? mode.color : ''}"
