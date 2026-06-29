@@ -1679,6 +1679,11 @@ function calculateRewards(battle, instanceData, prog) {
     if (remaining.length === 0) rewards.allFound = true;
   }
 
+  // Easy rare boss → 1-10 instance keys
+  if (modeName === 'easy' && instance.type === 'boss_rare') {
+    rewards.instanceKeys = 1 + Math.floor(Math.random() * 10);
+  }
+
   return rewards;
 }
 
@@ -1690,6 +1695,7 @@ function applyRewards(rewards) {
   R.crystal += rewards.crystal;
   R.he3     += rewards.he3;
   R.score   += rewards.xp;
+  if (rewards.instanceKeys) R.instanceKeys = (R.instanceKeys || 0) + rewards.instanceKeys;
 
   addExp(rewards.xp);
 
@@ -1930,6 +1936,7 @@ function renderBattleResult(battle, rewards) {
             }).join('')}
           </div>` : ''}
         <div style="font-size:0.65rem;color:#ffcc44">⭐ +${rewards.xp} XP</div>
+        ${rewards.instanceKeys ? `<div style="font-size:0.65rem;color:#ffaa00;margin-top:4px">🗝️ +${rewards.instanceKeys} instance ključeva</div>` : ''}
       </div>` : ''}
 
     <!-- Gubitci -->
