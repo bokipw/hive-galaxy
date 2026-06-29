@@ -17,8 +17,12 @@ Deno.serve(async (req: Request) => {
       if (!data) return err('Nedostaje data', 400);
       const errors: string[] = [];
       const u = async (table: string, payload: Record<string, unknown>) => {
-        const { error } = await supa.from(table).upsert(payload);
-        if (error) errors.push(`${table}: ${error.message}`);
+        try {
+          const { error } = await supa.from(table).upsert(payload);
+          if (error) errors.push(`${table}: ${error.message}`);
+        } catch (ex) {
+          errors.push(`${table} exception: ${(ex as Error).message}`);
+        }
       };
       const uu = (table: string, payload: Record<string, unknown>) => {
         const hasData = Object.entries(payload).some(([k, v]) => k !== 'player_id' && v !== undefined && v !== null);
@@ -27,7 +31,12 @@ Deno.serve(async (req: Request) => {
 
       const R = data.R || {};
       const upserts: Promise<void>[] = [];
-      await supa.from('players').upsert({ id: player_id, player_type: 'hive', username: player_id }, { onConflict: 'id' });
+      try {
+        const { error: pe } = await supa.from('players').upsert({ id: player_id, player_type: 'hive', username: player_id }, { onConflict: 'id' });
+        if (pe) errors.push(`players: ${pe.message}`);
+      } catch(pe) {
+        errors.push(`players exception: ${(pe as Error).message}`);
+      }
       uu('player_resources', { player_id, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: data.bcm, bocrypto: data.bocrypto, spcard: data.spCard, keys_cmd: data.keys_cmd, keys_inst: data.keys_inst, storage_buffer: data.storageBuffer, total_metal_mined: data.totalMetalMined, total_depot_pickups: data.totalDepotPickups });
       uu('player_buildings', { player_id, buildings: data.buildings });
       uu('player_research', { player_id, research: data.research });
@@ -59,10 +68,10 @@ Deno.serve(async (req: Request) => {
       await Promise.all(upserts);
 
       if (data._clear_boosters) {
-        await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id);
+        await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id).catch((ex: unknown) => errors.push(`hive_profiles: ${(ex as Error).message}`));
       }
       if (data._leaderboard) {
-        await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() });
+        await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() }).catch((ex: unknown) => errors.push(`leaderboard: ${(ex as Error).message}`));
       }
       if (data._pvp_snapshot) {
         await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot, id: player_id }).catch(() => {});
@@ -99,7 +108,9 @@ Deno.serve(async (req: Request) => {
 
     return err('Nepoznata akcija', 400);
   } catch (e) {
-    return err('Server error: ' + (e as Error).message, 500);
+    const msg = (e as Error).message + ' | ' + ((e as Error).stack || '');
+    console.error('[game-save] UNCAUGHT:', msg);
+    return err('Server error: ' + msg, 500);
   }
 });
 

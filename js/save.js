@@ -23,7 +23,7 @@ async function _hiveSave(payload) {
       body: JSON.stringify({ action: 'save', player_id: window._hiveUser, data: payload })
     });
     const result = await resp.json();
-    if (!result.success) console.error('[hiveSave] error:', result.errors);
+    if (!result.success) console.error('[hiveSave] error:', result.errors || result.error || '(unknown)');
     return result;
   } catch(e) { console.error('[hiveSave] exception:', e); }
 }
