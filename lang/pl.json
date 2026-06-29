@@ -4689,9 +4689,9 @@
                               },
                    "instance":  {
                                    "milestone100":  {
-                                                       "keyReward":  "🃏 +1 klucz dowódcy (100x {name} [{mode}])",
-                                                        "retro":  "🃏 +{n} klucz(y) dowódcy z 100x instancji",
-                                                        "progress":  "🃏 +1 klucz dowódcy przy 100x ({count}/100)",
+"keyReward":  "🃏 +1 klucz dowódcy (co 100x {name} [{mode}])",
+                                                         "retro":  "🃏 +{n} klucz(y) dowódcy z 100x instancji",
+                                                         "progress":  "🃏 +1 klucz dowódcy co 100 przejść ({count}/100)",
                                                         "earned":  "🃏 Klucz dowódcy zdobyty!"
                                                     }
                                },

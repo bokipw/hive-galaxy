@@ -4689,9 +4689,9 @@
                               },
                    "instance":  {
                                    "milestone100":  {
-                                                       "keyReward":  "🃏 +1 chiave comandante (100x {name} [{mode}])",
-                                                        "retro":  "🃏 +{n} chiave(i) comandante da 100x istanze",
-                                                        "progress":  "🃏 +1 chiave comandante a 100x ({count}/100)",
+"keyReward":  "🃏 +1 chiave comandante (ogni 100x {name} [{mode}])",
+                                                         "retro":  "🃏 +{n} chiave(i) comandante da 100x istanze",
+                                                         "progress":  "🃏 +1 chiave comandante ogni 100 completamenti ({count}/100)",
                                                         "earned":  "🃏 Chiave comandante ottenuta!"
                                                     }
                                },

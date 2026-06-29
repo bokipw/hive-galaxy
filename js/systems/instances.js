@@ -556,8 +556,8 @@ function openInstanceModal(instId) {
           ${({'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]) ? `<div>🎁 Garant drop: <span style="color:#00ff88;font-weight:700">${{'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]} itema</span></div>` : ''}
           <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ Energija: ${energyCost} MWh</div>
-          <div>✅ Clearova: ${prog.clear_count} ${prog.claimed100 ? '🃏' : ''}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${prog.claimed100 ? t('instance.milestone100.earned') : t('instance.milestone100.progress', { count: Math.min(prog.clear_count, 100) })}</div>
+          <div>✅ Clearova: ${prog.clear_count}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${t('instance.milestone100.progress', { count: prog.clear_count % 100 })}</div>
           ${prog.best_rank ? `<div>⚡ 🏆 Best rank: ${prog.best_rank}</div>` : ''}
         </div>
 
@@ -819,11 +819,12 @@ function startBattle(inst, instant = false) {
 
       prog2.completed = true;
       prog2.clear_count++;
-      // 100x completion → +1 commander key
-      if (prog2.clear_count >= 100 && !prog2.claimed100) {
-        prog2.claimed100 = true;
+      // Every 100 completions → +1 commander key
+      const expectedTimes = Math.floor(prog2.clear_count / 100);
+      if (expectedTimes > prog2.timesRewarded) {
+        prog2.timesRewarded = expectedTimes;
         R.keys = (R.keys || 0) + 1;
-        addLog(`🃏 +1 komandir ključ (100x ${dn(inst)} [${mode.label}])`);
+        addLog(`🃏 +1 komandir ključ (${expectedTimes * 100}x ${dn(inst)} [${mode.label}])`);
         setTimeout(() => {
           if (typeof toast === 'function') {
             toast(t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }), 'ok');
@@ -892,26 +893,29 @@ function getInstanceProgress(progKey) {
       best_rank:    null,
       best_time:    null,
       bpCompleted:  false,
-      claimed100:   false,
+      timesRewarded: 0,
     };
   }
   return window._instProgress[progKey];
 }
 
-// ── RETROACTIVE: 100x commander key migration ──
+// ── RETROACTIVE: every 100x commander key migration ──
 function _migrateInstance100Keys() {
   if (!window._instProgress || window._instProgress100Migrated) return;
   let total = 0;
   for (const key in window._instProgress) {
     const p = window._instProgress[key];
-    if (p.clear_count >= 100 && !p.claimed100) {
-      p.claimed100 = true;
-      R.keys = (R.keys || 0) + 1;
-      total++;
+    const expected = Math.floor(p.clear_count / 100);
+    const prev = p.timesRewarded || 0;
+    if (expected > prev) {
+      const reward = expected - prev;
+      p.timesRewarded = expected;
+      R.keys = (R.keys || 0) + reward;
+      total += reward;
     }
   }
   if (total > 0) {
-    addLog(`🃏 +${total} komandir ključ(ev/a) — 100x instance (retroaktivno)`);
+    addLog(`🃏 +${total} komandir ključ(ev/a) — svakih 100 instanci (retroaktivno)`);
     if (typeof toast === 'function') {
       toast(t('instance.milestone100.retro', { n: total }), 'ok');
     }

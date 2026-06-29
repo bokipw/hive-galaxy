@@ -4661,9 +4661,9 @@
                               },
                    "instance":  {
                                    "milestone100":  {
-                                                       "keyReward":  "🃏 +1 Kommandoschlüssel (100x {name} [{mode}])",
-                                                        "retro":  "🃏 +{n} Kommandoschlüssel von 100x Instanzen",
-                                                        "progress":  "🃏 +1 Kommandoschlüssel bei 100x ({count}/100)",
+"keyReward":  "🃏 +1 Kommandoschlüssel (alle 100x {name} [{mode}])",
+                                                         "retro":  "🃏 +{n} Kommandoschlüssel von 100x Instanzen",
+                                                         "progress":  "🃏 +1 Kommandoschlüssel alle 100 Durchläufe ({count}/100)",
                                                         "earned":  "🃏 Kommandoschlüssel verdient!"
                                                     }
                                },

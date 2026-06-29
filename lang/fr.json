@@ -4689,9 +4689,9 @@
                               },
                    "instance":  {
                                    "milestone100":  {
-                                                       "keyReward":  "🃏 +1 clé de commandant (100x {name} [{mode}])",
-                                                        "retro":  "🃏 +{n} clé(s) de commandant des 100x instances",
-                                                        "progress":  "🃏 +1 clé de commandant à 100x ({count}/100)",
+"keyReward":  "🃏 +1 clé de commandant (toutes les 100x {name} [{mode}])",
+                                                         "retro":  "🃏 +{n} clé(s) de commandant des 100x instances",
+                                                         "progress":  "🃏 +1 clé de commandant toutes les 100 exécutions ({count}/100)",
                                                         "earned":  "🃏 Clé de commandant gagnée!"
                                                     }
                                },

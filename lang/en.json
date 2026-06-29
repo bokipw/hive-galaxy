@@ -4467,9 +4467,9 @@
     },
     "instance": {
       "milestone100": {
-        "keyReward": "🃏 +1 commander key (100x {name} [{mode}])",
+        "keyReward": "🃏 +1 commander key (every 100x {name} [{mode}])",
         "retro": "🃏 +{n} commander key(s) from instance 100x completions",
-        "progress": "🃏 +1 commander key at 100x ({count}/100)",
+        "progress": "🃏 +1 commander key every 100 clears ({count}/100)",
         "earned": "🃏 Commander key earned!"
       }
     },
