@@ -4686,8 +4686,14 @@
                                  "title":  "Podoba Ci się gra?",
                                  "desc":  "Każda darowizna pomaga w rozwoju nowej zawartości i serwerów.",
                                  "btn":  "💳 WPŁAĆ PRZEZ PAYPAL"
-                             },
-                  "footer":  {
+                              },
+                   "instance":  {
+                                   "milestone100":  {
+                                                       "keyReward":  "🃏 +1 klucz dowódcy (100x {name} [{mode}])",
+                                                       "retro":  "🃏 +{n} klucz(y) dowódcy z 100x instancji"
+                                                   }
+                               },
+                   "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "Opracowany przez",
                                  "links":  {

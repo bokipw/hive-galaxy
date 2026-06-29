@@ -4465,6 +4465,12 @@
       "desc": "Every donation helps develop new content and servers.",
       "btn": "\uD83D\uDCB3 DONATE VIA PAYPAL"
     },
+    "instance": {
+      "milestone100": {
+        "keyReward": "🃏 +1 commander key (100x {name} [{mode}])",
+        "retro": "🃏 +{n} commander key(s) from instance 100x completions"
+      }
+    },
     "footer": {
       "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
       "developed": "Developed by",

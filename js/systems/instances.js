@@ -818,6 +818,17 @@ function startBattle(inst, instant = false) {
 
       prog2.completed = true;
       prog2.clear_count++;
+      // 100x completion → +1 commander key
+      if (prog2.clear_count >= 100 && !prog2.claimed100) {
+        prog2.claimed100 = true;
+        R.keys = (R.keys || 0) + 1;
+        addLog(`🃏 +1 komandir ključ (100x ${dn(inst)} [${mode.label}])`);
+        setTimeout(() => {
+          if (typeof toast === 'function') {
+            toast(t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }), 'ok');
+          }
+        }, 300);
+      }
       if (rewards.allFound) {
         prog2.bpCompleted = true;
         toast('⚡ Svi blueprinti iz ove instance su nađeni!', 'ok');
@@ -880,9 +891,32 @@ function getInstanceProgress(progKey) {
       best_rank:    null,
       best_time:    null,
       bpCompleted:  false,
+      claimed100:   false,
     };
   }
   return window._instProgress[progKey];
+}
+
+// ── RETROACTIVE: 100x commander key migration ──
+function _migrateInstance100Keys() {
+  if (!window._instProgress || window._instProgress100Migrated) return;
+  let total = 0;
+  for (const key in window._instProgress) {
+    const p = window._instProgress[key];
+    if (p.clear_count >= 100 && !p.claimed100) {
+      p.claimed100 = true;
+      R.keys = (R.keys || 0) + 1;
+      total++;
+    }
+  }
+  if (total > 0) {
+    addLog(`🃏 +${total} komandir ključ(ev/a) — 100x instance (retroaktivno)`);
+    if (typeof toast === 'function') {
+      toast(t('instance.milestone100.retro', { n: total }), 'ok');
+    }
+    saveGame();
+  }
+  window._instProgress100Migrated = true;
 }
 
 // ── SEEDED RNG (deterministički, isti za sve igrače) ──

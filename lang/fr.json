@@ -4686,8 +4686,14 @@
                                  "title":  "Vous appréciez le jeu ?",
                                  "desc":  "Chaque don aide à développer de nouveaux contenus et serveurs.",
                                  "btn":  "💳 FAITES UN DON VIA PAYPAL"
-                             },
-                  "footer":  {
+                              },
+                   "instance":  {
+                                   "milestone100":  {
+                                                       "keyReward":  "🃏 +1 clé de commandant (100x {name} [{mode}])",
+                                                       "retro":  "🃏 +{n} clé(s) de commandant des 100x instances"
+                                                   }
+                               },
+                   "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "Développé par",
                                  "links":  {

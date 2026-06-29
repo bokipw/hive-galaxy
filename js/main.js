@@ -20,6 +20,11 @@ async function init() {
     addLog('💾 Igra učitana.');
   }
 
+  // 100x instance → commander key retroactive migration
+  if (loaded && typeof _migrateInstance100Keys === 'function') {
+    _migrateInstance100Keys();
+  }
+
   // Render language picker
   const lpc = document.getElementById('langPickerContainer');
   if (lpc && typeof renderLangPicker === 'function') lpc.innerHTML = renderLangPicker();

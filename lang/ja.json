@@ -4686,8 +4686,14 @@
                                  "title":  "ゲームを楽しんでいますか？",
                                  "desc":  "すべての寄付は、新しいコンテンツとサーバーの開発に役立ちます。",
                                  "btn":  "💳 PAYPAL経由で寄付する"
-                             },
-                  "footer":  {
+                              },
+                   "instance":  {
+                                   "milestone100":  {
+                                                       "keyReward":  "🃏 +1 指揮官キー (100x {name} [{mode}])",
+                                                       "retro":  "🃏 +{n} 指揮官キーを100回インスタンス達成"
+                                                   }
+                               },
+                   "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "開発者",
                                  "links":  {

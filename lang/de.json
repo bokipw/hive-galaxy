@@ -4658,8 +4658,14 @@
                                  "title":  "Hat Ihnen das Spiel Spaß gemacht?",
                                  "desc":  "Jede Spende hilft bei der Entwicklung neuer Inhalte und Server",
                                  "btn":  "💳 SPENDEN SIE ÜBER PAYPAL"
-                             },
-                  "footer":  {
+                              },
+                   "instance":  {
+                                   "milestone100":  {
+                                                       "keyReward":  "🃏 +1 Kommandoschlüssel (100x {name} [{mode}])",
+                                                       "retro":  "🃏 +{n} Kommandoschlüssel von 100x Instanzen"
+                                                   }
+                               },
+                   "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Unterstützt von HIVE Blockchain",
                                  "developed":  "Entwickelt von",
                                  "links":  {
