@@ -491,8 +491,17 @@ function dropRandomArtifactFragment(instanceDifficulty) {
   else if (roll < rates.L+rates.E+rates.R) rarity = 'R';
   else rarity = 'C';
 
-  const pool = ARTIFACTS_DATA.filter(a => a.rarity === rarity);
-  if (pool.length === 0) return;
+  // Build pool excluding already-unlocked artifacts
+  const unlocked = window.artifactState?.unlocked || [];
+  let pool = ARTIFACTS_DATA.filter(a => a.rarity === rarity && !unlocked.includes(a.id));
+  // If no available artifacts at this rarity, fall back to other rarities
+  if (pool.length === 0) {
+    const allAvail = ARTIFACTS_DATA.filter(a => !unlocked.includes(a.id));
+    if (allAvail.length === 0) return;
+    const art = allAvail[Math.floor(Math.random() * allAvail.length)];
+    addArtifactFragment(art.id, 1);
+    return;
+  }
 
   const art = pool[Math.floor(Math.random() * pool.length)];
   addArtifactFragment(art.id, 1);
