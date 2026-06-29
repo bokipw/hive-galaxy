@@ -418,7 +418,7 @@ function renderInstanceCard(inst, playerPower) {
 
       <!-- 100x commander key reward -->
       <div style="font-size:0.52rem;color:#00d4ff;margin-bottom:6px">
-        ${t('instance.milestone100.progress', { count: prog.clear_count % 100 })}
+        ${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); return _t !== 'instance.milestone100.progress' ? _t : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}
       </div>
 
       <!-- Dugme -->
@@ -562,7 +562,7 @@ function openInstanceModal(instId) {
           <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ Energija: ${energyCost} MWh</div>
           <div>✅ Clearova: ${prog.clear_count}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${t('instance.milestone100.progress', { count: prog.clear_count % 100 })}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); return _t !== 'instance.milestone100.progress' ? _t : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
           ${prog.best_rank ? `<div>⚡ 🏆 Best rank: ${prog.best_rank}</div>` : ''}
         </div>
 
@@ -832,7 +832,7 @@ function startBattle(inst, instant = false) {
         addLog(`🃏 +1 komandir ključ (${expectedTimes * 100}x ${dn(inst)} [${mode.label}])`);
         setTimeout(() => {
           if (typeof toast === 'function') {
-            toast(t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }), 'ok');
+            const _rewardKey = t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); toast(_rewardKey !== 'instance.milestone100.keyReward' ? _rewardKey : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
           }
         }, 300);
       }
@@ -922,7 +922,7 @@ function _migrateInstance100Keys() {
   if (total > 0) {
     addLog(`🃏 +${total} komandir ključ(ev/a) — svakih 100 instanci (retroaktivno)`);
     if (typeof toast === 'function') {
-      toast(t('instance.milestone100.retro', { n: total }), 'ok');
+      const _retroKey = t('instance.milestone100.retro', { n: total }); toast(_retroKey !== 'instance.milestone100.retro' ? _retroKey : `🃏 +${total} komandir ključ(ev/a) od 100x instanci`, 'ok');
     }
     saveGame();
   }
