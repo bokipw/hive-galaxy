@@ -1,1 +1,1082 @@
-<!DOCTYPE html><html lang="sr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HIVE GALAXY</title><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"><link rel="icon" href="data:,"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>(function() {  const _sb = supabase.createClient(    'https://exmbmwukqssvgmhysamo.supabase.co',    'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'  );  window._supa = _sb;  window._supaAnonKey = 'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8';  // Provjeri maintenance mode i tajmer  document.documentElement.style.visibility = 'hidden';   _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(({ data, error }) => {    if (!error && data && data.is_premium === true) {      window.location.replace('maintenance.html');    } else {      document.documentElement.style.visibility = 'visible';      // Pokreni maintenance tajmer ako je postavljen      if (data && data.boosters && data.boosters.maintenance_at) {        _startMaintBanner(data.boosters.maintenance_at);      }    }  }).catch(() => {    document.documentElement.style.visibility = 'visible';  });  var _maintBannerInterval = null;  var _maintPollInterval   = null;  function _startMaintBanner(isoAt) {    var target = new Date(isoAt);    var banner = document.getElementById('maintBanner');    if (!banner) {      banner = document.createElement('div');      banner.id = 'maintBanner';      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(255,100,0,0.95);color:#fff;text-align:center;padding:10px 20px;font-family:Orbitron,sans-serif;font-size:.85rem;font-weight:700;letter-spacing:2px;display:flex;align-items:center;justify-content:center;gap:16px';      banner.innerHTML = '<span>⚠️ MAINTENANCE ZA:</span><span id="maintBannerTime" style="font-size:1.1rem;color:#ffe000"></span>';      document.body.appendChild(banner);    }    if (_maintBannerInterval) clearInterval(_maintBannerInterval);    _maintBannerInterval = setInterval(function() {      var diff = target - Date.now();      if (diff <= 0) {        clearInterval(_maintBannerInterval);        window.location.replace('maintenance.html');        return;      }      var m = Math.floor(diff / 60000);      var s = Math.floor((diff % 60000) / 1000);      var el = document.getElementById('maintBannerTime');      if (el) el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');    }, 1000);  }  // Poll svakih 30s da provjeri da li je tajmer postavljen  _maintPollInterval = setInterval(function() {    _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(function(res) {      var d = res.data;      if (!d) return;      if (d.is_premium) { window.location.replace('maintenance.html'); return; }      if (d.boosters && d.boosters.maintenance_at) {        _startMaintBanner(d.boosters.maintenance_at);      } else if (_maintBannerInterval) {        clearInterval(_maintBannerInterval);        var b = document.getElementById('maintBanner');        if (b) b.remove();      }    });  }, 30000);  const hiveUser = localStorage.getItem('hg_hive_user');  if(hiveUser) {    window._hiveUser = hiveUser;    window._loginType = 'hive';    window._supaSession = null;    (async () => {      // Očisti staru sesiju iz localStorage (npr. od admin logina)      await _sb.auth.signOut({ scope: 'local' }).catch(() => {});      console.log('[hive] upsert players + hive_profiles');      fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {        method: 'POST',        headers: { 'Content-Type': 'application/json' },        body: JSON.stringify({ username: hiveUser })      }).catch(() => {});      // Dohvati profil      const { data } = await _sb.from('hive_profiles')        .select('is_premium, boosters')        .eq('id', hiveUser)        .maybeSingle();      window._hiveProfile   = data || {};      window._playerPremium = (data && data.is_premium) || false;      // Čekaj da se igra inicijalizira pa primijeni boosters i tokene      const applyKeys = async () => {        if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }        if(typeof commander === 'undefined' || !commander.level || typeof ownedBlueprints === 'undefined') {          setTimeout(applyKeys, 200);          return;        }        try {          const [resPR, resHP] = await Promise.all([            _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),            _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).maybeSingle()          ]);          const hpPR = resPR.data;          const hp   = resHP.data;          if (hpPR) {            R.bcm          = hpPR.bcm        || 0;            R.bocrypto     = hpPR.bocrypto    || 0;            R.spCard       = hpPR.spcard      || 0;            R.keys         = Math.floor(hpPR.keys_cmd) || 0;            R.instanceKeys = Math.floor(hpPR.keys_inst) || 0;          }          if (hp) {            const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};            const msgs = [];            if(pending.metal   > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal   + ' metal'); }            if(pending.crystal > 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }            if(pending.he3     > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3     + ' He3'); }            if(pending.energy  > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : (R.energy + pending.energy)); msgs.push('+' + pending.energy + ' energija'); }            if(pending.bcm     > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;   msgs.push('+' + pending.bcm      + ' BCM'); }            if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }            if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }            if(msgs.length > 0) {              await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {                method: 'POST',                headers: { 'Content-Type': 'application/json' },                body: JSON.stringify({                  action: 'save',                  player_id: hiveUser,                  data: { R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys }, _clear_boosters: true }                })              }).catch(() => {});              if(typeof updateResUI === 'function') updateResUI();              if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');            }          }        } catch(e) { console.error('applyKeys error:', e); }      };      applyKeys();      fetch('https://api.hive-engine.com/rpc/contracts', {        method: 'POST',        headers: { 'Content-Type': 'application/json' },        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'find', params: { contract: 'tokens', table: 'balances', query: { account: hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } }, limit: 10 } })      }).then(r => r.json()).then(res => {        const rows = res.result || [];        const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.'+'0'.repeat(dec)); };        window._chainBCM = get('BCM', 0);        window._chainBOC = get('BOCRYPTO', 3);        window._chainBPW = get('BPW', 8);      }).catch(() => {});    })();  }  if (!window._hiveUser) {    _sb.auth.getSession().then(async ({ data }) => {      if(data.session) {        window._supaSession = data.session;        window._loginType = 'email';        const uid = data.session.user.id;        const email = data.session.user.email?.toLowerCase();        // Osiguraj da players red postoji (FK za sve player_* tabele)        await _sb.from('players').upsert({ id: uid, player_type: 'email', username: email?.split('@')[0] || uid }).catch(() => {});        if (email) {          const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();          window._playerPremium = !!(pu && pu.is_premium);        }      } else { window.location.href = 'index.html'; }    });  }})();</script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js?v=20260629233425"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js?v=20260629233425"></script><link rel="stylesheet" href="css/base.css?v=20260629233425"><link rel="stylesheet" href="css/layout.css?v=20260629233425"><link rel="stylesheet" href="css/components.css?v=20260629233425"><link rel="stylesheet" href="css/animations.css?v=20260629233425"></head><body><div id="app">  <!-- ── HEADER ── -->  <div id="header">    <h1>⬡ HIVE GALAXY</h1>    <div class="res-bar">      <div class="res-item">🔩 <span class="rval" id="rMetal">0</span><span class="rprod" id="rMetalProd"></span></div>      <div class="res-item">💎 <span class="rval" id="rCrystal">0</span><span class="rprod" id="rCrystalProd"></span></div>      <div class="res-item">⛽ <span class="rval" id="rHe3">0</span><span class="rprod" id="rHe3Prod"></span></div>      <div class="res-item">⚡ <span class="rval" id="rEnergy">0</span></div>      <div class="res-item">🗝️ <span class="rval" id="rKeys">0</span></div>      <div class="res-item">🃏 <span class="rval" id="rCardKeys">0</span></div>      <div class="res-item">⭐ <span class="rval" id="rScore">0</span></div>    </div>    <div id="activeEventBadge" style="display:none;font-size:0.65rem;padding:2px 10px;      background:rgba(255,204,68,0.1);border-bottom:1px solid rgba(255,204,68,0.2);      text-align:center"></div>    <div style="display:flex;gap:8px;align-items:center">      <button onclick="showPanel('shop')" style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🛒 Shop</button>      <button onclick="window.open('leaderboards.html','_blank')" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🏆 Leaderboard</button>      <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>      <div id="langPickerContainer" style="display:inline-block"></div>    </div>  </div>  <!-- ── MAIN LAYOUT ── -->  <div id="main-layout">    <!-- ── LEFT NAV ── -->    <div id="nav">      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-baza')" data-grp="grp-baza">        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> <span data-i18n="nav.base">Baza</span>      </div>      <div class="nav-group" id="grp-baza">        <button class="nav-btn active" onclick="showPanel('base')" data-panel="base">          <span class="icon">🏰</span> <span data-i18n="nav.base">Baza</span>        </button>        <button class="nav-btn" onclick="showPanel('shipfactory')" data-panel="shipfactory">          <span class="icon">🏭</span> <span data-i18n="nav.shipfactory">Ship Factory</span>        </button>        <button class="nav-btn" onclick="showPanel('depot')" data-panel="depot">          <span class="icon">📦</span> <span data-i18n="nav.depot">Depot</span>        </button>        <button class="nav-btn" onclick="showPanel('recycler')" data-panel="recycler">          <span class="icon">♻️</span> <span data-i18n="nav.recycler">Recycler</span>        </button>      </div>      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-flota')" data-grp="grp-flota">        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> <span data-i18n="nav.fleet">Flota</span>      </div>      <div class="nav-group" id="grp-flota">        <button class="nav-btn" onclick="showPanel('designer')" data-panel="designer">          <span class="icon">🔧</span> <span data-i18n="nav.designer">Designer</span>        </button>        <button class="nav-btn" onclick="showPanel('hangar')" data-panel="hangar">          <span class="icon">🏠</span> <span data-i18n="nav.hangar">Hangar</span>        </button>        <button class="nav-btn" onclick="showPanel('fleet')" data-panel="fleet">          <span class="icon">🚀</span> <span data-i18n="nav.fleet">Flota</span>        </button>        <button class="nav-btn" onclick="showPanel('formations')" data-panel="formations">          <span class="icon">⬛</span> <span data-i18n="nav.formations">Formacije</span>        </button>        <button class="nav-btn" onclick="showPanel('blueprints')" data-panel="blueprints">          <span class="icon">📋</span> <span data-i18n="nav.blueprints">Blueprinti</span>        </button>      </div>      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-galaksija')" data-grp="grp-galaksija">        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> <span data-i18n="nav.galaxy">Galaksija</span>      </div>      <div class="nav-group" id="grp-galaksija">        <button class="nav-btn" onclick="showPanel('galaxy')" data-panel="galaxy">          <span class="icon">🗺️</span> <span data-i18n="nav.galaxy">Galaksija</span>        </button>        <button class="nav-btn" onclick="showPanel('instances')" data-panel="instances">          <span class="icon">🌌</span> <span data-i18n="nav.instances">Instance</span>        </button>        <button class="nav-btn" onclick="showPanel('colonies')" data-panel="colonies">          <span class="icon">🪐</span> <span data-i18n="nav.colonies">Kolonije</span>        </button>        <button class="nav-btn" onclick="showPanel('pvp')" data-panel="pvp">          <span class="icon">⚔️</span> <span data-i18n="nav.pvp">PvP</span>        </button>        <button class="nav-btn" onclick="showPanel('espionage')" data-panel="espionage">          <span class="icon">🕵️</span> <span data-i18n="nav.espionage">Špijunaža</span>        </button>      </div>      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-napredak')" data-grp="grp-napredak">        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> <span data-i18n="nav.research">Istraživanje</span>      </div>      <div class="nav-group" id="grp-napredak">        <button class="nav-btn" onclick="showPanel('research')" data-panel="research">          <span class="icon">🔬</span> <span data-i18n="nav.research">Istraživanje</span>        </button>        <button class="nav-btn" onclick="showPanel('missions')" data-panel="missions" style="position:relative">          <span class="icon">📡</span> <span data-i18n="nav.missions">Misije</span>          <span id="missionsBadge" style="display:none;position:absolute;top:4px;right:4px;            background:#ff3355;color:white;font-size:0.55rem;font-weight:700;            padding:1px 5px;border-radius:8px;min-width:16px;text-align:center;            line-height:1.4;pointer-events:none"></span>        </button>        <button class="nav-btn" onclick="showPanel('artifacts')" data-panel="artifacts">          <span class="icon">💠</span> <span data-i18n="nav.artifacts">Artefakti</span>        </button>        <button class="nav-btn" onclick="showPanel('achievements')" data-panel="achievements">          <span class="icon">🏆</span> <span data-i18n="nav.achievements">Dostignuća</span>        </button>        <button class="nav-btn" onclick="showPanel('commander')" data-panel="commander">          <span class="icon">🎖️</span> <span data-i18n="nav.commanders">Komandir</span>        </button>        <button class="nav-btn" onclick="showPanel('commander-cards')" data-panel="commander-cards">          <span class="icon">🃏</span> <span data-i18n="nav.cards">Karte</span>        </button>      </div>    </div>    <!-- ── CONTENT ── -->    <div id="content">      <!-- BAZA -->      <div id="panel-base" class="panel active">        <div class="page-title">🏰 KOMANDNI CENTAR BAZE</div>        <div class="grid-3" id="baseGrid"></div>        <div class="page-title">⚡ ENERGETSKA MREŽA</div>        <div class="grid-4" id="energyGrid"></div>        <div class="page-title">🛡️ ODBRANA BAZE</div>        <div class="grid-4" id="defenseGrid"></div>        <div class="page-title">⚡ ENERGETSKI BILANS</div>        <div class="card" id="energyBalanceCard"></div>        <div class="page-title">🔧 SPECIJALNE ZGRADE</div>        <div class="grid-3" id="specialGrid"></div>      </div>      <!-- SHIP FACTORY -->      <div id="panel-shipfactory" class="panel">        <div class="page-title">🏭 FABRIKA BRODOVA</div>        <div id="shipFactoryCard"></div>        <div class="page-title" style="margin-top:20px">🚀 GRADNJA PO DIZAJNU</div>        <div id="shipBuildGrid"></div>      </div>      <!-- DEPOT -->      <div id="panel-depot" class="panel">        <div class="page-title">📦 DEPOT</div>        <div id="depotCard"></div>      </div>      <!-- RECYCLER -->      <div id="panel-recycler" class="panel">        <div class="page-title">♻️ RECIKLER</div>        <div id="recyclerContent"></div>      </div>      <!-- DESIGNER -->      <div id="panel-designer" class="panel">        <div class="page-title">🔧 DIZAJNER BRODOVA</div>        <div id="designerContent"></div>      </div>      <!-- HANGAR -->      <div id="panel-hangar" class="panel">        <div class="page-title">🏠 HANGAR</div>        <div id="hangarContent"></div>      </div>      <!-- FLOTA -->      <div id="panel-fleet" class="panel">        <div class="page-title">🚀 FLOTA</div>        <div id="fleetGrid"></div>      </div>      <!-- FORMACIJE -->      <div id="panel-formations" class="panel">        <div class="page-title">⬛ FORMACIJE FLOTE</div>        <div id="formationsContent"></div>      </div>      <!-- BLUEPRINTI -->      <div id="panel-blueprints" class="panel">        <div class="page-title">📋 BLUEPRINTI</div>        <div id="blueprintGrid"></div>      </div>      <!-- GALAKSIJA -->      <div id="panel-galaxy" class="panel">        <div class="page-title">🗺️ GALAKSIJA</div>        <div id="galaxyContent"></div>      </div>      <!-- INSTANCE -->      <div id="panel-instances" class="panel">        <div class="page-title">🌌 INSTANCE</div>        <div id="instanceContent"></div>      </div>      <!-- MISIJE -->      <div id="panel-missions" class="panel">        <div class="page-title">📡 MISIJE</div>        <div id="missionsContent"></div>      </div>      <!-- PVP -->      <div id="panel-pvp" class="panel">        <div class="page-title">⚔️ PvP ARENA</div>        <div id="pvpContent"></div>      </div>      <!-- ŠPIJUNAŽA -->      <div id="panel-espionage" class="panel">        <div class="page-title">🕵️ ŠPIJUNAŽA</div>        <div id="espionageContent"></div>      </div>      <!-- ISTRAŽIVANJE -->      <div id="panel-research" class="panel">        <div class="page-title">🔬 ISTRAŽIVANJE</div>        <div id="researchContent"></div>      </div>      <!-- KOLONIJE -->      <div id="panel-colonies" class="panel">        <div class="page-title">🪐 KOLONIJE</div>        <div id="coloniesContent"></div>      </div>      <!-- ARTEFAKTI -->      <div id="panel-artifacts" class="panel">        <div class="page-title">💠 ARTEFAKTI</div>        <div id="artifactsContent"></div>      </div>      <!-- DOSTIGNUĆA -->      <div id="panel-achievements" class="panel">        <div class="page-title">🏆 DOSTIGNUĆA</div>        <div id="achievementsContent"></div>      </div>      <!-- KOMANDIR -->      <div id="panel-commander" class="panel">        <div class="page-title">🎖️ KOMANDIR</div>        <div id="commanderContent"></div>      </div>      <!-- KARTE KOMANDIRA -->      <div id="panel-commander-cards" class="panel">        <div class="page-title">🃏 KARTE KOMANDIRA</div>        <!-- Tab navigacija -->        <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid rgba(0,212,255,0.15);padding-bottom:12px" id="cardTabNav"></div>        <!-- Tab sadržaj -->        <div id="cardTabBody"></div>        <!-- Skriveni divovi za svaki tab -->        <div id="commanderCardsContent" style="display:none"></div>        <div id="cmdFleetContent" style="display:none"></div>      </div>      <!-- SHOP -->      <div id="panel-shop" class="panel">        <div class="page-title">💎 ŠOP</div>        <div id="shopContent"></div>      </div>    </div>    <!-- ── RIGHT PANEL ── -->    <div id="rightPanel">      <div class="rp-section">        <div class="rp-title">KOMANDIR</div>        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">          <span id="rpUsername" style="font-size:0.7rem;color:#00d4ff;font-family:'Share Tech Mono',monospace;font-weight:700"></span>          <span id="rpPremiumBadge" style="display:none;font-size:0.55rem;font-weight:700;letter-spacing:1px;padding:2px 6px;background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);color:#000;border-radius:3px">&#x2605; PREMIUM</span>        </div>        <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>        <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">          <span style="font-size:0.65rem;color:#6a90b8"><span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP</span>          <button onclick="logoutGame()" style="font-size:0.5rem;padding:2px 7px;background:rgba(255,51,85,0.08);border:1px solid rgba(255,51,85,0.25);color:#ff3355;border-radius:3px;cursor:pointer;letter-spacing:1px">⏻ LOGOUT</button>        </div>      </div>      <!-- HIVE WALLET dugme -->      <div class="rp-section" id="hiveTokenSection" onclick="openHiveWalletModal()"        style="cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;border:1px solid rgba(255,204,0,0.15);border-radius:7px;padding:10px 12px"        onmouseenter="this.style.borderColor='rgba(255,204,0,0.45)';this.style.boxShadow='0 0 14px rgba(255,204,0,0.12)'"        onmouseleave="this.style.borderColor='rgba(255,204,0,0.15)';this.style.boxShadow=''">        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;letter-spacing:2px;color:#ffcc44">&#x1F4B0; HIVE WALLET</div>          <span style="font-size:0.55rem;color:#ffcc44;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.25);border-radius:3px;padding:2px 7px;letter-spacing:1px">&#x25BA; OPEN WALLET</span>        </div>        <div style="font-size:0.65rem;font-family:'Share Tech Mono',monospace;display:flex;flex-direction:column;gap:3px">          <div style="display:flex;justify-content:space-between">            <span style="color:#6a90b8">BCM <span style="font-size:0.5rem">(igrica)</span></span>            <span id="hBCM" style="color:white">0</span>          </div>          <div style="display:flex;justify-content:space-between">            <span style="color:#6a90b8">BoCrypto <span style="font-size:0.5rem">(igrica)</span></span>            <span id="hBoCrypto" style="color:white">0</span>          </div>          <div style="display:flex;justify-content:space-between">            <span style="color:#6a90b8">BPW <span style="font-size:0.5rem">(igrica)</span></span>            <span id="hBPW" style="color:#ffcc44">0</span>          </div>        </div>        <div id="hiveTokenLock" style="display:none;margin-top:6px;text-align:center;color:#6a90b8;font-size:0.6rem">          &#x1F512; Potreban <span style="color:#ffcc44">Premium</span>        </div>      </div>      <div class="rp-section">        <div class="rp-title">FLOTA MOĆ</div>        <div id="fleetPowerDisplay" style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#00d4ff">0</div>      </div>      <div class="rp-section">        <div class="rp-title">FORMACIJA</div>        <div id="formationStatus"></div>      </div>      <div class="rp-section">        <div class="rp-title">DEPOT STATUS</div>        <div id="depotStatus"></div>      </div>      <div class="rp-section">        <div class="rp-title">HANGAR</div>        <div id="hangarStatus"></div>      </div>      <div class="rp-section" style="flex:1;display:flex;flex-direction:column;min-height:0">        <!-- Tab header -->        <div style="display:flex;gap:0;margin-bottom:8px;border-bottom:1px solid rgba(0,212,255,0.15)">          <button id="tab-log" onclick="switchRightTab('log')"            style="flex:1;background:none;border:none;border-bottom:2px solid #00d4ff;              color:#00d4ff;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;              font-family:'Orbitron',monospace;letter-spacing:1px">LOG</button>          <button id="tab-events" onclick="switchRightTab('events')"            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;              font-family:'Orbitron',monospace;letter-spacing:1px">EVENTI</button>          <button id="tab-pvp" onclick="switchRightTab('pvp')"            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;              font-family:'Orbitron',monospace;letter-spacing:1px">PVP</button>        </div>        <!-- Log panel -->        <div id="logPanel" style="font-size:0.7rem;color:#6a90b8;overflow-y:auto;flex:1"></div>        <!-- Events panel -->        <div id="eventsPanel" style="display:none;overflow-y:auto;flex:1"></div>        <!-- PvP panel -->        <div id="pvpPanel" style="display:none;overflow-y:auto;flex:1"></div>      </div>    </div>  </div></div><!-- MODAL --><div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center">  <div style="background:#0c1428;border:1px solid #00d4ff33;border-radius:10px;padding:24px;max-width:520px;width:90%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden">    <div id="mTitle" style="font-family:'Orbitron',monospace;font-size:1rem;color:#00d4ff;margin-bottom:16px;flex-shrink:0"></div>    <div id="mBody" style="overflow-y:hidden;flex:1;min-height:0"></div>    <div id="mActions" style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-shrink:0;border-top:1px solid rgba(0,212,255,0.1);padding-top:14px"></div>  </div></div><!-- TOAST --><div id="toast-area" style="position:fixed;bottom:20px;right:20px;z-index:1000"></div><!-- EVENT BANNER --><div id="eventBanner" style="  display:none;  position:fixed;top:0;left:0;right:0;z-index:999;  padding:0;  pointer-events:none;">  <div id="eventBannerInner" style="    margin:12px auto;max-width:520px;    border-radius:10px;padding:16px 24px;    display:flex;align-items:center;gap:16px;    box-shadow:0 4px 32px rgba(0,0,0,0.6);    animation:eventBannerIn 0.35s cubic-bezier(.22,1,.36,1);  ">    <div id="eventBannerIcon" style="font-size:2.2rem;flex-shrink:0"></div>    <div style="flex:1;min-width:0">      <div id="eventBannerLabel" style="font-size:0.6rem;font-weight:700;        letter-spacing:3px;opacity:0.8;margin-bottom:3px;font-family:'Orbitron',monospace"></div>      <div id="eventBannerName" style="font-size:1rem;font-weight:700;        font-family:'Orbitron',monospace;letter-spacing:1px"></div>      <div id="eventBannerDesc" style="font-size:0.68rem;opacity:0.75;margin-top:3px"></div>    </div>    <div id="eventBannerCountdown" style="      font-size:2rem;font-family:'Orbitron',monospace;font-weight:700;      min-width:36px;text-align:center;flex-shrink:0;    "></div>  </div></div><style>@keyframes eventBannerIn {  from { opacity:0; transform:translateY(-24px) scale(0.97); }  to   { opacity:1; transform:translateY(0)     scale(1);    }}@keyframes eventBannerOut {  from { opacity:1; transform:translateY(0)     scale(1);    }  to   { opacity:0; transform:translateY(-16px) scale(0.97); }}@keyframes pvpDmgFloat {  0%   { opacity:1; transform:translateY(0)     scale(1);   }  100% { opacity:0; transform:translateY(-24px) scale(0.8); }}.btn-danger {  background: rgba(255,51,85,0.12);  border: 1px solid rgba(255,51,85,0.4);  color: #ff3355;}.btn-danger:hover {  background: rgba(255,51,85,0.25);}</style><!-- ── SCRIPTS — redoslijed je bitan ── --><!-- 1. DATA fajlovi — samo podaci, nula logike --><script src="data/buildings.js"></script><script src="data/ships.js"></script><script src="data/weapons.js"></script><script src="data/shields.js"></script><script src="data/engines.js"></script><script src="data/recon.js"></script><script src="data/special.js"></script><script src="data/modules.js"></script><script src="data/blueprints.js"></script><script src="data/instances_easy.js"></script><script src="data/instances_normal.js"></script><script src="data/instances_nightmare.js"></script><script src="data/instances_hell.js"></script><script src="data/instances.js"></script><script src="data/commanders.js"></script><script src="data/commanders_xenos.js"></script><script src="data/commanders_undead.js"></script><script src="data/passive_bonuses.js"></script><!-- 1b. I18N --><script src="js/i18n.js?v=20260629233425"></script><!-- 2. STATE --><script src="js/state.js?v=20260629233425"></script><!-- 3. SAVE/LOAD --><script src="js/save.js?v=20260629233425"></script><!-- 4. UI --><script src="js/ui/toast.js?v=20260629233425"></script><script src="js/ui/render.js?v=20260629233425"></script><script src="js/ui/modal.js?v=20260629233425"></script><script src="js/ui/battle-anim.js?v=20260629233425"></script><!-- 5. SYSTEMS --><script src="js/systems/economy.js?v=20260629233425"></script><script src="js/systems/buildings.js?v=20260629233425"></script><script src="js/systems/fleet.js?v=20260629233425"></script><script src="js/systems/designer.js?v=20260629233425"></script><script src="js/systems/combat.js?v=20260629233425"></script><script src="js/systems/instances.js?v=20260629233425"></script><script src="js/systems/blueprints.js?v=20260629233425"></script><script src="js/systems/research.js?v=20260629233425"></script><script src="js/systems/colonies.js?v=20260629233425"></script><script src="js/systems/missions.js?v=20260629233425"></script><script src="js/systems/pvp.js?v=20260629233425"></script><script src="js/ui/pvp-battle-3d.js?v=20260629233425"></script><script src="js/systems/espionage.js?v=20260629233425"></script><script src="js/systems/artifacts.js?v=20260629233425"></script><script src="js/systems/achievements.js?v=20260629233425"></script><script src="js/systems/commander.js?v=20260629233425"></script><script src="js/systems/commander_cards.js?v=20260629233425"></script><script src="js/systems/shop.js?v=20260629233425"></script><script src="js/systems/galaxy.js?v=20260629233425"></script><script src="js/systems/formations.js?v=20260629233425"></script><script src="js/systems/events.js?v=20260629233425"></script><script>function logoutGame() {  if (!confirm('Sigurno se želiš odjaviti?')) return;  saveGame();  localStorage.removeItem('hg_hive_user');  if (window._supa) window._supa.auth.signOut();  window.location.href = 'index.html';}function updateHiveTokenUI() {  const unEl = document.getElementById('rpUsername');  const badgeEl = document.getElementById('rpPremiumBadge');  if (unEl) {    const name = window._hiveUser || (window._supaSession && (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0])) || '';    unEl.textContent = name ? '@' + name : '';  }  const isPremium = window._playerPremium || false;  if (badgeEl) badgeEl.style.display = isPremium ? '' : 'none';  const lock = document.getElementById('hiveTokenLock');  if (lock) lock.style.display = (window._hiveUser && !isPremium) ? 'block' : 'none';}// ── Wallet modal ──async function openHiveWalletModal() {  if (!window._hiveUser) {    if (typeof toast === 'function') toast('Prijavi se sa HIVE Keychain da koristiš wallet!', 'warn');    return;  }  const isPremium = window._playerPremium || false;  // Fetch chain balances  let chainBCM = '...', chainBOC = '...', chainBPW = '...';  const modal = document.createElement('div');  modal.id = 'hiveWalletModal';  modal.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,5,15,0.92);display:flex;align-items:center;justify-content:center';  const renderModal = (bcm, boc, bpw) => {    const gameBCM = Math.floor(R.bcm || 0).toString();    const gameBOC = (R.bocrypto || 0).toFixed(3);    const gameBPW = ((R.spCard || 0) / 100000000).toFixed(8);    const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)';    const labelStyle = 'font-size:0.85rem;color:#6a90b8;font-family:"Share Tech Mono",monospace';    const valStyle = 'font-size:1rem;font-family:"Orbitron",monospace;color:white';    const depBtn = (sym) => isPremium      ? `<button onclick="walletDeposit('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;    const witBtn = (sym) => isPremium      ? `<button onclick="walletWithdraw('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;    modal.innerHTML = `      <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,204,0,0.2);border-radius:14px;        width:min(860px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;        box-shadow:0 0 80px rgba(255,204,0,0.1)">        <!-- Header -->        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid rgba(255,204,0,0.15);flex-shrink:0">          <div>            <div style="font-family:'Orbitron',monospace;font-size:1.1rem;color:#ffcc44;letter-spacing:2px">💰 HIVE WALLET</div>            <div style="font-size:0.7rem;color:#6a90b8;margin-top:4px">@${window._hiveUser}</div>          </div>          <div style="display:flex;gap:10px;align-items:center">            <button onclick="refreshHiveWallet()" style="font-size:0.7rem;padding:6px 14px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;border-radius:5px;cursor:pointer">🔄 Refresh</button>            <button onclick="document.getElementById('hiveWalletModal').remove()" style="font-size:0.8rem;padding:6px 14px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:5px;cursor:pointer">✕ Zatvori</button>          </div>        </div>        <!-- Body -->        <div style="flex:1;overflow-y:auto;padding:0 28px 24px">          <!-- Column headers -->          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:18px 0 8px;text-align:center">            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#6a90b8;letter-spacing:2px">TOKEN</div>            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00d4ff;letter-spacing:2px">⛓ BLOCKCHAIN WALLET</div>            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00ff88;letter-spacing:2px">🎮 U IGRICI</div>          </div>          <!-- BCM -->          <div style="${rowStyle}">            <div style="flex:1">              <div style="${labelStyle}">BCM</div>              <div style="font-size:0.5rem;color:#444;margin-top:1px">BoCrypto Miner</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00d4ff">${bcm}</div>              <div style="margin-top:4px">${depBtn('BCM')}</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00ff88">${gameBCM}</div>              <div style="margin-top:4px">${witBtn('BCM')}</div>            </div>          </div>          <!-- BOCRYPTO -->          <div style="${rowStyle}">            <div style="flex:1">              <div style="${labelStyle}">BoCrypto</div>              <div style="font-size:0.5rem;color:#444;margin-top:1px">BOCRYPTO token</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00d4ff">${boc}</div>              <div style="margin-top:4px">${depBtn('BOCRYPTO')}</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00ff88">${gameBOC}</div>              <div style="margin-top:4px">${witBtn('BOCRYPTO')}</div>            </div>          </div>          <!-- BPW -->          <div style="${rowStyle}">            <div style="flex:1">              <div style="${labelStyle}">BPW</div>              <div style="font-size:0.5rem;color:#444;margin-top:1px">BoCrypto Power</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00d4ff">${bpw}</div>              <div style="margin-top:4px">${depBtn('BPW')}</div>            </div>            <div style="flex:1;text-align:center">              <div style="${valStyle};color:#00ff88">${gameBPW}</div>              <div style="margin-top:4px">${witBtn('BPW')}</div>            </div>          </div>          ${!isPremium ? '<div style="margin-top:14px;text-align:center;padding:10px;background:rgba(255,204,0,0.06);border:1px solid rgba(255,204,0,0.2);border-radius:6px;font-size:0.65rem;color:#ffcc44">🔒 DEP/WIT dugmad su zaključana — potreban je <b>Premium</b></div>' : ''}          <div style="margin-top:12px;font-size:0.55rem;color:#444;text-align:center">            DEP = prebaci iz blockchain walleta u igru · WIT = prebaci iz igre u blockchain wallet (24h)          </div>        </div>      </div>`;  };  renderModal('...', '...', '...');  document.body.appendChild(modal);  // Fetch live balances  try {    const res = await fetch('https://api.hive-engine.com/rpc/contracts', {      method: 'POST',      headers: { 'Content-Type': 'application/json' },      body: JSON.stringify({        jsonrpc: '2.0', id: 1, method: 'find',        params: {          contract: 'tokens', table: 'balances',          query: { account: window._hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } },          limit: 10        }      })    });    const data = await res.json();    const rows = data.result || [];    const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.' + '0'.repeat(dec)); };    window._walletChainBCM = get('BCM', 0);    window._walletChainBOC = get('BOCRYPTO', 3);    window._walletChainBPW = get('BPW', 8);    renderModal(window._walletChainBCM, window._walletChainBOC, window._walletChainBPW);  } catch(e) {    renderModal('greška', 'greška', 'greška');  }}function refreshHiveWallet() {  const el = document.getElementById('hiveWalletModal');  if (el) el.remove();  openHiveWalletModal();}async function walletWithdraw(symbol) {  if (!window._hiveUser) { toast('Prijavi se sa HIVE Keychain!', 'warn'); return; }  if (!window._playerPremium) { toast('Potreban je Premium za withdraw!', 'warn'); return; }  if (!window._supa) return;  const cfg = {    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,      gas: null,  gasFlat: 1000, gasCurrency: 'bocrypto', decimals: 0 },    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000,   gas: 0.01,  gasFlat: null, gasCurrency: 'bocrypto', decimals: 3 },    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,    gas: 0.01,  gasFlat: null, gasCurrency: 'spCard',   decimals: 8, satoshi: true },  }[symbol];  if (!cfg) return;  const gameAmt = cfg.satoshi ? (R[cfg.key] || 0) : (R[cfg.key] || 0);  const gameDisplay = cfg.satoshi ? (gameAmt / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)) + ' ' + cfg.label;  const minDisplay = cfg.satoshi ? (cfg.min / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? cfg.min : cfg.min.toFixed ? cfg.min.toFixed(cfg.decimals) : cfg.min) + ' ' + cfg.label;  // Provjeri minimum  if (gameAmt < cfg.min) {    toast('Minimum za withdraw: ' + minDisplay + ' (imaš ' + gameDisplay + ')', 'warn');    return;  }  // Gas info string  let gasInfo = '';  if (cfg.gasFlat) {    gasInfo = `Gas fee: <strong style="color:#ff6600">${cfg.gasFlat.toLocaleString()} BoCrypto</strong> (flat)`;  } else {    const gasPct = (cfg.gas * 100) + '%';    gasInfo = `Gas fee: <strong style="color:#ff6600">${gasPct}</strong> od iznosa`;  }  // Modal za unos iznosa  const modalEl = document.createElement('div');  modalEl.id = 'withdrawModal';  modalEl.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,5,15,0.95);display:flex;align-items:center;justify-content:center';  modalEl.innerHTML = `    <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,100,0,0.3);border-radius:14px;      width:min(480px,94vw);padding:28px;box-shadow:0 0 60px rgba(255,100,0,0.15)">      <div style="font-family:'Orbitron',monospace;font-size:1rem;color:#ff6600;letter-spacing:2px;margin-bottom:6px">⬆ WITHDRAW ${symbol}</div>      <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:20px">U igrici: <strong style="color:white">${gameDisplay}</strong> · Min: <strong style="color:#ffcc44">${minDisplay}</strong></div>      <div style="margin-bottom:14px">        <label style="font-size:0.7rem;color:#6a90b8;display:block;margin-bottom:6px">Iznos za withdraw</label>        <input id="witAmt" type="number" step="${cfg.satoshi ? '0.00000001' : cfg.decimals === 0 ? '1' : '0.001'}"          min="${cfg.satoshi ? (cfg.min/1e8) : cfg.min}"          max="${cfg.satoshi ? (gameAmt/1e8) : gameAmt}"          value="${cfg.satoshi ? (gameAmt/1e8).toFixed(8) : cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)}"          style="width:100%;box-sizing:border-box;padding:10px 14px;background:rgba(0,0,0,0.4);            border:1px solid rgba(255,100,0,0.3);border-radius:6px;color:white;font-size:0.85rem;            font-family:'Share Tech Mono',monospace"          oninput="updateWitPreview('${symbol}')">      </div>      <div id="witPreview" style="background:rgba(255,100,0,0.06);border:1px solid rgba(255,100,0,0.2);        border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.72rem;line-height:2">      </div>      <div style="display:flex;gap:10px">        <button onclick="document.getElementById('withdrawModal').remove()"          style="flex:1;padding:10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);            color:#ff3355;border-radius:6px;cursor:pointer;font-size:0.75rem">✕ Otkaži</button>        <button onclick="submitWithdraw('${symbol}')"          style="flex:2;padding:10px;background:rgba(255,100,0,0.15);border:1px solid rgba(255,100,0,0.4);            color:#ff6600;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:700">⬆ Pošalji zahtev</button>      </div>    </div>`;  document.body.appendChild(modalEl);  updateWitPreview(symbol);}function updateWitPreview(symbol) {  const cfg = {    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,    gas: null, gasFlat: 1000, gasCurrency: 'BoCrypto', satoshi: false },    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000, gas: 0.01, gasFlat: null, gasCurrency: 'BoCrypto', satoshi: false },    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,  gas: 0.01, gasFlat: null, gasCurrency: 'BPW',      satoshi: true },  }[symbol];  const input = document.getElementById('witAmt');  const preview = document.getElementById('witPreview');  if (!input || !preview || !cfg) return;  const amt = parseFloat(input.value) || 0;  let gas = 0, net = 0, gasLabel = '', netLabel = '', valid = true, errMsg = '';  if (symbol === 'BCM') {    gas = 1000; // flat BoCrypto    net = Math.floor(amt);    const bocBal = R.bocrypto || 0;    if (bocBal < gas) { valid = false; errMsg = 'Nemaš dovoljno BoCrypto za gas fee (treba 1,000)!'; }    if (net < 1) { valid = false; errMsg = 'Minimum 1 BCM!'; }    gasLabel = `1,000 BoCrypto (flat)`;    netLabel = `${net} BCM`;  } else if (symbol === 'BOCRYPTO') {    gas = Math.ceil(amt * 0.01);    net = amt - gas;    if (amt < 1000) { valid = false; errMsg = 'Minimum 1,000 BoCrypto!'; }    if (net <= 0) { valid = false; errMsg = 'Iznos je premali!'; }    gasLabel = `${gas.toLocaleString()} BoCrypto (1%)`;    netLabel = `${net.toFixed(3)} BoCrypto`;  } else if (symbol === 'BPW') {    const amtSat = Math.round(amt * 1e8);    gas = Math.ceil(amtSat * 0.01);    net = amtSat - gas;    if (amtSat < 1e7) { valid = false; errMsg = 'Minimum 0.1 BPW!'; }    gasLabel = `${(gas/1e8).toFixed(8)} BPW (1%)`;    netLabel = `${(net/1e8).toFixed(8)} BPW`;  }  preview.innerHTML = valid    ? `<div>Iznos: <strong style="color:white">${symbol === 'BPW' ? amt.toFixed(8)+' BPW' : symbol==='BCM' ? Math.floor(amt)+' BCM' : amt.toFixed(3)+' BoCrypto'}</strong></div>       <div>Gas fee: <strong style="color:#ff6600">${gasLabel}</strong></div>       <div>Dobijaš: <strong style="color:#00ff88">${netLabel}</strong></div>       <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Zahtev je vidljiv u admin panelu</div>`    : `<div style="color:#ff3355">⚠ ${errMsg}</div>`;  document.getElementById('withdrawModal').querySelector('button:last-child').disabled = !valid;  document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.4';}async function submitWithdraw(symbol) {  if (!window._supa) return;  const cfg = {    BCM:      { key: 'bcm',    min: 1,    gas: null, gasFlat: 1000, satoshi: false },    BOCRYPTO: { key: 'bocrypto', min: 1000, gas: 0.01, gasFlat: null, satoshi: false },    BPW:      { key: 'spCard', min: 1e7,  gas: 0.01, gasFlat: null, satoshi: true },  }[symbol];  const input = document.getElementById('witAmt');  if (!input || !cfg) return;  const amt = parseFloat(input.value) || 0;  let amtRaw = cfg.satoshi ? Math.round(amt * 1e8) : amt;  let gas = 0, net = 0;  if (symbol === 'BCM') {    gas = 1000; net = Math.floor(amtRaw);    if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas!', 'warn'); return; }    if (net < 1) return;    R.bocrypto = (R.bocrypto || 0) - gas;    R.bcm = (R.bcm || 0) - net;  } else if (symbol === 'BOCRYPTO') {    gas = Math.ceil(amtRaw * 0.01);    net = amtRaw - gas;    if ((R.bocrypto || 0) < amtRaw) { toast('Nema dovoljno BoCrypto!', 'warn'); return; }    R.bocrypto = (R.bocrypto || 0) - amtRaw;  } else if (symbol === 'BPW') {    gas = Math.ceil(amtRaw * 0.01);    net = amtRaw - gas;    if ((R.spCard || 0) < amtRaw) { toast('Nema dovoljno BPW!', 'warn'); return; }    R.spCard = (R.spCard || 0) - amtRaw;  }  const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? window._hiveUser : window._supaSession?.user?.id);  const username = window._hiveUser || window._supaSession?.user?.email?.split('@')[0] || 'unknown';  const { error } = await window._supa.from('withdrawals').insert({    player_id: uid,    username,    hive_account: window._hiveUser || null,    token: symbol,    amount: cfg.satoshi ? amtRaw : amtRaw,    gas_amount: gas,    net_amount: net,    status: 'pending',    requested_at: new Date().toISOString(),  });  if (error) {    // Vrati resurse ako insert falio    if (symbol === 'BCM') { R.bocrypto += 1000; R.bcm += net; }    else if (symbol === 'BOCRYPTO') R.bocrypto += amtRaw;    else if (symbol === 'BPW') R.spCard += amtRaw;    toast('Greška pri slanju zahteva: ' + error.message, 'err');    return;  }  if (typeof updateResUI === 'function') updateResUI();  if (typeof saveGame === 'function') saveGame();  document.getElementById('withdrawModal')?.remove();  document.getElementById('hiveWalletModal')?.remove();  toast('✅ Withdraw zahtev poslat! Obrada 24-48h.', 'ok');}function walletDeposit(symbol) {  if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];  if (!cfg) return;  const amtStr = prompt('Koliko ' + symbol + ' da depositiraš u igru?', '1');  if (!amtStr) return;  const amt = parseFloat(amtStr);  if (isNaN(amt) || amt <= 0) return;  const method = 'requestSendToken';  const amtFormatted = symbol === 'BPW' ? amt.toFixed(8) : amt.toFixed(3);  window.hive_keychain[method](    window._hiveUser, 'bokica80', amtFormatted,    'HIVEGALAXY_deposit_' + symbol + '_' + window._hiveUser, symbol,    function(resp) {      if (resp.success) {        R[cfg.key] = (R[cfg.key] || 0) + (cfg.div > 1 ? Math.round(amt * cfg.div) : amt);        if (typeof updateResUI === 'function') updateResUI();        if (typeof saveGame === 'function') saveGame();        if (typeof toast === 'function') toast('✅ Deposit ' + amtFormatted + ' ' + symbol + ' uspešan!', 'ok');        refreshHiveWallet();      } else {        alert('Transakcija odbijena: ' + (resp.message || 'Greška'));      }    }  );}function walletWithdraw(symbol) {  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];  if (!cfg) return;  const gameAmt = cfg.div > 1 ? ((R[cfg.key] || 0) / cfg.div).toFixed(3) : (R[cfg.key] || 0).toFixed(3);  const amtStr = prompt('Koliko ' + symbol + ' da povučeš iz igre?\n(Imaš: ' + gameAmt + ' ' + symbol + ')', '1');  if (!amtStr) return;  const amt = parseFloat(amtStr);  if (isNaN(amt) || amt <= 0) return;  const deduct = cfg.div > 1 ? Math.round(amt * cfg.div) : amt;  if (deduct > (R[cfg.key] || 0)) { alert('Nemaš dovoljno ' + symbol + ' u igri!'); return; }  R[cfg.key] = (R[cfg.key] || 0) - deduct;  if (typeof updateResUI === 'function') updateResUI();  if (typeof saveGame === 'function') saveGame();  if (typeof toast === 'function') toast('⏳ Withdraw ' + amt.toFixed(3) + ' ' + symbol + ' zahtjev primljen. Isplata do 24h.', 'inf');  refreshHiveWallet();}async function openLeaderboard() {  infoModal('🏆 Leaderboard', '<div style="text-align:center;color:#6a90b8;padding:20px">Učitavam...</div>');  if (!window._supa) return;  const { data } = await window._supa.from('leaderboard').select('username,score,level,is_premium').order('score', { ascending: false }).limit(50);  if (!data || data.length === 0) { infoModal('🏆 Leaderboard', '<div style="color:#6a90b8;text-align:center;padding:20px">Nema igrača.</div>'); return; }  const rows = data.map((p, i) => {    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';    const prem  = p.is_premium ? ' <span style="color:#ffcc44;font-size:0.6rem">★</span>' : '';    const isMe  = p.username === (window._hiveUser || '');    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)' + (isMe ? ';background:rgba(0,212,255,0.05);border-radius:4px;padding:7px 6px' : '') + '">' +      '<div><span style="color:#6a90b8;font-size:0.7rem;margin-right:8px">' + medal + '</span><span style="color:' + (isMe ? '#00d4ff' : '#fff') + ';font-size:0.78rem;font-weight:600">' + p.username + '</span>' + prem + '<span style="color:#4a6a8a;font-size:0.6rem;margin-left:6px">Lv.' + (p.level||1) + '</span></div>' +      '<span style="color:#ffcc44;font-size:0.72rem;font-family:Orbitron,monospace">' + fmt(p.score||0) + '</span>' +      '</div>';  }).join('');  infoModal('🏆 Leaderboard', '<div style="max-height:60vh;overflow-y:auto">' + rows + '</div>');}</script><!-- 6. MAIN — zadnji --><script src="js/main.js?v=20260629233425"></script></body></html>
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIVE GALAXY</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function() {
+  const _sb = supabase.createClient(
+    'https://exmbmwukqssvgmhysamo.supabase.co',
+    'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'
+  );
+  window._supa = _sb;
+  window._supaAnonKey = 'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8';
+
+  // Provjeri maintenance mode i tajmer
+  document.documentElement.style.visibility = 'hidden';
+   _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(({ data, error }) => {
+    if (!error && data && data.is_premium === true) {
+      window.location.replace('maintenance.html');
+    } else {
+      document.documentElement.style.visibility = 'visible';
+      // Pokreni maintenance tajmer ako je postavljen
+      if (data && data.boosters && data.boosters.maintenance_at) {
+        _startMaintBanner(data.boosters.maintenance_at);
+      }
+    }
+  }).catch(() => {
+    document.documentElement.style.visibility = 'visible';
+  });
+
+  var _maintBannerInterval = null;
+  var _maintPollInterval   = null;
+
+  function _startMaintBanner(isoAt) {
+    var target = new Date(isoAt);
+    var banner = document.getElementById('maintBanner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'maintBanner';
+      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(255,100,0,0.95);color:#fff;text-align:center;padding:10px 20px;font-family:Orbitron,sans-serif;font-size:.85rem;font-weight:700;letter-spacing:2px;display:flex;align-items:center;justify-content:center;gap:16px';
+      banner.innerHTML = '<span>⚠️ MAINTENANCE ZA:</span><span id="maintBannerTime" style="font-size:1.1rem;color:#ffe000"></span>';
+      document.body.appendChild(banner);
+    }
+    if (_maintBannerInterval) clearInterval(_maintBannerInterval);
+    _maintBannerInterval = setInterval(function() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        clearInterval(_maintBannerInterval);
+        window.location.replace('maintenance.html');
+        return;
+      }
+      var m = Math.floor(diff / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      var el = document.getElementById('maintBannerTime');
+      if (el) el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }, 1000);
+  }
+
+  // Poll svakih 30s da provjeri da li je tajmer postavljen
+  _maintPollInterval = setInterval(function() {
+    _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(function(res) {
+      var d = res.data;
+      if (!d) return;
+      if (d.is_premium) { window.location.replace('maintenance.html'); return; }
+      if (d.boosters && d.boosters.maintenance_at) {
+        _startMaintBanner(d.boosters.maintenance_at);
+      } else if (_maintBannerInterval) {
+        clearInterval(_maintBannerInterval);
+        var b = document.getElementById('maintBanner');
+        if (b) b.remove();
+      }
+    });
+  }, 30000);
+
+  const hiveUser = localStorage.getItem('hg_hive_user');
+  if(hiveUser) {
+    window._hiveUser = hiveUser;
+    window._loginType = 'hive';
+    window._supaSession = null;
+
+    (async () => {
+      // Očisti staru sesiju iz localStorage (npr. od admin logina)
+      await _sb.auth.signOut({ scope: 'local' }).catch(() => {});
+
+      console.log('[hive] upsert players + hive_profiles');
+      fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: hiveUser })
+      }).catch(() => {});
+
+      // Dohvati profil
+      const { data } = await _sb.from('hive_profiles')
+        .select('is_premium, boosters')
+        .eq('id', hiveUser)
+        .maybeSingle();
+      window._hiveProfile   = data || {};
+      window._playerPremium = (data && data.is_premium) || false;
+
+      // Čekaj da se igra inicijalizira pa primijeni boosters i tokene
+      const applyKeys = async () => {
+        if(typeof R === 'undefined') { setTimeout(applyKeys, 200); return; }
+        if(typeof commander === 'undefined' || !commander.level || typeof ownedBlueprints === 'undefined') {
+          setTimeout(applyKeys, 200);
+          return;
+        }
+        try {
+          const [resPR, resHP] = await Promise.all([
+            _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),
+            _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).maybeSingle()
+          ]);
+          const hpPR = resPR.data;
+          const hp   = resHP.data;
+          if (hpPR) {
+            R.bcm          = hpPR.bcm        || 0;
+            R.bocrypto     = hpPR.bocrypto    || 0;
+            R.spCard       = hpPR.spcard      || 0;
+            R.keys         = Math.floor(hpPR.keys_cmd) || 0;
+            R.instanceKeys = Math.floor(hpPR.keys_inst) || 0;
+          }
+          if (hp) {
+            const pending = (hp.boosters && typeof hp.boosters === 'object' && !Array.isArray(hp.boosters)) ? hp.boosters : {};
+            const msgs = [];
+            if(pending.metal   > 0) { R.metal   = (R.metal   || 0) + pending.metal;   msgs.push('+' + pending.metal   + ' metal'); }
+            if(pending.crystal > 0) { R.crystal = (R.crystal || 0) + pending.crystal; msgs.push('+' + pending.crystal + ' kristal'); }
+            if(pending.he3     > 0) { R.he3     = (R.he3     || 0) + pending.he3;     msgs.push('+' + pending.he3     + ' He3'); }
+            if(pending.energy  > 0) { R.energy  = Math.min((R.energy || 0) + pending.energy, typeof getEnergyMax==='function' ? getEnergyMax() : (R.energy + pending.energy)); msgs.push('+' + pending.energy + ' energija'); }
+            if(pending.bcm     > 0) { R.bcm      = (R.bcm      || 0) + pending.bcm;   msgs.push('+' + pending.bcm      + ' BCM'); }
+            if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
+            if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }
+            if(msgs.length > 0) {
+              await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  action: 'save',
+                  player_id: hiveUser,
+                  data: { R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys }, _clear_boosters: true }
+                })
+              }).catch(() => {});
+              if(typeof updateResUI === 'function') updateResUI();
+              if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
+            }
+          }
+        } catch(e) { console.error('applyKeys error:', e); }
+      };
+      applyKeys();
+
+      fetch('https://api.hive-engine.com/rpc/contracts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'find', params: { contract: 'tokens', table: 'balances', query: { account: hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } }, limit: 10 } })
+      }).then(r => r.json()).then(res => {
+        const rows = res.result || [];
+        const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.'+'0'.repeat(dec)); };
+        window._chainBCM = get('BCM', 0);
+        window._chainBOC = get('BOCRYPTO', 3);
+        window._chainBPW = get('BPW', 8);
+      }).catch(() => {});
+    })();
+  }
+
+  if (!window._hiveUser) {
+    _sb.auth.getSession().then(async ({ data }) => {
+      if(data.session) {
+        window._supaSession = data.session;
+        window._loginType = 'email';
+        const uid = data.session.user.id;
+        const email = data.session.user.email?.toLowerCase();
+        // Osiguraj da players red postoji (FK za sve player_* tabele)
+        await _sb.from('players').upsert({ id: uid, player_type: 'email', username: email?.split('@')[0] || uid }).catch(() => {});
+        if (email) {
+          const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();
+          window._playerPremium = !!(pu && pu.is_premium);
+        }
+      } else { window.location.href = 'index.html'; }
+    });
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js?v=20260629233805"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js?v=20260629233805"></script>
+<link rel="stylesheet" href="css/base.css?v=20260629233805">
+<link rel="stylesheet" href="css/layout.css?v=20260629233805">
+<link rel="stylesheet" href="css/components.css?v=20260629233805">
+<link rel="stylesheet" href="css/animations.css?v=20260629233805">
+</head>
+<body>
+<div id="app">
+
+  <!-- ── HEADER ── -->
+  <div id="header">
+    <h1>⬡ HIVE GALAXY</h1>
+    <div class="res-bar">
+      <div class="res-item">🔩 <span class="rval" id="rMetal">0</span><span class="rprod" id="rMetalProd"></span></div>
+      <div class="res-item">💎 <span class="rval" id="rCrystal">0</span><span class="rprod" id="rCrystalProd"></span></div>
+      <div class="res-item">⛽ <span class="rval" id="rHe3">0</span><span class="rprod" id="rHe3Prod"></span></div>
+      <div class="res-item">⚡ <span class="rval" id="rEnergy">0</span></div>
+      <div class="res-item">🗝️ <span class="rval" id="rKeys">0</span></div>
+      <div class="res-item">🃏 <span class="rval" id="rCardKeys">0</span></div>
+      <div class="res-item">⭐ <span class="rval" id="rScore">0</span></div>
+    </div>
+    <div id="activeEventBadge" style="display:none;font-size:0.65rem;padding:2px 10px;
+      background:rgba(255,204,68,0.1);border-bottom:1px solid rgba(255,204,68,0.2);
+      text-align:center"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button onclick="showPanel('shop')" style="background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.3);color:#ffcc44;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🛒 Shop</button>
+      <button onclick="window.open('leaderboards.html','_blank')" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem">🏆 Leaderboard</button>
+      <button id="saveBtn" onclick="saveGame()">💾 Sačuvaj</button>
+      <div id="langPickerContainer" style="display:inline-block"></div>
+    </div>
+  </div>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div id="main-layout">
+
+    <!-- ── LEFT NAV ── -->
+    <div id="nav">
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-baza')" data-grp="grp-baza">
+        <span class="nav-grp-icon" id="icon-grp-baza">▾</span> <span data-i18n="nav.base">Baza</span>
+      </div>
+      <div class="nav-group" id="grp-baza">
+        <button class="nav-btn active" onclick="showPanel('base')" data-panel="base">
+          <span class="icon">🏰</span> <span data-i18n="nav.base">Baza</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('shipfactory')" data-panel="shipfactory">
+          <span class="icon">🏭</span> <span data-i18n="nav.shipfactory">Ship Factory</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('depot')" data-panel="depot">
+          <span class="icon">📦</span> <span data-i18n="nav.depot">Depot</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('recycler')" data-panel="recycler">
+          <span class="icon">♻️</span> <span data-i18n="nav.recycler">Recycler</span>
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-flota')" data-grp="grp-flota">
+        <span class="nav-grp-icon" id="icon-grp-flota">▾</span> <span data-i18n="nav.fleet">Flota</span>
+      </div>
+      <div class="nav-group" id="grp-flota">
+        <button class="nav-btn" onclick="showPanel('designer')" data-panel="designer">
+          <span class="icon">🔧</span> <span data-i18n="nav.designer">Designer</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('hangar')" data-panel="hangar">
+          <span class="icon">🏠</span> <span data-i18n="nav.hangar">Hangar</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('fleet')" data-panel="fleet">
+          <span class="icon">🚀</span> <span data-i18n="nav.fleet">Flota</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('formations')" data-panel="formations">
+          <span class="icon">⬛</span> <span data-i18n="nav.formations">Formacije</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('blueprints')" data-panel="blueprints">
+          <span class="icon">📋</span> <span data-i18n="nav.blueprints">Blueprinti</span>
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-galaksija')" data-grp="grp-galaksija">
+        <span class="nav-grp-icon" id="icon-grp-galaksija">▾</span> <span data-i18n="nav.galaxy">Galaksija</span>
+      </div>
+      <div class="nav-group" id="grp-galaksija">
+        <button class="nav-btn" onclick="showPanel('galaxy')" data-panel="galaxy">
+          <span class="icon">🗺️</span> <span data-i18n="nav.galaxy">Galaksija</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('instances')" data-panel="instances">
+          <span class="icon">🌌</span> <span data-i18n="nav.instances">Instance</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('colonies')" data-panel="colonies">
+          <span class="icon">🪐</span> <span data-i18n="nav.colonies">Kolonije</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('pvp')" data-panel="pvp">
+          <span class="icon">⚔️</span> <span data-i18n="nav.pvp">PvP</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('espionage')" data-panel="espionage">
+          <span class="icon">🕵️</span> <span data-i18n="nav.espionage">Špijunaža</span>
+        </button>
+      </div>
+
+      <div class="nav-section nav-toggle" onclick="toggleNavGroup('grp-napredak')" data-grp="grp-napredak">
+        <span class="nav-grp-icon" id="icon-grp-napredak">▾</span> <span data-i18n="nav.research">Istraživanje</span>
+      </div>
+      <div class="nav-group" id="grp-napredak">
+        <button class="nav-btn" onclick="showPanel('research')" data-panel="research">
+          <span class="icon">🔬</span> <span data-i18n="nav.research">Istraživanje</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('missions')" data-panel="missions" style="position:relative">
+          <span class="icon">📡</span> <span data-i18n="nav.missions">Misije</span>
+          <span id="missionsBadge" style="display:none;position:absolute;top:4px;right:4px;
+            background:#ff3355;color:white;font-size:0.55rem;font-weight:700;
+            padding:1px 5px;border-radius:8px;min-width:16px;text-align:center;
+            line-height:1.4;pointer-events:none"></span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('artifacts')" data-panel="artifacts">
+          <span class="icon">💠</span> <span data-i18n="nav.artifacts">Artefakti</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('achievements')" data-panel="achievements">
+          <span class="icon">🏆</span> <span data-i18n="nav.achievements">Dostignuća</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('commander')" data-panel="commander">
+          <span class="icon">🎖️</span> <span data-i18n="nav.commanders">Komandir</span>
+        </button>
+        <button class="nav-btn" onclick="showPanel('commander-cards')" data-panel="commander-cards">
+          <span class="icon">🃏</span> <span data-i18n="nav.cards">Karte</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── CONTENT ── -->
+    <div id="content">
+
+      <!-- BAZA -->
+      <div id="panel-base" class="panel active">
+        <div class="page-title">🏰 KOMANDNI CENTAR BAZE</div>
+        <div class="grid-3" id="baseGrid"></div>
+        <div class="page-title">⚡ ENERGETSKA MREŽA</div>
+        <div class="grid-4" id="energyGrid"></div>
+        <div class="page-title">🛡️ ODBRANA BAZE</div>
+        <div class="grid-4" id="defenseGrid"></div>
+        <div class="page-title">⚡ ENERGETSKI BILANS</div>
+        <div class="card" id="energyBalanceCard"></div>
+        <div class="page-title">🔧 SPECIJALNE ZGRADE</div>
+        <div class="grid-3" id="specialGrid"></div>
+      </div>
+
+      <!-- SHIP FACTORY -->
+      <div id="panel-shipfactory" class="panel">
+        <div class="page-title">🏭 FABRIKA BRODOVA</div>
+        <div id="shipFactoryCard"></div>
+        <div class="page-title" style="margin-top:20px">🚀 GRADNJA PO DIZAJNU</div>
+        <div id="shipBuildGrid"></div>
+      </div>
+
+      <!-- DEPOT -->
+      <div id="panel-depot" class="panel">
+        <div class="page-title">📦 DEPOT</div>
+        <div id="depotCard"></div>
+      </div>
+
+      <!-- RECYCLER -->
+      <div id="panel-recycler" class="panel">
+        <div class="page-title">♻️ RECIKLER</div>
+        <div id="recyclerContent"></div>
+      </div>
+
+      <!-- DESIGNER -->
+      <div id="panel-designer" class="panel">
+        <div class="page-title">🔧 DIZAJNER BRODOVA</div>
+        <div id="designerContent"></div>
+      </div>
+
+      <!-- HANGAR -->
+      <div id="panel-hangar" class="panel">
+        <div class="page-title">🏠 HANGAR</div>
+        <div id="hangarContent"></div>
+      </div>
+
+      <!-- FLOTA -->
+      <div id="panel-fleet" class="panel">
+        <div class="page-title">🚀 FLOTA</div>
+        <div id="fleetGrid"></div>
+      </div>
+
+      <!-- FORMACIJE -->
+      <div id="panel-formations" class="panel">
+        <div class="page-title">⬛ FORMACIJE FLOTE</div>
+        <div id="formationsContent"></div>
+      </div>
+
+      <!-- BLUEPRINTI -->
+      <div id="panel-blueprints" class="panel">
+        <div class="page-title">📋 BLUEPRINTI</div>
+        <div id="blueprintGrid"></div>
+      </div>
+
+      <!-- GALAKSIJA -->
+      <div id="panel-galaxy" class="panel">
+        <div class="page-title">🗺️ GALAKSIJA</div>
+        <div id="galaxyContent"></div>
+      </div>
+
+      <!-- INSTANCE -->
+      <div id="panel-instances" class="panel">
+        <div class="page-title">🌌 INSTANCE</div>
+        <div id="instanceContent"></div>
+      </div>
+
+      <!-- MISIJE -->
+      <div id="panel-missions" class="panel">
+        <div class="page-title">📡 MISIJE</div>
+        <div id="missionsContent"></div>
+      </div>
+
+      <!-- PVP -->
+      <div id="panel-pvp" class="panel">
+        <div class="page-title">⚔️ PvP ARENA</div>
+        <div id="pvpContent"></div>
+      </div>
+
+      <!-- ŠPIJUNAŽA -->
+      <div id="panel-espionage" class="panel">
+        <div class="page-title">🕵️ ŠPIJUNAŽA</div>
+        <div id="espionageContent"></div>
+      </div>
+
+      <!-- ISTRAŽIVANJE -->
+      <div id="panel-research" class="panel">
+        <div class="page-title">🔬 ISTRAŽIVANJE</div>
+        <div id="researchContent"></div>
+      </div>
+
+      <!-- KOLONIJE -->
+      <div id="panel-colonies" class="panel">
+        <div class="page-title">🪐 KOLONIJE</div>
+        <div id="coloniesContent"></div>
+      </div>
+
+      <!-- ARTEFAKTI -->
+      <div id="panel-artifacts" class="panel">
+        <div class="page-title">💠 ARTEFAKTI</div>
+        <div id="artifactsContent"></div>
+      </div>
+
+      <!-- DOSTIGNUĆA -->
+      <div id="panel-achievements" class="panel">
+        <div class="page-title">🏆 DOSTIGNUĆA</div>
+        <div id="achievementsContent"></div>
+      </div>
+
+      <!-- KOMANDIR -->
+      <div id="panel-commander" class="panel">
+        <div class="page-title">🎖️ KOMANDIR</div>
+        <div id="commanderContent"></div>
+      </div>
+
+      <!-- KARTE KOMANDIRA -->
+      <div id="panel-commander-cards" class="panel">
+        <div class="page-title">🃏 KARTE KOMANDIRA</div>
+        <!-- Tab navigacija -->
+        <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid rgba(0,212,255,0.15);padding-bottom:12px" id="cardTabNav"></div>
+        <!-- Tab sadržaj -->
+        <div id="cardTabBody"></div>
+        <!-- Skriveni divovi za svaki tab -->
+        <div id="commanderCardsContent" style="display:none"></div>
+        <div id="cmdFleetContent" style="display:none"></div>
+      </div>
+
+      <!-- SHOP -->
+      <div id="panel-shop" class="panel">
+        <div class="page-title">💎 ŠOP</div>
+        <div id="shopContent"></div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT PANEL ── -->
+    <div id="rightPanel">
+      <div class="rp-section">
+        <div class="rp-title">KOMANDIR</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span id="rpUsername" style="font-size:0.7rem;color:#00d4ff;font-family:'Share Tech Mono',monospace;font-weight:700"></span>
+          <span id="rpPremiumBadge" style="display:none;font-size:0.55rem;font-weight:700;letter-spacing:1px;padding:2px 6px;background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);color:#000;border-radius:3px">&#x2605; PREMIUM</span>
+        </div>
+        <div class="stat-row">Level <span id="cmdLevel">1</span> · <span id="cmdTitle" style="color:#6a90b8;font-size:0.7rem">Kadet</span></div>
+        <div class="pbar"><div class="pbar-fill" id="expBar" style="width:0%"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
+          <span style="font-size:0.65rem;color:#6a90b8"><span id="cmdExp">0</span> / <span id="cmdNextExp">1000</span> XP</span>
+          <button onclick="logoutGame()" style="font-size:0.5rem;padding:2px 7px;background:rgba(255,51,85,0.08);border:1px solid rgba(255,51,85,0.25);color:#ff3355;border-radius:3px;cursor:pointer;letter-spacing:1px">⏻ LOGOUT</button>
+        </div>
+      </div>
+      <!-- HIVE WALLET dugme -->
+      <div class="rp-section" id="hiveTokenSection" onclick="openHiveWalletModal()"
+        style="cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;border:1px solid rgba(255,204,0,0.15);border-radius:7px;padding:10px 12px"
+        onmouseenter="this.style.borderColor='rgba(255,204,0,0.45)';this.style.boxShadow='0 0 14px rgba(255,204,0,0.12)'"
+        onmouseleave="this.style.borderColor='rgba(255,204,0,0.15)';this.style.boxShadow=''">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;letter-spacing:2px;color:#ffcc44">&#x1F4B0; HIVE WALLET</div>
+          <span style="font-size:0.55rem;color:#ffcc44;background:rgba(255,204,68,0.1);border:1px solid rgba(255,204,68,0.25);border-radius:3px;padding:2px 7px;letter-spacing:1px">&#x25BA; OPEN WALLET</span>
+        </div>
+        <div style="font-size:0.65rem;font-family:'Share Tech Mono',monospace;display:flex;flex-direction:column;gap:3px">
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:#6a90b8">BCM <span style="font-size:0.5rem">(igrica)</span></span>
+            <span id="hBCM" style="color:white">0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:#6a90b8">BoCrypto <span style="font-size:0.5rem">(igrica)</span></span>
+            <span id="hBoCrypto" style="color:white">0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:#6a90b8">BPW <span style="font-size:0.5rem">(igrica)</span></span>
+            <span id="hBPW" style="color:#ffcc44">0</span>
+          </div>
+        </div>
+        <div id="hiveTokenLock" style="display:none;margin-top:6px;text-align:center;color:#6a90b8;font-size:0.6rem">
+          &#x1F512; Potreban <span style="color:#ffcc44">Premium</span>
+        </div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">FLOTA MOĆ</div>
+        <div id="fleetPowerDisplay" style="font-size:1.2rem;font-family:'Orbitron',monospace;color:#00d4ff">0</div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">FORMACIJA</div>
+        <div id="formationStatus"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">DEPOT STATUS</div>
+        <div id="depotStatus"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">HANGAR</div>
+        <div id="hangarStatus"></div>
+      </div>
+      <div class="rp-section" style="flex:1;display:flex;flex-direction:column;min-height:0">
+        <!-- Tab header -->
+        <div style="display:flex;gap:0;margin-bottom:8px;border-bottom:1px solid rgba(0,212,255,0.15)">
+          <button id="tab-log" onclick="switchRightTab('log')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid #00d4ff;
+              color:#00d4ff;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">LOG</button>
+          <button id="tab-events" onclick="switchRightTab('events')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;
+              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">EVENTI</button>
+          <button id="tab-pvp" onclick="switchRightTab('pvp')"
+            style="flex:1;background:none;border:none;border-bottom:2px solid transparent;
+              color:#6a90b8;font-size:0.65rem;font-weight:700;padding:4px 0;cursor:pointer;
+              font-family:'Orbitron',monospace;letter-spacing:1px">PVP</button>
+        </div>
+        <!-- Log panel -->
+        <div id="logPanel" style="font-size:0.7rem;color:#6a90b8;overflow-y:auto;flex:1"></div>
+        <!-- Events panel -->
+        <div id="eventsPanel" style="display:none;overflow-y:auto;flex:1"></div>
+        <!-- PvP panel -->
+        <div id="pvpPanel" style="display:none;overflow-y:auto;flex:1"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center">
+  <div style="background:#0c1428;border:1px solid #00d4ff33;border-radius:10px;padding:24px;max-width:520px;width:90%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden">
+    <div id="mTitle" style="font-family:'Orbitron',monospace;font-size:1rem;color:#00d4ff;margin-bottom:16px;flex-shrink:0"></div>
+    <div id="mBody" style="overflow-y:hidden;flex:1;min-height:0"></div>
+    <div id="mActions" style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-shrink:0;border-top:1px solid rgba(0,212,255,0.1);padding-top:14px"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast-area" style="position:fixed;bottom:20px;right:20px;z-index:1000"></div>
+
+<!-- EVENT BANNER -->
+<div id="eventBanner" style="
+  display:none;
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:0;
+  pointer-events:none;
+">
+  <div id="eventBannerInner" style="
+    margin:12px auto;max-width:520px;
+    border-radius:10px;padding:16px 24px;
+    display:flex;align-items:center;gap:16px;
+    box-shadow:0 4px 32px rgba(0,0,0,0.6);
+    animation:eventBannerIn 0.35s cubic-bezier(.22,1,.36,1);
+  ">
+    <div id="eventBannerIcon" style="font-size:2.2rem;flex-shrink:0"></div>
+    <div style="flex:1;min-width:0">
+      <div id="eventBannerLabel" style="font-size:0.6rem;font-weight:700;
+        letter-spacing:3px;opacity:0.8;margin-bottom:3px;font-family:'Orbitron',monospace"></div>
+      <div id="eventBannerName" style="font-size:1rem;font-weight:700;
+        font-family:'Orbitron',monospace;letter-spacing:1px"></div>
+      <div id="eventBannerDesc" style="font-size:0.68rem;opacity:0.75;margin-top:3px"></div>
+    </div>
+    <div id="eventBannerCountdown" style="
+      font-size:2rem;font-family:'Orbitron',monospace;font-weight:700;
+      min-width:36px;text-align:center;flex-shrink:0;
+    "></div>
+  </div>
+</div>
+<style>
+@keyframes eventBannerIn {
+  from { opacity:0; transform:translateY(-24px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0)     scale(1);    }
+}
+@keyframes eventBannerOut {
+  from { opacity:1; transform:translateY(0)     scale(1);    }
+  to   { opacity:0; transform:translateY(-16px) scale(0.97); }
+}
+@keyframes pvpDmgFloat {
+  0%   { opacity:1; transform:translateY(0)     scale(1);   }
+  100% { opacity:0; transform:translateY(-24px) scale(0.8); }
+}
+.btn-danger {
+  background: rgba(255,51,85,0.12);
+  border: 1px solid rgba(255,51,85,0.4);
+  color: #ff3355;
+}
+.btn-danger:hover {
+  background: rgba(255,51,85,0.25);
+}
+</style>
+
+<!-- ── SCRIPTS — redoslijed je bitan ── -->
+
+<!-- 1. DATA fajlovi — samo podaci, nula logike -->
+<script src="data/buildings.js"></script>
+<script src="data/ships.js"></script>
+<script src="data/weapons.js"></script>
+<script src="data/shields.js"></script>
+<script src="data/engines.js"></script>
+<script src="data/recon.js"></script>
+<script src="data/special.js"></script>
+<script src="data/modules.js"></script>
+<script src="data/blueprints.js"></script>
+<script src="data/instances_easy.js"></script>
+<script src="data/instances_normal.js"></script>
+<script src="data/instances_nightmare.js"></script>
+<script src="data/instances_hell.js"></script>
+<script src="data/instances.js"></script>
+<script src="data/commanders.js"></script>
+<script src="data/commanders_xenos.js"></script>
+<script src="data/commanders_undead.js"></script>
+<script src="data/passive_bonuses.js"></script>
+
+<!-- 1b. I18N -->
+<script src="js/i18n.js?v=20260629233805"></script>
+
+<!-- 2. STATE -->
+<script src="js/state.js?v=20260629233805"></script>
+
+<!-- 3. SAVE/LOAD -->
+<script src="js/save.js?v=20260629233805"></script>
+
+<!-- 4. UI -->
+<script src="js/ui/toast.js?v=20260629233805"></script>
+<script src="js/ui/render.js?v=20260629233805"></script>
+<script src="js/ui/modal.js?v=20260629233805"></script>
+<script src="js/ui/battle-anim.js?v=20260629233805"></script>
+
+<!-- 5. SYSTEMS -->
+<script src="js/systems/economy.js?v=20260629233805"></script>
+<script src="js/systems/buildings.js?v=20260629233805"></script>
+<script src="js/systems/fleet.js?v=20260629233805"></script>
+<script src="js/systems/designer.js?v=20260629233805"></script>
+<script src="js/systems/combat.js?v=20260629233805"></script>
+<script src="js/systems/instances.js?v=20260629233805"></script>
+<script src="js/systems/blueprints.js?v=20260629233805"></script>
+<script src="js/systems/research.js?v=20260629233805"></script>
+<script src="js/systems/colonies.js?v=20260629233805"></script>
+<script src="js/systems/missions.js?v=20260629233805"></script>
+<script src="js/systems/pvp.js?v=20260629233805"></script>
+<script src="js/ui/pvp-battle-3d.js?v=20260629233805"></script>
+<script src="js/systems/espionage.js?v=20260629233805"></script>
+<script src="js/systems/artifacts.js?v=20260629233805"></script>
+<script src="js/systems/achievements.js?v=20260629233805"></script>
+<script src="js/systems/commander.js?v=20260629233805"></script>
+<script src="js/systems/commander_cards.js?v=20260629233805"></script>
+<script src="js/systems/shop.js?v=20260629233805"></script>
+<script src="js/systems/galaxy.js?v=20260629233805"></script>
+<script src="js/systems/formations.js?v=20260629233805"></script>
+<script src="js/systems/events.js?v=20260629233805"></script>
+
+<script>
+function logoutGame() {
+  if (!confirm('Sigurno se želiš odjaviti?')) return;
+  saveGame();
+  localStorage.removeItem('hg_hive_user');
+  if (window._supa) window._supa.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+function updateHiveTokenUI() {
+  const unEl = document.getElementById('rpUsername');
+  const badgeEl = document.getElementById('rpPremiumBadge');
+  if (unEl) {
+    const name = window._hiveUser || (window._supaSession && (window._supaSession.user.user_metadata?.username || window._supaSession.user.email?.split('@')[0])) || '';
+    unEl.textContent = name ? '@' + name : '';
+  }
+  const isPremium = window._playerPremium || false;
+  if (badgeEl) badgeEl.style.display = isPremium ? '' : 'none';
+  const lock = document.getElementById('hiveTokenLock');
+  if (lock) lock.style.display = (window._hiveUser && !isPremium) ? 'block' : 'none';
+}
+
+// ── Wallet modal ──
+async function openHiveWalletModal() {
+  if (!window._hiveUser) {
+    if (typeof toast === 'function') toast('Prijavi se sa HIVE Keychain da koristiš wallet!', 'warn');
+    return;
+  }
+
+  const isPremium = window._playerPremium || false;
+
+  // Fetch chain balances
+  let chainBCM = '...', chainBOC = '...', chainBPW = '...';
+  const modal = document.createElement('div');
+  modal.id = 'hiveWalletModal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,5,15,0.92);display:flex;align-items:center;justify-content:center';
+
+  const renderModal = (bcm, boc, bpw) => {
+    const gameBCM = Math.floor(R.bcm || 0).toString();
+    const gameBOC = (R.bocrypto || 0).toFixed(3);
+    const gameBPW = ((R.spCard || 0) / 100000000).toFixed(8);
+
+    const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)';
+    const labelStyle = 'font-size:0.85rem;color:#6a90b8;font-family:"Share Tech Mono",monospace';
+    const valStyle = 'font-size:1rem;font-family:"Orbitron",monospace;color:white';
+    const depBtn = (sym) => isPremium
+      ? `<button onclick="walletDeposit('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`
+      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
+    const witBtn = (sym) => isPremium
+      ? `<button onclick="walletWithdraw('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`
+      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
+
+    modal.innerHTML = `
+      <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,204,0,0.2);border-radius:14px;
+        width:min(860px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;
+        box-shadow:0 0 80px rgba(255,204,0,0.1)">
+        <!-- Header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid rgba(255,204,0,0.15);flex-shrink:0">
+          <div>
+            <div style="font-family:'Orbitron',monospace;font-size:1.1rem;color:#ffcc44;letter-spacing:2px">💰 HIVE WALLET</div>
+            <div style="font-size:0.7rem;color:#6a90b8;margin-top:4px">@${window._hiveUser}</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button onclick="refreshHiveWallet()" style="font-size:0.7rem;padding:6px 14px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;border-radius:5px;cursor:pointer">🔄 Refresh</button>
+            <button onclick="document.getElementById('hiveWalletModal').remove()" style="font-size:0.8rem;padding:6px 14px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);color:#ff3355;border-radius:5px;cursor:pointer">✕ Zatvori</button>
+          </div>
+        </div>
+        <!-- Body -->
+        <div style="flex:1;overflow-y:auto;padding:0 28px 24px">
+          <!-- Column headers -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:18px 0 8px;text-align:center">
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#6a90b8;letter-spacing:2px">TOKEN</div>
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00d4ff;letter-spacing:2px">⛓ BLOCKCHAIN WALLET</div>
+            <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:#00ff88;letter-spacing:2px">🎮 U IGRICI</div>
+          </div>
+          <!-- BCM -->
+          <div style="${rowStyle}">
+            <div style="flex:1">
+              <div style="${labelStyle}">BCM</div>
+              <div style="font-size:0.5rem;color:#444;margin-top:1px">BoCrypto Miner</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00d4ff">${bcm}</div>
+              <div style="margin-top:4px">${depBtn('BCM')}</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00ff88">${gameBCM}</div>
+              <div style="margin-top:4px">${witBtn('BCM')}</div>
+            </div>
+          </div>
+          <!-- BOCRYPTO -->
+          <div style="${rowStyle}">
+            <div style="flex:1">
+              <div style="${labelStyle}">BoCrypto</div>
+              <div style="font-size:0.5rem;color:#444;margin-top:1px">BOCRYPTO token</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00d4ff">${boc}</div>
+              <div style="margin-top:4px">${depBtn('BOCRYPTO')}</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00ff88">${gameBOC}</div>
+              <div style="margin-top:4px">${witBtn('BOCRYPTO')}</div>
+            </div>
+          </div>
+          <!-- BPW -->
+          <div style="${rowStyle}">
+            <div style="flex:1">
+              <div style="${labelStyle}">BPW</div>
+              <div style="font-size:0.5rem;color:#444;margin-top:1px">BoCrypto Power</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00d4ff">${bpw}</div>
+              <div style="margin-top:4px">${depBtn('BPW')}</div>
+            </div>
+            <div style="flex:1;text-align:center">
+              <div style="${valStyle};color:#00ff88">${gameBPW}</div>
+              <div style="margin-top:4px">${witBtn('BPW')}</div>
+            </div>
+          </div>
+          ${!isPremium ? '<div style="margin-top:14px;text-align:center;padding:10px;background:rgba(255,204,0,0.06);border:1px solid rgba(255,204,0,0.2);border-radius:6px;font-size:0.65rem;color:#ffcc44">🔒 DEP/WIT dugmad su zaključana — potreban je <b>Premium</b></div>' : ''}
+          <div style="margin-top:12px;font-size:0.55rem;color:#444;text-align:center">
+            DEP = prebaci iz blockchain walleta u igru · WIT = prebaci iz igre u blockchain wallet (24h)
+          </div>
+        </div>
+      </div>`;
+  };
+
+  renderModal('...', '...', '...');
+  document.body.appendChild(modal);
+
+  // Fetch live balances
+  try {
+    const res = await fetch('https://api.hive-engine.com/rpc/contracts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0', id: 1, method: 'find',
+        params: {
+          contract: 'tokens', table: 'balances',
+          query: { account: window._hiveUser, symbol: { '$in': ['BCM', 'BOCRYPTO', 'BPW'] } },
+          limit: 10
+        }
+      })
+    });
+    const data = await res.json();
+    const rows = data.result || [];
+    const get = (sym, dec) => { const r = rows.find(x => x.symbol === sym); return r ? parseFloat(r.balance).toFixed(dec) : (dec === 0 ? '0' : '0.' + '0'.repeat(dec)); };
+    window._walletChainBCM = get('BCM', 0);
+    window._walletChainBOC = get('BOCRYPTO', 3);
+    window._walletChainBPW = get('BPW', 8);
+    renderModal(window._walletChainBCM, window._walletChainBOC, window._walletChainBPW);
+  } catch(e) {
+    renderModal('greška', 'greška', 'greška');
+  }
+}
+
+function refreshHiveWallet() {
+  const el = document.getElementById('hiveWalletModal');
+  if (el) el.remove();
+  openHiveWalletModal();
+}
+
+async function walletWithdraw(symbol) {
+  if (!window._hiveUser) { toast('Prijavi se sa HIVE Keychain!', 'warn'); return; }
+  if (!window._playerPremium) { toast('Potreban je Premium za withdraw!', 'warn'); return; }
+  if (!window._supa) return;
+
+  const cfg = {
+    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,      gas: null,  gasFlat: 1000, gasCurrency: 'bocrypto', decimals: 0 },
+    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000,   gas: 0.01,  gasFlat: null, gasCurrency: 'bocrypto', decimals: 3 },
+    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,    gas: 0.01,  gasFlat: null, gasCurrency: 'spCard',   decimals: 8, satoshi: true },
+  }[symbol];
+  if (!cfg) return;
+
+  const gameAmt = cfg.satoshi ? (R[cfg.key] || 0) : (R[cfg.key] || 0);
+  const gameDisplay = cfg.satoshi ? (gameAmt / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)) + ' ' + cfg.label;
+  const minDisplay = cfg.satoshi ? (cfg.min / 1e8).toFixed(8) + ' BPW' : (cfg.decimals === 0 ? cfg.min : cfg.min.toFixed ? cfg.min.toFixed(cfg.decimals) : cfg.min) + ' ' + cfg.label;
+
+  // Provjeri minimum
+  if (gameAmt < cfg.min) {
+    toast('Minimum za withdraw: ' + minDisplay + ' (imaš ' + gameDisplay + ')', 'warn');
+    return;
+  }
+
+  // Gas info string
+  let gasInfo = '';
+  if (cfg.gasFlat) {
+    gasInfo = `Gas fee: <strong style="color:#ff6600">${cfg.gasFlat.toLocaleString()} BoCrypto</strong> (flat)`;
+  } else {
+    const gasPct = (cfg.gas * 100) + '%';
+    gasInfo = `Gas fee: <strong style="color:#ff6600">${gasPct}</strong> od iznosa`;
+  }
+
+  // Modal za unos iznosa
+  const modalEl = document.createElement('div');
+  modalEl.id = 'withdrawModal';
+  modalEl.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,5,15,0.95);display:flex;align-items:center;justify-content:center';
+  modalEl.innerHTML = `
+    <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,100,0,0.3);border-radius:14px;
+      width:min(480px,94vw);padding:28px;box-shadow:0 0 60px rgba(255,100,0,0.15)">
+      <div style="font-family:'Orbitron',monospace;font-size:1rem;color:#ff6600;letter-spacing:2px;margin-bottom:6px">⬆ WITHDRAW ${symbol}</div>
+      <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:20px">U igrici: <strong style="color:white">${gameDisplay}</strong> · Min: <strong style="color:#ffcc44">${minDisplay}</strong></div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:0.7rem;color:#6a90b8;display:block;margin-bottom:6px">Iznos za withdraw</label>
+        <input id="witAmt" type="number" step="${cfg.satoshi ? '0.00000001' : cfg.decimals === 0 ? '1' : '0.001'}"
+          min="${cfg.satoshi ? (cfg.min/1e8) : cfg.min}"
+          max="${cfg.satoshi ? (gameAmt/1e8) : gameAmt}"
+          value="${cfg.satoshi ? (gameAmt/1e8).toFixed(8) : cfg.decimals === 0 ? Math.floor(gameAmt) : gameAmt.toFixed(cfg.decimals)}"
+          style="width:100%;box-sizing:border-box;padding:10px 14px;background:rgba(0,0,0,0.4);
+            border:1px solid rgba(255,100,0,0.3);border-radius:6px;color:white;font-size:0.85rem;
+            font-family:'Share Tech Mono',monospace"
+          oninput="updateWitPreview('${symbol}')">
+      </div>
+
+      <div id="witPreview" style="background:rgba(255,100,0,0.06);border:1px solid rgba(255,100,0,0.2);
+        border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.72rem;line-height:2">
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('withdrawModal').remove()"
+          style="flex:1;padding:10px;background:rgba(255,51,85,0.1);border:1px solid rgba(255,51,85,0.3);
+            color:#ff3355;border-radius:6px;cursor:pointer;font-size:0.75rem">✕ Otkaži</button>
+        <button onclick="submitWithdraw('${symbol}')"
+          style="flex:2;padding:10px;background:rgba(255,100,0,0.15);border:1px solid rgba(255,100,0,0.4);
+            color:#ff6600;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:700">⬆ Pošalji zahtev</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modalEl);
+  updateWitPreview(symbol);
+}
+
+function updateWitPreview(symbol) {
+  const cfg = {
+    BCM:      { key: 'bcm',      label: 'BCM',      min: 1,    gas: null, gasFlat: 1000, gasCurrency: 'BoCrypto', satoshi: false },
+    BOCRYPTO: { key: 'bocrypto', label: 'BoCrypto', min: 1000, gas: 0.01, gasFlat: null, gasCurrency: 'BoCrypto', satoshi: false },
+    BPW:      { key: 'spCard',   label: 'BPW',      min: 1e7,  gas: 0.01, gasFlat: null, gasCurrency: 'BPW',      satoshi: true },
+  }[symbol];
+  const input = document.getElementById('witAmt');
+  const preview = document.getElementById('witPreview');
+  if (!input || !preview || !cfg) return;
+
+  const amt = parseFloat(input.value) || 0;
+  let gas = 0, net = 0, gasLabel = '', netLabel = '', valid = true, errMsg = '';
+
+  if (symbol === 'BCM') {
+    gas = 1000; // flat BoCrypto
+    net = Math.floor(amt);
+    const bocBal = R.bocrypto || 0;
+    if (bocBal < gas) { valid = false; errMsg = 'Nemaš dovoljno BoCrypto za gas fee (treba 1,000)!'; }
+    if (net < 1) { valid = false; errMsg = 'Minimum 1 BCM!'; }
+    gasLabel = `1,000 BoCrypto (flat)`;
+    netLabel = `${net} BCM`;
+  } else if (symbol === 'BOCRYPTO') {
+    gas = Math.ceil(amt * 0.01);
+    net = amt - gas;
+    if (amt < 1000) { valid = false; errMsg = 'Minimum 1,000 BoCrypto!'; }
+    if (net <= 0) { valid = false; errMsg = 'Iznos je premali!'; }
+    gasLabel = `${gas.toLocaleString()} BoCrypto (1%)`;
+    netLabel = `${net.toFixed(3)} BoCrypto`;
+  } else if (symbol === 'BPW') {
+    const amtSat = Math.round(amt * 1e8);
+    gas = Math.ceil(amtSat * 0.01);
+    net = amtSat - gas;
+    if (amtSat < 1e7) { valid = false; errMsg = 'Minimum 0.1 BPW!'; }
+    gasLabel = `${(gas/1e8).toFixed(8)} BPW (1%)`;
+    netLabel = `${(net/1e8).toFixed(8)} BPW`;
+  }
+
+  preview.innerHTML = valid
+    ? `<div>Iznos: <strong style="color:white">${symbol === 'BPW' ? amt.toFixed(8)+' BPW' : symbol==='BCM' ? Math.floor(amt)+' BCM' : amt.toFixed(3)+' BoCrypto'}</strong></div>
+       <div>Gas fee: <strong style="color:#ff6600">${gasLabel}</strong></div>
+       <div>Dobijaš: <strong style="color:#00ff88">${netLabel}</strong></div>
+       <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Zahtev je vidljiv u admin panelu</div>`
+    : `<div style="color:#ff3355">⚠ ${errMsg}</div>`;
+  document.getElementById('withdrawModal').querySelector('button:last-child').disabled = !valid;
+  document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.4';
+}
+
+async function submitWithdraw(symbol) {
+  if (!window._supa) return;
+  const cfg = {
+    BCM:      { key: 'bcm',    min: 1,    gas: null, gasFlat: 1000, satoshi: false },
+    BOCRYPTO: { key: 'bocrypto', min: 1000, gas: 0.01, gasFlat: null, satoshi: false },
+    BPW:      { key: 'spCard', min: 1e7,  gas: 0.01, gasFlat: null, satoshi: true },
+  }[symbol];
+  const input = document.getElementById('witAmt');
+  if (!input || !cfg) return;
+
+  const amt = parseFloat(input.value) || 0;
+  let amtRaw = cfg.satoshi ? Math.round(amt * 1e8) : amt;
+  let gas = 0, net = 0;
+
+  if (symbol === 'BCM') {
+    gas = 1000; net = Math.floor(amtRaw);
+    if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas!', 'warn'); return; }
+    if (net < 1) return;
+    R.bocrypto = (R.bocrypto || 0) - gas;
+    R.bcm = (R.bcm || 0) - net;
+  } else if (symbol === 'BOCRYPTO') {
+    gas = Math.ceil(amtRaw * 0.01);
+    net = amtRaw - gas;
+    if ((R.bocrypto || 0) < amtRaw) { toast('Nema dovoljno BoCrypto!', 'warn'); return; }
+    R.bocrypto = (R.bocrypto || 0) - amtRaw;
+  } else if (symbol === 'BPW') {
+    gas = Math.ceil(amtRaw * 0.01);
+    net = amtRaw - gas;
+    if ((R.spCard || 0) < amtRaw) { toast('Nema dovoljno BPW!', 'warn'); return; }
+    R.spCard = (R.spCard || 0) - amtRaw;
+  }
+
+  const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? window._hiveUser : window._supaSession?.user?.id);
+  const username = window._hiveUser || window._supaSession?.user?.email?.split('@')[0] || 'unknown';
+
+  const { error } = await window._supa.from('withdrawals').insert({
+    player_id: uid,
+    username,
+    hive_account: window._hiveUser || null,
+    token: symbol,
+    amount: cfg.satoshi ? amtRaw : amtRaw,
+    gas_amount: gas,
+    net_amount: net,
+    status: 'pending',
+    requested_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    // Vrati resurse ako insert falio
+    if (symbol === 'BCM') { R.bocrypto += 1000; R.bcm += net; }
+    else if (symbol === 'BOCRYPTO') R.bocrypto += amtRaw;
+    else if (symbol === 'BPW') R.spCard += amtRaw;
+    toast('Greška pri slanju zahteva: ' + error.message, 'err');
+    return;
+  }
+
+  if (typeof updateResUI === 'function') updateResUI();
+  if (typeof saveGame === 'function') saveGame();
+  document.getElementById('withdrawModal')?.remove();
+  document.getElementById('hiveWalletModal')?.remove();
+  toast('✅ Withdraw zahtev poslat! Obrada 24-48h.', 'ok');
+}
+
+function walletDeposit(symbol) {
+  if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
+  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];
+  if (!cfg) return;
+  const amtStr = prompt('Koliko ' + symbol + ' da depositiraš u igru?', '1');
+  if (!amtStr) return;
+  const amt = parseFloat(amtStr);
+  if (isNaN(amt) || amt <= 0) return;
+  const method = 'requestSendToken';
+  const amtFormatted = symbol === 'BPW' ? amt.toFixed(8) : amt.toFixed(3);
+  window.hive_keychain[method](
+    window._hiveUser, 'bokica80', amtFormatted,
+    'HIVEGALAXY_deposit_' + symbol + '_' + window._hiveUser, symbol,
+    function(resp) {
+      if (resp.success) {
+        R[cfg.key] = (R[cfg.key] || 0) + (cfg.div > 1 ? Math.round(amt * cfg.div) : amt);
+        if (typeof updateResUI === 'function') updateResUI();
+        if (typeof saveGame === 'function') saveGame();
+        if (typeof toast === 'function') toast('✅ Deposit ' + amtFormatted + ' ' + symbol + ' uspešan!', 'ok');
+        refreshHiveWallet();
+      } else {
+        alert('Transakcija odbijena: ' + (resp.message || 'Greška'));
+      }
+    }
+  );
+}
+
+function walletWithdraw(symbol) {
+  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];
+  if (!cfg) return;
+  const gameAmt = cfg.div > 1 ? ((R[cfg.key] || 0) / cfg.div).toFixed(3) : (R[cfg.key] || 0).toFixed(3);
+  const amtStr = prompt('Koliko ' + symbol + ' da povučeš iz igre?\n(Imaš: ' + gameAmt + ' ' + symbol + ')', '1');
+  if (!amtStr) return;
+  const amt = parseFloat(amtStr);
+  if (isNaN(amt) || amt <= 0) return;
+  const deduct = cfg.div > 1 ? Math.round(amt * cfg.div) : amt;
+  if (deduct > (R[cfg.key] || 0)) { alert('Nemaš dovoljno ' + symbol + ' u igri!'); return; }
+  R[cfg.key] = (R[cfg.key] || 0) - deduct;
+  if (typeof updateResUI === 'function') updateResUI();
+  if (typeof saveGame === 'function') saveGame();
+  if (typeof toast === 'function') toast('⏳ Withdraw ' + amt.toFixed(3) + ' ' + symbol + ' zahtjev primljen. Isplata do 24h.', 'inf');
+  refreshHiveWallet();
+}
+
+async function openLeaderboard() {
+  infoModal('🏆 Leaderboard', '<div style="text-align:center;color:#6a90b8;padding:20px">Učitavam...</div>');
+  if (!window._supa) return;
+  const { data } = await window._supa.from('leaderboard').select('username,score,level,is_premium').order('score', { ascending: false }).limit(50);
+  if (!data || data.length === 0) { infoModal('🏆 Leaderboard', '<div style="color:#6a90b8;text-align:center;padding:20px">Nema igrača.</div>'); return; }
+  const rows = data.map((p, i) => {
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';
+    const prem  = p.is_premium ? ' <span style="color:#ffcc44;font-size:0.6rem">★</span>' : '';
+    const isMe  = p.username === (window._hiveUser || '');
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)' + (isMe ? ';background:rgba(0,212,255,0.05);border-radius:4px;padding:7px 6px' : '') + '">' +
+      '<div><span style="color:#6a90b8;font-size:0.7rem;margin-right:8px">' + medal + '</span><span style="color:' + (isMe ? '#00d4ff' : '#fff') + ';font-size:0.78rem;font-weight:600">' + p.username + '</span>' + prem + '<span style="color:#4a6a8a;font-size:0.6rem;margin-left:6px">Lv.' + (p.level||1) + '</span></div>' +
+      '<span style="color:#ffcc44;font-size:0.72rem;font-family:Orbitron,monospace">' + fmt(p.score||0) + '</span>' +
+      '</div>';
+  }).join('');
+  infoModal('🏆 Leaderboard', '<div style="max-height:60vh;overflow-y:auto">' + rows + '</div>');
+}
+</script>
+<!-- 6. MAIN — zadnji -->
+<script src="js/main.js?v=20260629233805"></script>
+
+</body>
+</html>
