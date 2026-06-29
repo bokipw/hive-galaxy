@@ -556,7 +556,8 @@ function openInstanceModal(instId) {
           ${({'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]) ? `<div>🎁 Garant drop: <span style="color:#00ff88;font-weight:700">${{'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]} itema</span></div>` : ''}
           <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ Energija: ${energyCost} MWh</div>
-          <div>✅ Clearova: ${prog.clear_count}</div>
+          <div>✅ Clearova: ${prog.clear_count} ${prog.claimed100 ? '🃏' : ''}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${prog.claimed100 ? t('instance.milestone100.earned') : t('instance.milestone100.progress', { count: Math.min(prog.clear_count, 100) })}</div>
           ${prog.best_rank ? `<div>⚡ 🏆 Best rank: ${prog.best_rank}</div>` : ''}
         </div>
 

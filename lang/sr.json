@@ -4690,7 +4690,9 @@
     "instance": {
       "milestone100": {
         "keyReward": "🃏 +1 komandir ključ (100x {name} [{mode}])",
-        "retro": "🃏 +{n} komandir ključ(ev/a) od 100x instanci"
+        "retro": "🃏 +{n} komandir ključ(ev/a) od 100x instanci",
+        "progress": "🃏 +1 komandir ključ na 100x ({count}/100)",
+        "earned": "🃏 Komandir ključ osvojen!"
       }
     },
     "footer": {
