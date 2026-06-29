@@ -16,14 +16,16 @@ async function _hiveSave(payload) {
   try {
     const cmdrs = payload.ownedCommanders || [];
     const total = cmdrs.reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
-    console.log(`[hiveSave] brodova: ${total}, commanders: ${cmdrs.length}`, JSON.stringify(cmdrs.map(c => ({ id: c.id, fleet: (c.fleet||[]).map(s => s ? { id: s.ship_id, count: s.count } : null) }))));
+    console.log(`[hiveSave] brodova: ${total}, commanders: ${cmdrs.length}`);
     const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'save', player_id: window._hiveUser, data: payload })
     });
-    const result = await resp.json();
-    if (!result.success) console.error('[hiveSave] error:', result.errors || result.error || '(unknown)');
+    const text = await resp.text();
+    let result;
+    try { result = JSON.parse(text); } catch(e) { result = { success: false, error: text }; }
+    if (!result.success) console.error('[hiveSave] error:', JSON.stringify(result.errors || result.error || text));
     return result;
   } catch(e) { console.error('[hiveSave] exception:', e); }
 }
@@ -314,6 +316,8 @@ function _buildSaveFromTables(tables) {
     R: {
       metal: pr.metal || 0, crystal: pr.crystal || 0, he3: pr.he3 || 0,
       energy: pr.energy || 100, score: pr.score || 0,
+      keys: pr.keys_cmd || 0, instanceKeys: pr.keys_inst || 0,
+      bcm: pr.bcm || 0, bocrypto: pr.bocrypto || 0, spCard: pr.spcard || 0,
       D: pdef.defenses || {},
     },
     buildings: pb.buildings || {},

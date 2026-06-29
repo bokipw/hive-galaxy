@@ -578,10 +578,36 @@ function openInstanceModal(instId) {
 
         <!-- Specifični item dropovi -->
         ${(() => {
+          const isBoss = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'].includes(inst.type);
           const rarCol = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+          const rarIcons = { C:'⚪', R:'🔵', E:'🟣', L:'🌟' };
           const guaranteed = inst.drops?.guaranteed || [];
           const chance     = inst.drops?.chance     || [];
-          if (guaranteed.length === 0 && chance.length === 0) return '';
+
+          // Boss instance — show boss-specific drop info instead of raw chance list
+          if (isBoss) {
+            const bossDropCount = { boss_rare: 3, boss_epic: 6, boss_legendary: 10, boss_master: 15, boss: 6 }[inst.type] || 0;
+            const bossRarityPool = {
+              boss_rare:      { easy: ['C'], normal: ['C','R'], nightmare: ['C','R'], hell: ['C','R','R','R'] },
+              boss_epic:      { easy: ['C'], normal: ['C','R'], nightmare: ['C','R','E'], hell: ['C','R','E','E'] },
+              boss_legendary: { easy: ['C'], normal: ['C','R'], nightmare: ['C','R','E'], hell: ['C','R','E','L'] },
+              boss_master:    { easy: ['C','R'], normal: ['C','R','E'], nightmare: ['C','R','E','L'], hell: ['C','R','E','L','L','L'] },
+              boss:           { easy: ['C'], normal: ['C','R'], nightmare: ['C','R','E'], hell: ['C','R','E','L'] },
+            };
+            const pool = (bossRarityPool[inst.type] || {})[_instDifficultyMode || 'easy'] || ['C'];
+            const uniqueRars = [...new Set(pool)];
+            return `
+            <div style="margin-top:12px">
+              <div style="font-size:0.72rem;color:#ffaa00;margin-bottom:6px">🎰 BOSS DROPOVI</div>
+              <div style="background:rgba(255,170,0,0.06);border:1px solid rgba(255,170,0,0.25);border-radius:6px;padding:10px">
+                <div style="font-size:0.62rem;color:#ffaa00;margin-bottom:6px">📦 ${bossDropCount} itema po pobedi</div>
+                <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:4px">Dostupni rariteti:</div>
+                <div style="display:flex;gap:4px;flex-wrap:wrap">
+                  ${uniqueRars.map(r => `<span style="background:${rarCol[r]||'#aaa'}18;border:1px solid ${rarCol[r]||'#aaa'}44;border-radius:4px;padding:2px 8px;font-size:0.6rem;color:${rarCol[r]||'#aaa'}">${rarIcons[r]||'⚪'} ${r}</span>`).join('')}
+                </div>
+              </div>
+            </div>`;
+          }
 
           let html = `<div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px;letter-spacing:1px">ITEM DROPOVI</div>`;
 
