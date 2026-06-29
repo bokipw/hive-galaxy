@@ -830,6 +830,7 @@ function startBattle(inst, instant = false) {
         prog2.timesRewarded = expectedTimes;
         R.keys = (R.keys || 0) + 1;
         addLog(`🃏 +1 komandir ključ (${expectedTimes * 100}x ${dn(inst)} [${mode.label}])`);
+        if (typeof saveGame === 'function') saveGame();
         setTimeout(() => {
           if (typeof toast === 'function') {
             const _rewardKey = t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); const _rkEn = (window._i18nLang||'').startsWith('en'); toast(_rewardKey !== 'instance.milestone100.keyReward' ? _rewardKey : _rkEn ? `🃏 +1 commander key (every 100x ${dn(inst)} [${mode.label}])` : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
