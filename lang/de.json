@@ -4390,12 +4390,15 @@
                                                                },
                                                         "100":  {
                                                                     "label":  "MATERIAL-RECYCLER",
-                                                                    "bonus":  "100% Rckgewinnung + Chance auf Bauplanfragment"
-                                                                }
-                                                    }
+                                                                     "bonus":  "100% Rckgewinnung + Chance auf Bauplanfragment"
+                                                                 }
+                                                     }
+                                   },
+                     "milestone":  {
+                                      "cmdKeyReward":  "🃏 +1 Kommandoschlüssel bei Lv.{level}"
                                   }
-                 },
-    "ui":  {
+                  },
+     "ui":  {
                "yes":  "Ja",
                "no":  "Nein",
                "ok":  "OK",

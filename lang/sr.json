@@ -4421,6 +4421,9 @@
           "bonus": "Povrat 100% + šansa za blueprint fragment"
         }
       }
+    },
+    "milestone": {
+      "cmdKeyReward": "🃏 +1 komandir ključ na Lv.{level}"
     }
   },
   "ui": {

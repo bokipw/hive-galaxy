@@ -4418,12 +4418,15 @@
                                                                },
                                                         "100":  {
                                                                     "label":  "RECYKLATOR MATERIAŁÓW",
-                                                                    "bonus":  "100% zwrotu + szansa na fragment planu"
-                                                                }
-                                                    }
+                                                                     "bonus":  "100% zwrotu + szansa na fragment planu"
+                                                                 }
+                                                     }
+                                   },
+                     "milestone":  {
+                                      "cmdKeyReward":  "🃏 +1 klucz dowódcy na Lv.{level}"
                                   }
-                 },
-    "ui":  {
+                  },
+     "ui":  {
                "yes":  "Tak",
                "no":  "Nie",
                "ok":  "OK",

@@ -4199,6 +4199,9 @@
         "75": { "label": "Atomic Reprocessor", "bonus": "Return +15% bonus" },
         "100": { "label": "MATTER RECYCLER", "bonus": "100% return + chance for blueprint fragment" }
       }
+    },
+    "milestone": {
+      "cmdKeyReward": "🃏 +1 commander key at Lv.{level}"
     }
   },
   "ui": {

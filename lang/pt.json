@@ -4418,12 +4418,15 @@
                                                                },
                                                         "100":  {
                                                                     "label":  "RECICLADOR DE MATÉRIA",
-                                                                    "bonus":  "100% de retorno + chance de fragmento do projeto"
-                                                                }
-                                                    }
+                                                                     "bonus":  "100% de retorno + chance de fragmento do projeto"
+                                                                 }
+                                                     }
+                                   },
+                     "milestone":  {
+                                      "cmdKeyReward":  "🃏 +1 chave de comandante no Lv.{level}"
                                   }
-                 },
-    "ui":  {
+                  },
+     "ui":  {
                "yes":  "Sim",
                "no":  "Não",
                "ok":  "OK",

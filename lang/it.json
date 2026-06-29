@@ -4418,12 +4418,15 @@
                                                                },
                                                         "100":  {
                                                                     "label":  "RICICLATORE DI MATERIA",
-                                                                    "bonus":  "Rendimento 100% + possibilit frammento progetto"
-                                                                }
-                                                    }
+                                                                     "bonus":  "Rendimento 100% + possibilit frammento progetto"
+                                                                 }
+                                                     }
+                                   },
+                     "milestone":  {
+                                      "cmdKeyReward":  "🃏 +1 chiave comandante al Lv.{level}"
                                   }
-                 },
-    "ui":  {
+                  },
+     "ui":  {
                "yes":  "Sì",
                "no":  "No",
                "ok":  "OK",

@@ -4418,12 +4418,15 @@
                                                                },
                                                         "100":  {
                                                                     "label":  "RECYCLEUR DE MATIÈRE",
-                                                                    "bonus":  "100 % de retour + chance d\u0027obtenir un fragment de plan"
-                                                                }
-                                                    }
+                                                                     "bonus":  "100 % de retour + chance d\u0027obtenir un fragment de plan"
+                                                                 }
+                                                     }
+                                   },
+                     "milestone":  {
+                                      "cmdKeyReward":  "🃏 +1 clé de commandant au Lv.{level}"
                                   }
-                 },
-    "ui":  {
+                  },
+     "ui":  {
                "yes":  "Oui",
                "no":  "Non",
                "ok":  "OK",
