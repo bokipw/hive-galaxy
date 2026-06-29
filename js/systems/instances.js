@@ -863,7 +863,7 @@ function startBattle(inst, instant = false) {
           }
         }, 300);
       }
-      if (rewards.allFound) {
+      if (rewards.allFound && !['boss_rare','boss_epic','boss_legendary','boss_master','boss'].includes(inst.type)) {
         prog2.bpCompleted = true;
         toast('⚡ Svi blueprinti iz ove instance su nađeni!', 'ok');
       }
