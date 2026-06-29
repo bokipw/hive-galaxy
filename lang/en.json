@@ -4488,6 +4488,9 @@
       "bcm": "BCM",
       "bocrypto": "BoCrypto",
       "bpw": "BPW"
-    }
+    },
+  "boss_reward": {
+    "instance_keys": "🗝️ 1-10 instance keys"
+  }
   }
 }

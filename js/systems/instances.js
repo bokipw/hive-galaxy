@@ -588,7 +588,7 @@ function openInstanceModal(instId) {
           // Easy rare boss — 1-10 instance keys
           if (inst.type === 'boss_rare' && (_instDifficultyMode || 'easy') === 'easy') {
             html += `<div style="background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.25);border-radius:6px;padding:8px 10px;margin-bottom:8px">
-              <div style="font-size:0.62rem;color:#ffaa00">🗝️ 1-10 instance ključeva</div>
+              <div style="font-size:0.62rem;color:#ffaa00">${t('boss_reward.instance_keys')}</div>
             </div>`;
           }
 
