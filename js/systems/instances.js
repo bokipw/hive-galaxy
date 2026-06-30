@@ -332,11 +332,6 @@ function renderInstanceCard(inst, playerPower) {
       <div style="font-size:0.68rem;color:#6a90b8;margin-bottom:6px">
         👾 Boss: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span>
       </div>
-      ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `
-      <div style="font-size:0.65rem;color:#aa44ff;margin-bottom:6px">
-        📦 Drop pool: <strong>${{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]} itema po killu</strong>
-      </div>` : ''}
-
       <!-- Enemy Komandiri -->
       ${(() => {
         const cmdRarityMap = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
