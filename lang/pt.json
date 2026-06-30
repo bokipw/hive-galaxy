@@ -4730,9 +4730,17 @@
                    "commanders":  "COMANDANTES",
                    "locked_cmd":  "🔒 Comandante Lv{level}",
                    "bp_abbr":  "BP",
-                   "max_cmd":  "max {count}"
-                               },
-                   "footer":  {
+                    "max_cmd":  "max {count}",
+                    "all_found_title":  "Todos os itens encontrados!",
+                    "all_found_desc":  "Podes continuar a jogar por recursos, mas novos projetos não cairão.",
+                    "frag_abbr":  "Frag",
+                    "enemies_header":  "INIMIGOS (×{mult})",
+                    "auto_battle_hint":  "⚠️ A batalha é automática. O resultado depende do poder da frota.",
+                    "attack_btn":  "⚔️ ATACAR! (-{cost} MWh)",
+                    "instant_btn":  "⚡ INSTANTÂNEO (-{cost} MWh)",
+                    "cancel_btn":  "Cancelar"
+                                },
+                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "Desenvolvido por",
                                  "links":  {

@@ -4702,9 +4702,17 @@
                     "commanders":  "KOMMANDANTEN",
                     "locked_cmd":  "🔒 Kommandant Lv{level}",
                     "bp_abbr":  "BP",
-                    "max_cmd":  "max {count}"
+                    "max_cmd":  "max {count}",
+                    "all_found_title":  "Alle Funde entdeckt!",
+                    "all_found_desc":  "Du kannst weiterhin für Ressourcen spielen, aber neue Baupläne werden nicht fallen.",
+                    "frag_abbr":  "Frag",
+                    "enemies_header":  "FEINDE (×{mult})",
+                    "auto_battle_hint":  "⚠️ Der Kampf ist automatisch. Das Ergebnis hängt von der Flottenstärke ab.",
+                    "attack_btn":  "⚔️ ANGREIFEN! (-{cost} MWh)",
+                    "instant_btn":  "⚡ SOFORT (-{cost} MWh)",
+                    "cancel_btn":  "Abbrechen"
                                 },
-                   "footer":  {
+                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Unterstützt von HIVE Blockchain",
                                  "developed":  "Entwickelt von",
                                  "links":  {

@@ -4730,9 +4730,17 @@
                    "commanders":  "指揮官",
                    "locked_cmd":  "🔒 指揮官Lv{level}",
                    "bp_abbr":  "BP",
-                   "max_cmd":  "最大 {count}"
-                               },
-                   "footer":  {
+                    "max_cmd":  "最大 {count}",
+                    "all_found_title":  "すべてのドロップを発見！",
+                    "all_found_desc":  "リソースのためにプレイし続けることはできますが、新しい設計図はドロップしません。",
+                    "frag_abbr":  "欠片",
+                    "enemies_header":  "敵 (×{mult})",
+                    "auto_battle_hint":  "⚠️ 戦闘は自動です。結果は艦隊の戦力に依存します。",
+                    "attack_btn":  "⚔️ 攻撃！ (-{cost} MWh)",
+                    "instant_btn":  "⚡ 即時 (-{cost} MWh)",
+                    "cancel_btn":  "キャンセル"
+                                },
+                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "開発者",
                                  "links":  {

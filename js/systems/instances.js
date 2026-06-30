@@ -55,6 +55,8 @@ const INST_DIFFICULTY_MODES = {
   },
 };
 
+const MODE_ICONS = { easy: '🌿', normal: '⚔️', nightmare: '💀', hell: '🔥' };
+
 // ── BLUEPRINT TIER DROPOVI PO MODU ──
 const BP_TIER_DROPS = {
   I:   { rarity: ['C'],       label: 'Tier I',       color: '#6a90b8' },
@@ -430,93 +432,6 @@ function renderInstanceCard(inst, playerPower) {
     </div>`;
 }
 
-// ── DROP PREVIEW ──
-function getDropPreview(inst) {
-  const modeName   = _instDifficultyMode || 'easy';
-  const mode       = INST_DIFFICULTY_MODES[modeName];
-  const bpTier     = BP_TIER_DROPS[mode.bpTier];
-
-  const rarityColor = { C: '#ffdd00', R: '#4488ff', E: '#aa44ff', L: '#ffaa00' };
-  const rarityName  = { C: 'Common',  R: 'Rare',    E: 'Epic',    L: 'Legendary' };
-
-  const FRAG_CHANCE = {
-    easy:      { C: 60 },
-    normal:    { C: 70, R: 40 },
-    nightmare: { C: 80, R: 60, E: 30 },
-    hell:      { C: 90, R: 75, E: 50, L: 20 },
-  };
-  const BP_CHANCE = {
-    easy:      {},
-    normal:    { C: 20, R: 8 },
-    nightmare: { C: 35, R: 18, E: 6 },
-    hell:      { C: 50, R: 30, E: 15, L: 5 },
-  };
-
-  const bossTypes = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'];
-  const isBoss = bossTypes.includes(inst.type);
-
-  // Boss drop rolls
-  const bossRolls = { boss_rare: 1, boss_epic: 2, boss_legendary: 3, boss_master: 4, boss: 2 };
-  const rollCount = isBoss ? (bossRolls[inst.type] || 1) : 0;
-  const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
-  const rars = isBoss ? (modeRarities[modeName] || ['C']) : [];
-
-  const fragChance = FRAG_CHANCE[modeName] || {};
-  const bpChance   = BP_CHANCE[modeName]   || {};
-
-  let html = '';
-
-  if (isBoss) {
-    html += `<div style="font-size:0.62rem;color:#aa44ff;letter-spacing:1px;margin-bottom:4px">📦 DROP POOL</div>`;
-    html += `<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px">${rollCount} item po killu · Rarity: `;
-    html += rars.map(r => `<span style="color:${rarityColor[r]}">${rarityName[r]}</span>`).join(' / ');
-    html += `</div>`;
-    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ FRAGMENTI</div>`;
-    html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-    rars.forEach(r => {
-      const pct = fragChance[r] || 0;
-      html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
-        border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
-        ${rarityName[r]} ${pct}%</span>`;
-    });
-    html += `</div>`;
-    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ BLUEPRINT DROP</div>`;
-    html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-    rars.forEach(r => {
-      const pct = bpChance[r] || 0;
-      html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
-        border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
-        ${rarityName[r]} ${pct > 0 ? pct + '%' : '0%'}</span>`;
-    });
-    html += `</div>`;
-    html += `<div style="font-size:0.55rem;color:#4488ff">🔄 Pool se ažurira kako otključavaš iteme</div>`;
-  } else {
-    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ FRAGMENTI</div>`;
-    html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-    Object.entries(fragChance).forEach(([r, pct]) => {
-      html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
-        border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
-        ${rarityName[r]} ${pct}%</span>`;
-    });
-    html += `</div>`;
-
-    if (Object.keys(bpChance).length > 0) {
-      html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ BLUEPRINT DROP</div>`;
-      html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-      Object.entries(bpChance).forEach(([r, pct]) => {
-        html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
-          border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
-          ${rarityName[r]} ${pct}%</span>`;
-      });
-      html += `</div>`;
-    } else {
-      html += `<div style="font-size:0.62rem;color:#6a90b8">⚡ Blueprinti ne padaju na <span style="color:#00ff88">Easy</span></div>`;
-    }
-  }
-
-  return html;
-}
-
 // ── OTVORI INSTANCE MODAL ──
 function openInstanceModal(instId) {
   const inst       = getActiveInstances().find(i => i.id === instId);
@@ -558,35 +473,33 @@ function openInstanceModal(instId) {
       border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
       <div style="font-size:1.5rem">✅</div>
       <div>
-        <div style="font-size:0.78rem;font-weight:700;color:#00ff88">Svi dropovi pronađeni!</div>
-        <div style="font-size:0.62rem;color:#6a90b8">Možeš i dalje igrati za resurse, ali novi blueprinti neće padati.</div>
+        <div style="font-size:0.78rem;font-weight:700;color:#00ff88">${t('index.instance.all_found_title')}</div>
+        <div style="font-size:0.62rem;color:#6a90b8">${t('index.instance.all_found_desc')}</div>
       </div>
     </div>` : ''}
 
     <!-- Difficulty banner -->
     <div style="background:${mode.color}18;border:1px solid ${mode.color}44;border-radius:6px;
       padding:8px 12px;margin-bottom:14px;display:flex;align-items:center;gap:10px">
-      <div style="font-size:1.2rem">${mode.label.split(' ')[0]}</div>
+      <div style="font-size:1.2rem">${MODE_ICONS[_instDifficultyMode] || '🌌'}</div>
       <div>
-        <div style="font-size:0.78rem;font-weight:700;color:${mode.color}">${mode.label}</div>
-        <div style="font-size:0.6rem;color:#6a90b8">${mode.desc}</div>
+        <div style="font-size:0.78rem;font-weight:700;color:${mode.color}">${t('index.instance.mode_' + _instDifficultyMode)}</div>
+        <div style="font-size:0.6rem;color:#6a90b8">${t('index.instance.desc_' + _instDifficultyMode)}</div>
       </div>
       <div style="margin-left:auto;text-align:right">
-        <div style="font-size:0.6rem;color:#6a90b8">Blueprint</div>
-        <div style="font-size:0.72rem;color:${bpTier.color};font-weight:700">${bpTier.label}</div>
+        <div style="font-size:0.6rem;color:#6a90b8">${t('index.instance.blueprint')}</div>
+        <div style="font-size:0.72rem;color:${bpTier.color};font-weight:700">${t('index.instance.bp_tier_' + mode.bpTier)}</div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px">
 
-      <!-- Lijevo: Info -->
       <div>
         <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('index.instance.info')}</div>
         <div style="font-size:0.68rem;line-height:1.8;font-family:'Share Tech Mono',monospace">
           <div>⚡ ${t('index.instance.type')}: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
           <div>⚡ ${t('index.instance.difficulty')}: ${dl(diff)}</div>
           <div>👾 ${t('index.instance.boss')}: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
-          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 ${t('index.instance.drop_pool',{count:{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]})}</div>` : ''}
           <div>⚡ ${t('index.instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ ${t('index.instance.energy',{cost:energyCost})}</div>
           <div>✅ ${t('index.instance.clears')}: ${prog.clear_count}</div>
@@ -599,9 +512,7 @@ function openInstanceModal(instId) {
           <div>🔩 ${fmt(metalMin)}-${fmt(metalMax)} ${t('res.metal')}</div>
           <div>💎 ${fmt(crystalMin)}-${fmt(crystalMax)} ${t('res.crystal')}</div>
           <div>⛽ ${fmt(he3Min)}-${fmt(he3Max)} ${t('res.he3')}</div>
-          <div style="margin-top:8px">
-            ${getDropPreview(inst)}
-          </div>
+
         </div>
 
         <!-- Specifični item dropovi -->
@@ -615,7 +526,7 @@ function openInstanceModal(instId) {
           const _resolveItemName = id => {
             if (id.startsWith('art_')) {
               const art = typeof ARTIFACTS_DATA !== 'undefined' ? ARTIFACTS_DATA.find(a => a.id === id) : null;
-              return art ? art.name + ' fragment' : id;
+              return art ? art.name + ' ' + t('index.instance.frag_abbr') : id;
             }
             return typeof getBpName === 'function' ? getBpName(id) : id;
           };
@@ -708,7 +619,7 @@ function openInstanceModal(instId) {
             rars.forEach(r => {
               const fp = fch[r] || 0;
               const bp = bch[r] || 0;
-              html += `<span style="color:${rarityColors[r]}">${rarityNames[r]}</span> ${fp}% frag · ${bp > 0 ? bp + '% BP' : '0% BP'}`;
+              html += `<span style="color:${rarityColors[r]}">${rarityNames[r]}</span> ${fp}% ${t('index.instance.frag_abbr')} · ${bp > 0 ? bp + '% ' + t('index.instance.bp_abbr') : '0% ' + t('index.instance.bp_abbr')}`;
               if (r !== rars[rars.length-1]) html += ` · `;
             });
             html += `</div></div>`;
@@ -717,61 +628,36 @@ function openInstanceModal(instId) {
         })()}
       </div>
 
-      <!-- Desno: Flota -->
-      <div>
-        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('index.instance.your_fleet')}</div>
-        ${fleetSlots.map(slot => {
-          const ship  = getShipById(slot.ship_id);
-          const stats = calcSlotStats(slot);
-          const cls   = SHIP_CLASSES[getShipClass(slot.ship_id)];
-          return `
-            <div style="display:flex;justify-content:space-between;align-items:center;
-              padding:5px 8px;background:rgba(0,0,0,0.3);border-radius:4px;margin-bottom:4px;
-              border-left:3px solid ${cls?.color||'#00d4ff'}">
-              <div>
-                <div style="font-size:0.72rem;color:${cls?.color||'white'}">${ship?.name||''}</div>
-                <div style="font-size:0.6rem;color:#6a90b8">×${fmt(slot.count)}</div>
-              </div>
-              <div style="text-align:right;font-size:0.6rem;font-family:'Share Tech Mono',monospace;color:#6a90b8">
-                <div>HP: ${fmt(stats.hp)}</div>
-                <div>DPS: ${fmt(stats.dps)}</div>
-              </div>
-            </div>`;
-        }).join('')}
-        <div style="margin-top:8px;font-size:0.65rem;color:#00d4ff;font-family:'Orbitron',monospace">
-          UKUPNA MOĆ: ${fmt(playerPower)}
-        </div>
-      </div>
     </div>
 
     <!-- Neprijatelji -->
     <div style="background:rgba(255,51,85,0.05);border:1px solid rgba(255,51,85,0.2);
       border-radius:6px;padding:10px;margin-bottom:16px">
       <div style="font-size:0.7rem;color:#ff3355;margin-bottom:6px;font-weight:700">
-        💥 NEPRIJATELJI (×${mode.enemyMult} j×Tina)
+        💥 ${t('index.instance.enemies_header',{mult:mode.enemyMult})}
       </div>
       <div style="font-size:0.65rem;color:#6a90b8">
-        ${inst.enemies.join(', ')} + Boss: ${t(inst.bossKey || '') || inst.boss}
+        ${inst.enemies.join(', ')} + ${t('index.instance.boss')}: ${t(inst.bossKey || '') || inst.boss}
       </div>
     </div>
 
     <div style="font-size:0.72rem;color:#6a90b8;text-align:center">
-      ⚠️ Borba je automatska. Rezultat zavisi od moći flote vs neprijatelja.
+      ${t('index.instance.auto_battle_hint')}
     </div>
   `;
 
   openModal(`⚔️ ${dn(inst)}`, body, [
     {
-      label: `⚔️ NAPADNI! (-${energyCost} MWh)`,
+      label: `${t('index.instance.attack_btn',{cost:energyCost})}`,
       cls:   'btn-r',
       fn: () => { closeModal(); startBattle(inst); }
     },
     {
-      label: `⚡ INSTANT (-${energyCost} MWh)`,
+      label: `${t('index.instance.instant_btn',{cost:energyCost})}`,
       cls:   'btn-g',
       fn: () => { closeModal(); startBattle(inst, true); }
     },
-    { label: 'Odustani', fn: closeModal }
+    { label: t('index.instance.cancel_btn'), fn: closeModal }
   ]);
   // Omogući scroll samo za ovaj modal (info je dugačak)
   const mBody = document.getElementById('mBody');

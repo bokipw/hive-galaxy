@@ -4730,9 +4730,17 @@
                    "commanders":  "DOWÓDCY",
                    "locked_cmd":  "🔒 Dowódca Lv{level}",
                    "bp_abbr":  "BP",
-                   "max_cmd":  "max {count}"
-                               },
-                   "footer":  {
+                    "max_cmd":  "max {count}",
+                    "all_found_title":  "Wszystkie dropy znalezione!",
+                    "all_found_desc":  "Możesz grać dalej dla zasobów, ale nowe projekty nie będą spadać.",
+                    "frag_abbr":  "Frag",
+                    "enemies_header":  "WROGOWIE (×{mult})",
+                    "auto_battle_hint":  "⚠️ Walka jest automatyczna. Wynik zależy od siły floty.",
+                    "attack_btn":  "⚔️ ATAKUJ! (-{cost} MWh)",
+                    "instant_btn":  "⚡ NATYCHMIAST (-{cost} MWh)",
+                    "cancel_btn":  "Anuluj"
+                                },
+                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "Opracowany przez",
                                  "links":  {

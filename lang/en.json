@@ -4508,7 +4508,15 @@
       "commanders": "COMMANDERS",
       "locked_cmd": "🔒 Commander Lv{level}",
       "bp_abbr": "BP",
-      "max_cmd": "max {count}"
+      "max_cmd": "max {count}",
+      "all_found_title": "All drops found!",
+      "all_found_desc": "You can keep playing for resources, but new blueprints won't drop.",
+      "frag_abbr": "frag",
+      "enemies_header": "ENEMIES (×{mult})",
+      "auto_battle_hint": "⚠️ Battle is automatic. Result depends on fleet power.",
+      "attack_btn": "⚔️ ATTACK! (-{cost} MWh)",
+      "instant_btn": "⚡ INSTANT (-{cost} MWh)",
+      "cancel_btn": "Cancel"
     },
     "footer": {
       "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",

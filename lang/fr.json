@@ -4730,9 +4730,17 @@
                    "commanders":  "COMMANDANTS",
                    "locked_cmd":  "🔒 Commandant Lv{level}",
                    "bp_abbr":  "BP",
-                   "max_cmd":  "max {count}"
-                               },
-                   "footer":  {
+                    "max_cmd":  "max {count}",
+                    "all_found_title":  "Tous les butins trouvés !",
+                    "all_found_desc":  "Tu peux continuer à jouer pour les ressources, mais les nouveaux plans ne tomberont pas.",
+                    "frag_abbr":  "Frag",
+                    "enemies_header":  "ENNEMIS (×{mult})",
+                    "auto_battle_hint":  "⚠️ Le combat est automatique. Le résultat dépend de la puissance de la flotte.",
+                    "attack_btn":  "⚔️ ATTAQUER ! (-{cost} MWh)",
+                    "instant_btn":  "⚡ INSTANT (-{cost} MWh)",
+                    "cancel_btn":  "Annuler"
+                                },
+                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",
                                  "developed":  "Développé par",
                                  "links":  {
