@@ -4686,7 +4686,6 @@
                }
 ,
     "boss_reward": {
-      "instance_keys": "1-10 Instanz-Schlüssel",
       "victory": "+{count} Instanz-Schlüssel"
     }
 }

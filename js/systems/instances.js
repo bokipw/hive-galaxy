@@ -583,8 +583,6 @@ function openInstanceModal(instId) {
           const guaranteed = inst.drops?.guaranteed || [];
           const chance     = inst.drops?.chance     || [];
 
-          let html = `<div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px;letter-spacing:1px">ITEM DROPOVI</div>`;
-
           const _resolveItemName = id => {
             if (id.startsWith('art_')) {
               const art = typeof ARTIFACTS_DATA !== 'undefined' ? ARTIFACTS_DATA.find(a => a.id === id) : null;
@@ -639,7 +637,7 @@ function openInstanceModal(instId) {
           }
 
           if (inst.type === 'boss_rare' && (_instDifficultyMode || 'easy') === 'easy') {
-            html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">${t('boss_reward.instance_keys')}</div>`;
+            html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">🗝️ 1-10 ${t('res.instanceKeys')}</div>`;
           }
           return html;
         })()}

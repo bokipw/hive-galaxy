@@ -4714,7 +4714,6 @@
               }
 ,
     "boss_reward": {
-      "instance_keys": "1-10 インスタンスキー",
       "victory": "+{count} インスタンスキー"
     }
 }
