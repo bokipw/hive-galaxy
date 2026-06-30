@@ -586,7 +586,7 @@ function openInstanceModal(instId) {
           <div>⚡ Tip: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
           <div>⚡ Težina: ${dl(diff)}</div>
           <div>👾 Boss: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
-          ${({'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]) ? `<div>🎁 Garant drop: <span style="color:#00ff88;font-weight:700">${{'boss_rare':3,'boss_epic':6,'boss_legendary':10,'boss_master':15}[inst.type]} itema</span></div>` : ''}
+          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 Drop pool: <span style="color:#aa44ff;font-weight:700">${{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]} itema po killu</span></div>` : ''}
           <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ Energija: ${energyCost} MWh</div>
           <div>✅ Clearova: ${prog.clear_count}</div>
