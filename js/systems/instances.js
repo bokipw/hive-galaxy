@@ -413,7 +413,7 @@ function renderInstanceCard(inst, playerPower) {
 
       <!-- 100x commander key reward -->
       <div style="font-size:0.52rem;color:#00d4ff;margin-bottom:6px">
-        ${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}
+        ${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'index.instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}
       </div>
 
       <!-- Dugme -->
@@ -590,7 +590,7 @@ function openInstanceModal(instId) {
           <div>⚡ ${t('index.instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ ${t('index.instance.energy',{cost:energyCost})}</div>
           <div>✅ ${t('index.instance.clears')}: ${prog.clear_count}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'index.instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
           ${prog.best_rank ? `<div>⚡ 🏆 ${t('index.instance.best_rank')}: ${prog.best_rank}</div>` : ''}
         </div>
 
@@ -908,7 +908,7 @@ function startBattle(inst, instant = false) {
         if (typeof saveGame === 'function') saveGame();
         setTimeout(() => {
           if (typeof toast === 'function') {
-            const _rewardKey = t('index.instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); const _rkEn = (window._i18nLang||'').startsWith('en'); toast(_rewardKey !== 'instance.milestone100.keyReward' ? _rewardKey : _rkEn ? `🃏 +1 commander key (every 100x ${dn(inst)} [${mode.label}])` : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
+            const _rewardKey = t('index.instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); const _rkEn = (window._i18nLang||'').startsWith('en'); toast(_rewardKey !== 'index.instance.milestone100.keyReward' ? _rewardKey : _rkEn ? `🃏 +1 commander key (every 100x ${dn(inst)} [${mode.label}])` : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
           }
         }, 300);
       }
@@ -998,7 +998,7 @@ function _migrateInstance100Keys() {
   if (total > 0) {
     addLog(`🃏 +${total} komandir ključ(ev/a) — svakih 100 instanci (retroaktivno)`);
     if (typeof toast === 'function') {
-      const _retroKey = t('index.instance.milestone100.retro', { n: total }); const _rEn = (window._i18nLang||'').startsWith('en'); toast(_retroKey !== 'instance.milestone100.retro' ? _retroKey : _rEn ? `🃏 +${total} commander key(s) from 100x instance clears` : `🃏 +${total} komandir ključ(ev/a) od 100x instanci`, 'ok');
+      const _retroKey = t('index.instance.milestone100.retro', { n: total }); const _rEn = (window._i18nLang||'').startsWith('en'); toast(_retroKey !== 'index.instance.milestone100.retro' ? _retroKey : _rEn ? `🃏 +${total} commander key(s) from 100x instance clears` : `🃏 +${total} komandir ključ(ev/a) od 100x instanci`, 'ok');
     }
     saveGame();
   }
