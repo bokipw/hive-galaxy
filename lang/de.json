@@ -37,7 +37,8 @@
                 "bocrypto":  "BoCrypto",
                 "score":  "Punkte",
                 "keys":  "Schlüssel",
-                "instanceKeys":  "Inst. Schlüssel"
+                "instanceKeys":  "Inst. Schlüssel",
+                "commanderKeys":  "Cmd. Schlüssel"
             },
     "pvp":  {
                 "title":  "PvP-Kampf",
@@ -4686,6 +4687,8 @@
                }
 ,
     "boss_reward": {
-      "victory": "+{count} Instanz-Schlüssel"
+      "victory": "+{count} Instanz-Schl�ssel",
+      "commander_victory": "+1 🃏 Kommandantenschlüssel"
     }
+}
 }

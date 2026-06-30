@@ -59,7 +59,8 @@
                 "bocrypto":  "BoCrypto",
                 "score":  "Punkty",
                 "keys":  "Klucze",
-                "instanceKeys":  "Kl. instancji"
+                "instanceKeys":  "Kl. instancji",
+                "commanderKeys":  "Kl. dowódcy"
             },
     "pvp":  {
                 "title":  "⚔️ ARENA PvP",
@@ -4714,6 +4715,7 @@
               }
 ,
     "boss_reward": {
-      "victory": "+{count} kluczy instancji"
+      "victory": "+{count} kluczy instancji",
+      "commander_victory": "+1 🃏 klucz dowódcy"
     }
 }

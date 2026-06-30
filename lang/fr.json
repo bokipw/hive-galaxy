@@ -59,7 +59,8 @@
                 "bocrypto":  "BoCrypto",
                 "score":  "Score",
                 "keys":  "Clés",
-                "instanceKeys":  "Clés d\u0027inst."
+                "instanceKeys":  "Clés d\u0027inst.",
+                "commanderKeys":  "Clés Cmd."
             },
     "pvp":  {
                 "title":  "⚔️ ARÈNE PvP",
@@ -4713,6 +4714,8 @@
                              }
               },
     "boss_reward": {
-        "victory": "+{count} clés d\u0027instance"
+        "victory": "+{count} cl�s d\u0027instance",
+        "commander_victory": "+1 🃏 clé de commandant"
     }
+}
 }

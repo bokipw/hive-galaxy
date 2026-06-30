@@ -648,6 +648,18 @@ function openInstanceModal(instId) {
           if (range) {
             html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">🗝️ ${range} ${t('res.instanceKeys')}</div>`;
           }
+
+          const cmdChances = {
+            boss_rare: '20%',
+            boss_epic: '45%',
+            boss_legendary: '98%',
+            boss_master: '98%',
+            boss: '98%',
+          };
+          const cmdChance = cmdChances[inst.type];
+          if (cmdChance) {
+            html += `<div style="font-size:0.6rem;color:#aa44ff;margin-top:4px">🃏 ${cmdChance} ${t('res.commanderKeys')}</div>`;
+          }
           return html;
         })()}
       </div>

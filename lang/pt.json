@@ -59,7 +59,8 @@
                 "bocrypto":  "BoCrypto",
                 "score":  "Pontuação",
                 "keys":  "Chaves",
-                "instanceKeys":  "Chaves de Inst."
+                "instanceKeys":  "Chaves de Inst.",
+                "commanderKeys":  "Chaves Cmd."
             },
     "pvp":  {
                 "title":  "⚔️ ARENA PvP",
@@ -4714,6 +4715,8 @@
               }
 ,
     "boss_reward": {
-      "victory": "+{count} chaves de instância"
+      "victory": "+{count} chaves de inst�ncia",
+      "commander_victory": "+1 🃏 chave de comandante"
     }
+}
 }

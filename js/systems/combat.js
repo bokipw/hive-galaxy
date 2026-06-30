@@ -1692,6 +1692,19 @@ function calculateRewards(battle, instanceData, prog) {
     rewards.instanceKeys = min + Math.floor(Math.random() * (max - min + 1));
   }
 
+  // Commander keys per boss type
+  const cmdChances = {
+    boss_rare: 0.20,
+    boss_epic: 0.45,
+    boss_legendary: 0.98,
+    boss_master: 0.98,
+    boss: 0.98,
+  };
+  const cmdChance = cmdChances[instance.type];
+  if (cmdChance && Math.random() < cmdChance) {
+    rewards.commanderKeys = 1;
+  }
+
   return rewards;
 }
 
@@ -1704,6 +1717,7 @@ function applyRewards(rewards) {
   R.he3     += rewards.he3;
   R.score   += rewards.xp;
   if (rewards.instanceKeys) R.instanceKeys = (R.instanceKeys || 0) + rewards.instanceKeys;
+  if (rewards.commanderKeys) R.keys = (R.keys || 0) + rewards.commanderKeys;
 
   addExp(rewards.xp);
 
@@ -1945,6 +1959,7 @@ function renderBattleResult(battle, rewards) {
           </div>` : ''}
         <div style="font-size:0.65rem;color:#ffcc44">⭐ +${rewards.xp} XP</div>
         ${rewards.instanceKeys ? `<div style="font-size:0.65rem;color:#ffaa00;margin-top:4px">${t('boss_reward.victory',{count:rewards.instanceKeys})}</div>` : ''}
+        ${rewards.commanderKeys ? `<div style="font-size:0.65rem;color:#aa44ff;margin-top:4px">${t('boss_reward.commander_victory')}</div>` : ''}
       </div>` : ''}
 
     <!-- Gubitci -->

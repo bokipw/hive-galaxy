@@ -59,7 +59,8 @@
     "bocrypto": "BoCrypto",
     "score": "Poeni",
     "keys": "Ključevi",
-    "instanceKeys": "Inst. ključevi"
+    "instanceKeys": "Inst. ključevi",
+    "commanderKeys": "Cmd. ključevi"
   },
   "pvp": {
     "title": "⚔️ PvP ARENA",
@@ -4713,6 +4714,7 @@
     }
   },
   "boss_reward": {
-    "victory": "+{count} instancnih kljuceva"
+    "victory": "+{count} instancnih kljuceva",
+    "commander_victory": "+1 🃏 komandir ključ"
   }
 }

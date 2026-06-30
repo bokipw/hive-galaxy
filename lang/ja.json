@@ -59,7 +59,8 @@
                 "bocrypto":  "BoCrypto",
                 "score":  "スコア",
                 "keys":  "鍵",
-                "instanceKeys":  "インスタンス鍵"
+                "instanceKeys":  "インスタンス鍵",
+                "commanderKeys":  "指揮官鍵"
             },
     "pvp":  {
                 "title":  "⚔️ PvP アリーナ",
@@ -4714,6 +4715,8 @@
               }
 ,
     "boss_reward": {
-      "victory": "+{count} インスタンスキー"
+      "victory": "+{count} ???????_",
+      "commander_victory": "+1 🃏 指揮官鍵"
     }
+}
 }
