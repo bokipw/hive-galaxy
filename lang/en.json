@@ -4488,9 +4488,9 @@
       "bcm": "BCM",
       "bocrypto": "BoCrypto",
       "bpw": "BPW"
-    },
-    "boss_reward": {
-      "victory": "+{count} instance keys"
     }
+  },
+  "boss_reward": {
+    "victory": "+{count} instance keys"
   }
 }

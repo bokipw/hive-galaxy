@@ -4710,9 +4710,9 @@
       "bcm": "BCM",
       "bocrypto": "BoCrypto",
       "bpw": "BPW"
-    },
-    "boss_reward": {
-      "victory": "+{count} instancnih kljuceva"
     }
+  },
+  "boss_reward": {
+    "victory": "+{count} instancnih kljuceva"
   }
 }
