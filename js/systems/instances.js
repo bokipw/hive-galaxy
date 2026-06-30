@@ -637,8 +637,16 @@ function openInstanceModal(instId) {
             });
           }
 
-          if (inst.type === 'boss_rare' && (_instDifficultyMode || 'easy') === 'easy') {
-            html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">🗝️ 1-10 ${t('res.instanceKeys')}</div>`;
+          const keyRanges = {
+            easy:      { boss_rare: '1-2', boss_epic: '1-3' },
+            normal:    { boss_rare: '1-3', boss_epic: '1-4' },
+            nightmare: { boss_rare: '1-4', boss_epic: '1-5' },
+            hell:      { boss_rare: '1-5', boss_epic: '1-6' },
+          };
+          const curMode = _instDifficultyMode || 'easy';
+          const range   = keyRanges[curMode]?.[inst.type];
+          if (range) {
+            html += `<div style="margin-top:10px;font-size:0.6rem;color:#ffaa00">🗝️ ${range} ${t('res.instanceKeys')}</div>`;
           }
           return html;
         })()}
