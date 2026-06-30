@@ -4689,7 +4689,24 @@
                                  "btn":  "💳 PAYPAL経由で寄付する"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "インスタンス情報",
+                                    "type":  "タイプ",
+                                    "difficulty":  "難易度",
+                                    "drop_pool":  "\uD83D\uDCE6 ドロッププール: {count} アイテム/キル",
+                                    "min_power":  "最小戦力",
+                                    "energy":  "エネルギー: {cost} MWh",
+                                    "clears":  "クリア数",
+                                    "best_rank":  "ベストランク",
+                                    "rewards_header":  "報酬 ×{mult}",
+                                    "guaranteed":  "\u2705 確定",
+                                    "chance":  "\uD83C\uDFB2 確率",
+                                    "your_fleet":  "あなたの艦隊",
+                                    "blueprints_header":  "設計図:",
+                                    "fragments_header":  "欠片:",
+                                    "boss":  "ボス",
+                                    "completed_in":  "{round}ラウンドで完了",
+                                    "rewards":  "\uD83C\uDF81 報酬",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 指揮官キー (100回毎 {name} [{mode}])",
                                                          "retro":  "🃏 +{n} 指揮官キーを100回インスタンス達成",
                                                          "progress":  "🃏 +1 指揮官キー 100回毎 ({count}/100)",

@@ -581,24 +581,24 @@ function openInstanceModal(instId) {
 
       <!-- Lijevo: Info -->
       <div>
-        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">INSTANCA INFO</div>
+        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('instance.info')}</div>
         <div style="font-size:0.68rem;line-height:1.8;font-family:'Share Tech Mono',monospace">
-          <div>⚡ Tip: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
-          <div>⚡ Težina: ${dl(diff)}</div>
-          <div>👾 Boss: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
-          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 Drop pool: <span style="color:#aa44ff;font-weight:700">${{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]} itema po killu</span></div>` : ''}
-          <div>⚡ Min moć: ${fmt(getInstanceMinPower(inst))}</div>
-          <div>⚡ Energija: ${energyCost} MWh</div>
-          <div>✅ Clearova: ${prog.clear_count}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
-          ${prog.best_rank ? `<div>⚡ 🏆 Best rank: ${prog.best_rank}</div>` : ''}
+          <div>⚡ ${t('instance.type')}: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
+          <div>⚡ ${t('instance.difficulty')}: ${dl(diff)}</div>
+          <div>👾 ${t('instance.boss')}: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
+          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 ${t('instance.drop_pool',{count:{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]})}</div>` : ''}
+          <div>⚡ ${t('instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
+          <div>⚡ ${t('instance.energy',{cost:energyCost})}</div>
+          <div>✅ ${t('instance.clears')}: ${prog.clear_count}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); return _t !== 'instance.milestone100.progress' ? _t : `🃏 ${t('instance.milestone100.progress',{count:_c})}`; })()}</div>
+          ${prog.best_rank ? `<div>⚡ 🏆 ${t('instance.best_rank')}: ${prog.best_rank}</div>` : ''}
         </div>
 
-        <div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px">NAGRADE ×${mode.rewardMult}</div>
+        <div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px">${t('instance.rewards_header',{mult:mode.rewardMult})}</div>
         <div style="font-size:0.62rem;font-family:'Share Tech Mono',monospace;line-height:1.6">
-          <div>🔩 ${fmt(metalMin)}-${fmt(metalMax)} metal</div>
-          <div>💎 ${fmt(crystalMin)}-${fmt(crystalMax)} crystal</div>
-          <div>⛽ ${fmt(he3Min)}-${fmt(he3Max)} he3</div>
+          <div>🔩 ${fmt(metalMin)}-${fmt(metalMax)} ${t('res.metal')}</div>
+          <div>💎 ${fmt(crystalMin)}-${fmt(crystalMax)} ${t('res.crystal')}</div>
+          <div>⛽ ${fmt(he3Min)}-${fmt(he3Max)} ${t('res.he3')}</div>
           <div style="margin-top:8px">
             ${getDropPreview(inst)}
           </div>
@@ -628,7 +628,7 @@ function openInstanceModal(instId) {
           };
 
           if (guaranteed.length > 0) {
-            html += `<div style="font-size:0.6rem;color:#00ff88;margin-bottom:4px">✅ GARANTOVANO</div>`;
+            html += `<div style="font-size:0.6rem;color:#00ff88;margin-bottom:4px">${t('instance.guaranteed')}</div>`;
             guaranteed.forEach(id => {
               const name = _resolveItemName(id);
               const rar  = _resolveItemRarity(id);
@@ -648,7 +648,7 @@ function openInstanceModal(instId) {
           const curModeIdx = modeOrd.indexOf(_instDifficultyMode || 'easy');
           const visChance = chance.filter(c => !c.minMode || modeOrd.indexOf(c.minMode) <= curModeIdx);
           if (visChance.length > 0) {
-            html += `<div style="font-size:0.6rem;color:#6a90b8;margin-top:6px;margin-bottom:4px">🎲 ŠANSA</div>`;
+            html += `<div style="font-size:0.6rem;color:#6a90b8;margin-top:6px;margin-bottom:4px">${t('instance.chance')}</div>`;
             visChance.forEach(({item: id, rate, minMode}) => {
               const name = _resolveItemName(id);
               const rar  = _resolveItemRarity(id);
@@ -697,7 +697,7 @@ function openInstanceModal(instId) {
             const curMode = _instDifficultyMode || 'easy';
             const rars = modeRarities[curMode] || ['C'];
             const rarityColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
-            const rarityNames = { C:'Common', R:'Rare', E:'Epic', L:'Legendary' };
+            const rarityNames = { C:t('inst_rarity.C.name'), R:t('inst_rarity.R.name'), E:t('inst_rarity.E.name'), L:t('inst_rarity.L.name') };
             const FRAG_CHANCE = { easy:{C:60}, normal:{C:70,R:40}, nightmare:{C:80,R:60,E:30}, hell:{C:90,R:75,E:50,L:20} };
             const BP_CHANCE   = { easy:{}, normal:{C:20,R:8}, nightmare:{C:35,R:18,E:6}, hell:{C:50,R:30,E:15,L:5} };
             const fch = FRAG_CHANCE[curMode] || {};
@@ -719,7 +719,7 @@ function openInstanceModal(instId) {
 
       <!-- Desno: Flota -->
       <div>
-        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">TVOJA FLOTA</div>
+        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('instance.your_fleet')}</div>
         ${fleetSlots.map(slot => {
           const ship  = getShipById(slot.ship_id);
           const stats = calcSlotStats(slot);

@@ -1938,7 +1938,7 @@ function renderBattleResult(battle, rewards) {
       <div style="font-family:'Orbitron',monospace;font-size:1.4rem;color:${statusColor};
         text-shadow:0 0 20px ${statusColor}44">${statusText}</div>
       <div style="font-size:0.72rem;color:#6a90b8;margin-top:4px">
-        Završeno u ${battle.round} rundi
+        ${t('instance.completed_in',{round:battle.round})}
       </div>
     </div>
 
@@ -1949,17 +1949,17 @@ function renderBattleResult(battle, rewards) {
     ${isVictory && rewards ? `
       <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);
         border-radius:8px;padding:14px;margin-bottom:16px">
-        <div style="font-size:0.72rem;color:#00ff88;font-weight:700;margin-bottom:10px">🎁 NAGRADE</div>
+        <div style="font-size:0.72rem;color:#00ff88;font-weight:700;margin-bottom:10px">${t('instance.rewards')}</div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-bottom:10px">
-          <div><div style="font-size:0.62rem;color:#6a90b8">METAL</div>
+          <div><div style="font-size:0.62rem;color:#6a90b8">${t('res.metal')}</div>
             <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(rewards.metal)}</div></div>
-          <div><div style="font-size:0.62rem;color:#6a90b8">CRYSTAL</div>
+          <div><div style="font-size:0.62rem;color:#6a90b8">${t('res.crystal')}</div>
             <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(rewards.crystal)}</div></div>
-          <div><div style="font-size:0.62rem;color:#6a90b8">HE3</div>
+          <div><div style="font-size:0.62rem;color:#6a90b8">${t('res.he3')}</div>
             <div style="color:white;font-family:'Share Tech Mono',monospace">+${fmt(rewards.he3)}</div></div>
         </div>
         ${(rewards.blueprints||[]).length > 0 ? `
-          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">BLUEPRINTI:</div>
+          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">${t('instance.blueprints_header')}</div>
           <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
             ${rewards.blueprints.map(id => `
               <span style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);
@@ -1968,7 +1968,7 @@ function renderBattleResult(battle, rewards) {
               </span>`).join('')}
           </div>` : ''}
         ${(rewards.fragments||[]).length > 0 ? `
-          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">FRAGMENTI:</div>
+          <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:6px">${t('instance.fragments_header')}</div>
           <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
             ${rewards.fragments.map(f => {
               const needed  = getBpFragmentCost(getBlueprintRarity(f.itemId));

@@ -4689,7 +4689,24 @@
                                  "btn":  "💳 WPŁAĆ PRZEZ PAYPAL"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "INFO INSTANCJI",
+                                    "type":  "Typ",
+                                    "difficulty":  "Trudność",
+                                    "drop_pool":  "\uD83D\uDCE6 Pool dropów: {count} przedmiotów na zabójstwo",
+                                    "min_power":  "Min. moc",
+                                    "energy":  "Energia: {cost} MWh",
+                                    "clears":  "Przejścia",
+                                    "best_rank":  "Najlepsza ranga",
+                                    "rewards_header":  "NAGRODY ×{mult}",
+                                    "guaranteed":  "\u2705 GWARANTOWANE",
+                                    "chance":  "\uD83C\uDFB2 SZANSA",
+                                    "your_fleet":  "TWOJA FLOTA",
+                                    "blueprints_header":  "BLUEPRINTY:",
+                                    "fragments_header":  "FRAGMENTY:",
+                                    "boss":  "Boss",
+                                    "completed_in":  "Ukończono w {round} rundach",
+                                    "rewards":  "\uD83C\uDF81 NAGRODY",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 klucz dowódcy (co 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} klucz(y) dowódcy z 100x instancji",
                                                          "progress":  "🃏 +1 klucz dowódcy co 100 przejść ({count}/100)",

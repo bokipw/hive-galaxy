@@ -4661,7 +4661,24 @@
                                  "btn":  "💳 SPENDEN SIE ÜBER PAYPAL"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "INSTANZEN INFO",
+                                    "type":  "Typ",
+                                    "difficulty":  "Schwierigkeit",
+                                    "drop_pool":  "\uD83D\uDCE6 Drop-Pool: {count} Gegenstände pro Kill",
+                                    "min_power":  "Min. Leistung",
+                                    "energy":  "Energie: {cost} MWh",
+                                    "clears":  "Durchläufe",
+                                    "best_rank":  "Bester Rang",
+                                    "rewards_header":  "BELOHNUNGEN ×{mult}",
+                                    "guaranteed":  "\u2705 GARANTIERT",
+                                    "chance":  "\uD83C\uDFB2 CHANCE",
+                                    "your_fleet":  "DEINE FLOTTE",
+                                    "blueprints_header":  "BLUEPRINTS:",
+                                     "fragments_header":  "FRAGMENTE:",
+                                     "boss":  "Boss",
+                                     "completed_in":  "Abgeschlossen in {round} Runden",
+                                     "rewards":  "\uD83C\uDF81 BELOHNUNGEN",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 Kommandoschlüssel (alle 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} Kommandoschlüssel von 100x Instanzen",
                                                          "progress":  "🃏 +1 Kommandoschlüssel alle 100 Durchläufe ({count}/100)",

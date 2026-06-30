@@ -4467,6 +4467,23 @@
       "btn": "\uD83D\uDCB3 DONATE VIA PAYPAL"
     },
     "instance": {
+      "info": "INSTANCE INFO",
+      "type": "Type",
+      "boss": "Boss",
+      "difficulty": "Difficulty",
+      "completed_in": "Completed in {round} rounds",
+      "rewards": "🎁 REWARDS",
+      "drop_pool": "📦 Drop pool: {count} items per kill",
+      "min_power": "Min power",
+      "energy": "Energy: {cost} MWh",
+      "clears": "Clears",
+      "best_rank": "Best rank",
+      "rewards_header": "REWARDS ×{mult}",
+      "guaranteed": "✅ GUARANTEED",
+      "chance": "🎲 CHANCE",
+      "your_fleet": "YOUR FLEET",
+      "blueprints_header": "BLUEPRINTS:",
+      "fragments_header": "FRAGMENTS:",
       "milestone100": {
         "keyReward": "🃏 +1 commander key (every 100x {name} [{mode}])",
         "retro": "🃏 +{n} commander key(s) from instance 100x completions",

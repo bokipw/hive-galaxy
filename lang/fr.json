@@ -4689,7 +4689,24 @@
                                  "btn":  "💳 FAITES UN DON VIA PAYPAL"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "INFOS INSTANCE",
+                                    "type":  "Type",
+                                    "difficulty":  "Difficulté",
+                                    "drop_pool":  "\uD83D\uDCE6 Pool de butin: {count} objets par kill",
+                                    "min_power":  "Puissance min",
+                                    "energy":  "Énergie: {cost} MWh",
+                                    "clears":  "Nettoyages",
+                                    "best_rank":  "Meilleur rang",
+                                    "rewards_header":  "RÉCOMPENSES ×{mult}",
+                                    "guaranteed":  "\u2705 GARANTI",
+                                    "chance":  "\uD83C\uDFB2 CHANCE",
+                                    "your_fleet":  "TA FLOTTE",
+                                    "blueprints_header":  "BLUEPRINTS:",
+                                    "fragments_header":  "FRAGMENTS:",
+                                    "boss":  "Boss",
+                                    "completed_in":  "Terminé en {round} rounds",
+                                    "rewards":  "\uD83C\uDF81 RÉCOMPENSES",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 clé de commandant (toutes les 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} clé(s) de commandant des 100x instances",
                                                          "progress":  "🃏 +1 clé de commandant toutes les 100 exécutions ({count}/100)",

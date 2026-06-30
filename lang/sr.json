@@ -4689,6 +4689,23 @@
       "btn": "\uD83D\uDCB3 DONIRAJ PUTEM PAYPALA"
     },
     "instance": {
+      "info": "INSTANCA INFO",
+      "type": "Tip",
+      "boss": "Boss",
+      "difficulty": "Težina",
+      "completed_in": "Završeno u {round} rundi",
+      "rewards": "🎁 NAGRADE",
+      "drop_pool": "📦 Drop pool: {count} itema po killu",
+      "min_power": "Min moć",
+      "energy": "Energija: {cost} MWh",
+      "clears": "Clearova",
+      "best_rank": "Najbolji rank",
+      "rewards_header": "NAGRADE ×{mult}",
+      "guaranteed": "✅ GARANTOVANO",
+      "chance": "🎲 ŠANSA",
+      "your_fleet": "TVOJA FLOTA",
+      "blueprints_header": "BLUEPRINTI:",
+      "fragments_header": "FRAGMENTI:",
       "milestone100": {
         "keyReward": "🃏 +1 komandir ključ (svakih 100x {name} [{mode}])",
         "retro": "🃏 +{n} komandir ključ(ev/a) od 100x instanci",

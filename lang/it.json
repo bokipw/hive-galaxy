@@ -4689,7 +4689,24 @@
                                  "btn":  "💳 DONA TRAMITE PAYPAL"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "INFO ISTANZA",
+                                    "type":  "Tipo",
+                                    "difficulty":  "Difficoltà",
+                                    "drop_pool":  "\uD83D\uDCE6 Pool drop: {count} oggetti per kill",
+                                    "min_power":  "Potenza min",
+                                    "energy":  "Energia: {cost} MWh",
+                                    "clears":  "Completamenti",
+                                    "best_rank":  "Miglior rango",
+                                    "rewards_header":  "RICOMPENSE ×{mult}",
+                                    "guaranteed":  "\u2705 GARANTITO",
+                                    "chance":  "\uD83C\uDFB2 PROBABILITÀ",
+                                    "your_fleet":  "TUA FLOTTA",
+                                    "blueprints_header":  "BLUEPRINT:",
+                                    "fragments_header":  "FRAMMENTI:",
+                                    "boss":  "Boss",
+                                    "completed_in":  "Completato in {round} round",
+                                    "rewards":  "\uD83C\uDF81 RICOMPENSE",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 chiave comandante (ogni 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} chiave(i) comandante da 100x istanze",
                                                          "progress":  "🃏 +1 chiave comandante ogni 100 completamenti ({count}/100)",

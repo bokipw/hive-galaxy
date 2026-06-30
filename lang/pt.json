@@ -4689,7 +4689,24 @@
                                  "btn":  "💳 DOE VIA PAYPAL"
                               },
                    "instance":  {
-                                   "milestone100":  {
+                                    "info":  "INFO DA INSTÂNCIA",
+                                    "type":  "Tipo",
+                                    "difficulty":  "Dificuldade",
+                                    "drop_pool":  "\uD83D\uDCE6 Pool de drops: {count} itens por kill",
+                                    "min_power":  "Poder mín",
+                                    "energy":  "Energia: {cost} MWh",
+                                    "clears":  "Limpezas",
+                                    "best_rank":  "Melhor rank",
+                                    "rewards_header":  "RECOMPENSAS ×{mult}",
+                                    "guaranteed":  "\u2705 GARANTIDO",
+                                    "chance":  "\uD83C\uDFB2 CHANCE",
+                                    "your_fleet":  "SUA FROTA",
+                                    "blueprints_header":  "BLUEPRINTS:",
+                                    "fragments_header":  "FRAGMENTOS:",
+                                    "boss":  "Chefe",
+                                    "completed_in":  "Concluído em {round} rodadas",
+                                    "rewards":  "\uD83C\uDF81 RECOMPENSAS",
+                                    "milestone100":  {
 "keyReward":  "🃏 +1 chave de comandante (a cada 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} chave(s) de comandante das 100x instâncias",
                                                          "progress":  "🃏 +1 chave de comandante a cada 100 conclusões ({count}/100)",
