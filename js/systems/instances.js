@@ -590,7 +590,7 @@ function openInstanceModal(instId) {
           <div>⚡ ${t('instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
           <div>⚡ ${t('instance.energy',{cost:energyCost})}</div>
           <div>✅ ${t('instance.clears')}: ${prog.clear_count}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); return _t !== 'instance.milestone100.progress' ? _t : `🃏 ${t('instance.milestone100.progress',{count:_c})}`; })()}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
           ${prog.best_rank ? `<div>⚡ 🏆 ${t('instance.best_rank')}: ${prog.best_rank}</div>` : ''}
         </div>
 
@@ -703,7 +703,7 @@ function openInstanceModal(instId) {
             const fch = FRAG_CHANCE[curMode] || {};
             const bch = BP_CHANCE[curMode]   || {};
             html += `<div style="margin-top:8px;padding:5px 7px;background:rgba(170,68,255,0.05);border:1px solid rgba(170,68,255,0.15);border-radius:4px">`;
-            html += `<div style="font-size:0.6rem;color:#aa44ff">📦 Boss drop: <strong>${rollCount}</strong> item po killu</div>`;
+            html += `<div style="font-size:0.6rem;color:#aa44ff">📦 ${t('instance.drop_pool',{count:rollCount})}</div>`;
             html += `<div style="font-size:0.55rem;color:#6a90b8;margin-top:3px">`;
             rars.forEach(r => {
               const fp = fch[r] || 0;

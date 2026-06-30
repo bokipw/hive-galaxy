@@ -4729,11 +4729,9 @@
                                  "bocrypto":  "BoCrypto",
                                  "bpw":  "BPW"
                               }
-              }
-,
+              },
     "boss_reward": {
       "victory": "+{count} ???????_",
       "commander_victory": "+1 🃏 指揮官鍵"
     }
-}
 }

@@ -4700,12 +4700,10 @@
                                  "bcm":  "BCM",
                                  "bocrypto":  "BoCrypto",
                                  "bpw":  "BPW"
-                              }
-               }
-,
+                               }
+                },
     "boss_reward": {
-      "victory": "+{count} Instanz-Schl�ssel",
+      "victory": "+{count} Instanz-Schlüssel",
       "commander_victory": "+1 🃏 Kommandantenschlüssel"
     }
-}
 }
