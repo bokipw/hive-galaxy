@@ -4695,7 +4695,7 @@
       "difficulty": "Težina",
       "completed_in": "Završeno u {round} rundi",
       "rewards": "🎁 NAGRADE",
-      "drop_pool": "📦 Drop pool: {count} itema po killu",
+      "drop_pool": "📦 Ispada: {count} item(a) po killu",
       "min_power": "Min moć",
       "energy": "Energija: {cost} MWh",
       "clears": "Clearova",
