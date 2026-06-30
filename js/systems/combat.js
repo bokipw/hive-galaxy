@@ -1679,9 +1679,17 @@ function calculateRewards(battle, instanceData, prog) {
     if (remaining.length === 0) rewards.allFound = true;
   }
 
-  // Easy rare boss → 1-10 instance keys
-  if (modeName === 'easy' && instance.type === 'boss_rare') {
-    rewards.instanceKeys = 1 + Math.floor(Math.random() * 10);
+  // Instance keys per mode & boss type
+  const keyRanges = {
+    easy:      { boss_rare: [1,2], boss_epic: [1,3] },
+    normal:    { boss_rare: [1,3], boss_epic: [1,4] },
+    nightmare: { boss_rare: [1,4], boss_epic: [1,5] },
+    hell:      { boss_rare: [1,5], boss_epic: [1,6] },
+  };
+  const range = keyRanges[modeName]?.[instance.type];
+  if (range) {
+    const [min, max] = range;
+    rewards.instanceKeys = min + Math.floor(Math.random() * (max - min + 1));
   }
 
   return rewards;
