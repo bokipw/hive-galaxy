@@ -4682,9 +4682,28 @@
 "keyReward":  "🃏 +1 Kommandoschlüssel (alle 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} Kommandoschlüssel von 100x Instanzen",
                                                          "progress":  "🃏 +1 Kommandoschlüssel alle 100 Durchläufe ({count}/100)",
-                                                        "earned":  "🃏 Kommandoschlüssel verdient!"
-                                                    }
-                               },
+                                                          "earned":  "🃏 Kommandoschlüssel verdient!"
+                                                     },
+                    "mode_easy":  "Einfach",
+                    "mode_normal":  "Normal",
+                    "mode_nightmare":  "Albtraum",
+                    "mode_hell":  "Hölle",
+                    "desc_easy":  "Kommandant Lv 0-25 · 1 Kommandant · Bauplan Stufe I",
+                    "desc_normal":  "Kommandant Lv 25-50 · bis zu 3 Kommandanten · Bauplan Stufe II",
+                    "desc_nightmare":  "Kommandant Lv 50-75 · bis zu 6 Kommandanten · Bauplan Stufe III",
+                    "desc_hell":  "Kommandant Lv 75-100 · bis zu 9 Kommandanten · Bauplan Stufe IV/Legendär",
+                    "bp_tier_I":  "Stufe I",
+                    "bp_tier_II":  "Stufe II",
+                    "bp_tier_III":  "Stufe III",
+                    "bp_tier_IV":  "Stufe IV",
+                    "active_mode":  "AKTIVER MODUS",
+                    "blueprint":  "BAUPLAN",
+                    "key_cost":  "SCHLÜSSELKOSTEN",
+                    "commanders":  "KOMMANDANTEN",
+                    "locked_cmd":  "🔒 Kommandant Lv{level}",
+                    "bp_abbr":  "BP",
+                    "max_cmd":  "max {count}"
+                                },
                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Unterstützt von HIVE Blockchain",
                                  "developed":  "Entwickelt von",

@@ -4711,7 +4711,26 @@
                                                          "retro":  "🃏 +{n} clé(s) de commandant des 100x instances",
                                                          "progress":  "🃏 +1 clé de commandant toutes les 100 exécutions ({count}/100)",
                                                         "earned":  "🃏 Clé de commandant gagnée!"
-                                                    }
+                                                    },
+                   "mode_easy":  "Facile",
+                   "mode_normal":  "Normal",
+                   "mode_nightmare":  "Cauchemar",
+                   "mode_hell":  "Enfer",
+                   "desc_easy":  "Commandant Lv 0-25 · 1 commandant · Plan Stade I",
+                   "desc_normal":  "Commandant Lv 25-50 · jusqu'à 3 commandants · Plan Stade II",
+                   "desc_nightmare":  "Commandant Lv 50-75 · jusqu'à 6 commandants · Plan Stade III",
+                   "desc_hell":  "Commandant Lv 75-100 · jusqu'à 9 commandants · Plan Stade IV/Légendaire",
+                   "bp_tier_I":  "Stade I",
+                   "bp_tier_II":  "Stade II",
+                   "bp_tier_III":  "Stade III",
+                   "bp_tier_IV":  "Stade IV",
+                   "active_mode":  "MODE ACTIF",
+                   "blueprint":  "PLAN",
+                   "key_cost":  "COÛT CLÉ",
+                   "commanders":  "COMMANDANTS",
+                   "locked_cmd":  "🔒 Commandant Lv{level}",
+                   "bp_abbr":  "BP",
+                   "max_cmd":  "max {count}"
                                },
                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",

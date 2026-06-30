@@ -4489,7 +4489,26 @@
         "retro": "🃏 +{n} commander key(s) from instance 100x completions",
         "progress": "🃏 +1 commander key every 100 clears ({count}/100)",
         "earned": "🃏 Commander key earned!"
-      }
+      },
+      "mode_easy": "Easy",
+      "mode_normal": "Normal",
+      "mode_nightmare": "Nightmare",
+      "mode_hell": "Hell",
+      "desc_easy": "Commander Lv 0-25 · 1 commander · Blueprint Tier I",
+      "desc_normal": "Commander Lv 25-50 · up to 3 commanders · Blueprint Tier II",
+      "desc_nightmare": "Commander Lv 50-75 · up to 6 commanders · Blueprint Tier III",
+      "desc_hell": "Commander Lv 75-100 · up to 9 commanders · Blueprint Tier IV/Legendary",
+      "bp_tier_I": "Tier I",
+      "bp_tier_II": "Tier II",
+      "bp_tier_III": "Tier III",
+      "bp_tier_IV": "Tier IV",
+      "active_mode": "ACTIVE MODE",
+      "blueprint": "BLUEPRINT",
+      "key_cost": "KEY COST",
+      "commanders": "COMMANDERS",
+      "locked_cmd": "🔒 Commander Lv{level}",
+      "bp_abbr": "BP",
+      "max_cmd": "max {count}"
     },
     "footer": {
       "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",

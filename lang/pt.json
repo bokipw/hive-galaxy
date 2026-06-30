@@ -4710,8 +4710,27 @@
 "keyReward":  "🃏 +1 chave de comandante (a cada 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} chave(s) de comandante das 100x instâncias",
                                                          "progress":  "🃏 +1 chave de comandante a cada 100 conclusões ({count}/100)",
-                                                        "earned":  "🃏 Chave de comandante ganha!"
-                                                    }
+                                                         "earned":  "🃏 Chave de comandante ganha!"
+                                                     },
+                   "mode_easy":  "Fácil",
+                   "mode_normal":  "Normal",
+                   "mode_nightmare":  "Pesadelo",
+                   "mode_hell":  "Inferno",
+                   "desc_easy":  "Comandante Lv 0-25 · 1 comandante · Projeto Tier I",
+                   "desc_normal":  "Comandante Lv 25-50 · até 3 comandantes · Projeto Tier II",
+                   "desc_nightmare":  "Comandante Lv 50-75 · até 6 comandantes · Projeto Tier III",
+                   "desc_hell":  "Comandante Lv 75-100 · até 9 comandantes · Projeto Tier IV/Lendário",
+                   "bp_tier_I":  "Tier I",
+                   "bp_tier_II":  "Tier II",
+                   "bp_tier_III":  "Tier III",
+                   "bp_tier_IV":  "Tier IV",
+                   "active_mode":  "MODO ATIVO",
+                   "blueprint":  "PROJETO",
+                   "key_cost":  "CUSTO DA CHAVE",
+                   "commanders":  "COMANDANTES",
+                   "locked_cmd":  "🔒 Comandante Lv{level}",
+                   "bp_abbr":  "BP",
+                   "max_cmd":  "max {count}"
                                },
                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",

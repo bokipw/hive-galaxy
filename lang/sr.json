@@ -4706,13 +4706,32 @@
       "your_fleet": "TVOJA FLOTA",
       "blueprints_header": "BLUEPRINTI:",
       "fragments_header": "FRAGMENTI:",
-      "milestone100": {
-        "keyReward": "🃏 +1 komandir ključ (svakih 100x {name} [{mode}])",
-        "retro": "🃏 +{n} komandir ključ(ev/a) od 100x instanci",
-        "progress": "🃏 +1 komandir ključ na svakih 100 clearova ({count}/100)",
-        "earned": "🃏 Komandir ključ osvojen!"
-      }
-    },
+        "milestone100": {
+          "keyReward": "🃏 +1 komandir ključ (svakih 100x {name} [{mode}])",
+          "retro": "🃏 +{n} komandir ključ(ev/a) od 100x instanci",
+          "progress": "🃏 +1 komandir ključ na svakih 100 clearova ({count}/100)",
+          "earned": "🃏 Komandir ključ osvojen!"
+        },
+        "mode_easy": "Lako",
+        "mode_normal": "Normalno",
+        "mode_nightmare": "Noćna mora",
+        "mode_hell": "Pakao",
+        "desc_easy": "Komandir Lv 0-25 · 1 komandant · Blueprint Tier I",
+        "desc_normal": "Komandir Lv 25-50 · do 3 komandanta · Blueprint Tier II",
+        "desc_nightmare": "Komandir Lv 50-75 · do 6 komandanata · Blueprint Tier III",
+        "desc_hell": "Komandir Lv 75-100 · do 9 komandanata · Blueprint Tier IV/Legendary",
+        "bp_tier_I": "Tier I",
+        "bp_tier_II": "Tier II",
+        "bp_tier_III": "Tier III",
+        "bp_tier_IV": "Tier IV",
+        "active_mode": "AKTIVAN MOD",
+        "blueprint": "BLUEPRINT",
+        "key_cost": "CENA KLJUČA",
+        "commanders": "KOMANDANTI",
+        "locked_cmd": "🔒 Komandir Lv{level}",
+        "bp_abbr": "BP",
+        "max_cmd": "max {count}"
+      },
     "footer": {
       "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
       "developed": "Developed by",

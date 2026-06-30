@@ -4710,8 +4710,27 @@
 "keyReward":  "🃏 +1 指揮官キー (100回毎 {name} [{mode}])",
                                                          "retro":  "🃏 +{n} 指揮官キーを100回インスタンス達成",
                                                          "progress":  "🃏 +1 指揮官キー 100回毎 ({count}/100)",
-                                                        "earned":  "🃏 指揮官キー獲得済み!"
-                                                    }
+                                                         "earned":  "🃏 指揮官キー獲得済み!"
+                                                     },
+                   "mode_easy":  "イージー",
+                   "mode_normal":  "ノーマル",
+                   "mode_nightmare":  "ナイトメア",
+                   "mode_hell":  "ヘル",
+                   "desc_easy":  "指揮官Lv 0-25 · 1指揮官 · 設計図Tier I",
+                   "desc_normal":  "指揮官Lv 25-50 · 最大3指揮官 · 設計図Tier II",
+                   "desc_nightmare":  "指揮官Lv 50-75 · 最大6指揮官 · 設計図Tier III",
+                   "desc_hell":  "指揮官Lv 75-100 · 最大9指揮官 · 設計図Tier IV/Legendary",
+                   "bp_tier_I":  "Tier I",
+                   "bp_tier_II":  "Tier II",
+                   "bp_tier_III":  "Tier III",
+                   "bp_tier_IV":  "Tier IV",
+                   "active_mode":  "アクティブモード",
+                   "blueprint":  "設計図",
+                   "key_cost":  "キーコスト",
+                   "commanders":  "指揮官",
+                   "locked_cmd":  "🔒 指揮官Lv{level}",
+                   "bp_abbr":  "BP",
+                   "max_cmd":  "最大 {count}"
                                },
                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",

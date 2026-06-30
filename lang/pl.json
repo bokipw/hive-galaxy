@@ -4710,8 +4710,27 @@
 "keyReward":  "🃏 +1 klucz dowódcy (co 100x {name} [{mode}])",
                                                          "retro":  "🃏 +{n} klucz(y) dowódcy z 100x instancji",
                                                          "progress":  "🃏 +1 klucz dowódcy co 100 przejść ({count}/100)",
-                                                        "earned":  "🃏 Klucz dowódcy zdobyty!"
-                                                    }
+                                                         "earned":  "🃏 Klucz dowódcy zdobyty!"
+                                                     },
+                   "mode_easy":  "Łatwy",
+                   "mode_normal":  "Normalny",
+                   "mode_nightmare":  "Koszmar",
+                   "mode_hell":  "Piekło",
+                   "desc_easy":  "Dowódca Lv 0-25 · 1 dowódca · Projekt Tier I",
+                   "desc_normal":  "Dowódca Lv 25-50 · do 3 dowódców · Projekt Tier II",
+                   "desc_nightmare":  "Dowódca Lv 50-75 · do 6 dowódców · Projekt Tier III",
+                   "desc_hell":  "Dowódca Lv 75-100 · do 9 dowódców · Projekt Tier IV/Legendary",
+                   "bp_tier_I":  "Tier I",
+                   "bp_tier_II":  "Tier II",
+                   "bp_tier_III":  "Tier III",
+                   "bp_tier_IV":  "Tier IV",
+                   "active_mode":  "TRYB AKTYWNY",
+                   "blueprint":  "PROJEKT",
+                   "key_cost":  "KOSZT KLUCZA",
+                   "commanders":  "DOWÓDCY",
+                   "locked_cmd":  "🔒 Dowódca Lv{level}",
+                   "bp_abbr":  "BP",
+                   "max_cmd":  "max {count}"
                                },
                    "footer":  {
                                  "copyright":  "© 2026 HIVE GALAXY · Powered by HIVE Blockchain",

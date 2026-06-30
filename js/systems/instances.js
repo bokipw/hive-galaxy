@@ -147,10 +147,10 @@ function renderInstances() {
           " onclick="${locked ? '' : `_instDifficultyMode='${key}';renderInstances()`}">
             <div style="font-size:1.1rem;margin-bottom:4px">${m.label.split(' ')[0]}</div>
             <div style="font-size:0.75rem;font-weight:700;color:${isActive ? m.color : locked ? '#6a90b8' : 'white'}">
-              ${m.label.split(' ').slice(1).join(' ')}
+              ${t('instance.mode_' + key)}
             </div>
             <div style="font-size:0.55rem;color:${locked ? '#444' : '#6a90b8'};margin-top:3px;line-height:1.4">
-              ${locked ? `🔒 Komandir Lv${m.cmdLevel[0]}` : `BP ${BP_TIER_DROPS[m.bpTier].label}`}
+              ${locked ? t('instance.locked_cmd',{level:m.cmdLevel[0]}) : t('instance.bp_abbr') + ' ' + t('instance.bp_tier_' + m.bpTier)}
             </div>
             ${isActive ? `<div style="width:100%;height:2px;background:${m.color};border-radius:2px;margin-top:6px"></div>` : ''}
           </div>`;
@@ -162,29 +162,29 @@ function renderInstances() {
       background:${mode.color}08">
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
         <div style="flex:1">
-          <div style="font-size:0.65rem;color:#6a90b8;letter-spacing:2px;margin-bottom:4px">AKTIVAN MOD</div>
+          <div style="font-size:0.65rem;color:#6a90b8;letter-spacing:2px;margin-bottom:4px">${t('instance.active_mode')}</div>
           <div style="font-size:0.9rem;font-weight:700;color:${mode.color};font-family:'Orbitron',monospace">
-            ${mode.label}
+            ${mode.label.split(' ')[0]} ${t('instance.mode_' + _instDifficultyMode)}
           </div>
-          <div style="font-size:0.62rem;color:#6a90b8;margin-top:2px">${mode.desc}</div>
+          <div style="font-size:0.62rem;color:#6a90b8;margin-top:2px">${t('instance.desc_' + _instDifficultyMode)}</div>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">BLUEPRINT</div>
-            <div style="font-size:0.78rem;font-weight:700;color:${bpTier.color}">${bpTier.label}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.blueprint')}</div>
+            <div style="font-size:0.78rem;font-weight:700;color:${bpTier.color}">${t('instance.bp_tier_' + mode.bpTier)}</div>
             <div style="font-size:0.55rem;color:${bpTier.color}">${bpTier.rarity.join(', ')}</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">NAGRADE</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.rewards')}</div>
             <div style="font-size:0.78rem;font-weight:700;color:#00ff88">×${mode.rewardMult}</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">KEY COST</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.key_cost')}</div>
             <div style="font-size:0.78rem;font-weight:700;color:#ffcc44">${mode.keyCost}🗝️</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">KOMANDANTI</div>
-            <div style="font-size:0.78rem;font-weight:700;color:#aa44ff">max ${mode.commanders}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.commanders')}</div>
+            <div style="font-size:0.78rem;font-weight:700;color:#aa44ff">${t('instance.max_cmd',{count:mode.commanders})}</div>
           </div>
         </div>
       </div>
@@ -298,7 +298,7 @@ function renderInstanceCard(inst, playerPower) {
       <div style="position:absolute;top:8px;left:8px;font-size:0.55rem;
         background:${mode.color}22;border:1px solid ${mode.color}66;
         color:${mode.color};padding:1px 5px;border-radius:3px;letter-spacing:1px">
-        ${mode.label.split(' ').slice(1).join(' ').toUpperCase()}
+        ${t('instance.mode_' + _instDifficultyMode).toUpperCase()}
       </div>
 
       ${locked ? `<div style="position:absolute;top:8px;right:8px;font-size:1.2rem">🔒</div>` : ''}
@@ -325,7 +325,7 @@ function renderInstanceCard(inst, playerPower) {
       <!-- Težina -->
       <div style="font-size:0.72rem;margin-bottom:6px">
         ${dl(diff)}
-        <span style="font-size:0.6rem;color:#6a90b8;margin-left:6px">Težina ${inst.difficulty}/10</span>
+        <span style="font-size:0.6rem;color:#6a90b8;margin-left:6px">${t('instance.difficulty')} ${inst.difficulty}/10</span>
       </div>
 
       <!-- Boss -->
