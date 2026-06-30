@@ -874,7 +874,7 @@ function claimDailyBonus() {
   if (window.missionState.daily.bonusClaimed) return;
   const activeMissions = getActiveDailyMissions();
   const completed = activeMissions.filter(m => {
-    try { return m.check(); } catch(e) { return false; }
+    try { if (window.missionState.daily.claimed.includes(m.id)) return true; return m.check(); } catch(e) { return false; }
   }).length;
   if (completed < activeMissions.length) { toast(`⚠️ Završi svih ${activeMissions.length} dnevnih misija!`, 'warn'); return; }
 
@@ -1095,7 +1095,7 @@ function renderMissions() {
 
   const activeDailyList  = getActiveDailyMissions();
   const activeWeeklyList = getActiveWeeklyMissions();
-  const dailyCompleted   = activeDailyList.filter(m => { try { return m.check(); } catch(e){ return false; } }).length;
+  const dailyCompleted   = activeDailyList.filter(m => { try { if (window.missionState.daily.claimed.includes(m.id)) return true; return m.check(); } catch(e){ return false; } }).length;
   const weeklyCompleted  = activeWeeklyList.filter(m => { try { return m.check(); } catch(e){ return false; } }).length;
   const storyCompleted   = window.missionState.storyline.completed.length;
 
