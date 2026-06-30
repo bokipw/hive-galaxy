@@ -583,6 +583,7 @@ function openInstanceModal(instId) {
           const guaranteed = inst.drops?.guaranteed || [];
           const chance     = inst.drops?.chance     || [];
 
+          let html = '';
           const _resolveItemName = id => {
             if (id.startsWith('art_')) {
               const art = typeof ARTIFACTS_DATA !== 'undefined' ? ARTIFACTS_DATA.find(a => a.id === id) : null;
