@@ -147,10 +147,10 @@ function renderInstances() {
           " onclick="${locked ? '' : `_instDifficultyMode='${key}';renderInstances()`}">
             <div style="font-size:1.1rem;margin-bottom:4px">${m.label.split(' ')[0]}</div>
             <div style="font-size:0.75rem;font-weight:700;color:${isActive ? m.color : locked ? '#6a90b8' : 'white'}">
-              ${t('instance.mode_' + key)}
+              ${t('index.instance.mode_' + key)}
             </div>
             <div style="font-size:0.55rem;color:${locked ? '#444' : '#6a90b8'};margin-top:3px;line-height:1.4">
-              ${locked ? t('instance.locked_cmd',{level:m.cmdLevel[0]}) : t('instance.bp_abbr') + ' ' + t('instance.bp_tier_' + m.bpTier)}
+              ${locked ? t('index.instance.locked_cmd',{level:m.cmdLevel[0]}) : t('index.instance.bp_abbr') + ' ' + t('index.instance.bp_tier_' + m.bpTier)}
             </div>
             ${isActive ? `<div style="width:100%;height:2px;background:${m.color};border-radius:2px;margin-top:6px"></div>` : ''}
           </div>`;
@@ -162,29 +162,29 @@ function renderInstances() {
       background:${mode.color}08">
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
         <div style="flex:1">
-          <div style="font-size:0.65rem;color:#6a90b8;letter-spacing:2px;margin-bottom:4px">${t('instance.active_mode')}</div>
+          <div style="font-size:0.65rem;color:#6a90b8;letter-spacing:2px;margin-bottom:4px">${t('index.instance.active_mode')}</div>
           <div style="font-size:0.9rem;font-weight:700;color:${mode.color};font-family:'Orbitron',monospace">
-            ${mode.label.split(' ')[0]} ${t('instance.mode_' + _instDifficultyMode)}
+            ${mode.label.split(' ')[0]} ${t('index.instance.mode_' + _instDifficultyMode)}
           </div>
-          <div style="font-size:0.62rem;color:#6a90b8;margin-top:2px">${t('instance.desc_' + _instDifficultyMode)}</div>
+          <div style="font-size:0.62rem;color:#6a90b8;margin-top:2px">${t('index.instance.desc_' + _instDifficultyMode)}</div>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.blueprint')}</div>
-            <div style="font-size:0.78rem;font-weight:700;color:${bpTier.color}">${t('instance.bp_tier_' + mode.bpTier)}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('index.instance.blueprint')}</div>
+            <div style="font-size:0.78rem;font-weight:700;color:${bpTier.color}">${t('index.instance.bp_tier_' + mode.bpTier)}</div>
             <div style="font-size:0.55rem;color:${bpTier.color}">${bpTier.rarity.join(', ')}</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.rewards')}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('index.instance.rewards')}</div>
             <div style="font-size:0.78rem;font-weight:700;color:#00ff88">×${mode.rewardMult}</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.key_cost')}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('index.instance.key_cost')}</div>
             <div style="font-size:0.78rem;font-weight:700;color:#ffcc44">${mode.keyCost}🗝️</div>
           </div>
           <div style="text-align:center">
-            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('instance.commanders')}</div>
-            <div style="font-size:0.78rem;font-weight:700;color:#aa44ff">${t('instance.max_cmd',{count:mode.commanders})}</div>
+            <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:2px">${t('index.instance.commanders')}</div>
+            <div style="font-size:0.78rem;font-weight:700;color:#aa44ff">${t('index.instance.max_cmd',{count:mode.commanders})}</div>
           </div>
         </div>
       </div>
@@ -298,7 +298,7 @@ function renderInstanceCard(inst, playerPower) {
       <div style="position:absolute;top:8px;left:8px;font-size:0.55rem;
         background:${mode.color}22;border:1px solid ${mode.color}66;
         color:${mode.color};padding:1px 5px;border-radius:3px;letter-spacing:1px">
-        ${t('instance.mode_' + _instDifficultyMode).toUpperCase()}
+        ${t('index.instance.mode_' + _instDifficultyMode).toUpperCase()}
       </div>
 
       ${locked ? `<div style="position:absolute;top:8px;right:8px;font-size:1.2rem">🔒</div>` : ''}
@@ -325,7 +325,7 @@ function renderInstanceCard(inst, playerPower) {
       <!-- Težina -->
       <div style="font-size:0.72rem;margin-bottom:6px">
         ${dl(diff)}
-        <span style="font-size:0.6rem;color:#6a90b8;margin-left:6px">${t('instance.difficulty')} ${inst.difficulty}/10</span>
+        <span style="font-size:0.6rem;color:#6a90b8;margin-left:6px">${t('index.instance.difficulty')} ${inst.difficulty}/10</span>
       </div>
 
       <!-- Boss -->
@@ -413,7 +413,7 @@ function renderInstanceCard(inst, playerPower) {
 
       <!-- 100x commander key reward -->
       <div style="font-size:0.52rem;color:#00d4ff;margin-bottom:6px">
-        ${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}
+        ${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}
       </div>
 
       <!-- Dugme -->
@@ -581,20 +581,20 @@ function openInstanceModal(instId) {
 
       <!-- Lijevo: Info -->
       <div>
-        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('instance.info')}</div>
+        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('index.instance.info')}</div>
         <div style="font-size:0.68rem;line-height:1.8;font-family:'Share Tech Mono',monospace">
-          <div>⚡ ${t('instance.type')}: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
-          <div>⚡ ${t('instance.difficulty')}: ${dl(diff)}</div>
-          <div>👾 ${t('instance.boss')}: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
-          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 ${t('instance.drop_pool',{count:{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]})}</div>` : ''}
-          <div>⚡ ${t('instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
-          <div>⚡ ${t('instance.energy',{cost:energyCost})}</div>
-          <div>✅ ${t('instance.clears')}: ${prog.clear_count}</div>
-          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
-          ${prog.best_rank ? `<div>⚡ 🏆 ${t('instance.best_rank')}: ${prog.best_rank}</div>` : ''}
+          <div>⚡ ${t('index.instance.type')}: <span style="color:${typeInfo.color||'white'}">${dn(typeInfo)}</span></div>
+          <div>⚡ ${t('index.instance.difficulty')}: ${dl(diff)}</div>
+          <div>👾 ${t('index.instance.boss')}: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span></div>
+          ${({'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]) ? `<div>📦 ${t('index.instance.drop_pool',{count:{'boss_rare':1,'boss_epic':2,'boss_legendary':3,'boss_master':4,'boss':2}[inst.type]})}</div>` : ''}
+          <div>⚡ ${t('index.instance.min_power')}: ${fmt(getInstanceMinPower(inst))}</div>
+          <div>⚡ ${t('index.instance.energy',{cost:energyCost})}</div>
+          <div>✅ ${t('index.instance.clears')}: ${prog.clear_count}</div>
+          <div style="font-size:0.55rem;color:#00d4ff;margin-top:2px">${(() => { const _c = prog.clear_count % 100; const _t = t('index.instance.milestone100.progress', { count: _c }); const _isEn = (window._i18nLang||'').startsWith('en'); return _t !== 'instance.milestone100.progress' ? _t : _isEn ? `🃏 +1 commander key every 100 clears (${_c}/100)` : `🃏 +1 komandir ključ na svakih 100 clearova (${_c}/100)`; })()}</div>
+          ${prog.best_rank ? `<div>⚡ 🏆 ${t('index.instance.best_rank')}: ${prog.best_rank}</div>` : ''}
         </div>
 
-        <div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px">${t('instance.rewards_header',{mult:mode.rewardMult})}</div>
+        <div style="margin-top:12px;font-size:0.72rem;color:#6a90b8;margin-bottom:6px">${t('index.instance.rewards_header',{mult:mode.rewardMult})}</div>
         <div style="font-size:0.62rem;font-family:'Share Tech Mono',monospace;line-height:1.6">
           <div>🔩 ${fmt(metalMin)}-${fmt(metalMax)} ${t('res.metal')}</div>
           <div>💎 ${fmt(crystalMin)}-${fmt(crystalMax)} ${t('res.crystal')}</div>
@@ -628,7 +628,7 @@ function openInstanceModal(instId) {
           };
 
           if (guaranteed.length > 0) {
-            html += `<div style="font-size:0.6rem;color:#00ff88;margin-bottom:4px">${t('instance.guaranteed')}</div>`;
+            html += `<div style="font-size:0.6rem;color:#00ff88;margin-bottom:4px">${t('index.instance.guaranteed')}</div>`;
             guaranteed.forEach(id => {
               const name = _resolveItemName(id);
               const rar  = _resolveItemRarity(id);
@@ -648,7 +648,7 @@ function openInstanceModal(instId) {
           const curModeIdx = modeOrd.indexOf(_instDifficultyMode || 'easy');
           const visChance = chance.filter(c => !c.minMode || modeOrd.indexOf(c.minMode) <= curModeIdx);
           if (visChance.length > 0) {
-            html += `<div style="font-size:0.6rem;color:#6a90b8;margin-top:6px;margin-bottom:4px">${t('instance.chance')}</div>`;
+            html += `<div style="font-size:0.6rem;color:#6a90b8;margin-top:6px;margin-bottom:4px">${t('index.instance.chance')}</div>`;
             visChance.forEach(({item: id, rate, minMode}) => {
               const name = _resolveItemName(id);
               const rar  = _resolveItemRarity(id);
@@ -703,7 +703,7 @@ function openInstanceModal(instId) {
             const fch = FRAG_CHANCE[curMode] || {};
             const bch = BP_CHANCE[curMode]   || {};
             html += `<div style="margin-top:8px;padding:5px 7px;background:rgba(170,68,255,0.05);border:1px solid rgba(170,68,255,0.15);border-radius:4px">`;
-            html += `<div style="font-size:0.6rem;color:#aa44ff">📦 ${t('instance.drop_pool',{count:rollCount})}</div>`;
+            html += `<div style="font-size:0.6rem;color:#aa44ff">📦 ${t('index.instance.drop_pool',{count:rollCount})}</div>`;
             html += `<div style="font-size:0.55rem;color:#6a90b8;margin-top:3px">`;
             rars.forEach(r => {
               const fp = fch[r] || 0;
@@ -719,7 +719,7 @@ function openInstanceModal(instId) {
 
       <!-- Desno: Flota -->
       <div>
-        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('instance.your_fleet')}</div>
+        <div style="font-size:0.72rem;color:#6a90b8;margin-bottom:8px">${t('index.instance.your_fleet')}</div>
         ${fleetSlots.map(slot => {
           const ship  = getShipById(slot.ship_id);
           const stats = calcSlotStats(slot);
@@ -908,7 +908,7 @@ function startBattle(inst, instant = false) {
         if (typeof saveGame === 'function') saveGame();
         setTimeout(() => {
           if (typeof toast === 'function') {
-            const _rewardKey = t('instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); const _rkEn = (window._i18nLang||'').startsWith('en'); toast(_rewardKey !== 'instance.milestone100.keyReward' ? _rewardKey : _rkEn ? `🃏 +1 commander key (every 100x ${dn(inst)} [${mode.label}])` : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
+            const _rewardKey = t('index.instance.milestone100.keyReward', { name: dn(inst), mode: mode.label }); const _rkEn = (window._i18nLang||'').startsWith('en'); toast(_rewardKey !== 'instance.milestone100.keyReward' ? _rewardKey : _rkEn ? `🃏 +1 commander key (every 100x ${dn(inst)} [${mode.label}])` : `🃏 +1 komandir ključ (svakih 100x ${dn(inst)} [${mode.label}])`, 'ok');
           }
         }, 300);
       }
@@ -998,7 +998,7 @@ function _migrateInstance100Keys() {
   if (total > 0) {
     addLog(`🃏 +${total} komandir ključ(ev/a) — svakih 100 instanci (retroaktivno)`);
     if (typeof toast === 'function') {
-      const _retroKey = t('instance.milestone100.retro', { n: total }); const _rEn = (window._i18nLang||'').startsWith('en'); toast(_retroKey !== 'instance.milestone100.retro' ? _retroKey : _rEn ? `🃏 +${total} commander key(s) from 100x instance clears` : `🃏 +${total} komandir ključ(ev/a) od 100x instanci`, 'ok');
+      const _retroKey = t('index.instance.milestone100.retro', { n: total }); const _rEn = (window._i18nLang||'').startsWith('en'); toast(_retroKey !== 'instance.milestone100.retro' ? _retroKey : _rEn ? `🃏 +${total} commander key(s) from 100x instance clears` : `🃏 +${total} komandir ključ(ev/a) od 100x instanci`, 'ok');
     }
     saveGame();
   }
