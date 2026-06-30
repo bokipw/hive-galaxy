@@ -638,10 +638,10 @@ function openInstanceModal(instId) {
           }
 
           const keyRanges = {
-            easy:      { boss_rare: '1-2', boss_epic: '1-3' },
-            normal:    { boss_rare: '1-3', boss_epic: '1-4' },
-            nightmare: { boss_rare: '1-4', boss_epic: '1-5' },
-            hell:      { boss_rare: '1-5', boss_epic: '1-6' },
+            easy:      { boss_rare: '1-2', boss_epic: '1-3', boss_legendary: '3-5', boss_master: '5-8', boss: '2-4' },
+            normal:    { boss_rare: '1-3', boss_epic: '1-4', boss_legendary: '4-7', boss_master: '7-11', boss: '3-5' },
+            nightmare: { boss_rare: '1-4', boss_epic: '1-5', boss_legendary: '5-9', boss_master: '9-14', boss: '4-7' },
+            hell:      { boss_rare: '1-5', boss_epic: '1-6', boss_legendary: '6-12', boss_master: '12-18', boss: '5-9' },
           };
           const curMode = _instDifficultyMode || 'easy';
           const range   = keyRanges[curMode]?.[inst.type];
