@@ -636,8 +636,49 @@ function openInstanceModal(instId) {
       <div style="font-size:0.7rem;color:#ff3355;margin-bottom:6px;font-weight:700">
         💥 ${t('index.instance.enemies_header',{mult:mode.enemyMult})}
       </div>
-      <div style="font-size:0.65rem;color:#6a90b8">
-        ${inst.enemies.join(', ')} + ${t('index.instance.boss')}: ${t(inst.bossKey || '') || inst.boss}
+      <div style="font-size:0.62rem;font-family:'Share Tech Mono',monospace;line-height:1.7">
+        ${(() => {
+          const groups = inst.enemyGroups || [];
+          const counted = {};
+          groups.forEach(g => {
+            const key = g.ship_id;
+            counted[key] = (counted[key] || 0) + g.count;
+          });
+          return Object.entries(counted).map(([sid, cnt]) => {
+            const ship = typeof getShipById === 'function' ? getShipById(sid) : null;
+            const name = ship ? dn(ship) || ship.name || sid : sid;
+            const clsColor = (typeof SHIP_CLASSES !== 'undefined' && ship) ? (SHIP_CLASSES[getShipClass(sid)]?.color || '#6a90b8') : '#6a90b8';
+            return `<span style="color:${clsColor}">×${fmt(cnt)} ${name}</span>`;
+          }).join(' · ');
+        })()}
+      </div>
+      ${(() => {
+        const cmdRarityMap = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
+        const cmdCountMap  = { easy: 1,   normal: 3,   nightmare: 6,   hell: 9   };
+        const cmdRarity    = cmdRarityMap[_instDifficultyMode] || 'C';
+        const cmdCount     = cmdCountMap[_instDifficultyMode]  || 1;
+        const cmdLevel     = getInstCmdLevel(inst.number);
+        const rarColors    = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ff8800' };
+        const rarCol       = rarColors[cmdRarity] || '#aaa';
+        const picked = [];
+        for (let i = 0; i < cmdCount; i++) {
+          const seed = _instHashCode(inst.id + '_cmd_' + _instDifficultyMode + '_' + i);
+          const cmd  = pickEnemyCommander(cmdRarity, seed);
+          if (!cmd || picked.find(c => c.id === cmd.id)) continue;
+          picked.push(cmd);
+        }
+        if (!picked.length) return '';
+        return `<div style="margin-top:6px;padding:4px 6px;background:${rarCol}10;border:1px solid ${rarCol}33;border-radius:4px;font-size:0.6rem">
+          <span style="color:${rarCol};font-weight:700">⚔️ ${t('index.instance.commanders')} (${picked.length})</span>
+          <span style="font-size:0.55rem;opacity:0.7;margin-left:4px">Lv.${cmdLevel}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px">
+            ${picked.map(cmd => `<span style="background:${rarCol}15;border:1px solid ${rarCol}44;border-radius:3px;padding:1px 5px;color:${rarCol}">${cmd.icon} ${cmd.name}</span>`).join('')}
+          </div>
+        </div>`;
+      })()}
+      <div style="margin-top:6px;font-size:0.62rem;color:#ff3355">
+        👾 ${t('index.instance.boss')}: <span style="color:white">${t(inst.bossKey || '') || inst.boss}</span>
+        ${inst.bossShip ? `<span style="color:#6a90b8;margin-left:4px">(HP ${fmt(inst.bossShip.structure||0)} · DPS ${fmt(inst.bossShip.dps||0)})</span>` : ''}
       </div>
     </div>
 
