@@ -2104,7 +2104,7 @@ const INSTANCES_EASY = [
 
   {
     id: 'boss_e3', name: 'Dreadnought Titan', type: 'boss_epic', number: 3,
-    difficulty: 9, min_power: 350000, icon: '👹',
+    difficulty: 10, min_power: 350000, icon: '👹',
     xp: 9000,
     boss_ability: 'titan_rage',
     enemies: ['Titan Escort Fleet', 'Dreadnought Titan'],
