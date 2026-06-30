@@ -457,33 +457,66 @@ function getDropPreview(inst) {
     hell:      { C: 50, R: 30, E: 15, L: 5 },
   };
 
+  const bossTypes = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'];
+  const isBoss = bossTypes.includes(inst.type);
+
+  // Boss drop rolls
+  const bossRolls = { boss_rare: 1, boss_epic: 2, boss_legendary: 3, boss_master: 4, boss: 2 };
+  const rollCount = isBoss ? (bossRolls[inst.type] || 1) : 0;
+  const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
+  const rars = isBoss ? (modeRarities[modeName] || ['C']) : [];
+
   const fragChance = FRAG_CHANCE[modeName] || {};
   const bpChance   = BP_CHANCE[modeName]   || {};
 
   let html = '';
 
-  // Fragmenti
-  html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ FRAGMENTI</div>`;
-  html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-  Object.entries(fragChance).forEach(([r, pct]) => {
-    html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
-      border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
-      ${rarityName[r]} ${pct}%</span>`;
-  });
-  html += `</div>`;
-
-  // Blueprinti
-  if (Object.keys(bpChance).length > 0) {
-    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ BLUEPRINT DROP</div>`;
+  if (isBoss) {
+    html += `<div style="font-size:0.62rem;color:#aa44ff;letter-spacing:1px;margin-bottom:4px">📦 DROP POOL</div>`;
+    html += `<div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px">${rollCount} item po killu · Rarity: `;
+    html += rars.map(r => `<span style="color:${rarityColor[r]}">${rarityName[r]}</span>`).join(' / ');
+    html += `</div>`;
+    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ FRAGMENTI</div>`;
     html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-    Object.entries(bpChance).forEach(([r, pct]) => {
+    rars.forEach(r => {
+      const pct = fragChance[r] || 0;
       html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
         border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
         ${rarityName[r]} ${pct}%</span>`;
     });
     html += `</div>`;
+    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ BLUEPRINT DROP</div>`;
+    html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
+    rars.forEach(r => {
+      const pct = bpChance[r] || 0;
+      html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
+        border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
+        ${rarityName[r]} ${pct > 0 ? pct + '%' : '0%'}</span>`;
+    });
+    html += `</div>`;
+    html += `<div style="font-size:0.55rem;color:#4488ff">🔄 Pool se ažurira kako otključavaš iteme</div>`;
   } else {
-    html += `<div style="font-size:0.62rem;color:#6a90b8">⚡ Blueprinti ne padaju na <span style="color:#00ff88">Easy</span></div>`;
+    html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ FRAGMENTI</div>`;
+    html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
+    Object.entries(fragChance).forEach(([r, pct]) => {
+      html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
+        border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
+        ${rarityName[r]} ${pct}%</span>`;
+    });
+    html += `</div>`;
+
+    if (Object.keys(bpChance).length > 0) {
+      html += `<div style="font-size:0.62rem;color:#6a90b8;letter-spacing:1px;margin-bottom:4px">⚡ BLUEPRINT DROP</div>`;
+      html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
+      Object.entries(bpChance).forEach(([r, pct]) => {
+        html += `<span style="background:${rarityColor[r]}18;border:1px solid ${rarityColor[r]}44;
+          border-radius:4px;padding:2px 8px;font-size:0.65rem;color:${rarityColor[r]}">
+          ${rarityName[r]} ${pct}%</span>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div style="font-size:0.62rem;color:#6a90b8">⚡ Blueprinti ne padaju na <span style="color:#00ff88">Easy</span></div>`;
+    }
   }
 
   return html;
@@ -659,6 +692,31 @@ function openInstanceModal(instId) {
           const cmdChance = cmdChances[inst.type];
           if (cmdChance) {
             html += `<div style="font-size:0.6rem;color:#aa44ff;margin-top:4px">🃏 ${cmdChance} ${t('res.commanderKeys')}</div>`;
+          }
+
+          const bossTypes = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'];
+          if (bossTypes.includes(inst.type) && !inst.drops?.chance?.length) {
+            const bossRolls = { boss_rare: 1, boss_epic: 2, boss_legendary: 3, boss_master: 4, boss: 2 };
+            const rollCount = bossRolls[inst.type] || 1;
+            const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
+            const curMode = _instDifficultyMode || 'easy';
+            const rars = modeRarities[curMode] || ['C'];
+            const rarityColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+            const rarityNames = { C:'Common', R:'Rare', E:'Epic', L:'Legendary' };
+            const FRAG_CHANCE = { easy:{C:60}, normal:{C:70,R:40}, nightmare:{C:80,R:60,E:30}, hell:{C:90,R:75,E:50,L:20} };
+            const BP_CHANCE   = { easy:{}, normal:{C:20,R:8}, nightmare:{C:35,R:18,E:6}, hell:{C:50,R:30,E:15,L:5} };
+            const fch = FRAG_CHANCE[curMode] || {};
+            const bch = BP_CHANCE[curMode]   || {};
+            html += `<div style="margin-top:8px;padding:5px 7px;background:rgba(170,68,255,0.05);border:1px solid rgba(170,68,255,0.15);border-radius:4px">`;
+            html += `<div style="font-size:0.6rem;color:#aa44ff">📦 Boss drop: <strong>${rollCount}</strong> item po killu</div>`;
+            html += `<div style="font-size:0.55rem;color:#6a90b8;margin-top:3px">`;
+            rars.forEach(r => {
+              const fp = fch[r] || 0;
+              const bp = bch[r] || 0;
+              html += `<span style="color:${rarityColors[r]}">${rarityNames[r]}</span> ${fp}% frag · ${bp > 0 ? bp + '% BP' : '0% BP'}`;
+              if (r !== rars[rars.length-1]) html += ` · `;
+            });
+            html += `</div></div>`;
           }
           return html;
         })()}

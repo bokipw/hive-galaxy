@@ -1611,7 +1611,7 @@ function calculateRewards(battle, instanceData, prog) {
 
   // Artifakti iz chance arraya — odvojiti od blueprintova
   const artifactDrops = allDrops.filter(id => id.startsWith('art_'));
-  const bpDrops = allDrops.filter(id => !id.startsWith('art_'));
+  let bpDrops = allDrops.filter(id => !id.startsWith('art_'));
 
   // Procesiraj artifakte — svaki baci kocku (60% šansa za fragment na easy+)
   const ART_FRAG_CHANCE = { easy: 60, normal: 70, nightmare: 80, hell: 90 };
@@ -1626,6 +1626,28 @@ function calculateRewards(battle, instanceData, prog) {
       rewards.artifactFragments.push(id);
     }
   });
+
+  // Boss drop pool — kad nema definisanih dropova, generiši iz globalnih nizova
+  const bossTypes = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'];
+  if (bossTypes.includes(instance.type) && bpDrops.length === 0) {
+    const allIds = [];
+    if (typeof WEAPONS !== 'undefined') WEAPONS.forEach(i => { if (i.id) allIds.push(i.id); });
+    if (typeof SHIELDS !== 'undefined') SHIELDS.forEach(i => { if (i.id) allIds.push(i.id); });
+    if (typeof ENGINES !== 'undefined') ENGINES.forEach(i => { if (i.id) allIds.push(i.id); });
+    if (typeof SHIPS !== 'undefined') {
+      Object.values(SHIPS).forEach(arr => arr.forEach(s => { if (s.id) allIds.push(s.id); }));
+    }
+    const bossRolls = { boss_rare: 1, boss_epic: 2, boss_legendary: 3, boss_master: 4, boss: 2 };
+    const rollCount = bossRolls[instance.type] || 1;
+    const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
+    const rars = modeRarities[modeName] || ['C'];
+    let pool = allIds.filter(id => {
+      if (ownedBlueprints[id]) return false;
+      return rars.includes(getBlueprintRarity(id));
+    });
+    pool.sort(() => Math.random() - 0.5);
+    bpDrops = pool.slice(0, rollCount);
+  }
 
   const available = bpDrops.filter(id => {
     if (ownedBlueprints[id]) return false;
