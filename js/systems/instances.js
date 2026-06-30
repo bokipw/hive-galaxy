@@ -608,7 +608,7 @@ function openInstanceModal(instId) {
             const curMode = _instDifficultyMode || 'easy';
             const rars = modeRarities[curMode] || ['C'];
             const rarityColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
-            const rarityNames = { C:t('inst_rarity.C.name'), R:t('inst_rarity.R.name'), E:t('inst_rarity.E.name'), L:t('inst_rarity.L.name') };
+            const rarityNames = { C:t('index.instance.rarity_C_name'), R:t('index.instance.rarity_R_name'), E:t('index.instance.rarity_E_name'), L:t('index.instance.rarity_L_name') };
             const FRAG_CHANCE = { easy:{C:60}, normal:{C:70,R:40}, nightmare:{C:80,R:60,E:30}, hell:{C:90,R:75,E:50,L:20} };
             const BP_CHANCE   = { easy:{}, normal:{C:20,R:8}, nightmare:{C:35,R:18,E:6}, hell:{C:50,R:30,E:15,L:5} };
             const fch = FRAG_CHANCE[curMode] || {};
