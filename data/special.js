@@ -852,7 +852,7 @@ const SPECIAL_MODULES = [
     name: 'Cargo Expansion I',
     nameKey: 'module.mod_cargo_I.name',
     variant: 'I', rarity: 'C', icon: '📦',
-    shipClass: 'special',
+    shipClass: ['special', 'carrier'],
     effect: { type: 'cargo', bonus: 500, desc: '+500 kapacitet plijena', effectKey: 'module.mod_cargo_I.effect' },
     cost: { metal: 400, crystal: 150, he3: 80 },
     source: 'Instanca 27',
@@ -865,7 +865,7 @@ const SPECIAL_MODULES = [
     name: 'Cargo Expansion II',
     nameKey: 'module.mod_cargo_II.name',
     variant: 'II', rarity: 'C', icon: '📦',
-    shipClass: 'special',
+    shipClass: ['special', 'carrier'],
     effect: { type: 'cargo', bonus: 1200, desc: '+1200 kapacitet plijena', effectKey: 'module.mod_cargo_II.effect' },
     cost: { metal: 900, crystal: 350, he3: 180 },
     source: 'Instanca 7',
@@ -878,7 +878,7 @@ const SPECIAL_MODULES = [
     name: 'Cargo Expansion III',
     nameKey: 'module.mod_cargo_III.name',
     variant: 'III', rarity: 'C', icon: '📦',
-    shipClass: 'special',
+    shipClass: ['special', 'carrier'],
     effect: { type: 'cargo', bonus: 2500, desc: '+2500 kapacitet plijena', effectKey: 'module.mod_cargo_III.effect' },
     cost: { metal: 1800, crystal: 700, he3: 360 },
     source: 'Instanca 13',
@@ -911,7 +911,10 @@ function getSpecialById(id) {
 }
 
 function getSpecialByClass(shipClass) {
-  return SPECIAL_MODULES.filter(m => m.shipClass === shipClass);
+  return SPECIAL_MODULES.filter(m => {
+    if (Array.isArray(m.shipClass)) return m.shipClass.includes(shipClass);
+    return m.shipClass === shipClass;
+  });
 }
 
 function getSpecialByRarity(rarity) {

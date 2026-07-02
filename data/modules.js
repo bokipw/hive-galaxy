@@ -23,8 +23,11 @@ function canShipUseModule(shipClass, moduleId) {
   if (!mod) return false;
   // Recon moduli — samo scout
   if (RECON_MODULES?.find(m => m.id === moduleId)) return shipClass === 'scout';
-  // Special moduli — po shipClass polju
-  if (mod.shipClass) return shipClass === mod.shipClass;
+  // Special moduli — po shipClass polju (može biti string ili niz)
+  if (mod.shipClass) {
+    if (Array.isArray(mod.shipClass)) return mod.shipClass.includes(shipClass);
+    return shipClass === mod.shipClass;
+  }
   return false;
 }
 
