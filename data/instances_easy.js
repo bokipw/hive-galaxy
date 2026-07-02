@@ -24,7 +24,13 @@ const INSTANCES_EASY = [
     ],
     boss: 'Alpha Drone',
   bossShip: {"name":"Alpha Drone","structure":12000,"shield":4000,"armor_val":2000,"dps":1900,"agility":5,"speed":2},
-    
+    drops: {
+      guaranteed: [],
+      chance: [
+        { item: 'w_heat_inferno_beam_I', rate: 25 },
+        { item: 'sh_iron_guard_I', rate: 20 },
+      ],
+    },
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
     desc: 'Prva instanca. Savršena za početnike i Common opremu.',
     unlock: 'Dostupna od starta',
