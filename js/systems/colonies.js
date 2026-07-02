@@ -267,18 +267,18 @@ function _showScanModal(colony, phalanxLv, data) {
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
       <div style="font-size:2rem">📡</div>
       <div>
-        <div style="font-size:0.9rem;font-weight:700;color:#00d4ff">${t('index.planet.phalanx_name')}</div>
-        <div style="font-size:0.65rem;color:#6a90b8">${colony.name} · ${t('index.planet.level')}.${phalanxLv} · ${t('index.planet.scan_range',{range})}</div>
+        <div style="font-size:0.9rem;font-weight:700;color:#00d4ff">Senzorska Falanga</div>
+        <div style="font-size:0.65rem;color:#6a90b8">${colony.name} · Lv.${phalanxLv} · Doseg: ${range} sistema</div>
       </div>
     </div>
 
     <!-- Planete u dosegu -->
     <div style="font-size:0.72rem;font-weight:700;color:#ffcc44;margin-bottom:8px;letter-spacing:1px">
-      🌍 ${t('index.planet.scanned_planets',{count:results.length})}
+      🌍 SKENIRANE PLANETE (${results.length})
     </div>`;
 
   if (results.length === 0) {
-    html += `<div style="color:#6a90b8;font-size:0.7rem;margin-bottom:12px">${t('index.planet.no_planets_in_range')}</div>`;
+    html += `<div style="color:#6a90b8;font-size:0.7rem;margin-bottom:12px">Nema neprijateljskih planeta u dosegu.</div>`;
   } else {
     html += `<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">`;
     results.forEach(r => {
@@ -287,15 +287,15 @@ function _showScanModal(colony, phalanxLv, data) {
           border:1px solid ${r.conquered ? 'rgba(0,255,136,0.2)' : 'rgba(255,51,85,0.2)'}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
             <span style="font-size:0.75rem;font-weight:700;color:${r.type.color}">${r.type.icon} ${r.name}</span>
-            <span style="font-size:0.6rem;color:#6a90b8">${t('index.planet.system')} ${r.distance}</span>
+            <span style="font-size:0.6rem;color:#6a90b8">Sistem ${r.distance}</span>
           </div>
           <div style="font-size:0.62rem;font-family:'Share Tech Mono',monospace;color:#6a90b8;line-height:1.7">
             ${r.conquered
-              ? `<span style="color:#00ff88">✅ ${t('index.planet.already_subdued')}</span>`
-              : `⚔️ ${t('index.planet.fleet')}: <span style="color:#ff8833">${fmt(r.fleet)} ${t('index.planet.ships_abbr')}</span>
-                 · ${t('index.planet.dps')}: <span style="color:#ff3355">${fmt(r.dps)}</span><br>
+              ? `<span style="color:#00ff88">✅ Već pokoren</span>`
+              : `⚔️ Flota: <span style="color:#ff8833">${fmt(r.fleet)} brodova</span>
+                 · DPS: <span style="color:#ff3355">${fmt(r.dps)}</span><br>
                  ${r.defenders.map(d => `· ${d.name} ×${d.count}`).join('<br>')}
-                 ${r.more > 0 ? `<br><span style="color:#4a6a88">... ${t('index.planet.more_groups',{count:r.more})}</span>` : ''}`}
+                 ${r.more > 0 ? `<br><span style="color:#4a6a88">... +${r.more} grupe</span>` : ''}`}
           </div>
         </div>`;
     });
@@ -304,7 +304,7 @@ function _showScanModal(colony, phalanxLv, data) {
 
   // PvP intel — tuđe baze u dosegu
   if (pvpIntel && pvpIntel.length > 0) {
-    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ ${t('index.planet.enemy_bases_header',{count:pvpIntel.length})}</div>
+    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ NEPRIJATELJSKE BAZE U DOSEGU (${pvpIntel.length})</div>
     <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">`;
     pvpIntel.forEach(p => {
       const res = p.resources || {};
@@ -313,37 +313,37 @@ function _showScanModal(colony, phalanxLv, data) {
           <span style="color:white;font-weight:700">🔴 ${p.username}</span>
           <span style="color:#ffcc44">⭐ ${p.rating || 1000}</span>
         </div>
-        💪 ${t('index.planet.power')}: <span style="color:#00d4ff">${fmt(p.power || 0)}</span>
+        💪 Moć: <span style="color:#00d4ff">${fmt(p.power || 0)}</span>
         ${res.metal !== undefined ? `&nbsp;·&nbsp; 🔩${fmt(res.metal)} 💎${fmt(res.crystal)} ⛽${fmt(res.he3)}` : ''}
         <div style="margin-top:6px">
-          <button class="btn btn-danger" style="padding:3px 10px;font-size:0.62rem" onclick="closeModal();galaxyAttackBase('${p.id}')">${t('index.planet.attack_short')}</button>
+          <button class="btn btn-danger" style="padding:3px 10px;font-size:0.62rem" onclick="closeModal();galaxyAttackBase('${p.id}')">⚔️ Napadni</button>
         </div>
       </div>`;
     });
     html += `</div>`;
   } else if (phalanxLv >= 2) {
-    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ ${t('index.planet.pvp_intel')}</div>
-    <div style="color:#6a90b8;font-size:0.7rem;margin-bottom:14px">${t('index.planet.no_bases_in_range')}</div>`;
+    html += `<div style="font-size:0.72rem;font-weight:700;color:#ff3355;margin-bottom:8px;letter-spacing:1px">⚔️ PVP INTEL</div>
+    <div style="color:#6a90b8;font-size:0.7rem;margin-bottom:14px">Nema neprijateljskih baza u dosegu.</div>`;
   }
 
   // Event intel
   if (eventIntel) {
     html += `
-      <div style="font-size:0.72rem;font-weight:700;color:#aa44ff;margin-bottom:8px;letter-spacing:1px">🔭 ${t('index.planet.event_intel')}</div>
+      <div style="font-size:0.72rem;font-weight:700;color:#aa44ff;margin-bottom:8px;letter-spacing:1px">🔭 EVENT INTEL</div>
       <div style="background:rgba(170,68,255,0.07);border:1px solid rgba(170,68,255,0.2);
         border-radius:6px;padding:8px;font-size:0.65rem;line-height:1.8">
         ${eventIntel.hint
           ? `<span style="color:${eventIntel.positive ? '#00ff88' : '#ff3355'}">
-              ${eventIntel.positive ? t('index.planet.event_positive') : t('index.planet.event_negative')}
+              ${eventIntel.positive ? '🟢 Povoljni event se sprema' : '🔴 Negativni event se sprema'}
              </span>`
-          : `<span style="color:#aa44ff">${eventIntel.icon || '⚡'} ${eventIntel.name || t('index.planet.event_unknown')}</span>`}
+          : `<span style="color:#aa44ff">${eventIntel.icon || '⚡'} ${eventIntel.name || 'Nepoznat event'}</span>`}
       </div>`;
   }
 
   if (typeof showModal === 'function') {
-    showModal('📡 ' + t('index.planet.scan_results'), html, [{ label: t('ui.close'), action: () => {} }]);
+    showModal('📡 Scan Rezultati', html, [{ label: 'Zatvori', action: () => {} }]);
   }
-  toast(`📡 ${t('index.planet.scan_done',{count:results.length,cost:SENSOR_SCAN_COST})}`, 'ok');
+  toast(`📡 Sken završen! Skenirano ${results.length} sistema. (-${fmt(SENSOR_SCAN_COST)} He3)`, 'ok');
 }
 
 function getColonyBuildingEffect(colony) {
@@ -494,6 +494,7 @@ function spyPlanet(planetId) {
                    'nightmare','nightmare','nightmare','nightmare','nightmare',
                    'hell','hell','hell','hell','hell'];
   const modeName = diffMap[pIdx] || 'easy';
+  const modeLabels = { easy:'🌿 Easy', normal:'⚔️ Normal', nightmare:'💀 Nightmare', hell:'🔥 Hell' };
   const modeColors = { easy:'#00ff88', normal:'#ffcc44', nightmare:'#ff8833', hell:'#ff3355' };
 
   // Generiši branitelje da možemo pokazati info
@@ -519,34 +520,34 @@ function spyPlanet(planetId) {
 
   const spyHtml = `
     <div style="font-size:0.62rem;color:#6a90b8;margin-bottom:6px;display:flex;align-items:center;gap:6px">
-      <span style="color:${modeColors[modeName]};font-weight:700">${t('index.planet.mode_' + modeName)}</span>
-      <span>· ${t('index.planet.level')} ${pIdx+1}</span>
+      <span style="color:${modeColors[modeName]};font-weight:700">${modeLabels[modeName]}</span>
+      <span>· Level ${pIdx+1}</span>
     </div>
 
     <div style="font-size:0.6rem;font-family:'Share Tech Mono',monospace;
       background:rgba(0,0,0,0.4);border-radius:5px;padding:8px;margin-bottom:6px;line-height:1.8">
-      <div style="color:#6a90b8;margin-bottom:3px;font-size:0.55rem">${t('index.planet.type_header')}</div>
+      <div style="color:#6a90b8;margin-bottom:3px;font-size:0.55rem">🌍 PLANETA TIP</div>
       <div style="color:${pType.color}">${pType.icon} ${pType.name}</div>
       <div style="color:#aaa;font-size:0.55rem">${pType.desc || ''}</div>
     </div>
 
     <div style="font-size:0.6rem;font-family:'Share Tech Mono',monospace;
       background:rgba(255,51,85,0.07);border-radius:5px;padding:8px;margin-bottom:6px;line-height:1.8">
-      <div style="color:#ff3355;margin-bottom:3px;font-size:0.55rem">⚔️ ${t('index.planet.defense_header',{count:defenders.length})}</div>
+      <div style="color:#ff3355;margin-bottom:3px;font-size:0.55rem">⚔️ ODBRANA (${defenders.length} grupe)</div>
       ${defenders.slice(0,5).map(g => `
         <div>· ${g.name} <span style="color:#ff8833">×${g.count}</span></div>
       `).join('')}
-      ${defenders.length > 5 ? `<div style="color:#6a90b8">... ${t('index.planet.more_groups',{count:defenders.length-5})}</div>` : ''}
+      ${defenders.length > 5 ? `<div style="color:#6a90b8">... +${defenders.length-5} grupe</div>` : ''}
       <div style="margin-top:4px;color:#6a90b8">
-        ${t('index.planet.total_ships')}: <span style="color:white">${fmt(totalCount)}</span>
-        · ${t('index.planet.dps')}: <span style="color:#ff8833">${fmt(Math.floor(totalDps))}</span>
+        Ukupno brodova: <span style="color:white">${fmt(totalCount)}</span>
+        · DPS: <span style="color:#ff8833">${fmt(Math.floor(totalDps))}</span>
       </div>
     </div>
 
     ${commanders.length > 0 ? `
     <div style="font-size:0.6rem;font-family:'Share Tech Mono',monospace;
       background:rgba(255,170,0,0.07);border-radius:5px;padding:8px;margin-bottom:6px;line-height:1.8">
-      <div style="color:#ffaa00;margin-bottom:3px;font-size:0.55rem">👑 ${t('index.planet.commanders_header')}</div>
+      <div style="color:#ffaa00;margin-bottom:3px;font-size:0.55rem">👑 KOMANDIRI</div>
       ${commanders.map(c => `<div>· <span style="color:#ffaa00">${c.name}</span> ×${c.count}</div>`).join('')}
     </div>` : ''}
 
@@ -554,16 +555,16 @@ function spyPlanet(planetId) {
       background:rgba(0,255,136,0.06);border-radius:5px;padding:8px;line-height:1.8;
       ${alreadyConquered ? 'opacity:0.45;' : ''}">
       <div style="color:#00ff88;margin-bottom:3px;font-size:0.55rem">
-        🎁 ${t('index.planet.rewards_header')} ${alreadyConquered ? t('index.planet.already_claimed') : t('index.planet.once')}
+        🎁 NAGRADE ${alreadyConquered ? '(već pokupljeno)' : '(jednom)'}
       </div>
       <div>🔩 ${fmt(rw.metal)} &nbsp;💎 ${fmt(rw.crystal)} &nbsp;⛽ ${fmt(rw.he3)}</div>
-      <div>🗝️ ${rw.instKeys} ${t('index.planet.inst_keys')} &nbsp;·&nbsp; 🎴 ${rw.cmdKeys} ${t('index.planet.cmd_keys')}</div>
+      <div>🗝️ ${rw.instKeys} inst. ključeva &nbsp;·&nbsp; 🎴 ${rw.cmdKeys} kap. ključ${rw.cmdKeys > 1 ? 'eva' : ''}</div>
     </div>
   `;
 
   window._planetSpyData[planetId] = spyHtml;
   renderColonies();
-  toast(`🔭 ${t('index.planet.spy_done',{name:planet.name})}`, 'ok');
+  toast(`🔭 ${planet.name} skeniran!`, 'ok');
 }
 
 // ── NAPADNI I KOLONIZUJ (iz Colonies tabela) ──
@@ -1014,32 +1015,34 @@ function renderPlanetCard(planet, inRange, full) {
         <div style="font-size:0.58rem;color:#6a90b8">${pType.name}</div>
         ${!colonized ? `
           <div style="font-size:0.55rem;color:${modeColors[modeName]};margin-top:2px">
-            ${modeIcons[modeName]} ${t('index.planet.level')} ${pIdx+1}
+            ${modeIcons[modeName]} Lv.${pIdx+1}
           </div>` : ''}
       </div>
 
       ${colonized ? `
-        <div style="text-align:center;font-size:0.68rem;color:#00ff88;padding:4px 0">${t('index.planet.colonized')}</div>
+        <div style="text-align:center;font-size:0.68rem;color:#00ff88;padding:4px 0">✅ Kolonizovano</div>
       ` : !inRange ? `
         <div style="text-align:center;font-size:0.62rem;color:#6a90b8;padding:6px 0">
-          ${t('index.planet.jg_needed',{level:planet.distance})}
+          🔒 JG Lv.${planet.distance} potreban
         </div>
       ` : full ? `
         <div style="text-align:center;font-size:0.62rem;color:#ffcc44;padding:6px 0">
-          ${t('index.planet.no_slots')}
+          🔒 Nema slobodnih slotova
         </div>
       ` : `
+        <!-- Spy rezultati -->
         ${spyData ? `<div style="margin-bottom:8px">${spyData}</div>` : ''}
 
+        <!-- Dugmad -->
         <div style="display:flex;gap:5px;flex-direction:column">
           <button class="btn" style="width:100%;font-size:0.65rem;background:rgba(0,180,255,0.12);
             border-color:rgba(0,180,255,0.3);color:#00d4ff"
             onclick="spyPlanet('${planet.id}')">
-            🔭 ${spyData ? t('index.planet.rescan_btn') : t('index.planet.spy_btn')}
+            🔭 ${spyData ? 'Reskeniranje' : 'Špijuniraj'}
           </button>
           <button class="btn btn-r" style="width:100%;font-size:0.68rem"
             onclick="attackAndColonize('${planet.id}')">
-            ${t('index.planet.attack_btn')}
+            ⚔️ Napadni & Kolonizuj
           </button>
         </div>
       `}

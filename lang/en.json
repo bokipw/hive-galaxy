@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "base": "Base",
     "fleet": "Fleet",
@@ -24,15 +24,15 @@
     "cards": "Cards"
   },
   "tab": {
-    "log": "đź“‹ Log",
-    "events": "đź“ˇ Events",
-    "pvp": "âš”ď¸Ź PvP"
+    "log": "📋 Log",
+    "events": "📡 Events",
+    "pvp": "⚔️ PvP"
   },
   "btn": {
-    "save": "đź’ľ Save",
-    "saved": "âś… Saved",
-    "attack": "âš”ď¸Ź Attack",
-    "scan": "đź”Ť Scan",
+    "save": "💾 Save",
+    "saved": "✅ Saved",
+    "attack": "⚔️ Attack",
+    "scan": "🔍 Scan",
     "buy": "Buy",
     "upgrade": "Upgrade",
     "build": "Build",
@@ -63,7 +63,7 @@
     "commanderKeys": "Cmd. Keys"
   },
   "pvp": {
-    "title": "âš”ď¸Ź PvP ARENA",
+    "title": "⚔️ PvP ARENA",
     "searching": "Searching for opponents...",
     "loaded": "Opponents loaded!",
     "noOpponents": "No opponents available.",
@@ -97,12 +97,12 @@
     "findOpponents": "Find Opponents"
   },
   "galaxy": {
-    "title": "đźŚŚ GALAXY",
+    "title": "🌌 GALAXY",
     "loading": "Loading galaxy...",
     "playerBase": "Player Base",
     "neutralSystem": "Neutral System",
-    "espionage": "đź”Ť Scout",
-    "attack": "âš”ď¸Ź Attack Base",
+    "espionage": "🔍 Scout",
+    "attack": "⚔️ Attack Base",
     "attackCost": "Attack cost: {energy} energy + {boc} BoCrypto",
     "attackVictory": "Victory! Stolen {metal} metal, {crystal} crystal, {he3} He-3!",
     "attackDefeat": "Defeat! The defense was stronger.",
@@ -113,8 +113,8 @@
     "espNoData": "No resource data available."
   },
   "shop": {
-    "title": "đźŹŞ SPACE SHOP",
-    "premium": "â­ PREMIUM",
+    "title": "🏪 SPACE SHOP",
+    "premium": "⭐ PREMIUM",
     "purchaseConfirm": "Confirm Purchase",
     "purchaseSuccess": "Purchase successful!",
     "purchaseFailed": "Purchase failed.",
@@ -125,7 +125,7 @@
     "keys10": "10 Commander Keys"
   },
   "base": {
-    "title": "đźŹ° BASE",
+    "title": "🏰 BASE",
     "buildQueue": "Build Queue",
     "recycleQueue": "Recycle Queue",
     "queueFull": "Queue is full!",
@@ -137,14 +137,14 @@
     "recycling": "Recycling..."
   },
   "research": {
-    "title": "đź”¬ RESEARCH",
+    "title": "🔬 RESEARCH",
     "researchStarted": "Research started: {name}",
     "researchComplete": "Research complete: {name}",
     "maxLevel": "Maximum Level",
     "notEnoughRes": "Not enough resources!"
   },
   "fleet": {
-    "title": "đźš€ FLEET",
+    "title": "🚀 FLEET",
     "noShips": "You have no ships",
     "deployedFleet": "Deployed Fleet",
     "hangar": "Hangar",
@@ -154,7 +154,7 @@
     "notEnoughRes": "Not enough resources!"
   },
   "missions": {
-    "title": "đź“ˇ MISSIONS",
+    "title": "📡 MISSIONS",
     "daily": "Daily Missions",
     "weekly": "Weekly Missions",
     "story": "Story",
@@ -165,7 +165,7 @@
     "progress": "Progress"
   },
   "colonies": {
-    "title": "đźŞ COLONIES",
+    "title": "🪐 COLONIES",
     "loading": "Loading colonies...",
     "noColonies": "You have no colonies. Conquer planets in the galaxy!",
     "phalanxScan": "Phalanx Scan",
@@ -177,7 +177,7 @@
     "power": "Power: {power}"
   },
   "commanders": {
-    "title": "đź‘¨â€Ťâśď¸Ź COMMANDERS",
+    "title": "👨‍✈️ COMMANDERS",
     "owned": "My Commanders",
     "active": "Active",
     "deploy": "Deploy",
@@ -187,7 +187,7 @@
     "noCommanders": "You have no commanders."
   },
   "blueprints": {
-    "title": "đź“ BLUEPRINTS",
+    "title": "📐 BLUEPRINTS",
     "owned": "Owned Blueprints",
     "fragments": "Fragments",
     "craft": "Craft",
@@ -195,7 +195,7 @@
     "notEnoughFragments": "Not enough fragments!"
   },
   "espionage": {
-    "title": "đź•µď¸Ź ESPIONAGE",
+    "title": "🕵️ ESPIONAGE",
     "sendDrone": "Send Drone",
     "dronesSent": "{count} drones sent!",
     "reportReady": "Report ready!",
@@ -203,25 +203,25 @@
     "targetInfo": "Target Info"
   },
   "artifacts": {
-    "title": "đźŹş ARTIFACTS",
+    "title": "🏺 ARTIFACTS",
     "fragments": "Artifact Fragments",
     "assemble": "Assemble",
     "assembled": "Artifact assembled!",
     "notEnoughFragments": "Not enough fragments!"
   },
   "toast": {
-    "saveOk": "âś… Game saved!",
-    "saveFail": "âťŚ Save failed!",
-    "loginOk": "âś… Login successful!",
-    "loginFail": "âťŚ Login failed!",
-    "loading": "âŹł Loading...",
-    "error": "âťŚ Error: {msg}",
-    "notEnoughRes": "âťŚ Not enough resources!",
-    "maxLevel": "âś… Maximum level!",
-    "featureWip": "đźš§ Coming soon..."
+    "saveOk": "✅ Game saved!",
+    "saveFail": "❌ Save failed!",
+    "loginOk": "✅ Login successful!",
+    "loginFail": "❌ Login failed!",
+    "loading": "⏳ Loading...",
+    "error": "❌ Error: {msg}",
+    "notEnoughRes": "❌ Not enough resources!",
+    "maxLevel": "✅ Maximum level!",
+    "featureWip": "🚧 Coming soon..."
   },
   "confirm": {
-    "resetGame": "âš ď¸Ź ARE YOU SURE? This will delete ALL progress!",
+    "resetGame": "⚠️ ARE YOU SURE? This will delete ALL progress!",
     "buyItem": "Buy {name} for {cost}?",
     "attack": "Attack {name}? Cost: {cost}"
   },
@@ -231,7 +231,7 @@
     "rank": "Season Rank"
   },
   "premium": {
-    "label": "â­ PREMIUM",
+    "label": "⭐ PREMIUM",
     "active": "Premium Active",
     "inactive": "Not Premium",
     "benefits": "Premium Benefits",
@@ -259,7 +259,7 @@
     },
     "Heat": {
       "name": "Heat",
-      "desc": "Thermal damage. Burning effect â€” damage over X rounds."
+      "desc": "Thermal damage. Burning effect — damage over X rounds."
     },
     "Magnetic": {
       "name": "Magnetic",
@@ -295,2161 +295,2161 @@
 "weapon":   {
     "w_kinetic_railgun_I": {
       "name": "Railgun I",
-      "desc": "Railgun I â€” Basic kinetic weapon. +10% crit chance.",
+      "desc": "Railgun I — Basic kinetic weapon. +10% crit chance.",
       "special": "+10% critical hit chance",
       "source": "Upgrade Ship Factory II"
     },
     "w_kinetic_railgun_II": {
       "name": "Railgun II",
-      "desc": "Railgun II â€” Improved kinetic cannon. +15% crit.",
+      "desc": "Railgun II — Improved kinetic cannon. +15% crit.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_railgun_III": {
       "name": "Railgun III",
-      "desc": "Railgun III â€” Advanced kinetic cannon. +22% crit.",
+      "desc": "Railgun III — Advanced kinetic cannon. +22% crit.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_gauss_cannon_I": {
       "name": "Gauss Cannon I",
-      "desc": "Gauss Cannon I â€” Electromagnetic cannon. +10% crit.",
+      "desc": "Gauss Cannon I — Electromagnetic cannon. +10% crit.",
       "special": "+10% critical hit chance",
       "source": "Trial 6"
     },
     "w_kinetic_gauss_cannon_II": {
       "name": "Gauss Cannon II",
-      "desc": "Gauss Cannon II â€” Improved electromagnetic cannon.",
+      "desc": "Gauss Cannon II — Improved electromagnetic cannon.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_gauss_cannon_III": {
       "name": "Gauss Cannon III",
-      "desc": "Gauss Cannon III â€” Advanced electromagnetic cannon.",
+      "desc": "Gauss Cannon III — Advanced electromagnetic cannon.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_mass_driver_I": {
       "name": "Mass Driver I",
-      "desc": "Mass Driver I â€” Fires massive projectiles.",
+      "desc": "Mass Driver I — Fires massive projectiles.",
       "special": "+10% critical hit chance",
       "source": "Trial 10"
     },
     "w_kinetic_mass_driver_II": {
       "name": "Mass Driver II",
-      "desc": "Mass Driver II â€” Improved mass driver.",
+      "desc": "Mass Driver II — Improved mass driver.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_mass_driver_III": {
       "name": "Mass Driver III",
-      "desc": "Mass Driver III â€” Advanced mass driver.",
+      "desc": "Mass Driver III — Advanced mass driver.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_shredder_I": {
       "name": "Shredder I",
-      "desc": "Shredder I â€” Tears armor with metal fragments.",
+      "desc": "Shredder I — Tears armor with metal fragments.",
       "special": "+10% critical hit chance",
       "source": "Pirate 2"
     },
     "w_kinetic_shredder_II": {
       "name": "Shredder II",
-      "desc": "Shredder II â€” Improved shredder.",
+      "desc": "Shredder II — Improved shredder.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_shredder_III": {
       "name": "Shredder III",
-      "desc": "Shredder III â€” Advanced shredder.",
+      "desc": "Shredder III — Advanced shredder.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_penetrator_I": {
       "name": "Penetrator I",
-      "desc": "Penetrator I â€” Pierces thick armor.",
+      "desc": "Penetrator I — Pierces thick armor.",
       "special": "+10% critical hit chance",
       "source": "Pirate 4"
     },
     "w_kinetic_penetrator_II": {
       "name": "Penetrator II",
-      "desc": "Penetrator II â€” Improved penetrator.",
+      "desc": "Penetrator II — Improved penetrator.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_penetrator_III": {
       "name": "Penetrator III",
-      "desc": "Penetrator III â€” Advanced penetrator.",
+      "desc": "Penetrator III — Advanced penetrator.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_accelerator_I": {
       "name": "Accelerator I",
-      "desc": "Accelerator I â€” Accelerates projectiles.",
+      "desc": "Accelerator I — Accelerates projectiles.",
       "special": "+10% critical hit chance",
       "source": "Pirate 6"
     },
     "w_kinetic_accelerator_II": {
       "name": "Accelerator II",
-      "desc": "Accelerator II â€” Improved accelerator.",
+      "desc": "Accelerator II — Improved accelerator.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_accelerator_III": {
       "name": "Accelerator III",
-      "desc": "Accelerator III â€” Advanced accelerator.",
+      "desc": "Accelerator III — Advanced accelerator.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_ripper_I": {
       "name": "Ripper I",
-      "desc": "Ripper I â€” Tears target to pieces.",
+      "desc": "Ripper I — Tears target to pieces.",
       "special": "+10% critical hit chance",
       "source": "Pirate 9"
     },
     "w_kinetic_ripper_II": {
       "name": "Ripper II",
-      "desc": "Ripper II â€” Improved ripper.",
+      "desc": "Ripper II — Improved ripper.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_ripper_III": {
       "name": "Ripper III",
-      "desc": "Ripper III â€” Advanced ripper.",
+      "desc": "Ripper III — Advanced ripper.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_hailstorm_I": {
       "name": "Hailstorm I",
-      "desc": "Hailstorm I â€” Rain of projectiles.",
+      "desc": "Hailstorm I — Rain of projectiles.",
       "special": "+10% critical hit chance",
       "source": "Constellation 3"
     },
     "w_kinetic_hailstorm_II": {
       "name": "Hailstorm II",
-      "desc": "Hailstorm II â€” Improved rain of projectiles.",
+      "desc": "Hailstorm II — Improved rain of projectiles.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_hailstorm_III": {
       "name": "Hailstorm III",
-      "desc": "Hailstorm III â€” Advanced rain of projectiles.",
+      "desc": "Hailstorm III — Advanced rain of projectiles.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_obliterator_I": {
       "name": "Obliterator I",
-      "desc": "Obliterator I â€” Total destruction.",
+      "desc": "Obliterator I — Total destruction.",
       "special": "+10% critical hit chance",
       "source": "Constellation 2"
     },
     "w_kinetic_obliterator_II": {
       "name": "Obliterator II",
-      "desc": "Obliterator II â€” Improved obliterator.",
+      "desc": "Obliterator II — Improved obliterator.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_obliterator_III": {
       "name": "Obliterator III",
-      "desc": "Obliterator III â€” Advanced obliterator.",
+      "desc": "Obliterator III — Advanced obliterator.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_kinetic_annihilator_I": {
       "name": "Annihilator I",
-      "desc": "Annihilator I â€” Complete target eradication.",
+      "desc": "Annihilator I — Complete target eradication.",
       "special": "+10% critical hit chance",
       "source": "Constellation 1"
     },
     "w_kinetic_annihilator_II": {
       "name": "Annihilator II",
-      "desc": "Annihilator II â€” Improved annihilator.",
+      "desc": "Annihilator II — Improved annihilator.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-15"
     },
     "w_kinetic_annihilator_III": {
       "name": "Annihilator III",
-      "desc": "Annihilator III â€” Advanced annihilator.",
+      "desc": "Annihilator III — Advanced annihilator.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-25"
     },
     "w_heat_inferno_I": {
       "name": "Inferno I",
-      "desc": "Inferno I â€” Hellfire.",
+      "desc": "Inferno I — Hellfire.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Humanoid 7"
     },
     "w_heat_inferno_II": {
       "name": "Inferno II",
-      "desc": "Inferno II â€” Improved hellfire.",
+      "desc": "Inferno II — Improved hellfire.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_inferno_III": {
       "name": "Inferno III",
-      "desc": "Inferno III â€” Advanced hellfire.",
+      "desc": "Inferno III — Advanced hellfire.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_scorch_I": {
       "name": "Scorch I",
-      "desc": "Scorch I â€” Burns the ship surface.",
+      "desc": "Scorch I — Burns the ship surface.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Trial 3"
     },
     "w_heat_scorch_II": {
       "name": "Scorch II",
-      "desc": "Scorch II â€” Improved scorch.",
+      "desc": "Scorch II — Improved scorch.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_scorch_III": {
       "name": "Scorch III",
-      "desc": "Scorch III â€” Advanced scorch.",
+      "desc": "Scorch III — Advanced scorch.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_molten_core_I": {
       "name": "Molten Core I",
-      "desc": "Molten Core I â€” Molten core.",
+      "desc": "Molten Core I — Molten core.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Trial 5"
     },
     "w_heat_molten_core_II": {
       "name": "Molten Core II",
-      "desc": "Molten Core II â€” Improved molten core.",
+      "desc": "Molten Core II — Improved molten core.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_molten_core_III": {
       "name": "Molten Core III",
-      "desc": "Molten Core III â€” Advanced molten core.",
+      "desc": "Molten Core III — Advanced molten core.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_pyro_blast_I": {
       "name": "Pyro Blast I",
-      "desc": "Pyro Blast I â€” Explosive fireball.",
+      "desc": "Pyro Blast I — Explosive fireball.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Trial 8"
     },
     "w_heat_pyro_blast_II": {
       "name": "Pyro Blast II",
-      "desc": "Pyro Blast II â€” Improved fireball.",
+      "desc": "Pyro Blast II — Improved fireball.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_pyro_blast_III": {
       "name": "Pyro Blast III",
-      "desc": "Pyro Blast III â€” Advanced fireball.",
+      "desc": "Pyro Blast III — Advanced fireball.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_thermal_lance_I": {
       "name": "Thermal Lance I",
-      "desc": "Thermal Lance I â€” Focused thermal beam.",
+      "desc": "Thermal Lance I — Focused thermal beam.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 1"
     },
     "w_heat_thermal_lance_II": {
       "name": "Thermal Lance II",
-      "desc": "Thermal Lance II â€” Improved thermal beam.",
+      "desc": "Thermal Lance II — Improved thermal beam.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_thermal_lance_III": {
       "name": "Thermal Lance III",
-      "desc": "Thermal Lance III â€” Advanced thermal beam.",
+      "desc": "Thermal Lance III — Advanced thermal beam.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_sunflare_I": {
       "name": "Sunflare I",
-      "desc": "Sunflare I â€” Solar energy explosion.",
+      "desc": "Sunflare I — Solar energy explosion.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 3"
     },
     "w_heat_sunflare_II": {
       "name": "Sunflare II",
-      "desc": "Sunflare II â€” Improved sunflare.",
+      "desc": "Sunflare II — Improved sunflare.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_sunflare_III": {
       "name": "Sunflare III",
-      "desc": "Sunflare III â€” Advanced sunflare.",
+      "desc": "Sunflare III — Advanced sunflare.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_magma_I": {
       "name": "Magma I",
-      "desc": "Magma I â€” Molten rock.",
+      "desc": "Magma I — Molten rock.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 5"
     },
     "w_heat_magma_II": {
       "name": "Magma II",
-      "desc": "Magma II â€” Improved magma.",
+      "desc": "Magma II — Improved magma.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_magma_III": {
       "name": "Magma III",
-      "desc": "Magma III â€” Advanced magma.",
+      "desc": "Magma III — Advanced magma.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_incinerator_I": {
       "name": "Incinerator I",
-      "desc": "Incinerator I â€” Burns everything to the ground.",
+      "desc": "Incinerator I — Burns everything to the ground.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 7"
     },
     "w_heat_incinerator_II": {
       "name": "Incinerator II",
-      "desc": "Incinerator II â€” Improved incinerator.",
+      "desc": "Incinerator II — Improved incinerator.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_incinerator_III": {
       "name": "Incinerator III",
-      "desc": "Incinerator III â€” Advanced incinerator.",
+      "desc": "Incinerator III — Advanced incinerator.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_phoenix_I": {
       "name": "Phoenix I",
-      "desc": "Phoenix I â€” Firebird.",
+      "desc": "Phoenix I — Firebird.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 8"
     },
     "w_heat_phoenix_II": {
       "name": "Phoenix II",
-      "desc": "Phoenix II â€” Improved firebird.",
+      "desc": "Phoenix II — Improved firebird.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_phoenix_III": {
       "name": "Phoenix III",
-      "desc": "Phoenix III â€” Advanced firebird.",
+      "desc": "Phoenix III — Advanced firebird.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_heat_hellfire_I": {
       "name": "Hellfire I",
-      "desc": "Hellfire I â€” Hellfire.",
+      "desc": "Hellfire I — Hellfire.",
       "special": "15% chance: burn 2 rounds (+20 damage/round)",
       "source": "Pirate 10"
     },
     "w_heat_hellfire_II": {
       "name": "Hellfire II",
-      "desc": "Hellfire II â€” Improved hellfire.",
+      "desc": "Hellfire II — Improved hellfire.",
       "special": "20% chance: burn 2 rounds (+35 damage/round)",
       "source": "Instance 11-15"
     },
     "w_heat_hellfire_III": {
       "name": "Hellfire III",
-      "desc": "Hellfire III â€” Advanced hellfire.",
+      "desc": "Hellfire III — Advanced hellfire.",
       "special": "30% chance: burn 3 rounds (+50 damage/round)",
       "source": "Instance 21-25"
     },
     "w_magnetic_pulsar_I": {
       "name": "Pulsar I",
-      "desc": "Pulsar I â€” EMP pulse.",
+      "desc": "Pulsar I — EMP pulse.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_pulsar_II": {
       "name": "Pulsar II",
-      "desc": "Pulsar II â€” Improved EMP pulse.",
+      "desc": "Pulsar II — Improved EMP pulse.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_pulsar_III": {
       "name": "Pulsar III",
-      "desc": "Pulsar III â€” Advanced EMP pulse.",
+      "desc": "Pulsar III — Advanced EMP pulse.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_emp_blast_I": {
       "name": "EMP Blast I",
-      "desc": "EMP Blast I â€” Electromagnetic pulse.",
+      "desc": "EMP Blast I — Electromagnetic pulse.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_emp_blast_II": {
       "name": "EMP Blast II",
-      "desc": "EMP Blast II â€” Improved EMP blast.",
+      "desc": "EMP Blast II — Improved EMP blast.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_emp_blast_III": {
       "name": "EMP Blast III",
-      "desc": "EMP Blast III â€” Advanced EMP blast.",
+      "desc": "EMP Blast III — Advanced EMP blast.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_stasis_beam_I": {
       "name": "Stasis Beam I",
-      "desc": "Stasis Beam I â€” Paralyzes ship.",
+      "desc": "Stasis Beam I — Paralyzes ship.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_stasis_beam_II": {
       "name": "Stasis Beam II",
-      "desc": "Stasis Beam II â€” Improved stasis beam.",
+      "desc": "Stasis Beam II — Improved stasis beam.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_stasis_beam_III": {
       "name": "Stasis Beam III",
-      "desc": "Stasis Beam III â€” Advanced stasis beam.",
+      "desc": "Stasis Beam III — Advanced stasis beam.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_disruptor_I": {
       "name": "Disruptor I",
-      "desc": "Disruptor I â€” Disrupts systems.",
+      "desc": "Disruptor I — Disrupts systems.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_disruptor_II": {
       "name": "Disruptor II",
-      "desc": "Disruptor II â€” Improved disruptor.",
+      "desc": "Disruptor II — Improved disruptor.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_disruptor_III": {
       "name": "Disruptor III",
-      "desc": "Disruptor III â€” Advanced disruptor.",
+      "desc": "Disruptor III — Advanced disruptor.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_magnetron_I": {
       "name": "Magnetron I",
-      "desc": "Magnetron I â€” Magnetic field.",
+      "desc": "Magnetron I — Magnetic field.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_magnetron_II": {
       "name": "Magnetron II",
-      "desc": "Magnetron II â€” Improved magnetron.",
+      "desc": "Magnetron II — Improved magnetron.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_magnetron_III": {
       "name": "Magnetron III",
-      "desc": "Magnetron III â€” Advanced magnetron.",
+      "desc": "Magnetron III — Advanced magnetron.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_neutron_wave_I": {
       "name": "Neutron Wave I",
-      "desc": "Neutron Wave I â€” Spreads interference wave.",
+      "desc": "Neutron Wave I — Spreads interference wave.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_neutron_wave_II": {
       "name": "Neutron Wave II",
-      "desc": "Neutron Wave II â€” Improved neutron wave.",
+      "desc": "Neutron Wave II — Improved neutron wave.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_neutron_wave_III": {
       "name": "Neutron Wave III",
-      "desc": "Neutron Wave III â€” Advanced neutron wave.",
+      "desc": "Neutron Wave III — Advanced neutron wave.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_cascade_I": {
       "name": "Cascade I",
-      "desc": "Cascade I â€” Chain reaction.",
+      "desc": "Cascade I — Chain reaction.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_cascade_II": {
       "name": "Cascade II",
-      "desc": "Cascade II â€” Improved chain reaction.",
+      "desc": "Cascade II — Improved chain reaction.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_cascade_III": {
       "name": "Cascade III",
-      "desc": "Cascade III â€” Advanced chain reaction.",
+      "desc": "Cascade III — Advanced chain reaction.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_ion_storm_I": {
       "name": "Ion Storm I",
-      "desc": "Ion Storm I â€” Ionic storm.",
+      "desc": "Ion Storm I — Ionic storm.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_ion_storm_II": {
       "name": "Ion Storm II",
-      "desc": "Ion Storm II â€” Improved ionic storm.",
+      "desc": "Ion Storm II — Improved ionic storm.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_ion_storm_III": {
       "name": "Ion Storm III",
-      "desc": "Ion Storm III â€” Advanced ionic storm.",
+      "desc": "Ion Storm III — Advanced ionic storm.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_magnetosphere_I": {
       "name": "Magnetosphere I",
-      "desc": "Magnetosphere I â€” Defensive magnetic field.",
+      "desc": "Magnetosphere I — Defensive magnetic field.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_magnetosphere_II": {
       "name": "Magnetosphere II",
-      "desc": "Magnetosphere II â€” Improved magnetosphere.",
+      "desc": "Magnetosphere II — Improved magnetosphere.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_magnetosphere_III": {
       "name": "Magnetosphere III",
-      "desc": "Magnetosphere III â€” Advanced magnetosphere.",
+      "desc": "Magnetosphere III — Advanced magnetosphere.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_magnetic_singularity_I": {
       "name": "Singularity I",
-      "desc": "Singularity I â€” Magnetic singularity.",
+      "desc": "Singularity I — Magnetic singularity.",
       "special": "5% chance: disable shield 1 round",
       "source": "Instance 6-10"
     },
     "w_magnetic_singularity_II": {
       "name": "Singularity II",
-      "desc": "Singularity II â€” Improved singularity.",
+      "desc": "Singularity II — Improved singularity.",
       "special": "10% chance: disable shield 1 round",
       "source": "Instance 16-20"
     },
     "w_magnetic_singularity_III": {
       "name": "Singularity III",
-      "desc": "Singularity III â€” Advanced singularity.",
+      "desc": "Singularity III — Advanced singularity.",
       "special": "18% chance: disable shield 2 rounds",
       "source": "Restricted 1-3"
     },
     "w_explosive_devastator_I": {
       "name": "Devastator I",
-      "desc": "Devastator I â€” Devastates everything in its path.",
+      "desc": "Devastator I — Devastates everything in its path.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_devastator_II": {
       "name": "Devastator II",
-      "desc": "Devastator II â€” Improved devastator.",
+      "desc": "Devastator II — Improved devastator.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_devastator_III": {
       "name": "Devastator III",
-      "desc": "Devastator III â€” Advanced devastator.",
+      "desc": "Devastator III — Advanced devastator.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_annihilator_I": {
       "name": "Annihilator I",
-      "desc": "Annihilator I â€” Total annihilation.",
+      "desc": "Annihilator I — Total annihilation.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_annihilator_II": {
       "name": "Annihilator II",
-      "desc": "Annihilator II â€” Improved annihilator.",
+      "desc": "Annihilator II — Improved annihilator.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_annihilator_III": {
       "name": "Annihilator III",
-      "desc": "Annihilator III â€” Advanced annihilator.",
+      "desc": "Annihilator III — Advanced annihilator.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_maelstrom_I": {
       "name": "Maelstrom I",
-      "desc": "Maelstrom I â€” Vortex of explosions.",
+      "desc": "Maelstrom I — Vortex of explosions.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_maelstrom_II": {
       "name": "Maelstrom II",
-      "desc": "Maelstrom II â€” Improved maelstrom.",
+      "desc": "Maelstrom II — Improved maelstrom.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_maelstrom_III": {
       "name": "Maelstrom III",
-      "desc": "Maelstrom III â€” Advanced maelstrom.",
+      "desc": "Maelstrom III — Advanced maelstrom.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_cataclysm_I": {
       "name": "Cataclysm I",
-      "desc": "Cataclysm I â€” Cataclysmic explosion.",
+      "desc": "Cataclysm I — Cataclysmic explosion.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_cataclysm_II": {
       "name": "Cataclysm II",
-      "desc": "Cataclysm II â€” Improved cataclysm.",
+      "desc": "Cataclysm II — Improved cataclysm.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_cataclysm_III": {
       "name": "Cataclysm III",
-      "desc": "Cataclysm III â€” Advanced cataclysm.",
+      "desc": "Cataclysm III — Advanced cataclysm.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_oblivion_I": {
       "name": "Oblivion I",
-      "desc": "Oblivion I â€” Erases target from existence.",
+      "desc": "Oblivion I — Erases target from existence.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_oblivion_II": {
       "name": "Oblivion II",
-      "desc": "Oblivion II â€” Improved oblivion.",
+      "desc": "Oblivion II — Improved oblivion.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_oblivion_III": {
       "name": "Oblivion III",
-      "desc": "Oblivion III â€” Advanced oblivion.",
+      "desc": "Oblivion III — Advanced oblivion.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_earthshaker_I": {
       "name": "Earthshaker I",
-      "desc": "Earthshaker I â€” Shakes the battlefield.",
+      "desc": "Earthshaker I — Shakes the battlefield.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_earthshaker_II": {
       "name": "Earthshaker II",
-      "desc": "Earthshaker II â€” Improved earthshaker.",
+      "desc": "Earthshaker II — Improved earthshaker.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_earthshaker_III": {
       "name": "Earthshaker III",
-      "desc": "Earthshaker III â€” Advanced earthshaker.",
+      "desc": "Earthshaker III — Advanced earthshaker.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_nova_I": {
       "name": "Nova I",
-      "desc": "Nova I â€” Stellar power explosion.",
+      "desc": "Nova I — Stellar power explosion.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_nova_II": {
       "name": "Nova II",
-      "desc": "Nova II â€” Improved nova.",
+      "desc": "Nova II — Improved nova.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_nova_III": {
       "name": "Nova III",
-      "desc": "Nova III â€” Advanced nova.",
+      "desc": "Nova III — Advanced nova.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_armageddon_I": {
       "name": "Armageddon I",
-      "desc": "Armageddon I â€” Judgement day.",
+      "desc": "Armageddon I — Judgement day.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_armageddon_II": {
       "name": "Armageddon II",
-      "desc": "Armageddon II â€” Improved armageddon.",
+      "desc": "Armageddon II — Improved armageddon.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_armageddon_III": {
       "name": "Armageddon III",
-      "desc": "Armageddon III â€” Advanced armageddon.",
+      "desc": "Armageddon III — Advanced armageddon.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_apocalypse_I": {
       "name": "Apocalypse I",
-      "desc": "Apocalypse I â€” Apocalypse.",
+      "desc": "Apocalypse I — Apocalypse.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_apocalypse_II": {
       "name": "Apocalypse II",
-      "desc": "Apocalypse II â€” Improved apocalypse.",
+      "desc": "Apocalypse II — Improved apocalypse.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_apocalypse_III": {
       "name": "Apocalypse III",
-      "desc": "Apocalypse III â€” Advanced apocalypse.",
+      "desc": "Apocalypse III — Advanced apocalypse.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_explosive_crusher_I": {
       "name": "Crusher I",
-      "desc": "Crusher I â€” Crushes armor.",
+      "desc": "Crusher I — Crushes armor.",
       "special": "10% chance: area damage (hits 1 extra ship)",
       "source": "Instance 6-10"
     },
     "w_explosive_crusher_II": {
       "name": "Crusher II",
-      "desc": "Crusher II â€” Improved crusher.",
+      "desc": "Crusher II — Improved crusher.",
       "special": "15% chance: area damage (hits 2 extra ships)",
       "source": "Instance 16-20"
     },
     "w_explosive_crusher_III": {
       "name": "Crusher III",
-      "desc": "Crusher III â€” Advanced crusher.",
+      "desc": "Crusher III — Advanced crusher.",
       "special": "25% chance: area damage (hits 3 extra ships)",
       "source": "Restricted 1-3"
     },
     "w_kinetic_railgun_beam_I": {
       "name": "Railgun Beam I",
-      "desc": "Railgun Beam I â€” Kinetic beam. +10% crit.",
+      "desc": "Railgun Beam I — Kinetic beam. +10% crit.",
       "special": "+10% critical hit chance",
       "source": "Instance 1"
     },
     "w_kinetic_railgun_beam_II": {
       "name": "Railgun Beam II",
-      "desc": "Railgun Beam II â€” Improved kinetic beam.",
+      "desc": "Railgun Beam II — Improved kinetic beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_railgun_beam_III": {
       "name": "Railgun Beam III",
-      "desc": "Railgun Beam III â€” Advanced kinetic beam.",
+      "desc": "Railgun Beam III — Advanced kinetic beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_gauss_cannon_beam_I": {
       "name": "Gauss Cannon Beam I",
-      "desc": "Gauss Cannon Beam I â€” Electromagnetic beam.",
+      "desc": "Gauss Cannon Beam I — Electromagnetic beam.",
       "special": "+10% critical hit chance",
       "source": "Instance 22"
     },
     "w_kinetic_gauss_cannon_beam_II": {
       "name": "Gauss Cannon Beam II",
-      "desc": "Gauss Cannon Beam II â€” Improved electromagnetic beam.",
+      "desc": "Gauss Cannon Beam II — Improved electromagnetic beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_gauss_cannon_beam_III": {
       "name": "Gauss Cannon Beam III",
-      "desc": "Gauss Cannon Beam III â€” Advanced electromagnetic beam.",
+      "desc": "Gauss Cannon Beam III — Advanced electromagnetic beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_mass_driver_beam_I": {
       "name": "Mass Driver Beam I",
-      "desc": "Mass Driver Beam I â€” Mass driver beam.",
+      "desc": "Mass Driver Beam I — Mass driver beam.",
       "special": "+10% critical hit chance",
       "source": "Instance 7"
     },
     "w_kinetic_mass_driver_beam_II": {
       "name": "Mass Driver Beam II",
-      "desc": "Mass Driver Beam II â€” Improved mass driver beam.",
+      "desc": "Mass Driver Beam II — Improved mass driver beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_mass_driver_beam_III": {
       "name": "Mass Driver Beam III",
-      "desc": "Mass Driver Beam III â€” Advanced mass driver beam.",
+      "desc": "Mass Driver Beam III — Advanced mass driver beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_shredder_beam_I": {
       "name": "Shredder Beam I",
-      "desc": "Shredder Beam I â€” Beam that shreds armor.",
+      "desc": "Shredder Beam I — Beam that shreds armor.",
       "special": "+10% critical hit chance",
       "source": "Instance 17"
     },
     "w_kinetic_shredder_beam_II": {
       "name": "Shredder Beam II",
-      "desc": "Shredder Beam II â€” Improved shredder beam.",
+      "desc": "Shredder Beam II — Improved shredder beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_shredder_beam_III": {
       "name": "Shredder Beam III",
-      "desc": "Shredder Beam III â€” Advanced shredder beam.",
+      "desc": "Shredder Beam III — Advanced shredder beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_penetrator_beam_I": {
       "name": "Penetrator Beam I",
-      "desc": "Penetrator Beam I â€” Penetrator beam.",
+      "desc": "Penetrator Beam I — Penetrator beam.",
       "special": "+10% critical hit chance",
       "source": "Instance 26"
     },
     "w_kinetic_penetrator_beam_II": {
       "name": "Penetrator Beam II",
-      "desc": "Penetrator Beam II â€” Improved penetrator beam.",
+      "desc": "Penetrator Beam II — Improved penetrator beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_penetrator_beam_III": {
       "name": "Penetrator Beam III",
-      "desc": "Penetrator Beam III â€” Advanced penetrator beam.",
+      "desc": "Penetrator Beam III — Advanced penetrator beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_accelerator_beam_I": {
       "name": "Accelerator Beam I",
-      "desc": "Accelerator Beam I â€” Accelerated beam.",
+      "desc": "Accelerator Beam I — Accelerated beam.",
       "special": "+10% critical hit chance",
       "source": "Humanoid 10"
     },
     "w_kinetic_accelerator_beam_II": {
       "name": "Accelerator Beam II",
-      "desc": "Accelerator Beam II â€” Improved accelerated beam.",
+      "desc": "Accelerator Beam II — Improved accelerated beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_accelerator_beam_III": {
       "name": "Accelerator Beam III",
-      "desc": "Accelerator Beam III â€” Advanced accelerated beam.",
+      "desc": "Accelerator Beam III — Advanced accelerated beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_ripper_beam_I": {
       "name": "Ripper Beam I",
-      "desc": "Ripper Beam I â€” Ripper beam.",
+      "desc": "Ripper Beam I — Ripper beam.",
       "special": "+10% critical hit chance",
       "source": "Trial 2"
     },
     "w_kinetic_ripper_beam_II": {
       "name": "Ripper Beam II",
-      "desc": "Ripper Beam II â€” Improved ripper beam.",
+      "desc": "Ripper Beam II — Improved ripper beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_ripper_beam_III": {
       "name": "Ripper Beam III",
-      "desc": "Ripper Beam III â€” Advanced ripper beam.",
+      "desc": "Ripper Beam III — Advanced ripper beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_hailstorm_beam_I": {
       "name": "Hailstorm Beam I",
-      "desc": "Hailstorm Beam I â€” Hailstorm beam.",
+      "desc": "Hailstorm Beam I — Hailstorm beam.",
       "special": "+10% critical hit chance",
       "source": "Trial 4"
     },
     "w_kinetic_hailstorm_beam_II": {
       "name": "Hailstorm Beam II",
-      "desc": "Hailstorm Beam II â€” Improved hailstorm beam.",
+      "desc": "Hailstorm Beam II — Improved hailstorm beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_hailstorm_beam_III": {
       "name": "Hailstorm Beam III",
-      "desc": "Hailstorm Beam III â€” Advanced hailstorm beam.",
+      "desc": "Hailstorm Beam III — Advanced hailstorm beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_obliterator_beam_I": {
       "name": "Obliterator Beam I",
-      "desc": "Obliterator Beam I â€” Obliterator beam.",
+      "desc": "Obliterator Beam I — Obliterator beam.",
       "special": "+10% critical hit chance",
       "source": "Trial 7"
     },
     "w_kinetic_obliterator_beam_II": {
       "name": "Obliterator Beam II",
-      "desc": "Obliterator Beam II â€” Improved obliterator beam.",
+      "desc": "Obliterator Beam II — Improved obliterator beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_obliterator_beam_III": {
       "name": "Obliterator Beam III",
-      "desc": "Obliterator Beam III â€” Advanced obliterator beam.",
+      "desc": "Obliterator Beam III — Advanced obliterator beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_kinetic_annihilator_beam_I": {
       "name": "Annihilator Beam I",
-      "desc": "Annihilator Beam I â€” Annihilating beam.",
+      "desc": "Annihilator Beam I — Annihilating beam.",
       "special": "+10% critical hit chance",
       "source": "Trial 9"
     },
     "w_kinetic_annihilator_beam_II": {
       "name": "Annihilator Beam II",
-      "desc": "Annihilator Beam II â€” Improved annihilator beam.",
+      "desc": "Annihilator Beam II — Improved annihilator beam.",
       "special": "+15% critical hit chance",
       "source": "Instance 11-16"
     },
     "w_kinetic_annihilator_beam_III": {
       "name": "Annihilator Beam III",
-      "desc": "Annihilator Beam III â€” Advanced annihilator beam.",
+      "desc": "Annihilator Beam III — Advanced annihilator beam.",
       "special": "+22% critical hit chance",
       "source": "Instance 21-26"
     },
     "w_heat_inferno_beam_I": {
       "name": "Inferno Beam I",
-      "desc": "Inferno Beam I â€” Infernal beam.",
+      "desc": "Inferno Beam I — Infernal beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 2"
     },
     "w_heat_inferno_beam_II": {
       "name": "Inferno Beam II",
-      "desc": "Inferno Beam II â€” Improved infernal beam.",
+      "desc": "Inferno Beam II — Improved infernal beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_inferno_beam_III": {
       "name": "Inferno Beam III",
-      "desc": "Inferno Beam III â€” Advanced infernal beam.",
+      "desc": "Inferno Beam III — Advanced infernal beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_scorch_beam_I": {
       "name": "Scorch Beam I",
-      "desc": "Scorch Beam I â€” Scorching beam.",
+      "desc": "Scorch Beam I — Scorching beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 6"
     },
     "w_heat_scorch_beam_II": {
       "name": "Scorch Beam II",
-      "desc": "Scorch Beam II â€” Improved scorch beam.",
+      "desc": "Scorch Beam II — Improved scorch beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_scorch_beam_III": {
       "name": "Scorch Beam III",
-      "desc": "Scorch Beam III â€” Advanced scorch beam.",
+      "desc": "Scorch Beam III — Advanced scorch beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_molten_core_beam_I": {
       "name": "Molten Core Beam I",
-      "desc": "Molten Core Beam I â€” Molten core beam.",
+      "desc": "Molten Core Beam I — Molten core beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 11"
     },
     "w_heat_molten_core_beam_II": {
       "name": "Molten Core Beam II",
-      "desc": "Molten Core Beam II â€” Improved molten core beam.",
+      "desc": "Molten Core Beam II — Improved molten core beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_molten_core_beam_III": {
       "name": "Molten Core Beam III",
-      "desc": "Molten Core Beam III â€” Advanced molten core beam.",
+      "desc": "Molten Core Beam III — Advanced molten core beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_pyro_blast_beam_I": {
       "name": "Pyro Blast Beam I",
-      "desc": "Pyro Blast Beam I â€” Fireball beam.",
+      "desc": "Pyro Blast Beam I — Fireball beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 16"
     },
     "w_heat_pyro_blast_beam_II": {
       "name": "Pyro Blast Beam II",
-      "desc": "Pyro Blast Beam II â€” Improved pyro blast beam.",
+      "desc": "Pyro Blast Beam II — Improved pyro blast beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_pyro_blast_beam_III": {
       "name": "Pyro Blast Beam III",
-      "desc": "Pyro Blast Beam III â€” Advanced pyro blast beam.",
+      "desc": "Pyro Blast Beam III — Advanced pyro blast beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_thermal_lance_beam_I": {
       "name": "Thermal Lance Beam I",
-      "desc": "Thermal Lance Beam I â€” Thermal beam.",
+      "desc": "Thermal Lance Beam I — Thermal beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 27"
     },
     "w_heat_thermal_lance_beam_II": {
       "name": "Thermal Lance Beam II",
-      "desc": "Thermal Lance Beam II â€” Improved thermal beam.",
+      "desc": "Thermal Lance Beam II — Improved thermal beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_thermal_lance_beam_III": {
       "name": "Thermal Lance Beam III",
-      "desc": "Thermal Lance Beam III â€” Advanced thermal beam.",
+      "desc": "Thermal Lance Beam III — Advanced thermal beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_sunflare_beam_I": {
       "name": "Sunflare Beam I",
-      "desc": "Sunflare Beam I â€” Solar flare beam.",
+      "desc": "Sunflare Beam I — Solar flare beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 12"
     },
     "w_heat_sunflare_beam_II": {
       "name": "Sunflare Beam II",
-      "desc": "Sunflare Beam II â€” Improved sunflare beam.",
+      "desc": "Sunflare Beam II — Improved sunflare beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_sunflare_beam_III": {
       "name": "Sunflare Beam III",
-      "desc": "Sunflare Beam III â€” Advanced sunflare beam.",
+      "desc": "Sunflare Beam III — Advanced sunflare beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_magma_beam_I": {
       "name": "Magma Beam I",
-      "desc": "Magma Beam I â€” Magma beam.",
+      "desc": "Magma Beam I — Magma beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Instance 21"
     },
     "w_heat_magma_beam_II": {
       "name": "Magma Beam II",
-      "desc": "Magma Beam II â€” Improved magma beam.",
+      "desc": "Magma Beam II — Improved magma beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_magma_beam_III": {
       "name": "Magma Beam III",
-      "desc": "Magma Beam III â€” Advanced magma beam.",
+      "desc": "Magma Beam III — Advanced magma beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_incinerator_beam_I": {
       "name": "Incinerator Beam I",
-      "desc": "Incinerator Beam I â€” Incinerator beam.",
+      "desc": "Incinerator Beam I — Incinerator beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Humanoid 1"
     },
     "w_heat_incinerator_beam_II": {
       "name": "Incinerator Beam II",
-      "desc": "Incinerator Beam II â€” Improved incinerator beam.",
+      "desc": "Incinerator Beam II — Improved incinerator beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_incinerator_beam_III": {
       "name": "Incinerator Beam III",
-      "desc": "Incinerator Beam III â€” Advanced incinerator beam.",
+      "desc": "Incinerator Beam III — Advanced incinerator beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_phoenix_beam_I": {
       "name": "Phoenix Beam I",
-      "desc": "Phoenix Beam I â€” Phoenix beam.",
+      "desc": "Phoenix Beam I — Phoenix beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Humanoid 4"
     },
     "w_heat_phoenix_beam_II": {
       "name": "Phoenix Beam II",
-      "desc": "Phoenix Beam II â€” Improved phoenix beam.",
+      "desc": "Phoenix Beam II — Improved phoenix beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_phoenix_beam_III": {
       "name": "Phoenix Beam III",
-      "desc": "Phoenix Beam III â€” Advanced phoenix beam.",
+      "desc": "Phoenix Beam III — Advanced phoenix beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_heat_hellfire_beam_I": {
       "name": "Hellfire Beam I",
-      "desc": "Hellfire Beam I â€” Hellfire beam.",
+      "desc": "Hellfire Beam I — Hellfire beam.",
       "special": "Melts armor: -10% def 1 round",
       "source": "Trial 1"
     },
     "w_heat_hellfire_beam_II": {
       "name": "Hellfire Beam II",
-      "desc": "Hellfire Beam II â€” Improved hellfire beam.",
+      "desc": "Hellfire Beam II — Improved hellfire beam.",
       "special": "Melts armor: -15% def 2 rounds",
       "source": "Instance 11-16"
     },
     "w_heat_hellfire_beam_III": {
       "name": "Hellfire Beam III",
-      "desc": "Hellfire Beam III â€” Advanced hellfire beam.",
+      "desc": "Hellfire Beam III — Advanced hellfire beam.",
       "special": "Melts armor: -22% def 3 rounds",
       "source": "Instance 21-26"
     },
     "w_magnetic_pulsar_beam_I": {
       "name": "Pulsar Beam I",
-      "desc": "Pulsar Beam I â€” EMP pulse beam.",
+      "desc": "Pulsar Beam I — EMP pulse beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_pulsar_beam_II": {
       "name": "Pulsar Beam II",
-      "desc": "Pulsar Beam II â€” Improved pulsar beam.",
+      "desc": "Pulsar Beam II — Improved pulsar beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_pulsar_beam_III": {
       "name": "Pulsar Beam III",
-      "desc": "Pulsar Beam III â€” Advanced pulsar beam.",
+      "desc": "Pulsar Beam III — Advanced pulsar beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_emp_blast_beam_I": {
       "name": "EMP Blast Beam I",
-      "desc": "EMP Blast Beam I â€” EMP beam.",
+      "desc": "EMP Blast Beam I — EMP beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_emp_blast_beam_II": {
       "name": "EMP Blast Beam II",
-      "desc": "EMP Blast Beam II â€” Improved EMP beam.",
+      "desc": "EMP Blast Beam II — Improved EMP beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_emp_blast_beam_III": {
       "name": "EMP Blast Beam III",
-      "desc": "EMP Blast Beam III â€” Advanced EMP beam.",
+      "desc": "EMP Blast Beam III — Advanced EMP beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_stasis_beam_beam_I": {
       "name": "Stasis Beam I",
-      "desc": "Stasis Beam â€” Freeze beam.",
+      "desc": "Stasis Beam — Freeze beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_stasis_beam_beam_II": {
       "name": "Stasis Beam II",
-      "desc": "Stasis Beam II â€” Improved stasis beam.",
+      "desc": "Stasis Beam II — Improved stasis beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_stasis_beam_beam_III": {
       "name": "Stasis Beam III",
-      "desc": "Stasis Beam III â€” Advanced stasis beam.",
+      "desc": "Stasis Beam III — Advanced stasis beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_disruptor_beam_I": {
       "name": "Disruptor Beam I",
-      "desc": "Disruptor Beam I â€” Jammer beam.",
+      "desc": "Disruptor Beam I — Jammer beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_disruptor_beam_II": {
       "name": "Disruptor Beam II",
-      "desc": "Disruptor Beam II â€” Improved disruptor beam.",
+      "desc": "Disruptor Beam II — Improved disruptor beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_disruptor_beam_III": {
       "name": "Disruptor Beam III",
-      "desc": "Disruptor Beam III â€” Advanced disruptor beam.",
+      "desc": "Disruptor Beam III — Advanced disruptor beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_magnetron_beam_I": {
       "name": "Magnetron Beam I",
-      "desc": "Magnetron Beam I â€” Magnetron beam.",
+      "desc": "Magnetron Beam I — Magnetron beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_magnetron_beam_II": {
       "name": "Magnetron Beam II",
-      "desc": "Magnetron Beam II â€” Improved magnetron beam.",
+      "desc": "Magnetron Beam II — Improved magnetron beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_magnetron_beam_III": {
       "name": "Magnetron Beam III",
-      "desc": "Magnetron Beam III â€” Advanced magnetron beam.",
+      "desc": "Magnetron Beam III — Advanced magnetron beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_neutron_wave_beam_I": {
       "name": "Neutron Wave Beam I",
-      "desc": "Neutron Wave Beam I â€” Neutron wave beam.",
+      "desc": "Neutron Wave Beam I — Neutron wave beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_neutron_wave_beam_II": {
       "name": "Neutron Wave Beam II",
-      "desc": "Neutron Wave Beam II â€” Improved neutron wave beam.",
+      "desc": "Neutron Wave Beam II — Improved neutron wave beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_neutron_wave_beam_III": {
       "name": "Neutron Wave Beam III",
-      "desc": "Neutron Wave Beam III â€” Advanced neutron wave beam.",
+      "desc": "Neutron Wave Beam III — Advanced neutron wave beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_cascade_beam_I": {
       "name": "Cascade Beam I",
-      "desc": "Cascade Beam I â€” Cascade beam.",
+      "desc": "Cascade Beam I — Cascade beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_cascade_beam_II": {
       "name": "Cascade Beam II",
-      "desc": "Cascade Beam II â€” Improved cascade beam.",
+      "desc": "Cascade Beam II — Improved cascade beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_cascade_beam_III": {
       "name": "Cascade Beam III",
-      "desc": "Cascade Beam III â€” Advanced cascade beam.",
+      "desc": "Cascade Beam III — Advanced cascade beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_ion_storm_beam_I": {
       "name": "Ion Storm Beam I",
-      "desc": "Ion Storm Beam I â€” Ion storm beam.",
+      "desc": "Ion Storm Beam I — Ion storm beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_ion_storm_beam_II": {
       "name": "Ion Storm Beam II",
-      "desc": "Ion Storm Beam II â€” Improved ion storm beam.",
+      "desc": "Ion Storm Beam II — Improved ion storm beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_ion_storm_beam_III": {
       "name": "Ion Storm Beam III",
-      "desc": "Ion Storm Beam III â€” Advanced ion storm beam.",
+      "desc": "Ion Storm Beam III — Advanced ion storm beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_magnetosphere_beam_I": {
       "name": "Magnetosphere Beam I",
-      "desc": "Magnetosphere Beam I â€” Magnetosphere beam.",
+      "desc": "Magnetosphere Beam I — Magnetosphere beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_magnetosphere_beam_II": {
       "name": "Magnetosphere Beam II",
-      "desc": "Magnetosphere Beam II â€” Improved magnetosphere beam.",
+      "desc": "Magnetosphere Beam II — Improved magnetosphere beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_magnetosphere_beam_III": {
       "name": "Magnetosphere Beam III",
-      "desc": "Magnetosphere Beam III â€” Advanced magnetosphere beam.",
+      "desc": "Magnetosphere Beam III — Advanced magnetosphere beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_magnetic_singularity_beam_I": {
       "name": "Singularity Beam I",
-      "desc": "Singularity Beam I â€” Singularity beam.",
+      "desc": "Singularity Beam I — Singularity beam.",
       "special": "10% chance: disable weapon 1 round",
       "source": "Instance 11-15"
     },
     "w_magnetic_singularity_beam_II": {
       "name": "Singularity Beam II",
-      "desc": "Singularity Beam II â€” Improved singularity beam.",
+      "desc": "Singularity Beam II — Improved singularity beam.",
       "special": "18% chance: disable weapon 2 rounds",
       "source": "Instance 16-20"
     },
     "w_magnetic_singularity_beam_III": {
       "name": "Singularity Beam III",
-      "desc": "Singularity Beam III â€” Advanced singularity beam.",
+      "desc": "Singularity Beam III — Advanced singularity beam.",
       "special": "28% chance: disable weapon 2 rounds",
       "source": "Restricted 4-6"
     },
     "w_explosive_devastator_beam_I": {
       "name": "Devastator Beam I",
-      "desc": "Devastator Beam I â€” Devastating beam.",
+      "desc": "Devastator Beam I — Devastating beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_devastator_beam_II": {
       "name": "Devastator Beam II",
-      "desc": "Devastator Beam II â€” Improved devastating beam.",
+      "desc": "Devastator Beam II — Improved devastating beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_devastator_beam_III": {
       "name": "Devastator Beam III",
-      "desc": "Devastator Beam III â€” Advanced devastating beam.",
+      "desc": "Devastator Beam III — Advanced devastating beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_annihilator_beam_I": {
       "name": "Annihilator Beam I",
-      "desc": "Annihilator Beam I â€” Annihilating beam.",
+      "desc": "Annihilator Beam I — Annihilating beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_annihilator_beam_II": {
       "name": "Annihilator Beam II",
-      "desc": "Annihilator Beam II â€” Improved annihilator beam.",
+      "desc": "Annihilator Beam II — Improved annihilator beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_annihilator_beam_III": {
       "name": "Annihilator Beam III",
-      "desc": "Annihilator Beam III â€” Advanced annihilator beam.",
+      "desc": "Annihilator Beam III — Advanced annihilator beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_maelstrom_beam_I": {
       "name": "Maelstrom Beam I",
-      "desc": "Maelstrom Beam I â€” Maelstrom beam.",
+      "desc": "Maelstrom Beam I — Maelstrom beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_maelstrom_beam_II": {
       "name": "Maelstrom Beam II",
-      "desc": "Maelstrom Beam II â€” Improved maelstrom beam.",
+      "desc": "Maelstrom Beam II — Improved maelstrom beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_maelstrom_beam_III": {
       "name": "Maelstrom Beam III",
-      "desc": "Maelstrom Beam III â€” Advanced maelstrom beam.",
+      "desc": "Maelstrom Beam III — Advanced maelstrom beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_cataclysm_beam_I": {
       "name": "Cataclysm Beam I",
-      "desc": "Cataclysm Beam I â€” Cataclysmic beam.",
+      "desc": "Cataclysm Beam I — Cataclysmic beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_cataclysm_beam_II": {
       "name": "Cataclysm Beam II",
-      "desc": "Cataclysm Beam II â€” Improved cataclysmic beam.",
+      "desc": "Cataclysm Beam II — Improved cataclysmic beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_cataclysm_beam_III": {
       "name": "Cataclysm Beam III",
-      "desc": "Cataclysm Beam III â€” Advanced cataclysmic beam.",
+      "desc": "Cataclysm Beam III — Advanced cataclysmic beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_oblivion_beam_I": {
       "name": "Oblivion Beam I",
-      "desc": "Oblivion Beam I â€” Oblivion beam.",
+      "desc": "Oblivion Beam I — Oblivion beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_oblivion_beam_II": {
       "name": "Oblivion Beam II",
-      "desc": "Oblivion Beam II â€” Improved oblivion beam.",
+      "desc": "Oblivion Beam II — Improved oblivion beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_oblivion_beam_III": {
       "name": "Oblivion Beam III",
-      "desc": "Oblivion Beam III â€” Advanced oblivion beam.",
+      "desc": "Oblivion Beam III — Advanced oblivion beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_earthshaker_beam_I": {
       "name": "Earthshaker Beam I",
-      "desc": "Earthshaker Beam I â€” Earthshaker beam.",
+      "desc": "Earthshaker Beam I — Earthshaker beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_earthshaker_beam_II": {
       "name": "Earthshaker Beam II",
-      "desc": "Earthshaker Beam II â€” Improved earthshaker beam.",
+      "desc": "Earthshaker Beam II — Improved earthshaker beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_earthshaker_beam_III": {
       "name": "Earthshaker Beam III",
-      "desc": "Earthshaker Beam III â€” Advanced earthshaker beam.",
+      "desc": "Earthshaker Beam III — Advanced earthshaker beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_nova_beam_I": {
       "name": "Nova Beam I",
-      "desc": "Nova Beam I â€” Nova beam.",
+      "desc": "Nova Beam I — Nova beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_nova_beam_II": {
       "name": "Nova Beam II",
-      "desc": "Nova Beam II â€” Improved nova beam.",
+      "desc": "Nova Beam II — Improved nova beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_nova_beam_III": {
       "name": "Nova Beam III",
-      "desc": "Nova Beam III â€” Advanced nova beam.",
+      "desc": "Nova Beam III — Advanced nova beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_armageddon_beam_I": {
       "name": "Armageddon Beam I",
-      "desc": "Armageddon Beam I â€” Armageddon beam.",
+      "desc": "Armageddon Beam I — Armageddon beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_armageddon_beam_II": {
       "name": "Armageddon Beam II",
-      "desc": "Armageddon Beam II â€” Improved armageddon beam.",
+      "desc": "Armageddon Beam II — Improved armageddon beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_armageddon_beam_III": {
       "name": "Armageddon Beam III",
-      "desc": "Armageddon Beam III â€” Advanced armageddon beam.",
+      "desc": "Armageddon Beam III — Advanced armageddon beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_apocalypse_beam_I": {
       "name": "Apocalypse Beam I",
-      "desc": "Apocalypse Beam I â€” Apocalyptic beam.",
+      "desc": "Apocalypse Beam I — Apocalyptic beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_apocalypse_beam_II": {
       "name": "Apocalypse Beam II",
-      "desc": "Apocalypse Beam II â€” Improved apocalyptic beam.",
+      "desc": "Apocalypse Beam II — Improved apocalyptic beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_apocalypse_beam_III": {
       "name": "Apocalypse Beam III",
-      "desc": "Apocalypse Beam III â€” Advanced apocalyptic beam.",
+      "desc": "Apocalypse Beam III — Advanced apocalyptic beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_explosive_crusher_beam_I": {
       "name": "Crusher Beam I",
-      "desc": "Crusher Beam I â€” Crusher beam.",
+      "desc": "Crusher Beam I — Crusher beam.",
       "special": "+20% damage directly through shield",
       "source": "Instance 11-15"
     },
     "w_explosive_crusher_beam_II": {
       "name": "Crusher Beam II",
-      "desc": "Crusher Beam II â€” Improved crusher beam.",
+      "desc": "Crusher Beam II — Improved crusher beam.",
       "special": "+30% damage directly through shield",
       "source": "Instance 16-20"
     },
     "w_explosive_crusher_beam_III": {
       "name": "Crusher Beam III",
-      "desc": "Crusher Beam III â€” Advanced crusher beam.",
+      "desc": "Crusher Beam III — Advanced crusher beam.",
       "special": "+45% damage directly through shield",
       "source": "Restricted 4-6"
     },
     "w_kinetic_railgun_missile_I": {
       "name": "Railgun Missile I",
-      "desc": "Railgun Missile I â€” Guided missile. Always hits.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Railgun Missile I — Guided missile. Always hits.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_railgun_missile_II": {
       "name": "Railgun Missile II",
-      "desc": "Railgun Missile II â€” Improved guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Railgun Missile II — Improved guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_railgun_missile_III": {
       "name": "Railgun Missile III",
-      "desc": "Railgun Missile III â€” Elite guided missile.",
-      "special": "Guided â€” 100% hit +10% bonus Ĺˇtete",
+      "desc": "Railgun Missile III — Elite guided missile.",
+      "special": "Guided — 100% hit +10% bonus štete",
       "source": "Restricted 6-8"
     },
     "w_kinetic_gauss_cannon_missile_I": {
       "name": "Gauss Cannon Missile I",
-      "desc": "Gauss Cannon Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Gauss Cannon Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_gauss_cannon_missile_II": {
       "name": "Gauss Cannon Missile II",
-      "desc": "Gauss Cannon Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Gauss Cannon Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_gauss_cannon_missile_III": {
       "name": "Gauss Cannon Missile III",
-      "desc": "Gauss Cannon Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Gauss Cannon Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_mass_driver_missile_I": {
       "name": "Mass Driver Missile I",
-      "desc": "Mass Driver Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Mass Driver Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_mass_driver_missile_II": {
       "name": "Mass Driver Missile II",
-      "desc": "Mass Driver Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Mass Driver Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_mass_driver_missile_III": {
       "name": "Mass Driver Missile III",
-      "desc": "Mass Driver Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Mass Driver Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_shredder_missile_I": {
       "name": "Shredder Missile I",
-      "desc": "Shredder Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Shredder Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_shredder_missile_II": {
       "name": "Shredder Missile II",
-      "desc": "Shredder Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Shredder Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_shredder_missile_III": {
       "name": "Shredder Missile III",
-      "desc": "Shredder Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Shredder Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_penetrator_missile_I": {
       "name": "Penetrator Missile I",
-      "desc": "Penetrator Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Penetrator Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_penetrator_missile_II": {
       "name": "Penetrator Missile II",
-      "desc": "Penetrator Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Penetrator Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_penetrator_missile_III": {
       "name": "Penetrator Missile III",
-      "desc": "Penetrator Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Penetrator Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_accelerator_missile_I": {
       "name": "Accelerator Missile I",
-      "desc": "Accelerator Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Accelerator Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_accelerator_missile_II": {
       "name": "Accelerator Missile II",
-      "desc": "Accelerator Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Accelerator Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_accelerator_missile_III": {
       "name": "Accelerator Missile III",
-      "desc": "Accelerator Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Accelerator Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_ripper_missile_I": {
       "name": "Ripper Missile I",
-      "desc": "Ripper Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Ripper Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_ripper_missile_II": {
       "name": "Ripper Missile II",
-      "desc": "Ripper Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Ripper Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_ripper_missile_III": {
       "name": "Ripper Missile III",
-      "desc": "Ripper Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Ripper Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_hailstorm_missile_I": {
       "name": "Hailstorm Missile I",
-      "desc": "Hailstorm Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Hailstorm Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_hailstorm_missile_II": {
       "name": "Hailstorm Missile II",
-      "desc": "Hailstorm Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Hailstorm Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_hailstorm_missile_III": {
       "name": "Hailstorm Missile III",
-      "desc": "Hailstorm Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Hailstorm Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_obliterator_missile_I": {
       "name": "Obliterator Missile I",
-      "desc": "Obliterator Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Obliterator Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_obliterator_missile_II": {
       "name": "Obliterator Missile II",
-      "desc": "Obliterator Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Obliterator Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_obliterator_missile_III": {
       "name": "Obliterator Missile III",
-      "desc": "Obliterator Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Obliterator Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_kinetic_annihilator_missile_I": {
       "name": "Annihilator Missile I",
-      "desc": "Annihilator Missile I â€” Guided missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Annihilator Missile I — Guided missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 16-20"
     },
     "w_kinetic_annihilator_missile_II": {
       "name": "Annihilator Missile II",
-      "desc": "Annihilator Missile II â€” Improved missile.",
-      "special": "Guided â€” 100% hit",
+      "desc": "Annihilator Missile II — Improved missile.",
+      "special": "Guided — 100% hit",
       "source": "Instance 21-26"
     },
     "w_kinetic_annihilator_missile_III": {
       "name": "Annihilator Missile III",
-      "desc": "Annihilator Missile III â€” Elite missile.",
-      "special": "Guided â€” 100% hit +10% bonus",
+      "desc": "Annihilator Missile III — Elite missile.",
+      "special": "Guided — 100% hit +10% bonus",
       "source": "Restricted 6-8"
     },
     "w_heat_inferno_missile_I": {
       "name": "Inferno Missile I",
-      "desc": "Inferno Missile I â€” Thermal guided missile.",
+      "desc": "Inferno Missile I — Thermal guided missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_inferno_missile_II": {
       "name": "Inferno Missile II",
-      "desc": "Inferno Missile II â€” Improved thermal missile.",
+      "desc": "Inferno Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_inferno_missile_III": {
       "name": "Inferno Missile III",
-      "desc": "Inferno Missile III â€” Elite thermal missile.",
+      "desc": "Inferno Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_scorch_missile_I": {
       "name": "Scorch Missile I",
-      "desc": "Scorch Missile I â€” Thermal missile.",
+      "desc": "Scorch Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_scorch_missile_II": {
       "name": "Scorch Missile II",
-      "desc": "Scorch Missile II â€” Improved thermal missile.",
+      "desc": "Scorch Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_scorch_missile_III": {
       "name": "Scorch Missile III",
-      "desc": "Scorch Missile III â€” Elite thermal missile.",
+      "desc": "Scorch Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_molten_core_missile_I": {
       "name": "Molten Core Missile I",
-      "desc": "Molten Core Missile I â€” Thermal missile.",
+      "desc": "Molten Core Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_molten_core_missile_II": {
       "name": "Molten Core Missile II",
-      "desc": "Molten Core Missile II â€” Improved thermal missile.",
+      "desc": "Molten Core Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_molten_core_missile_III": {
       "name": "Molten Core Missile III",
-      "desc": "Molten Core Missile III â€” Elite thermal missile.",
+      "desc": "Molten Core Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_pyro_blast_missile_I": {
       "name": "Pyro Blast Missile I",
-      "desc": "Pyro Blast Missile I â€” Thermal missile.",
+      "desc": "Pyro Blast Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_pyro_blast_missile_II": {
       "name": "Pyro Blast Missile II",
-      "desc": "Pyro Blast Missile II â€” Improved thermal missile.",
+      "desc": "Pyro Blast Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_pyro_blast_missile_III": {
       "name": "Pyro Blast Missile III",
-      "desc": "Pyro Blast Missile III â€” Elite thermal missile.",
+      "desc": "Pyro Blast Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_thermal_lance_missile_I": {
       "name": "Thermal Lance Missile I",
-      "desc": "Thermal Lance Missile I â€” Thermal missile.",
+      "desc": "Thermal Lance Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_thermal_lance_missile_II": {
       "name": "Thermal Lance Missile II",
-      "desc": "Thermal Lance Missile II â€” Improved thermal missile.",
+      "desc": "Thermal Lance Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_thermal_lance_missile_III": {
       "name": "Thermal Lance Missile III",
-      "desc": "Thermal Lance Missile III â€” Elite thermal missile.",
+      "desc": "Thermal Lance Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_sunflare_missile_I": {
       "name": "Sunflare Missile I",
-      "desc": "Sunflare Missile I â€” Thermal missile.",
+      "desc": "Sunflare Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_sunflare_missile_II": {
       "name": "Sunflare Missile II",
-      "desc": "Sunflare Missile II â€” Improved thermal missile.",
+      "desc": "Sunflare Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_sunflare_missile_III": {
       "name": "Sunflare Missile III",
-      "desc": "Sunflare Missile III â€” Elite thermal missile.",
+      "desc": "Sunflare Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_magma_missile_I": {
       "name": "Magma Missile I",
-      "desc": "Magma Missile I â€” Thermal missile.",
+      "desc": "Magma Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_magma_missile_II": {
       "name": "Magma Missile II",
-      "desc": "Magma Missile II â€” Improved thermal missile.",
+      "desc": "Magma Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_magma_missile_III": {
       "name": "Magma Missile III",
-      "desc": "Magma Missile III â€” Elite thermal missile.",
+      "desc": "Magma Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_incinerator_missile_I": {
       "name": "Incinerator Missile I",
-      "desc": "Incinerator Missile I â€” Thermal missile.",
+      "desc": "Incinerator Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_incinerator_missile_II": {
       "name": "Incinerator Missile II",
-      "desc": "Incinerator Missile II â€” Improved thermal missile.",
+      "desc": "Incinerator Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_incinerator_missile_III": {
       "name": "Incinerator Missile III",
-      "desc": "Incinerator Missile III â€” Elite thermal missile.",
+      "desc": "Incinerator Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_phoenix_missile_I": {
       "name": "Phoenix Missile I",
-      "desc": "Phoenix Missile I â€” Thermal missile.",
+      "desc": "Phoenix Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_phoenix_missile_II": {
       "name": "Phoenix Missile II",
-      "desc": "Phoenix Missile II â€” Improved thermal missile.",
+      "desc": "Phoenix Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_phoenix_missile_III": {
       "name": "Phoenix Missile III",
-      "desc": "Phoenix Missile III â€” Elite thermal missile.",
+      "desc": "Phoenix Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_heat_hellfire_missile_I": {
       "name": "Hellfire Missile I",
-      "desc": "Hellfire Missile I â€” Thermal missile.",
+      "desc": "Hellfire Missile I — Thermal missile.",
       "special": "Guided + burn 2 rounds (15 damage/round)",
       "source": "Instance 16-20"
     },
     "w_heat_hellfire_missile_II": {
       "name": "Hellfire Missile II",
-      "desc": "Hellfire Missile II â€” Improved thermal missile.",
+      "desc": "Hellfire Missile II — Improved thermal missile.",
       "special": "Guided + burn 2 rounds (28 damage/round)",
       "source": "Instance 21-26"
     },
     "w_heat_hellfire_missile_III": {
       "name": "Hellfire Missile III",
-      "desc": "Hellfire Missile III â€” Elite thermal missile.",
+      "desc": "Hellfire Missile III — Elite thermal missile.",
       "special": "Guided + burn 3 rounds (45 damage/round)",
       "source": "Restricted 6-8"
     },
     "w_magnetic_pulsar_missile_I": {
       "name": "Pulsar Missile I",
-      "desc": "Pulsar Missile I â€” Magnetic guided missile.",
+      "desc": "Pulsar Missile I — Magnetic guided missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_pulsar_missile_II": {
       "name": "Pulsar Missile II",
-      "desc": "Pulsar Missile II â€” Improved magnetic missile.",
+      "desc": "Pulsar Missile II — Improved magnetic missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_pulsar_missile_III": {
       "name": "Pulsar Missile III",
-      "desc": "Pulsar Missile III â€” Elite magnetic missile.",
+      "desc": "Pulsar Missile III — Elite magnetic missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_emp_blast_missile_I": {
       "name": "EMP Blast Missile I",
-      "desc": "EMP Blast Missile I â€” EMP missile.",
+      "desc": "EMP Blast Missile I — EMP missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_emp_blast_missile_II": {
       "name": "EMP Blast Missile II",
-      "desc": "EMP Blast Missile II â€” Improved EMP missile.",
+      "desc": "EMP Blast Missile II — Improved EMP missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_emp_blast_missile_III": {
       "name": "EMP Blast Missile III",
-      "desc": "EMP Blast Missile III â€” Elite EMP missile.",
+      "desc": "EMP Blast Missile III — Elite EMP missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_stasis_beam_missile_I": {
       "name": "Stasis Missile I",
-      "desc": "Stasis Missile I â€” Stasis missile.",
+      "desc": "Stasis Missile I — Stasis missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_stasis_beam_missile_II": {
       "name": "Stasis Missile II",
-      "desc": "Stasis Missile II â€” Improved stasis missile.",
+      "desc": "Stasis Missile II — Improved stasis missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_stasis_beam_missile_III": {
       "name": "Stasis Missile III",
-      "desc": "Stasis Missile III â€” Elite stasis missile.",
+      "desc": "Stasis Missile III — Elite stasis missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_disruptor_missile_I": {
       "name": "Disruptor Missile I",
-      "desc": "Disruptor Missile I â€” Disruptor missile.",
+      "desc": "Disruptor Missile I — Disruptor missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_disruptor_missile_II": {
       "name": "Disruptor Missile II",
-      "desc": "Disruptor Missile II â€” Improved disruptor missile.",
+      "desc": "Disruptor Missile II — Improved disruptor missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_disruptor_missile_III": {
       "name": "Disruptor Missile III",
-      "desc": "Disruptor Missile III â€” Elite disruptor missile.",
+      "desc": "Disruptor Missile III — Elite disruptor missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_magnetron_missile_I": {
       "name": "Magnetron Missile I",
-      "desc": "Magnetron Missile I â€” Magnetron missile.",
+      "desc": "Magnetron Missile I — Magnetron missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_magnetron_missile_II": {
       "name": "Magnetron Missile II",
-      "desc": "Magnetron Missile II â€” Improved magnetron missile.",
+      "desc": "Magnetron Missile II — Improved magnetron missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_magnetron_missile_III": {
       "name": "Magnetron Missile III",
-      "desc": "Magnetron Missile III â€” Elite magnetron missile.",
+      "desc": "Magnetron Missile III — Elite magnetron missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_neutron_wave_missile_I": {
       "name": "Neutron Wave Missile I",
-      "desc": "Neutron Wave Missile I â€” Neutron missile.",
+      "desc": "Neutron Wave Missile I — Neutron missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_neutron_wave_missile_II": {
       "name": "Neutron Wave Missile II",
-      "desc": "Neutron Wave Missile II â€” Improved neutron missile.",
+      "desc": "Neutron Wave Missile II — Improved neutron missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_neutron_wave_missile_III": {
       "name": "Neutron Wave Missile III",
-      "desc": "Neutron Wave Missile III â€” Elite neutron missile.",
+      "desc": "Neutron Wave Missile III — Elite neutron missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_cascade_missile_I": {
       "name": "Cascade Missile I",
-      "desc": "Cascade Missile I â€” Cascade missile.",
+      "desc": "Cascade Missile I — Cascade missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_cascade_missile_II": {
       "name": "Cascade Missile II",
-      "desc": "Cascade Missile II â€” Improved cascade missile.",
+      "desc": "Cascade Missile II — Improved cascade missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_cascade_missile_III": {
       "name": "Cascade Missile III",
-      "desc": "Cascade Missile III â€” Elite cascade missile.",
+      "desc": "Cascade Missile III — Elite cascade missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_ion_storm_missile_I": {
       "name": "Ion Storm Missile I",
-      "desc": "Ion Storm Missile I â€” Ion missile.",
+      "desc": "Ion Storm Missile I — Ion missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_ion_storm_missile_II": {
       "name": "Ion Storm Missile II",
-      "desc": "Ion Storm Missile II â€” Improved ion missile.",
+      "desc": "Ion Storm Missile II — Improved ion missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_ion_storm_missile_III": {
       "name": "Ion Storm Missile III",
-      "desc": "Ion Storm Missile III â€” Elite ion missile.",
+      "desc": "Ion Storm Missile III — Elite ion missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_magnetosphere_missile_I": {
       "name": "Magnetosphere Missile I",
-      "desc": "Magnetosphere Missile I â€” Magnetosphere missile.",
+      "desc": "Magnetosphere Missile I — Magnetosphere missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_magnetosphere_missile_II": {
       "name": "Magnetosphere Missile II",
-      "desc": "Magnetosphere Missile II â€” Improved magnetosphere missile.",
+      "desc": "Magnetosphere Missile II — Improved magnetosphere missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_magnetosphere_missile_III": {
       "name": "Magnetosphere Missile III",
-      "desc": "Magnetosphere Missile III â€” Elite magnetosphere missile.",
+      "desc": "Magnetosphere Missile III — Elite magnetosphere missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_magnetic_singularity_missile_I": {
       "name": "Singularity Missile I",
-      "desc": "Singularity Missile I â€” Singularity missile.",
+      "desc": "Singularity Missile I — Singularity missile.",
       "special": "Guided + 15% chance: disable engine 1 round",
       "source": "Instance 21-25"
     },
     "w_magnetic_singularity_missile_II": {
       "name": "Singularity Missile II",
-      "desc": "Singularity Missile II â€” Improved singularity missile.",
+      "desc": "Singularity Missile II — Improved singularity missile.",
       "special": "Guided + 25% chance: disable engine 2 rounds",
       "source": "Restricted 3-5"
     },
     "w_magnetic_singularity_missile_III": {
       "name": "Singularity Missile III",
-      "desc": "Singularity Missile III â€” Elite singularity missile.",
+      "desc": "Singularity Missile III — Elite singularity missile.",
       "special": "Guided + 38% chance: disable engine 2 rounds",
       "source": "Trial 1-3"
     },
     "w_explosive_devastator_missile_I": {
       "name": "Devastator Missile I",
-      "desc": "Devastator Missile I â€” Devastating missile.",
+      "desc": "Devastator Missile I — Devastating missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_devastator_missile_II": {
       "name": "Devastator Missile II",
-      "desc": "Devastator Missile II â€” Improved devastating missile.",
+      "desc": "Devastator Missile II — Improved devastating missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_devastator_missile_III": {
       "name": "Devastator Missile III",
-      "desc": "Devastator Missile III â€” Elite devastating missile.",
+      "desc": "Devastator Missile III — Elite devastating missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_annihilator_missile_I": {
       "name": "Annihilator Missile I",
-      "desc": "Annihilator Missile I â€” Annihilating missile.",
+      "desc": "Annihilator Missile I — Annihilating missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_annihilator_missile_II": {
       "name": "Annihilator Missile II",
-      "desc": "Annihilator Missile II â€” Improved annihilating missile.",
+      "desc": "Annihilator Missile II — Improved annihilating missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_annihilator_missile_III": {
       "name": "Annihilator Missile III",
-      "desc": "Annihilator Missile III â€” Elite annihilating missile.",
+      "desc": "Annihilator Missile III — Elite annihilating missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_maelstrom_missile_I": {
       "name": "Maelstrom Missile I",
-      "desc": "Maelstrom Missile I â€” Maelstrom missile.",
+      "desc": "Maelstrom Missile I — Maelstrom missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_maelstrom_missile_II": {
       "name": "Maelstrom Missile II",
-      "desc": "Maelstrom Missile II â€” Improved maelstrom missile.",
+      "desc": "Maelstrom Missile II — Improved maelstrom missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_maelstrom_missile_III": {
       "name": "Maelstrom Missile III",
-      "desc": "Maelstrom Missile III â€” Elite maelstrom missile.",
+      "desc": "Maelstrom Missile III — Elite maelstrom missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_cataclysm_missile_I": {
       "name": "Cataclysm Missile I",
-      "desc": "Cataclysm Missile I â€” Cataclysmic missile.",
+      "desc": "Cataclysm Missile I — Cataclysmic missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_cataclysm_missile_II": {
       "name": "Cataclysm Missile II",
-      "desc": "Cataclysm Missile II â€” Improved cataclysmic missile.",
+      "desc": "Cataclysm Missile II — Improved cataclysmic missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_cataclysm_missile_III": {
       "name": "Cataclysm Missile III",
-      "desc": "Cataclysm Missile III â€” Elite cataclysmic missile.",
+      "desc": "Cataclysm Missile III — Elite cataclysmic missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_oblivion_missile_I": {
       "name": "Oblivion Missile I",
-      "desc": "Oblivion Missile I â€” Oblivion missile.",
+      "desc": "Oblivion Missile I — Oblivion missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_oblivion_missile_II": {
       "name": "Oblivion Missile II",
-      "desc": "Oblivion Missile II â€” Improved oblivion missile.",
+      "desc": "Oblivion Missile II — Improved oblivion missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_oblivion_missile_III": {
       "name": "Oblivion Missile III",
-      "desc": "Oblivion Missile III â€” Elite oblivion missile.",
+      "desc": "Oblivion Missile III — Elite oblivion missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_earthshaker_missile_I": {
       "name": "Earthshaker Missile I",
-      "desc": "Earthshaker Missile I â€” Earthshaker missile.",
+      "desc": "Earthshaker Missile I — Earthshaker missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_earthshaker_missile_II": {
       "name": "Earthshaker Missile II",
-      "desc": "Earthshaker Missile II â€” Improved earthshaker missile.",
+      "desc": "Earthshaker Missile II — Improved earthshaker missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_earthshaker_missile_III": {
       "name": "Earthshaker Missile III",
-      "desc": "Earthshaker Missile III â€” Elite earthshaker missile.",
+      "desc": "Earthshaker Missile III — Elite earthshaker missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_nova_missile_I": {
       "name": "Nova Missile I",
-      "desc": "Nova Missile I â€” Nova missile.",
+      "desc": "Nova Missile I — Nova missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_nova_missile_II": {
       "name": "Nova Missile II",
-      "desc": "Nova Missile II â€” Improved nova missile.",
+      "desc": "Nova Missile II — Improved nova missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_nova_missile_III": {
       "name": "Nova Missile III",
-      "desc": "Nova Missile III â€” Elite nova missile.",
+      "desc": "Nova Missile III — Elite nova missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_armageddon_missile_I": {
       "name": "Armageddon Missile I",
-      "desc": "Armageddon Missile I â€” Armageddon missile.",
+      "desc": "Armageddon Missile I — Armageddon missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_armageddon_missile_II": {
       "name": "Armageddon Missile II",
-      "desc": "Armageddon Missile II â€” Improved armageddon missile.",
+      "desc": "Armageddon Missile II — Improved armageddon missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_armageddon_missile_III": {
       "name": "Armageddon Missile III",
-      "desc": "Armageddon Missile III â€” Elite armageddon missile.",
+      "desc": "Armageddon Missile III — Elite armageddon missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_apocalypse_missile_I": {
       "name": "Apocalypse Missile I",
-      "desc": "Apocalypse Missile I â€” Apocalyptic missile.",
+      "desc": "Apocalypse Missile I — Apocalyptic missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_apocalypse_missile_II": {
       "name": "Apocalypse Missile II",
-      "desc": "Apocalypse Missile II â€” Improved apocalyptic missile.",
+      "desc": "Apocalypse Missile II — Improved apocalyptic missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_apocalypse_missile_III": {
       "name": "Apocalypse Missile III",
-      "desc": "Apocalypse Missile III â€” Elite apocalyptic missile.",
+      "desc": "Apocalypse Missile III — Elite apocalyptic missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
     "w_explosive_crusher_missile_I": {
       "name": "Crusher Missile I",
-      "desc": "Crusher Missile I â€” Crusher missile.",
+      "desc": "Crusher Missile I — Crusher missile.",
       "special": "Guided + 5% chance: destroy module",
       "source": "Instance 21-25"
     },
     "w_explosive_crusher_missile_II": {
       "name": "Crusher Missile II",
-      "desc": "Crusher Missile II â€” Improved crusher missile.",
+      "desc": "Crusher Missile II — Improved crusher missile.",
       "special": "Guided + 10% chance: destroy module",
       "source": "Restricted 3-5"
     },
     "w_explosive_crusher_missile_III": {
       "name": "Crusher Missile III",
-      "desc": "Crusher Missile III â€” Elite crusher missile.",
+      "desc": "Crusher Missile III — Elite crusher missile.",
       "special": "Guided + 18% chance: destroy module + area",
       "source": "Trial 1-3"
     },
@@ -2510,37 +2510,37 @@
     "w_bomber_squadron_I": {
       "name": "Bomber Squadron I",
       "desc": "Bombers. Hits multiple targets.",
-      "special": "Area damage â€” attacks 1-3 targets",
+      "special": "Area damage — attacks 1-3 targets",
       "source": "Restricted 6-8"
     },
     "w_bomber_squadron_II": {
       "name": "Bomber Squadron II",
       "desc": "Advanced bombers.",
-      "special": "Area damage â€” attacks 1-4 targets",
+      "special": "Area damage — attacks 1-4 targets",
       "source": "Trial 4-6"
     },
     "w_bomber_squadron_III": {
       "name": "Bomber Squadron III",
       "desc": "Elite bombers.",
-      "special": "Area damage â€” attacks 1-5 targets + possible destroy",
+      "special": "Area damage — attacks 1-5 targets + possible destroy",
       "source": "Boss Event"
     },
     "w_elite_squadron_I": {
       "name": "Elite Squadron I",
       "desc": "Elite squadron.",
-      "special": "Attacks 2 targets â€” mixes damage types",
+      "special": "Attacks 2 targets — mixes damage types",
       "source": "Restricted 8-10"
     },
     "w_elite_squadron_II": {
       "name": "Elite Squadron II",
       "desc": "Advanced elite squadron.",
-      "special": "Attacks 3 targets â€” adaptive damage",
+      "special": "Attacks 3 targets — adaptive damage",
       "source": "Trial 7-9"
     },
     "w_elite_squadron_III": {
       "name": "Elite Squadron III",
       "desc": "Ultimate elite squadron.",
-      "special": "Attacks 4 targets â€” picks weakest armor",
+      "special": "Attacks 4 targets — picks weakest armor",
       "source": "Boss Event"
     }
   },
@@ -3322,19 +3322,19 @@
     "sh_infinity_regen_I": {
       "name": "Infinity Regen I",
       "desc": "Infinite regen. Extremely fast regeneration.",
-      "special": "+85% faster shield regen â€” nearly constant renewal",
+      "special": "+85% faster shield regen — nearly constant renewal",
       "source": "Trial 7"
     },
     "sh_infinity_regen_II": {
       "name": "Infinity Regen II",
       "desc": "Improved infinite regen.",
-      "special": "+85% faster shield regen â€” nearly constant renewal",
+      "special": "+85% faster shield regen — nearly constant renewal",
       "source": "Trial 9"
     },
     "sh_infinity_regen_III": {
       "name": "Infinity Regen III",
       "desc": "Advanced infinite regen. Constellation exclusive.",
-      "special": "+85% faster shield regen â€” nearly constant renewal",
+      "special": "+85% faster shield regen — nearly constant renewal",
       "source": "Constellation"
     },
     "sh_omega_absorber_I": {
@@ -4073,7 +4073,7 @@
     },
     "depot": {
       "name": "Depot",
-      "desc": "Resource warehouse. Player must collect resources. If full â€” production stops.",
+      "desc": "Resource warehouse. Player must collect resources. If full — production stops.",
       "milestone": {
         "25": { "label": "Expanded Storage", "bonus": "+10% capacity" },
         "50": { "label": "Industrial Storage", "bonus": "+25% capacity" },
@@ -4202,7 +4202,7 @@
       }
     },
     "milestone": {
-      "cmdKeyReward": "đźŹ +1 commander key at Lv.{level}"
+      "cmdKeyReward": "🃏 +1 commander key at Lv.{level}"
     }
   },
   "ui": {
@@ -4227,7 +4227,7 @@
   "index": {
     "title": "HIVE GALAXY - Conquer the Galaxy",
     "nav": {
-      "logo": "â¬ˇ HIVE GALAXY",
+      "logo": "⬡ HIVE GALAXY",
       "features": "Features",
       "ships": "Ships",
       "tokens": "Tokens",
@@ -4407,10 +4407,10 @@
         "login_link": "Already have an account?",
         "login_cta": "Sign in \u2192",
         "features": "\u2713 All instances and content\n\u2713 300 commanders\n\u2713 PvP and galaxy\n\u2717 Blockchain earnings",
-        "check1": "âś“ All instances and content",
-        "check2": "âś“ 300 commanders",
-        "check3": "âś“ PvP and galaxy",
-        "check4": "âś— Blockchain earnings"
+        "check1": "✓ All instances and content",
+        "check2": "✓ 300 commanders",
+        "check3": "✓ PvP and galaxy",
+        "check4": "✗ Blockchain earnings"
       },
       "hive": {
         "badge": "INSTANT PREMIUM",
@@ -4424,10 +4424,10 @@
         "features": "\u2713 All Free options\n\u2713 BPW token earnings\n\u2713 BCM and BoCrypto\n\u2713 Exclusive content",
         "no_account": "Don't have a HIVE account?",
         "register": "Register free \u2192",
-        "check1": "âś“ All Free options",
-        "check2": "âś“ BPW token earnings",
-        "check3": "âś“ BCM and BoCrypto",
-        "check4": "âś“ Exclusive content"
+        "check1": "✓ All Free options",
+        "check2": "✓ BPW token earnings",
+        "check3": "✓ BCM and BoCrypto",
+        "check4": "✓ Exclusive content"
       },
       "crypto": {
         "badge": "PREMIUM \u00B7 10\u20AC",
@@ -4442,10 +4442,10 @@
         "price_note": "\u00B7 One-time \u00B7 Lifetime access",
         "btn": "\u25B6 BUY PREMIUM",
         "features": "\u2713 All Free options\n\u2713 BPW token earnings\n\u2713 BCM and BoCrypto\n\u2713 Exclusive content",
-        "check1": "âś“ All Free options",
-        "check2": "âś“ BPW token earnings",
-        "check3": "âś“ BCM and BoCrypto",
-        "check4": "âś“ Exclusive content"
+        "check1": "✓ All Free options",
+        "check2": "✓ BPW token earnings",
+        "check3": "✓ BCM and BoCrypto",
+        "check4": "✓ Exclusive content"
       }
     },
     "faq": {
@@ -4472,32 +4472,32 @@
       "boss": "Boss",
       "difficulty": "Difficulty",
       "completed_in": "Completed in {round} rounds",
-      "rewards": "đźŽ REWARDS",
-      "drop_pool": "đź“¦ Drop pool: {count} items per kill",
+      "rewards": "🎁 REWARDS",
+      "drop_pool": "📦 Drop pool: {count} items per kill",
       "min_power": "Min power",
       "energy": "Energy: {cost} MWh",
       "clears": "Clears",
       "best_rank": "Best rank",
-      "rewards_header": "REWARDS Ă—{mult}",
-      "guaranteed": "âś… GUARANTEED",
-      "chance": "đźŽ˛ CHANCE",
+      "rewards_header": "REWARDS ×{mult}",
+      "guaranteed": "✅ GUARANTEED",
+      "chance": "🎲 CHANCE",
       "your_fleet": "YOUR FLEET",
       "blueprints_header": "BLUEPRINTS:",
       "fragments_header": "FRAGMENTS:",
       "milestone100": {
-        "keyReward": "đźŹ +1 commander key (every 100x {name} [{mode}])",
-        "retro": "đźŹ +{n} commander key(s) from instance 100x completions",
-        "progress": "đźŹ +1 commander key every 100 clears ({count}/100)",
-        "earned": "đźŹ Commander key earned!"
+        "keyReward": "🃏 +1 commander key (every 100x {name} [{mode}])",
+        "retro": "🃏 +{n} commander key(s) from instance 100x completions",
+        "progress": "🃏 +1 commander key every 100 clears ({count}/100)",
+        "earned": "🃏 Commander key earned!"
       },
       "mode_easy": "Easy",
       "mode_normal": "Normal",
       "mode_nightmare": "Nightmare",
       "mode_hell": "Hell",
-      "desc_easy": "Commander Lv 0-25 Â· 1 commander Â· Blueprint Tier I",
-      "desc_normal": "Commander Lv 25-50 Â· up to 3 commanders Â· Blueprint Tier II",
-      "desc_nightmare": "Commander Lv 50-75 Â· up to 6 commanders Â· Blueprint Tier III",
-      "desc_hell": "Commander Lv 75-100 Â· up to 9 commanders Â· Blueprint Tier IV/Legendary",
+      "desc_easy": "Commander Lv 0-25 · 1 commander · Blueprint Tier I",
+      "desc_normal": "Commander Lv 25-50 · up to 3 commanders · Blueprint Tier II",
+      "desc_nightmare": "Commander Lv 50-75 · up to 6 commanders · Blueprint Tier III",
+      "desc_hell": "Commander Lv 75-100 · up to 9 commanders · Blueprint Tier IV/Legendary",
       "bp_tier_I": "Tier I",
       "bp_tier_II": "Tier II",
       "bp_tier_III": "Tier III",
@@ -4506,7 +4506,7 @@
       "blueprint": "BLUEPRINT",
       "key_cost": "KEY COST",
       "commanders": "COMMANDERS",
-      "locked_cmd": "đź”’ Commander Lv{level}",
+      "locked_cmd": "🔒 Commander Lv{level}",
       "bp_abbr": "BP",
       "max_cmd": "max {count}",
       "all_found_title": "All drops found!",
@@ -4516,88 +4516,11 @@
       "rarity_R_name": "Rare",
       "rarity_E_name": "Epic",
       "rarity_L_name": "Legendary",
-      "enemies_header": "ENEMIES (Ă—{mult})",
-      "auto_battle_hint": "âš ď¸Ź Battle is automatic. Result depends on fleet power.",
-      "attack_btn": "âš”ď¸Ź ATTACK! (-{cost} MWh)",
-      "instant_btn": "âšˇ INSTANT (-{cost} MWh)",
-      "cancel_btn": "Cancel",
-        "planet": {
-      "mode_easy": "Easy",
-      "mode_normal": "Normal",
-      "mode_nightmare": "Nightmare",
-      "mode_hell": "Hell",
-      "level": "Level",
-      "type_header": "PLANET TYPE",
-      "defense_header": "DEFENSE ({count} groups)",
-      "more_groups": "+{count} more groups",
-      "total_ships": "Total ships",
-      "dps": "DPS",
-      "commanders_header": "COMMANDERS",
-      "rewards_header": "REWARDS",
-      "already_claimed": "(claimed)",
-      "once": "(once)",
-      "inst_keys": "instance keys",
-      "cmd_keys": "commander keys",
-      "colonized": "Colonized",
-      "jg_needed": "JG Lv.{level} needed",
-      "no_slots": "No free slots",
-      "spy_btn": "Spy",
-      "rescan_btn": "Rescan",
-      "attack_btn": "Attack & Colonize",
-      "phalanx_name": "Sensor Phalanx",
-      "scan_range": "Range: {range} systems",
-      "scanned_planets": "SCANNED PLANETS ({count})",
-      "no_planets_in_range": "No hostile planets in range.",
-      "system": "System",
-      "already_subdued": "Already subdued",
-      "fleet": "Fleet",
-      "ships_abbr": "ships",
-      "enemy_bases_header": "ENEMY BASES ({count})",
-      "power": "Power",
-      "attack_short": "Attack",
-      "pvp_intel": "PVP INTEL",
-      "no_bases_in_range": "No enemy bases in range.",
-      "event_intel": "EVENT INTEL",
-      "event_positive": "Favorable event brewing",
-      "event_negative": "Negative event brewing",
-      "event_unknown": "Unknown event",
-      "scan_results": "Scan Results",
-      "scan_done": "Scan done! {count} systems. (-{cost} He3)",
-      "spy_done": "{name} scanned!"
-    },
-    "galaxy": {
-      "home_base": "HOME BASE",
-      "conquered": "CONQUERED",
-      "jg_needed": "JG Lv.{level} needed",
-      "max_colonies": "Max colonies",
-      "attack_colonize": "ATTACK & COLONIZE",
-      "threat": "Threat {level}/10",
-      "system": "System",
-      "base": "BASE",
-      "yours": "YOURS",
-      "your_power": "YOUR POWER",
-      "needed": "NEEDED",
-      "military_path": "Military path",
-      "military_desc": "Win battle = Free colony",
-      "peaceful_path": "Peaceful path",
-      "peaceful_desc": "Colonies = Explore = Pay",
-      "rating": "Rating",
-      "power": "Power",
-      "estimated_loot": "Estimated resources:",
-      "metal": "metal",
-      "crystal": "crystal",
-      "he3": "He3",
-      "attack_cost": "Attack costs 1000 + 1000 BoCrypto",
-      "victory_reward": "Victory: 50k each + rating",
-      "scan_btn": "Scan",
-      "attack_short": "Attack",
-      "scan_title": "Scan",
-      "scan_result": "Espionage results:",
-      "fleet_power": "Fleet power",
-      "resources_unknown": "Resources unknown.",
-      "no_energy": "Not enough energy! Need {cost}",
-      "no_bocrypto": "Not enough BoCrypto! Need {cost}"
-    }
+      "enemies_header": "ENEMIES (×{mult})",
+      "auto_battle_hint": "⚠️ Battle is automatic. Result depends on fleet power.",
+      "attack_btn": "⚔️ ATTACK! (-{cost} MWh)",
+      "instant_btn": "⚡ INSTANT (-{cost} MWh)",
+      "cancel_btn": "Cancel"
     },
     "footer": {
       "copyright": "\u00A9 2026 HIVE GALAXY \u00B7 Powered by HIVE Blockchain",
@@ -4608,7 +4531,7 @@
         "blog": "HIVE Blog",
         "github": "GitHub"
       },
-      "logo": "â¬ˇ HIVE GALAXY",
+      "logo": "⬡ HIVE GALAXY",
       "author": "@bokica80",
       "twitch_link": "twitch/bokipw",
       "bcm": "BCM",
@@ -4618,7 +4541,6 @@
   },
   "boss_reward": {
     "victory": "+{count} instance keys",
-    "commander_victory": "+1 đźŹ commander key"
+    "commander_victory": "+1 🃏 commander key"
   }
 }
-
