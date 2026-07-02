@@ -489,7 +489,7 @@ function renderEquipInfo(type, id) {
       </div>
       <div style="color:#aa44ff;margin-bottom:4px">⭐ ${t(m.effectKey || '') || m.effect.desc}</div>
       <div style="color:#6a90b8">${dd(m)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 ${m.shipClass || 'special'}</div>
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 ${Array.isArray(m.shipClass) ? m.shipClass.join('/') : m.shipClass || 'special'}</div>
     </div>`;
   }
 
@@ -560,7 +560,7 @@ function renderDynamicSlots(cls, slots, prefill) {
     </div>`;
 
   if (slots.module > 0) {
-    const myMods   = (typeof SPECIAL_MODULES !== 'undefined') ? SPECIAL_MODULES.filter(m => m.shipClass === cls && ownedBlueprints[m.id]) : [];
+    const myMods   = (typeof SPECIAL_MODULES !== 'undefined') ? SPECIAL_MODULES.filter(m => (Array.isArray(m.shipClass) ? m.shipClass.includes(cls) : m.shipClass === cls) && ownedBlueprints[m.id]) : [];
     const modVal   = prefill.module_1 || '';
     const modIcon  = cls === 'fighter' ? '⚔️' : '🛡️';
     html += `
@@ -592,7 +592,7 @@ function renderDynamicSlots(cls, slots, prefill) {
 
   for (let i = 1; i <= slots.special; i++) {
     const mySpecial  = (typeof SPECIAL_MODULES !== 'undefined')
-      ? SPECIAL_MODULES.filter(m => m.shipClass === cls && ownedBlueprints[m.id])
+      ? SPECIAL_MODULES.filter(m => (Array.isArray(m.shipClass) ? m.shipClass.includes(cls) : m.shipClass === cls) && ownedBlueprints[m.id])
       : [];
     const specialVal = prefill[`special_${i}`] || '';
     const specialIcon = cls === 'battleship' ? '💥' : cls === 'carrier' ? '🌌' : '⭐';
