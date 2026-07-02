@@ -1,6 +1,6 @@
-// ============================================================
-// HIVE GALAXY � data/instances_easy.js
-// Normal instance data � R tier blueprinti, 3 flote
+﻿// ============================================================
+// HIVE GALAXY ďż˝ data/instances_easy.js
+// Normal instance data ďż˝ R tier blueprinti, 3 flote
 // ============================================================
 
 const INSTANCES_HELL = [
@@ -20,7 +20,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Alpha Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
     
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
-    desc: 'Prva instanca. Savr�ena za po�etnike i Common opremu.',
+    desc: 'Prva instanca. Savrďż˝ena za poďż˝etnike i Common opremu.',
     unlock: 'Dostupna od starta',
   },
 
@@ -38,8 +38,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_kinetic_shredder_III', rate: 20 },
         { item: 'w_kinetic_mass_driver_III', rate: 20 },
-        { item: 'w_kinetic_shredder_III', rate: 20 },
-        { item: 'w_kinetic_mass_driver_III', rate: 20 },
         { item: 'w_kinetic_gauss_cannon_II', rate: 20 },
         { item: 'scout_Stinger_I', rate: 15 },
         { item: 'cruiser_Guardian_I', rate: 15 },
@@ -49,8 +47,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [250, 600], crystal: [120, 350], he3: [60, 180] },
-    desc: 'Nastavak po�etne zone. Mali �tit I garantirani drop.',
-    unlock: 'Instanca 1 zavr�ena',
+    desc: 'Nastavak poďż˝etne zone. Mali ďż˝tit I garantirani drop.',
+    unlock: 'Instanca 1 zavrďż˝ena',
   },
 
   {
@@ -69,9 +67,6 @@ const INSTANCES_HELL = [
         { item: 'sh_quantum_veil_I', rate: 20 },
         { item: 'w_kinetic_accelerator_III', rate: 20 },
         { item: 'w_kinetic_penetrator_III', rate: 20 },
-        { item: 'sh_quantum_veil_I', rate: 20 },
-        { item: 'w_kinetic_accelerator_III', rate: 20 },
-        { item: 'w_kinetic_penetrator_III', rate: 20 },
         { item: 'sh_phase_curtain_I', rate: 20 },
         { item: 'w_kinetic_mass_driver_II', rate: 20 },
         { item: 'fighter_Reaper_I', rate: 15 },
@@ -83,8 +78,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [300, 700], crystal: [150, 400], he3: [70, 200] },
-    desc: 'Takti�ki pogon garantiran. Dobra za early armor buildup.',
-    unlock: 'Instanca 2 zavr�ena',
+    desc: 'Taktiďż˝ki pogon garantiran. Dobra za early armor buildup.',
+    unlock: 'Instanca 2 zavrďż˝ena',
   },
 
   {
@@ -101,8 +96,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_kinetic_hailstorm_III', rate: 20 },
         { item: 'w_kinetic_ripper_III', rate: 20 },
-        { item: 'w_kinetic_hailstorm_III', rate: 20 },
-        { item: 'w_kinetic_ripper_III', rate: 20 },
         { item: 'w_kinetic_shredder_II', rate: 20 },
         { item: 'scout_Wisp_I', rate: 15 },
         { item: 'cruiser_Defender_I', rate: 15 },
@@ -114,8 +107,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [400, 900], crystal: [200, 500], he3: [90, 250] },
-    desc: 'Srednji �tit I uvijek pada. Prijelaz u mid-tier opremu.',
-    unlock: 'Instanca 3 zavr�ena',
+    desc: 'Srednji ďż˝tit I uvijek pada. Prijelaz u mid-tier opremu.',
+    unlock: 'Instanca 3 zavrďż˝ena',
   },
 
   {
@@ -133,24 +126,20 @@ const INSTANCES_HELL = [
         { item: 'eng_quantum_I', rate: 20 },
         { item: 'w_kinetic_annihilator_III', rate: 20 },
         { item: 'w_kinetic_obliterator_III', rate: 20 },
-        { item: 'eng_quantum_I', rate: 20 },
-        { item: 'w_kinetic_annihilator_III', rate: 20 },
-        { item: 'w_kinetic_obliterator_III', rate: 20 },
         { item: 'eng_sprint_I', rate: 20 },
         { item: 'w_kinetic_penetrator_II', rate: 20 },
         { item: 'scout_Phantom_I', rate: 15 },
         { item: 'battleship_Behemoth_I', rate: 15 },
         { item: 'art_3', rate: 20 },
         { item: 'eng_basic_I', rate: 20 },
-        { item: 'scout_Phantom_I', rate: 15 },
         { item: 'w_heat_inferno_II', rate: 25, minMode: 'normal' },
         { item: 'sh_srednji_II', rate: 20, minMode: 'normal' },
         { item: 'mod_cargo_II', rate: 35, minMode: 'normal' }
       ],
     },
     resources: { metal: [500, 1100], crystal: [250, 600], he3: [110, 300] },
-    desc: 'Te�ki Drive I garantiran. Dobar za Lovce i Krstarice.',
-    unlock: 'Instanca 4 zavr�ena',
+    desc: 'Teďż˝ki Drive I garantiran. Dobar za Lovce i Krstarice.',
+    unlock: 'Instanca 4 zavrďż˝ena',
   },
 
   {
@@ -169,9 +158,6 @@ const INSTANCES_HELL = [
         { item: 'sh_quantum_veil_II', rate: 20 },
         { item: 'w_heat_scorch_III', rate: 20 },
         { item: 'w_heat_inferno_III', rate: 20 },
-        { item: 'sh_quantum_veil_II', rate: 20 },
-        { item: 'w_heat_scorch_III', rate: 20 },
-        { item: 'w_heat_inferno_III', rate: 20 },
         { item: 'sh_phase_curtain_II', rate: 20 },
         { item: 'w_kinetic_accelerator_II', rate: 20 },
         { item: 'scout_Glimmer_I', rate: 15 },
@@ -184,8 +170,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [600, 1300], crystal: [300, 700], he3: [130, 360] },
-    desc: 'Jaki �tit I. Klju�na instanca za Krstarice i Bojne Brodove.',
-    unlock: 'Instanca 5 zavr�ena',
+    desc: 'Jaki ďż˝tit I. Kljuďż˝na instanca za Krstarice i Bojne Brodove.',
+    unlock: 'Instanca 5 zavrďż˝ena',
   },
 
   {
@@ -202,8 +188,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_heat_pyro_blast_III', rate: 20 },
         { item: 'w_heat_molten_core_III', rate: 20 },
-        { item: 'w_heat_pyro_blast_III', rate: 20 },
-        { item: 'w_heat_molten_core_III', rate: 20 },
         { item: 'w_kinetic_ripper_II', rate: 20 },
         { item: 'cruiser_Bulwark_I', rate: 15 },
         { item: 'art_4', rate: 20 },
@@ -215,7 +199,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [700, 1500], crystal: [350, 800], he3: [150, 420] },
     desc: 'Basic Drive II garantiran. Dobar za early farming.',
-    unlock: 'Instanca 6 zavr�ena',
+    unlock: 'Instanca 6 zavrďż˝ena',
   },
 
   {
@@ -232,8 +216,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_heat_sunflare_III', rate: 20 },
         { item: 'w_heat_thermal_lance_III', rate: 20 },
-        { item: 'w_heat_sunflare_III', rate: 20 },
-        { item: 'w_heat_thermal_lance_III', rate: 20 },
         { item: 'w_kinetic_hailstorm_II', rate: 20 },
         { item: 'scout_Viper_I', rate: 15 },
         { item: 'cruiser_Sentinel_I', rate: 15 },
@@ -244,8 +226,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [800, 1800], crystal: [400, 950], he3: [180, 500] },
-    desc: 'Mali �tit II garantiran. Prelazak u mid-tier instance.',
-    unlock: 'Instanca 7 zavr�ena',
+    desc: 'Mali ďż˝tit II garantiran. Prelazak u mid-tier instance.',
+    unlock: 'Instanca 7 zavrďż˝ena',
   },
 
   {
@@ -264,9 +246,6 @@ const INSTANCES_HELL = [
         { item: 'sh_quantum_veil_III', rate: 20 },
         { item: 'w_heat_incinerator_III', rate: 20 },
         { item: 'w_heat_magma_III', rate: 20 },
-        { item: 'sh_quantum_veil_III', rate: 20 },
-        { item: 'w_heat_incinerator_III', rate: 20 },
-        { item: 'w_heat_magma_III', rate: 20 },
         { item: 'sh_phase_curtain_III', rate: 20 },
         { item: 'w_kinetic_obliterator_II', rate: 20 },
         { item: 'fighter_Vengeance_I', rate: 15 },
@@ -279,8 +258,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [900, 2000], crystal: [450, 1100], he3: [200, 560] },
-    desc: 'Takti�ki Drive II garantiran. Uvod u Magnetic oru�ja.',
-    unlock: 'Instanca 8 zavr�ena',
+    desc: 'Taktiďż˝ki Drive II garantiran. Uvod u Magnetic oruďż˝ja.',
+    unlock: 'Instanca 8 zavrďż˝ena',
   },
 
   {
@@ -299,9 +278,6 @@ const INSTANCES_HELL = [
         { item: 'eng_quantum_II', rate: 20 },
         { item: 'w_heat_hellfire_III', rate: 20 },
         { item: 'w_heat_phoenix_III', rate: 20 },
-        { item: 'eng_quantum_II', rate: 20 },
-        { item: 'w_heat_hellfire_III', rate: 20 },
-        { item: 'w_heat_phoenix_III', rate: 20 },
         { item: 'eng_sprint_II', rate: 20 },
         { item: 'w_kinetic_annihilator_II', rate: 20 },
         { item: 'scout_Specter_I', rate: 15 },
@@ -313,8 +289,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1100, 2400], crystal: [550, 1300], he3: [240, 660] },
-    desc: 'Srednji �tit II garantiran. Solid mid-game instanca.',
-    unlock: 'Instanca 9 zavr�ena',
+    desc: 'Srednji ďż˝tit II garantiran. Solid mid-game instanca.',
+    unlock: 'Instanca 9 zavrďż˝ena',
   },
 
   {
@@ -331,8 +307,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_magnetic_pulsar_III', rate: 20 },
         { item: 'w_magnetic_pulsar_II', rate: 20 },
-        { item: 'w_magnetic_pulsar_III', rate: 20 },
-        { item: 'w_magnetic_pulsar_II', rate: 20 },
         { item: 'w_heat_scorch_II', rate: 20 },
         { item: 'w_heat_inferno_II', rate: 20 },
         { item: 'scout_Swift_II', rate: 15 },
@@ -347,8 +321,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1300, 2800], crystal: [650, 1500], he3: [280, 760] },
-    desc: 'Kinetic Cannon II garantiran. Va�na instanca za DPS buildove.',
-    unlock: 'Instanca 10 zavr�ena',
+    desc: 'Kinetic Cannon II garantiran. Vaďż˝na instanca za DPS buildove.',
+    unlock: 'Instanca 10 zavrďż˝ena',
   },
 
   {
@@ -364,10 +338,6 @@ const INSTANCES_HELL = [
       guaranteed: [],
       chance: [
         { item: 'sh_eternal_fortress_I', rate: 20 },
-        { item: 'mod_overload_I', rate: 20 },
-        { item: 'sh_nova_barrier_I', rate: 20 },
-        { item: 'w_magnetic_emp_blast_III', rate: 20 },
-        { item: 'w_magnetic_emp_blast_II', rate: 20 },
         { item: 'mod_overload_I', rate: 20 },
         { item: 'sh_nova_barrier_I', rate: 20 },
         { item: 'w_magnetic_emp_blast_III', rate: 20 },
@@ -388,8 +358,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [1600, 3500], crystal: [800, 1900], he3: [350, 950] },
-    desc: 'Jaki �tit II garantiran. Uvod u Rare-tier opremu.',
-    unlock: 'Instanca 11 zavr�ena',
+    desc: 'Jaki ďż˝tit II garantiran. Uvod u Rare-tier opremu.',
+    unlock: 'Instanca 11 zavrďż˝ena',
   },
 
   {
@@ -406,14 +376,11 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_magnetic_stasis_beam_III', rate: 20 },
         { item: 'w_magnetic_stasis_beam_II', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_III', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_II', rate: 20 },
         { item: 'w_heat_sunflare_II', rate: 20 },
         { item: 'w_heat_thermal_lance_II', rate: 20 },
         { item: 'scout_Razor_I', rate: 15 },
         { item: 'cruiser_Rampart_I', rate: 15 },
         { item: 'art_7', rate: 20 },
-        { item: 'cruiser_Rampart_I', rate: 15 },
         { item: 'w_heat_inferno_III', rate: 15, minMode: 'nightmare' },
         { item: 'mod_cargo_III', rate: 30, minMode: 'nightmare' },
         { item: 'sh_quartz_shell_III', rate: 20, minMode: 'nightmare' },
@@ -425,7 +392,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [1900, 4200], crystal: [950, 2200], he3: [420, 1100] },
     desc: 'Basic Drive III garantiran. Dobar za sve klase.',
-    unlock: 'Instanca 12 zavr�ena',
+    unlock: 'Instanca 12 zavrďż˝ena',
   },
 
   {
@@ -442,8 +409,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_magnetic_disruptor_III', rate: 20 },
         { item: 'w_magnetic_disruptor_II', rate: 20 },
-        { item: 'w_magnetic_disruptor_III', rate: 20 },
-        { item: 'w_magnetic_disruptor_II', rate: 20 },
         { item: 'w_heat_incinerator_II', rate: 20 },
         { item: 'w_heat_magma_II', rate: 20 },
         { item: 'scout_Shadow_I', rate: 15 },
@@ -456,8 +421,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [2200, 4800], crystal: [1100, 2600], he3: [500, 1300] },
-    desc: 'Mali �tit III garantiran. Klju�an za Izvi�a�e.',
-    unlock: 'Instanca 13 zavr�ena',
+    desc: 'Mali ďż˝tit III garantiran. Kljuďż˝an za Izviďż˝aďż˝e.',
+    unlock: 'Instanca 13 zavrďż˝ena',
   },
 
   {
@@ -474,12 +439,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'sh_eternal_fortress_II', rate: 20 },
         { item: 'eng_hyperdrive_II', rate: 20 },
-        { item: 'scout_Swift_III', rate: 15 },
-        { item: 'mod_countermeasure_I', rate: 20 },
-        { item: 'sh_nova_barrier_II', rate: 20 },
-        { item: 'eng_quantum_III', rate: 20 },
-        { item: 'w_magnetic_magnetron_III', rate: 20 },
-        { item: 'w_magnetic_magnetron_II', rate: 20 },
         { item: 'scout_Swift_III', rate: 15 },
         { item: 'mod_countermeasure_I', rate: 20 },
         { item: 'sh_nova_barrier_II', rate: 20 },
@@ -508,8 +467,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [2600, 5500], crystal: [1300, 3000], he3: [580, 1550] },
-    desc: 'Takti�ki Drive III garantiran. Kraj early-mid game zone.',
-    unlock: 'Instanca 14 zavr�ena',
+    desc: 'Taktiďż˝ki Drive III garantiran. Kraj early-mid game zone.',
+    unlock: 'Instanca 14 zavrďż˝ena',
   },
 
   {
@@ -524,8 +483,6 @@ const INSTANCES_HELL = [
     drops: {
       guaranteed: [],
       chance: [
-        { item: 'w_magnetic_neutron_wave_III', rate: 20 },
-        { item: 'w_magnetic_neutron_wave_II', rate: 20 },
         { item: 'w_magnetic_neutron_wave_III', rate: 20 },
         { item: 'w_magnetic_neutron_wave_II', rate: 20 },
         { item: 'w_magnetic_emp_blast_I', rate: 20 },
@@ -543,8 +500,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [3000, 6500], crystal: [1500, 3500], he3: [680, 1800] },
-    desc: 'Srednji �tit III garantiran. Ulazak u late-mid game.',
-    unlock: 'Instanca 15 zavr�ena',
+    desc: 'Srednji ďż˝tit III garantiran. Ulazak u late-mid game.',
+    unlock: 'Instanca 15 zavrďż˝ena',
   },
 
   {
@@ -561,8 +518,6 @@ const INSTANCES_HELL = [
       chance: [
         { item: 'w_magnetic_cascade_III', rate: 20 },
         { item: 'w_magnetic_cascade_II', rate: 20 },
-        { item: 'w_magnetic_cascade_III', rate: 20 },
-        { item: 'w_magnetic_cascade_II', rate: 20 },
         { item: 'w_magnetic_disruptor_I', rate: 20 },
         { item: 'w_magnetic_stasis_beam_I', rate: 20 },
         { item: 'scout_Wisp_II', rate: 15 },
@@ -575,8 +530,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [3500, 7500], crystal: [1750, 4000], he3: [800, 2100] },
-    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosa�e.',
-    unlock: 'Instanca 16 zavr�ena',
+    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosaďż˝e.',
+    unlock: 'Instanca 16 zavrďż˝ena',
   },
 
   {
@@ -598,10 +553,6 @@ const INSTANCES_HELL = [
         { item: 'sh_nova_barrier_III', rate: 20 },
         { item: 'w_magnetic_ion_storm_III', rate: 20 },
         { item: 'w_magnetic_ion_storm_II', rate: 20 },
-        { item: 'mod_overload_II', rate: 20 },
-        { item: 'sh_nova_barrier_III', rate: 20 },
-        { item: 'w_magnetic_ion_storm_III', rate: 20 },
-        { item: 'w_magnetic_ion_storm_II', rate: 20 },
         { item: 'mod_crit_amp_II', rate: 20 },
         { item: 'sh_particle_veil_III', rate: 20 },
         { item: 'w_magnetic_neutron_wave_I', rate: 20 },
@@ -617,8 +568,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [4000, 8500], crystal: [2000, 4600], he3: [920, 2400] },
-    desc: 'Jaki �tit III garantiran. Kraj standardnih instanci mid-tiera.',
-    unlock: 'Instanca 17 zavr�ena',
+    desc: 'Jaki ďż˝tit III garantiran. Kraj standardnih instanci mid-tiera.',
+    unlock: 'Instanca 17 zavrďż˝ena',
   },
 
   {
@@ -636,8 +587,6 @@ const INSTANCES_HELL = [
         { item: 'mod_annihilator_II', rate: 20 },
         { item: 'w_magnetic_magnetosphere_III', rate: 20 },
         { item: 'w_magnetic_magnetosphere_II', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_III', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_II', rate: 20 },
         { item: 'w_magnetic_ion_storm_I', rate: 20 },
         { item: 'w_magnetic_cascade_I', rate: 20 },
         { item: 'cruiser_Guardian_II', rate: 15 },
@@ -646,8 +595,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [4800, 10000], crystal: [2400, 5500], he3: [1100, 2900] },
-    desc: 'Ulazak u Rare zonu. �ansa za Phase �tit i Stealth Drive.',
-    unlock: 'Instanca 18 zavr�ena',
+    desc: 'Ulazak u Rare zonu. ďż˝ansa za Phase ďż˝tit i Stealth Drive.',
+    unlock: 'Instanca 18 zavrďż˝ena',
   },
 
   {
@@ -670,10 +619,6 @@ const INSTANCES_HELL = [
         { item: 'eng_berserker_I', rate: 20 },
         { item: 'w_magnetic_singularity_III', rate: 20 },
         { item: 'w_magnetic_singularity_II', rate: 20 },
-        { item: 'scout_Phantom_II', rate: 15 },
-        { item: 'eng_berserker_I', rate: 20 },
-        { item: 'w_magnetic_singularity_III', rate: 20 },
-        { item: 'w_magnetic_singularity_II', rate: 20 },
         { item: 'eng_surge_I', rate: 20 },
         { item: 'w_magnetic_singularity_I', rate: 20 },
         { item: 'w_magnetic_magnetosphere_I', rate: 20 },
@@ -686,8 +631,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [5500, 12000], crystal: [2750, 6500], he3: [1300, 3400] },
-    desc: 'Sprint Drive I garantiran. Particle �tit �ansa.',
-    unlock: 'Instanca 19 zavr�ena',
+    desc: 'Sprint Drive I garantiran. Particle ďż˝tit ďż˝ansa.',
+    unlock: 'Instanca 19 zavrďż˝ena',
   },
 
   {
@@ -711,12 +656,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_annihilator_II', rate: 20 },
         { item: 'w_explosive_devastator_III', rate: 20 },
         { item: 'w_explosive_devastator_II', rate: 20 },
-        { item: 'scout_Wisp_III', rate: 15 },
-        { item: 'mod_overload_III', rate: 20 },
-        { item: 'sh_kinetic_fortress_I', rate: 20 },
-        { item: 'w_explosive_annihilator_II', rate: 20 },
-        { item: 'w_explosive_devastator_III', rate: 20 },
-        { item: 'w_explosive_devastator_II', rate: 20 },
         { item: 'mod_crit_amp_III', rate: 20 },
         { item: 'sh_ballistic_ward_I', rate: 20 },
         { item: 'w_explosive_annihilator_I', rate: 20 },
@@ -732,8 +671,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [6500, 14000], crystal: [3250, 7500], he3: [1550, 4000] },
-    desc: 'Heat Diffusion �tit I garantiran. Ulazak u visoke standard instance.',
-    unlock: 'Instanca 20 zavr�ena',
+    desc: 'Heat Diffusion ďż˝tit I garantiran. Ulazak u visoke standard instance.',
+    unlock: 'Instanca 20 zavrďż˝ena',
   },
 
   {
@@ -754,9 +693,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_maelstrom_III', rate: 20 },
         { item: 'w_explosive_maelstrom_II', rate: 20 },
         { item: 'w_explosive_annihilator_III', rate: 20 },
-        { item: 'w_explosive_maelstrom_III', rate: 20 },
-        { item: 'w_explosive_maelstrom_II', rate: 20 },
-        { item: 'w_explosive_annihilator_III', rate: 20 },
         { item: 'w_explosive_cataclysm_I', rate: 20 },
         { item: 'w_explosive_maelstrom_I', rate: 20 },
         { item: 'fighter_Reaper_II', rate: 15 },
@@ -767,8 +703,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [4000, 9000], he3: [1900, 4800] },
-    desc: 'Stealth Drive I garantiran. �ansa za Quantum Lance.',
-    unlock: 'Instanca 21 zavr�ena',
+    desc: 'Stealth Drive I garantiran. ďż˝ansa za Quantum Lance.',
+    unlock: 'Instanca 21 zavrďż˝ena',
   },
 
   {
@@ -789,10 +725,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_oblivion_II', rate: 20 },
         { item: 'w_explosive_cataclysm_III', rate: 20 },
         { item: 'w_explosive_cataclysm_II', rate: 20 },
-        { item: 'scout_Glimmer_III', rate: 15 },
-        { item: 'w_explosive_oblivion_II', rate: 20 },
-        { item: 'w_explosive_cataclysm_III', rate: 20 },
-        { item: 'w_explosive_cataclysm_II', rate: 20 },
         { item: 'w_explosive_earthshaker_I', rate: 20 },
         { item: 'w_explosive_oblivion_I', rate: 20 },
         { item: 'cruiser_Protector_I', rate: 15 },
@@ -806,8 +738,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [9500, 20000], crystal: [4750, 10500], he3: [2200, 5600] },
-    desc: 'Uvod u endgame standardnih instanci. �ansa za Rare-Epic opremu.',
-    unlock: 'Instanca 22 zavr�ena',
+    desc: 'Uvod u endgame standardnih instanci. ďż˝ansa za Rare-Epic opremu.',
+    unlock: 'Instanca 22 zavrďż˝ena',
   },
 
   {
@@ -826,12 +758,6 @@ const INSTANCES_HELL = [
         { item: 'mod_chrono_matrix_I', rate: 20 },
         { item: 'sh_bulwark_prime_II', rate: 20 },
         { item: 'w_kinetic_penetrator_missile_III', rate: 20 },
-        { item: 'scout_Stinger_III', rate: 15 },
-        { item: 'mod_emp_burst_I', rate: 20 },
-        { item: 'sh_kinetic_fortress_II', rate: 20 },
-        { item: 'w_explosive_earthshaker_III', rate: 20 },
-        { item: 'w_explosive_earthshaker_II', rate: 20 },
-        { item: 'w_explosive_oblivion_III', rate: 20 },
         { item: 'scout_Stinger_III', rate: 15 },
         { item: 'mod_emp_burst_I', rate: 20 },
         { item: 'sh_kinetic_fortress_II', rate: 20 },
@@ -857,7 +783,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [11000, 23000], crystal: [5500, 12500], he3: [2600, 6600] },
     desc: 'Sprint Drive II garantiran.',
-    unlock: 'Instanca 23 zavr�ena',
+    unlock: 'Instanca 23 zavrďż˝ena',
   },
 
   {
@@ -880,10 +806,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_armageddon_II', rate: 20 },
         { item: 'w_explosive_nova_III', rate: 20 },
         { item: 'w_explosive_nova_II', rate: 20 },
-        { item: 'eng_berserker_II', rate: 20 },
-        { item: 'w_explosive_armageddon_II', rate: 20 },
-        { item: 'w_explosive_nova_III', rate: 20 },
-        { item: 'w_explosive_nova_II', rate: 20 },
         { item: 'eng_surge_II', rate: 20 },
         { item: 'w_explosive_crusher_I', rate: 20 },
         { item: 'w_explosive_apocalypse_I', rate: 20 },
@@ -902,7 +824,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [13000, 28000], crystal: [6500, 15000], he3: [3100, 7900] },
     desc: 'Heat Diffusion II garantiran. Kraj mid standardnih instanci.',
-    unlock: 'Instanca 24 zavr�ena',
+    unlock: 'Instanca 24 zavrďż˝ena',
   },
 
   {
@@ -920,10 +842,6 @@ const INSTANCES_HELL = [
         { item: 'scout_Razor_III', rate: 15 },
         { item: 'mod_chrono_matrix_III', rate: 20 },
         { item: 'w_kinetic_ripper_missile_III', rate: 20 },
-        { item: 'scout_Shadow_II', rate: 15 },
-        { item: 'w_explosive_apocalypse_III', rate: 20 },
-        { item: 'w_explosive_apocalypse_II', rate: 20 },
-        { item: 'w_explosive_armageddon_III', rate: 20 },
         { item: 'scout_Shadow_II', rate: 15 },
         { item: 'w_explosive_apocalypse_III', rate: 20 },
         { item: 'w_explosive_apocalypse_II', rate: 20 },
@@ -950,7 +868,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [16000, 34000], crystal: [8000, 18000], he3: [3800, 9500] },
     desc: 'Stealth Drive II garantiran. Ulazak u endgame standardnih instanci.',
-    unlock: 'Instanca 25 zavr�ena',
+    unlock: 'Instanca 25 zavrďż˝ena',
   },
 
   {
@@ -969,11 +887,6 @@ const INSTANCES_HELL = [
         { item: 'mod_dreadnought_I', rate: 20 },
         { item: 'sh_bulwark_prime_III', rate: 20 },
         { item: 'w_kinetic_hailstorm_missile_III', rate: 20 },
-        { item: 'mod_emp_burst_II', rate: 20 },
-        { item: 'sh_kinetic_fortress_III', rate: 20 },
-        { item: 'w_kinetic_railgun_beam_III', rate: 20 },
-        { item: 'w_explosive_crusher_III', rate: 20 },
-        { item: 'w_explosive_crusher_II', rate: 20 },
         { item: 'mod_emp_burst_II', rate: 20 },
         { item: 'sh_kinetic_fortress_III', rate: 20 },
         { item: 'w_kinetic_railgun_beam_III', rate: 20 },
@@ -998,8 +911,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [19000, 40000], crystal: [9500, 21500], he3: [4500, 11500] },
-    desc: 'Te�ka instanca. Dobar izvor Epic komponenti.',
-    unlock: 'Instanca 26 zavr�ena',
+    desc: 'Teďż˝ka instanca. Dobar izvor Epic komponenti.',
+    unlock: 'Instanca 26 zavrďż˝ena',
   },
 
   {
@@ -1017,11 +930,6 @@ const INSTANCES_HELL = [
         { item: 'scout_Specter_III', rate: 15 },
         { item: 'mod_dreadnought_II', rate: 20 },
         { item: 'w_kinetic_obliterator_missile_III', rate: 20 },
-        { item: 'scout_Razor_II', rate: 15 },
-        { item: 'w_kinetic_penetrator_beam_III', rate: 20 },
-        { item: 'w_kinetic_shredder_beam_III', rate: 20 },
-        { item: 'w_kinetic_mass_driver_beam_III', rate: 20 },
-        { item: 'w_kinetic_gauss_cannon_beam_III', rate: 20 },
         { item: 'scout_Razor_II', rate: 15 },
         { item: 'w_kinetic_penetrator_beam_III', rate: 20 },
         { item: 'w_kinetic_shredder_beam_III', rate: 20 },
@@ -1047,8 +955,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [23000, 48000], crystal: [11500, 26000], he3: [5500, 14000] },
-    desc: 'Particle Stun III garantiran. �ansa za Quantum Drive.',
-    unlock: 'Instanca 27 zavr�ena',
+    desc: 'Particle Stun III garantiran. ďż˝ansa za Quantum Drive.',
+    unlock: 'Instanca 27 zavrďż˝ena',
   },
 
   {
@@ -1071,11 +979,6 @@ const INSTANCES_HELL = [
         { item: 'w_kinetic_hailstorm_beam_III', rate: 20 },
         { item: 'w_kinetic_ripper_beam_III', rate: 20 },
         { item: 'w_kinetic_accelerator_beam_III', rate: 20 },
-        { item: 'scout_Viper_III', rate: 15 },
-        { item: 'w_kinetic_obliterator_beam_III', rate: 20 },
-        { item: 'w_kinetic_hailstorm_beam_III', rate: 20 },
-        { item: 'w_kinetic_ripper_beam_III', rate: 20 },
-        { item: 'w_kinetic_accelerator_beam_III', rate: 20 },
         { item: 'w_kinetic_hailstorm_beam_II', rate: 20 },
         { item: 'w_kinetic_ripper_beam_II', rate: 20 },
         { item: 'fighter_Nemesis_I', rate: 15 },
@@ -1087,7 +990,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [28000, 58000], crystal: [14000, 31000], he3: [6600, 17000] },
     desc: 'Heat Diffusion III garantiran. Predposljednja standardna instanca.',
-    unlock: 'Instanca 28 zavr�ena',
+    unlock: 'Instanca 28 zavrďż˝ena',
   },
 
   {
@@ -1117,14 +1020,6 @@ const INSTANCES_HELL = [
         { item: 'w_heat_inferno_beam_III', rate: 20 },
         { item: 'w_kinetic_annihilator_beam_III', rate: 20 },
         { item: 'w_heavy_fighters_I', rate: 20 },
-        { item: 'mod_countermeasure_II', rate: 20 },
-        { item: 'sh_plasma_guard_I', rate: 20 },
-        { item: 'eng_berserker_III', rate: 20 },
-        { item: 'w_heat_pyro_blast_beam_III', rate: 20 },
-        { item: 'w_heat_molten_core_beam_III', rate: 20 },
-        { item: 'w_heat_scorch_beam_III', rate: 20 },
-        { item: 'w_heat_inferno_beam_III', rate: 20 },
-        { item: 'w_kinetic_annihilator_beam_III', rate: 20 },
         { item: 'mod_scanner_II', rate: 20 },
         { item: 'sh_thermal_guard_I', rate: 20 },
         { item: 'eng_surge_III', rate: 20 },
@@ -1147,7 +1042,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [35000, 72000], crystal: [17500, 37000], he3: [8500, 21000] },
     desc: 'Posljednja standardna instanca. Quantum Drive garantiran. Prolaz za Restricted.',
-    unlock: 'Instanca 29 zavr�ena',
+    unlock: 'Instanca 29 zavrďż˝ena',
   },
 
   // ============================================
@@ -1172,11 +1067,6 @@ const INSTANCES_HELL = [
         { item: 'eng_sentinel_I', rate: 20 },
         { item: 'w_heat_sunflare_beam_III', rate: 20 },
         { item: 'w_heat_thermal_lance_beam_III', rate: 20 },
-        { item: 'battleship_Imperator_III', rate: 15 },
-        { item: 'sh_plasma_guard_II', rate: 20 },
-        { item: 'eng_sentinel_I', rate: 20 },
-        { item: 'w_heat_sunflare_beam_III', rate: 20 },
-        { item: 'w_heat_thermal_lance_beam_III', rate: 20 },
         { item: 'sh_thermal_guard_II', rate: 20 },
         { item: 'eng_combat_I', rate: 20 },
         { item: 'w_heat_inferno_beam_II', rate: 20 },
@@ -1187,8 +1077,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [5000, 11000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Prva Restricted instanca. Phase �tit I garantiran.',
-    unlock: 'Instanca 15+ zavr�ena',
+    desc: 'Prva Restricted instanca. Phase ďż˝tit I garantiran.',
+    unlock: 'Instanca 15+ zavrďż˝ena',
   },
 
   {
@@ -1209,11 +1099,6 @@ const INSTANCES_HELL = [
         { item: 'eng_sentinel_II', rate: 20 },
         { item: 'w_heat_incinerator_beam_III', rate: 20 },
         { item: 'w_heat_magma_beam_III', rate: 20 },
-        { item: 'battleship_Annihilator_I', rate: 15 },
-        { item: 'sh_plasma_guard_III', rate: 20 },
-        { item: 'eng_sentinel_II', rate: 20 },
-        { item: 'w_heat_incinerator_beam_III', rate: 20 },
-        { item: 'w_heat_magma_beam_III', rate: 20 },
         { item: 'sh_thermal_guard_III', rate: 20 },
         { item: 'eng_combat_II', rate: 20 },
         { item: 'w_heat_scorch_beam_II', rate: 20 },
@@ -1224,8 +1109,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
-    desc: 'Space-Time Magnetic �tit I garantiran. Epic Motori �ansa.',
-    unlock: 'Restricted 1 zavr�ena',
+    desc: 'Space-Time Magnetic ďż˝tit I garantiran. Epic Motori ďż˝ansa.',
+    unlock: 'Restricted 1 zavrďż˝ena',
   },
 
   {
@@ -1246,11 +1131,6 @@ const INSTANCES_HELL = [
         { item: 'eng_sentinel_III', rate: 20 },
         { item: 'w_heat_hellfire_beam_III', rate: 20 },
         { item: 'w_heat_phoenix_beam_III', rate: 20 },
-        { item: 'scout_Specter_II', rate: 15 },
-        { item: 'sh_void_field_I', rate: 20 },
-        { item: 'eng_sentinel_III', rate: 20 },
-        { item: 'w_heat_hellfire_beam_III', rate: 20 },
-        { item: 'w_heat_phoenix_beam_III', rate: 20 },
         { item: 'sh_mag_field_I', rate: 20 },
         { item: 'eng_combat_III', rate: 20 },
         { item: 'w_heat_molten_core_beam_II', rate: 20 },
@@ -1261,8 +1141,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [11000, 23000], crystal: [7000, 15000], he3: [3500, 9000] },
-    desc: 'Phase �tit II garantiran.',
-    unlock: 'Restricted 2 zavr�ena',
+    desc: 'Phase ďż˝tit II garantiran.',
+    unlock: 'Restricted 2 zavrďż˝ena',
   },
 
   {
@@ -1284,11 +1164,6 @@ const INSTANCES_HELL = [
         { item: 'eng_void_I', rate: 20 },
         { item: 'w_magnetic_pulsar_beam_III', rate: 20 },
         { item: 'w_magnetic_pulsar_beam_II', rate: 20 },
-        { item: 'battleship_Dreadnought_II', rate: 15 },
-        { item: 'sh_void_field_II', rate: 20 },
-        { item: 'eng_void_I', rate: 20 },
-        { item: 'w_magnetic_pulsar_beam_III', rate: 20 },
-        { item: 'w_magnetic_pulsar_beam_II', rate: 20 },
         { item: 'sh_mag_field_II', rate: 20 },
         { item: 'eng_phantom_I', rate: 20 },
         { item: 'w_heat_pyro_blast_beam_II', rate: 20 },
@@ -1300,7 +1175,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [15000, 32000], crystal: [9500, 20000], he3: [4800, 12000] },
     desc: 'Space-Time Magnetic II garantiran. Epic zone.',
-    unlock: 'Restricted 3 zavr�ena',
+    unlock: 'Restricted 3 zavrďż˝ena',
   },
 
   {
@@ -1324,11 +1199,6 @@ const INSTANCES_HELL = [
         { item: 'eng_void_II', rate: 20 },
         { item: 'w_magnetic_emp_blast_beam_III', rate: 20 },
         { item: 'w_magnetic_emp_blast_beam_II', rate: 20 },
-        { item: 'battleship_Obliterator_III', rate: 15 },
-        { item: 'sh_void_field_III', rate: 20 },
-        { item: 'eng_void_II', rate: 20 },
-        { item: 'w_magnetic_emp_blast_beam_III', rate: 20 },
-        { item: 'w_magnetic_emp_blast_beam_II', rate: 20 },
         { item: 'sh_mag_field_III', rate: 20 },
         { item: 'eng_phantom_II', rate: 20 },
         { item: 'w_heat_thermal_lance_beam_II', rate: 20 },
@@ -1339,8 +1209,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 27000], he3: [6500, 16500] },
-    desc: 'Phase �tit III garantiran. Polovina Restricted zone.',
-    unlock: 'Restricted 4 zavr�ena',
+    desc: 'Phase ďż˝tit III garantiran. Polovina Restricted zone.',
+    unlock: 'Restricted 4 zavrďż˝ena',
   },
 
   {
@@ -1364,11 +1234,6 @@ const INSTANCES_HELL = [
         { item: 'eng_void_III', rate: 20 },
         { item: 'w_magnetic_stasis_beam_beam_III', rate: 20 },
         { item: 'w_magnetic_stasis_beam_beam_II', rate: 20 },
-        { item: 'scout_PhantomX_II', rate: 15 },
-        { item: 'sh_shockwave_shell_I', rate: 20 },
-        { item: 'eng_void_III', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_beam_III', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_beam_II', rate: 20 },
         { item: 'sh_blast_barrier_I', rate: 20 },
         { item: 'eng_phantom_III', rate: 20 },
         { item: 'w_magnetic_pulsar_beam_I', rate: 20 },
@@ -1381,7 +1246,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [26000, 55000], crystal: [16500, 35000], he3: [8200, 21000] },
     desc: 'Space-Time Magnetic III garantiran. Ulazak u endgame Restricted.',
-    unlock: 'Restricted 5 zavr�ena',
+    unlock: 'Restricted 5 zavrďż˝ena',
   },
 
   {
@@ -1405,11 +1270,6 @@ const INSTANCES_HELL = [
         { item: 'eng_predator_I', rate: 20 },
         { item: 'w_magnetic_disruptor_beam_III', rate: 20 },
         { item: 'w_magnetic_disruptor_beam_II', rate: 20 },
-        { item: 'carrier_Atlas_III', rate: 15 },
-        { item: 'sh_shockwave_shell_II', rate: 20 },
-        { item: 'eng_predator_I', rate: 20 },
-        { item: 'w_magnetic_disruptor_beam_III', rate: 20 },
-        { item: 'w_magnetic_disruptor_beam_II', rate: 20 },
         { item: 'sh_blast_barrier_II', rate: 20 },
         { item: 'eng_reactive_I', rate: 20 },
         { item: 'w_magnetic_emp_blast_beam_I', rate: 20 },
@@ -1421,7 +1281,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [33000, 69000], crystal: [21000, 44000], he3: [10500, 27000] },
     desc: 'Berserker Drive III garantiran. Visoka Restricted zona.',
-    unlock: 'Restricted 6 zavr�ena',
+    unlock: 'Restricted 6 zavrďż˝ena',
   },
 
   {
@@ -1445,11 +1305,6 @@ const INSTANCES_HELL = [
         { item: 'eng_predator_II', rate: 20 },
         { item: 'w_magnetic_magnetron_beam_III', rate: 20 },
         { item: 'w_magnetic_magnetron_beam_II', rate: 20 },
-        { item: 'carrier_Titanfall_III', rate: 15 },
-        { item: 'sh_shockwave_shell_III', rate: 20 },
-        { item: 'eng_predator_II', rate: 20 },
-        { item: 'w_magnetic_magnetron_beam_III', rate: 20 },
-        { item: 'w_magnetic_magnetron_beam_II', rate: 20 },
         { item: 'sh_blast_barrier_III', rate: 20 },
         { item: 'eng_reactive_II', rate: 20 },
         { item: 'w_magnetic_stasis_beam_beam_I', rate: 20 },
@@ -1461,8 +1316,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Eos Phase �tit I garantiran. Pristup Carrier brodovima.',
-    unlock: 'Restricted 7 zavr�ena',
+    desc: 'Eos Phase ďż˝tit I garantiran. Pristup Carrier brodovima.',
+    unlock: 'Restricted 7 zavrďż˝ena',
   },
 
   {
@@ -1486,11 +1341,6 @@ const INSTANCES_HELL = [
         { item: 'eng_predator_III', rate: 20 },
         { item: 'w_magnetic_neutron_wave_beam_III', rate: 20 },
         { item: 'w_magnetic_neutron_wave_beam_II', rate: 20 },
-        { item: 'fighter_Fury_III', rate: 15 },
-        { item: 'sh_echo_mirror_I', rate: 20 },
-        { item: 'eng_predator_III', rate: 20 },
-        { item: 'w_magnetic_neutron_wave_beam_III', rate: 20 },
-        { item: 'w_magnetic_neutron_wave_beam_II', rate: 20 },
         { item: 'sh_deflector_web_I', rate: 20 },
         { item: 'eng_reactive_III', rate: 20 },
         { item: 'w_magnetic_disruptor_beam_I', rate: 20 },
@@ -1503,7 +1353,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [55000, 115000], crystal: [34000, 72000], he3: [17000, 44000] },
     desc: 'Eos Phase II garantiran. Predposljednja Restricted instanca.',
-    unlock: 'Restricted 8 zavr�ena',
+    unlock: 'Restricted 8 zavrďż˝ena',
   },
 
   {
@@ -1529,12 +1379,6 @@ const INSTANCES_HELL = [
         { item: 'w_magnetic_cascade_beam_III', rate: 20 },
         { item: 'w_magnetic_cascade_beam_II', rate: 20 },
         { item: 'w_magnetic_fighters_I', rate: 20 },
-        { item: 'carrier_Nebula_II', rate: 15 },
-        { item: 'mod_emp_burst_III', rate: 20 },
-        { item: 'sh_echo_mirror_II', rate: 20 },
-        { item: 'eng_phoenix_core_I', rate: 20 },
-        { item: 'w_magnetic_cascade_beam_III', rate: 20 },
-        { item: 'w_magnetic_cascade_beam_II', rate: 20 },
         { item: 'mod_shield_booster_III', rate: 20 },
         { item: 'sh_deflector_web_II', rate: 20 },
         { item: 'eng_adaptive_I', rate: 20 },
@@ -1547,12 +1391,12 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [70000, 145000], crystal: [44000, 92000], he3: [22000, 57000] },
-    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Klju� za Trial.',
-    unlock: 'Restricted 9 zavr�ena',
+    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Kljuďż˝ za Trial.',
+    unlock: 'Restricted 9 zavrďż˝ena',
   },
 
   // ============================================
-  // TRIAL INSTANCE (1-10) � timed, ranked
+  // TRIAL INSTANCE (1-10) ďż˝ timed, ranked
   // ============================================
 
   {
@@ -1576,9 +1420,6 @@ const INSTANCES_HELL = [
         { item: 'sh_echo_mirror_III', rate: 20 },
         { item: 'w_magnetic_ion_storm_beam_III', rate: 20 },
         { item: 'w_magnetic_ion_storm_beam_II', rate: 20 },
-        { item: 'sh_echo_mirror_III', rate: 20 },
-        { item: 'w_magnetic_ion_storm_beam_III', rate: 20 },
-        { item: 'w_magnetic_ion_storm_beam_II', rate: 20 },
         { item: 'sh_deflector_web_III', rate: 20 },
         { item: 'eng_stealth_I', rate: 20 },
         { item: 'w_magnetic_neutron_wave_beam_I', rate: 20 },
@@ -1589,7 +1430,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [15000, 35000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Prva Trial instanca. Zahtijeva brzinu. S rank = Epic modul.',
-    unlock: 'Restricted 5 zavr�ena',
+    unlock: 'Restricted 5 zavrďż˝ena',
   },
 
   {
@@ -1613,9 +1454,6 @@ const INSTANCES_HELL = [
         { item: 'sh_phoenix_shell_I', rate: 20 },
         { item: 'w_magnetic_magnetosphere_beam_III', rate: 20 },
         { item: 'w_magnetic_magnetosphere_beam_II', rate: 20 },
-        { item: 'sh_phoenix_shell_I', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_beam_III', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_beam_II', rate: 20 },
         { item: 'sh_ionic_shell_I', rate: 20 },
         { item: 'eng_stealth_II', rate: 20 },
         { item: 'w_magnetic_cascade_beam_I', rate: 20 },
@@ -1625,7 +1463,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [20000, 44000], crystal: [13000, 29000], he3: [6500, 17000] },
     desc: 'Trial 2. Overload III i Berserker III za S rank.',
-    unlock: 'Trial 1 zavr�ena',
+    unlock: 'Trial 1 zavrďż˝ena',
   },
 
   {
@@ -1650,10 +1488,6 @@ const INSTANCES_HELL = [
         { item: 'sh_phoenix_shell_II', rate: 20 },
         { item: 'w_magnetic_singularity_beam_III', rate: 20 },
         { item: 'w_magnetic_singularity_beam_II', rate: 20 },
-        { item: 'carrier_Dominion_II', rate: 15 },
-        { item: 'sh_phoenix_shell_II', rate: 20 },
-        { item: 'w_magnetic_singularity_beam_III', rate: 20 },
-        { item: 'w_magnetic_singularity_beam_II', rate: 20 },
         { item: 'sh_ionic_shell_II', rate: 20 },
         { item: 'eng_stealth_III', rate: 20 },
         { item: 'w_magnetic_ion_storm_beam_I', rate: 20 },
@@ -1663,7 +1497,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [27000, 56000], crystal: [17000, 37000], he3: [8500, 22000] },
     desc: 'Trial 3. Hyperdrive I i Annihilator I za S rank.',
-    unlock: 'Trial 2 zavr�ena',
+    unlock: 'Trial 2 zavrďż˝ena',
   },
 
   {
@@ -1688,9 +1522,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_devastator_beam_III', rate: 20 },
         { item: 'w_explosive_devastator_beam_II', rate: 20 },
         { item: 'special_AggressiveWarlord_I', rate: 15 },
-        { item: 'sh_phoenix_shell_III', rate: 20 },
-        { item: 'w_explosive_devastator_beam_III', rate: 20 },
-        { item: 'w_explosive_devastator_beam_II', rate: 20 },
         { item: 'sh_ionic_shell_III', rate: 20 },
         { item: 'eng_he3_saver_I', rate: 20 },
         { item: 'w_magnetic_magnetosphere_beam_I', rate: 20 },
@@ -1701,7 +1532,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [36000, 74000], crystal: [22500, 47000], he3: [11000, 28000] },
     desc: 'Trial 4. Mid-tier Trial. Brodovi klase special pojavljuju se.',
-    unlock: 'Trial 3 zavr�ena',
+    unlock: 'Trial 3 zavrďż˝ena',
   },
 
   {
@@ -1729,11 +1560,6 @@ const INSTANCES_HELL = [
         { item: 'sh_titan_core_I', rate: 20 },
         { item: 'w_explosive_annihilator_beam_III', rate: 20 },
         { item: 'w_explosive_annihilator_beam_II', rate: 20 },
-        { item: 'fighter_Talon_III', rate: 15 },
-        { item: 'mod_iron_fortress_I', rate: 20 },
-        { item: 'sh_titan_core_I', rate: 20 },
-        { item: 'w_explosive_annihilator_beam_III', rate: 20 },
-        { item: 'w_explosive_annihilator_beam_II', rate: 20 },
         { item: 'mod_drone_swarm_III', rate: 20 },
         { item: 'sh_ember_diffuser_I', rate: 20 },
         { item: 'eng_he3_saver_II', rate: 20 },
@@ -1744,8 +1570,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [46000, 96000], crystal: [29000, 62000], he3: [14500, 37000] },
-    desc: 'Trial 5. Hyperdrive II �ansa za S rank.',
-    unlock: 'Trial 4 zavr�ena',
+    desc: 'Trial 5. Hyperdrive II ďż˝ansa za S rank.',
+    unlock: 'Trial 4 zavrďż˝ena',
   },
 
   {
@@ -1772,10 +1598,6 @@ const INSTANCES_HELL = [
         { item: 'sh_titan_core_II', rate: 20 },
         { item: 'w_explosive_maelstrom_beam_III', rate: 20 },
         { item: 'w_explosive_maelstrom_beam_II', rate: 20 },
-        { item: 'carrier_Vanguard_III', rate: 15 },
-        { item: 'sh_titan_core_II', rate: 20 },
-        { item: 'w_explosive_maelstrom_beam_III', rate: 20 },
-        { item: 'w_explosive_maelstrom_beam_II', rate: 20 },
         { item: 'sh_ember_diffuser_II', rate: 20 },
         { item: 'eng_he3_saver_III', rate: 20 },
         { item: 'w_explosive_earthshaker_beam_I', rate: 20 },
@@ -1785,8 +1607,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [60000, 125000], crystal: [38000, 80000], he3: [19000, 48000] },
-    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona po�inje.',
-    unlock: 'Trial 5 zavr�ena',
+    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona poďż˝inje.',
+    unlock: 'Trial 5 zavrďż˝ena',
   },
 
   {
@@ -1813,10 +1635,6 @@ const INSTANCES_HELL = [
         { item: 'sh_titan_core_III', rate: 20 },
         { item: 'w_explosive_cataclysm_beam_III', rate: 20 },
         { item: 'w_explosive_cataclysm_beam_II', rate: 20 },
-        { item: 'fighter_Reaper_III', rate: 15 },
-        { item: 'sh_titan_core_III', rate: 20 },
-        { item: 'w_explosive_cataclysm_beam_III', rate: 20 },
-        { item: 'w_explosive_cataclysm_beam_II', rate: 20 },
         { item: 'sh_ember_diffuser_III', rate: 20 },
         { item: 'w_explosive_nova_beam_I', rate: 20 },
         { item: 'w_explosive_annihilator_beam_I', rate: 20 },
@@ -1826,7 +1644,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [78000, 162000], crystal: [49000, 103000], he3: [24500, 62000] },
     desc: 'Trial 7. Celestial II i Fleet Commander I za S rank.',
-    unlock: 'Trial 6 zavr�ena',
+    unlock: 'Trial 6 zavrďż˝ena',
   },
 
   {
@@ -1853,10 +1671,6 @@ const INSTANCES_HELL = [
         { item: 'sh_storm_absorber_I', rate: 20 },
         { item: 'w_explosive_oblivion_beam_III', rate: 20 },
         { item: 'w_explosive_oblivion_beam_II', rate: 20 },
-        { item: 'carrier_Harbinger_III', rate: 15 },
-        { item: 'sh_storm_absorber_I', rate: 20 },
-        { item: 'w_explosive_oblivion_beam_III', rate: 20 },
-        { item: 'w_explosive_oblivion_beam_II', rate: 20 },
         { item: 'sh_pulse_nullifier_I', rate: 20 },
         { item: 'w_explosive_armageddon_beam_I', rate: 20 },
         { item: 'w_explosive_maelstrom_beam_I', rate: 20 },
@@ -1867,7 +1681,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [100000, 210000], crystal: [63000, 133000], he3: [31500, 80000] },
     desc: 'Trial 8. Chrono Matrix II i VoidWarp III za S rank.',
-    unlock: 'Trial 7 zavr�ena',
+    unlock: 'Trial 7 zavrďż˝ena',
   },
 
   {
@@ -1894,10 +1708,6 @@ const INSTANCES_HELL = [
         { item: 'sh_storm_absorber_II', rate: 20 },
         { item: 'w_explosive_earthshaker_beam_III', rate: 20 },
         { item: 'w_explosive_earthshaker_beam_II', rate: 20 },
-        { item: 'fighter_Striker_II', rate: 15 },
-        { item: 'sh_storm_absorber_II', rate: 20 },
-        { item: 'w_explosive_earthshaker_beam_III', rate: 20 },
-        { item: 'w_explosive_earthshaker_beam_II', rate: 20 },
         { item: 'sh_pulse_nullifier_II', rate: 20 },
         { item: 'w_explosive_apocalypse_beam_I', rate: 20 },
         { item: 'w_explosive_cataclysm_beam_I', rate: 20 },
@@ -1908,8 +1718,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [130000, 270000], crystal: [82000, 172000], he3: [41000, 104000] },
-    desc: 'Trial 9. Celestial III za S rank. Gotovo nemogu�e bez endgame opreme.',
-    unlock: 'Trial 8 zavr�ena',
+    desc: 'Trial 9. Celestial III za S rank. Gotovo nemoguďż˝e bez endgame opreme.',
+    unlock: 'Trial 8 zavrďż˝ena',
   },
 
   {
@@ -1921,8 +1731,8 @@ const INSTANCES_HELL = [
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Supreme Flagship', 'Trial Apex Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Sanctuary_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Leviathan_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":3,"col":3}],
-    boss: 'Trial Supreme Omega � Final Boss',
-  bossShip: {"name":"Trial Supreme Omega � Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
+    boss: 'Trial Supreme Omega ďż˝ Final Boss',
+  bossShip: {"name":"Trial Supreme Omega ďż˝ Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_fleet_commander_III', 'mod_chrono_matrix_III'],
       rank_A: ['eng_celestial_III', 'sh_void_field_III'],
@@ -1933,11 +1743,6 @@ const INSTANCES_HELL = [
         { item: 'sh_spacetime_III', rate: 20 },
         { item: 'eng_divine_III', rate: 20 },
         { item: 'w_magnetic_stasis_beam_missile_III', rate: 20 },
-        { item: 'fighter_Vengeance_III', rate: 15 },
-        { item: 'mod_iron_fortress_II', rate: 20 },
-        { item: 'sh_storm_absorber_III', rate: 20 },
-        { item: 'w_explosive_nova_beam_III', rate: 20 },
-        { item: 'w_explosive_nova_beam_II', rate: 20 },
         { item: 'fighter_Vengeance_III', rate: 15 },
         { item: 'mod_iron_fortress_II', rate: 20 },
         { item: 'sh_storm_absorber_III', rate: 20 },
@@ -1956,7 +1761,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [170000, 350000], crystal: [107000, 225000], he3: [53000, 135000] },
     desc: 'Zadnja Trial instanca. Fleet Commander III za S rank. Samo endgame elite.',
-    unlock: 'Trial 9 zavr�ena',
+    unlock: 'Trial 9 zavrďż˝ena',
   },
 
   // ============================================
@@ -1980,11 +1785,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_apocalypse_beam_II', rate: 20 },
         { item: 'w_explosive_armageddon_beam_III', rate: 20 },
         { item: 'w_explosive_armageddon_beam_II', rate: 20 },
-        { item: 'fighter_Tempest_II', rate: 15 },
-        { item: 'sh_arc_deflector_III', rate: 20 },
-        { item: 'w_explosive_apocalypse_beam_II', rate: 20 },
-        { item: 'w_explosive_armageddon_beam_III', rate: 20 },
-        { item: 'w_explosive_armageddon_beam_II', rate: 20 },
         { item: 'sh_charge_acc_III', rate: 20 },
         { item: 'w_kinetic_railgun_missile_I', rate: 20 },
         { item: 'w_heat_incinerator_beam_I', rate: 20 },
@@ -1992,7 +1792,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Uvod u Humanoid zone. Aegis Shield I garantiran.',
-    unlock: 'Instanca 15 zavr�ena',
+    unlock: 'Instanca 15 zavrďż˝ena',
   },
 
   {
@@ -2013,12 +1813,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_crusher_beam_III', rate: 20 },
         { item: 'w_explosive_crusher_beam_II', rate: 20 },
         { item: 'w_explosive_apocalypse_beam_III', rate: 20 },
-        { item: 'fighter_Outlaw_III', rate: 15 },
-        { item: 'mod_fleet_beacon_I', rate: 20 },
-        { item: 'sh_cryo_ward_I', rate: 20 },
-        { item: 'w_explosive_crusher_beam_III', rate: 20 },
-        { item: 'w_explosive_crusher_beam_II', rate: 20 },
-        { item: 'w_explosive_apocalypse_beam_III', rate: 20 },
         { item: 'sh_heat_diff_III', rate: 20 },
         { item: 'mod_repair_nano_I', rate: 20 },
         { item: 'w_kinetic_gauss_cannon_missile_I', rate: 20 },
@@ -2026,7 +1820,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [8000, 18000], crystal: [5000, 12000], he3: [2500, 6500] },
     desc: 'Sentinel Drive I garantiran.',
-    unlock: 'Humanoid 1 zavr�ena',
+    unlock: 'Humanoid 1 zavrďż˝ena',
   },
 
   {
@@ -2045,19 +1839,14 @@ const INSTANCES_HELL = [
         { item: 'w_kinetic_mass_driver_missile_II', rate: 20 },
         { item: 'w_kinetic_gauss_cannon_missile_II', rate: 20 },
         { item: 'w_kinetic_railgun_missile_II', rate: 20 },
-        { item: 'fighter_Ravager_III', rate: 15 },
-        { item: 'mod_countermeasure_III', rate: 20 },
-        { item: 'w_kinetic_mass_driver_missile_II', rate: 20 },
-        { item: 'w_kinetic_gauss_cannon_missile_II', rate: 20 },
-        { item: 'w_kinetic_railgun_missile_II', rate: 20 },
         { item: 'mod_scanner_III', rate: 20 },
         { item: 'w_kinetic_mass_driver_missile_I', rate: 20 },
         { item: 'mod_evasion_matrix_I', rate: 20 },
       ],
     },
     resources: { metal: [12000, 26000], crystal: [8000, 17000], he3: [4000, 10500] },
-    desc: 'Aegis �tit I garantiran. �ansa za Independence Flagship.',
-    unlock: 'Humanoid 2 zavr�ena',
+    desc: 'Aegis ďż˝tit I garantiran. ďż˝ansa za Independence Flagship.',
+    unlock: 'Humanoid 2 zavrďż˝ena',
   },
 
   {
@@ -2076,17 +1865,13 @@ const INSTANCES_HELL = [
         { item: 'w_kinetic_accelerator_missile_II', rate: 20 },
         { item: 'w_kinetic_penetrator_missile_II', rate: 20 },
         { item: 'w_kinetic_shredder_missile_II', rate: 20 },
-        { item: 'fighter_Corsair_II', rate: 15 },
-        { item: 'w_kinetic_accelerator_missile_II', rate: 20 },
-        { item: 'w_kinetic_penetrator_missile_II', rate: 20 },
-        { item: 'w_kinetic_shredder_missile_II', rate: 20 },
         { item: 'w_kinetic_shredder_missile_I', rate: 20 },
         { item: 'w_heat_phoenix_beam_I', rate: 20 },
       ],
     },
     resources: { metal: [16000, 34000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Aegis II garantiran.',
-    unlock: 'Humanoid 3 zavr�ena',
+    unlock: 'Humanoid 3 zavrďż˝ena',
   },
 
   {
@@ -2108,12 +1893,6 @@ const INSTANCES_HELL = [
         { item: 'w_kinetic_obliterator_missile_II', rate: 20 },
         { item: 'w_kinetic_hailstorm_missile_II', rate: 20 },
         { item: 'w_kinetic_ripper_missile_II', rate: 20 },
-        { item: 'fighter_Nemesis_II', rate: 15 },
-        { item: 'mod_fleet_beacon_II', rate: 20 },
-        { item: 'sh_cryo_ward_II', rate: 20 },
-        { item: 'w_kinetic_obliterator_missile_II', rate: 20 },
-        { item: 'w_kinetic_hailstorm_missile_II', rate: 20 },
-        { item: 'w_kinetic_ripper_missile_II', rate: 20 },
         { item: 'sh_charge_acc_I', rate: 20 },
         { item: 'mod_repair_nano_II', rate: 20 },
         { item: 'w_kinetic_penetrator_missile_I', rate: 20 },
@@ -2121,8 +1900,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 28000], he3: [6500, 17000] },
-    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship �ansa.',
-    unlock: 'Humanoid 4 zavr�ena',
+    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship ďż˝ansa.',
+    unlock: 'Humanoid 4 zavrďż˝ena',
   },
 
   {
@@ -2142,18 +1921,13 @@ const INSTANCES_HELL = [
         { item: 'w_heat_scorch_missile_II', rate: 20 },
         { item: 'w_heat_inferno_missile_II', rate: 20 },
         { item: 'w_kinetic_annihilator_missile_II', rate: 20 },
-        { item: 'cruiser_Defender_III', rate: 15 },
-        { item: 'mod_sprint_drive_I', rate: 20 },
-        { item: 'w_heat_scorch_missile_II', rate: 20 },
-        { item: 'w_heat_inferno_missile_II', rate: 20 },
-        { item: 'w_kinetic_annihilator_missile_II', rate: 20 },
         { item: 'mod_stealth_cloak_I', rate: 20 },
         { item: 'w_kinetic_accelerator_missile_I', rate: 20 },
         { item: 'mod_targeting_II', rate: 20 },],
     },
     resources: { metal: [28000, 58000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Sentinel II garantiran.',
-    unlock: 'Humanoid 5 zavr�ena',
+    unlock: 'Humanoid 5 zavrďż˝ena',
   },
 
   {
@@ -2172,17 +1946,13 @@ const INSTANCES_HELL = [
         { item: 'w_heat_thermal_lance_missile_II', rate: 20 },
         { item: 'w_heat_pyro_blast_missile_II', rate: 20 },
         { item: 'w_heat_molten_core_missile_II', rate: 20 },
-        { item: 'cruiser_Guardian_III', rate: 15 },
-        { item: 'w_heat_thermal_lance_missile_II', rate: 20 },
-        { item: 'w_heat_pyro_blast_missile_II', rate: 20 },
-        { item: 'w_heat_molten_core_missile_II', rate: 20 },
         { item: 'w_kinetic_ripper_missile_I', rate: 20 },
         { item: 'w_heat_inferno_I', rate: 20 },
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Aegis III garantiran. Independence II �ansa.',
-    unlock: 'Humanoid 6 zavr�ena',
+    desc: 'Aegis III garantiran. Independence II ďż˝ansa.',
+    unlock: 'Humanoid 6 zavrďż˝ena',
   },
 
   {
@@ -2205,12 +1975,6 @@ const INSTANCES_HELL = [
         { item: 'w_heat_incinerator_missile_II', rate: 20 },
         { item: 'w_heat_magma_missile_II', rate: 20 },
         { item: 'w_heat_sunflare_missile_II', rate: 20 },
-        { item: 'cruiser_Sentinel_II', rate: 15 },
-        { item: 'mod_fleet_beacon_III', rate: 20 },
-        { item: 'sh_cryo_ward_III', rate: 20 },
-        { item: 'w_heat_incinerator_missile_II', rate: 20 },
-        { item: 'w_heat_magma_missile_II', rate: 20 },
-        { item: 'w_heat_sunflare_missile_II', rate: 20 },
         { item: 'sh_charge_acc_II', rate: 20 },
         { item: 'mod_repair_nano_III', rate: 20 },
         { item: 'w_kinetic_hailstorm_missile_I', rate: 20 },
@@ -2218,8 +1982,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [55000, 115000], crystal: [35000, 73000], he3: [17500, 44500] },
-    desc: 'Aegis III garantiran. Quick Assault Flagship �ansa.',
-    unlock: 'Humanoid 7 zavr�ena',
+    desc: 'Aegis III garantiran. Quick Assault Flagship ďż˝ansa.',
+    unlock: 'Humanoid 7 zavrďż˝ena',
   },
 
   {
@@ -2241,18 +2005,13 @@ const INSTANCES_HELL = [
         { item: 'w_magnetic_pulsar_missile_I', rate: 20 },
         { item: 'w_heat_hellfire_missile_II', rate: 20 },
         { item: 'w_heat_phoenix_missile_II', rate: 20 },
-        { item: 'cruiser_Bulwark_III', rate: 15 },
-        { item: 'mod_sprint_drive_II', rate: 20 },
-        { item: 'w_magnetic_pulsar_missile_I', rate: 20 },
-        { item: 'w_heat_hellfire_missile_II', rate: 20 },
-        { item: 'w_heat_phoenix_missile_II', rate: 20 },
         { item: 'mod_stealth_cloak_II', rate: 20 },
         { item: 'w_kinetic_obliterator_missile_I', rate: 20 },
         { item: 'mod_evasion_matrix_III', rate: 20 },],
     },
     resources: { metal: [80000, 166000], crystal: [50000, 106000], he3: [25000, 64000] },
     desc: 'Sentinel III garantiran.',
-    unlock: 'Humanoid 8 zavr�ena',
+    unlock: 'Humanoid 8 zavrďż˝ena',
   },
 
   {
@@ -2271,8 +2030,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [120000, 250000], crystal: [76000, 160000], he3: [38000, 96000] },
-    desc: 'Kraj Humanoid zone. Quick Assault II �ansa.',
-    unlock: 'Humanoid 9 zavr�ena',
+    desc: 'Kraj Humanoid zone. Quick Assault II ďż˝ansa.',
+    unlock: 'Humanoid 9 zavrďż˝ena',
   },
 
   // ============================================
@@ -2293,9 +2052,6 @@ const INSTANCES_HELL = [
         { item: 'sh_flash_gate_I', rate: 20 },
         { item: 'w_magnetic_emp_blast_missile_I', rate: 20 },
         { item: 'w_magnetic_pulsar_missile_II', rate: 20 },
-        { item: 'sh_flash_gate_I', rate: 20 },
-        { item: 'w_magnetic_emp_blast_missile_I', rate: 20 },
-        { item: 'w_magnetic_pulsar_missile_II', rate: 20 },
         { item: 'sh_mirror_plate_I', rate: 20 },
         { item: 'w_heat_inferno_missile_I', rate: 20 },
         { item: 'w_heat_thermal_lance_I', rate: 20 },
@@ -2303,7 +2059,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Void Shield I garantiran.',
-    unlock: 'Instanca 15 zavr�ena',
+    unlock: 'Instanca 15 zavrďż˝ena',
   },
 
   {
@@ -2320,10 +2076,6 @@ const INSTANCES_HELL = [
         { item: 'eng_fleet_sync_II', rate: 20 },
         { item: 'w_magnetic_stasis_beam_missile_I', rate: 20 },
         { item: 'w_magnetic_emp_blast_missile_II', rate: 20 },
-        { item: 'carrier_Ark_I', rate: 15 },
-        { item: 'eng_fleet_sync_II', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_missile_I', rate: 20 },
-        { item: 'w_magnetic_emp_blast_missile_II', rate: 20 },
         { item: 'eng_pulse_regen_II', rate: 20 },
         { item: 'w_heat_scorch_missile_I', rate: 20 },
         { item: 'eng_heavy_II', rate: 20 },
@@ -2332,7 +2084,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
     desc: 'Voidwarp I garantiran.',
-    unlock: 'Pirate 1 zavr�ena',
+    unlock: 'Pirate 1 zavrďż˝ena',
   },
 
   {
@@ -2351,10 +2103,6 @@ const INSTANCES_HELL = [
         { item: 'w_magnetic_disruptor_missile_I', rate: 20 },
         { item: 'w_magnetic_stasis_beam_missile_II', rate: 20 },
         { item: 'special_IntrepidNexus_I', rate: 15 },
-        { item: 'mod_iron_fortress_III', rate: 20 },
-        { item: 'sh_flash_gate_II', rate: 20 },
-        { item: 'w_magnetic_disruptor_missile_I', rate: 20 },
-        { item: 'w_magnetic_stasis_beam_missile_II', rate: 20 },
         { item: 'sh_mirror_plate_II', rate: 20 },
         { item: 'mod_drone_swarm_I', rate: 20 },
         { item: 'w_heat_molten_core_missile_I', rate: 20 },
@@ -2362,8 +2110,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [12000, 25000], crystal: [8000, 17000], he3: [4000, 10000] },
-    desc: 'Void �tit I garantiran. �ansa za 3 razli�ita Pirate Flagship.',
-    unlock: 'Pirate 2 zavr�ena',
+    desc: 'Void ďż˝tit I garantiran. ďż˝ansa za 3 razliďż˝ita Pirate Flagship.',
+    unlock: 'Pirate 2 zavrďż˝ena',
   },
 
   {
@@ -2380,10 +2128,6 @@ const INSTANCES_HELL = [
         { item: 'eng_fleet_sync_III', rate: 20 },
         { item: 'w_magnetic_magnetron_missile_I', rate: 20 },
         { item: 'w_magnetic_disruptor_missile_II', rate: 20 },
-        { item: 'cruiser_Citadel_II', rate: 15 },
-        { item: 'eng_fleet_sync_III', rate: 20 },
-        { item: 'w_magnetic_magnetron_missile_I', rate: 20 },
-        { item: 'w_magnetic_disruptor_missile_II', rate: 20 },
         { item: 'eng_pulse_regen_III', rate: 20 },
         { item: 'w_heat_pyro_blast_missile_I', rate: 20 },
         { item: 'eng_heavy_III', rate: 20 },
@@ -2392,7 +2136,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [16000, 33000], crystal: [10000, 21000], he3: [5000, 13000] },
     desc: 'Void II garantiran.',
-    unlock: 'Pirate 3 zavr�ena',
+    unlock: 'Pirate 3 zavrďż˝ena',
   },
 
   {
@@ -2412,10 +2156,6 @@ const INSTANCES_HELL = [
         { item: 'sh_flash_gate_III', rate: 20 },
         { item: 'w_magnetic_neutron_wave_missile_I', rate: 20 },
         { item: 'w_magnetic_magnetron_missile_II', rate: 20 },
-        { item: 'carrier_Sanctuary_II', rate: 15 },
-        { item: 'sh_flash_gate_III', rate: 20 },
-        { item: 'w_magnetic_neutron_wave_missile_I', rate: 20 },
-        { item: 'w_magnetic_magnetron_missile_II', rate: 20 },
         { item: 'sh_mirror_plate_III', rate: 20 },
         { item: 'w_heat_thermal_lance_missile_I', rate: 20 },
         { item: 'w_heat_magma_I', rate: 20 },
@@ -2423,7 +2163,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [28000, 59000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Voidwarp II garantiran.',
-    unlock: 'Pirate 4 zavr�ena',
+    unlock: 'Pirate 4 zavrďż˝ena',
   },
 
   {
@@ -2442,10 +2182,6 @@ const INSTANCES_HELL = [
         { item: 'eng_apex_I', rate: 20 },
         { item: 'w_magnetic_cascade_missile_I', rate: 20 },
         { item: 'w_magnetic_neutron_wave_missile_II', rate: 20 },
-        { item: 'cruiser_Rampart_III', rate: 15 },
-        { item: 'eng_apex_I', rate: 20 },
-        { item: 'w_magnetic_cascade_missile_I', rate: 20 },
-        { item: 'w_magnetic_neutron_wave_missile_II', rate: 20 },
         { item: 'eng_fortified_I', rate: 20 },
         { item: 'w_heat_sunflare_missile_I', rate: 20 },
         { item: 'battleship_Imperator_II', rate: 15 },
@@ -2454,8 +2190,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [36000, 76000], crystal: [23000, 49000], he3: [11500, 29500] },
-    desc: 'Void �tit II garantiran. Voidwarp Engine �ansa.',
-    unlock: 'Pirate 5 zavr�ena',
+    desc: 'Void ďż˝tit II garantiran. Voidwarp Engine ďż˝ansa.',
+    unlock: 'Pirate 5 zavrďż˝ena',
   },
 
   {
@@ -2475,10 +2211,6 @@ const INSTANCES_HELL = [
         { item: 'sh_arc_deflector_I', rate: 20 },
         { item: 'w_magnetic_ion_storm_missile_I', rate: 20 },
         { item: 'w_magnetic_cascade_missile_II', rate: 20 },
-        { item: 'mod_warp_jammer_I', rate: 20 },
-        { item: 'sh_arc_deflector_I', rate: 20 },
-        { item: 'w_magnetic_ion_storm_missile_I', rate: 20 },
-        { item: 'w_magnetic_cascade_missile_II', rate: 20 },
         { item: 'sh_heat_diff_I', rate: 20 },
         { item: 'mod_drone_swarm_II', rate: 20 },
         { item: 'w_heat_magma_missile_I', rate: 20 },
@@ -2487,7 +2219,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 41000] },
     desc: 'Void III garantiran.',
-    unlock: 'Pirate 6 zavr�ena',
+    unlock: 'Pirate 6 zavrďż˝ena',
   },
 
   {
@@ -2507,10 +2239,6 @@ const INSTANCES_HELL = [
         { item: 'eng_apex_II', rate: 20 },
         { item: 'w_magnetic_magnetosphere_missile_I', rate: 20 },
         { item: 'w_magnetic_ion_storm_missile_II', rate: 20 },
-        { item: 'cruiser_Paladin_III', rate: 15 },
-        { item: 'eng_apex_II', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_missile_I', rate: 20 },
-        { item: 'w_magnetic_ion_storm_missile_II', rate: 20 },
         { item: 'eng_fortified_II', rate: 20 },
         { item: 'w_heat_incinerator_missile_I', rate: 20 },
         { item: 'eng_stabilizer_II', rate: 20 },
@@ -2519,7 +2247,7 @@ const INSTANCES_HELL = [
     },
     resources: { metal: [78000, 163000], crystal: [49000, 104000], he3: [24500, 63000] },
     desc: 'Voidwarp III garantiran.',
-    unlock: 'Pirate 7 zavr�ena',
+    unlock: 'Pirate 7 zavrďż˝ena',
   },
 
   {
@@ -2538,17 +2266,14 @@ const INSTANCES_HELL = [
         { item: 'sh_arc_deflector_II', rate: 20 },
         { item: 'w_magnetic_singularity_missile_I', rate: 20 },
         { item: 'w_magnetic_magnetosphere_missile_II', rate: 20 },
-        { item: 'sh_arc_deflector_II', rate: 20 },
-        { item: 'w_magnetic_singularity_missile_I', rate: 20 },
-        { item: 'w_magnetic_magnetosphere_missile_II', rate: 20 },
         { item: 'sh_heat_diff_II', rate: 20 },
         { item: 'w_heat_phoenix_missile_I', rate: 20 },
         { item: 'w_kinetic_ripper_I', rate: 20 },
       ],
     },
     resources: { metal: [105000, 220000], crystal: [66000, 140000], he3: [33000, 84000] },
-    desc: 'Void III garantiran. Voidwarp III �ansa. Piratski ekskluziv.',
-    unlock: 'Pirate 8 zavr�ena',
+    desc: 'Void III garantiran. Voidwarp III ďż˝ansa. Piratski ekskluziv.',
+    unlock: 'Pirate 8 zavrďż˝ena',
   },
 
   {
@@ -2570,11 +2295,6 @@ const INSTANCES_HELL = [
         { item: 'eng_apex_III', rate: 20 },
         { item: 'w_explosive_devastator_missile_I', rate: 20 },
         { item: 'w_magnetic_singularity_missile_II', rate: 20 },
-        { item: 'cruiser_Protector_II', rate: 15 },
-        { item: 'mod_warp_jammer_II', rate: 20 },
-        { item: 'eng_apex_III', rate: 20 },
-        { item: 'w_explosive_devastator_missile_I', rate: 20 },
-        { item: 'w_magnetic_singularity_missile_II', rate: 20 },
         { item: 'mod_heavy_barrage_II', rate: 20 },
         { item: 'eng_fortified_III', rate: 20 },
         { item: 'w_heat_hellfire_missile_I', rate: 20 },
@@ -2584,8 +2304,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [160000, 335000], crystal: [100000, 210000], he3: [50000, 126000] },
-    desc: 'Final Pirate instance. Fleet Commander III �ansa.',
-    unlock: 'Pirate 9 zavr�ena',
+    desc: 'Final Pirate instance. Fleet Commander III ďż˝ansa.',
+    unlock: 'Pirate 9 zavrďż˝ena',
   },
 
   // ============================================
@@ -2605,7 +2325,7 @@ const INSTANCES_HELL = [
     boss_stats: { hp: 15000, shield: 5000, dps: 800, agility: 20, speed: 2, armor: 'Light' },
     
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Void Scavenger � krade resurse! Izgubi borbu = -10% nagrade.',
+    desc: 'Void Scavenger ďż˝ krade resurse! Izgubi borbu = -10% nagrade.',
     unlock: 'Min 30k power',
   },
 
@@ -2620,7 +2340,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Corsair Marauder","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":7,"speed":4},
     boss_stats: { hp: 18000, shield: 6000, dps: 900, agility: 18, speed: 2, armor: 'Chrome' },
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Corsair Marauder � poziva 2 pomo�na broda u rundi 3!',
+    desc: 'Corsair Marauder ďż˝ poziva 2 pomoďż˝na broda u rundi 3!',
     unlock: 'Min 35k power',
   },
 
@@ -2635,7 +2355,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Nebula Stalker","structure":144000,"shield":47250,"armor_val":18000,"dps":8100,"agility":7,"speed":5},
     boss_stats: { hp: 20000, shield: 8000, dps: 1100, agility: 35, speed: 3, armor: 'Nano' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Nebula Stalker � nevidljiv u prvoj rundi! Igra� ne mo�e napadati.',
+    desc: 'Nebula Stalker ďż˝ nevidljiv u prvoj rundi! Igraďż˝ ne moďż˝e napadati.',
     unlock: 'Min 45k power',
   },
 
@@ -2650,7 +2370,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Solar Predator","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
     boss_stats: { hp: 22000, shield: 7000, dps: 1200, agility: 15, speed: 2, armor: 'Light' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Solar Predator � AoE napadi! Svaki hit poga�a sve tvoje slotove za 20%.',
+    desc: 'Solar Predator ďż˝ AoE napadi! Svaki hit pogaďż˝a sve tvoje slotove za 20%.',
     unlock: 'Min 50k power',
   },
 
@@ -2665,7 +2385,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Frost Reaver","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
     boss_stats: { hp: 28000, shield: 10000, dps: 1400, agility: 20, speed: 2, armor: 'Chrome' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Frost Reaver � zamrzava random slot! Taj slot preska�e 1 rundu.',
+    desc: 'Frost Reaver ďż˝ zamrzava random slot! Taj slot preskaďż˝e 1 rundu.',
     unlock: 'Min 70k power',
   },
 
@@ -2680,7 +2400,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Plasma Wraith","structure":256000,"shield":84000,"armor_val":32000,"dps":14400,"agility":8,"speed":5},
     boss_stats: { hp: 30000, shield: 12000, dps: 1500, agility: 22, speed: 2, armor: 'Neutralizing' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Plasma Wraith � eksplodira kad umre! 20% �tete svim tvojim brodovima.',
+    desc: 'Plasma Wraith ďż˝ eksplodira kad umre! 20% ďż˝tete svim tvojim brodovima.',
     unlock: 'Min 80k power',
   },
 
@@ -2697,7 +2417,7 @@ const INSTANCES_HELL = [
     boss_stats: { hp: 80000, shield: 30000, dps: 3000, agility: 15, speed: 2, armor: 'Chrome' },
     
     resources: { metal: [30000, 65000], crystal: [19000, 41000], he3: [9500, 24000] },
-    desc: 'Quantum Hydra � 3 glave! Respawnuje jednom na 30% HP.',
+    desc: 'Quantum Hydra ďż˝ 3 glave! Respawnuje jednom na 30% HP.',
     unlock: 'Pobijedi R1+R2+R3',
   },
 
@@ -2712,7 +2432,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Chrono Warden","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
     boss_stats: { hp: 100000, shield: 40000, dps: 4000, agility: 12, speed: 1, armor: 'Regen' },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 40000] },
-    desc: 'Chrono Warden � vra�a HP! Jednom u borbi resetuje HP na 50%.',
+    desc: 'Chrono Warden ďż˝ vraďż˝a HP! Jednom u borbi resetuje HP na 50%.',
     unlock: 'Pobijedi R4+R5+R6',
   },
 
@@ -2727,7 +2447,7 @@ const INSTANCES_HELL = [
   bossShip: {"name":"Dreadnought Titan","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":6},
     boss_stats: { hp: 150000, shield: 60000, dps: 5000, agility: 5, speed: 1, armor: 'Neutralizing' },
     resources: { metal: [80000, 168000], crystal: [50000, 106000], he3: [25000, 63000] },
-    desc: 'Dreadnought Titan � Titan Rage! Svaki pre�ivljeni napad +10% boss DPS.',
+    desc: 'Dreadnought Titan ďż˝ Titan Rage! Svaki preďż˝ivljeni napad +10% boss DPS.',
     unlock: 'Pobijedi E1+E2',
   },
 
@@ -2738,10 +2458,10 @@ const INSTANCES_HELL = [
     xp: 10000,
     boss_ability: 'four_phases',
     boss_phases: [
-      { name: 'Phase 1 � Awakening', hp_pct: 100, ability: 'normal' },
-      { name: 'Phase 2 � Devouring', hp_pct: 75, ability: 'aoe_damage' },
-      { name: 'Phase 3 � Consuming', hp_pct: 50, ability: 'ship_absorb' },
-      { name: 'Phase 4 � Ascension', hp_pct: 25, ability: 'self_heal' },
+      { name: 'Phase 1 ďż˝ Awakening', hp_pct: 100, ability: 'normal' },
+      { name: 'Phase 2 ďż˝ Devouring', hp_pct: 75, ability: 'aoe_damage' },
+      { name: 'Phase 3 ďż˝ Consuming', hp_pct: 50, ability: 'ship_absorb' },
+      { name: 'Phase 4 ďż˝ Ascension', hp_pct: 25, ability: 'self_heal' },
     ],
     enemies: ['Galaxy Eater Void Spawn', 'Galaxy Eater Core'],
   enemyGroups: [{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":1},{"ship_id":"carrier_Nebula_III","count":27000,"row":1,"col":2},{"ship_id":"carrier_Ark_III","count":27000,"row":1,"col":3},{"ship_id":"battleship_Dreadnought_III","count":27000,"row":2,"col":1},{"ship_id":"battleship_Dreadnought_III","count":32400,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Annihilator_III","count":27000,"row":2,"col":3},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":1},{"ship_id":"carrier_Dominion_III","count":27000,"row":3,"col":2},{"ship_id":"carrier_Nebula_III","count":27000,"row":3,"col":3}],
@@ -2750,7 +2470,7 @@ const INSTANCES_HELL = [
     boss_stats: { hp: 600000, shield: 200000, dps: 8000, agility: 8, speed: 1, armor: 'Neutralizing' },
     
     resources: { metal: [250000, 530000], crystal: [158000, 334000], he3: [79000, 167000] },
-    desc: 'Galaxy Eater � 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
+    desc: 'Galaxy Eater ďż˝ 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
     unlock: 'Pobijedi E1+E2+E3',
   },
 
@@ -2790,17 +2510,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_annihilator_missile_I', rate: 20 },
         { item: 'w_explosive_devastator_missile_II', rate: 20 },
         { item: 'w_explosive_crusher_missile_I', rate: 20 },
-        { item: 'cruiser_Haven_II', rate: 15 },
-        { item: 'cruiser_Bastion_III', rate: 15 },
-        { item: 'cruiser_Shield_III', rate: 15 },
-        { item: 'mod_sprint_drive_III', rate: 20 },
-        { item: 'sh_detonator_field_I', rate: 20 },
-        { item: 'eng_phoenix_core_II', rate: 20 },
-        { item: 'w_explosive_maelstrom_missile_II', rate: 20 },
-        { item: 'w_explosive_maelstrom_missile_I', rate: 20 },
-        { item: 'w_explosive_annihilator_missile_II', rate: 20 },
-        { item: 'w_explosive_annihilator_missile_I', rate: 20 },
-        { item: 'w_explosive_devastator_missile_II', rate: 20 },
         { item: 'mod_stealth_cloak_III', rate: 20 },
         { item: 'eng_adaptive_II', rate: 20 },
         { item: 'carrier_Sanctuary_I', rate: 15 },
@@ -2811,8 +2520,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [150000, 320000], crystal: [95000, 200000], he3: [47500, 120000] },
-    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral �ansa.',
-    unlock: 'Trial 8 zavr�ena + min 500k power',
+    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral ďż˝ansa.',
+    unlock: 'Trial 8 zavrďż˝ena + min 500k power',
   },
 
   {
@@ -2848,17 +2557,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_cataclysm_missile_II', rate: 20 },
         { item: 'w_explosive_cataclysm_missile_I', rate: 20 },
         { item: 'w_explosive_crusher_missile_II', rate: 20 },
-        { item: 'battleship_Behemoth_III', rate: 15 },
-        { item: 'battleship_Titan_III', rate: 15 },
-        { item: 'cruiser_Fortress_I', rate: 15 },
-        { item: 'sh_detonator_field_II', rate: 20 },
-        { item: 'eng_phoenix_core_III', rate: 20 },
-        { item: 'w_explosive_earthshaker_missile_II', rate: 20 },
-        { item: 'w_explosive_earthshaker_missile_I', rate: 20 },
-        { item: 'w_explosive_oblivion_missile_II', rate: 20 },
-        { item: 'w_explosive_oblivion_missile_I', rate: 20 },
-        { item: 'w_explosive_cataclysm_missile_II', rate: 20 },
-        { item: 'w_explosive_cataclysm_missile_I', rate: 20 },
         { item: 'eng_adaptive_III', rate: 20 },
         { item: 'carrier_Vanguard_II', rate: 15 },
         { item: 'art_34', rate: 20 },
@@ -2868,8 +2566,8 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [220000, 460000], crystal: [140000, 295000], he3: [70000, 178000] },
-    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II �ansa.',
-    unlock: 'Constellation 1 zavr�ena',
+    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II ďż˝ansa.',
+    unlock: 'Constellation 1 zavrďż˝ena',
   },
 
   {
@@ -2907,18 +2605,6 @@ const INSTANCES_HELL = [
         { item: 'w_explosive_nova_missile_II', rate: 20 },
         { item: 'w_explosive_nova_missile_I', rate: 20 },
         { item: 'w_light_fighters_I', rate: 20 },
-        { item: 'battleship_Colossus_III', rate: 15 },
-        { item: 'battleship_Goliath_II', rate: 15 },
-        { item: 'battleship_Leviathan_II', rate: 15 },
-        { item: 'mod_warp_jammer_III', rate: 20 },
-        { item: 'sh_detonator_field_III', rate: 20 },
-        { item: 'eng_fleet_sync_I', rate: 20 },
-        { item: 'w_explosive_apocalypse_missile_II', rate: 20 },
-        { item: 'w_explosive_apocalypse_missile_I', rate: 20 },
-        { item: 'w_explosive_armageddon_missile_II', rate: 20 },
-        { item: 'w_explosive_armageddon_missile_I', rate: 20 },
-        { item: 'w_explosive_nova_missile_II', rate: 20 },
-        { item: 'w_explosive_nova_missile_I', rate: 20 },
         { item: 'mod_heavy_barrage_III', rate: 20 },
         { item: 'eng_pulse_regen_I', rate: 20 },
         { item: 'art_35', rate: 20 },
@@ -2929,12 +2615,12 @@ const INSTANCES_HELL = [
       ],
     },
     resources: { metal: [320000, 670000], crystal: [202000, 425000], he3: [101000, 255000] },
-    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III �ansa.',
-    unlock: 'Constellation 2 zavr�ena',
+    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III ďż˝ansa.',
+    unlock: 'Constellation 2 zavrďż˝ena',
   },
 
   // ============================================
-  // MASTER BOSS � THE HIVE GOD
+  // MASTER BOSS ďż˝ THE HIVE GOD
   // ============================================
 
   {
@@ -2951,13 +2637,13 @@ const INSTANCES_HELL = [
     boss_stats: { hp: 1000000, shield: 400000, dps: 12000, agility: 10, speed: 2, armor: 'Neutralizing' },
     
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'THE HIVE GOD � Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
+    desc: 'THE HIVE GOD ďż˝ Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
     unlock: 'Min 1M power + pobijedi Galaxy Eater',
     respawn: 'weekly',
   },
 
   // ============================================
-  // BOSS EVENT (globalni, rijedak) � LEGACY
+  // BOSS EVENT (globalni, rijedak) ďż˝ LEGACY
   // ============================================
 
   {
@@ -2970,8 +2656,8 @@ const INSTANCES_HELL = [
     boss: 'THE HIVE GOD',
   bossShip: {"name":"THE HIVE GOD","structure":2560000,"shield":840000,"armor_val":320000,"dps":144000,"agility":10,"speed":7},
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igra�i napadaju isti boss.',
-    unlock: 'Min 800k power. Event se pojavljuje jednom sedmi�no.',
+    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igraďż˝i napadaju isti boss.',
+    unlock: 'Min 800k power. Event se pojavljuje jednom sedmiďż˝no.',
     respawn: 'weekly',
   },
 ];

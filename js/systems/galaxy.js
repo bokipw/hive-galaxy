@@ -159,23 +159,23 @@ function updateGalaxyDetails(sys){
         <div style="font-size:2.4rem">🔴</div>
         <div style="flex:1">
           <div style="font-weight:700;color:#ff3355;font-size:0.95rem">${p.username}</div>
-          <div style="font-size:0.65rem;color:#6a90b8;margin-top:2px">⭐ Rating: ${p.rating || 1000} · 💪 Moć: ${fmt(p.power || 0)}</div>
+          <div style="font-size:0.65rem;color:#6a90b8;margin-top:2px">⭐ ${t('index.galaxy.rating')}: ${p.rating || 1000} · 💪 ${t('index.galaxy.power')}: ${fmt(p.power || 0)}</div>
         </div>
       </div>
       ${res.metal !== undefined ? `
       <div style="font-size:0.65rem;color:#6a90b8;margin-bottom:10px;padding:8px;background:rgba(255,51,85,0.06);border-radius:6px;border:1px solid rgba(255,51,85,0.2)">
-        <div style="color:#ff8899;margin-bottom:4px">📊 Procijenjeni resursi (plijen ~50k):</div>
-        🔩 ${fmt(res.metal)} metala &nbsp; 💎 ${fmt(res.crystal)} kristala &nbsp; ⛽ ${fmt(res.he3)} He3
+        <div style="color:#ff8899;margin-bottom:4px">📊 ${t('index.galaxy.estimated_loot')}</div>
+        🔩 ${fmt(res.metal)} ${t('index.galaxy.metal')} &nbsp; 💎 ${fmt(res.crystal)} ${t('index.galaxy.crystal')} &nbsp; ⛽ ${fmt(res.he3)} ${t('index.galaxy.he3')}
       </div>` : ''}
       <div style="font-size:0.68rem;color:#6a90b8;margin-bottom:12px;padding:6px 8px;background:rgba(255,51,85,0.06);border-radius:4px;border-left:2px solid #ff3355">
-        ⚔️ Napad košta <b style="color:#fff">1000 ⚡ + 1000 BoCrypto</b><br>
-        🏆 Pobjeda: <b style="color:#00ff99">50k svakog resursa + rating poeni</b>
+        ⚔️ ${t('index.galaxy.attack_cost')}<br>
+        🏆 ${t('index.galaxy.victory_reward')}
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn" style="flex:1;font-size:0.72rem;border-color:rgba(0,212,255,0.3);color:#00d4ff"
-          onclick="galaxyEspionage('${p.id}')">🔍 Skeniraj</button>
+          onclick="galaxyEspionage('${p.id}')">🔍 ${t('index.galaxy.scan_btn')}</button>
         <button class="btn btn-danger" style="flex:1;font-size:0.72rem"
-          onclick="galaxyAttackBase('${p.id}')">⚔️ NAPADNI</button>
+          onclick="galaxyAttackBase('${p.id}')">⚔️ ${t('index.galaxy.attack_short')}</button>
       </div>
     </div>`;
     return;
@@ -191,11 +191,11 @@ function updateGalaxyDetails(sys){
   const typeInfo = pType ? `<span style="color:${pType.color}">${pType.icon} ${pType.name}</span>` : '';
 
   let btnLabel, btnClass, btnDisabled;
-  if(sys.isBase){ btnLabel='🏠 MATIČNA BAZA'; btnClass=''; btnDisabled=true; }
-  else if(owned){ btnLabel='✅ OSVOJENO'; btnClass=''; btnDisabled=true; }
-  else if(!inRange){ btnLabel=`🔒 JG Lv.${sys.distance} potreban`; btnClass=''; btnDisabled=true; }
-  else if(maxed){ btnLabel='🔒 Max kolonija dostignut'; btnClass=''; btnDisabled=true; }
-  else { btnLabel='⚔️ NAPADNI & KOLONIZUJ'; btnClass='btn-g'; btnDisabled=false; }
+  if(sys.isBase){ btnLabel=t('index.galaxy.home_base'); btnClass=''; btnDisabled=true; }
+  else if(owned){ btnLabel=t('index.galaxy.conquered'); btnClass=''; btnDisabled=true; }
+  else if(!inRange){ btnLabel=t('index.galaxy.jg_needed',{level:sys.distance}); btnClass=''; btnDisabled=true; }
+  else if(maxed){ btnLabel=t('index.galaxy.max_colonies'); btnClass=''; btnDisabled=true; }
+  else { btnLabel=t('index.galaxy.attack_colonize'); btnClass='btn-g'; btnDisabled=false; }
 
   d.innerHTML=`
   <div class="card" style="border-color:${sys.sector.color}55">
@@ -204,20 +204,20 @@ function updateGalaxyDetails(sys){
       <div style="flex:1">
         <div style="font-weight:700;color:${sys.sector.color};font-size:0.95rem">${sys.name}</div>
         <div style="font-size:0.65rem;color:#6a90b8;margin-top:2px">
-          ${typeInfo}${typeInfo?' · ':''}Threat ${sys.threat}/10 · Sistem ${sys.distance||0}
-          ${sys.isBase?' · BAZA':''}
+          ${typeInfo}${typeInfo?' · ':''}${t('index.galaxy.threat',{level:sys.threat})} · ${t('index.galaxy.system')} ${sys.distance||0}
+          ${sys.isBase?' · '+t('index.galaxy.base'):''}
         </div>
       </div>
-      ${owned?`<div style="font-size:0.65rem;color:#00ff88;font-weight:700">✅ TVOJE</div>`:''}
+      ${owned?`<div style="font-size:0.65rem;color:#00ff88;font-weight:700">✅ ${t('index.galaxy.yours')}</div>`:''}
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;font-size:0.7rem">
       <div style="background:#0003;padding:8px;border-radius:6px;text-align:center">
-        TVOJA SNAGA<br>
+        ${t('index.galaxy.your_power')}<br>
         <b style="color:${pow>=need?'#00ff88':'#ffaa00'}">${fmt(pow)}</b>
       </div>
       <div style="background:#0003;padding:8px;border-radius:6px;text-align:center">
-        POTREBNO<br>
+        ${t('index.galaxy.needed')}<br>
         <b style="color:${getThreatColor(sys.threat)}">${fmt(need)}</b>
       </div>
     </div>
@@ -225,8 +225,8 @@ function updateGalaxyDetails(sys){
     ${!sys.isBase && !owned && inRange && !maxed ? `
     <div style="font-size:0.6rem;color:#6a90b8;margin-bottom:10px;padding:6px 8px;
       background:rgba(0,255,136,0.06);border-radius:4px;border-left:2px solid #00ff88">
-      ⚔️ <b style="color:#00ff88">Vojni put:</b> Pobijedi u bici → Besplatna kolonija<br>
-      🕊️ <b style="color:#4488ff">Mirni put:</b> Idi na Kolonije → Istraži → Plati resurse
+      ⚔️ <b style="color:#00ff88">${t('index.galaxy.military_path')}:</b> ${t('index.galaxy.military_desc')}<br>
+      🕊️ <b style="color:#4488ff">${t('index.galaxy.peaceful_path')}:</b> ${t('index.galaxy.peaceful_desc')}
     </div>` : ''}
 
     <button class="btn ${btnClass}" style="width:100%;font-size:0.78rem"
@@ -590,18 +590,18 @@ function galaxyEspionage(playerId) {
   }
   // Fallback — prikaži resurse direktno
   const res = p.resources || {};
-  openModal('🔍 Skeniranje — ' + p.username,
-    `<div style="font-size:0.8rem;color:#6a90b8;margin-bottom:12px">Rezultati izviđanja:</div>
+  openModal('🔍 ' + t('index.galaxy.scan_title') + ' — ' + p.username,
+    `<div style="font-size:0.8rem;color:#6a90b8;margin-bottom:12px">${t('index.galaxy.scan_result')}</div>
     <div style="display:grid;gap:8px">
-      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">⭐ Rating: <b style="color:#ffcc44">${p.rating || 1000}</b></div>
-      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">💪 Moć flote: <b style="color:#00d4ff">${fmt(p.power || 0)}</b></div>
+      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">⭐ ${t('index.galaxy.rating')}: <b style="color:#ffcc44">${p.rating || 1000}</b></div>
+      <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">💪 ${t('index.galaxy.fleet_power')}: <b style="color:#00d4ff">${fmt(p.power || 0)}</b></div>
       ${res.metal !== undefined ? `
       <div style="padding:10px;background:rgba(0,0,0,0.3);border-radius:6px">
-        🔩 Metal: <b>${fmt(res.metal)}</b> &nbsp; 💎 Kristal: <b>${fmt(res.crystal)}</b> &nbsp; ⛽ He3: <b>${fmt(res.he3)}</b>
-      </div>` : '<div style="color:#6a90b8;font-size:0.72rem">Resursi nepoznati.</div>'}
+        🔩 ${t('index.galaxy.metal')}: <b>${fmt(res.metal)}</b> &nbsp; 💎 ${t('index.galaxy.crystal')}: <b>${fmt(res.crystal)}</b> &nbsp; ⛽ ${t('index.galaxy.he3')}: <b>${fmt(res.he3)}</b>
+      </div>` : '<div style="color:#6a90b8;font-size:0.72rem">' + t('index.galaxy.resources_unknown') + '</div>'}
     </div>`,
-    [{ label: '⚔️ Napadni', cls: 'btn-danger', fn: () => { closeModal(); galaxyAttackBase(playerId); } },
-     { label: 'Zatvori', cls: '', fn: closeModal }]
+    [{ label: t('index.galaxy.attack_short'), cls: 'btn-danger', fn: () => { closeModal(); galaxyAttackBase(playerId); } },
+     { label: t('ui.close'), cls: '', fn: closeModal }]
   );
 }
 
@@ -610,8 +610,8 @@ function galaxyAttackBase(playerId) {
   if (!p) return;
 
   const energyCost = 1000, bocCost = 1000;
-  if (R.energy < energyCost) { toast('Nedovoljno energije! Treba ' + energyCost, 'warn'); return; }
-  if ((R.bocrypto || 0) < bocCost) { toast('Nedovoljno BoCrypto! Treba ' + bocCost, 'warn'); return; }
+  if (R.energy < energyCost) { toast(t('index.galaxy.no_energy',{cost:energyCost}), 'warn'); return; }
+  if ((R.bocrypto || 0) < bocCost) { toast(t('index.galaxy.no_bocrypto',{cost:bocCost}), 'warn'); return; }
 
   R.energy   -= energyCost;
   R.bocrypto  = (R.bocrypto || 0) - bocCost;
