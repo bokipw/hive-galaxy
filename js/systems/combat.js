@@ -1599,10 +1599,13 @@ function calculateRewards(battle, instanceData, prog) {
 
   // ── CARGO BONUS (modul na brodu povećava resurse) ──
   let cargoBonus = 0;
-  if (typeof fleet !== 'undefined' && fleet) {
-    for (const slot of fleet) {
-      if (!slot || !slot.special_1) continue;
-      const mod = getModuleById(slot.special_1);
+  const fleetSlots = (typeof getAllDeployedSlots === 'function') ? getAllDeployedSlots() : (fleet || []);
+  for (const ship of fleetSlots) {
+    if (!ship) continue;
+    for (let e = 1; e <= 2; e++) {
+      const modId = ship[`special_${e}`];
+      if (!modId) continue;
+      const mod = getModuleById(modId);
       if (mod && mod.effect && mod.effect.type === 'cargo') {
         cargoBonus += mod.effect.bonus || 0;
       }
