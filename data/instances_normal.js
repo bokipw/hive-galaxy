@@ -19,7 +19,12 @@ const INSTANCES_NORMAL = [
   enemyGroups: [{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":1},{"ship_id":"fighter_Reaper_II","count":200,"row":1,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":1,"col":3},{"ship_id":"scout_Swift_II","count":200,"row":2,"col":1},{"ship_id":"scout_Wisp_II","count":240,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Viper_II","count":200,"row":2,"col":3},{"ship_id":"fighter_Outlaw_II","count":200,"row":3,"col":1},{"ship_id":"fighter_Vengeance_II","count":200,"row":3,"col":2},{"ship_id":"fighter_Talon_II","count":200,"row":3,"col":3}],
     boss: 'Alpha Drone',
   bossShip: {"name":"Alpha Drone","structure":200,"shield":75,"armor_val":25,"dps":15,"agility":3,"speed":2},
-    
+    drops: {
+      guaranteed: [],
+      chance: [
+        { item: 'mod_cargo_II', rate: 20 },
+      ],
+    },
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
     desc: 'Prva instanca. Savr—ena za po—etnike i Common opremu.',
     unlock: 'Dostupna od starta',

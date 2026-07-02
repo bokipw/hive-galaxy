@@ -18,7 +18,12 @@ const INSTANCES_HELL = [
   enemyGroups: [{"ship_id":"fighter_Striker_III","count":10000,"row":1,"col":1},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":2},{"ship_id":"fighter_Tempest_III","count":10000,"row":1,"col":3},{"ship_id":"scout_Shadow_III","count":10000,"row":2,"col":1},{"ship_id":"scout_Phantom_III","count":12000,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Razor_III","count":10000,"row":2,"col":3},{"ship_id":"fighter_Corsair_III","count":10000,"row":3,"col":1},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":2},{"ship_id":"fighter_Nemesis_III","count":10000,"row":3,"col":3}],
     boss: 'Alpha Drone',
   bossShip: {"name":"Alpha Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
-    
+    drops: {
+      guaranteed: [],
+      chance: [
+        { item: 'mod_cargo_III', rate: 20 },
+      ],
+    },
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
     desc: 'Prva instanca. Savr—ena za po—etnike i Common opremu.',
     unlock: 'Dostupna od starta',
