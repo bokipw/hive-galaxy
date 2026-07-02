@@ -354,6 +354,111 @@ const CMD_PASSIVE_BONUSES = {
 
 };
 
+// ── Set svih standardizovanih ključeva koje agregator podržava ──
+const _ALL_STD_KEYS = new Set([
+  'atk','hp','shield','shield_regen','hp_regen','evasion','speed',
+  'crit','crit_dmg','dmg_reduction',
+  'heat_atk','kinetic_atk','explosive_atk','magnetic_atk',
+  'heat_reduction','explosive_reduction',
+  'battleship_atk','battleship_hp','fighter_atk','fighter_hp','fighter_evasion','fighter_speed',
+  'cruiser_atk','cruiser_hp','cruiser_shield','scout_atk','scout_evasion','scout_speed',
+  'carrier_atk','carrier_hp','carrier_shield','special_atk','special_hp',
+  'enemy_atk','enemy_crit','enemy_shield',
+  'kill_atk_stack','first_round_atk','berserker_atk','dodge_chance','revive_chance',
+  'double_hit_chance','round_atk_stack','hp_drain_start','hit_stack_atk','kill_hp_regen',
+  'first_round_immune','reflect_dmg','fleet_size_atk','miss_stack_atk','hp_on_miss',
+  'enemy_dot','kill_explosion','enemy_self_chance',
+]);
+
+// ── Mapiranje Undead inline ključeva u standardizovane ──
+const UNDEAD_KEY_MAP = {
+  attack_bonus:     'atk',
+  hp_bonus:         'hp',
+  armor_bonus:      'dmg_reduction',
+  evasion_bonus:    'evasion',
+  speed_bonus:      'speed',
+  crit_bonus:       'crit',
+  shield_bonus:     'shield',
+  dps_bonus:        'atk',
+  agility_bonus:    'evasion',
+  enemy_attack_debuff: 'enemy_atk',
+  enemy_hp_debuff:  'enemy_shield',
+  enemy_dps_debuff: 'enemy_atk',
+  kill_stack_attack:'kill_atk_stack',
+  kill_stack_dps:   'kill_atk_stack',
+  kill_stack_all:   'kill_atk_stack',
+  fleet_size_attack:'fleet_size_atk',
+  first_round_attack:'first_round_atk',
+  last_stand_attack:'berserker_atk',
+  death_resist:     'dmg_reduction',
+};
+
+// ── Klasa-specifično mapiranje (kad Undead ima ship_class polje) ──
+const UNDEAD_CLASS_KEYS = {
+  attack_bonus:  { fighter:'fighter_atk', cruiser:'cruiser_atk', battleship:'battleship_atk', carrier:'carrier_atk', special:'special_atk', scout:'scout_atk' },
+  hp_bonus:      { fighter:'fighter_hp',  cruiser:'cruiser_hp',  battleship:'battleship_hp',  carrier:'carrier_hp',  special:'special_hp' },
+  speed_bonus:   { fighter:'fighter_speed', scout:'scout_speed' },
+  evasion_bonus: { fighter:'fighter_evasion', scout:'scout_evasion' },
+  armor_bonus:   { fighter:null, cruiser:null, battleship:'dmg_reduction', carrier:null, special:null, scout:null },
+};
+
+// ── Pronađi commander definiciju po ID-u ──
+function _findCommanderById(id) {
+  const allCmdArrays = [
+    typeof COMMANDERS !== 'undefined' ? COMMANDERS : [],
+    typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : [],
+    typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : [],
+  ];
+  for (const arr of allCmdArrays) {
+    const found = arr.find(c => c.id === id);
+    if (found) return found;
+  }
+  return null;
+}
+
+// ── Agregiraj Undead inline bonuse ──
+function _applyUndeadPassive(agg, passive) {
+  if (!passive) return;
+  const cls = passive.ship_class || null;
+  const addMaxKeys = ['kill_stack_attack','kill_stack_dps','kill_stack_all','first_round_attack','last_stand_attack','fleet_size_attack','kill_hp_regen',
+    'dodge_chance','revive_chance','double_hit_chance','round_atk_stack','hp_drain_start',
+    'hit_stack_atk','first_round_immune','reflect_dmg','miss_stack_atk','hp_on_miss',
+    'enemy_dot','kill_explosion','enemy_self_chance','berserker_atk','first_round_atk'];
+  const maxKeysSet = new Set(addMaxKeys);
+
+  for (const [key, val] of Object.entries(passive)) {
+    if (key === 'name' || key === 'nameKey' || key === 'desc' || key === 'descKey' || key === 'fleet_recovery' || key === 'ship_class') continue;
+    if (!val || typeof val !== 'number') continue;
+
+    const stdKey = UNDEAD_KEY_MAP[key] || (_ALL_STD_KEYS.has(key) ? key : null);
+    if (!stdKey) continue;
+
+    // Ako ima ship_class, pokušaj klasno mapiranje
+    if (cls && UNDEAD_CLASS_KEYS[key]) {
+      const clsKey = UNDEAD_CLASS_KEYS[key][cls];
+      if (clsKey) {
+        if (maxKeysSet.has(key)) {
+          if (val > (agg[clsKey] || 0)) agg[clsKey] = val;
+        } else {
+          agg[clsKey] = (agg[clsKey] || 0) + val;
+        }
+        continue;
+      }
+      // armor_bonus sa ship_class = battleship → dmg_reduction (global)
+      if (key === 'armor_bonus' && cls) {
+        // padamo na globalni dmg_reduction
+      }
+    }
+
+    // Globalni bonus
+    if (maxKeysSet.has(key)) {
+      if (val > (agg[stdKey] || 0)) agg[stdKey] = val;
+    } else {
+      agg[stdKey] = (agg[stdKey] || 0) + val;
+    }
+  }
+}
+
 // ── HELPER: Uzmi sve bonuse od deployed komandira i agreguj ih ──
 function getAggregatedCommanderBonuses(deployedCommanders) {
   const agg = {
@@ -371,7 +476,6 @@ function getAggregatedCommanderBonuses(deployedCommanders) {
     carrier_atk: 0, carrier_hp: 0, carrier_shield: 0,
     special_atk: 0, special_hp: 0,
     enemy_atk: 0, enemy_crit: 0, enemy_shield: 0,
-    // Per-round/conditional (max od svih komandira, ne sumiramo)
     kill_atk_stack: 0,
     first_round_atk: 0,
     berserker_atk: 0,
@@ -395,35 +499,45 @@ function getAggregatedCommanderBonuses(deployedCommanders) {
   if (!deployedCommanders || deployedCommanders.length === 0) return agg;
 
   deployedCommanders.forEach(cmd => {
-    if (!cmd || !cmd.id) return;
-    const b = CMD_PASSIVE_BONUSES[cmd.id];
-    if (!b) return;
+    // cmd može biti string ID ili objekat sa .id
+    const cmdId = typeof cmd === 'string' ? cmd : (cmd?.id || null);
+    if (!cmdId) return;
 
-    // Additive flat bonuses
-    const addKeys = [
-      'atk','hp','shield','shield_regen','hp_regen','evasion','speed',
-      'crit','crit_dmg','dmg_reduction',
-      'heat_atk','kinetic_atk','explosive_atk','magnetic_atk',
-      'heat_reduction','explosive_reduction',
-      'battleship_atk','battleship_hp',
-      'fighter_atk','fighter_hp','fighter_evasion','fighter_speed',
-      'cruiser_atk','cruiser_hp','cruiser_shield',
-      'scout_atk','scout_evasion','scout_speed',
-      'carrier_atk','carrier_hp','carrier_shield',
-      'special_atk','special_hp',
-      'enemy_atk','enemy_crit','enemy_shield',
-    ];
-    addKeys.forEach(k => { if (b[k]) agg[k] += b[k]; });
+    // 1. Pokušaj standardni CMD_PASSIVE_BONUSES lookup
+    const b = CMD_PASSIVE_BONUSES[cmdId];
+    if (b) {
+      // Additive flat bonuses
+      const addKeys = [
+        'atk','hp','shield','shield_regen','hp_regen','evasion','speed',
+        'crit','crit_dmg','dmg_reduction',
+        'heat_atk','kinetic_atk','explosive_atk','magnetic_atk',
+        'heat_reduction','explosive_reduction',
+        'battleship_atk','battleship_hp',
+        'fighter_atk','fighter_hp','fighter_evasion','fighter_speed',
+        'cruiser_atk','cruiser_hp','cruiser_shield',
+        'scout_atk','scout_evasion','scout_speed',
+        'carrier_atk','carrier_hp','carrier_shield',
+        'special_atk','special_hp',
+        'enemy_atk','enemy_crit','enemy_shield',
+      ];
+      addKeys.forEach(k => { if (b[k]) agg[k] += b[k]; });
 
-    // Max-based (take highest, don't stack same type)
-    const maxKeys = [
-      'kill_atk_stack','first_round_atk','berserker_atk','dodge_chance',
-      'revive_chance','double_hit_chance','round_atk_stack','hp_drain_start',
-      'hit_stack_atk','kill_hp_regen','first_round_immune','reflect_dmg',
-      'fleet_size_atk','miss_stack_atk','hp_on_miss','enemy_dot',
-      'kill_explosion','enemy_self_chance',
-    ];
-    maxKeys.forEach(k => { if (b[k] && b[k] > agg[k]) agg[k] = b[k]; });
+      const maxKeys = [
+        'kill_atk_stack','first_round_atk','berserker_atk','dodge_chance',
+        'revive_chance','double_hit_chance','round_atk_stack','hp_drain_start',
+        'hit_stack_atk','kill_hp_regen','first_round_immune','reflect_dmg',
+        'fleet_size_atk','miss_stack_atk','hp_on_miss','enemy_dot',
+        'kill_explosion','enemy_self_chance',
+      ];
+      maxKeys.forEach(k => { if (b[k] && b[k] > agg[k]) agg[k] = b[k]; });
+      return;
+    }
+
+    // 2. Undead fallback — čitaj inline keys iz commander definicije
+    const def = _findCommanderById(cmdId);
+    if (def && def.passive) {
+      _applyUndeadPassive(agg, def.passive);
+    }
   });
 
   return agg;
