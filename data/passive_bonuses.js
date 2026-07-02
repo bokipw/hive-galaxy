@@ -403,7 +403,7 @@ const UNDEAD_CLASS_KEYS = {
 };
 
 // ── Multiplikatori ocena (F-S) za pasivne bonuse ──
-const GRADE_MULT = { S: 1.5, A: 1.25, B: 1.0, C: 0.75, D: 0.5, F: 0.25 };
+const GRADE_MULT = { S: 1.30, A: 1.20, B: 1.10, C: 1.00, D: 0.90, E: 0.80, F: 0.70 };
 
 const _CLASS_MASTERY_KEY = {
   battleship_atk:'battleship', battleship_hp:'battleship',
