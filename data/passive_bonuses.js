@@ -423,13 +423,8 @@ function _getKeyMult(key, owned) {
   if (cls) { const g = owned?.masteryShips?.[cls]; return GRADE_MULT[g] || 1.0; }
   const wpn = _WEAPON_MASTERY_KEY[key];
   if (wpn) { const g = owned?.masteryWeapons?.[wpn]; return GRADE_MULT[g] || 1.0; }
-  // global → koristi najvišu ocenu komandira (brodsku ili oružanu)
-  const allShips = owned?.masteryShips || {};
-  const allWeapons = owned?.masteryWeapons || {};
-  let best = 1.0;
-  for (const g of Object.values(allShips)) { const m = GRADE_MULT[g] || 1.0; if (m > best) best = m; }
-  for (const g of Object.values(allWeapons)) { const m = GRADE_MULT[g] || 1.0; if (m > best) best = m; }
-  return best;
+  // global → uvek 100%
+  return 1.0;
 }
 
 function _applyMult(val, key, owned) {
