@@ -1597,6 +1597,24 @@ function calculateRewards(battle, instanceData, prog) {
     xp:         Math.floor(baseXp * xpMult),
   };
 
+  // ── CARGO BONUS (modul na brodu povećava resurse) ──
+  let cargoBonus = 0;
+  if (typeof fleet !== 'undefined' && fleet) {
+    for (const slot of fleet) {
+      if (!slot || !slot.special_1) continue;
+      const mod = getModuleById(slot.special_1);
+      if (mod && mod.effect && mod.effect.type === 'cargo') {
+        cargoBonus += mod.effect.bonus || 0;
+      }
+    }
+  }
+  if (cargoBonus > 0) {
+    const cargoPct = 1 + cargoBonus / 10000;
+    rewards.metal   = Math.floor(rewards.metal   * cargoPct);
+    rewards.crystal = Math.floor(rewards.crystal * cargoPct);
+    rewards.he3     = Math.floor(rewards.he3     * cargoPct);
+  }
+
   // Redoslijed modova za minMode provjeru
   const MODE_ORDER = ['easy', 'normal', 'nightmare', 'hell'];
 
