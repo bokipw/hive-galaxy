@@ -99,15 +99,28 @@ function randomGrade(rarity, isSpecialty) {
 
 // ── MASTERY GENERACIJA ──
 function generateMastery(commander) {
+  const minIdx = GRADE_ORDER.indexOf('C');
   const ships = {};
   CMD_SHIP_CLASSES.forEach(cls => {
     const isSp = (commander.specialty_ships || []).includes(cls);
-    ships[cls] = randomGrade(commander.rarity, isSp);
+    let g = randomGrade(commander.rarity, isSp);
+    // ⭐ garantuje minimum C
+    if (isSp) {
+      const idx = GRADE_ORDER.indexOf(g);
+      if (idx < minIdx) g = 'C';
+    }
+    ships[cls] = g;
   });
   const weapons = {};
   CMD_DAMAGE_TYPES.forEach(type => {
     const isSp = (commander.specialty_weapons || []).includes(type);
-    weapons[type] = randomGrade(commander.rarity, isSp);
+    let g = randomGrade(commander.rarity, isSp);
+    // ⭐ garantuje minimum C
+    if (isSp) {
+      const idx = GRADE_ORDER.indexOf(g);
+      if (idx < minIdx) g = 'C';
+    }
+    weapons[type] = g;
   });
   return { ships, weapons };
 }

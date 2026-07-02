@@ -402,6 +402,42 @@ const UNDEAD_CLASS_KEYS = {
   armor_bonus:   { fighter:null, cruiser:null, battleship:'dmg_reduction', carrier:null, special:null, scout:null },
 };
 
+// ── Multiplikatori ocena (F-S) za pasivne bonuse ──
+const GRADE_MULT = { S: 1.5, A: 1.25, B: 1.0, C: 0.75, D: 0.5, F: 0.25 };
+
+const _CLASS_MASTERY_KEY = {
+  battleship_atk:'battleship', battleship_hp:'battleship',
+  fighter_atk:'fighter', fighter_hp:'fighter', fighter_evasion:'fighter', fighter_speed:'fighter',
+  cruiser_atk:'cruiser', cruiser_hp:'cruiser', cruiser_shield:'cruiser',
+  scout_atk:'scout', scout_evasion:'scout', scout_speed:'scout',
+  carrier_atk:'carrier', carrier_hp:'carrier', carrier_shield:'carrier',
+  special_atk:'special', special_hp:'special',
+};
+
+const _WEAPON_MASTERY_KEY = {
+  kinetic_atk:'kinetic', heat_atk:'heat', explosive_atk:'explosive', magnetic_atk:'magnetic',
+};
+
+function _getKeyMult(key, owned) {
+  const cls = _CLASS_MASTERY_KEY[key];
+  if (cls) { const g = owned?.masteryShips?.[cls]; return GRADE_MULT[g] || 1.0; }
+  const wpn = _WEAPON_MASTERY_KEY[key];
+  if (wpn) { const g = owned?.masteryWeapons?.[wpn]; return GRADE_MULT[g] || 1.0; }
+  // global → prosek svih brodskih ocena
+  const classes = ['scout','fighter','cruiser','battleship','carrier','special'];
+  let total = 0, count = 0;
+  for (const c of classes) {
+    const g = owned?.masteryShips?.[c];
+    if (g) { total += GRADE_MULT[g] || 0; count++; }
+  }
+  return count > 0 ? total / count : 1.0;
+}
+
+function _applyMult(val, key, owned) {
+  const m = _getKeyMult(key, owned);
+  return m !== 1.0 ? Math.round(val * m) : val;
+}
+
 // ── Pronađi commander definiciju po ID-u ──
 function _findCommanderById(id) {
   const allCmdArrays = [
@@ -416,8 +452,8 @@ function _findCommanderById(id) {
   return null;
 }
 
-// ── Agregiraj Undead inline bonuse ──
-function _applyUndeadPassive(agg, passive) {
+// ── Agregiraj Undead inline bonuse (sa mastery multiplikatorom) ──
+function _applyUndeadPassive(agg, passive, owned) {
   if (!passive) return;
   const cls = passive.ship_class || null;
   const addMaxKeys = ['kill_stack_attack','kill_stack_dps','kill_stack_all','first_round_attack','last_stand_attack','fleet_size_attack','kill_hp_regen',
@@ -433,28 +469,24 @@ function _applyUndeadPassive(agg, passive) {
     const stdKey = UNDEAD_KEY_MAP[key] || (_ALL_STD_KEYS.has(key) ? key : null);
     if (!stdKey) continue;
 
+    let targetKey = stdKey;
+    let useMax = maxKeysSet.has(key);
+
     // Ako ima ship_class, pokušaj klasno mapiranje
     if (cls && UNDEAD_CLASS_KEYS[key]) {
       const clsKey = UNDEAD_CLASS_KEYS[key][cls];
       if (clsKey) {
-        if (maxKeysSet.has(key)) {
-          if (val > (agg[clsKey] || 0)) agg[clsKey] = val;
-        } else {
-          agg[clsKey] = (agg[clsKey] || 0) + val;
-        }
-        continue;
-      }
-      // armor_bonus sa ship_class = battleship → dmg_reduction (global)
-      if (key === 'armor_bonus' && cls) {
-        // padamo na globalni dmg_reduction
+        targetKey = clsKey;
+      } else if (key === 'armor_bonus' && cls) {
+        // armor_bonus sa ship_class → globalni dmg_reduction (ostaje stdKey)
       }
     }
 
-    // Globalni bonus
-    if (maxKeysSet.has(key)) {
-      if (val > (agg[stdKey] || 0)) agg[stdKey] = val;
+    const finalVal = _applyMult(val, targetKey, owned);
+    if (useMax) {
+      if (finalVal > (agg[targetKey] || 0)) agg[targetKey] = finalVal;
     } else {
-      agg[stdKey] = (agg[stdKey] || 0) + val;
+      agg[targetKey] = (agg[targetKey] || 0) + finalVal;
     }
   }
 }
