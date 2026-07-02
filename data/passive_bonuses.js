@@ -423,14 +423,8 @@ function _getKeyMult(key, owned) {
   if (cls) { const g = owned?.masteryShips?.[cls]; return GRADE_MULT[g] || 1.0; }
   const wpn = _WEAPON_MASTERY_KEY[key];
   if (wpn) { const g = owned?.masteryWeapons?.[wpn]; return GRADE_MULT[g] || 1.0; }
-  // global → prosek svih brodskih ocena
-  const classes = ['scout','fighter','cruiser','battleship','carrier','special'];
-  let total = 0, count = 0;
-  for (const c of classes) {
-    const g = owned?.masteryShips?.[c];
-    if (g) { total += GRADE_MULT[g] || 0; count++; }
-  }
-  return count > 0 ? total / count : 1.0;
+  // global → uvek 100%
+  return 1.0;
 }
 
 function _applyMult(val, key, owned) {
