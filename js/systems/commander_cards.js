@@ -609,7 +609,7 @@ function showCardDetail(cmdId) {
   const modalActions = owned
     ? [
         { label: isActive ? '✓ Aktivan Komandir' : '★ Postavi kao Aktivnog', cls: isActive ? 'btn-g' : 'btn-gold', fn: () => { setActiveCommander(cmdId); closeModal(); } },
-        { label: '🗑️ Uništi', cls: 'btn-err', fn: () => { destroyCommander(cmdId); closeModal(); } },
+        { label: '🔥 Spali', cls: 'btn-r', fn: () => { destroyCommander(cmdId); closeModal(); } },
         { label: 'Zatvori', cls: '', fn: closeModal }
       ]
     : [{ label: 'Zatvori', cls: '', fn: closeModal }];
