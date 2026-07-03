@@ -696,8 +696,9 @@ function destroyCommander(cmdId) {
 
   window.ownedCommanders.splice(idx, 1);
 
-  // Nagrada: ključevi = nivo komandira (1-100)
-  const keyReward = burnedLevel;
+  // Nagrada: ključevi = nivo × rarity multiplikator
+  const rarityMult = { C: 1, R: 2.5, E: 5, L: 10 }[def?.rarity] || 1;
+  const keyReward = Math.floor(burnedLevel * rarityMult);
   if (keyReward > 0) {
     if (typeof R !== 'undefined' && R.keys !== undefined) R.keys += keyReward;
     toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
