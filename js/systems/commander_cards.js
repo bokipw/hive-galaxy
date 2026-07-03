@@ -609,6 +609,7 @@ function showCardDetail(cmdId) {
   const modalActions = owned
     ? [
         { label: isActive ? '✓ Aktivan Komandir' : '★ Postavi kao Aktivnog', cls: isActive ? 'btn-g' : 'btn-gold', fn: () => { setActiveCommander(cmdId); closeModal(); } },
+        { label: '🗑️ Uništi', cls: 'btn-err', fn: () => { destroyCommander(cmdId); closeModal(); } },
         { label: 'Zatvori', cls: '', fn: closeModal }
       ]
     : [{ label: 'Zatvori', cls: '', fn: closeModal }];
@@ -657,6 +658,44 @@ function setActiveCommander(cmdId) {
   toast(`✅ ${def ? def.icon+' '+def.name : cmdId} je sada aktivan komandir!`, 'ok');
   saveGame();
   renderCommanderCards();
+}
+
+// ── UNIŠTI KOMANDIRA ──
+function destroyCommander(cmdId) {
+  if (!window.ownedCommanders) return;
+  const idx = window.ownedCommanders.findIndex(o => o.id === cmdId);
+  if (idx === -1) { toast('❌ Nemaš ovog komandira!', 'err'); return; }
+
+  // Skini sa deploymenta ako je deployovan
+  if (window._deployedCommanders?.includes(cmdId)) {
+    undeployCommander(cmdId);
+  }
+
+  // Vrati brodove u hangar
+  clearCommanderFleet(cmdId);
+
+  // Očisti _cmdFleet referencu
+  if (window._cmdFleet) {
+    window._cmdFleet = window._cmdFleet.map(id => id === cmdId ? null : id);
+  }
+
+  // Ako je bio aktivan, postavi drugog
+  if (window._activeCommander === cmdId) {
+    const next = (window._deployedCommanders || [])[0] || null;
+    window._activeCommander = next;
+  }
+
+  window.ownedCommanders.splice(idx, 1);
+  saveGame();
+  renderCommanderCards();
+
+  const allCmds = [
+    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
+    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
+    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
+  ];
+  const def = allCmds.find(c => c.id === cmdId);
+  toast(`💀 ${def ? def.icon+' '+def.name : cmdId} uništen!`, 'ok');
 }
 
 // ── PULL ANIMACIJA ──
