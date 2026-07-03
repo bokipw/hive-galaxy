@@ -94,18 +94,21 @@ async function _savePvpSnapshot(saveData) {
   const pid = _getPlayerId();
   const username = _getUsername();
   if (!pid || !window._supa) return;
-  const isHive = window._loginType === 'hive';
   try {
-    const deployedFleet = typeof buildPvpFleetLocal === 'function' ? buildPvpFleetLocal().map(u => ({
-      ship_id: u.ship_id, name: u.name, count: u.count, hp: u.hp, dps: u.dps,
-      shield: u.shield, shield_regen: u.shieldRegen, agility: u.agility,
-      speed: u.speed, armor: u.armor, dmg_reduction: u.dmgReduction || 0,
-      crit_bonus: u.critBonus || 0, engine_special: u.engineSpecial || null,
-    })) : [];
+    let deployedFleet = [];
+    try {
+      if (typeof buildPvpFleetLocal === 'function') {
+        deployedFleet = buildPvpFleetLocal().map(u => ({
+          ship_id: u.ship_id, name: u.name, count: u.count, hp: u.hp, dps: u.dps,
+          shield: u.shield, shield_regen: u.shieldRegen, agility: u.agility,
+          speed: u.speed, armor: u.armor, dmg_reduction: u.dmgReduction || 0,
+          crit_bonus: u.critBonus || 0, engine_special: u.engineSpecial || null,
+        }));
+      }
+    } catch(_) {}
     const commanders = (saveData.deployedCommanders || []).map(c => ({
       id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
     }));
-    const score = (saveData.R && saveData.R.score) || 0;
     const level = (saveData.commander && saveData.commander.level) || 1;
     const payload = {
       player_id: pid, username,
@@ -120,10 +123,13 @@ async function _savePvpSnapshot(saveData) {
       },
       updated_at: new Date().toISOString()
     };
-    await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
-    });
+    const { error } = await window._supa.from('pvp_snapshots').upsert(payload);
+    if (error && (error.status === 401 || error.status === 403)) {
+      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+      });
+    }
   } catch(e) { console.error('[pvpSave] exception:', e); }
 }
 
