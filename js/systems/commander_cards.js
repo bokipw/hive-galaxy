@@ -713,6 +713,7 @@ function destroyCommander(cmdId) {
   const keyReward = Math.floor(burnedLevel * rarityMult);
   if (keyReward > 0) {
     if (typeof R !== 'undefined' && R.keys !== undefined) R.keys += keyReward;
+    if (typeof updateResUI === 'function') updateResUI();
     toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
   } else {
     toast(`💀 ${def ? def.icon+' '+def.name : cmdId} uništen!`, 'ok');
