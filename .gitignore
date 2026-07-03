@@ -1,0 +1,12 @@
+node_modules/
+package-lock.json
+package.json
+fix_roman_numerals.js
+fix_serbian_cyrillic.js
+generate_translations.js
+transform*.js
+translate_missing.js
+tmp_*
+lang/index_en_map.json
+
+admin.html

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>HIVE GALAXY — Odrzavanje</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050a14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+    color: #00d4ff;
+    text-align: center;
+    gap: 20px;
+  }
+  .gear { font-size: 5rem; animation: spin 4s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 { font-size: 2rem; font-weight: 900; letter-spacing: 6px; }
+  p { font-size: 0.95rem; color: #4a6a8a; max-width: 440px; line-height: 1.7; }
+  .dot-anim::after {
+    content: '';
+    animation: dots 2s steps(4, end) infinite;
+  }
+  @keyframes dots {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+  }
+</style>
+</head>
+<body>
+<div class="gear">&#9881;</div>
+<h1>ODRZAVANJE</h1>
+<p>Server je trenutno u rezimu odrzavanja.<br>Molimo sacekajte, igra ce uskoro biti dostupna<span class="dot-anim"></span></p>
+
+<script>
+(function() {
+  var _sb = supabase.createClient(
+    'https://exmbmwukqssvgmhysamo.supabase.co',
+    'sb_publishable_159bwy4x2wZgI53Ant1i0w_8d9X0wl8'
+  );
+
+  function check() {
+    _sb.from('hive_profiles').select('is_premium').eq('id', '__system__').single().then(function(res) {
+      if (!res.error && res.data && res.data.is_premium === true) {
+        // Maintenance je jos uvijek ON — provjeri ponovo za 10s
+        setTimeout(check, 10000);
+      } else {
+        // Maintenance je OFF — vrati igraca na login
+        window.location.replace('index.html');
+      }
+    }).catch(function() {
+      setTimeout(check, 10000);
+    });
+  }
+
+  // Provjeri svakih 10 sekundi
+  setTimeout(check, 10000);
+})();
+</script>
+</body>
+</html>
