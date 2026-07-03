@@ -171,6 +171,23 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
     .map((slot, idx) => {
       const ship      = getShipById(slot.ship_id);
       const stats     = calcSlotStats(slot);
+      // ── PRIMIJENI OCENU KOMANDIRA NA STATOVE BRODA ──
+      const _cmdId = slot._ownerCmdId;
+      if (_cmdId) {
+        const _owned = (window.ownedCommanders || []).find(o => o.id === _cmdId);
+        if (_owned) {
+          const _class = getShipClass(slot.ship_id);
+          const _grade = _owned.masteryShips?.[_class];
+          const _mult = (typeof GRADE_MULT !== 'undefined' ? GRADE_MULT : { S:1.3, A:1.2, B:1.1, C:1.0, D:0.9, E:0.8, F:0.7 })[_grade] || 1.0;
+          if (_mult !== 1.0) {
+            stats.hp        = Math.floor(stats.hp * _mult);
+            stats.dps       = Math.floor(stats.dps * _mult);
+            stats.shield    = Math.floor(stats.shield * _mult);
+            stats.armor     = Math.floor(stats.armor * _mult);
+            stats.structure = Math.floor(stats.structure * _mult);
+          }
+        }
+      }
       const fleetIdx  = fleet.indexOf(slot);
 
       // Prikupi sve shield slotove (shield_1, shield_2, shield_3)
