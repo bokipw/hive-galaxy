@@ -711,8 +711,10 @@ function destroyCommander(cmdId) {
   // Nagrada: ključevi = nivo × rarity multiplikator
   const rarityMult = { C: 1, R: 2.5, E: 5, L: 10 }[def?.rarity] || 1;
   const keyReward = Math.floor(burnedLevel * rarityMult);
+  console.log('[destroy] rarity=', def?.rarity, 'level=', burnedLevel, 'mult=', rarityMult, 'reward=', keyReward, 'R.keys before=', R.keys);
   if (keyReward > 0) {
-    if (typeof R !== 'undefined' && R.keys !== undefined) R.keys += keyReward;
+    R.keys = (R.keys || 0) + keyReward;
+    console.log('[destroy] R.keys after=', R.keys);
     if (typeof updateResUI === 'function') updateResUI();
     toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
   } else {
