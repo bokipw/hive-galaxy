@@ -103,6 +103,49 @@ function buildPvpFleetLocal() {
     if (cls === 'scout')     { if (cb.scout_atk) dps *= (1+cb.scout_atk/100); if (cb.scout_evasion) agility = Math.min(90,agility+cb.scout_evasion); if (cb.scout_speed) speed += cb.scout_speed; }
     if (cls === 'carrier')   { if (cb.carrier_atk) dps *= (1+cb.carrier_atk/100); if (cb.carrier_hp) hp *= (1+cb.carrier_hp/100); }
     if (cls === 'special')   { if (cb.special_atk) dps *= (1+cb.special_atk/100); if (cb.special_hp) hp *= (1+cb.special_hp/100); }
+    // ── FLEET COMMANDER SLOT BONUSI (fleet panel) + faction synergy ──
+    if (typeof calcFleetBonuses === 'function') {
+      const fb = calcFleetBonuses();
+      if (fb && fb.bonuses) {
+        if (fb.bonuses.attack)  dps    *= (1 + fb.bonuses.attack  / 100);
+        if (fb.bonuses.defense)       dmgRed += fb.bonuses.defense;
+        if (fb.bonuses.speed)   speed += fb.bonuses.speed;
+        if (fb.bonuses.shield)  shield *= (1 + fb.bonuses.shield / 100);
+        if (fb.bonuses.evasion) agility = Math.min(90, agility + fb.bonuses.evasion);
+        if (fb.bonuses.crit)    critBonus += fb.bonuses.crit;
+        if (fb.bonuses.hp)      { hp *= (1 + fb.bonuses.hp / 100); shield *= (1 + fb.bonuses.hp / 100); }
+        if (fb.bonuses.shield_regen) regen *= (1 + fb.bonuses.shield_regen / 100);
+        if (fb.bonuses.dmg_reduction)   dmgRed += fb.bonuses.dmg_reduction;
+        if (fb.bonuses.crit_dmg)        {} // crit_dmg se ne koristi u PVP simulaciji
+        if (fb.bonuses.dodge_chance)    {} // dodge_chance se ne koristi u PVP simulaciji
+        if (fb.bonuses.hp_regen)        {} // hp_regen se ne koristi u PVP simulaciji
+      }
+    }
+    // ── GRADE MULTIPLIER (mastery) ──
+    if (typeof masteryShips !== 'undefined' && masteryShips && typeof GRADE_MULT !== 'undefined') {
+      const shipClass = slot.ship_id.split('_')[0];
+      const gMult = GRADE_MULT[masteryShips[shipClass]] || 1;
+      if (gMult !== 1) {
+        dps    = Math.floor(dps    * gMult);
+        hp     = Math.floor(hp     * gMult);
+        shield = Math.floor(shield * gMult);
+      }
+      // Weapon grade multiplier — uzmi prvi naoružani weapon_type
+      if (typeof masteryWeapons !== 'undefined' && masteryWeapons) {
+        let wepGrade = 1;
+        for (let wi = 1; wi <= 4; wi++) {
+          const wid = slot['weapon_' + wi];
+          if (wid && typeof getWeaponById === 'function') {
+            const wpn = getWeaponById(wid);
+            if (wpn && wpn.weapon_type && masteryWeapons[wpn.weapon_type]) {
+              wepGrade = GRADE_MULT[masteryWeapons[wpn.weapon_type]] || 1;
+              break;
+            }
+          }
+        }
+        if (wepGrade !== 1) dps = Math.floor(dps * wepGrade);
+      }
+    }
     // Defense buildings
     if (bldAtkBonus)       dps    *= (1 + bldAtkBonus / 100);
     if (bldCritBonus)      critBonus += bldCritBonus;
@@ -268,7 +311,7 @@ async function refreshOpponents() {
   if (!window._supa) { if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.cannotLoad')+'</div>'; return; }
   var myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
   if (!myId) { window._currentOpponents = []; if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.noOpponents')+'</div>'; return; }
-  var res = await window._supa.from('pvp_snapshots').select('*').neq('id',myId).order('rating',{ascending:false}).limit(20);
+  var res = await window._supa.from('pvp_snapshots').select('*').neq('player_id',myId).order('rating',{ascending:false}).limit(20);
   var data = res.data, error = res.error;
   if (error || !data || data.length===0) {
     window._currentOpponents = [];

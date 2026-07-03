@@ -48,8 +48,8 @@ async function loadGalaxyPlayerBases() {
   const myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
   if (!myId) return Promise.resolve();
   const { data } = await window._supa.from('pvp_snapshots')
-    .select('id,username,rating,power,fleet,resources')
-    .neq('id', myId)
+    .select('player_id,username,rating,power,fleet,resources')
+    .neq('player_id', myId)
     .order('rating', { ascending: false })
     .limit(25);
   _galaxyPlayerBases = (data || []).filter(p => p.fleet && p.fleet.length > 0);
@@ -580,12 +580,12 @@ function triggerFleetRecoveryMission(planetId, planet, fleetSlots, battle) {
 
 // ── GALAXY PVP — NAPAD NA TUĐU BAZU ──
 function galaxyEspionage(playerId) {
-  const p = _galaxyPlayerBases.find(b => b.id === playerId);
+  const p = _galaxyPlayerBases.find(b => (b.id || b.player_id) === playerId);
   if (!p) return;
   // Koristimo postojeći espionage sistem ako je dostupan
   if (typeof openSendDronesModal === 'function') {
     // Pronađi index u window._currentOpponents ako postoji
-    const idx = (window._currentOpponents || []).findIndex(o => o.id === playerId);
+    const idx = (window._currentOpponents || []).findIndex(o => (o.id || o.player_id) === playerId);
     if (idx >= 0) { openSendDronesModal(idx); return; }
   }
   // Fallback — prikaži resurse direktno

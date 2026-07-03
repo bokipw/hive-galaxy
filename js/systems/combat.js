@@ -163,9 +163,11 @@ function applyCommanderPassivesToBattle(playerSide, enemySide) {
   }
 
   // ── FLEET COMMANDER SLOT BONUSI (fleet panel) ──
+  window._fleetRecoveryBonus = 0; // reset
   if (typeof calcFleetBonuses === 'function') {
     const fb = calcFleetBonuses();
     if (fb && fb.bonuses) {
+      if (fb.bonuses.fleet_recovery) window._fleetRecoveryBonus = fb.bonuses.fleet_recovery;
       playerSide.forEach(unit => {
         if (fb.bonuses.attack)  { unit.dps     = Math.floor(unit.dps  * (1 + fb.bonuses.attack  / 100)); unit.baseDps = unit.dps; }
         if (fb.bonuses.defense) { unit._dmgReduction = (unit._dmgReduction || 0) + fb.bonuses.defense; }
@@ -1891,7 +1893,7 @@ function applyPlayerLosses(battle) {
     }
   });
 
-  // ── FLEET RECOVERY (Undead pasivna sposobnost) ──
+  // ── FLEET RECOVERY (Undead pasivna sposobnost + faction synergy) ──
   if (anyLost && recoveryData.length > 0) {
     // Nađi najveći fleet_recovery% među svim deployovanim komandirima
     let recoveryPct = 0;
@@ -1905,8 +1907,12 @@ function applyPlayerLosses(battle) {
         recoveryCmd = cmd;
       }
     });
+    // Dodaj faction synergy fleet_recovery bonus (od calcFleetBonuses)
+    if (window._fleetRecoveryBonus) {
+      recoveryPct += window._fleetRecoveryBonus;
+    }
 
-    if (recoveryPct > 0 && recoveryCmd) {
+    if (recoveryPct > 0) {
       const totalRecovered = [];
       recoveryData.forEach(item => {
         const recoveredCount = Math.floor(item.count * (recoveryPct / 100));
@@ -1924,8 +1930,9 @@ function applyPlayerLosses(battle) {
 
       if (totalRecovered.length > 0) {
         const totalShips = totalRecovered.reduce((s, x) => s + x.count, 0);
-        addLog(`☠️ ${recoveryCmd.name} (${recoveryPct}% Fleet Recovery) — ${totalShips} brodova vraćeno u hangar!`);
-        window._lastFleetRecovery = { cmd: recoveryCmd.name, pct: recoveryPct, ships: totalShips };
+        const sourceName = recoveryCmd ? recoveryCmd.name : 'Synergy';
+        addLog(`☠️ ${sourceName} (${recoveryPct}% Fleet Recovery) — ${totalShips} brodova vraćeno u hangar!`);
+        window._lastFleetRecovery = { cmd: sourceName, pct: recoveryPct, ships: totalShips };
       }
     }
   }

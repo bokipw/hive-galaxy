@@ -1164,7 +1164,7 @@ function renderCommanderCards() {
 const FACTION_BONUS_MAP = {
   vanguard: 'attack', sentinel: 'defense', technocrat: 'economy', shadow: 'evasion', solar: 'shield',
   krall: 'hp', ethereal: 'crit', synth: 'shield_regen', hive: 'speed', ancient: 'dmg_reduction',
-  revenant: 'atk', wraith_lord: 'dodge_chance', tomb_keeper: 'hp_regen', kaels_chosen: 'crit_dmg',
+  revenant: 'fleet_recovery', wraith_lord: 'dodge_chance', tomb_keeper: 'hp_regen', kaels_chosen: 'crit_dmg',
 };
 // Flat synergy bonus per group (3 commanders) for non-slot bonus types
 const FACTION_SYNERGY_FLAT = {
