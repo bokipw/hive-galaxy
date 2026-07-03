@@ -714,7 +714,7 @@ function destroyCommander(cmdId) {
   if (keyReward > 0) {
     R.keys = (R.keys || 0) + keyReward;
     if (typeof updateResUI === 'function') updateResUI();
-    toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
+    toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🃏 ključeva`, 'ok');
   } else {
     toast(`💀 ${def ? def.icon+' '+def.name : cmdId} uništen!`, 'ok');
   }

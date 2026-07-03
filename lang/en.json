@@ -186,9 +186,9 @@
     "openPack": "Open pack",
     "noCommanders": "No commanders yet.",
     "burn": "🔥 Burn",
-    "burnReward": "🔥 Burning gives: {keys} 🗝️ keys",
-    "burnRewardFormula": "Level × {mult} = {keys} 🗝️",
-    "burnConfirm": "🔥 Really burn this commander? You'll get {keys} 🗝️ keys! This cannot be undone!"
+    "burnReward": "🔥 Burning gives: {keys} 🃏 keys",
+    "burnRewardFormula": "Level × {mult} = {keys} 🃏",
+    "burnConfirm": "🔥 Really burn this commander? You'll get {keys} 🃏 keys! This cannot be undone!"
   },
   "blueprints": {
     "title": "📐 BLUEPRINTS",

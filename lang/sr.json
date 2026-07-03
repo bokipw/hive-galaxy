@@ -186,9 +186,9 @@
     "openPack": "Otvori paket",
     "noCommanders": "Nemaš komandanata.",
     "burn": "🔥 Spali",
-    "burnReward": "🔥 Spaljivanjem dobijaš: {keys} 🗝️ ključeva",
-    "burnRewardFormula": "Nivo × {mult} = {keys} 🗝️",
-    "burnConfirm": "🔥 Sigurno želiš da spališ ovog komandira? Dobićeš {keys} 🗝️ ključeva! Ova radnja je trajna!"
+    "burnReward": "🔥 Spaljivanjem dobijaš: {keys} 🃏 ključeva",
+    "burnRewardFormula": "Nivo × {mult} = {keys} 🃏",
+    "burnConfirm": "🔥 Sigurno želiš da spališ ovog komandira? Dobićeš {keys} 🃏 ključeva! Ova radnja je trajna!"
   },
   "blueprints": {
     "title": "📐 PLANOVI",
