@@ -1,20 +1,20 @@
 // ============================================================
-// HIVE GALAXY — data/instances_easy.js
-// Easy instance data — C tier blueprinti, 1 flota
+// HIVE GALAXY ??? data/instances_easy.js
+// Easy instance data ??? C tier blueprinti, 1 flota
 // ============================================================
 
 const INSTANCES_EASY = [
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // STANDARDNE INSTANCE (1-30)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'inst_1', name: 'Instanca 1', type: 'standard', number: 1,
     difficulty: 1,
     xp: 100,
     min_power: 100000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
     enemyGroups: [
       {"ship_id":"scout_Swift_I","count":5,"row":1,"col":1},
@@ -31,7 +31,7 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
-    desc: 'Prva instanca. Savršena za početnike i Common opremu.',
+    desc: 'Prva instanca. Savr??ena za po??etnike i Common opremu.',
     unlock: 'Dostupna od starta',
   },
 
@@ -40,7 +40,7 @@ const INSTANCES_EASY = [
     difficulty: 1,
     xp: 117,
     min_power: 100000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Rogue Drones I', 'Pirate Scout I'],
     enemyGroups: [
       {"ship_id":"scout_Stinger_I","count":5,"row":1,"col":1},
@@ -59,8 +59,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [250, 600], crystal: [120, 350], he3: [60, 180] },
-    desc: 'Nastavak početne zone. Mali Štit I garantirani drop.',
-    unlock: 'Instanca 1 završena',
+    desc: 'Nastavak po??etne zone. Mali ??tit I garantirani drop.',
+    unlock: 'Instanca 1 zavr??ena',
   },
 
   {
@@ -68,7 +68,7 @@ const INSTANCES_EASY = [
     difficulty: 1,
     xp: 137,
     min_power: 100000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
     enemyGroups: [
       {"ship_id":"scout_Wisp_I","count":5,"row":1,"col":1},
@@ -88,8 +88,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [300, 700], crystal: [150, 400], he3: [70, 200] },
-    desc: 'Taktički pogon garantiran. Dobra za early armor buildup.',
-    unlock: 'Instanca 2 završena',
+    desc: 'Takti??ki pogon garantiran. Dobra za early armor buildup.',
+    unlock: 'Instanca 2 zavr??ena',
   },
 
   {
@@ -97,7 +97,7 @@ const INSTANCES_EASY = [
     difficulty: 2,
     xp: 161,
     min_power: 220000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Rogue Drones II', 'Marauder Scout I'],
     enemyGroups: [
       {"ship_id":"scout_Swift_I","count":8,"row":1,"col":1},
@@ -120,8 +120,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [400, 900], crystal: [200, 500], he3: [90, 250] },
-    desc: 'Srednji Štit I uvijek pada. Prijelaz u mid-tier opremu.',
-    unlock: 'Instanca 3 završena',
+    desc: 'Srednji ??tit I uvijek pada. Prijelaz u mid-tier opremu.',
+    unlock: 'Instanca 3 zavr??ena',
   },
 
   {
@@ -129,7 +129,7 @@ const INSTANCES_EASY = [
     difficulty: 2,
     xp: 189,
     min_power: 220000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Marauder Fighter I', 'Rogue Drones III'],
     enemyGroups: [
       {"ship_id":"scout_Wisp_I","count":8,"row":1,"col":1},
@@ -153,8 +153,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [500, 1100], crystal: [250, 600], he3: [110, 300] },
-    desc: 'Teški Drive I garantiran. Dobar za Lovce i Krstarice.',
-    unlock: 'Instanca 4 završena',
+    desc: 'Te??ki Drive I garantiran. Dobar za Lovce i Krstarice.',
+    unlock: 'Instanca 4 zavr??ena',
   },
 
   {
@@ -162,7 +162,7 @@ const INSTANCES_EASY = [
     difficulty: 2,
     xp: 221,
     min_power: 220000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Marauder Fighter I', 'Vex Cruiser I'],
     enemyGroups: [
       {"ship_id":"scout_Stinger_I","count":8,"row":1,"col":1},
@@ -184,8 +184,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [600, 1300], crystal: [300, 700], he3: [130, 360] },
-    desc: 'Jaki Štit I. Ključna instanca za Krstarice i Bojne Brodove.',
-    unlock: 'Instanca 5 završena',
+    desc: 'Jaki ??tit I. Klju??na instanca za Krstarice i Bojne Brodove.',
+    unlock: 'Instanca 5 zavr??ena',
   },
 
   {
@@ -193,7 +193,7 @@ const INSTANCES_EASY = [
     difficulty: 2,
     xp: 259,
     min_power: 220000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Marauder Fighter II', 'Vex Cruiser I'],
     enemyGroups: [
       {"ship_id":"scout_Glimmer_I","count":8,"row":1,"col":1},
@@ -217,7 +217,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [700, 1500], crystal: [350, 800], he3: [150, 420] },
     desc: 'Basic Drive II garantiran. Dobar za early farming.',
-    unlock: 'Instanca 6 završena',
+    unlock: 'Instanca 6 zavr??ena',
   },
 
   {
@@ -225,7 +225,7 @@ const INSTANCES_EASY = [
     difficulty: 3,
     xp: 304,
     min_power: 484000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Vex Cruiser I', 'Marauder Fighter II'],
     enemyGroups: [
       {"ship_id":"fighter_Fury_I","count":10,"row":1,"col":1},
@@ -250,8 +250,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [800, 1800], crystal: [400, 950], he3: [180, 500] },
-    desc: 'Mali Štit II garantiran. Prelazak u mid-tier instance.',
-    unlock: 'Instanca 7 završena',
+    desc: 'Mali ??tit II garantiran. Prelazak u mid-tier instance.',
+    unlock: 'Instanca 7 zavr??ena',
   },
 
   {
@@ -259,7 +259,7 @@ const INSTANCES_EASY = [
     difficulty: 3,
     xp: 356,
     min_power: 484000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
     enemyGroups: [
       {"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":1},
@@ -285,8 +285,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [900, 2000], crystal: [450, 1100], he3: [200, 560] },
-    desc: 'Taktički Drive II garantiran. Uvod u Magnetic oružja.',
-    unlock: 'Instanca 8 završena',
+    desc: 'Takti??ki Drive II garantiran. Uvod u Magnetic oru??ja.',
+    unlock: 'Instanca 8 zavr??ena',
   },
 
   {
@@ -294,7 +294,7 @@ const INSTANCES_EASY = [
     difficulty: 3,
     xp: 418,
     min_power: 484000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Vex Cruiser II', 'Khal Battleship I'],
     enemyGroups: [
       {"ship_id":"fighter_Fury_I","count":10,"row":1,"col":1},
@@ -319,8 +319,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [1100, 2400], crystal: [550, 1300], he3: [240, 660] },
-    desc: 'Srednji Štit II garantiran. Solid mid-game instanca.',
-    unlock: 'Instanca 9 završena',
+    desc: 'Srednji ??tit II garantiran. Solid mid-game instanca.',
+    unlock: 'Instanca 9 zavr??ena',
   },
 
   {
@@ -328,7 +328,7 @@ const INSTANCES_EASY = [
     difficulty: 3,
     xp: 489,
     min_power: 484000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Khal Battleship I', 'Vex Cruiser III'],
     enemyGroups: [
       {"ship_id":"fighter_Talon_I","count":10,"row":1,"col":1},
@@ -356,8 +356,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [1300, 2800], crystal: [650, 1500], he3: [280, 760] },
-    desc: 'Kinetic Cannon II garantiran. Važna instanca za DPS buildove.',
-    unlock: 'Instanca 10 završena',
+    desc: 'Kinetic Cannon II garantiran. Va??na instanca za DPS buildove.',
+    unlock: 'Instanca 10 zavr??ena',
   },
 
   {
@@ -365,7 +365,7 @@ const INSTANCES_EASY = [
     difficulty: 4,
     xp: 574,
     min_power: 1065000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
     enemyGroups: [
       {"ship_id":"fighter_Fury_I","count":20,"row":1,"col":1},
@@ -393,8 +393,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [1600, 3500], crystal: [800, 1900], he3: [350, 950] },
-    desc: 'Jaki Štit II garantiran. Uvod u Rare-tier opremu.',
-    unlock: 'Instanca 11 završena',
+    desc: 'Jaki ??tit II garantiran. Uvod u Rare-tier opremu.',
+    unlock: 'Instanca 11 zavr??ena',
   },
 
   {
@@ -402,7 +402,7 @@ const INSTANCES_EASY = [
     difficulty: 4,
     xp: 672,
     min_power: 1065000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Khal Battleship II', 'Nexus Carrier I'],
     enemyGroups: [
       {"ship_id":"fighter_Reaper_I","count":20,"row":1,"col":1},
@@ -433,7 +433,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [1900, 4200], crystal: [950, 2200], he3: [420, 1100] },
     desc: 'Basic Drive III garantiran. Dobar za sve klase.',
-    unlock: 'Instanca 12 završena',
+    unlock: 'Instanca 12 zavr??ena',
   },
 
   {
@@ -441,7 +441,7 @@ const INSTANCES_EASY = [
     difficulty: 4,
     xp: 788,
     min_power: 1065000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Nexus Carrier I', 'Khal Battleship III'],
     enemyGroups: [
       {"ship_id":"fighter_Talon_I","count":20,"row":1,"col":1},
@@ -468,8 +468,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [2200, 4800], crystal: [1100, 2600], he3: [500, 1300] },
-    desc: 'Mali Štit III garantiran. Ključan za Izviđače.',
-    unlock: 'Instanca 13 završena',
+    desc: 'Mali ??tit III garantiran. Klju??an za Izvi??a??e.',
+    unlock: 'Instanca 13 zavr??ena',
   },
 
   {
@@ -477,7 +477,7 @@ const INSTANCES_EASY = [
     difficulty: 4,
     xp: 924,
     min_power: 1065000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Nexus Carrier II', 'Omega Battleship I'],
     enemyGroups: [
       {"ship_id":"fighter_Vengeance_I","count":20,"row":1,"col":1},
@@ -509,8 +509,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [2600, 5500], crystal: [1300, 3000], he3: [580, 1550] },
-    desc: 'Taktički Drive III garantiran. Kraj early-mid game zone.',
-    unlock: 'Instanca 14 završena',
+    desc: 'Takti??ki Drive III garantiran. Kraj early-mid game zone.',
+    unlock: 'Instanca 14 zavr??ena',
   },
 
   {
@@ -518,7 +518,7 @@ const INSTANCES_EASY = [
     difficulty: 5,
     xp: 1083,
     min_power: 2343000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Omega Battleship I', 'Nexus Carrier II'],
     enemyGroups: [
       {"ship_id":"cruiser_Defender_I","count":23,"row":1,"col":1},
@@ -547,8 +547,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [3000, 6500], crystal: [1500, 3500], he3: [680, 1800] },
-    desc: 'Srednji Štit III garantiran. Ulazak u late-mid game.',
-    unlock: 'Instanca 15 završena',
+    desc: 'Srednji ??tit III garantiran. Ulazak u late-mid game.',
+    unlock: 'Instanca 15 zavr??ena',
   },
 
   {
@@ -556,7 +556,7 @@ const INSTANCES_EASY = [
     difficulty: 5,
     xp: 1269,
     min_power: 2343000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Omega Battleship II', 'Void Cruiser I'],
     enemyGroups: [
       {"ship_id":"cruiser_Bulwark_I","count":23,"row":1,"col":1},
@@ -582,8 +582,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [3500, 7500], crystal: [1750, 4000], he3: [800, 2100] },
-    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosače.',
-    unlock: 'Instanca 16 završena',
+    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosa??e.',
+    unlock: 'Instanca 16 zavr??ena',
   },
 
   {
@@ -591,7 +591,7 @@ const INSTANCES_EASY = [
     difficulty: 5,
     xp: 1487,
     min_power: 2343000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Cruiser I', 'Omega Battleship II'],
     enemyGroups: [
       {"ship_id":"cruiser_Shield_I","count":23,"row":1,"col":1},
@@ -618,8 +618,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [4000, 8500], crystal: [2000, 4600], he3: [920, 2400] },
-    desc: 'Jaki Štit III garantiran. Kraj standardnih instanci mid-tiera.',
-    unlock: 'Instanca 17 završena',
+    desc: 'Jaki ??tit III garantiran. Kraj standardnih instanci mid-tiera.',
+    unlock: 'Instanca 17 zavr??ena',
   },
 
   {
@@ -627,7 +627,7 @@ const INSTANCES_EASY = [
     difficulty: 6,
     xp: 1743,
     min_power: 5154000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Cruiser II', 'Phantom Battleship I'],
     enemyGroups: [
       {"ship_id":"cruiser_Defender_I","count":51,"row":1,"col":1},
@@ -650,8 +650,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [4800, 10000], crystal: [2400, 5500], he3: [1100, 2900] },
-    desc: 'Ulazak u Rare zonu. Šansa za Phase Štit i Stealth Drive.',
-    unlock: 'Instanca 18 završena',
+    desc: 'Ulazak u Rare zonu. ??ansa za Phase ??tit i Stealth Drive.',
+    unlock: 'Instanca 18 zavr??ena',
   },
 
   {
@@ -659,7 +659,7 @@ const INSTANCES_EASY = [
     difficulty: 6,
     xp: 2043,
     min_power: 5154000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Phantom Battleship I', 'Void Carrier I'],
     enemyGroups: [
       {"ship_id":"cruiser_Guardian_I","count":51,"row":1,"col":1},
@@ -683,8 +683,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [5500, 12000], crystal: [2750, 6500], he3: [1300, 3400] },
-    desc: 'Sprint Drive I garantiran. Particle Štit šansa.',
-    unlock: 'Instanca 19 završena',
+    desc: 'Sprint Drive I garantiran. Particle ??tit ??ansa.',
+    unlock: 'Instanca 19 zavr??ena',
   },
 
   {
@@ -692,7 +692,7 @@ const INSTANCES_EASY = [
     difficulty: 6,
     xp: 2395,
     min_power: 5154000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Carrier I', 'Phantom Battleship II'],
     enemyGroups: [
       {"ship_id":"cruiser_Shield_I","count":51,"row":1,"col":1},
@@ -719,8 +719,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [6500, 14000], crystal: [3250, 7500], he3: [1550, 4000] },
-    desc: 'Heat Diffusion Štit I garantiran. Ulazak u visoke standard instance.',
-    unlock: 'Instanca 20 završena',
+    desc: 'Heat Diffusion ??tit I garantiran. Ulazak u visoke standard instance.',
+    unlock: 'Instanca 20 zavr??ena',
   },
 
   {
@@ -728,7 +728,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 2807,
     min_power: 11338000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Phantom Battleship II', 'Void Carrier II'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":1},
@@ -752,8 +752,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [4000, 9000], he3: [1900, 4800] },
-    desc: 'Stealth Drive I garantiran. Šansa za Quantum Lance.',
-    unlock: 'Instanca 21 završena',
+    desc: 'Stealth Drive I garantiran. ??ansa za Quantum Lance.',
+    unlock: 'Instanca 21 zavr??ena',
   },
 
   {
@@ -761,7 +761,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 3290,
     min_power: 11338000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Carrier II', 'Nexus Flagship I'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":57,"row":1,"col":1},
@@ -789,8 +789,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [9500, 20000], crystal: [4750, 10500], he3: [2200, 5600] },
-    desc: 'Uvod u endgame standardnih instanci. Šansa za Rare-Epic opremu.',
-    unlock: 'Instanca 22 završena',
+    desc: 'Uvod u endgame standardnih instanci. ??ansa za Rare-Epic opremu.',
+    unlock: 'Instanca 22 zavr??ena',
   },
 
   {
@@ -798,7 +798,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 3857,
     min_power: 11338000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Nexus Flagship I', 'Omega Carrier I'],
     enemyGroups: [
       {"ship_id":"battleship_Behemoth_I","count":57,"row":1,"col":1},
@@ -830,7 +830,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [11000, 23000], crystal: [5500, 12500], he3: [2600, 6600] },
     desc: 'Sprint Drive II garantiran.',
-    unlock: 'Instanca 23 završena',
+    unlock: 'Instanca 23 zavr??ena',
   },
 
   {
@@ -838,7 +838,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 4520,
     min_power: 24944000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Omega Carrier I', 'Nexus Flagship II'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":1},
@@ -870,7 +870,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [13000, 28000], crystal: [6500, 15000], he3: [3100, 7900] },
     desc: 'Heat Diffusion II garantiran. Kraj mid standardnih instanci.',
-    unlock: 'Instanca 24 završena',
+    unlock: 'Instanca 24 zavr??ena',
   },
 
   {
@@ -878,7 +878,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 5298,
     min_power: 24944000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Nexus Flagship II', 'Omega Carrier II'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":125,"row":1,"col":1},
@@ -914,7 +914,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [16000, 34000], crystal: [8000, 18000], he3: [3800, 9500] },
     desc: 'Stealth Drive II garantiran. Ulazak u endgame standardnih instanci.',
-    unlock: 'Instanca 25 završena',
+    unlock: 'Instanca 25 zavr??ena',
   },
 
   {
@@ -922,7 +922,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 6210,
     min_power: 24944000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Omega Carrier II', 'Void Flagship I'],
     enemyGroups: [
       {"ship_id":"battleship_Behemoth_I","count":125,"row":1,"col":1},
@@ -953,8 +953,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [19000, 40000], crystal: [9500, 21500], he3: [4500, 11500] },
-    desc: 'Teška instanca. Dobar izvor Epic komponenti.',
-    unlock: 'Instanca 26 završena',
+    desc: 'Te??ka instanca. Dobar izvor Epic komponenti.',
+    unlock: 'Instanca 26 zavr??ena',
   },
 
   {
@@ -962,7 +962,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 7279,
     min_power: 54876000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Flagship I', 'Omega Carrier III'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":275,"row":1,"col":1},
@@ -996,8 +996,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [23000, 48000], crystal: [11500, 26000], he3: [5500, 14000] },
-    desc: 'Particle Stun III garantiran. Šansa za Quantum Drive.',
-    unlock: 'Instanca 27 završena',
+    desc: 'Particle Stun III garantiran. ??ansa za Quantum Drive.',
+    unlock: 'Instanca 27 zavr??ena',
   },
 
   {
@@ -1005,7 +1005,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 8532,
     min_power: 54876000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Omega Carrier III', 'Void Flagship II'],
     enemyGroups: [
       {"ship_id":"battleship_Behemoth_I","count":275,"row":1,"col":1},
@@ -1030,7 +1030,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [28000, 58000], crystal: [14000, 31000], he3: [6600, 17000] },
     desc: 'Heat Diffusion III garantiran. Predposljednja standardna instanca.',
-    unlock: 'Instanca 28 završena',
+    unlock: 'Instanca 28 zavr??ena',
   },
 
   {
@@ -1038,7 +1038,7 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 120727000,
-    icon: '🌌',
+    icon: '????',
     enemies: ['Void Flagship II', 'Omega Dreadnought'],
     enemyGroups: [
       {"ship_id":"battleship_Titan_I","count":605,"row":1,"col":1},
@@ -1069,19 +1069,19 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [35000, 72000], crystal: [17500, 37000], he3: [8500, 21000] },
     desc: 'Posljednja standardna instanca. Quantum Drive garantiran. Prolaz za Restricted.',
-    unlock: 'Instanca 29 završena',
+    unlock: 'Instanca 29 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // RESTRICTED INSTANCE (1-10)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'rest_1', name: 'Restricted 1', type: 'restricted', number: 1,
     difficulty: 5,
     xp: 1000,
     min_power: 20000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Marauder I', 'Phase Hunter I'],
   enemyGroups: [{"ship_id":"fighter_Outlaw_I","count":10,"row":1,"col":1},{"ship_id":"fighter_Outlaw_I","count":10,"row":1,"col":2},{"ship_id":"fighter_Talon_I","count":10,"row":1,"col":3},{"ship_id":"scout_Wisp_I","count":10,"row":2,"col":1},{"ship_id":"scout_Glimmer_I","count":12,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Wisp_I","count":10,"row":2,"col":3},{"ship_id":"fighter_Vengeance_I","count":10,"row":3,"col":1},{"ship_id":"fighter_Outlaw_I","count":10,"row":3,"col":2},{"ship_id":"fighter_Talon_I","count":10,"row":3,"col":3}],
     boss: 'Phase Lord I',
@@ -1095,8 +1095,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [5000, 11000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Prva Restricted instanca. Phase Štit I garantiran.',
-    unlock: 'Instanca 15+ završena',
+    desc: 'Prva Restricted instanca. Phase ??tit I garantiran.',
+    unlock: 'Instanca 15+ zavr??ena',
   },
 
   {
@@ -1104,7 +1104,7 @@ const INSTANCES_EASY = [
     difficulty: 6,
     xp: 1292,
     min_power: 30000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Marauder II', 'Quantum Hunter I'],
   enemyGroups: [{"ship_id":"cruiser_Paladin_I","count":7,"row":1,"col":1},{"ship_id":"cruiser_Bulwark_I","count":7,"row":1,"col":2},{"ship_id":"cruiser_Guardian_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Reaper_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Vengeance_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Outlaw_I","count":7,"row":2,"col":3},{"ship_id":"cruiser_Defender_I","count":7,"row":3,"col":1},{"ship_id":"cruiser_Bastion_I","count":7,"row":3,"col":2},{"ship_id":"cruiser_Rampart_I","count":7,"row":3,"col":3}],
     boss: 'Quantum Lord I',
@@ -1118,8 +1118,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
-    desc: 'Space-Time Magnetic Štit I garantiran. Epic Motori šansa.',
-    unlock: 'Restricted 1 završena',
+    desc: 'Space-Time Magnetic ??tit I garantiran. Epic Motori ??ansa.',
+    unlock: 'Restricted 1 zavr??ena',
   },
 
   {
@@ -1127,7 +1127,7 @@ const INSTANCES_EASY = [
     difficulty: 6,
     xp: 1668,
     min_power: 40000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Cruiser I', 'Phase Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Shield_I","count":7,"row":1,"col":1},{"ship_id":"cruiser_Shield_I","count":7,"row":1,"col":2},{"ship_id":"cruiser_Rampart_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Ravager_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Talon_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Talon_I","count":7,"row":2,"col":3},{"ship_id":"cruiser_Bastion_I","count":7,"row":3,"col":1},{"ship_id":"cruiser_Guardian_I","count":7,"row":3,"col":2},{"ship_id":"cruiser_Bulwark_I","count":7,"row":3,"col":3}],
     boss: 'Phase Lord II',
@@ -1141,8 +1141,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [11000, 23000], crystal: [7000, 15000], he3: [3500, 9000] },
-    desc: 'Phase Štit II garantiran.',
-    unlock: 'Restricted 2 završena',
+    desc: 'Phase ??tit II garantiran.',
+    unlock: 'Restricted 2 zavr??ena',
   },
 
   {
@@ -1150,7 +1150,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 2154,
     min_power: 55000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Battleship I', 'Quantum Hunter II'],
   enemyGroups: [{"ship_id":"cruiser_Bastion_I","count":7,"row":1,"col":1},{"ship_id":"cruiser_Guardian_I","count":7,"row":1,"col":2},{"ship_id":"cruiser_Rampart_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Fury_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Reaper_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Fury_I","count":7,"row":2,"col":3},{"ship_id":"cruiser_Bulwark_I","count":7,"row":3,"col":1},{"ship_id":"cruiser_Defender_I","count":7,"row":3,"col":2},{"ship_id":"cruiser_Guardian_I","count":7,"row":3,"col":3}],
     boss: 'Quantum Lord II',
@@ -1165,7 +1165,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [15000, 32000], crystal: [9500, 20000], he3: [4800, 12000] },
     desc: 'Space-Time Magnetic II garantiran. Epic zone.',
-    unlock: 'Restricted 3 završena',
+    unlock: 'Restricted 3 zavr??ena',
   },
 
   {
@@ -1173,7 +1173,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 2783,
     min_power: 70000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Carrier I', 'Phase Dreadnought I'],
   enemyGroups: [{"ship_id":"cruiser_Bastion_I","count":7,"row":1,"col":1},{"ship_id":"cruiser_Paladin_I","count":7,"row":1,"col":2},{"ship_id":"cruiser_Rampart_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Fury_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Vengeance_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Outlaw_I","count":7,"row":2,"col":3},{"ship_id":"cruiser_Shield_I","count":7,"row":3,"col":1},{"ship_id":"cruiser_Bastion_I","count":7,"row":3,"col":2},{"ship_id":"cruiser_Defender_I","count":7,"row":3,"col":3}],
     boss: 'Phase Dreadnought Alpha',
@@ -1187,8 +1187,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 27000], he3: [6500, 16500] },
-    desc: 'Phase Štit III garantiran. Polovina Restricted zone.',
-    unlock: 'Restricted 4 završena',
+    desc: 'Phase ??tit III garantiran. Polovina Restricted zone.',
+    unlock: 'Restricted 4 zavr??ena',
   },
 
   {
@@ -1196,7 +1196,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 3594,
     min_power: 90000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Battleship II', 'Void Hunter I'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_I","count":5,"row":1,"col":1},{"ship_id":"battleship_Titan_I","count":5,"row":1,"col":2},{"ship_id":"battleship_Colossus_I","count":5,"row":1,"col":3},{"ship_id":"cruiser_Guardian_I","count":5,"row":2,"col":1},{"ship_id":"cruiser_Paladin_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Rampart_I","count":5,"row":2,"col":3},{"ship_id":"battleship_Titan_I","count":5,"row":3,"col":1},{"ship_id":"battleship_Obliterator_I","count":5,"row":3,"col":2},{"ship_id":"battleship_Obliterator_I","count":5,"row":3,"col":3}],
     boss: 'Void Hunter Prime',
@@ -1211,7 +1211,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [26000, 55000], crystal: [16500, 35000], he3: [8200, 21000] },
     desc: 'Space-Time Magnetic III garantiran. Ulazak u endgame Restricted.',
-    unlock: 'Restricted 5 završena',
+    unlock: 'Restricted 5 zavr??ena',
   },
 
   {
@@ -1219,7 +1219,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 4642,
     min_power: 115000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Elite Carrier II', 'Void Hunter II'],
   enemyGroups: [{"ship_id":"battleship_Titan_I","count":5,"row":1,"col":1},{"ship_id":"battleship_Colossus_I","count":5,"row":1,"col":2},{"ship_id":"battleship_Colossus_I","count":5,"row":1,"col":3},{"ship_id":"cruiser_Guardian_I","count":5,"row":2,"col":1},{"ship_id":"cruiser_Paladin_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bulwark_I","count":5,"row":2,"col":3},{"ship_id":"battleship_Colossus_I","count":5,"row":3,"col":1},{"ship_id":"battleship_Imperator_I","count":5,"row":3,"col":2},{"ship_id":"battleship_Obliterator_I","count":5,"row":3,"col":3}],
     boss: 'Void Destroyer',
@@ -1234,7 +1234,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [33000, 69000], crystal: [21000, 44000], he3: [10500, 27000] },
     desc: 'Berserker Drive III garantiran. Visoka Restricted zona.',
-    unlock: 'Restricted 6 završena',
+    unlock: 'Restricted 6 zavr??ena',
   },
 
   {
@@ -1242,7 +1242,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 5995,
     min_power: 145000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Apex Battleship I', 'Void Flagship I'],
   enemyGroups: [{"ship_id":"battleship_Titan_I","count":5,"row":1,"col":1},{"ship_id":"battleship_Obliterator_I","count":5,"row":1,"col":2},{"ship_id":"battleship_Imperator_I","count":5,"row":1,"col":3},{"ship_id":"cruiser_Guardian_I","count":5,"row":2,"col":1},{"ship_id":"cruiser_Shield_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Defender_I","count":5,"row":2,"col":3},{"ship_id":"battleship_Obliterator_I","count":5,"row":3,"col":1},{"ship_id":"battleship_Colossus_I","count":5,"row":3,"col":2},{"ship_id":"battleship_Imperator_I","count":5,"row":3,"col":3}],
     boss: 'Apex Destroyer I',
@@ -1256,8 +1256,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Eos Phase Štit I garantiran. Pristup Carrier brodovima.',
-    unlock: 'Restricted 7 završena',
+    desc: 'Eos Phase ??tit I garantiran. Pristup Carrier brodovima.',
+    unlock: 'Restricted 7 zavr??ena',
   },
 
   {
@@ -1265,7 +1265,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 7743,
     min_power: 185000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Apex Battleship II', 'Void Flagship II'],
   enemyGroups: [{"ship_id":"battleship_Titan_I","count":5,"row":1,"col":1},{"ship_id":"battleship_Behemoth_I","count":5,"row":1,"col":2},{"ship_id":"battleship_Imperator_I","count":5,"row":1,"col":3},{"ship_id":"cruiser_Bulwark_I","count":5,"row":2,"col":1},{"ship_id":"cruiser_Bastion_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Shield_I","count":5,"row":2,"col":3},{"ship_id":"battleship_Behemoth_I","count":5,"row":3,"col":1},{"ship_id":"battleship_Colossus_I","count":5,"row":3,"col":2},{"ship_id":"battleship_Colossus_I","count":5,"row":3,"col":3}],
     boss: 'Apex Destroyer II',
@@ -1280,7 +1280,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [55000, 115000], crystal: [34000, 72000], he3: [17000, 44000] },
     desc: 'Eos Phase II garantiran. Predposljednja Restricted instanca.',
-    unlock: 'Restricted 8 završena',
+    unlock: 'Restricted 8 zavr??ena',
   },
 
   {
@@ -1288,7 +1288,7 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 240000,
-    icon: '🔒',
+    icon: '????',
     enemies: ['Apex Carrier I', 'Omega Flagship I'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Obliterator_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":3,"row":3,"col":3}],
     boss: 'Omega Apex Supreme',
@@ -1303,20 +1303,20 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [70000, 145000], crystal: [44000, 92000], he3: [22000, 57000] },
-    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Ključ za Trial.',
-    unlock: 'Restricted 9 završena',
+    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Klju?? za Trial.',
+    unlock: 'Restricted 9 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
-  // TRIAL INSTANCE (1-10) — timed, ranked
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  // TRIAL INSTANCE (1-10) ??? timed, ranked
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'trial_1', name: 'Trial 1', type: 'trial', number: 1,
     difficulty: 6,
     xp: 1292,
     min_power: 50000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 30,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Drone Wave I', 'Trial Cruiser I'],
@@ -1335,7 +1335,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [15000, 35000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Prva Trial instanca. Zahtijeva brzinu. S rank = Epic modul.',
-    unlock: 'Restricted 5 završena',
+    unlock: 'Restricted 5 zavr??ena',
   },
 
   {
@@ -1343,7 +1343,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 2154,
     min_power: 70000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 28,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Fighter Wave I', 'Trial Battleship I'],
@@ -1362,7 +1362,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [20000, 44000], crystal: [13000, 29000], he3: [6500, 17000] },
     desc: 'Trial 2. Overload III i Berserker III za S rank.',
-    unlock: 'Trial 1 završena',
+    unlock: 'Trial 1 zavr??ena',
   },
 
   {
@@ -1370,7 +1370,7 @@ const INSTANCES_EASY = [
     difficulty: 7,
     xp: 2154,
     min_power: 90000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 25,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Carrier Wave I', 'Trial Battleship II'],
@@ -1389,7 +1389,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [27000, 56000], crystal: [17000, 37000], he3: [8500, 22000] },
     desc: 'Trial 3. Hyperdrive I i Annihilator I za S rank.',
-    unlock: 'Trial 2 završena',
+    unlock: 'Trial 2 zavr??ena',
   },
 
   {
@@ -1397,7 +1397,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 3594,
     min_power: 120000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 22,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Flagship Wave I', 'Trial Carrier II'],
@@ -1416,7 +1416,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [36000, 74000], crystal: [22500, 47000], he3: [11000, 28000] },
     desc: 'Trial 4. Mid-tier Trial. Brodovi klase special pojavljuju se.',
-    unlock: 'Trial 3 završena',
+    unlock: 'Trial 3 zavr??ena',
   },
 
   {
@@ -1424,7 +1424,7 @@ const INSTANCES_EASY = [
     difficulty: 8,
     xp: 3594,
     min_power: 155000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 20,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Dreadnought I', 'Trial Carrier III'],
@@ -1442,8 +1442,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [46000, 96000], crystal: [29000, 62000], he3: [14500, 37000] },
-    desc: 'Trial 5. Hyperdrive II šansa za S rank.',
-    unlock: 'Trial 4 završena',
+    desc: 'Trial 5. Hyperdrive II ??ansa za S rank.',
+    unlock: 'Trial 4 zavr??ena',
   },
 
   {
@@ -1451,7 +1451,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 5995,
     min_power: 200000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 18,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Flagship II', 'Trial Dreadnought II'],
@@ -1469,8 +1469,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [60000, 125000], crystal: [38000, 80000], he3: [19000, 48000] },
-    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona počinje.',
-    unlock: 'Trial 5 završena',
+    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona po??inje.',
+    unlock: 'Trial 5 zavr??ena',
   },
 
   {
@@ -1478,7 +1478,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 5995,
     min_power: 260000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 15,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Omega Carrier I', 'Trial Flagship III'],
@@ -1497,7 +1497,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [78000, 162000], crystal: [49000, 103000], he3: [24500, 62000] },
     desc: 'Trial 7. Celestial II i Fleet Commander I za S rank.',
-    unlock: 'Trial 6 završena',
+    unlock: 'Trial 6 zavr??ena',
   },
 
   {
@@ -1505,7 +1505,7 @@ const INSTANCES_EASY = [
     difficulty: 9,
     xp: 5995,
     min_power: 330000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 12,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Apex Carrier I', 'Trial Omega Flagship I'],
@@ -1525,7 +1525,7 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [100000, 210000], crystal: [63000, 133000], he3: [31500, 80000] },
     desc: 'Trial 8. Chrono Matrix II i VoidWarp III za S rank.',
-    unlock: 'Trial 7 završena',
+    unlock: 'Trial 7 zavr??ena',
   },
 
   {
@@ -1533,7 +1533,7 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 420000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 10,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Apex Flagship I', 'Trial Omega Carrier II'],
@@ -1553,8 +1553,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [130000, 270000], crystal: [82000, 172000], he3: [41000, 104000] },
-    desc: 'Trial 9. Celestial III za S rank. Gotovo nemoguće bez endgame opreme.',
-    unlock: 'Trial 8 završena',
+    desc: 'Trial 9. Celestial III za S rank. Gotovo nemogu??e bez endgame opreme.',
+    unlock: 'Trial 8 zavr??ena',
   },
 
   {
@@ -1562,13 +1562,13 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 540000,
-    icon: '⚔️',
+    icon: '??????',
     time_limit_minutes: 8,
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Supreme Flagship', 'Trial Apex Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Titan_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Harbinger_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":3}],
-    boss: 'Trial Supreme Omega — Final Boss',
-  bossShip: {"name":"Trial Supreme Omega — Final Boss","structure":216000,"shield":81000,"armor_val":27000,"dps":16200,"agility":10,"speed":7},
+    boss: 'Trial Supreme Omega ??? Final Boss',
+  bossShip: {"name":"Trial Supreme Omega ??? Final Boss","structure":216000,"shield":81000,"armor_val":27000,"dps":16200,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_fleet_commander_III', 'mod_chrono_matrix_III'],
       rank_A: ['eng_celestial_III', 'sh_void_field_III'],
@@ -1584,16 +1584,16 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [170000, 350000], crystal: [107000, 225000], he3: [53000, 135000] },
     desc: 'Zadnja Trial instanca. Fleet Commander III za S rank. Samo endgame elite.',
-    unlock: 'Trial 9 završena',
+    unlock: 'Trial 9 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // HUMANOID INSTANCE (1-10)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'human_1', name: 'Humanoid 1', type: 'humanoid', number: 1,
-    difficulty: 4, min_power: 15000, icon: '👤',
+    difficulty: 4, min_power: 15000, icon: '????',
     xp: 464,
     enemies: ['Humanoid Militia', 'Humanoid Light Cruiser'],
   enemyGroups: [{"ship_id":"cruiser_Paladin_I","count":10,"row":1,"col":1},{"ship_id":"cruiser_Bulwark_I","count":10,"row":1,"col":2},{"ship_id":"cruiser_Rampart_I","count":10,"row":1,"col":3},{"ship_id":"scout_Specter_I","count":10,"row":2,"col":1},{"ship_id":"scout_Specter_I","count":12,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Glimmer_I","count":10,"row":2,"col":3},{"ship_id":"cruiser_Paladin_I","count":10,"row":3,"col":1},{"ship_id":"cruiser_Shield_I","count":10,"row":3,"col":2},{"ship_id":"cruiser_Shield_I","count":10,"row":3,"col":3}],
@@ -1607,12 +1607,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Uvod u Humanoid zone. Aegis Shield I garantiran.',
-    unlock: 'Instanca 15 završena',
+    unlock: 'Instanca 15 zavr??ena',
   },
 
   {
     id: 'human_2', name: 'Humanoid 2', type: 'humanoid', number: 2,
-    difficulty: 5, min_power: 25000, icon: '👤',
+    difficulty: 5, min_power: 25000, icon: '????',
     xp: 774,
     enemies: ['Humanoid Marine Squad', 'Humanoid Destroyer'],
   enemyGroups: [{"ship_id":"cruiser_Paladin_I","count":10,"row":1,"col":1},{"ship_id":"cruiser_Bastion_I","count":10,"row":1,"col":2},{"ship_id":"cruiser_Bulwark_I","count":10,"row":1,"col":3},{"ship_id":"scout_Viper_I","count":10,"row":2,"col":1},{"ship_id":"scout_Specter_I","count":12,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_I","count":10,"row":2,"col":3},{"ship_id":"cruiser_Guardian_I","count":10,"row":3,"col":1},{"ship_id":"cruiser_Bastion_I","count":10,"row":3,"col":2},{"ship_id":"cruiser_Bastion_I","count":10,"row":3,"col":3}],
@@ -1625,12 +1625,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [8000, 18000], crystal: [5000, 12000], he3: [2500, 6500] },
     desc: 'Sentinel Drive I garantiran.',
-    unlock: 'Humanoid 1 završena',
+    unlock: 'Humanoid 1 zavr??ena',
   },
 
   {
     id: 'human_3', name: 'Humanoid 3', type: 'humanoid', number: 3,
-    difficulty: 6, min_power: 40000, icon: '👤',
+    difficulty: 6, min_power: 40000, icon: '????',
     xp: 1292,
     enemies: ['Humanoid Fighter Squadron', 'Humanoid Cruiser Wing'],
   enemyGroups: [{"ship_id":"battleship_Colossus_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Colossus_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":1,"col":3},{"ship_id":"cruiser_Shield_I","count":7,"row":2,"col":1},{"ship_id":"cruiser_Shield_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Defender_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Obliterator_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":3}],
@@ -1643,13 +1643,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [12000, 26000], crystal: [8000, 17000], he3: [4000, 10500] },
-    desc: 'Aegis Štit I garantiran. Šansa za Independence Flagship.',
-    unlock: 'Humanoid 2 završena',
+    desc: 'Aegis ??tit I garantiran. ??ansa za Independence Flagship.',
+    unlock: 'Humanoid 2 zavr??ena',
   },
 
   {
     id: 'human_4', name: 'Humanoid 4', type: 'humanoid', number: 4,
-    difficulty: 6, min_power: 55000, icon: '👤',
+    difficulty: 6, min_power: 55000, icon: '????',
     xp: 1292,
     enemies: ['Humanoid Battlegroup', 'Humanoid Carrier Wing'],
   enemyGroups: [{"ship_id":"battleship_Colossus_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Titan_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":1,"col":3},{"ship_id":"cruiser_Paladin_I","count":7,"row":2,"col":1},{"ship_id":"cruiser_Paladin_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Bulwark_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Behemoth_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":3,"col":3}],
@@ -1663,12 +1663,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [16000, 34000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Aegis II garantiran.',
-    unlock: 'Humanoid 3 završena',
+    unlock: 'Humanoid 3 zavr??ena',
   },
 
   {
     id: 'human_5', name: 'Humanoid 5', type: 'humanoid', number: 5,
-    difficulty: 7, min_power: 65000, icon: '👤',
+    difficulty: 7, min_power: 65000, icon: '????',
     xp: 2154,
     enemies: ['Humanoid Battleship Wing', 'Humanoid Carrier'],
   enemyGroups: [{"ship_id":"battleship_Colossus_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Imperator_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":1,"col":3},{"ship_id":"cruiser_Paladin_I","count":7,"row":2,"col":1},{"ship_id":"cruiser_Paladin_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Rampart_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Behemoth_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":3}],
@@ -1681,13 +1681,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 28000], he3: [6500, 17000] },
-    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship šansa.',
-    unlock: 'Humanoid 4 završena',
+    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship ??ansa.',
+    unlock: 'Humanoid 4 zavr??ena',
   },
 
   {
     id: 'human_6', name: 'Humanoid 6', type: 'humanoid', number: 6,
-    difficulty: 7, min_power: 90000, icon: '👤',
+    difficulty: 7, min_power: 90000, icon: '????',
     xp: 2154,
     enemies: ['Humanoid Heavy Battleship', 'Humanoid Flagship'],
   enemyGroups: [{"ship_id":"battleship_Colossus_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Titan_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":1,"col":3},{"ship_id":"cruiser_Paladin_I","count":7,"row":2,"col":1},{"ship_id":"cruiser_Rampart_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"cruiser_Shield_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Imperator_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":3}],
@@ -1700,12 +1700,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [28000, 58000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Sentinel II garantiran.',
-    unlock: 'Humanoid 5 završena',
+    unlock: 'Humanoid 5 zavr??ena',
   },
 
   {
     id: 'human_7', name: 'Humanoid 7', type: 'humanoid', number: 7,
-    difficulty: 8, min_power: 140000, icon: '👤',
+    difficulty: 8, min_power: 140000, icon: '????',
     xp: 3594,
     enemies: ['Humanoid Apex Carrier', 'Humanoid Dreadnought'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Colossus_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Colossus_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Atlas_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":5,"row":3,"col":3}],
@@ -1718,13 +1718,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Aegis III garantiran. Independence II šansa.',
-    unlock: 'Humanoid 6 završena',
+    desc: 'Aegis III garantiran. Independence II ??ansa.',
+    unlock: 'Humanoid 6 zavr??ena',
   },
 
   {
     id: 'human_8', name: 'Humanoid 8', type: 'humanoid', number: 8,
-    difficulty: 9, min_power: 180000, icon: '👤',
+    difficulty: 9, min_power: 180000, icon: '????',
     xp: 5995,
     enemies: ['Humanoid Apex Carrier', 'Humanoid Supreme Flagship'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Colossus_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Behemoth_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":3}],
@@ -1737,13 +1737,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [55000, 115000], crystal: [35000, 73000], he3: [17500, 44500] },
-    desc: 'Aegis III garantiran. Quick Assault Flagship šansa.',
-    unlock: 'Humanoid 7 završena',
+    desc: 'Aegis III garantiran. Quick Assault Flagship ??ansa.',
+    unlock: 'Humanoid 7 zavr??ena',
   },
 
   {
     id: 'human_9', name: 'Humanoid 9', type: 'humanoid', number: 9,
-    difficulty: 9, min_power: 260000, icon: '👤',
+    difficulty: 9, min_power: 260000, icon: '????',
     xp: 5995,
     enemies: ['Humanoid Omega Fleet', 'Humanoid Colossus'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Obliterator_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Colossus_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":3}],
@@ -1756,12 +1756,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [80000, 166000], crystal: [50000, 106000], he3: [25000, 64000] },
     desc: 'Sentinel III garantiran.',
-    unlock: 'Humanoid 8 završena',
+    unlock: 'Humanoid 8 zavr??ena',
   },
 
   {
     id: 'human_10', name: 'Humanoid 10', type: 'humanoid', number: 10,
-    difficulty: 10, min_power: 400000, icon: '👤',
+    difficulty: 10, min_power: 400000, icon: '????',
     xp: 10000,
     enemies: ['Humanoid Ultimate Fleet', 'Humanoid God Flagship'],
   enemyGroups: [{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Colossus_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Obliterator_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Behemoth_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":3}],
@@ -1775,17 +1775,17 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [120000, 250000], crystal: [76000, 160000], he3: [38000, 96000] },
-    desc: 'Kraj Humanoid zone. Quick Assault II šansa.',
-    unlock: 'Humanoid 9 završena',
+    desc: 'Kraj Humanoid zone. Quick Assault II ??ansa.',
+    unlock: 'Humanoid 9 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // PIRATE INSTANCE (1-10)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'pirate_1', name: 'Pirate 1', type: 'pirate', number: 1,
-    difficulty: 4, min_power: 15000, icon: '🏴‍☠️',
+    difficulty: 4, min_power: 15000, icon: '?????????????',
     xp: 464,
     enemies: ['Raider Corvette', 'Marauder Frigate'],
   enemyGroups: [{"ship_id":"fighter_Ravager_I","count":10,"row":1,"col":1},{"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":2},{"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":3},{"ship_id":"scout_Wisp_I","count":10,"row":2,"col":1},{"ship_id":"scout_Swift_I","count":12,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Specter_I","count":10,"row":2,"col":3},{"ship_id":"fighter_Talon_I","count":10,"row":3,"col":1},{"ship_id":"fighter_Ravager_I","count":10,"row":3,"col":2},{"ship_id":"fighter_Talon_I","count":10,"row":3,"col":3}],
@@ -1799,12 +1799,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Void Shield I garantiran.',
-    unlock: 'Instanca 15 završena',
+    unlock: 'Instanca 15 zavr??ena',
   },
 
   {
     id: 'pirate_2', name: 'Pirate 2', type: 'pirate', number: 2,
-    difficulty: 5, min_power: 25000, icon: '🏴‍☠️',
+    difficulty: 5, min_power: 25000, icon: '?????????????',
     xp: 774,
     enemies: ['Pirate Destroyer', 'Raider Cruiser'],
   enemyGroups: [{"ship_id":"fighter_Outlaw_I","count":10,"row":1,"col":1},{"ship_id":"fighter_Fury_I","count":10,"row":1,"col":2},{"ship_id":"fighter_Vengeance_I","count":10,"row":1,"col":3},{"ship_id":"scout_Wisp_I","count":10,"row":2,"col":1},{"ship_id":"scout_Specter_I","count":12,"row":2,"col":2,"isBoss":true},{"ship_id":"scout_Phantom_I","count":10,"row":2,"col":3},{"ship_id":"fighter_Ravager_I","count":10,"row":3,"col":1},{"ship_id":"fighter_Ravager_I","count":10,"row":3,"col":2},{"ship_id":"fighter_Reaper_I","count":10,"row":3,"col":3}],
@@ -1819,12 +1819,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
     desc: 'Voidwarp I garantiran.',
-    unlock: 'Pirate 1 završena',
+    unlock: 'Pirate 1 zavr??ena',
   },
 
   {
     id: 'pirate_3', name: 'Pirate 3', type: 'pirate', number: 3,
-    difficulty: 6, min_power: 40000, icon: '🏴‍☠️',
+    difficulty: 6, min_power: 40000, icon: '?????????????',
     xp: 1292,
     enemies: ['Pirate Raider Squadron', 'Pirate Battlecruiser'],
   enemyGroups: [{"ship_id":"battleship_Imperator_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Obliterator_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Titan_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Ravager_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Ravager_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Outlaw_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Behemoth_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":3}],
@@ -1837,13 +1837,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [12000, 25000], crystal: [8000, 17000], he3: [4000, 10000] },
-    desc: 'Void Štit I garantiran. Šansa za 3 različita Pirate Flagship.',
-    unlock: 'Pirate 2 završena',
+    desc: 'Void ??tit I garantiran. ??ansa za 3 razli??ita Pirate Flagship.',
+    unlock: 'Pirate 2 zavr??ena',
   },
 
   {
     id: 'pirate_4', name: 'Pirate 4', type: 'pirate', number: 4,
-    difficulty: 6, min_power: 55000, icon: '🏴‍☠️',
+    difficulty: 6, min_power: 55000, icon: '?????????????',
     xp: 1292,
     enemies: ['Pirate Battleship', 'Raider Carrier'],
   enemyGroups: [{"ship_id":"battleship_Imperator_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Behemoth_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Titan_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Ravager_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Fury_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Vengeance_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Colossus_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Behemoth_I","count":7,"row":3,"col":3}],
@@ -1858,12 +1858,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [16000, 33000], crystal: [10000, 21000], he3: [5000, 13000] },
     desc: 'Void II garantiran.',
-    unlock: 'Pirate 3 završena',
+    unlock: 'Pirate 3 zavr??ena',
   },
 
   {
     id: 'pirate_5', name: 'Pirate 5', type: 'pirate', number: 5,
-    difficulty: 7, min_power: 90000, icon: '🏴‍☠️',
+    difficulty: 7, min_power: 90000, icon: '?????????????',
     xp: 2154,
     enemies: ['Pirate Dreadnought', 'Raider Flagship'],
   enemyGroups: [{"ship_id":"battleship_Obliterator_I","count":7,"row":1,"col":1},{"ship_id":"battleship_Obliterator_I","count":7,"row":1,"col":2},{"ship_id":"battleship_Titan_I","count":7,"row":1,"col":3},{"ship_id":"fighter_Fury_I","count":7,"row":2,"col":1},{"ship_id":"fighter_Fury_I","count":8,"row":2,"col":2,"isBoss":true},{"ship_id":"fighter_Reaper_I","count":7,"row":2,"col":3},{"ship_id":"battleship_Obliterator_I","count":7,"row":3,"col":1},{"ship_id":"battleship_Obliterator_I","count":7,"row":3,"col":2},{"ship_id":"battleship_Titan_I","count":7,"row":3,"col":3}],
@@ -1877,12 +1877,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [28000, 59000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Voidwarp II garantiran.',
-    unlock: 'Pirate 4 završena',
+    unlock: 'Pirate 4 zavr??ena',
   },
 
   {
     id: 'pirate_6', name: 'Pirate 6', type: 'pirate', number: 6,
-    difficulty: 8, min_power: 120000, icon: '🏴‍☠️',
+    difficulty: 8, min_power: 120000, icon: '?????????????',
     xp: 3594,
     enemies: ['Pirate Elite Carrier', 'Pirate Apex Battleship'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Behemoth_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Atlas_I","count":5,"row":3,"col":3}],
@@ -1896,13 +1896,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [36000, 76000], crystal: [23000, 49000], he3: [11500, 29500] },
-    desc: 'Void Štit II garantiran. Voidwarp Engine šansa.',
-    unlock: 'Pirate 5 završena',
+    desc: 'Void ??tit II garantiran. Voidwarp Engine ??ansa.',
+    unlock: 'Pirate 5 zavr??ena',
   },
 
   {
     id: 'pirate_7', name: 'Pirate 7', type: 'pirate', number: 7,
-    difficulty: 8, min_power: 180000, icon: '🏴‍☠️',
+    difficulty: 8, min_power: 180000, icon: '?????????????',
     xp: 3594,
     enemies: ['Pirate Colossus', 'Raider Titan'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Behemoth_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Obliterator_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":3}],
@@ -1916,12 +1916,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 41000] },
     desc: 'Void III garantiran.',
-    unlock: 'Pirate 6 završena',
+    unlock: 'Pirate 6 zavr??ena',
   },
 
   {
     id: 'pirate_8', name: 'Pirate 8', type: 'pirate', number: 8,
-    difficulty: 9, min_power: 250000, icon: '🏴‍☠️',
+    difficulty: 9, min_power: 250000, icon: '?????????????',
     xp: 5995,
     enemies: ['Pirate Omega Fleet', 'Raider Apocalypse'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Behemoth_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Colossus_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Atlas_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":5,"row":3,"col":3}],
@@ -1936,12 +1936,12 @@ const INSTANCES_EASY = [
     },
     resources: { metal: [78000, 163000], crystal: [49000, 104000], he3: [24500, 63000] },
     desc: 'Voidwarp III garantiran.',
-    unlock: 'Pirate 7 završena',
+    unlock: 'Pirate 7 zavr??ena',
   },
 
   {
     id: 'pirate_9', name: 'Pirate 9', type: 'pirate', number: 9,
-    difficulty: 10, min_power: 350000, icon: '🏴‍☠️',
+    difficulty: 10, min_power: 350000, icon: '?????????????',
     xp: 10000,
     enemies: ['Pirate Supreme Carrier', 'Pirate Omega Flagship'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Behemoth_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Colossus_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Colossus_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":3}],
@@ -1954,13 +1954,13 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [105000, 220000], crystal: [66000, 140000], he3: [33000, 84000] },
-    desc: 'Void III garantiran. Voidwarp III šansa. Piratski ekskluziv.',
-    unlock: 'Pirate 8 završena',
+    desc: 'Void III garantiran. Voidwarp III ??ansa. Piratski ekskluziv.',
+    unlock: 'Pirate 8 zavr??ena',
   },
 
   {
     id: 'pirate_10', name: 'Pirate 10', type: 'pirate', number: 10,
-    difficulty: 10, min_power: 500000, icon: '🏴‍☠️',
+    difficulty: 10, min_power: 500000, icon: '?????????????',
     xp: 10000,
     enemies: ['Pirate Ultimate Fleet', 'Pirate God Emperor'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Harbinger_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Imperator_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Imperator_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":3}],
@@ -1975,18 +1975,18 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [160000, 335000], crystal: [100000, 210000], he3: [50000, 126000] },
-    desc: 'Final Pirate instance. Fleet Commander III šansa.',
-    unlock: 'Pirate 9 završena',
+    desc: 'Final Pirate instance. Fleet Commander III ??ansa.',
+    unlock: 'Pirate 9 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // BOSS SISTEM (6 RARE + 3 EPIC + 1 LEGENDARY)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   // ---- 6 RARE BOSSOVA (R1-R6) ----
   {
-    id: 'boss_r1', name: 'Void Scavenger', type: 'boss_rare', number: 1,
-    difficulty: 5, min_power: 30000, icon: '💀',
+    id: 'boss_r1', name: 'Void Scavenger', type: 'boss_rare',cooldown_hours:6, number: 1,
+    difficulty: 5, min_power: 30000, icon: '????',
     xp: 5000,
     boss_ability: 'scavenger',
     enemies: ['Void Scavenger Drones', 'Scavenger Fleet'],
@@ -1995,13 +1995,13 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Void Scavenger","structure":12000,"shield":4500,"armor_val":1500,"dps":900,"agility":7,"speed":4},
     boss_stats: { hp: 15000, shield: 5000, dps: 800, agility: 20, speed: 2, armor: 'Light' },
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Void Scavenger — krade resurse! Izgubi borbu = -10% nagrade.',
+    desc: 'Void Scavenger ??? krade resurse! Izgubi borbu = -10% nagrade.',
     unlock: 'Min 30k power',
   },
 
   {
-    id: 'boss_r2', name: 'Corsair Marauder', type: 'boss_rare', number: 2,
-    difficulty: 6, min_power: 35000, icon: '💀',
+    id: 'boss_r2', name: 'Corsair Marauder', type: 'boss_rare',cooldown_hours:6, number: 2,
+    difficulty: 6, min_power: 35000, icon: '????',
     xp: 5000,
     boss_ability: 'spawn_reinforcements',
     enemies: ['Corsair Escort', 'Corsair Marauder Fleet'],
@@ -2011,13 +2011,13 @@ const INSTANCES_EASY = [
     boss_stats: { hp: 18000, shield: 6000, dps: 900, agility: 18, speed: 2, armor: 'Chrome' },
     
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Corsair Marauder — poziva 2 pomoćna broda u rundi 3!',
+    desc: 'Corsair Marauder ??? poziva 2 pomo??na broda u rundi 3!',
     unlock: 'Min 35k power',
   },
 
   {
-    id: 'boss_r3', name: 'Nebula Stalker', type: 'boss_rare', number: 3,
-    difficulty: 7, min_power: 45000, icon: '💀',
+    id: 'boss_r3', name: 'Nebula Stalker', type: 'boss_rare',cooldown_hours:6, number: 3,
+    difficulty: 7, min_power: 45000, icon: '????',
     xp: 6000,
     boss_ability: 'stealth_first_round',
     enemies: ['Nebula Shadow Drones', 'Nebula Stalker Pack'],
@@ -2026,13 +2026,13 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Nebula Stalker","structure":18000,"shield":6750,"armor_val":2250,"dps":1350,"agility":7,"speed":5},
     boss_stats: { hp: 20000, shield: 8000, dps: 1100, agility: 35, speed: 3, armor: 'Nano' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Nebula Stalker — nevidljiv u prvoj rundi! Igrač ne može napadati.',
+    desc: 'Nebula Stalker ??? nevidljiv u prvoj rundi! Igra?? ne mo??e napadati.',
     unlock: 'Min 45k power',
   },
 
   {
-    id: 'boss_r4', name: 'Solar Predator', type: 'boss_rare', number: 4,
-    difficulty: 8, min_power: 50000, icon: '💀',
+    id: 'boss_r4', name: 'Solar Predator', type: 'boss_rare',cooldown_hours:6, number: 4,
+    difficulty: 8, min_power: 50000, icon: '????',
     xp: 6000,
     boss_ability: 'aoe_damage',
     enemies: ['Solar Drone Swarm', 'Solar Predator Pack'],
@@ -2041,13 +2041,13 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Solar Predator","structure":20000,"shield":7500,"armor_val":2500,"dps":1500,"agility":7,"speed":5},
     boss_stats: { hp: 22000, shield: 7000, dps: 1200, agility: 15, speed: 2, armor: 'Light' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Solar Predator — AoE napadi! Svaki hit pogađa sve tvoje slotove za 20%.',
+    desc: 'Solar Predator ??? AoE napadi! Svaki hit poga??a sve tvoje slotove za 20%.',
     unlock: 'Min 50k power',
   },
 
   {
-    id: 'boss_r5', name: 'Frost Reaver', type: 'boss_rare', number: 5,
-    difficulty: 9, min_power: 70000, icon: '💀',
+    id: 'boss_r5', name: 'Frost Reaver', type: 'boss_rare',cooldown_hours:6, number: 5,
+    difficulty: 9, min_power: 70000, icon: '????',
     xp: 7000,
     boss_ability: 'freeze_slot',
     enemies: ['Frost Drone Pack', 'Frost Reaver Fleet'],
@@ -2056,13 +2056,13 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Frost Reaver","structure":28000,"shield":10500,"armor_val":3500,"dps":2100,"agility":8,"speed":5},
     boss_stats: { hp: 28000, shield: 10000, dps: 1400, agility: 20, speed: 2, armor: 'Chrome' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Frost Reaver — zamrzava random slot! Taj slot preskače 1 rundu.',
+    desc: 'Frost Reaver ??? zamrzava random slot! Taj slot preska??e 1 rundu.',
     unlock: 'Min 70k power',
   },
 
   {
-    id: 'boss_r6', name: 'Plasma Wraith', type: 'boss_rare', number: 6,
-    difficulty: 10, min_power: 80000, icon: '💀',
+    id: 'boss_r6', name: 'Plasma Wraith', type: 'boss_rare',cooldown_hours:6, number: 6,
+    difficulty: 10, min_power: 80000, icon: '????',
     xp: 7000,
     boss_ability: 'death_explosion',
     enemies: ['Plasma Ghost Pack', 'Plasma Wraith Fleet'],
@@ -2071,14 +2071,14 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Plasma Wraith","structure":32000,"shield":12000,"armor_val":4000,"dps":2400,"agility":8,"speed":5},
     boss_stats: { hp: 30000, shield: 12000, dps: 1500, agility: 22, speed: 2, armor: 'Neutralizing' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Plasma Wraith — eksplodira kad umre! 20% štete svim tvojim brodovima.',
+    desc: 'Plasma Wraith ??? eksplodira kad umre! 20% ??tete svim tvojim brodovima.',
     unlock: 'Min 80k power',
   },
 
   // ---- 3 EPIC BOSSOVA (E1-E3) ----
   {
-    id: 'boss_e1', name: 'Quantum Hydra', type: 'boss_epic', number: 1,
-    difficulty: 8, min_power: 150000, icon: '👹',
+    id: 'boss_e1', name: 'Quantum Hydra', type: 'boss_epic',cooldown_hours:12, number: 1,
+    difficulty: 8, min_power: 150000, icon: '????',
     xp: 8000,
     boss_ability: 'hydra_respawn',
     enemies: ['Hydra Head Alpha', 'Hydra Head Beta', 'Hydra Head Gamma'],
@@ -2087,13 +2087,13 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Quantum Hydra","structure":60000,"shield":22500,"armor_val":7500,"dps":4500,"agility":9,"speed":6},
     boss_stats: { hp: 80000, shield: 30000, dps: 3000, agility: 15, speed: 2, armor: 'Chrome' },
     resources: { metal: [30000, 65000], crystal: [19000, 41000], he3: [9500, 24000] },
-    desc: 'Quantum Hydra — 3 glave! Respawnuje jednom na 30% HP.',
+    desc: 'Quantum Hydra ??? 3 glave! Respawnuje jednom na 30% HP.',
     unlock: 'Pobijedi R1+R2+R3',
   },
 
   {
-    id: 'boss_e2', name: 'Chrono Warden', type: 'boss_epic', number: 2,
-    difficulty: 9, min_power: 250000, icon: '👹',
+    id: 'boss_e2', name: 'Chrono Warden', type: 'boss_epic',cooldown_hours:12, number: 2,
+    difficulty: 9, min_power: 250000, icon: '????',
     xp: 9000,
     boss_ability: 'hp_reset',
     enemies: ['Time Guardian I', 'Chrono Sentinel'],
@@ -2103,13 +2103,13 @@ const INSTANCES_EASY = [
     boss_stats: { hp: 100000, shield: 40000, dps: 4000, agility: 12, speed: 1, armor: 'Regen' },
     
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 40000] },
-    desc: 'Chrono Warden — vraća HP! Jednom u borbi resetuje HP na 50%.',
+    desc: 'Chrono Warden ??? vra??a HP! Jednom u borbi resetuje HP na 50%.',
     unlock: 'Pobijedi R4+R5+R6',
   },
 
   {
-    id: 'boss_e3', name: 'Dreadnought Titan', type: 'boss_epic', number: 3,
-    difficulty: 10, min_power: 350000, icon: '👹',
+    id: 'boss_e3', name: 'Dreadnought Titan', type: 'boss_epic',cooldown_hours:12, number: 3,
+    difficulty: 10, min_power: 350000, icon: '????',
     xp: 9000,
     boss_ability: 'titan_rage',
     enemies: ['Titan Escort Fleet', 'Dreadnought Titan'],
@@ -2118,21 +2118,21 @@ const INSTANCES_EASY = [
   bossShip: {"name":"Dreadnought Titan","structure":140000,"shield":52500,"armor_val":17500,"dps":10500,"agility":10,"speed":6},
     boss_stats: { hp: 150000, shield: 60000, dps: 5000, agility: 5, speed: 1, armor: 'Neutralizing' },
     resources: { metal: [80000, 168000], crystal: [50000, 106000], he3: [25000, 63000] },
-    desc: 'Dreadnought Titan — Titan Rage! Svaki preživljeni napad +10% boss DPS.',
+    desc: 'Dreadnought Titan ??? Titan Rage! Svaki pre??ivljeni napad +10% boss DPS.',
     unlock: 'Pobijedi E1+E2',
   },
 
   // ---- 1 LEGENDARY BOSS (L1) ----
   {
-    id: 'boss_l1', name: 'Galaxy Eater', type: 'boss_legendary', number: 1,
-    difficulty: 10, min_power: 700000, icon: '🌑',
+    id: 'boss_l1', name: 'Galaxy Eater', type: 'boss_legendary',cooldown_hours:168, number: 1,
+    difficulty: 10, min_power: 700000, icon: '????',
     xp: 50000,
     boss_ability: 'four_phases',
     boss_phases: [
-      { name: 'Phase 1 — Awakening', hp_pct: 100, ability: 'normal' },
-      { name: 'Phase 2 — Devouring', hp_pct: 75, ability: 'aoe_damage' },
-      { name: 'Phase 3 — Consuming', hp_pct: 50, ability: 'ship_absorb' },
-      { name: 'Phase 4 — Ascension', hp_pct: 25, ability: 'self_heal' },
+      { name: 'Phase 1 ??? Awakening', hp_pct: 100, ability: 'normal' },
+      { name: 'Phase 2 ??? Devouring', hp_pct: 75, ability: 'aoe_damage' },
+      { name: 'Phase 3 ??? Consuming', hp_pct: 50, ability: 'ship_absorb' },
+      { name: 'Phase 4 ??? Ascension', hp_pct: 25, ability: 'self_heal' },
     ],
     enemies: ['Galaxy Eater Void Spawn', 'Galaxy Eater Core'],
   enemyGroups: [{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Imperator_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Titan_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Atlas_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":3,"row":3,"col":3}],
@@ -2141,20 +2141,20 @@ const INSTANCES_EASY = [
     boss_stats: { hp: 600000, shield: 200000, dps: 8000, agility: 8, speed: 1, armor: 'Neutralizing' },
     
     resources: { metal: [250000, 530000], crystal: [158000, 334000], he3: [79000, 167000] },
-    desc: 'Galaxy Eater — 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
+    desc: 'Galaxy Eater ??? 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
     unlock: 'Pobijedi E1+E2+E3',
   },
 
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   // CONSTELLATION (1-3)
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
     id: 'const_1', name: 'Constellation 1', type: 'constellation', number: 1,
     difficulty: 9,
     xp: 5995,
     min_power: 500000,
-    icon: '⭐',
+    icon: '???',
     enemies: ['Constellation Guardian I', 'Star Dreadnought I'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":5,"row":1,"col":1},{"ship_id":"carrier_Harbinger_I","count":5,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":5,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":5,"row":2,"col":1},{"ship_id":"battleship_Colossus_I","count":6,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Colossus_I","count":5,"row":2,"col":3},{"ship_id":"carrier_Harbinger_I","count":5,"row":3,"col":1},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":2},{"ship_id":"carrier_Titanfall_I","count":5,"row":3,"col":3}],
     boss: 'Constellation Prime',
@@ -2169,8 +2169,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [150000, 320000], crystal: [95000, 200000], he3: [47500, 120000] },
-    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral šansa.',
-    unlock: 'Trial 8 završena + min 500k power',
+    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral ??ansa.',
+    unlock: 'Trial 8 zavr??ena + min 500k power',
   },
 
   {
@@ -2178,7 +2178,7 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 750000,
-    icon: '⭐',
+    icon: '???',
     enemies: ['Constellation Guardian II', 'Star Carrier I'],
   enemyGroups: [{"ship_id":"carrier_Atlas_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Titanfall_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Behemoth_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Titanfall_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":3}],
     boss: 'Constellation Overlord',
@@ -2193,8 +2193,8 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [220000, 460000], crystal: [140000, 295000], he3: [70000, 178000] },
-    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II šansa.',
-    unlock: 'Constellation 1 završena',
+    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II ??ansa.',
+    unlock: 'Constellation 1 zavr??ena',
   },
 
   {
@@ -2202,7 +2202,7 @@ const INSTANCES_EASY = [
     difficulty: 10,
     xp: 10000,
     min_power: 1000000,
-    icon: '⭐',
+    icon: '???',
     enemies: ['Constellation Supreme', 'Star Flagship'],
   enemyGroups: [{"ship_id":"carrier_Harbinger_I","count":3,"row":1,"col":1},{"ship_id":"carrier_Harbinger_I","count":3,"row":1,"col":2},{"ship_id":"carrier_Vanguard_I","count":3,"row":1,"col":3},{"ship_id":"battleship_Obliterator_I","count":3,"row":2,"col":1},{"ship_id":"battleship_Behemoth_I","count":4,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Titan_I","count":3,"row":2,"col":3},{"ship_id":"carrier_Harbinger_I","count":3,"row":3,"col":1},{"ship_id":"carrier_Vanguard_I","count":3,"row":3,"col":2},{"ship_id":"carrier_Harbinger_I","count":3,"row":3,"col":3}],
     boss: 'Constellation God-Emperor',
@@ -2218,19 +2218,19 @@ const INSTANCES_EASY = [
       ],
     },
     resources: { metal: [320000, 670000], crystal: [202000, 425000], he3: [101000, 255000] },
-    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III šansa.',
-    unlock: 'Constellation 2 završena',
+    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III ??ansa.',
+    unlock: 'Constellation 2 zavr??ena',
   },
 
-  // ════════════════════════════════════════════
-  // MASTER BOSS — THE HIVE GOD
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  // MASTER BOSS ??? THE HIVE GOD
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
-    id: 'boss_master', name: 'THE HIVE GOD', type: 'boss_master', number: 0,
+    id: 'boss_master', name: 'THE HIVE GOD', type: 'boss_master',cooldown_hours:336, number: 0,
     difficulty: 10,
     min_power: 1000000,
-    icon: '👑',
+    icon: '????',
     xp: 100000,
     boss_ability: 'all_abilities',
     enemies: ['Hive God Spawn Wave 1', 'Hive God Spawn Wave 2', 'Hive God Core'],
@@ -2240,26 +2240,26 @@ const INSTANCES_EASY = [
     boss_stats: { hp: 1000000, shield: 400000, dps: 12000, agility: 10, speed: 2, armor: 'Neutralizing' },
     
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'THE HIVE GOD — Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
+    desc: 'THE HIVE GOD ??? Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
     unlock: 'Min 1M power + pobijedi Galaxy Eater',
     respawn: 'weekly',
   },
 
-  // ════════════════════════════════════════════
-  // BOSS EVENT (globalni, rijedak) — LEGACY
-  // ════════════════════════════════════════════
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  // BOSS EVENT (globalni, rijedak) ??? LEGACY
+  // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
   {
-    id: 'boss_event', name: 'Boss Event', type: 'boss', number: null,
+    id: 'boss_event', name: 'Boss Event', type: 'boss',cooldown_hours:168, number: null,
     difficulty: 10, xp: 1000000,
     min_power: 800000,
-    icon: '👹',
+    icon: '????',
     enemies: ['Global Boss Phase 1', 'Global Boss Phase 2', 'Global Boss Phase 3'],
     boss: 'THE HIVE GOD',
   bossShip: {"name":"THE HIVE GOD","structure":320000,"shield":120000,"armor_val":40000,"dps":24000,"agility":10,"speed":7},
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igrači napadaju isti boss.',
-    unlock: 'Min 800k power. Event se pojavljuje jednom sedmično.',
+    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igra??i napadaju isti boss.',
+    unlock: 'Min 800k power. Event se pojavljuje jednom sedmi??no.',
     respawn: 'weekly',
   },
 ];

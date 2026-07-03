@@ -398,6 +398,17 @@ function renderInstanceCard(inst, playerPower) {
         ⚡ ${energyCost} MWh ${hasEnergy ? '' : '(nedovoljno)'}
       </div>
 
+      ${inst.cooldown_hours ? (() => {
+        const last = window._bossCooldowns?.[inst.id];
+        if (!last) return `<div style="font-size:0.62rem;margin-bottom:6px;color:#00ff88">⏳ Spreman</div>`;
+        const el = (Date.now() - last) / 3600000;
+        if (el >= inst.cooldown_hours) return `<div style="font-size:0.62rem;margin-bottom:6px;color:#00ff88">⏳ Spreman</div>`;
+        const rem = inst.cooldown_hours - el;
+        const d = Math.floor(rem / 24), h = Math.floor(rem % 24), m = Math.floor((rem % 1) * 60);
+        const p = []; if (d) p.push(d + 'd'); if (h) p.push(h + 'h'); if (m) p.push(m + 'm');
+        return `<div style="font-size:0.62rem;margin-bottom:6px;color:#ff8844">⏳ Cooldown ${p.join(' ')}</div>`;
+      })() : ''}
+
       <!-- BP tier badge -->
       <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px">
         <div style="font-size:0.58rem;background:${bpTier.color}18;border:1px solid ${bpTier.color}44;
