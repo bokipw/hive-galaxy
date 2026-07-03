@@ -1163,8 +1163,12 @@ function renderCommanderCards() {
 
 const FACTION_BONUS_MAP = {
   vanguard: 'attack', sentinel: 'defense', technocrat: 'economy', shadow: 'evasion', solar: 'shield',
-  krall: 'attack', ethereal: 'crit', synth: 'shield', hive: 'defense', ancient: 'defense',
-  revenant: 'attack', wraith_lord: 'evasion', tomb_keeper: 'shield', kaels_chosen: 'attack',
+  krall: 'hp', ethereal: 'crit', synth: 'shield_regen', hive: 'speed', ancient: 'dmg_reduction',
+  revenant: 'atk', wraith_lord: 'dodge_chance', tomb_keeper: 'hp_regen', kaels_chosen: 'crit_dmg',
+};
+// Flat synergy bonus per group (3 commanders) for non-slot bonus types
+const FACTION_SYNERGY_FLAT = {
+  hp: 3, shield_regen: 3, hp_regen: 2, dmg_reduction: 3, crit_dmg: 5, fleet_recovery: 2, dodge_chance: 2,
 };
 
 // Slot definicije — svaki slot ima ulogu i bonus tip
@@ -1269,13 +1273,19 @@ function calcFleetBonuses() {
   (window._deployedCommanders || []).forEach(id => countFaction(id));
   const hasFactionBonus = Object.values(factionCount).some(v => v >= 3);
   if (hasFactionBonus) {
-    // Svakih 3 komandira iste frakcije = +10% na bonus te frakcije
+    const slotKeys = new Set(Object.keys(bonuses));
     for (const [faction, cnt] of Object.entries(factionCount)) {
       const groups = Math.floor(cnt / 3);
       if (groups > 0) {
         const bonusKey = FACTION_BONUS_MAP[faction];
-        if (bonusKey && bonuses[bonusKey] !== undefined) {
+        if (!bonusKey) continue;
+        if (slotKeys.has(bonusKey)) {
+          // Slot bonus → multiplikativno
           bonuses[bonusKey] = Math.floor(bonuses[bonusKey] * (1 + groups * 0.1));
+        } else {
+          // Non-slot bonus → flat po grupi
+          const flat = FACTION_SYNERGY_FLAT[bonusKey] || 0;
+          bonuses[bonusKey] = (bonuses[bonusKey] || 0) + flat * groups;
         }
       }
     }
@@ -1449,6 +1459,9 @@ function renderFleetCommanders() {
   const FACTION_BONUS_LABELS_MAP = {
     attack: '⚔️ Napad', defense: '🛡️ Odbrana', economy: '⚙️ Ekonomija',
     evasion: '🌑 Evasion', shield: '🔵 Shield', speed: '🚀 Brzina', crit: '🔥 Crit',
+    hp: '❤️ HP', shield_regen: '🔄 Shield Regen', hp_regen: '💚 HP Regen',
+    dmg_reduction: '🛡️ Dmg Red.', crit_dmg: '💥 Crit Dmg', fleet_recovery: '☠️ Fleet Rec.',
+    dodge_chance: '🌀 Dodge',
   };
   const synActiveBonuses = hasSyn && fb?.factionCount
     ? Object.entries(fb.factionCount).filter(([,c]) => c >= 3)

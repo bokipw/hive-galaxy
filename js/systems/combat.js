@@ -173,6 +173,13 @@ function applyCommanderPassivesToBattle(playerSide, enemySide) {
         if (fb.bonuses.shield)  { const m = 1 + fb.bonuses.shield/100; unit.shield = Math.floor(unit.shield * m); unit.maxShield = unit.shield; }
         if (fb.bonuses.evasion) { unit.agility = Math.min(90, unit.agility + fb.bonuses.evasion); }
         if (fb.bonuses.crit)    { unit._resCritBonus = (unit._resCritBonus || 0) + fb.bonuses.crit; }
+        // Faction synergy flat bonusi
+        if (fb.bonuses.hp)           { const m = 1 + fb.bonuses.hp/100; unit.hp = Math.floor(unit.hp * m); unit.maxHp = unit.hp; }
+        if (fb.bonuses.hp_regen)     { unit._cmdHpRegen = (unit._cmdHpRegen || 0) + fb.bonuses.hp_regen; }
+        if (fb.bonuses.shield_regen) { unit.shieldRegen = Math.floor(unit.shieldRegen * (1 + fb.bonuses.shield_regen / 100)); }
+        if (fb.bonuses.dmg_reduction){ unit._dmgReduction = (unit._dmgReduction || 0) + fb.bonuses.dmg_reduction; }
+        if (fb.bonuses.crit_dmg)     { unit._critDmgBonus = (unit._critDmgBonus || 0) + fb.bonuses.crit_dmg; }
+        if (fb.bonuses.dodge_chance) { unit._dodgeChance = Math.min(75, (unit._dodgeChance || 0) + fb.bonuses.dodge_chance); }
       });
     }
   }
