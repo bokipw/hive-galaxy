@@ -1,6 +1,6 @@
 // ============================================================
-// HIVE GALAXY ??? data/instances_easy.js
-// Normal instance data ??? R tier blueprinti, 3 flote
+// HIVE GALAXY ÔÇö data/instances_easy.js
+// Normal instance data ÔÇö R tier blueprinti, 3 flote
 // ============================================================
 
 const INSTANCES_NIGHTMARE = [
@@ -20,7 +20,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Alpha Drone","structure":1600,"shield":525,"armor_val":200,"dps":90,"agility":3,"speed":2},
     
     resources: { metal: [200, 500], crystal: [100, 300], he3: [50, 150] },
-    desc: 'Prva instanca. Savr???ena za po???etnike i Common opremu.',
+    desc: 'Prva instanca. SavrÔÇöena za poÔÇöetnike i Common opremu.',
     unlock: 'Dostupna od starta',
   },
 
@@ -49,8 +49,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [250, 600], crystal: [120, 350], he3: [60, 180] },
-    desc: 'Nastavak po???etne zone. Mali ???tit I garantirani drop.',
-    unlock: 'Instanca 1 zavr???ena',
+    desc: 'Nastavak poÔÇöetne zone. Mali ÔÇötit I garantirani drop.',
+    unlock: 'Instanca 1 zavrÔÇöena',
   },
 
   {
@@ -82,8 +82,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [300, 700], crystal: [150, 400], he3: [70, 200] },
-    desc: 'Takti???ki pogon garantiran. Dobra za early armor buildup.',
-    unlock: 'Instanca 2 zavr???ena',
+    desc: 'TaktiÔÇöki pogon garantiran. Dobra za early armor buildup.',
+    unlock: 'Instanca 2 zavrÔÇöena',
   },
 
   {
@@ -113,8 +113,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [400, 900], crystal: [200, 500], he3: [90, 250] },
-    desc: 'Srednji ???tit I uvijek pada. Prijelaz u mid-tier opremu.',
-    unlock: 'Instanca 3 zavr???ena',
+    desc: 'Srednji ÔÇötit I uvijek pada. Prijelaz u mid-tier opremu.',
+    unlock: 'Instanca 3 zavrÔÇöena',
   },
 
   {
@@ -148,8 +148,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [500, 1100], crystal: [250, 600], he3: [110, 300] },
-    desc: 'Te???ki Drive I garantiran. Dobar za Lovce i Krstarice.',
-    unlock: 'Instanca 4 zavr???ena',
+    desc: 'TeÔÇöki Drive I garantiran. Dobar za Lovce i Krstarice.',
+    unlock: 'Instanca 4 zavrÔÇöena',
   },
 
   {
@@ -182,8 +182,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [600, 1300], crystal: [300, 700], he3: [130, 360] },
-    desc: 'Jaki ???tit I. Klju???na instanca za Krstarice i Bojne Brodove.',
-    unlock: 'Instanca 5 zavr???ena',
+    desc: 'Jaki ÔÇötit I. KljuÔÇöna instanca za Krstarice i Bojne Brodove.',
+    unlock: 'Instanca 5 zavrÔÇöena',
   },
 
   {
@@ -213,7 +213,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [700, 1500], crystal: [350, 800], he3: [150, 420] },
     desc: 'Basic Drive II garantiran. Dobar za early farming.',
-    unlock: 'Instanca 6 zavr???ena',
+    unlock: 'Instanca 6 zavrÔÇöena',
   },
 
   {
@@ -242,8 +242,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [800, 1800], crystal: [400, 950], he3: [180, 500] },
-    desc: 'Mali ???tit II garantiran. Prelazak u mid-tier instance.',
-    unlock: 'Instanca 7 zavr???ena',
+    desc: 'Mali ÔÇötit II garantiran. Prelazak u mid-tier instance.',
+    unlock: 'Instanca 7 zavrÔÇöena',
   },
 
   {
@@ -276,8 +276,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [900, 2000], crystal: [450, 1100], he3: [200, 560] },
-    desc: 'Takti???ki Drive II garantiran. Uvod u Magnetic oru???ja.',
-    unlock: 'Instanca 8 zavr???ena',
+    desc: 'TaktiÔÇöki Drive II garantiran. Uvod u Magnetic oruÔÇöja.',
+    unlock: 'Instanca 8 zavrÔÇöena',
   },
 
   {
@@ -309,8 +309,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [1100, 2400], crystal: [550, 1300], he3: [240, 660] },
-    desc: 'Srednji ???tit II garantiran. Solid mid-game instanca.',
-    unlock: 'Instanca 9 zavr???ena',
+    desc: 'Srednji ÔÇötit II garantiran. Solid mid-game instanca.',
+    unlock: 'Instanca 9 zavrÔÇöena',
   },
 
   {
@@ -343,8 +343,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [1300, 2800], crystal: [650, 1500], he3: [280, 760] },
-    desc: 'Kinetic Cannon II garantiran. Va???na instanca za DPS buildove.',
-    unlock: 'Instanca 10 zavr???ena',
+    desc: 'Kinetic Cannon II garantiran. VaÔÇöna instanca za DPS buildove.',
+    unlock: 'Instanca 10 zavrÔÇöena',
   },
 
   {
@@ -383,8 +383,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [1600, 3500], crystal: [800, 1900], he3: [350, 950] },
-    desc: 'Jaki ???tit II garantiran. Uvod u Rare-tier opremu.',
-    unlock: 'Instanca 11 zavr???ena',
+    desc: 'Jaki ÔÇötit II garantiran. Uvod u Rare-tier opremu.',
+    unlock: 'Instanca 11 zavrÔÇöena',
   },
 
   {
@@ -420,7 +420,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [1900, 4200], crystal: [950, 2200], he3: [420, 1100] },
     desc: 'Basic Drive III garantiran. Dobar za sve klase.',
-    unlock: 'Instanca 12 zavr???ena',
+    unlock: 'Instanca 12 zavrÔÇöena',
   },
 
   {
@@ -451,8 +451,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [2200, 4800], crystal: [1100, 2600], he3: [500, 1300] },
-    desc: 'Mali ???tit III garantiran. Klju???an za Izvi???a???e.',
-    unlock: 'Instanca 13 zavr???ena',
+    desc: 'Mali ÔÇötit III garantiran. KljuÔÇöan za IzviÔÇöaÔÇöe.',
+    unlock: 'Instanca 13 zavrÔÇöena',
   },
 
   {
@@ -501,8 +501,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [2600, 5500], crystal: [1300, 3000], he3: [580, 1550] },
-    desc: 'Takti???ki Drive III garantiran. Kraj early-mid game zone.',
-    unlock: 'Instanca 14 zavr???ena',
+    desc: 'TaktiÔÇöki Drive III garantiran. Kraj early-mid game zone.',
+    unlock: 'Instanca 14 zavrÔÇöena',
   },
 
   {
@@ -536,8 +536,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [3000, 6500], crystal: [1500, 3500], he3: [680, 1800] },
-    desc: 'Srednji ???tit III garantiran. Ulazak u late-mid game.',
-    unlock: 'Instanca 15 zavr???ena',
+    desc: 'Srednji ÔÇötit III garantiran. Ulazak u late-mid game.',
+    unlock: 'Instanca 15 zavrÔÇöena',
   },
 
   {
@@ -568,8 +568,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [3500, 7500], crystal: [1750, 4000], he3: [800, 2100] },
-    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i Nosa???e.',
-    unlock: 'Instanca 16 zavr???ena',
+    desc: 'Heavy Drive III garantiran. Solid za Bojne Brodove i NosaÔÇöe.',
+    unlock: 'Instanca 16 zavrÔÇöena',
   },
 
   {
@@ -607,8 +607,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [4000, 8500], crystal: [2000, 4600], he3: [920, 2400] },
-    desc: 'Jaki ???tit III garantiran. Kraj standardnih instanci mid-tiera.',
-    unlock: 'Instanca 17 zavr???ena',
+    desc: 'Jaki ÔÇötit III garantiran. Kraj standardnih instanci mid-tiera.',
+    unlock: 'Instanca 17 zavrÔÇöena',
   },
 
   {
@@ -635,8 +635,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [4800, 10000], crystal: [2400, 5500], he3: [1100, 2900] },
-    desc: 'Ulazak u Rare zonu. ???ansa za Phase ???tit i Stealth Drive.',
-    unlock: 'Instanca 18 zavr???ena',
+    desc: 'Ulazak u Rare zonu. ÔÇöansa za Phase ÔÇötit i Stealth Drive.',
+    unlock: 'Instanca 18 zavrÔÇöena',
   },
 
   {
@@ -671,8 +671,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [5500, 12000], crystal: [2750, 6500], he3: [1300, 3400] },
-    desc: 'Sprint Drive I garantiran. Particle ???tit ???ansa.',
-    unlock: 'Instanca 19 zavr???ena',
+    desc: 'Sprint Drive I garantiran. Particle ÔÇötit ÔÇöansa.',
+    unlock: 'Instanca 19 zavrÔÇöena',
   },
 
   {
@@ -714,8 +714,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [6500, 14000], crystal: [3250, 7500], he3: [1550, 4000] },
-    desc: 'Heat Diffusion ???tit I garantiran. Ulazak u visoke standard instance.',
-    unlock: 'Instanca 20 zavr???ena',
+    desc: 'Heat Diffusion ÔÇötit I garantiran. Ulazak u visoke standard instance.',
+    unlock: 'Instanca 20 zavrÔÇöena',
   },
 
   {
@@ -746,8 +746,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [4000, 9000], he3: [1900, 4800] },
-    desc: 'Stealth Drive I garantiran. ???ansa za Quantum Lance.',
-    unlock: 'Instanca 21 zavr???ena',
+    desc: 'Stealth Drive I garantiran. ÔÇöansa za Quantum Lance.',
+    unlock: 'Instanca 21 zavrÔÇöena',
   },
 
   {
@@ -783,8 +783,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [9500, 20000], crystal: [4750, 10500], he3: [2200, 5600] },
-    desc: 'Uvod u endgame standardnih instanci. ???ansa za Rare-Epic opremu.',
-    unlock: 'Instanca 22 zavr???ena',
+    desc: 'Uvod u endgame standardnih instanci. ÔÇöansa za Rare-Epic opremu.',
+    unlock: 'Instanca 22 zavrÔÇöena',
   },
 
   {
@@ -830,7 +830,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [11000, 23000], crystal: [5500, 12500], he3: [2600, 6600] },
     desc: 'Sprint Drive II garantiran.',
-    unlock: 'Instanca 23 zavr???ena',
+    unlock: 'Instanca 23 zavrÔÇöena',
   },
 
   {
@@ -871,7 +871,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [13000, 28000], crystal: [6500, 15000], he3: [3100, 7900] },
     desc: 'Heat Diffusion II garantiran. Kraj mid standardnih instanci.',
-    unlock: 'Instanca 24 zavr???ena',
+    unlock: 'Instanca 24 zavrÔÇöena',
   },
 
   {
@@ -916,7 +916,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [16000, 34000], crystal: [8000, 18000], he3: [3800, 9500] },
     desc: 'Stealth Drive II garantiran. Ulazak u endgame standardnih instanci.',
-    unlock: 'Instanca 25 zavr???ena',
+    unlock: 'Instanca 25 zavrÔÇöena',
   },
 
   {
@@ -960,8 +960,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [19000, 40000], crystal: [9500, 21500], he3: [4500, 11500] },
-    desc: 'Te???ka instanca. Dobar izvor Epic komponenti.',
-    unlock: 'Instanca 26 zavr???ena',
+    desc: 'TeÔÇöka instanca. Dobar izvor Epic komponenti.',
+    unlock: 'Instanca 26 zavrÔÇöena',
   },
 
   {
@@ -1006,8 +1006,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [23000, 48000], crystal: [11500, 26000], he3: [5500, 14000] },
-    desc: 'Particle Stun III garantiran. ???ansa za Quantum Drive.',
-    unlock: 'Instanca 27 zavr???ena',
+    desc: 'Particle Stun III garantiran. ÔÇöansa za Quantum Drive.',
+    unlock: 'Instanca 27 zavrÔÇöena',
   },
 
   {
@@ -1043,7 +1043,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [28000, 58000], crystal: [14000, 31000], he3: [6600, 17000] },
     desc: 'Heat Diffusion III garantiran. Predposljednja standardna instanca.',
-    unlock: 'Instanca 28 zavr???ena',
+    unlock: 'Instanca 28 zavrÔÇöena',
   },
 
   {
@@ -1097,7 +1097,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [35000, 72000], crystal: [17500, 37000], he3: [8500, 21000] },
     desc: 'Posljednja standardna instanca. Quantum Drive garantiran. Prolaz za Restricted.',
-    unlock: 'Instanca 29 zavr???ena',
+    unlock: 'Instanca 29 zavrÔÇöena',
   },
 
   // ============================================
@@ -1136,8 +1136,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [5000, 11000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Prva Restricted instanca. Phase ???tit I garantiran.',
-    unlock: 'Instanca 15+ zavr???ena',
+    desc: 'Prva Restricted instanca. Phase ÔÇötit I garantiran.',
+    unlock: 'Instanca 15+ zavrÔÇöena',
   },
 
   {
@@ -1172,8 +1172,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
-    desc: 'Space-Time Magnetic ???tit I garantiran. Epic Motori ???ansa.',
-    unlock: 'Restricted 1 zavr???ena',
+    desc: 'Space-Time Magnetic ÔÇötit I garantiran. Epic Motori ÔÇöansa.',
+    unlock: 'Restricted 1 zavrÔÇöena',
   },
 
   {
@@ -1208,8 +1208,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [11000, 23000], crystal: [7000, 15000], he3: [3500, 9000] },
-    desc: 'Phase ???tit II garantiran.',
-    unlock: 'Restricted 2 zavr???ena',
+    desc: 'Phase ÔÇötit II garantiran.',
+    unlock: 'Restricted 2 zavrÔÇöena',
   },
 
   {
@@ -1245,7 +1245,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [15000, 32000], crystal: [9500, 20000], he3: [4800, 12000] },
     desc: 'Space-Time Magnetic II garantiran. Epic zone.',
-    unlock: 'Restricted 3 zavr???ena',
+    unlock: 'Restricted 3 zavrÔÇöena',
   },
 
   {
@@ -1280,8 +1280,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 27000], he3: [6500, 16500] },
-    desc: 'Phase ???tit III garantiran. Polovina Restricted zone.',
-    unlock: 'Restricted 4 zavr???ena',
+    desc: 'Phase ÔÇötit III garantiran. Polovina Restricted zone.',
+    unlock: 'Restricted 4 zavrÔÇöena',
   },
 
   {
@@ -1318,7 +1318,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [26000, 55000], crystal: [16500, 35000], he3: [8200, 21000] },
     desc: 'Space-Time Magnetic III garantiran. Ulazak u endgame Restricted.',
-    unlock: 'Restricted 5 zavr???ena',
+    unlock: 'Restricted 5 zavrÔÇöena',
   },
 
   {
@@ -1354,7 +1354,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [33000, 69000], crystal: [21000, 44000], he3: [10500, 27000] },
     desc: 'Berserker Drive III garantiran. Visoka Restricted zona.',
-    unlock: 'Restricted 6 zavr???ena',
+    unlock: 'Restricted 6 zavrÔÇöena',
   },
 
   {
@@ -1390,8 +1390,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Eos Phase ???tit I garantiran. Pristup Carrier brodovima.',
-    unlock: 'Restricted 7 zavr???ena',
+    desc: 'Eos Phase ÔÇötit I garantiran. Pristup Carrier brodovima.',
+    unlock: 'Restricted 7 zavrÔÇöena',
   },
 
   {
@@ -1428,7 +1428,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [55000, 115000], crystal: [34000, 72000], he3: [17000, 44000] },
     desc: 'Eos Phase II garantiran. Predposljednja Restricted instanca.',
-    unlock: 'Restricted 8 zavr???ena',
+    unlock: 'Restricted 8 zavrÔÇöena',
   },
 
   {
@@ -1468,12 +1468,12 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [70000, 145000], crystal: [44000, 92000], he3: [22000, 57000] },
-    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. Klju??? za Trial.',
-    unlock: 'Restricted 9 zavr???ena',
+    desc: 'Zadnja Restricted instanca. Eos III + VoidWarp II garantirani. KljuÔÇö za Trial.',
+    unlock: 'Restricted 9 zavrÔÇöena',
   },
 
   // ============================================
-  // TRIAL INSTANCE (1-10) ??? timed, ranked
+  // TRIAL INSTANCE (1-10) ÔÇö timed, ranked
   // ============================================
 
   {
@@ -1509,7 +1509,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [15000, 35000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Prva Trial instanca. Zahtijeva brzinu. S rank = Epic modul.',
-    unlock: 'Restricted 5 zavr???ena',
+    unlock: 'Restricted 5 zavrÔÇöena',
   },
 
   {
@@ -1544,7 +1544,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [20000, 44000], crystal: [13000, 29000], he3: [6500, 17000] },
     desc: 'Trial 2. Overload III i Berserker III za S rank.',
-    unlock: 'Trial 1 zavr???ena',
+    unlock: 'Trial 1 zavrÔÇöena',
   },
 
   {
@@ -1581,7 +1581,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [27000, 56000], crystal: [17000, 37000], he3: [8500, 22000] },
     desc: 'Trial 3. Hyperdrive I i Annihilator I za S rank.',
-    unlock: 'Trial 2 zavr???ena',
+    unlock: 'Trial 2 zavrÔÇöena',
   },
 
   {
@@ -1618,7 +1618,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [36000, 74000], crystal: [22500, 47000], he3: [11000, 28000] },
     desc: 'Trial 4. Mid-tier Trial. Brodovi klase special pojavljuju se.',
-    unlock: 'Trial 3 zavr???ena',
+    unlock: 'Trial 3 zavrÔÇöena',
   },
 
   {
@@ -1658,8 +1658,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [46000, 96000], crystal: [29000, 62000], he3: [14500, 37000] },
-    desc: 'Trial 5. Hyperdrive II ???ansa za S rank.',
-    unlock: 'Trial 4 zavr???ena',
+    desc: 'Trial 5. Hyperdrive II ÔÇöansa za S rank.',
+    unlock: 'Trial 4 zavrÔÇöena',
   },
 
   {
@@ -1696,8 +1696,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [60000, 125000], crystal: [38000, 80000], he3: [19000, 48000] },
-    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona po???inje.',
-    unlock: 'Trial 5 zavr???ena',
+    desc: 'Trial 6. Hyperdrive III za S rank. Endgame Trial zona poÔÇöinje.',
+    unlock: 'Trial 5 zavrÔÇöena',
   },
 
   {
@@ -1734,7 +1734,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [78000, 162000], crystal: [49000, 103000], he3: [24500, 62000] },
     desc: 'Trial 7. Celestial II i Fleet Commander I za S rank.',
-    unlock: 'Trial 6 zavr???ena',
+    unlock: 'Trial 6 zavrÔÇöena',
   },
 
   {
@@ -1772,7 +1772,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [100000, 210000], crystal: [63000, 133000], he3: [31500, 80000] },
     desc: 'Trial 8. Chrono Matrix II i VoidWarp III za S rank.',
-    unlock: 'Trial 7 zavr???ena',
+    unlock: 'Trial 7 zavrÔÇöena',
   },
 
   {
@@ -1810,8 +1810,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [130000, 270000], crystal: [82000, 172000], he3: [41000, 104000] },
-    desc: 'Trial 9. Celestial III za S rank. Gotovo nemogu???e bez endgame opreme.',
-    unlock: 'Trial 8 zavr???ena',
+    desc: 'Trial 9. Celestial III za S rank. Gotovo nemoguÔÇöe bez endgame opreme.',
+    unlock: 'Trial 8 zavrÔÇöena',
   },
 
   {
@@ -1823,8 +1823,8 @@ const INSTANCES_NIGHTMARE = [
     ranks: { S: 25, A: 20, B: 15, C: 10 },
     enemies: ['Trial Supreme Flagship', 'Trial Apex Carrier II'],
   enemyGroups: [{"ship_id":"carrier_Vanguard_III","count":5000,"row":1,"col":1},{"ship_id":"carrier_Atlas_III","count":5000,"row":1,"col":2},{"ship_id":"carrier_Atlas_III","count":5000,"row":1,"col":3},{"ship_id":"battleship_Behemoth_III","count":5000,"row":2,"col":1},{"ship_id":"battleship_Imperator_III","count":6000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Imperator_III","count":5000,"row":2,"col":3},{"ship_id":"carrier_Vanguard_III","count":5000,"row":3,"col":1},{"ship_id":"carrier_Titanfall_III","count":5000,"row":3,"col":2},{"ship_id":"carrier_Titanfall_III","count":5000,"row":3,"col":3}],
-    boss: 'Trial Supreme Omega ??? Final Boss',
-  bossShip: {"name":"Trial Supreme Omega ??? Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
+    boss: 'Trial Supreme Omega ÔÇö Final Boss',
+  bossShip: {"name":"Trial Supreme Omega ÔÇö Final Boss","structure":1728000,"shield":567000,"armor_val":216000,"dps":97200,"agility":10,"speed":7},
     drops: {
       rank_S: ['mod_fleet_commander_III', 'mod_chrono_matrix_III'],
       rank_A: ['eng_celestial_III', 'sh_void_field_III'],
@@ -1854,7 +1854,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [170000, 350000], crystal: [107000, 225000], he3: [53000, 135000] },
     desc: 'Zadnja Trial instanca. Fleet Commander III za S rank. Samo endgame elite.',
-    unlock: 'Trial 9 zavr???ena',
+    unlock: 'Trial 9 zavrÔÇöena',
   },
 
   // ============================================
@@ -1888,7 +1888,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Uvod u Humanoid zone. Aegis Shield I garantiran.',
-    unlock: 'Instanca 15 zavr???ena',
+    unlock: 'Instanca 15 zavrÔÇöena',
   },
 
   {
@@ -1920,7 +1920,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [8000, 18000], crystal: [5000, 12000], he3: [2500, 6500] },
     desc: 'Sentinel Drive I garantiran.',
-    unlock: 'Humanoid 1 zavr???ena',
+    unlock: 'Humanoid 1 zavrÔÇöena',
   },
 
   {
@@ -1949,8 +1949,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [12000, 26000], crystal: [8000, 17000], he3: [4000, 10500] },
-    desc: 'Aegis ???tit I garantiran. ???ansa za Independence Flagship.',
-    unlock: 'Humanoid 2 zavr???ena',
+    desc: 'Aegis ÔÇötit I garantiran. ÔÇöansa za Independence Flagship.',
+    unlock: 'Humanoid 2 zavrÔÇöena',
   },
 
   {
@@ -1977,7 +1977,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [16000, 34000], crystal: [10000, 22000], he3: [5000, 13000] },
     desc: 'Aegis II garantiran.',
-    unlock: 'Humanoid 3 zavr???ena',
+    unlock: 'Humanoid 3 zavrÔÇöena',
   },
 
   {
@@ -2009,8 +2009,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [20000, 42000], crystal: [13000, 28000], he3: [6500, 17000] },
-    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship ???ansa.',
-    unlock: 'Humanoid 4 zavr???ena',
+    desc: 'Aegis II garantiran. Intrepid Nexus ili Grim Reaper Flagship ÔÇöansa.',
+    unlock: 'Humanoid 4 zavrÔÇöena',
   },
 
   {
@@ -2039,7 +2039,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [28000, 58000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Sentinel II garantiran.',
-    unlock: 'Humanoid 5 zavr???ena',
+    unlock: 'Humanoid 5 zavrÔÇöena',
   },
 
   {
@@ -2065,8 +2065,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [42000, 88000], crystal: [26000, 56000], he3: [13000, 34000] },
-    desc: 'Aegis III garantiran. Independence II ???ansa.',
-    unlock: 'Humanoid 6 zavr???ena',
+    desc: 'Aegis III garantiran. Independence II ÔÇöansa.',
+    unlock: 'Humanoid 6 zavrÔÇöena',
   },
 
   {
@@ -2098,8 +2098,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [55000, 115000], crystal: [35000, 73000], he3: [17500, 44500] },
-    desc: 'Aegis III garantiran. Quick Assault Flagship ???ansa.',
-    unlock: 'Humanoid 7 zavr???ena',
+    desc: 'Aegis III garantiran. Quick Assault Flagship ÔÇöansa.',
+    unlock: 'Humanoid 7 zavrÔÇöena',
   },
 
   {
@@ -2128,7 +2128,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [80000, 166000], crystal: [50000, 106000], he3: [25000, 64000] },
     desc: 'Sentinel III garantiran.',
-    unlock: 'Humanoid 8 zavr???ena',
+    unlock: 'Humanoid 8 zavrÔÇöena',
   },
 
   {
@@ -2147,8 +2147,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [120000, 250000], crystal: [76000, 160000], he3: [38000, 96000] },
-    desc: 'Kraj Humanoid zone. Quick Assault II ???ansa.',
-    unlock: 'Humanoid 9 zavr???ena',
+    desc: 'Kraj Humanoid zone. Quick Assault II ÔÇöansa.',
+    unlock: 'Humanoid 9 zavrÔÇöena',
   },
 
   // ============================================
@@ -2178,7 +2178,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [5000, 10000], crystal: [3000, 7000], he3: [1500, 4000] },
     desc: 'Void Shield I garantiran.',
-    unlock: 'Instanca 15 zavr???ena',
+    unlock: 'Instanca 15 zavrÔÇöena',
   },
 
   {
@@ -2207,7 +2207,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [8000, 17000], crystal: [5000, 11000], he3: [2500, 6500] },
     desc: 'Voidwarp I garantiran.',
-    unlock: 'Pirate 1 zavr???ena',
+    unlock: 'Pirate 1 zavrÔÇöena',
   },
 
   {
@@ -2236,8 +2236,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [12000, 25000], crystal: [8000, 17000], he3: [4000, 10000] },
-    desc: 'Void ???tit I garantiran. ???ansa za 3 razli???ita Pirate Flagship.',
-    unlock: 'Pirate 2 zavr???ena',
+    desc: 'Void ÔÇötit I garantiran. ÔÇöansa za 3 razliÔÇöita Pirate Flagship.',
+    unlock: 'Pirate 2 zavrÔÇöena',
   },
 
   {
@@ -2266,7 +2266,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [16000, 33000], crystal: [10000, 21000], he3: [5000, 13000] },
     desc: 'Void II garantiran.',
-    unlock: 'Pirate 3 zavr???ena',
+    unlock: 'Pirate 3 zavrÔÇöena',
   },
 
   {
@@ -2294,7 +2294,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [28000, 59000], crystal: [18000, 38000], he3: [9000, 23000] },
     desc: 'Voidwarp II garantiran.',
-    unlock: 'Pirate 4 zavr???ena',
+    unlock: 'Pirate 4 zavrÔÇöena',
   },
 
   {
@@ -2323,8 +2323,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [36000, 76000], crystal: [23000, 49000], he3: [11500, 29500] },
-    desc: 'Void ???tit II garantiran. Voidwarp Engine ???ansa.',
-    unlock: 'Pirate 5 zavr???ena',
+    desc: 'Void ÔÇötit II garantiran. Voidwarp Engine ÔÇöansa.',
+    unlock: 'Pirate 5 zavrÔÇöena',
   },
 
   {
@@ -2353,7 +2353,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 41000] },
     desc: 'Void III garantiran.',
-    unlock: 'Pirate 6 zavr???ena',
+    unlock: 'Pirate 6 zavrÔÇöena',
   },
 
   {
@@ -2382,7 +2382,7 @@ const INSTANCES_NIGHTMARE = [
     },
     resources: { metal: [78000, 163000], crystal: [49000, 104000], he3: [24500, 63000] },
     desc: 'Voidwarp III garantiran.',
-    unlock: 'Pirate 7 zavr???ena',
+    unlock: 'Pirate 7 zavrÔÇöena',
   },
 
   {
@@ -2407,8 +2407,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [105000, 220000], crystal: [66000, 140000], he3: [33000, 84000] },
-    desc: 'Void III garantiran. Voidwarp III ???ansa. Piratski ekskluziv.',
-    unlock: 'Pirate 8 zavr???ena',
+    desc: 'Void III garantiran. Voidwarp III ÔÇöansa. Piratski ekskluziv.',
+    unlock: 'Pirate 8 zavrÔÇöena',
   },
 
   {
@@ -2440,8 +2440,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [160000, 335000], crystal: [100000, 210000], he3: [50000, 126000] },
-    desc: 'Final Pirate instance. Fleet Commander III ???ansa.',
-    unlock: 'Pirate 9 zavr???ena',
+    desc: 'Final Pirate instance. Fleet Commander III ÔÇöansa.',
+    unlock: 'Pirate 9 zavrÔÇöena',
   },
 
   // ============================================
@@ -2461,7 +2461,7 @@ const INSTANCES_NIGHTMARE = [
     boss_stats: { hp: 15000, shield: 5000, dps: 800, agility: 20, speed: 2, armor: 'Light' },
     
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Void Scavenger ??? krade resurse! Izgubi borbu = -10% nagrade.',
+    desc: 'Void Scavenger ÔÇö krade resurse! Izgubi borbu = -10% nagrade.',
     unlock: 'Min 30k power',
   },
 
@@ -2476,7 +2476,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Corsair Marauder","structure":112000,"shield":36750,"armor_val":14000,"dps":6300,"agility":7,"speed":4},
     boss_stats: { hp: 18000, shield: 6000, dps: 900, agility: 18, speed: 2, armor: 'Chrome' },
     resources: { metal: [5000, 12000], crystal: [3000, 7000], he3: [1500, 4000] },
-    desc: 'Corsair Marauder ??? poziva 2 pomo???na broda u rundi 3!',
+    desc: 'Corsair Marauder ÔÇö poziva 2 pomoÔÇöna broda u rundi 3!',
     unlock: 'Min 35k power',
   },
 
@@ -2491,7 +2491,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Nebula Stalker","structure":144000,"shield":47250,"armor_val":18000,"dps":8100,"agility":7,"speed":5},
     boss_stats: { hp: 20000, shield: 8000, dps: 1100, agility: 35, speed: 3, armor: 'Nano' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Nebula Stalker ??? nevidljiv u prvoj rundi! Igra??? ne mo???e napadati.',
+    desc: 'Nebula Stalker ÔÇö nevidljiv u prvoj rundi! IgraÔÇö ne moÔÇöe napadati.',
     unlock: 'Min 45k power',
   },
 
@@ -2506,7 +2506,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Solar Predator","structure":160000,"shield":52500,"armor_val":20000,"dps":9000,"agility":7,"speed":5},
     boss_stats: { hp: 22000, shield: 7000, dps: 1200, agility: 15, speed: 2, armor: 'Light' },
     resources: { metal: [7000, 15000], crystal: [4500, 10000], he3: [2200, 5500] },
-    desc: 'Solar Predator ??? AoE napadi! Svaki hit poga???a sve tvoje slotove za 20%.',
+    desc: 'Solar Predator ÔÇö AoE napadi! Svaki hit pogaÔÇöa sve tvoje slotove za 20%.',
     unlock: 'Min 50k power',
   },
 
@@ -2521,7 +2521,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Frost Reaver","structure":224000,"shield":73500,"armor_val":28000,"dps":12600,"agility":8,"speed":5},
     boss_stats: { hp: 28000, shield: 10000, dps: 1400, agility: 20, speed: 2, armor: 'Chrome' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Frost Reaver ??? zamrzava random slot! Taj slot preska???e 1 rundu.',
+    desc: 'Frost Reaver ÔÇö zamrzava random slot! Taj slot preskaÔÇöe 1 rundu.',
     unlock: 'Min 70k power',
   },
 
@@ -2536,7 +2536,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Plasma Wraith","structure":256000,"shield":84000,"armor_val":32000,"dps":14400,"agility":8,"speed":5},
     boss_stats: { hp: 30000, shield: 12000, dps: 1500, agility: 22, speed: 2, armor: 'Neutralizing' },
     resources: { metal: [10000, 22000], crystal: [6500, 14000], he3: [3200, 8000] },
-    desc: 'Plasma Wraith ??? eksplodira kad umre! 20% ???tete svim tvojim brodovima.',
+    desc: 'Plasma Wraith ÔÇö eksplodira kad umre! 20% ÔÇötete svim tvojim brodovima.',
     unlock: 'Min 80k power',
   },
 
@@ -2553,7 +2553,7 @@ const INSTANCES_NIGHTMARE = [
     boss_stats: { hp: 80000, shield: 30000, dps: 3000, agility: 15, speed: 2, armor: 'Chrome' },
     
     resources: { metal: [30000, 65000], crystal: [19000, 41000], he3: [9500, 24000] },
-    desc: 'Quantum Hydra ??? 3 glave! Respawnuje jednom na 30% HP.',
+    desc: 'Quantum Hydra ÔÇö 3 glave! Respawnuje jednom na 30% HP.',
     unlock: 'Pobijedi R1+R2+R3',
   },
 
@@ -2568,7 +2568,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Chrono Warden","structure":800000,"shield":262500,"armor_val":100000,"dps":45000,"agility":10,"speed":6},
     boss_stats: { hp: 100000, shield: 40000, dps: 4000, agility: 12, speed: 1, armor: 'Regen' },
     resources: { metal: [50000, 105000], crystal: [32000, 67000], he3: [16000, 40000] },
-    desc: 'Chrono Warden ??? vra???a HP! Jednom u borbi resetuje HP na 50%.',
+    desc: 'Chrono Warden ÔÇö vraÔÇöa HP! Jednom u borbi resetuje HP na 50%.',
     unlock: 'Pobijedi R4+R5+R6',
   },
 
@@ -2583,7 +2583,7 @@ const INSTANCES_NIGHTMARE = [
   bossShip: {"name":"Dreadnought Titan","structure":1120000,"shield":367500,"armor_val":140000,"dps":63000,"agility":10,"speed":6},
     boss_stats: { hp: 150000, shield: 60000, dps: 5000, agility: 5, speed: 1, armor: 'Neutralizing' },
     resources: { metal: [80000, 168000], crystal: [50000, 106000], he3: [25000, 63000] },
-    desc: 'Dreadnought Titan ??? Titan Rage! Svaki pre???ivljeni napad +10% boss DPS.',
+    desc: 'Dreadnought Titan ÔÇö Titan Rage! Svaki preÔÇöivljeni napad +10% boss DPS.',
     unlock: 'Pobijedi E1+E2',
   },
 
@@ -2594,10 +2594,10 @@ const INSTANCES_NIGHTMARE = [
     xp: 10000,
     boss_ability: 'four_phases',
     boss_phases: [
-      { name: 'Phase 1 ??? Awakening', hp_pct: 100, ability: 'normal' },
-      { name: 'Phase 2 ??? Devouring', hp_pct: 75, ability: 'aoe_damage' },
-      { name: 'Phase 3 ??? Consuming', hp_pct: 50, ability: 'ship_absorb' },
-      { name: 'Phase 4 ??? Ascension', hp_pct: 25, ability: 'self_heal' },
+      { name: 'Phase 1 ÔÇö Awakening', hp_pct: 100, ability: 'normal' },
+      { name: 'Phase 2 ÔÇö Devouring', hp_pct: 75, ability: 'aoe_damage' },
+      { name: 'Phase 3 ÔÇö Consuming', hp_pct: 50, ability: 'ship_absorb' },
+      { name: 'Phase 4 ÔÇö Ascension', hp_pct: 25, ability: 'self_heal' },
     ],
     enemies: ['Galaxy Eater Void Spawn', 'Galaxy Eater Core'],
   enemyGroups: [{"ship_id":"carrier_Atlas_III","count":5000,"row":1,"col":1},{"ship_id":"carrier_Harbinger_III","count":5000,"row":1,"col":2},{"ship_id":"carrier_Vanguard_III","count":5000,"row":1,"col":3},{"ship_id":"battleship_Titan_III","count":5000,"row":2,"col":1},{"ship_id":"battleship_Obliterator_III","count":6000,"row":2,"col":2,"isBoss":true},{"ship_id":"battleship_Colossus_III","count":5000,"row":2,"col":3},{"ship_id":"carrier_Harbinger_III","count":5000,"row":3,"col":1},{"ship_id":"carrier_Atlas_III","count":5000,"row":3,"col":2},{"ship_id":"carrier_Harbinger_III","count":5000,"row":3,"col":3}],
@@ -2606,7 +2606,7 @@ const INSTANCES_NIGHTMARE = [
     boss_stats: { hp: 600000, shield: 200000, dps: 8000, agility: 8, speed: 1, armor: 'Neutralizing' },
     
     resources: { metal: [250000, 530000], crystal: [158000, 334000], he3: [79000, 167000] },
-    desc: 'Galaxy Eater ??? 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
+    desc: 'Galaxy Eater ÔÇö 4 faze! Faza 3: apsorb jednog slota. Faza 4: self-heal.',
     unlock: 'Pobijedi E1+E2+E3',
   },
 
@@ -2659,8 +2659,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [150000, 320000], crystal: [95000, 200000], he3: [47500, 120000] },
-    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral ???ansa.',
-    unlock: 'Trial 8 zavr???ena + min 500k power',
+    desc: 'Immortal I i Celestial I garantirani. Alliance Admiral ÔÇöansa.',
+    unlock: 'Trial 8 zavrÔÇöena + min 500k power',
   },
 
   {
@@ -2707,8 +2707,8 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [220000, 460000], crystal: [140000, 295000], he3: [70000, 178000] },
-    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II ???ansa.',
-    unlock: 'Constellation 1 zavr???ena',
+    desc: 'Immortal II i Celestial II garantirani. Fleet Commander II ÔÇöansa.',
+    unlock: 'Constellation 1 zavrÔÇöena',
   },
 
   {
@@ -2758,12 +2758,12 @@ const INSTANCES_NIGHTMARE = [
       ],
     },
     resources: { metal: [320000, 670000], crystal: [202000, 425000], he3: [101000, 255000] },
-    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III ???ansa.',
-    unlock: 'Constellation 2 zavr???ena',
+    desc: 'Immortal III i Celestial III garantirani. Striking Sword i Fleet Commander III ÔÇöansa.',
+    unlock: 'Constellation 2 zavrÔÇöena',
   },
 
   // ============================================
-  // MASTER BOSS ??? THE HIVE GOD
+  // MASTER BOSS ÔÇö THE HIVE GOD
   // ============================================
 
   {
@@ -2780,13 +2780,13 @@ const INSTANCES_NIGHTMARE = [
     boss_stats: { hp: 1000000, shield: 400000, dps: 12000, agility: 10, speed: 2, armor: 'Neutralizing' },
     
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'THE HIVE GOD ??? Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
+    desc: 'THE HIVE GOD ÔÇö Master Boss. Sve mehanike kombinovano. Jedino mjesto za Divine opremu.',
     unlock: 'Min 1M power + pobijedi Galaxy Eater',
     respawn: 'weekly',
   },
 
   // ============================================
-  // BOSS EVENT (globalni, rijedak) ??? LEGACY
+  // BOSS EVENT (globalni, rijedak) ÔÇö LEGACY
   // ============================================
 
   {
@@ -2799,8 +2799,8 @@ const INSTANCES_NIGHTMARE = [
     boss: 'THE HIVE GOD',
   bossShip: {"name":"THE HIVE GOD","structure":2560000,"shield":840000,"armor_val":320000,"dps":144000,"agility":10,"speed":7},
     resources: { metal: [500000, 1000000], crystal: [315000, 630000], he3: [157500, 315000] },
-    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igra???i napadaju isti boss.',
-    unlock: 'Min 800k power. Event se pojavljuje jednom sedmi???no.',
+    desc: 'Globalni Boss Event. Jedino mjesto za Divine opremu. Svi igraÔÇöi napadaju isti boss.',
+    unlock: 'Min 800k power. Event se pojavljuje jednom sedmiÔÇöno.',
     respawn: 'weekly',
   },
 ];
