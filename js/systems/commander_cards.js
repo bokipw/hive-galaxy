@@ -1263,7 +1263,11 @@ function calcFleetBonuses() {
   (window._deployedCommanders || []).forEach(id => countFaction(id));
   const hasFactionBonus = Object.values(factionCount).some(v => v >= 3);
   if (hasFactionBonus) {
-    Object.keys(bonuses).forEach(k => { bonuses[k] = Math.floor(bonuses[k] * 1.1); });
+    // Svakih 3 komandira iste frakcije = +10% (9 kom = 3x)
+    Object.keys(bonuses).forEach(k => {
+      const mult = Object.values(factionCount).reduce((sum, cnt) => sum + Math.floor(cnt / 3), 0);
+      bonuses[k] = Math.floor(bonuses[k] * (1 + mult * 0.1));
+    });
   }
 
   return { bonuses, hasFactionBonus, factionCount };
@@ -1431,6 +1435,7 @@ function renderFleetCommanders() {
   const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
   const factionCt = fb ? Object.entries(fb.factionCount) : [];
   const hasSyn = fb?.hasFactionBonus;
+  const synMult = hasSyn ? Object.values(fb.factionCount).reduce((sum, cnt) => sum + Math.floor(cnt / 3), 0) : 0;
   const nearSyn = factionCt.find(([,c]) => c === 2);
   const noDeploy = factionCt.length === 0;
   const synHtml = `
@@ -1439,11 +1444,11 @@ function renderFleetCommanders() {
       border:1px solid ${hasSyn ? 'rgba(255,204,68,0.2)' : 'rgba(0,212,255,0.1)'}">
       <div style="font-size:0.85rem;font-weight:700;color:${hasSyn ? '#ffcc44' : '#00d4ff'};
         font-family:'Orbitron',monospace;margin-bottom:8px">
-        ${hasSyn ? '🔗 FACTION SYNERGY AKTIVNA! +10%' : '🔗 FACTION SYNERGY'}
+        ${hasSyn ? `🔗 FACTION SYNERGY AKTIVNA! +${synMult * 10}%` : '🔗 FACTION SYNERGY'}
       </div>
       <div style="font-size:0.8rem;color:#c8d8e8;margin-bottom:10px;line-height:1.5">
         ${hasSyn
-          ? 'Svi bonusi flote su uvećani za <strong>+10%</strong> jer imaš 3+ komandira iste frakcije.'
+          ? `Svi bonusi flote su uvećani za <strong>+${synMult * 10}%</strong> (${synMult}x svakih 3 komandira iste frakcije).`
           : noDeploy
             ? 'Svaki komandir pripada nekoj frakciji. Ako deployuješ <strong>3 komandira iste frakcije</strong>, dobijaš <strong>+10%</strong> na sve bonuse.'
             : 'Deployuj <strong>još 1 komandira</strong> iste frakcije da aktiviraš Faction Synergy i dobiješ <strong>+10%</strong> na sve bonuse.'}
