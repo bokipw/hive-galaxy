@@ -714,6 +714,20 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
   const _count = attacker.count || 1;
   let dmg = (wpn.dmgMin + Math.floor(Math.random() * (wpn.dmgMax - wpn.dmgMin + 1))) * _count;
 
+  // ── COMMANDER WEAPON MASTERY ──
+  if (attacker.side === 'player') {
+    const _cmdId = attacker.slot?._ownerCmdId;
+    if (_cmdId) {
+      const _wOwned = (window.ownedCommanders || []).find(o => o.id === _cmdId);
+      if (_wOwned) {
+        const _wt = weaponDmgType?.toLowerCase();
+        const _wGrade = _wOwned.masteryWeapons?.[_wt];
+        const _wMult = (typeof GRADE_MULT !== 'undefined' ? GRADE_MULT : { S:1.3, A:1.2, B:1.1, C:1.0, D:0.9, E:0.8, F:0.7 })[_wGrade] || 1.0;
+        if (_wMult !== 1.0) dmg = Math.floor(dmg * _wMult);
+      }
+    }
+  }
+
   // ── COMMANDER PASSIVE: first_round_atk bonus ──
   if (round === 1 && attacker.side === 'player' && attacker._firstRoundAtkBonus > 0) {
     dmg = Math.floor(dmg * (1 + attacker._firstRoundAtkBonus / 100));
