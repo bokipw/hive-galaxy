@@ -77,8 +77,8 @@ Deno.serve(async (req: Request) => {
         catch (ex: unknown) { errors.push(`leaderboard: ${(ex as Error).message}`); }
       }
       if (data._pvp_snapshot) {
-        try { await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot, id: player_id }); }
-        catch {}
+        try { await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot }); }
+        catch (ex: unknown) { errors.push(`pvp_snapshots: ${(ex as Error).message}`); }
       }
 
       return new Response(JSON.stringify({ success: true, errors }), {

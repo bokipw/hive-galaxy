@@ -120,14 +120,10 @@ async function _savePvpSnapshot(saveData) {
       },
       updated_at: new Date().toISOString()
     };
-    if (isHive) {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
-      });
-    } else {
-      await window._supa.from('pvp_snapshots').upsert(payload);
-    }
+    await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+    });
   } catch(e) { console.error('[pvpSave] exception:', e); }
 }
 
