@@ -691,10 +691,13 @@ function destroyCommander(cmdId) {
     window._activeCommander = next;
   }
 
+  // Uhvati nivo pre nego što obrišemo
+  const burnedLevel = window.ownedCommanders[idx]?.level || 0;
+
   window.ownedCommanders.splice(idx, 1);
 
-  // Nagrada: ključevi po raritetu
-  const keyReward = { C: 1, R: 3, E: 5, L: 10 }[def?.rarity] || 0;
+  // Nagrada: ključevi = nivo komandira (1-100)
+  const keyReward = burnedLevel;
   if (keyReward > 0) {
     if (typeof R !== 'undefined' && R.keys !== undefined) R.keys += keyReward;
     toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
