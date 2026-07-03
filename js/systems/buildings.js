@@ -732,7 +732,11 @@ function renderDepot() {
   const isLocked = level >= hqLevel;
   const isMaxed  = level >= 100;
   const nameColor = getBuildingNameColor(level);
-  const nextCap  = Math.floor(220 + (level) * (22000 - 220) / 99);
+  const nextBase = Math.floor(220 + (level) * (22000 - 220) / 99);
+  const mm = getBuildingMilestones('depot');
+  let nb = 0;
+  Object.entries(mm).forEach(([mlvl,d])=>{ if ((level+1)>=parseInt(mlvl)&&d.capBonus) nb+=d.capBonus; });
+  const nextCap = Math.floor(nextBase * (1 + nb / 100));
   const barColor = pct >= 90 ? '#ff3355' : pct >= 70 ? '#ffcc44' : '#00ff88';
   const inQueue  = buildQueue.some(q => q.key === 'depot');
   const queueItem = buildQueue.find(q => q.key === 'depot');
