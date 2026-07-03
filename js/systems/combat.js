@@ -161,6 +161,21 @@ function applyCommanderPassivesToBattle(playerSide, enemySide) {
       if (b.enemy_shield) { const m = Math.max(0, 1 - b.enemy_shield/100); enemy.shield = Math.floor(enemy.shield * m); enemy.maxShield = enemy.shield; }
     });
   }
+
+  // ── FLEET COMMANDER SLOT BONUSI (fleet panel) ──
+  if (typeof calcFleetBonuses === 'function') {
+    const fb = calcFleetBonuses();
+    if (fb && fb.bonuses) {
+      playerSide.forEach(unit => {
+        if (fb.bonuses.attack)  { unit.dps     = Math.floor(unit.dps  * (1 + fb.bonuses.attack  / 100)); unit.baseDps = unit.dps; }
+        if (fb.bonuses.defense) { unit._dmgReduction = (unit._dmgReduction || 0) + fb.bonuses.defense; }
+        if (fb.bonuses.speed)   { unit.speed  += fb.bonuses.speed; }
+        if (fb.bonuses.shield)  { const m = 1 + fb.bonuses.shield/100; unit.shield = Math.floor(unit.shield * m); unit.maxShield = unit.shield; }
+        if (fb.bonuses.evasion) { unit.agility = Math.min(90, unit.agility + fb.bonuses.evasion); }
+        if (fb.bonuses.crit)    { unit._resCritBonus = (unit._resCritBonus || 0) + fb.bonuses.crit; }
+      });
+    }
+  }
 }
 
 // ── INICIJALIZACIJA BORBE ──

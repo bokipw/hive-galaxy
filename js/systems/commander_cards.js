@@ -1254,16 +1254,12 @@ function calcFleetBonuses() {
     if (shipSynergy) bonuses[slot.bonus] += 5;
   });
 
-  // Faction synergy: broji iz slotova i deployovanih komandira
+  // Faction synergy: broji samo deployovane komandire (izbegni duplo brojanje sa slotovima)
   const factionCount = {};
   const countFaction = id => {
     const def = allCmds.find(c => c.id === id);
     if (def) factionCount[def.faction] = (factionCount[def.faction] || 0) + 1;
   };
-  FLEET_SLOTS.slice(0, cap).forEach(slot => {
-    const cmdId = window._cmdFleet[slot.id];
-    if (cmdId) countFaction(cmdId);
-  });
   (window._deployedCommanders || []).forEach(id => countFaction(id));
   const hasFactionBonus = Object.values(factionCount).some(v => v >= 3);
   if (hasFactionBonus) {
