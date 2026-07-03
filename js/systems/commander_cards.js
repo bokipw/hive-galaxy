@@ -208,7 +208,13 @@ function doPull(packId, count = 1) {
     const rarity = rollRarity(packId);
     const candidates = pool.filter(c => c.rarity === rarity);
     if (!candidates.length) continue;
-    const cmd = candidates[Math.floor(Math.random() * candidates.length)];
+    // Preskoči komandire koji su već max level (100) — moraš ih prvo spaliti
+    const available = candidates.filter(c => {
+      const o = window.ownedCommanders.find(o => o.id === c.id);
+      return !o || o.level < 100;
+    });
+    if (!available.length) continue;
+    const cmd = available[Math.floor(Math.random() * available.length)];
 
     // Provjeri postoji li već
     const existing = window.ownedCommanders.find(o => o.id === cmd.id);
