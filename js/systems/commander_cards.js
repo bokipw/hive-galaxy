@@ -606,10 +606,21 @@ function showCardDetail(cmdId) {
       transition:all 0.2s">★</span>`;
   }).join('') : '';
 
+  // ── BURN INFO ──
+  const rarityMultBurn = { C: 1, R: 2.5, E: 5, L: 10 }[def?.rarity] || 1;
+  const burnKeysNow = owned ? Math.floor((owned.level || 1) * rarityMultBurn) : 0;
+  const burnInfo = owned ? `
+    <div class="card" style="padding:10px;margin-bottom:16px;border-color:rgba(255,51,85,0.2)">
+      <div style="font-size:0.65rem;color:#ff4455;font-family:'Orbitron',monospace;margin-bottom:4px">
+        ${t('commanders.burn')}</div>
+      <div style="font-size:0.62rem;color:#6a90b8">
+        ${t('commanders.burnRewardFormula', { mult: rarityMultBurn, keys: burnKeysNow })}</div>
+    </div>` : '';
+
   const modalActions = owned
     ? [
         { label: isActive ? '✓ Aktivan Komandir' : '★ Postavi kao Aktivnog', cls: isActive ? 'btn-g' : 'btn-gold', fn: () => { setActiveCommander(cmdId); closeModal(); } },
-        { label: '🔥 Spali', cls: 'btn-r', fn: () => { if (confirm('🔥 Sigurno želiš da spališ ovog komandira? Ova radnja je trajna!')) { destroyCommander(cmdId); closeModal(); } } },
+        { label: t('commanders.burn'), cls: 'btn-r', fn: () => { if (confirm(t('commanders.burnConfirm', { keys: burnKeysNow }))) { destroyCommander(cmdId); closeModal(); } } },
         { label: 'Zatvori', cls: '', fn: closeModal }
       ]
     : [{ label: 'Zatvori', cls: '', fn: closeModal }];
@@ -632,6 +643,7 @@ function showCardDetail(cmdId) {
         <div style="font-size:0.7rem;color:#aaa;line-height:1.6;font-style:italic">"${def.desc || def.lore || '???'}"</div>
       </div>
       ${masteryHtml}
+      ${burnInfo}
       <div style="display:grid;gap:8px;margin-bottom:16px">${abilities}</div>
       ${!owned ? `<div class="card" style="text-align:center;color:#6a90b8;font-size:0.7rem;padding:12px">
         🔒 Nije u kolekciji — otvori paket da dobijes ovog komandira

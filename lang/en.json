@@ -178,13 +178,17 @@
   },
   "commanders": {
     "title": "👨‍✈️ COMMANDERS",
-    "owned": "My Commanders",
+    "owned": "My commanders",
     "active": "Active",
     "deploy": "Deploy",
     "recall": "Recall",
     "stats": "Stats",
-    "openPack": "Open Pack",
-    "noCommanders": "You have no commanders."
+    "openPack": "Open pack",
+    "noCommanders": "No commanders yet.",
+    "burn": "🔥 Burn",
+    "burnReward": "🔥 Burning gives: {keys} 🗝️ keys",
+    "burnRewardFormula": "Level × {mult} = {keys} 🗝️",
+    "burnConfirm": "🔥 Really burn this commander? You'll get {keys} 🗝️ keys! This cannot be undone!"
   },
   "blueprints": {
     "title": "📐 BLUEPRINTS",
