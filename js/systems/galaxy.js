@@ -47,11 +47,22 @@ async function loadGalaxyPlayerBases() {
   if (!window._supa) return Promise.resolve();
   const myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
   if (!myId) return Promise.resolve();
-  const { data } = await window._supa.from('pvp_snapshots')
+  let col = 'player_id';
+  let res = await window._supa.from('pvp_snapshots')
     .select('player_id,username,rating,power,fleet,resources')
-    .neq('player_id', myId)
+    .neq(col, myId)
     .order('rating', { ascending: false })
     .limit(25);
+  if (res.error && (res.error.status===400 || (res.error.message && res.error.message.indexOf('column')>=0))) {
+    console.warn('galaxy: player_id kolona ne postoji, padam na id');
+    col = 'id';
+    res = await window._supa.from('pvp_snapshots')
+      .select('player_id,username,rating,power,fleet,resources')
+      .neq(col, myId)
+      .order('rating', { ascending: false })
+      .limit(25);
+  }
+  const { data } = res;
   _galaxyPlayerBases = (data || []).filter(p => p.fleet && p.fleet.length > 0);
 }
 

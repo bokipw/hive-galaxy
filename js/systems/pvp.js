@@ -311,7 +311,13 @@ async function refreshOpponents() {
   if (!window._supa) { if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.cannotLoad')+'</div>'; return; }
   var myId = typeof _getPlayerId === 'function' ? _getPlayerId() : null;
   if (!myId) { window._currentOpponents = []; if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.noOpponents')+'</div>'; return; }
-  var res = await window._supa.from('pvp_snapshots').select('*').neq('player_id',myId).order('rating',{ascending:false}).limit(20);
+  var colName = 'player_id';
+  var res = await window._supa.from('pvp_snapshots').select('*').neq(colName,myId).order('rating',{ascending:false}).limit(20);
+  if (res.error && (res.error.status===400 || (res.error.message && res.error.message.indexOf('column')>=0))) {
+    console.warn('PVP: player_id kolona ne postoji, padam na id');
+    colName = 'id';
+    res = await window._supa.from('pvp_snapshots').select('*').neq(colName,myId).order('rating',{ascending:false}).limit(20);
+  }
   var data = res.data, error = res.error;
   if (error || !data || data.length===0) {
     window._currentOpponents = [];
