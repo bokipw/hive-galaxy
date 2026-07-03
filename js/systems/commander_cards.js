@@ -666,6 +666,12 @@ function destroyCommander(cmdId) {
   const idx = window.ownedCommanders.findIndex(o => o.id === cmdId);
   if (idx === -1) { toast('❌ Nemaš ovog komandira!', 'err'); return; }
 
+  const def = [
+    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
+    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
+    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
+  ].find(c => c.id === cmdId) || null;
+
   // Skini sa deploymenta ako je deployovan
   if (window._deployedCommanders?.includes(cmdId)) {
     undeployCommander(cmdId);
@@ -686,16 +692,18 @@ function destroyCommander(cmdId) {
   }
 
   window.ownedCommanders.splice(idx, 1);
+
+  // Nagrada: ključevi po raritetu
+  const keyReward = { C: 1, R: 3, E: 5, L: 10 }[def?.rarity] || 0;
+  if (keyReward > 0) {
+    if (typeof R !== 'undefined' && R.keys !== undefined) R.keys += keyReward;
+    toast(`🔥 ${def ? def.icon+' '+def.name : cmdId} spaljen! +${keyReward} 🗝️ ključeva`, 'ok');
+  } else {
+    toast(`💀 ${def ? def.icon+' '+def.name : cmdId} uništen!`, 'ok');
+  }
+
   saveGame();
   renderCommanderCards();
-
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
-  const def = allCmds.find(c => c.id === cmdId);
-  toast(`💀 ${def ? def.icon+' '+def.name : cmdId} uništen!`, 'ok');
 }
 
 // ── PULL ANIMACIJA ──
