@@ -1161,6 +1161,12 @@ function renderCommanderCards() {
 // FLEET COMMANDER SISTEM
 // ============================================================
 
+const FACTION_BONUS_MAP = {
+  vanguard: 'attack', sentinel: 'defense', technocrat: 'economy', shadow: 'evasion', solar: 'shield',
+  krall: 'attack', ethereal: 'crit', synth: 'shield', hive: 'defense', ancient: 'defense',
+  revenant: 'attack', wraith_lord: 'evasion', tomb_keeper: 'shield', kaels_chosen: 'attack',
+};
+
 // Slot definicije — svaki slot ima ulogu i bonus tip
 const FLEET_SLOTS = [
   // Row 1 — Vrhovna komanda (uvijek dostupan)
@@ -1263,11 +1269,16 @@ function calcFleetBonuses() {
   (window._deployedCommanders || []).forEach(id => countFaction(id));
   const hasFactionBonus = Object.values(factionCount).some(v => v >= 3);
   if (hasFactionBonus) {
-    // Svakih 3 komandira iste frakcije = +10% (9 kom = 3x)
-    Object.keys(bonuses).forEach(k => {
-      const mult = Object.values(factionCount).reduce((sum, cnt) => sum + Math.floor(cnt / 3), 0);
-      bonuses[k] = Math.floor(bonuses[k] * (1 + mult * 0.1));
-    });
+    // Svakih 3 komandira iste frakcije = +10% na bonus te frakcije
+    for (const [faction, cnt] of Object.entries(factionCount)) {
+      const groups = Math.floor(cnt / 3);
+      if (groups > 0) {
+        const bonusKey = FACTION_BONUS_MAP[faction];
+        if (bonusKey && bonuses[bonusKey] !== undefined) {
+          bonuses[bonusKey] = Math.floor(bonuses[bonusKey] * (1 + groups * 0.1));
+        }
+      }
+    }
   }
 
   return { bonuses, hasFactionBonus, factionCount };
@@ -1435,7 +1446,14 @@ function renderFleetCommanders() {
   const fb = typeof calcFleetBonuses === 'function' ? calcFleetBonuses() : null;
   const factionCt = fb ? Object.entries(fb.factionCount) : [];
   const hasSyn = fb?.hasFactionBonus;
-  const synMult = hasSyn ? Object.values(fb.factionCount).reduce((sum, cnt) => sum + Math.floor(cnt / 3), 0) : 0;
+  const FACTION_BONUS_LABELS_MAP = {
+    attack: '⚔️ Napad', defense: '🛡️ Odbrana', economy: '⚙️ Ekonomija',
+    evasion: '🌑 Evasion', shield: '🔵 Shield', speed: '🚀 Brzina', crit: '🔥 Crit',
+  };
+  const synActiveBonuses = hasSyn && fb?.factionCount
+    ? Object.entries(fb.factionCount).filter(([,c]) => c >= 3)
+        .map(([f,c]) => FACTION_BONUS_LABELS_MAP[FACTION_BONUS_MAP[f]] || f)
+    : [];
   const nearSyn = factionCt.find(([,c]) => c === 2);
   const noDeploy = factionCt.length === 0;
   const synHtml = `
@@ -1444,14 +1462,14 @@ function renderFleetCommanders() {
       border:1px solid ${hasSyn ? 'rgba(255,204,68,0.2)' : 'rgba(0,212,255,0.1)'}">
       <div style="font-size:0.85rem;font-weight:700;color:${hasSyn ? '#ffcc44' : '#00d4ff'};
         font-family:'Orbitron',monospace;margin-bottom:8px">
-        ${hasSyn ? `🔗 FACTION SYNERGY AKTIVNA! +${synMult * 10}%` : '🔗 FACTION SYNERGY'}
+        ${hasSyn ? `🔗 FACTION SYNERGY AKTIVNA! +${synActiveBonuses.join(', ')}` : '🔗 FACTION SYNERGY'}
       </div>
       <div style="font-size:0.8rem;color:#c8d8e8;margin-bottom:10px;line-height:1.5">
         ${hasSyn
-          ? `Svi bonusi flote su uvećani za <strong>+${synMult * 10}%</strong> (${synMult}x svakih 3 komandira iste frakcije).`
+          ? `Svakih 3 komandira iste frakcije daje +10% na njihov specifičan bonus.`
           : noDeploy
-            ? 'Svaki komandir pripada nekoj frakciji. Ako deployuješ <strong>3 komandira iste frakcije</strong>, dobijaš <strong>+10%</strong> na sve bonuse.'
-            : 'Deployuj <strong>još 1 komandira</strong> iste frakcije da aktiviraš Faction Synergy i dobiješ <strong>+10%</strong> na sve bonuse.'}
+            ? 'Svaki komandir pripada nekoj frakciji. Deployuj <strong>3 komandira iste frakcije</strong> za +10% na specifičan bonus te frakcije.'
+            : 'Deployuj <strong>još 1 komandira</strong> iste frakcije da aktiviraš Faction Synergy.'}
       </div>
       ${factionCt.length > 0 ? `
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:${noDeploy ? '0' : '6px'}">
