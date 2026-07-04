@@ -242,6 +242,11 @@ function _applyGameState(s) {
     if (!window._dropPity)       window._dropPity             = {};
     if (s.bossCooldowns)         window._bossCooldowns        = s.bossCooldowns;
     if (!window._bossCooldowns)  window._bossCooldowns        = {};
+    // Očisti stare ključeve bez sufiksa težine (pre fix-a)
+    const _modes = ['easy','normal','nightmare','hell'];
+    Object.keys(window._bossCooldowns).forEach(k => {
+      if (!_modes.some(m => k.endsWith('_' + m))) delete window._bossCooldowns[k];
+    });
     window._fleetPosition = s.fleetPosition || null;
     if (s.dynamicStoryMissions) window._dynamicStoryMissions = s.dynamicStoryMissions;
     if (!window._dynamicStoryMissions) window._dynamicStoryMissions = [];
