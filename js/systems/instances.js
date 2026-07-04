@@ -399,7 +399,7 @@ function renderInstanceCard(inst, playerPower) {
       </div>
 
       ${inst.cooldown_hours ? (() => {
-        const last = window._bossCooldowns?.[inst.id];
+        const last = window._bossCooldowns?.[inst.id + '_' + _instDifficultyMode];
         if (!last) return `<div style="font-size:0.62rem;margin-bottom:6px;color:#00ff88">⏳ Spreman</div>`;
         const el = (Date.now() - last) / 3600000;
         if (el >= inst.cooldown_hours) return `<div style="font-size:0.62rem;margin-bottom:6px;color:#00ff88">⏳ Spreman</div>`;
@@ -741,9 +741,10 @@ function startBattle(inst, instant = false) {
   }
 
   // ── Boss cooldown provjera ──────────────────────────────
+  const _cdKey = inst.id + '_' + _instDifficultyMode;
   if (inst.cooldown_hours) {
     if (!window._bossCooldowns) window._bossCooldowns = {};
-    const lastKill = window._bossCooldowns[inst.id];
+    const lastKill = window._bossCooldowns[_cdKey];
     if (lastKill) {
       const elapsed = (Date.now() - lastKill) / 3600000;
       if (elapsed < inst.cooldown_hours) {
@@ -857,7 +858,7 @@ function startBattle(inst, instant = false) {
       // Postavi boss cooldown
       if (inst.cooldown_hours) {
         if (!window._bossCooldowns) window._bossCooldowns = {};
-        window._bossCooldowns[inst.id] = Date.now();
+        window._bossCooldowns[_cdKey] = Date.now();
       }
       if (!window._instProgress) window._instProgress = {};
       window._instProgress[progKey] = prog2;
