@@ -340,6 +340,14 @@ function renderDesignerForm(prefill = {}) {
   const prefillCls = prefill.ship_id ? getShipClass(prefill.ship_id) : null;
   const prefillSlots = prefillCls ? getClassSlots(prefillCls) : null;
 
+  // Grupiši brodove po klasi
+  const shipGroups = {};
+  allShips.forEach(s => {
+    const clsName = dn(SHIP_CLASSES[s.cls]) || s.cls;
+    if (!shipGroups[clsName]) shipGroups[clsName] = [];
+    shipGroups[clsName].push(s);
+  });
+
   return `
     <div style="display:flex;flex-direction:column;gap:10px">
       <div style="display:flex;gap:10px">
@@ -349,10 +357,14 @@ function renderDesignerForm(prefill = {}) {
         </div>
         <div style="flex:1">
           <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
-          <input id="dShipSearch" type="text" placeholder="🔍 Pretraži brod..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem;margin-bottom:4px" oninput="filterShipOptions(this.value)">
-          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem;min-height:120px" onchange="refreshDesignerSlots();document.getElementById('dShipSearch').value=this.options[this.selectedIndex]?.text.split(' [')[0]||''">
+          <input id="dShipSearch" type="text" placeholder="🔍 Ime ili klasa..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem;margin-bottom:4px" oninput="filterShipOptions(this.value)">
+          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem;min-height:100px" onchange="refreshDesignerSlots();document.getElementById('dShipSearch').value=this.options[this.selectedIndex]?.text.split(' [')[0]||''">
             <option value="">-- Odaberi brod --</option>
-            ${allShips.map(s => `<option value="${s.id}" class="ship-opt" data-cls="${s.cls}" data-name="${s.name.toLowerCase()}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} [${dn(SHIP_CLASSES[s.cls]) || s.cls}] ⭐${s.rarity}</option>`).join('')}
+            ${Object.entries(shipGroups).map(([clsName, ships]) =>
+              `<optgroup label="${clsName}">
+                ${ships.map(s => `<option value="${s.id}" data-cls="${s.cls}" data-name="${s.name.toLowerCase()}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} ⭐${s.rarity}</option>`).join('')}
+              </optgroup>`
+            ).join('')}
           </select>
         </div>
       </div>
@@ -517,8 +529,14 @@ function filterShipOptions(q) {
   for (let i = 0; i < sel.options.length; i++) {
     const opt = sel.options[i];
     if (!opt.value) continue;
-    opt.style.display = (!q || opt.dataset.name.includes(q) || opt.dataset.cls.includes(q) || opt.text.toLowerCase().includes(q)) ? '' : 'none';
+    const match = !q || opt.dataset.name.includes(q) || opt.parentElement?.label?.toLowerCase().includes(q) || opt.text.toLowerCase().includes(q);
+    opt.style.display = match ? '' : 'none';
   }
+  // Sakrij prazne optgroup-e
+  sel.querySelectorAll('optgroup').forEach(grp => {
+    const hasVisible = Array.from(grp.options).some(o => o.style.display !== 'none');
+    grp.style.display = hasVisible ? '' : 'none';
+  });
   if (!q && sel.value) { sel.value = ''; refreshDesignerSlots(); }
 }
 
