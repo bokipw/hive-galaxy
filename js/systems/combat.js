@@ -1406,12 +1406,27 @@ function applyWeaponEffect(attacker, target, battle, round) {
       battle.log.push({ round, type: 'effect', msg: `🎯🔧 Guided motor disable: ${target.name} usporjen (${spec.duration || 1} runde)!` });
     }
 
-    // GUIDED_MODULE_DESTROY — guided + šansa uništava modul (trajno -10% DPS)
+    // GUIDED_MODULE_DESTROY — guided + šansa uništava modul
     if (spec.type === 'guided_module_destroy' && roll < spec.chance) {
-      target.dps = Math.floor(target.dps * 0.9);
-      battle.log.push({ round, type: 'effect', msg: `🎯💥 Guided modul destroy: ${target.name} -10% DPS trajno!` });
+      let destroyed = false;
+      if (target._slot) {
+        const modName = id => { const m = typeof getModuleById === 'function' && getModuleById(id); return m ? m.name : id; };
+        if (target._slot.module_1) {
+          battle.log.push({ round, type: 'effect', msg: `🎯💥 ${target.name}: modul "${modName(target._slot.module_1)}" uništen!` });
+          target._slot.module_1 = null; target.moduleSpecial = null; destroyed = true;
+        } else if (target._slot.special_1) {
+          battle.log.push({ round, type: 'effect', msg: `🎯💥 ${target.name}: special modul "${modName(target._slot.special_1)}" uništen!` });
+          target._slot.special_1 = null; target.specialSpecial = null; destroyed = true;
+        } else if (target._slot.recon_1) {
+          battle.log.push({ round, type: 'effect', msg: `🎯💥 ${target.name}: recon modul "${modName(target._slot.recon_1)}" uništen!` });
+          target._slot.recon_1 = null; target.reconSpecial = null; destroyed = true;
+        }
+      }
+      if (!destroyed) {
+        target.dps = Math.floor(target.dps * 0.9);
+        battle.log.push({ round, type: 'effect', msg: `🎯💥 ${target.name}: -10% DPS (nema modula za uništenje)` });
+      }
       if (spec.chance >= 18) {
-        // Viši tier: dodatna area šteta
         const nearTargets = (attacker.side === 'player' ? battle.enemy : battle.player)
           .filter(e => e.alive && e.id !== target.id).slice(0, 1);
         nearTargets.forEach(t => {
