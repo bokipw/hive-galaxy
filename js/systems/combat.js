@@ -1402,8 +1402,11 @@ function applyWeaponEffect(attacker, target, battle, round) {
 
     // GUIDED_MOTOR_DISABLE — guided + šansa onesposobljava motor (smanjuje speed i agility)
     if (spec.type === 'guided_motor_disable' && roll < spec.chance) {
-      target.effects.push({ type: 'motor_disable', duration: spec.duration || 1 });
-      battle.log.push({ round, type: 'effect', msg: `🎯🔧 Guided motor disable: ${target.name} usporjen (${spec.duration || 1} runde)!` });
+      const dur = spec.duration || 1;
+      target.effects.push({ type: 'motor_disable', duration: dur, applied: true });
+      target.speed   = Math.max(1, Math.floor(target.speed   * 0.5));
+      target.agility = Math.max(0, Math.floor(target.agility * 0.5));
+      battle.log.push({ round, type: 'effect', msg: `🎯🔧 Guided motor disable: ${target.name} usporjen (${dur} runde)!` });
     }
 
     // GUIDED_MODULE_DESTROY — guided + šansa uništava modul
@@ -1553,16 +1556,10 @@ function processEffects(unit, battle) {
       return eff.duration > 0;
     }
 
-    // MOTOR_DISABLE — smanjuje speed i agility (primjenjuje se odmah, vraća se kad istekne)
+    // MOTOR_DISABLE — smanjuje speed i agility (primijenjen odmah, ovde samo countdown + restore)
     if (eff.type === 'motor_disable') {
-      if (!eff.applied) {
-        unit.speed   = Math.max(1, Math.floor(unit.speed   * 0.5));
-        unit.agility = Math.max(0, Math.floor(unit.agility * 0.5));
-        eff.applied  = true;
-      }
       eff.duration--;
       if (eff.duration <= 0) {
-        // Vrati originalne vrijednosti
         unit.speed   = Math.floor(unit.speed   * 2);
         unit.agility = Math.floor(unit.agility * 2);
         return false;
