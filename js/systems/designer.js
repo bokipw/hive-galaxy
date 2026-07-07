@@ -566,13 +566,17 @@ function renderEquipInfo(type, id) {
 // ── BROWSER ZA BLUEPRINTE ──
 function openEquipBrowser(type, slotIdx) {
   let items = [];
-  const typeLabel = { weapon:'Oružje', shield:'Štit', engine:'Motor' }[type] || type;
+  const typeLabel = { weapon:'Oružje', shield:'Štit', engine:'Motor', module:'Modul', special:'Special', recon:'Recon' }[type] || type;
   if (type === 'weapon') items = typeof WEAPONS !== 'undefined' ? WEAPONS.filter(w => ownedBlueprints[w.id]) : [];
   else if (type === 'shield') items = typeof SHIELDS !== 'undefined' ? SHIELDS.filter(s => ownedBlueprints[s.id]) : [];
   else if (type === 'engine') items = typeof ENGINES !== 'undefined' ? ENGINES.filter(e => ownedBlueprints[e.id]) : [];
+  else if (type === 'module' || type === 'special') {
+    const cls = getShipClass(document.getElementById('dShip')?.value);
+    if (cls) items = (typeof SPECIAL_MODULES !== 'undefined') ? SPECIAL_MODULES.filter(m => (Array.isArray(m.shipClass) ? m.shipClass.includes(cls) : m.shipClass === cls) && ownedBlueprints[m.id]) : [];
+  }
+  else if (type === 'recon') items = typeof RECON_MODULES !== 'undefined' ? RECON_MODULES.filter(m => ownedBlueprints[m.id]) : [];
   if (!items.length) { toast(`❌ Nemaš nijedan ${typeLabel.toLowerCase()} blueprint.`, 'err'); return; }
 
-  // Grupiši oružja po podtipu
   let groups = {};
   if (type === 'weapon') {
     items.forEach(w => {
@@ -585,56 +589,148 @@ function openEquipBrowser(type, slotIdx) {
   }
 
   const uid = 'browse_' + Date.now();
+  const rarities = [...new Set(items.map(x => x.rarity))].sort();
+  const subtypes = type === 'weapon' ? [...new Set(items.map(x => x.subtype))].sort() : [];
+  const dmgTypes = type === 'weapon' ? [...new Set(items.map(x => x.dmgType))].sort() : [];
+
   let body = `
-    <div style="margin-bottom:8px">
+    <div style="margin-bottom:6px">
       <input id="${uid}_search" type="text" placeholder="🔍 Pretraži ${typeLabel.toLowerCase()}..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 8px;border-radius:4px;font-size:0.78rem">
+    </div>`;
+
+  if (type === 'weapon') {
+    body += `<div style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:0.6rem;color:#6a90b8;margin-right:4px">Tip:</span>
+      <span class="${uid}_ft" data-f="all" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,212,255,0.2);border:1px solid #00d4ff66;color:#00d4ff" onclick="filterBrowse('${uid}','all')">Sve</span>
+      ${subtypes.map(st => `<span class="${uid}_ft" data-f="${st}" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,0,0,0.3);border:1px solid transparent;color:#6a90b8" onclick="filterBrowse('${uid}','${st}')">${st}</span>`).join('')}
     </div>
-    <div id="${uid}_list" style="max-height:45vh;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px">
+    <div style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:0.6rem;color:#6a90b8;margin-right:4px">Šteta:</span>
+      <span class="${uid}_fd" data-f="all" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,212,255,0.2);border:1px solid #00d4ff66;color:#00d4ff" onclick="filterBrowseDmg('${uid}','all')">Sve</span>
+      ${dmgTypes.map(dt => `<span class="${uid}_fd" data-f="${dt}" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,0,0,0.3);border:1px solid transparent;color:#6a90b8" onclick="filterBrowseDmg('${uid}','${dt}')">${dt}</span>`).join('')}
+    </div>`;
+  }
+
+  body += `
+    <div style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:0.6rem;color:#6a90b8;margin-right:4px">Rijetkost:</span>
+      <span class="${uid}_fr" data-f="all" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,212,255,0.2);border:1px solid #00d4ff66;color:#00d4ff" onclick="filterBrowseRar('${uid}','all')">Sve</span>
+      ${rarities.map(r => `<span class="${uid}_fr" data-f="${r}" style="cursor:pointer;padding:2px 7px;border-radius:3px;font-size:0.62rem;background:rgba(0,0,0,0.3);border:1px solid transparent;color:#6a90b8" onclick="filterBrowseRar('${uid}','${r}')">${r}</span>`).join('')}
+    </div>
+    <div id="${uid}_list" style="max-height:40vh;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:2px">
       ${Object.entries(groups).map(([gname, gitems]) => `
-        <div class="browse-group">
-          <div style="font-size:0.65rem;color:#6a90b8;padding:4px 6px;margin-bottom:2px;border-bottom:1px solid rgba(0,212,255,0.1)">${gname}</div>
+        <div class="browse-group" data-group="${gname}">
+          <div style="font-size:0.62rem;color:#6a90b8;padding:3px 6px;margin-bottom:2px;border-bottom:1px solid rgba(0,212,255,0.1);font-weight:600">${gname}</div>
           ${gitems.map(item => {
             const info = renderEquipInfo(type, item.id);
-            return `<div class="browse-item" data-name="${(item.name||'').toLowerCase()}" data-id="${item.id}" onclick="selectEquipFromBrowser('${type}',${slotIdx},'${item.id}')" style="cursor:pointer;transition:0.15s" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${info}</div>`;
+            return `<div class="browse-item" data-name="${(item.name||'').toLowerCase()}" data-id="${item.id}" data-rarity="${item.rarity||''}" data-subtype="${item.subtype||''}" data-dmgtype="${item.dmgType||''}" onclick="selectEquipFromBrowser('${type}',${slotIdx},'${item.id}')" style="cursor:pointer;transition:0.15s" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${info}</div>`;
           }).join('')}
         </div>`).join('')}
     </div>`;
 
   openModal(`📖 Biramo: ${typeLabel}`, body, [{ label: 'Zatvori', fn: closeModal }]);
-  // Pretraga uživo — filter prikazuje/sakriva grupe i iteme
   setTimeout(() => {
     const inp = document.getElementById(uid + '_search');
     if (!inp) return;
-    inp.oninput = function() {
-      const q = this.value.toLowerCase().trim();
-      document.querySelectorAll('.browse-group').forEach(grp => {
-        let anyVisible = false;
-        grp.querySelectorAll('.browse-item').forEach(el => {
-          const match = el.dataset.name.includes(q) || el.dataset.id.toLowerCase().includes(q);
-          el.style.display = match ? '' : 'none';
-          if (match) anyVisible = true;
-        });
-        grp.style.display = anyVisible ? '' : 'none';
-      });
-    };
+    inp.oninput = function() { applyBrowseFilters(uid); };
   }, 50);
 }
 
+function filterBrowse(uid, val) {
+  document.querySelectorAll(`.${uid}_ft`).forEach(s => {
+    const active = s.dataset.f === val;
+    s.style.background = active ? 'rgba(0,212,255,0.2)' : 'rgba(0,0,0,0.3)';
+    s.style.borderColor = active ? '#00d4ff66' : 'transparent';
+    s.style.color = active ? '#00d4ff' : '#6a90b8';
+  });
+  window['_browseFilter_subtype_' + uid] = val;
+  applyBrowseFilters(uid);
+}
+
+function filterBrowseDmg(uid, val) {
+  document.querySelectorAll(`.${uid}_fd`).forEach(s => {
+    const active = s.dataset.f === val;
+    s.style.background = active ? 'rgba(0,212,255,0.2)' : 'rgba(0,0,0,0.3)';
+    s.style.borderColor = active ? '#00d4ff66' : 'transparent';
+    s.style.color = active ? '#00d4ff' : '#6a90b8';
+  });
+  window['_browseFilter_dmg_' + uid] = val;
+  applyBrowseFilters(uid);
+}
+
+function filterBrowseRar(uid, val) {
+  document.querySelectorAll(`.${uid}_fr`).forEach(s => {
+    const active = s.dataset.f === val;
+    s.style.background = active ? 'rgba(0,212,255,0.2)' : 'rgba(0,0,0,0.3)';
+    s.style.borderColor = active ? '#00d4ff66' : 'transparent';
+    s.style.color = active ? '#00d4ff' : '#6a90b8';
+  });
+  window['_browseFilter_rar_' + uid] = val;
+  applyBrowseFilters(uid);
+}
+
+function applyBrowseFilters(uid) {
+  const q = (document.getElementById(uid + '_search')?.value || '').toLowerCase().trim();
+  const fST = window['_browseFilter_subtype_' + uid] || 'all';
+  const fDMG = window['_browseFilter_dmg_' + uid] || 'all';
+  const fRAR = window['_browseFilter_rar_' + uid] || 'all';
+
+  document.querySelectorAll('.browse-group').forEach(grp => {
+    let anyVisible = false;
+    grp.querySelectorAll('.browse-item').forEach(el => {
+      const nameMatch = !q || el.dataset.name.includes(q) || el.dataset.id.toLowerCase().includes(q);
+      const stMatch = fST === 'all' || el.dataset.subtype === fST;
+      const dmgMatch = fDMG === 'all' || el.dataset.dmgtype === fDMG;
+      const rarMatch = fRAR === 'all' || el.dataset.rarity === fRAR;
+      const show = nameMatch && stMatch && dmgMatch && rarMatch;
+      el.style.display = show ? '' : 'none';
+      if (show) anyVisible = true;
+    });
+    grp.style.display = anyVisible ? '' : 'none';
+  });
+}
+
 function selectEquipFromBrowser(type, slotIdx, id) {
-  const el = document.getElementById(`d${type.charAt(0).toUpperCase()+type.slice(1)}${slotIdx}`);
-  if (el) {
-    el.value = id;
-    updateSlotVisual();
-    updateEquipInfo(type, slotIdx, id);
+  const key = type.charAt(0).toUpperCase() + type.slice(1);
+  const sel = document.getElementById(`d${key}${slotIdx}`);
+  const display = document.getElementById(`d${key}${slotIdx}Display`);
+  if (sel) sel.value = id || '';
+  if (display) {
+    if (id) {
+      // Pokušaj naći ime
+      const pool = type === 'weapon' ? WEAPONS : type === 'shield' ? SHIELDS : type === 'engine' ? ENGINES : type === 'module' || type === 'special' ? SPECIAL_MODULES : type === 'recon' ? RECON_MODULES : [];
+      const item = pool?.find(x => x.id === id);
+      display.textContent = item ? `${item.icon||'🔹'} ${item.name} [${item.rarity}]` : id;
+      display.style.color = 'white';
+    } else {
+      display.textContent = '🔍 Klikni da odabereš';
+      display.style.color = '#3a5070';
+    }
   }
+  updateSlotVisual();
+  updateEquipInfo(type, slotIdx, id);
   closeModal();
 }
 
-// ── RENDER DINAMIČKIH SLOTOVA ──
+function clearEquip(type, slotIdx) {
+  selectEquipFromBrowser(type, slotIdx, '');
+}
+
+// ── RENDER DINAMIČKIH SLOTOVA (BEZ VELIKIH DROPDOWNOVA) ──
 function renderDynamicSlots(cls, slots, prefill) {
   const myWeapons = typeof WEAPONS !== 'undefined' ? WEAPONS.filter(w => ownedBlueprints[w.id]) : [];
   const myShields = typeof SHIELDS !== 'undefined' ? SHIELDS.filter(s => ownedBlueprints[s.id]) : [];
   const myEngines = typeof ENGINES !== 'undefined' ? ENGINES.filter(e => ownedBlueprints[e.id]) : [];
+
+  function shortName(id) {
+    const w = myWeapons.find(x => x.id === id);
+    if (w) return `${w.icon} ${dn(w)} [${w.rarity}]`;
+    const s2 = myShields.find(x => x.id === id);
+    if (s2) return `${s2.icon} ${dn(s2)} [${s2.rarity}]`;
+    const e = myEngines.find(x => x.id === id);
+    if (e) return `${e.icon} ${dn(e)} [${e.rarity}]`;
+    return id;
+  }
 
   let html = '';
 
@@ -642,11 +738,16 @@ function renderDynamicSlots(cls, slots, prefill) {
     const val = prefill[`weapon_${i}`] || '';
     html += `
       <div style="margin-bottom:8px">
-        <div style="font-size:0.7rem;color:#ff4444;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">⚔️ ORUŽJE ${i}<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('weapon',${i})">📖</span></div>
-        <select id="dWeapon${i}" style="width:100%;background:#070c1a;border:1px solid rgba(255,68,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-          onchange="updateSlotVisual();updateEquipInfo('weapon',${i},this.value)">
-          <option value="">-- Bez oružja --</option>
-          ${myWeapons.map(w => `<option value="${w.id}" ${val === w.id ? 'selected' : ''}>${dn(w)} [${w.rarity}] ⚔${w.dps} ${w.dmgType} ${w.subtype}${w.special?.desc ? ' · '+w.special.desc : w.special?.type ? ' · '+w.special.type : ''}</option>`).join('')}
+        <div style="font-size:0.7rem;color:#ff4444;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center">⚔️ ORUŽJE ${i}</div>
+        <div style="display:flex;gap:4px">
+          <div id="dWeapon${i}Display" style="flex:1;background:#070c1a;border:1px solid rgba(255,68,68,0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${val?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('weapon',${i})">
+            ${val ? shortName(val) : '🔍 Klikni da odabereš oružje'}
+          </div>
+          <span style="background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('weapon',${i})" title="Ukloni">✕</span>
+        </div>
+        <select id="dWeapon${i}" style="display:none" onchange="updateSlotVisual();updateEquipInfo('weapon',${i},this.value)">
+          <option value="">--</option>
+          <option value="${val}" selected>${val}</option>
         </select>
         <div id="info_weapon_${i}">${renderEquipInfo('weapon', val)}</div>
       </div>`;
@@ -656,11 +757,16 @@ function renderDynamicSlots(cls, slots, prefill) {
     const val = prefill[`shield_${i}`] || '';
     html += `
       <div style="margin-bottom:8px">
-        <div style="font-size:0.7rem;color:#00d4ff;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">🛡️ ŠTIT ${i}<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('shield',${i})">📖</span></div>
-        <select id="dShield${i}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-          onchange="updateSlotVisual();updateEquipInfo('shield',${i},this.value)">
-          <option value="">-- Bez štita --</option>
-          ${myShields.map(s => `<option value="${s.id}" ${val === s.id ? 'selected' : ''}>${dn(s)} [${s.rarity}] 🛡+${s.shield} ♻${s.regen}/r</option>`).join('')}
+        <div style="font-size:0.7rem;color:#00d4ff;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center">🛡️ ŠTIT ${i}</div>
+        <div style="display:flex;gap:4px">
+          <div id="dShield${i}Display" style="flex:1;background:#070c1a;border:1px solid rgba(0,212,255,0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${val?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('shield',${i})">
+            ${val ? shortName(val) : '🔍 Klikni da odabereš štit'}
+          </div>
+          <span style="background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('shield',${i})" title="Ukloni">✕</span>
+        </div>
+        <select id="dShield${i}" style="display:none" onchange="updateSlotVisual();updateEquipInfo('shield',${i},this.value)">
+          <option value="">--</option>
+          <option value="${val}" selected>${val}</option>
         </select>
         <div id="info_shield_${i}">${renderEquipInfo('shield', val)}</div>
       </div>`;
@@ -669,11 +775,16 @@ function renderDynamicSlots(cls, slots, prefill) {
   const engVal = prefill.engine_1 || '';
   html += `
     <div style="margin-bottom:8px">
-      <div style="font-size:0.7rem;color:#ffcc44;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">🔩 MOTOR<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('engine',1)">📖</span></div>
-      <select id="dEngine1" style="width:100%;background:#070c1a;border:1px solid rgba(255,204,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-        onchange="updateSlotVisual();updateEquipInfo('engine',1,this.value)">
-        <option value="">-- Bez motora --</option>
-        ${myEngines.map(e => `<option value="${e.id}" ${engVal === e.id ? 'selected' : ''}>${dn(e)} [${e.rarity}] 💨+${e.speed} 🏃+${e.agility_bonus}${e.evasion_bonus ? ' 💫+'+e.evasion_bonus+'%' : ''}</option>`).join('')}
+      <div style="font-size:0.7rem;color:#ffcc44;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center">🔩 MOTOR</div>
+      <div style="display:flex;gap:4px">
+        <div id="dEngine1Display" style="flex:1;background:#070c1a;border:1px solid rgba(255,204,68,0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${engVal?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('engine',1)">
+          ${engVal ? shortName(engVal) : '🔍 Klikni da odabereš motor'}
+        </div>
+        <span style="background:rgba(255,204,68,0.15);border:1px solid rgba(255,204,68,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('engine',1)" title="Ukloni">✕</span>
+      </div>
+      <select id="dEngine1" style="display:none" onchange="updateSlotVisual();updateEquipInfo('engine',1,this.value)">
+        <option value="">--</option>
+        <option value="${engVal}" selected>${engVal}</option>
       </select>
       <div id="info_engine_1">${renderEquipInfo('engine', engVal)}</div>
     </div>`;
@@ -682,13 +793,19 @@ function renderDynamicSlots(cls, slots, prefill) {
     const myMods   = (typeof SPECIAL_MODULES !== 'undefined') ? SPECIAL_MODULES.filter(m => (Array.isArray(m.shipClass) ? m.shipClass.includes(cls) : m.shipClass === cls) && ownedBlueprints[m.id]) : [];
     const modVal   = prefill.module_1 || '';
     const modIcon  = cls === 'fighter' ? '⚔️' : '🛡️';
+    const modName  = myMods.find(x => x.id === modVal);
     html += `
       <div style="margin-bottom:8px">
         <div style="font-size:0.7rem;color:${cls === 'fighter' ? '#ff4444' : '#00ff88'};margin-bottom:2px">${modIcon} MODULE</div>
-        <select id="dModule1" style="width:100%;background:#070c1a;border:1px solid rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-          onchange="updateEquipInfo('module',1,this.value)">
-          <option value="">-- Bez modula --</option>
-          ${myMods.map(m => `<option value="${m.id}" ${modVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
+        <div style="display:flex;gap:4px">
+          <div id="dModule1Display" style="flex:1;background:#070c1a;border:1px solid rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${modVal?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('module',1)">
+            ${modVal ? (modName?`${modName.icon} ${dn(modName)}`:modVal) : '🔍 Klikni da odabereš modul'}
+          </div>
+          <span style="background:rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.15);border:1px solid rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('module',1)" title="Ukloni">✕</span>
+        </div>
+        <select id="dModule1" style="display:none">
+          <option value="">--</option>
+          ${myMods.map(m => `<option value="${m.id}" ${modVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
         </select>
         <div id="info_module_1">${renderEquipInfo('module', modVal)}</div>
       </div>`;
@@ -697,13 +814,19 @@ function renderDynamicSlots(cls, slots, prefill) {
   if (slots.recon > 0) {
     const myRecon = typeof RECON_MODULES !== 'undefined' ? RECON_MODULES.filter(m => ownedBlueprints[m.id]) : [];
     const reconVal = prefill.recon_1 || '';
+    const reconName = myRecon.find(x => x.id === reconVal);
     html += `
       <div style="margin-bottom:8px">
         <div style="font-size:0.7rem;color:#00e5ff;margin-bottom:2px">🛸 RECON</div>
-        <select id="dRecon1" style="width:100%;background:#070c1a;border:1px solid rgba(0,229,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-          onchange="updateEquipInfo('recon',1,this.value)">
-          <option value="">-- Bez recon modula --</option>
-          ${myRecon.map(m => `<option value="${m.id}" ${reconVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
+        <div style="display:flex;gap:4px">
+          <div id="dRecon1Display" style="flex:1;background:#070c1a;border:1px solid rgba(0,229,255,0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${reconVal?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('recon',1)">
+            ${reconVal ? (reconName?`${reconName.icon} ${dn(reconName)}`:reconVal) : '🔍 Klikni da odabereš recon'}
+          </div>
+          <span style="background:rgba(0,229,255,0.15);border:1px solid rgba(0,229,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('recon',1)" title="Ukloni">✕</span>
+        </div>
+        <select id="dRecon1" style="display:none">
+          <option value="">--</option>
+          ${myRecon.map(m => `<option value="${m.id}" ${reconVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
         </select>
         <div id="info_recon_1">${renderEquipInfo('recon', reconVal)}</div>
       </div>`;
@@ -715,13 +838,19 @@ function renderDynamicSlots(cls, slots, prefill) {
       : [];
     const specialVal = prefill[`special_${i}`] || '';
     const specialIcon = cls === 'battleship' ? '💥' : cls === 'carrier' ? '🌌' : '⭐';
+    const spName = mySpecial.find(x => x.id === specialVal);
     html += `
       <div style="margin-bottom:8px">
         <div style="font-size:0.7rem;color:#aa44ff;margin-bottom:2px">${specialIcon} SPECIAL ${i}</div>
-        <select id="dSpecial${i}" style="width:100%;background:#070c1a;border:1px solid rgba(170,68,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
-          onchange="updateEquipInfo('special',${i},this.value)">
-          <option value="">-- Bez special modula --</option>
-          ${mySpecial.map(m => `<option value="${m.id}" ${specialVal === m.id ? 'selected' : ''}>${m.icon} ${dn(m)} (${m.rarity}) — ${t(m.effectKey || '') || m.effect.desc}</option>`).join('')}
+        <div style="display:flex;gap:4px">
+          <div id="dSpecial${i}Display" style="flex:1;background:#070c1a;border:1px solid rgba(170,68,255,0.3);border-radius:4px;padding:5px 8px;font-size:0.78rem;color:${specialVal?'white':'#3a5070'};cursor:pointer" onclick="openEquipBrowser('special',${i})">
+            ${specialVal ? (spName?`${spName.icon} ${dn(spName)}`:specialVal) : `🔍 Klikni da odabereš special`}
+          </div>
+          <span style="background:rgba(170,68,255,0.15);border:1px solid rgba(170,68,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('special',${i})" title="Ukloni">✕</span>
+        </div>
+        <select id="dSpecial${i}" style="display:none">
+          <option value="">--</option>
+          ${mySpecial.map(m => `<option value="${m.id}" ${specialVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
         </select>
         <div id="info_special_${i}">${renderEquipInfo('special', specialVal)}</div>
       </div>`;
@@ -905,7 +1034,6 @@ function editDesign(designId) {
   if (!design) return;
   const formEl = document.getElementById('designerForm');
   if (formEl) formEl.innerHTML = renderDesignerForm(design);
-  // Nakon što se form popuni, refresh-ujemo slotove i vizuelni prikaz
   setTimeout(() => {
     const shipId = design.ship_id;
     if (shipId) {
@@ -913,15 +1041,33 @@ function editDesign(designId) {
       if (sel) sel.value = shipId;
       const cls = getShipClass(shipId);
       const slots = getClassSlots(cls);
-      for (let i = 1; i <= slots.weapon; i++) {
-        const val = design[`weapon_${i}`];
-        if (val && document.getElementById(`dWeapon${i}`)) document.getElementById(`dWeapon${i}`).value = val;
+      const allItems = {
+        weapon: typeof WEAPONS !== 'undefined' ? WEAPONS : [],
+        shield: typeof SHIELDS !== 'undefined' ? SHIELDS : [],
+        engine: typeof ENGINES !== 'undefined' ? ENGINES : [],
+      };
+      const allMods = typeof SPECIAL_MODULES !== 'undefined' ? SPECIAL_MODULES : [];
+      const allRecon = typeof RECON_MODULES !== 'undefined' ? RECON_MODULES : [];
+      function setDisplay(type, i, val) {
+        const key = type.charAt(0).toUpperCase() + type.slice(1);
+        const hid = document.getElementById(`d${key}${i}`);
+        const dis = document.getElementById(`d${key}${i}Display`);
+        if (hid) hid.value = val || '';
+        if (dis) {
+          if (val) {
+            const pool = type === 'weapon' ? allItems.weapon : type === 'shield' ? allItems.shield : type === 'engine' ? allItems.engine : type === 'module' || type === 'special' ? allMods : type === 'recon' ? allRecon : [];
+            const item = pool.find(x => x.id === val);
+            dis.textContent = item ? `${item.icon||'🔹'} ${item.name} [${item.rarity}]` : val;
+            dis.style.color = 'white';
+          } else {
+            dis.textContent = '🔍 Klikni da odabereš';
+            dis.style.color = '#3a5070';
+          }
+        }
       }
-      for (let i = 1; i <= slots.shield; i++) {
-        const val = design[`shield_${i}`];
-        if (val && document.getElementById(`dShield${i}`)) document.getElementById(`dShield${i}`).value = val;
-      }
-      if (design.engine_1 && document.getElementById('dEngine1')) document.getElementById('dEngine1').value = design.engine_1;
+      for (let i = 1; i <= slots.weapon; i++) setDisplay('weapon', i, design[`weapon_${i}`]);
+      for (let i = 1; i <= slots.shield; i++) setDisplay('shield', i, design[`shield_${i}`]);
+      setDisplay('engine', 1, design.engine_1);
       updateSlotVisual();
       updateDesignPreview();
     }
