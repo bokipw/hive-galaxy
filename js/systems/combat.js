@@ -1775,7 +1775,6 @@ function calculateRewards(battle, instanceData, prog) {
     const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
     const rars = modeRarities[modeName] || ['C'];
     let pool = allIds.filter(id => {
-      if (ownedBlueprints[id]) return false;
       return rars.includes(getBlueprintRarity(id));
     });
     pool.sort(() => Math.random() - 0.5);
@@ -1783,7 +1782,6 @@ function calculateRewards(battle, instanceData, prog) {
   }
 
   const available = bpDrops.filter(id => {
-    if (ownedBlueprints[id]) return false;
     const rarity = getBlueprintRarity(id);
     return allowedRarity.includes(rarity);
   });
