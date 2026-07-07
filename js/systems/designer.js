@@ -342,11 +342,14 @@ function renderDesignerForm(prefill = {}) {
 
   // Grupiši brodove po klasi
   const shipGroups = {};
+  const clsOrder = ['scout','fighter','cruiser','battleship','carrier','special'];
   allShips.forEach(s => {
-    const clsName = dn(SHIP_CLASSES[s.cls]) || s.cls;
-    if (!shipGroups[clsName]) shipGroups[clsName] = [];
-    shipGroups[clsName].push(s);
+    if (!shipGroups[s.cls]) shipGroups[s.cls] = [];
+    shipGroups[s.cls].push(s);
   });
+
+  const rc = { C:'#aaaaaa', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+  const initCls = prefillCls || clsOrder.find(c => shipGroups[c]?.length) || 'scout';
 
   return `
     <div style="display:flex;flex-direction:column;gap:10px">
@@ -355,17 +358,30 @@ function renderDesignerForm(prefill = {}) {
           <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">IME DIZAJNA</div>
           <input id="dName" type="text" placeholder="npr. Swift Laser Alpha" value="${prefill.name || ''}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem">
         </div>
-        <div style="flex:1">
-          <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
-          <input id="dShipSearch" type="text" placeholder="🔍 Ime ili klasa..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem;margin-bottom:4px" oninput="filterShipOptions(this.value)">
-          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem;min-height:100px" onchange="refreshDesignerSlots();document.getElementById('dShipSearch').value=this.options[this.selectedIndex]?.text.split(' [')[0]||''">
-            <option value="">-- Odaberi brod --</option>
-            ${Object.entries(shipGroups).map(([clsName, ships]) =>
-              `<optgroup label="${clsName}">
-                ${ships.map(s => `<option value="${s.id}" data-cls="${s.cls}" data-name="${s.name.toLowerCase()}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} ⭐${s.rarity}</option>`).join('')}
-              </optgroup>`
-            ).join('')}
-          </select>
+      </div>
+
+      <div>
+        <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
+        <div id="dShipClasses" style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap">
+          ${clsOrder.map(c => {
+            const cd = SHIP_CLASSES[c];
+            const has = shipGroups[c]?.length > 0;
+            return `<span class="ship-cls-tab" data-cls="${c}" onclick="switchShipClass('${c}')" style="cursor:${has?'pointer':'default'};opacity:${has?1:0.3};padding:3px 10px;border-radius:4px;font-size:0.7rem;background:${c===initCls?'rgba(0,212,255,0.2)':'rgba(0,0,0,0.3)'};border:1px solid ${c===initCls?cd?.color+'66':'transparent'};color:${cd?.color||'#6a90b8'}">${cd?.icon||''} ${cd?.name||c} (${shipGroups[c]?.length||0})</span>`;
+          }).join('')}
+        </div>
+        <div id="dShipGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:4px;max-height:200px;overflow-y:auto;padding:2px">
+          ${clsOrder.map(c => (shipGroups[c]||[]).map(s => {
+            const sel = prefill.ship_id === s.id;
+            return `<div class="ship-card" data-cls="${c}" data-ship="${s.id}" onclick="selectShip('${s.id}')" style="display:${c===initCls?'':'none'};cursor:pointer;background:${sel?'rgba(0,212,255,0.15)':'rgba(0,0,0,0.2)'};border:1px solid ${sel?'#00d4ff':'transparent'};border-radius:4px;padding:4px 6px;font-size:0.6rem;transition:0.1s" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='${sel?'#00d4ff':'transparent'}'">
+              <div style="color:white;font-weight:600">${s.name}</div>
+              <div style="display:flex;gap:4px;color:#6a90b8;margin-top:2px">
+                <span>⭐<span style="color:${rc[s.rarity]||'#aaa'}">${s.rarity}</span></span>
+                <span>🛡${s.shield}</span>
+                <span>❤️${s.structure}</span>
+              </div>
+              <div style="color:#3a5070;font-size:0.55rem">💨${s.movement} 🏃${s.agility}</div>
+            </div>`;
+          }).join('')).join('')}
         </div>
       </div>
       
@@ -382,6 +398,39 @@ function renderDesignerForm(prefill = {}) {
       <button class="btn btn-g" style="width:100%" onclick="saveDesign('${prefill.id || ''}')">💾 Sačuvaj dizajn</button>
     </div>
   `;
+}
+
+// ── GLOBALNA ZA ODABIR BRODA ──
+let _shipSelectedId = '';
+
+function switchShipClass(cls) {
+  document.querySelectorAll('.ship-card').forEach(c => c.style.display = c.dataset.cls === cls ? '' : 'none');
+  document.querySelectorAll('.ship-cls-tab').forEach(t => {
+    const active = t.dataset.cls === cls;
+    t.style.background = active ? 'rgba(0,212,255,0.2)' : 'rgba(0,0,0,0.3)';
+    t.style.borderColor = active ? (SHIP_CLASSES[cls]?.color+'66') : 'transparent';
+  });
+}
+
+function selectShip(id) {
+  _shipSelectedId = id;
+  document.querySelectorAll('.ship-card').forEach(c => {
+    const sel = c.dataset.ship === id;
+    c.style.background = sel ? 'rgba(0,212,255,0.15)' : 'rgba(0,0,0,0.2)';
+    c.style.borderColor = sel ? '#00d4ff' : 'transparent';
+    c.classList.toggle('selected', sel);
+  });
+  // Napravi ili ažuriraj hidden select za kompatibilnost sa saveDesign/refreshDesignerSlots
+  let hiddenSel = document.getElementById('dShip');
+  if (!hiddenSel) {
+    hiddenSel = document.createElement('select');
+    hiddenSel.id = 'dShip';
+    hiddenSel.style.display = 'none';
+    const form = document.getElementById('designerForm');
+    if (form) form.appendChild(hiddenSel);
+  }
+  hiddenSel.value = id;
+  refreshDesignerSlots();
 }
 
 // ── REFRESH SLOTOVA ──
@@ -518,26 +567,6 @@ function renderEquipInfo(type, id) {
   }
 
   return '';
-}
-
-console.log('designer.js v2 loaded');
-// ── FILTER ZA BRODOVE ──
-function filterShipOptions(q) {
-  const sel = document.getElementById('dShip');
-  if (!sel) return;
-  q = q.toLowerCase().trim();
-  for (let i = 0; i < sel.options.length; i++) {
-    const opt = sel.options[i];
-    if (!opt.value) continue;
-    const match = !q || opt.dataset.name.includes(q) || opt.parentElement?.label?.toLowerCase().includes(q) || opt.text.toLowerCase().includes(q);
-    opt.style.display = match ? '' : 'none';
-  }
-  // Sakrij prazne optgroup-e
-  sel.querySelectorAll('optgroup').forEach(grp => {
-    const hasVisible = Array.from(grp.options).some(o => o.style.display !== 'none');
-    grp.style.display = hasVisible ? '' : 'none';
-  });
-  if (!q && sel.value) { sel.value = ''; refreshDesignerSlots(); }
 }
 
 // ── BROWSER ZA BLUEPRINTE ──
@@ -884,11 +913,28 @@ function editDesign(designId) {
   if (formEl) formEl.innerHTML = renderDesignerForm(design);
   // Nakon što se form popuni, refresh-ujemo slotove i vizuelni prikaz
   setTimeout(() => {
-    const shipId = document.getElementById('dShip')?.value;
+    const shipId = design.ship_id;
     if (shipId) {
+      // Inicijalizuj hidden select da saveDesign/refreshDesignerSlots rade
+      let hiddenSel = document.getElementById('dShip');
+      if (!hiddenSel) {
+        hiddenSel = document.createElement('select');
+        hiddenSel.id = 'dShip';
+        hiddenSel.style.display = 'none';
+        const form = document.getElementById('designerForm');
+        if (form) form.appendChild(hiddenSel);
+      }
+      hiddenSel.value = shipId;
+      // Highlight odgovarajuću karticu
+      _shipSelectedId = shipId;
+      document.querySelectorAll('.ship-card').forEach(c => {
+        const sel = c.dataset.ship === shipId;
+        c.style.background = sel ? 'rgba(0,212,255,0.15)' : 'rgba(0,0,0,0.2)';
+        c.style.borderColor = sel ? '#00d4ff' : 'transparent';
+        c.classList.toggle('selected', sel);
+      });
       const cls = getShipClass(shipId);
       const slots = getClassSlots(cls);
-      // Postavi vrednosti u dropdownove
       for (let i = 1; i <= slots.weapon; i++) {
         const val = design[`weapon_${i}`];
         if (val && document.getElementById(`dWeapon${i}`)) document.getElementById(`dWeapon${i}`).value = val;
