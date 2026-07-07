@@ -413,6 +413,7 @@ function switchShipClass(cls) {
 }
 
 function selectShip(id) {
+  try {
   _shipSelectedId = id;
   document.querySelectorAll('.ship-card').forEach(c => {
     const sel = c.dataset.ship === id;
@@ -420,7 +421,6 @@ function selectShip(id) {
     c.style.borderColor = sel ? '#00d4ff' : 'transparent';
     c.classList.toggle('selected', sel);
   });
-  // Napravi ili ažuriraj hidden select za kompatibilnost sa saveDesign/refreshDesignerSlots
   let hiddenSel = document.getElementById('dShip');
   if (!hiddenSel) {
     hiddenSel = document.createElement('select');
@@ -431,10 +431,12 @@ function selectShip(id) {
   }
   hiddenSel.value = id;
   refreshDesignerSlots();
+  } catch(e) { alert('selectShip error: '+e.message+'\\n'+e.stack); }
 }
 
 // ── REFRESH SLOTOVA ──
 function refreshDesignerSlots() {
+  try {
   const shipId = document.getElementById('dShip')?.value;
   const slotsEl = document.getElementById('dynamicSlots');
   const visualEl = document.getElementById('visualShipContainer');
@@ -452,6 +454,7 @@ function refreshDesignerSlots() {
   if (slotsEl) slotsEl.innerHTML = renderDynamicSlots(cls, slots, {});
   if (visualEl) visualEl.innerHTML = renderShipVisual(shipId, {});
   updateDesignPreview();
+  } catch(e) { alert('refreshDesignerSlots error: '+e.message+'\\n'+e.stack); }
 }
 
 // ── INFO KARTICA ZA OPREMU ──
