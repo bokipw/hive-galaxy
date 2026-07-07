@@ -639,11 +639,10 @@ function simulateRound(battle) {
 // ── IZBOR METE PREMA TIPU ORUŽJA (GO2 sistem) ──
 function _selectTargetByWeapon(attacker, wpn, alive) {
   if (!alive.length) return null;
-  if (wpn.subtype === 'Ballistic') {
-    // Ballistic: ista kolona, najbliži (min row)
+  if (wpn.subtype === 'Ballistic' || wpn.subtype === 'FighterBay') {
+    // Ballistic / FighterBay: ista kolona, najbliži (min row)
     const inCol = alive.filter(t => t.col === attacker.col).sort((a, b) => a.row - b.row);
     if (inCol.length) return inCol[0];
-    // Fallback: prvi red, lijeva kolona
     return alive.sort((a, b) => (a.row - b.row) || (a.col - b.col))[0];
   }
   if (wpn.subtype === 'Directional') {
@@ -652,7 +651,7 @@ function _selectTargetByWeapon(attacker, wpn, alive) {
     if (inRow.length) return inRow[0];
     return alive.sort((a, b) => (a.col - b.col) || (a.row - b.row))[0];
   }
-  // Missile, FighterBay i ostali: random
+  // Ostali: random
   const shuffled = [...alive].sort(() => Math.random() - 0.5);
   return shuffled[0];
 }
