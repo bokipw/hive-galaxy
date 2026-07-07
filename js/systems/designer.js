@@ -515,14 +515,53 @@ function openEquipBrowser(type, slotIdx) {
   else if (type === 'shield') items = typeof SHIELDS !== 'undefined' ? SHIELDS.filter(s => ownedBlueprints[s.id]) : [];
   else if (type === 'engine') items = typeof ENGINES !== 'undefined' ? ENGINES.filter(e => ownedBlueprints[e.id]) : [];
   if (!items.length) { toast(`❌ Nemaš nijedan ${typeLabel.toLowerCase()} blueprint.`, 'err'); return; }
-  const body = `
-    <div style="max-height:50vh;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px">
-      ${items.map(item => {
-        const info = renderEquipInfo(type, item.id);
-        return `<div onclick="selectEquipFromBrowser('${type}',${slotIdx},'${item.id}')" style="cursor:pointer;transition:0.15s" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${info}</div>`;
-      }).join('')}
+
+  // Grupiši oružja po podtipu
+  let groups = {};
+  if (type === 'weapon') {
+    items.forEach(w => {
+      const g = w.subtype || 'Ostalo';
+      if (!groups[g]) groups[g] = [];
+      groups[g].push(w);
+    });
+  } else {
+    groups['Sve'] = items;
+  }
+
+  const uid = 'browse_' + Date.now();
+  let body = `
+    <div style="margin-bottom:8px">
+      <input id="${uid}_search" type="text" placeholder="🔍 Pretraži ${typeLabel.toLowerCase()}..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 8px;border-radius:4px;font-size:0.78rem">
+    </div>
+    <div id="${uid}_list" style="max-height:45vh;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px">
+      ${Object.entries(groups).map(([gname, gitems]) => `
+        <div class="browse-group">
+          <div style="font-size:0.65rem;color:#6a90b8;padding:4px 6px;margin-bottom:2px;border-bottom:1px solid rgba(0,212,255,0.1)">${gname}</div>
+          ${gitems.map(item => {
+            const info = renderEquipInfo(type, item.id);
+            return `<div class="browse-item" data-name="${(item.name||'').toLowerCase()}" data-id="${item.id}" onclick="selectEquipFromBrowser('${type}',${slotIdx},'${item.id}')" style="cursor:pointer;transition:0.15s" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${info}</div>`;
+          }).join('')}
+        </div>`).join('')}
     </div>`;
-  openModal(`📖 Biramo: ${typeLabel} ${slotIdx}`, body, [{ label: 'Zatvori', fn: closeModal }]);
+
+  openModal(`📖 Biramo: ${typeLabel}`, body, [{ label: 'Zatvori', fn: closeModal }]);
+  // Pretraga uživo — filter prikazuje/sakriva grupe i iteme
+  setTimeout(() => {
+    const inp = document.getElementById(uid + '_search');
+    if (!inp) return;
+    inp.oninput = function() {
+      const q = this.value.toLowerCase().trim();
+      document.querySelectorAll('.browse-group').forEach(grp => {
+        let anyVisible = false;
+        grp.querySelectorAll('.browse-item').forEach(el => {
+          const match = el.dataset.name.includes(q) || el.dataset.id.toLowerCase().includes(q);
+          el.style.display = match ? '' : 'none';
+          if (match) anyVisible = true;
+        });
+        grp.style.display = anyVisible ? '' : 'none';
+      });
+    };
+  }, 50);
 }
 
 function selectEquipFromBrowser(type, slotIdx, id) {
