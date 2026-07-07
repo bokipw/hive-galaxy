@@ -348,9 +348,6 @@ function renderDesignerForm(prefill = {}) {
     shipGroups[s.cls].push(s);
   });
 
-  const rc = { C:'#aaaaaa', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
-  const initCls = prefillCls || clsOrder.find(c => shipGroups[c]?.length) || 'scout';
-
   return `
     <div style="display:flex;flex-direction:column;gap:10px">
       <div style="display:flex;gap:10px">
@@ -362,27 +359,23 @@ function renderDesignerForm(prefill = {}) {
 
       <div>
         <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
-        <div id="dShipClasses" style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap">
+        <div id="classFilters" style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap">
+          <span onclick="filterShipClass('all')" class="cf-all" style="cursor:pointer;padding:2px 8px;border-radius:4px;font-size:0.65rem;background:rgba(0,212,255,0.2);border:1px solid #00d4ff66;color:#00d4ff">Sve</span>
           ${clsOrder.map(c => {
             const cd = SHIP_CLASSES[c];
-            const has = shipGroups[c]?.length > 0;
-            return `<span class="ship-cls-tab" data-cls="${c}" onclick="switchShipClass('${c}')" style="cursor:${has?'pointer':'default'};opacity:${has?1:0.3};padding:3px 10px;border-radius:4px;font-size:0.7rem;background:${c===initCls?'rgba(0,212,255,0.2)':'rgba(0,0,0,0.3)'};border:1px solid ${c===initCls?cd?.color+'66':'transparent'};color:${cd?.color||'#6a90b8'}">${cd?.icon||''} ${cd?.name||c} (${shipGroups[c]?.length||0})</span>`;
+            const cnt = shipGroups[c]?.length || 0;
+            return cnt > 0 ? `<span onclick="filterShipClass('${c}')" class="cf-${c}" style="cursor:pointer;padding:2px 8px;border-radius:4px;font-size:0.65rem;background:rgba(0,0,0,0.3);border:1px solid transparent;color:${cd?.color||'#6a90b8'}">${cd?.icon||''} ${cd?.name||c} (${cnt})</span>` : '';
           }).join('')}
         </div>
-        <div id="dShipGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:4px;max-height:200px;overflow-y:auto;padding:2px">
-          ${clsOrder.map(c => (shipGroups[c]||[]).map(s => {
-            const sel = prefill.ship_id === s.id;
-            return `<div class="ship-card" data-cls="${c}" data-ship="${s.id}" onclick="selectShip('${s.id}')" style="display:${c===initCls?'':'none'};cursor:pointer;background:${sel?'rgba(0,212,255,0.15)':'rgba(0,0,0,0.2)'};border:1px solid ${sel?'#00d4ff':'transparent'};border-radius:4px;padding:4px 6px;font-size:0.6rem;transition:0.1s" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='${sel?'#00d4ff':'transparent'}'">
-              <div style="color:white;font-weight:600">${s.name}</div>
-              <div style="display:flex;gap:4px;color:#6a90b8;margin-top:2px">
-                <span>⭐<span style="color:${rc[s.rarity]||'#aaa'}">${s.rarity}</span></span>
-                <span>🛡${s.shield}</span>
-                <span>❤️${s.structure}</span>
-              </div>
-              <div style="color:#3a5070;font-size:0.55rem">💨${s.movement} 🏃${s.agility}</div>
-            </div>`;
-          }).join('')).join('')}
-        </div>
+        <input id="dShipSearch" type="text" placeholder="🔍 Upiši ime broda..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem;margin-bottom:4px" oninput="filterShipOptions(this.value)">
+        <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem" onchange="onShipSelect(this)">
+          <option value="">-- Odaberi brod --</option>
+          ${Object.entries(shipGroups).map(([cls, ships]) =>
+            `<optgroup label="${SHIP_CLASSES[cls]?.name||cls}" class="og-${cls}">
+              ${ships.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} [${s.rarity}] 🛡${s.shield} ❤️${s.structure} 💨${s.movement}</option>`).join('')}
+            </optgroup>`
+          ).join('')}
+        </select>
       </div>
       
       <div style="display:flex;gap:12px">
@@ -400,47 +393,42 @@ function renderDesignerForm(prefill = {}) {
   `;
 }
 
-// ── GLOBALNA ZA ODABIR BRODA ──
-let _shipSelectedId = '';
-
-function switchShipClass(cls) {
-  document.querySelectorAll('.ship-card').forEach(c => c.style.display = c.dataset.cls === cls ? '' : 'none');
-  document.querySelectorAll('.ship-cls-tab').forEach(t => {
-    const active = t.dataset.cls === cls;
-    t.style.background = active ? 'rgba(0,212,255,0.2)' : 'rgba(0,0,0,0.3)';
-    t.style.borderColor = active ? (SHIP_CLASSES[cls]?.color+'66') : 'transparent';
-  });
+// ── ODABIR BRODA ──
+function onShipSelect(sel) {
+  document.getElementById('dShipSearch').value = sel.options[sel.selectedIndex]?.text.split(' [')[0]||'';
+  refreshDesignerSlots();
 }
 
-function selectShip(id) {
-  try {
-  _shipSelectedId = id;
-  document.querySelectorAll('.ship-card').forEach(c => {
-    const sel = c.dataset.ship === id;
-    c.style.background = sel ? 'rgba(0,212,255,0.15)' : 'rgba(0,0,0,0.2)';
-    c.style.borderColor = sel ? '#00d4ff' : 'transparent';
-    c.classList.toggle('selected', sel);
-  });
-  let hiddenSel = document.getElementById('dShip');
-  if (!hiddenSel) {
-    hiddenSel = document.createElement('select');
-    hiddenSel.id = 'dShip';
-    hiddenSel.style.display = 'none';
-    const form = document.getElementById('designerForm');
-    if (form) form.appendChild(hiddenSel);
+function filterShipClass(cls) {
+  document.querySelectorAll('#classFilters span').forEach(s => { s.style.background = 'rgba(0,0,0,0.3)'; s.style.borderColor = 'transparent'; });
+  if (cls === 'all') {
+    document.querySelector('.cf-all').style.background = 'rgba(0,212,255,0.2)';
+    document.querySelector('.cf-all').style.borderColor = '#00d4ff66';
+  } else {
+    document.querySelector('.cf-'+cls).style.background = 'rgba(0,212,255,0.2)';
+    document.querySelector('.cf-'+cls).style.borderColor = '#00d4ff66';
   }
-  hiddenSel.value = id;
-  // Debug
-  let dbg = document.getElementById('debugInfo');
-  if (!dbg) { dbg = document.createElement('div'); dbg.id = 'debugInfo'; dbg.style.cssText = 'background:yellow;color:black;padding:8px;margin:8px 0;font-size:0.7rem'; document.getElementById('designerForm')?.appendChild(dbg); }
-  dbg.innerHTML = 'Brod: ' + id + ' | Klasa: ' + (getShipClass(id)||'?') + ' | dShip.value: ' + (document.getElementById('dShip')?.value||'null');
-  refreshDesignerSlots();
-  } catch(e) { alert('selectShip error: '+e.message+'\\n'+e.stack); }
+  // Sakrij/prikaži optgroup-ove
+  document.querySelectorAll('#dShip optgroup').forEach(og => {
+    if (cls === 'all') { og.style.display = ''; return; }
+    og.style.display = og.classList.contains('og-'+cls) ? '' : 'none';
+  });
+  filterShipOptions(document.getElementById('dShipSearch')?.value||'');
+}
+
+function filterShipOptions(q) {
+  const sel = document.getElementById('dShip');
+  if (!sel) return;
+  q = q.toLowerCase().trim();
+  for (let i = 0; i < sel.options.length; i++) {
+    const opt = sel.options[i];
+    if (!opt.value) continue;
+    opt.style.display = (!q || opt.text.toLowerCase().includes(q)) ? '' : 'none';
+  }
 }
 
 // ── REFRESH SLOTOVA ──
 function refreshDesignerSlots() {
-  try {
   const shipId = document.getElementById('dShip')?.value;
   const slotsEl = document.getElementById('dynamicSlots');
   const visualEl = document.getElementById('visualShipContainer');
@@ -455,13 +443,9 @@ function refreshDesignerSlots() {
   
   const cls = getShipClass(shipId);
   const slots = getClassSlots(cls);
-  if (slotsEl) {
-    const html = renderDynamicSlots(cls, slots, {});
-    slotsEl.innerHTML = html + '<div style="background:#ff0;color:#000;padding:4px;font-size:0.6rem;margin-top:4px">DEBUG: ship='+shipId+' cls='+cls+' slots='+JSON.stringify(slots)+' html.len='+html.length+'</div>';
-  }
+  if (slotsEl) slotsEl.innerHTML = renderDynamicSlots(cls, slots, {});
   if (visualEl) visualEl.innerHTML = renderShipVisual(shipId, {});
   updateDesignPreview();
-  } catch(e) { alert('refreshDesignerSlots error: '+e.message+'\\n'+e.stack); }
 }
 
 // ── INFO KARTICA ZA OPREMU ──
@@ -925,24 +909,8 @@ function editDesign(designId) {
   setTimeout(() => {
     const shipId = design.ship_id;
     if (shipId) {
-      // Inicijalizuj hidden select da saveDesign/refreshDesignerSlots rade
-      let hiddenSel = document.getElementById('dShip');
-      if (!hiddenSel) {
-        hiddenSel = document.createElement('select');
-        hiddenSel.id = 'dShip';
-        hiddenSel.style.display = 'none';
-        const form = document.getElementById('designerForm');
-        if (form) form.appendChild(hiddenSel);
-      }
-      hiddenSel.value = shipId;
-      // Highlight odgovarajuću karticu
-      _shipSelectedId = shipId;
-      document.querySelectorAll('.ship-card').forEach(c => {
-        const sel = c.dataset.ship === shipId;
-        c.style.background = sel ? 'rgba(0,212,255,0.15)' : 'rgba(0,0,0,0.2)';
-        c.style.borderColor = sel ? '#00d4ff' : 'transparent';
-        c.classList.toggle('selected', sel);
-      });
+      const sel = document.getElementById('dShip');
+      if (sel) sel.value = shipId;
       const cls = getShipClass(shipId);
       const slots = getClassSlots(cls);
       for (let i = 1; i <= slots.weapon; i++) {
