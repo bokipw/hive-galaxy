@@ -657,6 +657,14 @@ function _selectTargetByWeapon(attacker, wpn, alive) {
   return shuffled[0];
 }
 
+// ── MISSILE — pogađa sve brodove sa smanjenom štetom ──
+function _fireMissile(attacker, wi, wpn, aliveTargets, battle, round) {
+  for (const t of aliveTargets) {
+    if (!t.alive) continue;
+    _fireWeapon(attacker, wi, wpn, t, aliveTargets, battle, round, 0.5);
+  }
+}
+
 // ── NAPAD ──
 function performAttack(attacker, targets, battle, round) {
   if (!attacker._weaponRanges || !attacker._weaponCDs) return;
@@ -667,9 +675,15 @@ function performAttack(attacker, targets, battle, round) {
     if (attacker._weaponCDs[wi] > 0) continue;
     const alive = targets.filter(t => t.alive);
     if (alive.length === 0) break;
-    const target = _selectTargetByWeapon(attacker, wpn, alive);
-    if (!target) continue;
-    _fireWeapon(attacker, wi, wpn, target, targets, battle, round);
+    if (wpn.subtype === 'Missile') {
+      _fireMissile(attacker, wi, wpn, alive, battle, round);
+      attacker._weaponCDs[wi] = wpn.cooldown || 0;
+      continue;
+    } else {
+      const target = _selectTargetByWeapon(attacker, wpn, alive);
+      if (!target) continue;
+      _fireWeapon(attacker, wi, wpn, target, targets, battle, round);
+    }
     attacker._weaponCDs[wi] = wpn.cooldown || 0;
   }
 }
@@ -742,7 +756,7 @@ function _applyScatter(wi, wpn, attacker, primaryTarget, targets, battle, round,
   }
 }
 
-function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
+function _fireWeapon(attacker, wi, wpn, target, targets, battle, round, dmgMult = 1) {
   const weaponDmgType = wpn.dmgType || 'Kinetic';
 
   // 1. HIT CHANCE (G2O: agility vs steering)
@@ -761,6 +775,7 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
   // 3. Random damage unutar dmgMin-dmgMax, pomnožen s brojem brodova u slotu
   const _count = attacker.count || 1;
   let dmg = (wpn.dmgMin + Math.floor(Math.random() * (wpn.dmgMax - wpn.dmgMin + 1))) * _count;
+  if (dmgMult !== 1) dmg = Math.floor(dmg * dmgMult);
 
   // ── COMMANDER WEAPON MASTERY ──
   if (attacker.side === 'player') {
