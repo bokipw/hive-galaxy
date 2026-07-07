@@ -132,17 +132,10 @@ function renderDesigner() {
   const el = document.getElementById('designerContent');
   if (!el) return;
   el.innerHTML = `
-    <div style="background:lime;color:black;padding:12px;border-radius:8px;margin-bottom:12px;text-align:center;font-weight:700">DESIGNER V2 — browser radi! (ako vidiš ovo, novi kod je učitan)</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-      <div>
-        <div class="page-title" style="font-size:0.85rem">➕ NOVI DIZAJN</div>
-        <div class="card" id="designerForm">${renderDesignerForm()}</div>
-      </div>
-      <div>
-        <div class="page-title" style="font-size:0.85rem">📋 MOJI DIZAJNI (${shipDesigns.length})</div>
-        <div id="designList">${renderDesignList()}</div>
-      </div>
-    </div>
+    <div class="page-title" style="font-size:0.85rem;margin-bottom:12px">🔧 DIZAJNER BRODOVA</div>
+    <div class="card" id="designerForm" style="margin-bottom:16px">${renderDesignerForm()}</div>
+    <div class="page-title" style="font-size:0.85rem;margin-bottom:12px">📋 MOJI DIZAJNI (${shipDesigns.length})</div>
+    <div id="designList">${renderDesignList()}</div>
   `;
 }
 
@@ -321,15 +314,12 @@ function renderShipVisual(shipId, prefill = {}) {
   }
 
   return `
-    <div style="background:radial-gradient(ellipse at 40% 35%, #0d1830, #020408);border-radius:14px;padding:16px;text-align:center;border:1px solid ${color}44;margin-bottom:16px;position:relative">
-      <div style="font-size:0.6rem;color:${color};letter-spacing:2px;margin-bottom:8px;font-family:'Orbitron',monospace">${clsDef.icon || ''} ${clsDef.name?.toUpperCase() || cls.toUpperCase()}</div>
-      <svg width="200" height="150" viewBox="0 0 200 150" style="filter:drop-shadow(0 0 6px ${color}55)">
+    <div style="background:radial-gradient(ellipse at 40% 35%, #0d1830, #020408);border-radius:10px;padding:8px;text-align:center;border:1px solid ${color}44;position:relative">
+      <div style="font-size:0.55rem;color:${color};letter-spacing:1px;margin-bottom:4px;font-family:'Orbitron',monospace">${clsDef.icon || ''} ${clsDef.name?.toUpperCase() || cls.toUpperCase()}</div>
+      <svg width="140" height="105" viewBox="0 0 200 150" style="filter:drop-shadow(0 0 4px ${color}55)">
         ${svgBody}
         ${slotOverlay}
       </svg>
-      <div style="margin-top:6px;font-size:0.55rem;color:#3a5070;letter-spacing:1px">
-        ● = oružje &nbsp; ■ = štit &nbsp; ▲ = motor &nbsp; ◆ = special
-      </div>
     </div>`;
 }
 
@@ -352,25 +342,30 @@ function renderDesignerForm(prefill = {}) {
 
   return `
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div>
-        <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">IME DIZAJNA</div>
-        <input id="dName" type="text" placeholder="npr. Swift Laser Alpha" value="${prefill.name || ''}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem">
-      </div>
-      <div>
-        <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
-        <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem" onchange="refreshDesignerSlots()">
-          <option value="">-- Odaberi brod --</option>
-          ${allShips.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} (${dn(SHIP_CLASSES[s.cls]) || s.cls})</option>`).join('')}
-        </select>
-      </div>
-      
-      <!-- VIZUELNI PRIKAZ BRODA -->
-      <div id="visualShipContainer">
-        ${prefill.ship_id ? renderShipVisual(prefill.ship_id, prefill) : '<div style="background:radial-gradient(circle at 30% 40%, #0a1020, #020408); border-radius:16px; padding:20px; text-align:center; border:1px solid rgba(0,212,255,0.3); color:#6a90b8;">⬡ ODABERI BROD ⬡</div>'}
+      <div style="display:flex;gap:10px">
+        <div style="flex:1">
+          <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">IME DIZAJNA</div>
+          <input id="dName" type="text" placeholder="npr. Swift Laser Alpha" value="${prefill.name || ''}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem">
+        </div>
+        <div style="flex:1">
+          <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
+          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem" onchange="refreshDesignerSlots()">
+            <option value="">-- Odaberi brod --</option>
+            ${allShips.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} (${dn(SHIP_CLASSES[s.cls]) || s.cls})</option>`).join('')}
+          </select>
+        </div>
       </div>
       
-      <div id="dynamicSlots">${prefill.ship_id ? renderDynamicSlots(prefillCls, prefillSlots, prefill) : '<div style="font-size:0.72rem;color:#6a90b8">Odaberi brod da vidiš slotove...</div>'}</div>
-      <div id="designPreview" style="background:rgba(0,0,0,0.3);border-radius:6px;padding:10px;font-size:0.68rem;font-family:'Share Tech Mono',monospace;color:#6a90b8;min-height:50px">${prefill.ship_id ? getShipPreviewHTML(prefill.ship_id) : 'Odaberi brod da vidiš statistike...'}</div>
+      <div style="display:flex;gap:12px">
+        <div id="visualShipContainer" style="flex-shrink:0">
+          ${prefill.ship_id ? renderShipVisual(prefill.ship_id, prefill) : '<div style="background:radial-gradient(circle at 30% 40%, #0a1020, #020408); border-radius:16px; padding:20px; text-align:center; border:1px solid rgba(0,212,255,0.3); color:#6a90b8;">⬡ ODABERI BROD ⬡</div>'}
+        </div>
+        <div style="flex:1;min-width:0">
+          <div id="dynamicSlots" style="margin-bottom:8px">${prefill.ship_id ? renderDynamicSlots(prefillCls, prefillSlots, prefill) : '<div style="font-size:0.72rem;color:#6a90b8">Odaberi brod da vidiš slotove...</div>'}</div>
+          <div id="designPreview" style="background:rgba(0,0,0,0.3);border-radius:6px;padding:10px;font-size:0.68rem;font-family:\'Share Tech Mono\',monospace;color:#6a90b8;min-height:50px">${prefill.ship_id ? getShipPreviewHTML(prefill.ship_id) : 'Odaberi brod da vidiš statistike...'}</div>
+        </div>
+      </div>
+      
       <button class="btn btn-g" style="width:100%" onclick="saveDesign('${prefill.id || ''}')">💾 Sačuvaj dizajn</button>
     </div>
   `;
@@ -512,7 +507,6 @@ function renderEquipInfo(type, id) {
   return '';
 }
 
-console.log('designer.js v2 loaded — browse modal, dropdown info, live preview');
 // ── BROWSER ZA BLUEPRINTE ──
 function openEquipBrowser(type, slotIdx) {
   let items = [];
@@ -861,8 +855,8 @@ function renderDesignList() {
         <div style="font-size:0.6rem;color:#00ff88;text-align:center">✅ Maksimum slotova (100)</div>`}
     </div>`;
 
-  if (shipDesigns.length === 0) return slotBar + `<div class="card" style="text-align:center;color:#6a90b8">📋 Nemaš sačuvanih dizajna.<br><span style="font-size:0.72rem">Kreiraj novi dizajn lijevo.</span></div>`;
-  return slotBar + shipDesigns.map(d => {
+  if (shipDesigns.length === 0) return slotBar + `<div class="card" style="text-align:center;color:#6a90b8">📋 Nemaš sačuvanih dizajna.<br><span style="font-size:0.72rem">Kreiraj novi dizajn iznad.</span></div>`;
+  return slotBar + `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px">` + shipDesigns.map(d => {
     const ship = getShipById(d.ship_id);
     const cls = SHIP_CLASSES[d.cls || getShipClass(d.ship_id)];
     const slots = getClassSlots(d.cls || getShipClass(d.ship_id));
@@ -872,8 +866,8 @@ function renderDesignList() {
     for (let i = 1; i <= slots.weapon; i++) if (d[`weapon_${i}`]) { const w = WEAPONS?.find(x => x.id === d[`weapon_${i}`]); equipLines += `⚔️ ${dn(w) || d[`weapon_${i}`]}<br>`; }
     for (let i = 1; i <= slots.shield; i++) if (d[`shield_${i}`]) { const s = SHIELDS?.find(x => x.id === d[`shield_${i}`]); equipLines += `🛡️ ${dn(s) || d[`shield_${i}`]}<br>`; }
     if (d.engine_1) { const e = ENGINES?.find(x => x.id === d.engine_1); equipLines += `🔩 ${dn(e) || d.engine_1}`; }
-    return `<div class="card" style="margin-bottom:8px;border-color:${cls?.color || '#00d4ff'}33"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px"><div><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'}">${d.name}</div><div style="font-size:0.65rem;color:#6a90b8">${ship?.name || d.ship_id} · ${dn(cls) || ''}</div></div><div style="display:flex;gap:4px"><button class="btn" style="font-size:0.6rem;padding:2px 6px" onclick="editDesign('${d.id}')">✏️</button><button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px" onclick="deleteDesign('${d.id}')">🗑️</button></div></div><div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;padding:4px 6px;background:rgba(0,0,0,0.2);border-radius:4px">🛡️${stats.shield} ❤️${stats.hp} 💨${stats.speed} ⚔️${stats.dps}</div><div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">${equipLines || '<span style="opacity:0.5">Bez opreme</span>'}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.65rem;color:#6a90b8">🏠 Hangar: <strong style="color:white">${fmt(hangarCount)}</strong></span><button class="btn btn-gold" style="font-size:0.65rem" onclick="openBuildModal('${d.id}')">🏭 Gradi</button></div></div>`;
-  }).join('');
+    return `<div class="card" style="border-color:${cls?.color || '#00d4ff'}33"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><div><div style="font-size:0.85rem;font-weight:700;color:${cls?.color || 'white'}">${d.name}</div><div style="font-size:0.65rem;color:#6a90b8">${ship?.name || d.ship_id} · ${dn(cls) || ''}</div></div><div style="display:flex;gap:4px"><button class="btn" style="font-size:0.6rem;padding:2px 6px" onclick="editDesign('${d.id}')">✏️</button><button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px" onclick="deleteDesign('${d.id}')">🗑️</button></div></div><div style="display:flex;gap:12px;font-size:0.65rem;color:#6a90b8;margin-bottom:8px;padding:6px 8px;background:rgba(0,0,0,0.25);border-radius:4px"><span>🛡️<strong style="color:#00d4ff">${stats.shield}</strong></span><span>❤️<strong style="color:white">${stats.hp}</strong></span><span>💨<strong style="color:#ffcc44">${stats.speed}</strong></span><span>⚔️<strong style="color:#ff4444">${stats.dps}</strong></span></div><div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">${equipLines || '<span style="opacity:0.5">Bez opreme</span>'}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.65rem;color:#6a90b8">🏠 <strong style="color:white">${fmt(hangarCount)}</strong> u hangaru</span><button class="btn btn-gold" style="font-size:0.65rem" onclick="openBuildModal('${d.id}')">🏭 Gradi</button></div></div>`;
+  }).join('') + `</div>`;
 }
 
 // ── RENDER HANGARA ──
