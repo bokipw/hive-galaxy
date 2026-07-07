@@ -349,9 +349,10 @@ function renderDesignerForm(prefill = {}) {
         </div>
         <div style="flex:1">
           <div style="font-size:0.7rem;color:#6a90b8;margin-bottom:4px">BROD</div>
-          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem" onchange="refreshDesignerSlots()">
+          <input id="dShipSearch" type="text" placeholder="🔍 Pretraži brod..." style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem;margin-bottom:4px" oninput="filterShipOptions(this.value)">
+          <select id="dShip" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:6px 10px;border-radius:4px;font-size:0.82rem;min-height:120px" onchange="refreshDesignerSlots();document.getElementById('dShipSearch').value=this.options[this.selectedIndex]?.text.split(' [')[0]||''">
             <option value="">-- Odaberi brod --</option>
-            ${allShips.map(s => `<option value="${s.id}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} (${dn(SHIP_CLASSES[s.cls]) || s.cls})</option>`).join('')}
+            ${allShips.map(s => `<option value="${s.id}" class="ship-opt" data-cls="${s.cls}" data-name="${s.name.toLowerCase()}" ${prefill.ship_id === s.id ? 'selected' : ''}>${s.name} [${dn(SHIP_CLASSES[s.cls]) || s.cls}] ⭐${s.rarity}</option>`).join('')}
           </select>
         </div>
       </div>
@@ -505,6 +506,20 @@ function renderEquipInfo(type, id) {
   }
 
   return '';
+}
+
+console.log('designer.js v2 loaded');
+// ── FILTER ZA BRODOVE ──
+function filterShipOptions(q) {
+  const sel = document.getElementById('dShip');
+  if (!sel) return;
+  q = q.toLowerCase().trim();
+  for (let i = 0; i < sel.options.length; i++) {
+    const opt = sel.options[i];
+    if (!opt.value) continue;
+    opt.style.display = (!q || opt.dataset.name.includes(q) || opt.dataset.cls.includes(q) || opt.text.toLowerCase().includes(q)) ? '' : 'none';
+  }
+  if (!q && sel.value) { sel.value = ''; refreshDesignerSlots(); }
 }
 
 // ── BROWSER ZA BLUEPRINTE ──
