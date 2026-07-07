@@ -430,6 +430,10 @@ function selectShip(id) {
     if (form) form.appendChild(hiddenSel);
   }
   hiddenSel.value = id;
+  // Debug
+  let dbg = document.getElementById('debugInfo');
+  if (!dbg) { dbg = document.createElement('div'); dbg.id = 'debugInfo'; dbg.style.cssText = 'background:yellow;color:black;padding:8px;margin:8px 0;font-size:0.7rem'; document.getElementById('designerForm')?.appendChild(dbg); }
+  dbg.innerHTML = 'Brod: ' + id + ' | Klasa: ' + (getShipClass(id)||'?') + ' | dShip.value: ' + (document.getElementById('dShip')?.value||'null');
   refreshDesignerSlots();
   } catch(e) { alert('selectShip error: '+e.message+'\\n'+e.stack); }
 }
@@ -451,7 +455,10 @@ function refreshDesignerSlots() {
   
   const cls = getShipClass(shipId);
   const slots = getClassSlots(cls);
-  if (slotsEl) slotsEl.innerHTML = renderDynamicSlots(cls, slots, {});
+  if (slotsEl) {
+    const html = renderDynamicSlots(cls, slots, {});
+    slotsEl.innerHTML = html + '<div style="background:#ff0;color:#000;padding:4px;font-size:0.6rem;margin-top:4px">DEBUG: ship='+shipId+' cls='+cls+' slots='+JSON.stringify(slots)+' html.len='+html.length+'</div>';
+  }
   if (visualEl) visualEl.innerHTML = renderShipVisual(shipId, {});
   updateDesignPreview();
   } catch(e) { alert('refreshDesignerSlots error: '+e.message+'\\n'+e.stack); }
