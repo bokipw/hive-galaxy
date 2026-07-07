@@ -281,9 +281,13 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
       const resShield = Math.floor(baseShield   * resShieldBonus);
       const resRegen  = Math.floor(baseRegen    * resRegenBonus);
 
+      const pRow = Math.floor(idx / 3) + 1;
+      const pCol = (idx % 3) + 1;
       return {
         id:            `p_${idx}`,
         slotIndex:     slot._ownerIdx ?? idx,
+        row:           pRow,
+        col:           pCol,
         side:          'player',
         name:          shipDesigns.find(d => d.id === slot.design_id)?.name || ship?.name || 'Brod',
         ship_id:       slot.ship_id,
@@ -384,6 +388,8 @@ function initBattle(playerSlots, enemyGroups, instanceData) {
     return {
       id:        `e_${idx}`,
       slotIndex: group.col ? (group.row - 1) * 3 + (group.col - 1) : idx,
+      row:       group.row || Math.floor(idx / 3) + 1,
+      col:       group.col || (idx % 3) + 1,
       side:      'enemy',
       name:      group.name,
       ship_id:   group.ship_id || null,
@@ -630,6 +636,27 @@ function simulateRound(battle) {
   }
 }
 
+// ── IZBOR METE PREMA TIPU ORUŽJA (GO2 sistem) ──
+function _selectTargetByWeapon(attacker, wpn, alive) {
+  if (!alive.length) return null;
+  if (wpn.subtype === 'Ballistic') {
+    // Ballistic: ista kolona, najbliži (min row)
+    const inCol = alive.filter(t => t.col === attacker.col).sort((a, b) => a.row - b.row);
+    if (inCol.length) return inCol[0];
+    // Fallback: prvi red, lijeva kolona
+    return alive.sort((a, b) => (a.row - b.row) || (a.col - b.col))[0];
+  }
+  if (wpn.subtype === 'Directional') {
+    // Directional: isti red, najljevlji (min col)
+    const inRow = alive.filter(t => t.row === attacker.row).sort((a, b) => a.col - b.col);
+    if (inRow.length) return inRow[0];
+    return alive.sort((a, b) => (a.col - b.col) || (a.row - b.row))[0];
+  }
+  // Missile, FighterBay i ostali: random
+  const shuffled = [...alive].sort(() => Math.random() - 0.5);
+  return shuffled[0];
+}
+
 // ── NAPAD ──
 function performAttack(attacker, targets, battle, round) {
   if (!attacker._weaponRanges || !attacker._weaponCDs) return;
@@ -640,11 +667,8 @@ function performAttack(attacker, targets, battle, round) {
     if (attacker._weaponCDs[wi] > 0) continue;
     const alive = targets.filter(t => t.alive);
     if (alive.length === 0) break;
-    const target = alive.reduce((a, b) => {
-      const ai = a.slotIndex ?? 99, bi = b.slotIndex ?? 99;
-      if (ai !== bi) return ai < bi ? a : b;
-      return a.hp < b.hp ? a : b;
-    });
+    const target = _selectTargetByWeapon(attacker, wpn, alive);
+    if (!target) continue;
     _fireWeapon(attacker, wi, wpn, target, targets, battle, round);
     attacker._weaponCDs[wi] = wpn.cooldown || 0;
   }
@@ -1116,9 +1140,6 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
       if (attacker.hp <= 0) { attacker.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${attacker.name} UNIŠTEN od refleksije!` }); }
     }
   }
-
-  // ── SCATTER ──
-  _applyScatter(wi, wpn, attacker, target, targets, battle, round, effectiveDmg);
 
   // ── PROVJERA DA LI JE META UNIŠTENA ──
   if (target.hp <= 0) {
