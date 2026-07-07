@@ -132,6 +132,7 @@ function renderDesigner() {
   const el = document.getElementById('designerContent');
   if (!el) return;
   el.innerHTML = `
+    <div style="background:lime;color:black;padding:12px;border-radius:8px;margin-bottom:12px;text-align:center;font-weight:700">DESIGNER V2 — browser radi! (ako vidiš ovo, novi kod je učitan)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div>
         <div class="page-title" style="font-size:0.85rem">➕ NOVI DIZAJN</div>
@@ -393,7 +394,7 @@ function refreshDesignerSlots() {
   const slots = getClassSlots(cls);
   if (slotsEl) slotsEl.innerHTML = renderDynamicSlots(cls, slots, {});
   if (visualEl) visualEl.innerHTML = renderShipVisual(shipId, {});
-  if (prevEl) prevEl.innerHTML = getShipPreviewHTML(shipId);
+  updateDesignPreview();
 }
 
 // ── INFO KARTICA ZA OPREMU ──
@@ -511,6 +512,35 @@ function renderEquipInfo(type, id) {
   return '';
 }
 
+console.log('designer.js v2 loaded — browse modal, dropdown info, live preview');
+// ── BROWSER ZA BLUEPRINTE ──
+function openEquipBrowser(type, slotIdx) {
+  let items = [];
+  const typeLabel = { weapon:'Oružje', shield:'Štit', engine:'Motor' }[type] || type;
+  if (type === 'weapon') items = typeof WEAPONS !== 'undefined' ? WEAPONS.filter(w => ownedBlueprints[w.id]) : [];
+  else if (type === 'shield') items = typeof SHIELDS !== 'undefined' ? SHIELDS.filter(s => ownedBlueprints[s.id]) : [];
+  else if (type === 'engine') items = typeof ENGINES !== 'undefined' ? ENGINES.filter(e => ownedBlueprints[e.id]) : [];
+  if (!items.length) { toast(`❌ Nemaš nijedan ${typeLabel.toLowerCase()} blueprint.`, 'err'); return; }
+  const body = `
+    <div style="max-height:50vh;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px">
+      ${items.map(item => {
+        const info = renderEquipInfo(type, item.id);
+        return `<div onclick="selectEquipFromBrowser('${type}',${slotIdx},'${item.id}')" style="cursor:pointer;transition:0.15s" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${info}</div>`;
+      }).join('')}
+    </div>`;
+  openModal(`📖 Biramo: ${typeLabel} ${slotIdx}`, body, [{ label: 'Zatvori', fn: closeModal }]);
+}
+
+function selectEquipFromBrowser(type, slotIdx, id) {
+  const el = document.getElementById(`d${type.charAt(0).toUpperCase()+type.slice(1)}${slotIdx}`);
+  if (el) {
+    el.value = id;
+    updateSlotVisual();
+    updateEquipInfo(type, slotIdx, id);
+  }
+  closeModal();
+}
+
 // ── RENDER DINAMIČKIH SLOTOVA ──
 function renderDynamicSlots(cls, slots, prefill) {
   const myWeapons = typeof WEAPONS !== 'undefined' ? WEAPONS.filter(w => ownedBlueprints[w.id]) : [];
@@ -523,11 +553,11 @@ function renderDynamicSlots(cls, slots, prefill) {
     const val = prefill[`weapon_${i}`] || '';
     html += `
       <div style="margin-bottom:8px">
-        <div style="font-size:0.7rem;color:#ff4444;margin-bottom:2px">⚔️ ORUŽJE ${i}</div>
+        <div style="font-size:0.7rem;color:#ff4444;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">⚔️ ORUŽJE ${i}<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('weapon',${i})">📖</span></div>
         <select id="dWeapon${i}" style="width:100%;background:#070c1a;border:1px solid rgba(255,68,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateSlotVisual();updateEquipInfo('weapon',${i},this.value)">
           <option value="">-- Bez oružja --</option>
-          ${myWeapons.map(w => `<option value="${w.id}" ${val === w.id ? 'selected' : ''}>${dn(w)} (${w.rarity}) ⚔️${w.dps} | ${w.dmgType} | ${w.subtype}</option>`).join('')}
+          ${myWeapons.map(w => `<option value="${w.id}" ${val === w.id ? 'selected' : ''}>${dn(w)} [${w.rarity}] ⚔${w.dps} ${w.dmgType} ${w.subtype}${w.special?.desc ? ' · '+w.special.desc : w.special?.type ? ' · '+w.special.type : ''}</option>`).join('')}
         </select>
         <div id="info_weapon_${i}">${renderEquipInfo('weapon', val)}</div>
       </div>`;
@@ -537,11 +567,11 @@ function renderDynamicSlots(cls, slots, prefill) {
     const val = prefill[`shield_${i}`] || '';
     html += `
       <div style="margin-bottom:8px">
-        <div style="font-size:0.7rem;color:#00d4ff;margin-bottom:2px">🛡️ ŠTIT ${i}</div>
+        <div style="font-size:0.7rem;color:#00d4ff;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">🛡️ ŠTIT ${i}<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('shield',${i})">📖</span></div>
         <select id="dShield${i}" style="width:100%;background:#070c1a;border:1px solid rgba(0,212,255,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
           onchange="updateSlotVisual();updateEquipInfo('shield',${i},this.value)">
           <option value="">-- Bez štita --</option>
-          ${myShields.map(s => `<option value="${s.id}" ${val === s.id ? 'selected' : ''}>${dn(s)} (${s.rarity}) 🛡️${s.shield} | Regen:${s.regen}</option>`).join('')}
+          ${myShields.map(s => `<option value="${s.id}" ${val === s.id ? 'selected' : ''}>${dn(s)} [${s.rarity}] 🛡+${s.shield} ♻${s.regen}/r</option>`).join('')}
         </select>
         <div id="info_shield_${i}">${renderEquipInfo('shield', val)}</div>
       </div>`;
@@ -550,11 +580,11 @@ function renderDynamicSlots(cls, slots, prefill) {
   const engVal = prefill.engine_1 || '';
   html += `
     <div style="margin-bottom:8px">
-      <div style="font-size:0.7rem;color:#ffcc44;margin-bottom:2px">🔩 MOTOR</div>
+      <div style="font-size:0.7rem;color:#ffcc44;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center">🔩 MOTOR<span style="font-size:0.6rem;color:#6a90b8;cursor:pointer" onclick="openEquipBrowser('engine',1)">📖</span></div>
       <select id="dEngine1" style="width:100%;background:#070c1a;border:1px solid rgba(255,204,68,0.3);color:white;padding:5px 8px;border-radius:4px;font-size:0.78rem"
         onchange="updateSlotVisual();updateEquipInfo('engine',1,this.value)">
         <option value="">-- Bez motora --</option>
-        ${myEngines.map(e => `<option value="${e.id}" ${engVal === e.id ? 'selected' : ''}>${dn(e)} (${e.rarity}) 💨+${e.speed} | Agility:+${e.agility_bonus}</option>`).join('')}
+        ${myEngines.map(e => `<option value="${e.id}" ${engVal === e.id ? 'selected' : ''}>${dn(e)} [${e.rarity}] 💨+${e.speed} 🏃+${e.agility_bonus}${e.evasion_bonus ? ' 💫+'+e.evasion_bonus+'%' : ''}</option>`).join('')}
       </select>
       <div id="info_engine_1">${renderEquipInfo('engine', engVal)}</div>
     </div>`;
@@ -615,6 +645,7 @@ function renderDynamicSlots(cls, slots, prefill) {
 function updateEquipInfo(type, idx, id) {
   const el = document.getElementById(`info_${type}_${idx}`);
   if (el) el.innerHTML = renderEquipInfo(type, id);
+  updateDesignPreview();
 }
 
 // ── AŽURIRAJ VIZUELNI PRIKAZ KADA SE PROMENI OPREMA ──
@@ -622,7 +653,6 @@ function updateSlotVisual() {
   const shipId = document.getElementById('dShip')?.value;
   if (!shipId) return;
   
-  // Prikupi trenutne vrednosti iz dropdownova
   const slots = getClassSlots(getShipClass(shipId));
   const currentLoadout = {};
   for (let i = 1; i <= slots.weapon; i++) {
@@ -636,9 +666,71 @@ function updateSlotVisual() {
   const engineVal = document.getElementById('dEngine1')?.value;
   if (engineVal) currentLoadout.engine_1 = engineVal;
   
-  // Re-render vizuelnog prikaza sa trenutnim loadout-om
   const visualEl = document.getElementById('visualShipContainer');
   if (visualEl) visualEl.innerHTML = renderShipVisual(shipId, currentLoadout);
+}
+
+// ── LIVE STAT PREVIEW KADA SE MIJENJA OPREMA ──
+function updateDesignPreview() {
+  const shipId = document.getElementById('dShip')?.value;
+  if (!shipId) return;
+  const ship = getShipById(shipId);
+  if (!ship) return;
+  const cls = getShipClass(shipId);
+  const slots = getClassSlots(cls);
+  const clsDef = SHIP_CLASSES[cls];
+  const at = (typeof ARMOR_RESISTANCE !== 'undefined') ? (ARMOR_RESISTANCE[ship.armor] || {}) : {};
+
+  let totalShield = ship.shield || 0;
+  for (let i = 1; i <= slots.shield; i++) {
+    const sid = document.getElementById(`dShield${i}`)?.value;
+    if (sid) { const sh = getShieldById(sid); if (sh) totalShield += sh.shield; }
+  }
+  const totalHP = (ship.armor_val || 0) + totalShield + (ship.structure || 0);
+
+  let speed = ship.movement || 0, agility = ship.agility || 0, evasion = 0;
+  let engSpecial = '';
+  const eid = document.getElementById('dEngine1')?.value;
+  if (eid) {
+    const eng = getEngineById(eid);
+    if (eng) {
+      speed += eng.speed;
+      agility += (eng.agility_bonus || 0);
+      evasion = eng.evasion_bonus || 0;
+      engSpecial = eng.special?.type || '';
+    }
+  }
+
+  let dps = 0, crit = 0, weaponSpecials = [];
+  for (let i = 1; i <= slots.weapon; i++) {
+    const wid = document.getElementById(`dWeapon${i}`)?.value;
+    if (wid) {
+      const wpn = getWeaponById(wid);
+      if (wpn) {
+        dps += wpn.dps;
+        if (wpn.special?.type === 'crit') crit = Math.max(crit, wpn.special.bonus || 0);
+        if (wpn.special?.type) weaponSpecials.push(wpn.special.type);
+      }
+    }
+  }
+
+  const armorStr = ship.armor ? `${ship.armor} (Kin${at.Kinetic||'?'}% H${at.Heat||'?'}% Mag${at.Magnetic||'?'}% Exp${at.Explosive||'?'}%)` : '?';
+  const el = document.getElementById('designPreview');
+  if (!el) return;
+  el.innerHTML = `
+    <div style="color:${clsDef?.color||'white'};font-weight:700;font-size:0.75rem;margin-bottom:6px">${clsDef?.icon||''} ${ship.name} — Pregled opreme</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-family:'Share Tech Mono',monospace">
+      <span>🛡️ Shield: <strong style="color:#00d4ff">${fmt(totalShield)}</strong></span>
+      <span>❤️ HP: <strong style="color:white">${fmt(totalHP)}</strong></span>
+      <span>⚔️ DPS: <strong style="color:#ff4444">${fmt(dps)}</strong></span>
+      <span>💨 Speed: <strong style="color:#ffcc44">${speed}</strong></span>
+      <span>🏃 Agility: <strong style="color:#00ff88">${agility}</strong></span>
+      <span>💫 Evasion: <strong style="color:#00d4ff">${evasion}%</strong></span>
+      <span>🎯 Crit: <strong style="color:#ff8844">${5 + crit}%</strong></span>
+      <span>🔰 Armor: <strong style="color:#6a90b8">${armorStr}</strong></span>
+    </div>
+    ${weaponSpecials.length ? `<div style="margin-top:4px;font-size:0.6rem;color:#ffcc44">✨ ${weaponSpecials.join(' · ')}</div>` : ''}
+    ${engSpecial ? `<div style="font-size:0.6rem;color:#ffcc44">🔩 Engine: ${engSpecial}</div>` : ''}`;
 }
 
 // ── SHIP PREVIEW HTML ──
@@ -741,6 +833,7 @@ function editDesign(designId) {
       }
       if (design.engine_1 && document.getElementById('dEngine1')) document.getElementById('dEngine1').value = design.engine_1;
       updateSlotVisual();
+      updateDesignPreview();
     }
   }, 50);
 }
@@ -776,9 +869,9 @@ function renderDesignList() {
     const hangarCount = hangar.find(h => h.design_id === d.id)?.count || 0;
     const stats = calcDesignStats(d);
     let equipLines = '';
-    for (let i = 1; i <= slots.weapon; i++) if (d[`weapon_${i}`]) equipLines += `⚔️ ${d[`weapon_${i}`]}<br>`;
-    for (let i = 1; i <= slots.shield; i++) if (d[`shield_${i}`]) equipLines += `🛡️ ${d[`shield_${i}`]}<br>`;
-    if (d.engine_1) equipLines += `🔩 ${d.engine_1}`;
+    for (let i = 1; i <= slots.weapon; i++) if (d[`weapon_${i}`]) { const w = WEAPONS?.find(x => x.id === d[`weapon_${i}`]); equipLines += `⚔️ ${dn(w) || d[`weapon_${i}`]}<br>`; }
+    for (let i = 1; i <= slots.shield; i++) if (d[`shield_${i}`]) { const s = SHIELDS?.find(x => x.id === d[`shield_${i}`]); equipLines += `🛡️ ${dn(s) || d[`shield_${i}`]}<br>`; }
+    if (d.engine_1) { const e = ENGINES?.find(x => x.id === d.engine_1); equipLines += `🔩 ${dn(e) || d.engine_1}`; }
     return `<div class="card" style="margin-bottom:8px;border-color:${cls?.color || '#00d4ff'}33"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px"><div><div style="font-size:0.82rem;font-weight:700;color:${cls?.color || 'white'}">${d.name}</div><div style="font-size:0.65rem;color:#6a90b8">${ship?.name || d.ship_id} · ${dn(cls) || ''}</div></div><div style="display:flex;gap:4px"><button class="btn" style="font-size:0.6rem;padding:2px 6px" onclick="editDesign('${d.id}')">✏️</button><button class="btn btn-r" style="font-size:0.6rem;padding:2px 6px" onclick="deleteDesign('${d.id}')">🗑️</button></div></div><div style="font-size:0.6rem;color:#6a90b8;margin-bottom:6px;padding:4px 6px;background:rgba(0,0,0,0.2);border-radius:4px">🛡️${stats.shield} ❤️${stats.hp} 💨${stats.speed} ⚔️${stats.dps}</div><div style="font-size:0.62rem;color:#6a90b8;margin-bottom:8px;line-height:1.6">${equipLines || '<span style="opacity:0.5">Bez opreme</span>'}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.65rem;color:#6a90b8">🏠 Hangar: <strong style="color:white">${fmt(hangarCount)}</strong></span><button class="btn btn-gold" style="font-size:0.65rem" onclick="openBuildModal('${d.id}')">🏭 Gradi</button></div></div>`;
   }).join('');
 }
