@@ -937,6 +937,16 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
   }
   const effectiveDmg = shieldResistPct > 0 ? Math.floor(dmg * (1 - shieldResistPct / 100)) : dmg;
 
+  // ── SHIELD DISABLE — odmah onesposobi shield prije štete ──
+  if (target.shield > 0 && wpn.special?.type === 'shield_disable') {
+    const roll = Math.random() * 100;
+    if (roll < (wpn.special.chance || 0)) {
+      target.shield = 0;
+      target.effects.push({ type: 'shield_disable', duration: wpn.special.duration || 1 });
+      battle.log.push({ round, type: 'effect', msg: `🧲 ${target.name} shield onesposobljen od ${attacker.name}!` });
+    }
+  }
+
   // ── PRIMIJENI ŠTETU ──
   let shieldDmg = 0;
   let hpDmg     = 0;
@@ -946,6 +956,15 @@ function _fireWeapon(attacker, wi, wpn, target, targets, battle, round) {
       // shieldPen = probija shield, ide direktno na HP
       hpDmg = effectiveDmg;
       battle.log.push({ round, type: 'effect', msg: `⚡ ${attacker.name}'s ${wpn.id} probija shield ${target.name}!` });
+    } else if (wpn.special?.type === 'shield_penetrate' && wpn.special.bonus) {
+      // shield_penetrate — X% štete ide direktno kroz shield u HP
+      const penPct = wpn.special.bonus / 100;
+      const penDmg = Math.floor(effectiveDmg * penPct);
+      const shieldDmgLocal = Math.min(target.shield, effectiveDmg - penDmg);
+      target.shield -= shieldDmgLocal;
+      if (target._shieldImmune && target.shield <= 0) target.shield = 1;
+      hpDmg = penDmg + (effectiveDmg - penDmg - shieldDmgLocal);
+      battle.log.push({ round, type: 'effect', msg: `🔱 ${attacker.name}'s ${wpn.id} probija ${wpn.special.bonus}% štete kroz shield ${target.name}!` });
     } else {
       shieldDmg = Math.min(target.shield, effectiveDmg);
       target.shield -= shieldDmg;
@@ -1274,7 +1293,7 @@ function applyWeaponEffect(attacker, target, battle, round) {
 
     // BURN — gorenje po rundama
     if (spec.type === 'burn' && roll < spec.chance) {
-      const dmgPR = spec.dmgPerRound || (spec.duration === 2 ? 20 : 35);
+      const dmgPR = spec.damage || spec.dmgPerRound || (spec.duration === 2 ? 20 : 35);
       target.effects.push({ type: 'burn', duration: spec.duration, dmgPerRound: dmgPR });
       battle.log.push({ round, type: 'effect', msg: `🔥 ${target.name} gori! (${spec.duration} runde, ${dmgPR}/rundi)` });
     }
@@ -1313,15 +1332,6 @@ function applyWeaponEffect(attacker, target, battle, round) {
     if (spec.type === 'weapon_disable' && roll < spec.chance) {
       target.effects.push({ type: 'weapon_disable', duration: spec.duration || 1 });
       battle.log.push({ round, type: 'effect', msg: `🔧 ${target.name} oružje onesposobljeno (${spec.duration || 1} runde)!` });
-    }
-
-    // SHIELD_PENETRATE — dio štete ide direktno kroz shield u HP
-    if (spec.type === 'shield_penetrate' && target.shield > 0) {
-      const penetratePct = spec.bonus || 20;
-      const extraHpDmg   = Math.floor(attacker.dps * (penetratePct / 100));
-      target.hp = Math.max(0, target.hp - extraHpDmg);
-      battle.log.push({ round, type: 'effect', msg: `🔱 ${attacker.name} probio shield: ${extraHpDmg} direktno u HP ${target.name}!` });
-      if (target.hp <= 0) { target.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${target.name} UNIŠTEN!` }); }
     }
 
     // EMP_STUN — šansa stuna + eventualno shield disable

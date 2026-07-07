@@ -156,7 +156,7 @@ function updateDroneModal(opponentIdx) {
       revealLevel === 0 ? 'Power + Rating' :
       revealLevel === 1 ? 'Power + HP' :
       revealLevel === 2 ? 'Power + HP + Oprema' :
-      revealLevel === 3 ? 'Power + HP + Oprema + Module' :
+      revealLevel === 3 ? 'Power + HP + Oprema + Flota' :
       'SVE informacije'
     }</span></div>
   `;
@@ -221,8 +221,11 @@ function buildEspReport(opponent, revealLevel) {
     data.shield = opponent.fleet ? opponent.fleet.reduce((a, g) => a + (g.shield || 0), 0) : opponent.power * 0.5;
   }
   if (revealLevel >= 3) {
-    data.armors = opponent.fleet ? [...new Set(opponent.fleet.map(g => g.armor))] : ['Unknown'];
-    data.groups = opponent.fleet ? opponent.fleet.length : '?';
+    data.ships = opponent.fleet ? opponent.fleet.map(g => ({
+      name: g.name || g.ship_id || 'Nepoznat',
+      count: g.count || 1,
+      armor: g.armor || 'Unknown',
+    })) : [];
   }
   if (revealLevel >= 4) {
     data.full      = true;
@@ -256,8 +259,15 @@ function showEspReport(report) {
         ${d.hp      !== undefined ? `<div>❤️ HP: <span style="color:#00ff88">${fmt(d.hp)}</span></div>` : ''}
         ${d.dps     !== undefined ? `<div>⚔️ DPS: <span style="color:#ff4444">${fmt(d.dps)}</span></div>` : ''}
         ${d.shield  !== undefined ? `<div>🛡️ Shield: <span style="color:#00d4ff">${fmt(d.shield)}</span></div>` : ''}
-        ${d.armors  !== undefined ? `<div>🔰 Oklop: <span style="color:#ff8833">${d.armors.join(', ')}</span></div>` : ''}
-        ${d.groups  !== undefined ? `<div>🚀 Grupe: <span style="color:white">${d.groups}</span></div>` : ''}
+        ${d.ships  !== undefined ? `
+          <div style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,0.05)">
+            <div style="color:#6a90b8;font-size:0.65rem;margin-bottom:4px">🚀 FLOTA (${d.ships.length} grupa)</div>
+            ${d.ships.map(s => `
+              <div style="display:flex;justify-content:space-between;padding:2px 4px;background:rgba(0,0,0,0.2);border-radius:3px;margin-bottom:2px">
+                <span style="color:white">${s.name}</span>
+                <span><span style="color:#ff8833">×${fmt(s.count)}</span> <span style="color:#6a90b8;font-size:0.6rem">${s.armor}</span></span>
+              </div>`).join('')}
+          </div>` : ''}
         ${d.resources ? `
           <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.05)">
             🔩${fmt(d.resources.metal)} 💎${fmt(d.resources.crystal)} ⛽${fmt(d.resources.he3)}
@@ -274,7 +284,7 @@ function showEspReport(report) {
         🔬 Research Espionage ${
           revealLevel === 0 ? 'Lv.25 → otkrij HP' :
           revealLevel === 1 ? 'Lv.50 → otkrij opremu' :
-          revealLevel === 2 ? 'Lv.75 → otkrij module' : 'Lv.100 → sve + krit'
+          revealLevel === 2 ? 'Lv.75 → otkrij flotu' : 'Lv.100 → sve + krit'
         }
       </div>` : ''}
   ` : `
@@ -338,7 +348,7 @@ function renderEspionage() {
         ${[
           { lvl:25,  label:'Vidi HP',     icon:'❤️'  },
           { lvl:50,  label:'Vidi opremu', icon:'⚔️'  },
-          { lvl:75,  label:'Vidi module', icon:'⚙️'  },
+          { lvl:75,  label:'Vidi flotu',  icon:'🚀'  },
           { lvl:100, label:'Sve + krit',  icon:'👑'  },
         ].map(m => `
           <div style="text-align:center;padding:8px;border-radius:6px;

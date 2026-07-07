@@ -133,7 +133,7 @@ const RESEARCH_BRANCHES = {
     milestones: {
       25:  { desc: 'Špijunaža otkriva HP neprijatelja',      effect: 'esp_25'  },
       50:  { desc: 'Špijunaža otkriva opremu neprijatelja',  effect: 'esp_50'  },
-      75:  { desc: 'Špijunaža otkriva module neprijatelja',  effect: 'esp_75'  },
+       75:  { desc: 'Špijunaža otkriva flotu neprijatelja',    effect: 'esp_75'  },
       100: { desc: 'Vidi sve + +10% krit u PvP',            effect: 'esp_100' },
     },
   },
