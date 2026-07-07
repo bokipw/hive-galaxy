@@ -745,10 +745,7 @@ function renderDynamicSlots(cls, slots, prefill) {
           </div>
           <span style="background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('weapon',${i})" title="Ukloni">✕</span>
         </div>
-        <select id="dWeapon${i}" style="display:none" onchange="updateSlotVisual();updateEquipInfo('weapon',${i},this.value)">
-          <option value="">--</option>
-          <option value="${val}" selected>${val}</option>
-        </select>
+        <input type="hidden" id="dWeapon${i}" value="${val}">
         <div id="info_weapon_${i}">${renderEquipInfo('weapon', val)}</div>
       </div>`;
   }
@@ -764,10 +761,7 @@ function renderDynamicSlots(cls, slots, prefill) {
           </div>
           <span style="background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('shield',${i})" title="Ukloni">✕</span>
         </div>
-        <select id="dShield${i}" style="display:none" onchange="updateSlotVisual();updateEquipInfo('shield',${i},this.value)">
-          <option value="">--</option>
-          <option value="${val}" selected>${val}</option>
-        </select>
+        <input type="hidden" id="dShield${i}" value="${val}">
         <div id="info_shield_${i}">${renderEquipInfo('shield', val)}</div>
       </div>`;
   }
@@ -782,10 +776,7 @@ function renderDynamicSlots(cls, slots, prefill) {
         </div>
         <span style="background:rgba(255,204,68,0.15);border:1px solid rgba(255,204,68,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('engine',1)" title="Ukloni">✕</span>
       </div>
-      <select id="dEngine1" style="display:none" onchange="updateSlotVisual();updateEquipInfo('engine',1,this.value)">
-        <option value="">--</option>
-        <option value="${engVal}" selected>${engVal}</option>
-      </select>
+      <input type="hidden" id="dEngine1" value="${engVal}">
       <div id="info_engine_1">${renderEquipInfo('engine', engVal)}</div>
     </div>`;
 
@@ -803,10 +794,7 @@ function renderDynamicSlots(cls, slots, prefill) {
           </div>
           <span style="background:rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.15);border:1px solid rgba(${cls === 'fighter' ? '255,68,68' : '0,255,136'},0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('module',1)" title="Ukloni">✕</span>
         </div>
-        <select id="dModule1" style="display:none">
-          <option value="">--</option>
-          ${myMods.map(m => `<option value="${m.id}" ${modVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
-        </select>
+        <input type="hidden" id="dModule1" value="${modVal}">
         <div id="info_module_1">${renderEquipInfo('module', modVal)}</div>
       </div>`;
   }
@@ -824,10 +812,7 @@ function renderDynamicSlots(cls, slots, prefill) {
           </div>
           <span style="background:rgba(0,229,255,0.15);border:1px solid rgba(0,229,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('recon',1)" title="Ukloni">✕</span>
         </div>
-        <select id="dRecon1" style="display:none">
-          <option value="">--</option>
-          ${myRecon.map(m => `<option value="${m.id}" ${reconVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
-        </select>
+        <input type="hidden" id="dRecon1" value="${reconVal}">
         <div id="info_recon_1">${renderEquipInfo('recon', reconVal)}</div>
       </div>`;
   }
@@ -848,10 +833,7 @@ function renderDynamicSlots(cls, slots, prefill) {
           </div>
           <span style="background:rgba(170,68,255,0.15);border:1px solid rgba(170,68,255,0.3);border-radius:4px;padding:5px 10px;cursor:pointer;font-size:0.8rem" onclick="clearEquip('special',${i})" title="Ukloni">✕</span>
         </div>
-        <select id="dSpecial${i}" style="display:none">
-          <option value="">--</option>
-          ${mySpecial.map(m => `<option value="${m.id}" ${specialVal === m.id ? 'selected' : ''}>${m.id}</option>`).join('')}
-        </select>
+        <input type="hidden" id="dSpecial${i}" value="${specialVal}">
         <div id="info_special_${i}">${renderEquipInfo('special', specialVal)}</div>
       </div>`;
   }
