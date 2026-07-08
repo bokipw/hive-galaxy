@@ -1679,7 +1679,7 @@ function calculateRewards(battle, instanceData, prog) {
     nightmare: ['C', 'R', 'E'],
     hell:      ['C', 'R', 'E', 'L'],
   };
-  const allowedRarity = MODE_ALLOWED_RARITY[modeName] || ['C'];
+  let allowedRarity = MODE_ALLOWED_RARITY[modeName] || ['C'];
 
   // Šansa za CIJELI blueprint po rarity i modu (0 = nikad)
   const MODE_BP_CHANCE = {
@@ -1760,8 +1760,9 @@ function calculateRewards(battle, instanceData, prog) {
     }
   });
 
-  // Boss drop pool — kad nema definisanih dropova, generiši iz globalnih nizova
+  // Boss drop pool
   const bossTypes = ['boss_rare','boss_epic','boss_legendary','boss_master','boss'];
+  let rarsExpanded = false;
   if (bossTypes.includes(instance.type) && bpDrops.length === 0) {
     const allIds = [];
     if (typeof WEAPONS !== 'undefined') WEAPONS.forEach(i => { if (i.id) allIds.push(i.id); });
@@ -1772,18 +1773,32 @@ function calculateRewards(battle, instanceData, prog) {
     }
     const bossRolls = { boss_rare: 1, boss_epic: 2, boss_legendary: 3, boss_master: 4, boss: 2 };
     const rollCount = bossRolls[instance.type] || 1;
-    const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
-    const rars = modeRarities[modeName] || ['C'];
-    let pool = allIds.filter(id => {
-      return rars.includes(getBlueprintRarity(id));
-    });
-    pool.sort(() => Math.random() - 0.5);
+    const MODE_RARS = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
+    const RARITY_ORDER = ['C','R','E','L'];
+    let rars = MODE_RARS[modeName] || ['C'];
+    let pool = [];
+    while (pool.length === 0 && rars.length > 0) {
+      pool = allIds.filter(function(id) {
+        if (ownedBlueprints[id]) return false;
+        return rars.indexOf(getBlueprintRarity(id)) !== -1;
+      });
+      if (pool.length > 0) break;
+      var lastIdx = RARITY_ORDER.indexOf(rars[rars.length - 1]);
+      if (lastIdx >= RARITY_ORDER.length - 1) break;
+      rars = [RARITY_ORDER[lastIdx + 1]];
+    }
+    pool.sort(function() { return Math.random() - 0.5; });
     bpDrops = pool.slice(0, rollCount);
+    var baseStr = (MODE_RARS[modeName] || ['C']).toString();
+    rarsExpanded = rars.toString() !== baseStr;
+    if (rarsExpanded) {
+      allowedRarity = [...new Set([...allowedRarity, ...rars])];
+    }
   }
 
-  const available = bpDrops.filter(id => {
+  const available = bpDrops.filter(function(id) {
     const rarity = getBlueprintRarity(id);
-    return allowedRarity.includes(rarity);
+    return allowedRarity.indexOf(rarity) !== -1;
   });
 
   if (available.length === 0) {
@@ -1792,19 +1807,29 @@ function calculateRewards(battle, instanceData, prog) {
     // Cijeli blueprint drop (Easy uvijek 0%)
     available.forEach(id => {
       const rarity = getBlueprintRarity(id);
-      const chance = bpChance[rarity] || 0;
+      let chance = bpChance[rarity] || 0;
+      if (chance === 0 && rarsExpanded) {
+        var modeMap = { R:'normal', E:'nightmare', L:'hell' };
+        var modeFor = modeMap[rarity];
+        if (modeFor) chance = MODE_BP_CHANCE[modeFor][rarity] || 0;
+      }
       if (chance > 0 && Math.random() * 100 < chance) {
         rewards.blueprints.push(id);
       }
     });
 
-    // Fragment drop — za svaki dostupan BP baci kocku + pity (100 pokušaja)
+    // Fragment drop
     if (!window._dropPity) window._dropPity = {};
     const PITY_THRESHOLD = 100;
     available.forEach(id => {
-      if (rewards.blueprints.includes(id)) return; // već dobio cijeli BP
+      if (rewards.blueprints.indexOf(id) !== -1) return;
       const rarity   = getBlueprintRarity(id);
-      const chance   = fragChance[rarity] || 0;
+      let chance     = fragChance[rarity] || 0;
+      if (chance === 0 && rarsExpanded) {
+        var modeMap = { R:'normal', E:'nightmare', L:'hell' };
+        var modeFor = modeMap[rarity];
+        if (modeFor) chance = MODE_FRAG_CHANCE[modeFor][rarity] || 60;
+      }
       const pityKey  = instance.id + '_' + id;
       const pityCount = window._dropPity[pityKey] || 0;
       const pityed   = pityCount >= PITY_THRESHOLD;
