@@ -1818,18 +1818,11 @@ function calculateRewards(battle, instanceData, prog) {
       }
     });
 
-    // Fragment drop — za bossa uvijek garantovan fragment (ne kocka se)
+    // Fragment drop
+    if (!window._dropPity) window._dropPity = {};
+    const PITY_THRESHOLD = 100;
     available.forEach(id => {
       if (rewards.blueprints.indexOf(id) !== -1) return;
-      var isBoss = bossTypes.indexOf(instance.type) !== -1;
-      if (isBoss) {
-        if (!rewards.fragments.some(function(f) { return f.itemId === id; })) {
-          rewards.fragments.push({ itemId: id, count: 1, boss: true });
-        }
-        return;
-      }
-      // Non-boss: normalna fragment logika sa kockom i pity
-      if (!window._dropPity) window._dropPity = {};
       const rarity   = getBlueprintRarity(id);
       let chance     = fragChance[rarity] || 0;
       if (chance === 0 && rarsExpanded) {
@@ -1839,15 +1832,15 @@ function calculateRewards(battle, instanceData, prog) {
       }
       const pityKey  = instance.id + '_' + id;
       const pityCount = window._dropPity[pityKey] || 0;
-      const pityed   = pityCount >= 100;
+      const pityed   = pityCount >= PITY_THRESHOLD;
       const dropped  = pityed || (chance > 0 && Math.random() * 100 < chance);
       if (dropped) {
         if (!rewards.fragments.some(f => f.itemId === id)) {
           rewards.fragments.push({ itemId: id, count: 1, ...(pityed ? { pity: true } : {}) });
         }
-        window._dropPity[pityKey] = 0;
+        window._dropPity[pityKey] = 0; // reset pity
       } else {
-        window._dropPity[pityKey] = pityCount + 1;
+        window._dropPity[pityKey] = pityCount + 1; // inkrement pity
       }
     });
 
