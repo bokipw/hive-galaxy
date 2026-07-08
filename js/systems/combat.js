@@ -1797,6 +1797,7 @@ function calculateRewards(battle, instanceData, prog) {
   }
 
   const available = bpDrops.filter(function(id) {
+    if (ownedBlueprints[id]) return false;
     const rarity = getBlueprintRarity(id);
     return allowedRarity.indexOf(rarity) !== -1;
   });
