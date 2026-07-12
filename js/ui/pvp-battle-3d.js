@@ -145,7 +145,7 @@ function _pvp3BuildModal() {
         <div style="padding:8px 12px;font-size:.66rem;letter-spacing:1px;color:#5f86ad;
              border-bottom:1px solid rgba(120,180,255,.12);">COMBAT LOG // HIVE_NET</div>
         <div id="pvp3LogList" style="flex:1;overflow-y:auto;padding:8px 10px;font-size:.66rem;
-             line-height:1.5;font-family:'Share Tech Mono',monospace;"></div>
+             line-height:1.5;font-family:'Share Tech Mono',monospace;display:flex;flex-direction:column-reverse;"></div>
       </div>
     </div>`;
 
@@ -420,20 +420,25 @@ function _pvp3SyncHpBars() {
   if (!container) return;
   const w = container.clientWidth, h = container.clientHeight;
   const v = new THREE.Vector3();
+  const writes = [];
   for (const id in _pvp3.ships) {
     const s = _pvp3.ships[id];
     if (!s.hpBar) continue;
-    if (!s.alive) { s.hpBar.style.display = 'none'; continue; }
+    if (!s.alive) { writes.push({ el: s.hpBar, display: 'none' }); continue; }
     v.setFromMatrixPosition(s.group.matrixWorld);
     v.y += 3.2;
     v.project(_pvp3.camera);
     const x = (v.x * 0.5 + 0.5) * w;
     const y = (-v.y * 0.5 + 0.5) * h;
-    const onScreen = v.z < 1 && x > -40 && x < w + 40;
-    s.hpBar.style.display = onScreen ? 'block' : 'none';
-    s.hpBar.style.left = x + 'px';
-    s.hpBar.style.top  = y + 'px';
-    s.hpBar.style.transform = 'translate(-50%,-50%)';
+    if (v.z < 1 && x > -40 && x < w + 40) {
+      writes.push({ el: s.hpBar, display: 'block', left: x + 'px', top: y + 'px' });
+    } else {
+      writes.push({ el: s.hpBar, display: 'none' });
+    }
+  }
+  for (const ww of writes) {
+    ww.el.style.display = ww.display;
+    if (ww.left) { ww.el.style.left = ww.left; ww.el.style.top = ww.top; }
   }
 }
 
@@ -710,7 +715,7 @@ function _pvp3PushLog(entry) {
     d.style.color = colors[entry.type] || '#9fb4cc';
     d.style.marginBottom = '2px';
     d.textContent = entry.msg;
-    list.insertBefore(d, list.firstChild);
+    list.appendChild(d);
   }
   if (typeof addPvpLog === 'function' && entry.msg && entry.type !== 'attack' && entry.type !== 'miss') {
     try { addPvpLog(entry.msg, entry.type); } catch (e) {}

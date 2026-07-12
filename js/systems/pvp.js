@@ -164,7 +164,7 @@ function buildPvpFleetLocal() {
 }
 
 function buildPvpFleetFromSnapshot(snapshotFleet) {
-  return (snapshotFleet || []).map((s, idx) => ({
+  return (snapshotFleet || []).slice(0, 30).map((s, idx) => ({
     id:'b_'+idx, ship_id:s.ship_id, name:s.name||s.ship_id, count:s.count||1,
     hp:s.hp, maxHp:s.hp, shield:s.shield||0, maxShield:s.shield||0,
     shieldRegen:s.shield_regen||0, dps:s.dps, agility:s.agility||0, speed:s.speed||1,
@@ -178,7 +178,7 @@ function buildPvpFleetFromSnapshot(snapshotFleet) {
 // ============================================================
 
 function simulatePvpBattle(fleetA, fleetB) {
-  const clone = u => JSON.parse(JSON.stringify(u));
+  const clone = u => Object.assign({}, u, { effects: u.effects ? [...u.effects] : [] });
   const units = [...fleetA.map(clone), ...fleetB.map(clone)];
   const log = [];
   const armorMod = { Light:1, Medium:0.9, Heavy:0.8, Nano:1.1 };
