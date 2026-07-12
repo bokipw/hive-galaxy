@@ -92,6 +92,7 @@ function craftBlueprint(itemId) {
   }
   blueprintFragments[itemId] -= needed;
   ownedBlueprints[itemId]    = true;
+  window._totalBpCrafted = (window._totalBpCrafted || 0) + 1;
   saveGame();
   toast('✅ Craftovan blueprint: ' + getBpName(itemId) + '!', 'ok');
   addLog('🔨 Craftovan blueprint: ' + getBpName(itemId));

@@ -883,7 +883,7 @@ SPECIAL_ACHS.forEach(a => {
     category: 'espionage', id: `spy_success_${count}`, tier: idx <= 1 ? 1 : idx <= 3 ? 2 : 3,
     name: `Špijun ${count}`, icon: '🕵️',
     desc: `Uspješno izvedi ${count} špijunskih misija`,
-    check: () => (espionage?.successfulMissions || 0) >= count,
+    check: () => (window._espSuccessfulMissions || 0) >= count,
     reward: { bpw: count * 5, xp: count * 100, crystal: count * 300, he3: count * 200,
               ...(count >= 50 ? { art_fragment: count >= 100 ? 'E' : 'R', instanceKeys: Math.floor(count / 20) } : {}) },
     requires: idx > 0 ? `spy_success_${[5,10,25,50,100,200][idx-1]}` : null
@@ -895,7 +895,7 @@ SPECIAL_ACHS.forEach(a => {
     category: 'espionage', id: `spy_stolen_count_${count}`, tier: idx <= 1 ? 1 : idx <= 3 ? 2 : 3,
     name: `Lopov ${count}`, icon: '💰',
     desc: `Ukradi resurse u ${count} misijama`,
-    check: () => (espionage?.stealMissions || 0) >= count,
+    check: () => (window._espStealMissions || 0) >= count,
     reward: { bpw: count * 8, xp: count * 150, metal: count * 500, crystal: count * 250, he3: count * 100,
               ...(count >= 25 ? { art_fragment: count >= 100 ? 'E' : 'R' } : {}) },
     requires: idx > 0 ? `spy_stolen_count_${[1,5,10,25,50,100][idx-1]}` : null

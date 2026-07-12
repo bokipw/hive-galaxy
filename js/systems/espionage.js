@@ -195,6 +195,7 @@ function espionageTarget(opponent, numDrones) {
   if (success) {
     toast(`✅ Špijunaža uspešna! (${dronesToSend} dronova, ${successChance.toFixed(0)}% šansa)`, 'ok');
     addLog(`🕵️ Špijunaža uspešna: ${opponent.name} — ${dronesToSend} dronova potrošeno`);
+    window._espSuccessfulMissions = (window._espSuccessfulMissions || 0) + 1;
     if (typeof trackDailyEsp === 'function') trackDailyEsp();;
   } else {
     toast(`❌ Špijunaža neuspešna! ${dronesToSend} dronova izgubljeno.`, 'err');

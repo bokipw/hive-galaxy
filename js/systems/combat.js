@@ -2029,12 +2029,9 @@ function applyPlayerLosses(battle) {
     }
   }
 
-  // Savršena pobjeda — nema gubitaka
-  if (battle.status === 'victory' && !anyLost) {
-    window._flawlessWins    = (window._flawlessWins    || 0) + 1;
-    window._instanceStreak  = (window._instanceStreak  || 0) + 1;
-  } else {
-    window._instanceStreak  = 0; // reset serije ako je bilo gubitaka
+  // Streak reset only (tracking is done in instances.js)
+  if (battle.status !== 'victory' || anyLost) {
+    window._instanceStreak  = 0;
   }
 }
 

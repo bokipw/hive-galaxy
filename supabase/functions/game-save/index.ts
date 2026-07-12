@@ -52,7 +52,7 @@ Deno.serve(async (req: Request) => {
       uu('player_colonies', { player_id, colonies: data.colonies });
       uu('player_instance_progress', { player_id, progress: data.instProgress });
       uu('player_missions', { player_id, mission_state: data.missionState, mission_counters: data.missionCounters, mission_targets: data.missionTargets, story_missions: data.dynamicStoryMissions });
-      uu('player_achievements', { player_id, achieves: data.ACHIEVES, state: data.achievementState });
+      uu('player_achievements', { player_id, achieves: data.ACHIEVES, state: data.achievementState, tracking: data.achievementTracking });
       uu('player_artifacts', { player_id, fragments: data.artifactFragments, state: data.artifactState });
       uu('player_pvp', { player_id, wins: data.pvp?.wins, losses: data.pvp?.losses, rating: data.pvp?.rating, history: data.pvp?.history, shield: data.pvpShield });
       uu('player_espionage', { player_id, drones: data.espDrones, reports: data.espReports });

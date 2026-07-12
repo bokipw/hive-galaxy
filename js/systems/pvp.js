@@ -269,8 +269,13 @@ function finishPvpBattle() {
   if (typeof getCmdPvpRatingFloor === 'function') {
     pvp.rating = Math.max(pvp.rating, getCmdPvpRatingFloor());
   }
-  if (isVictory) pvp.wins = (pvp.wins||0)+1;
-  else if (result.status==='defeat') pvp.losses = (pvp.losses||0)+1;
+  if (isVictory) {
+    pvp.wins = (pvp.wins||0)+1;
+    pvp.winStreak = (pvp.winStreak || 0) + 1;
+  } else if (result.status==='defeat') {
+    pvp.losses = (pvp.losses||0)+1;
+    pvp.winStreak = 0;
+  }
   if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
   var loot = { metal:0, crystal:0, he3:0, bocrypto:0, xp:0 };
   if (isVictory) {

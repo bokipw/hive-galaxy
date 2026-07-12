@@ -147,6 +147,7 @@ CREATE TABLE player_achievements (
   player_id   TEXT PRIMARY KEY REFERENCES players(id) ON DELETE CASCADE,
   achieves    JSONB NOT NULL DEFAULT '[]',
   state       JSONB NOT NULL DEFAULT '{}',
+  tracking    JSONB NOT NULL DEFAULT '{}',
   updated_at  TIMESTAMPTZ DEFAULT now()
 );
 

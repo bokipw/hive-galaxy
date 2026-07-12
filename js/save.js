@@ -51,7 +51,7 @@ async function _emailSave(payload) {
       u('player_colonies', { player_id: pid, colonies: payload.colonies }),
       u('player_instance_progress', { player_id: pid, progress: payload.instProgress }),
       u('player_missions', { player_id: pid, mission_state: payload.missionState, mission_counters: payload.missionCounters, story_missions: payload.dynamicStoryMissions }),
-      u('player_achievements', { player_id: pid, achieves: payload.ACHIEVES, state: payload.achievementState }),
+      u('player_achievements', { player_id: pid, achieves: payload.ACHIEVES, state: payload.achievementState, tracking: payload.achievementTracking }),
       u('player_artifacts', { player_id: pid, fragments: payload.artifactFragments, state: payload.artifactState }),
       u('player_pvp', { player_id: pid, wins: payload.pvp?.wins, losses: payload.pvp?.losses, rating: payload.pvp?.rating, history: payload.pvp?.history, shield: payload.pvpShield }),
       u('player_espionage', { player_id: pid, drones: payload.espDrones, reports: payload.espReports }),
@@ -235,6 +235,29 @@ function _applyGameState(s) {
     if (s.totalMetalMined != null) window._totalMetalMined = s.totalMetalMined;
     if (s.totalDepotPickups != null) window._totalDepotPickups = s.totalDepotPickups;
     if (s.ACHIEVES)                ACHIEVES = s.ACHIEVES;
+    if (s.achievementTracking) {
+      const at = s.achievementTracking;
+      if (at.totalCrystalMined   != null) window._totalCrystalMined   = at.totalCrystalMined;
+      if (at.totalHe3Mined       != null) window._totalHe3Mined       = at.totalHe3Mined;
+      if (at.totalShipsBuilt     != null) window._totalShipsBuilt     = at.totalShipsBuilt;
+      if (at.totalShipsDestroyed != null) window._totalShipsDestroyed = at.totalShipsDestroyed;
+      if (at.totalShipsRecycled  != null) window._totalShipsRecycled  = at.totalShipsRecycled;
+      if (at.totalDamageDealt    != null) window._totalDamageDealt    = at.totalDamageDealt;
+      if (at.totalResourcesSpent != null) window._totalResourcesSpent = at.totalResourcesSpent;
+      if (at.totalBpCrafted      != null) window._totalBpCrafted      = at.totalBpCrafted;
+      if (at.flawlessWins        != null) window._flawlessWins        = at.flawlessWins;
+      if (at.instanceStreak      != null) window._instanceStreak      = at.instanceStreak;
+      if (at.winsEasy            != null) window._wins_easy           = at.winsEasy;
+      if (at.winsNormal          != null) window._wins_normal         = at.winsNormal;
+      if (at.winsNightmare       != null) window._wins_nightmare      = at.winsNightmare;
+      if (at.winsHell            != null) window._wins_hell           = at.winsHell;
+      if (at.energySurplus       != null) window._energySurplus       = at.energySurplus;
+      if (at.metalPerHour          != null) window._metalPerHour          = at.metalPerHour;
+      if (at.crystalPerHour        != null) window._crystalPerHour        = at.crystalPerHour;
+      if (at.he3PerHour            != null) window._he3PerHour            = at.he3PerHour;
+      if (at.espSuccessfulMissions != null) window._espSuccessfulMissions = at.espSuccessfulMissions;
+      if (at.espStealMissions      != null) window._espStealMissions      = at.espStealMissions;
+    }
     if (s.ownedCommanders) {
       const _oldTotal = (window.ownedCommanders || []).reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
       window.ownedCommanders    = s.ownedCommanders;
@@ -371,6 +394,7 @@ function _buildSaveFromTables(tables) {
     missionTargets: pm.mission_targets || {},
     totalMetalMined: pr.total_metal_mined || 0,
     totalDepotPickups: pr.total_depot_pickups || 0,
+    achievementTracking: pach.tracking || {},
     storageBuffer: pr.storage_buffer || {metal:0,crystal:0,he3:0},
     buildQueue: pbq.queue || [],
     recycleQueue: prq.queue || [],
@@ -442,6 +466,28 @@ function saveGame() {
       },
       totalMetalMined: window._totalMetalMined,
       totalDepotPickups: window._totalDepotPickups,
+      achievementTracking: {
+        totalCrystalMined:   window._totalCrystalMined   || 0,
+        totalHe3Mined:       window._totalHe3Mined       || 0,
+        totalShipsBuilt:     window._totalShipsBuilt     || 0,
+        totalShipsDestroyed: window._totalShipsDestroyed || 0,
+        totalShipsRecycled:  window._totalShipsRecycled  || 0,
+        totalDamageDealt:    window._totalDamageDealt    || 0,
+        totalResourcesSpent: window._totalResourcesSpent || 0,
+        totalBpCrafted:      window._totalBpCrafted      || 0,
+        flawlessWins:        window._flawlessWins        || 0,
+        instanceStreak:      window._instanceStreak      || 0,
+        winsEasy:            window._wins_easy           || 0,
+        winsNormal:          window._wins_normal         || 0,
+        winsNightmare:       window._wins_nightmare      || 0,
+        winsHell:            window._wins_hell           || 0,
+        energySurplus:       window._energySurplus       || 0,
+        metalPerHour:        window._metalPerHour        || 0,
+        crystalPerHour:      window._crystalPerHour      || 0,
+        he3PerHour:            window._he3PerHour            || 0,
+        espSuccessfulMissions: window._espSuccessfulMissions || 0,
+        espStealMissions:      window._espStealMissions      || 0,
+      },
       storageBuffer, buildQueue, recycleQueue, ACHIEVES,
       ownedCommanders: window.ownedCommanders || [],
       activeCommander: window._activeCommander || null,
