@@ -224,15 +224,16 @@ function renderPvpPanel() {
   const el = document.getElementById('pvpPanel');
   if (!el) return;
 
-  const history = window._pvpHistory || [];
-  const shield  = window._pvpShieldEnd || 0;
+  const history = pvp.log || pvp.history || [];
+  const shieldObj = window.pvpShield || {};
+  const shieldExp = shieldObj.expiresAt ? Math.floor(new Date(shieldObj.expiresAt).getTime() / 1000) : 0;
   const now     = Math.floor(Date.now() / 1000);
-  const shieldActive = shield > now;
-  const shieldLeft   = shieldActive ? Math.ceil((shield - now) / 60) : 0;
+  const shieldActive = shieldObj.active && shieldExp > now;
+  const shieldLeft   = shieldActive ? Math.ceil((shieldExp - now) / 60) : 0;
 
   // Rating i rank
-  const rating = window._pvpRating || 0;
-  const rank   = window._pvpRank   || '-';
+  const rating = pvp.rating || 0;
+  const rank   = rating >= 2000 ? 'Dijamant' : rating >= 1500 ? 'Zlato' : rating >= 1200 ? 'Srebro' : rating >= 1000 ? 'Bronza' : 'Nerangiran';
 
   el.innerHTML = `
     <!-- Rating strip -->

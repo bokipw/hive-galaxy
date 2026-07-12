@@ -163,6 +163,7 @@ CREATE TABLE player_pvp (
   wins        INT DEFAULT 0,
   losses      INT DEFAULT 0,
   rating      INT DEFAULT 1000,
+  win_streak  INT DEFAULT 0,
   history     JSONB NOT NULL DEFAULT '[]',
   shield      JSONB DEFAULT '{}',
   updated_at  TIMESTAMPTZ DEFAULT now()

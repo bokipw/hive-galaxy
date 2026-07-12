@@ -642,23 +642,27 @@ function galaxyAttackBase(playerId) {
   if (!pvp.log) pvp.log = [];
 
   // Manji rating change nego normalni PvP (K=16 umjesto 32)
-  const myR = pvp.rating || 1000, oppR = p.rating || 1000;
+  const myR = pvp.rating ?? 1000, oppR = p.rating ?? 1000;
   const expected = 1 / (1 + Math.pow(10, (oppR - myR) / 400));
   const ratingChange = Math.round(16 * ((isVictory ? 1 : 0) - expected));
-  pvp.rating = Math.max(0, pvp.rating + ratingChange);
+  const floor = typeof getCmdPvpRatingFloor === 'function' ? getCmdPvpRatingFloor() : 0;
+  pvp.rating = Math.max(floor, (pvp.rating || 1000) + ratingChange);
 
   if (isVictory) {
     pvp.wins = (pvp.wins || 0) + 1;
+    pvp.winStreak = (pvp.winStreak || 0) + 1;
     R.metal   += 50000;
     R.crystal += 50000;
     R.he3     += 50000;
     toast(`🏆 Pobjeda nad ${p.username}! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating`, 'ok');
     addLog(`⚔️ Napad na bazu ${p.username} — POBJEDA! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating.`);
-  } else {
+  } else if (battle.status === 'defeat') {
     pvp.losses = (pvp.losses || 0) + 1;
+    pvp.winStreak = 0;
     toast(`💀 Poraz od ${p.username}. ${ratingChange} rating.`, 'warn');
     addLog(`⚔️ Napad na bazu ${p.username} — PORAZ. ${ratingChange} rating.`);
   }
+  if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
 
   pvp.log = pvp.log || [];
   pvp.log.unshift({ time: Date.now(), opponent: p.username, rating: p.rating, result: battle.status, rounds: battle.round, ratingChange, loot: isVictory ? { metal:50000, crystal:50000, he3:50000 } : {} });

@@ -54,7 +54,7 @@ Deno.serve(async (req: Request) => {
       uu('player_missions', { player_id, mission_state: data.missionState, mission_counters: data.missionCounters, mission_targets: data.missionTargets, story_missions: data.dynamicStoryMissions });
       uu('player_achievements', { player_id, achieves: data.ACHIEVES, state: data.achievementState, tracking: data.achievementTracking });
       uu('player_artifacts', { player_id, fragments: data.artifactFragments, state: data.artifactState });
-      uu('player_pvp', { player_id, wins: data.pvp?.wins, losses: data.pvp?.losses, rating: data.pvp?.rating, history: data.pvp?.history, shield: data.pvpShield });
+      uu('player_pvp', { player_id, wins: data.pvp?.wins, losses: data.pvp?.losses, rating: data.pvp?.rating, win_streak: data.pvp?.winStreak, history: data.pvp?.history, shield: data.pvpShield });
       uu('player_espionage', { player_id, drones: data.espDrones, reports: data.espReports });
       uu('player_formations', { player_id, active_formation: data.activeFormation, formation_slots: data.formationSlots });
       uu('player_recycle_queue', { player_id, queue: data.recycleQueue });

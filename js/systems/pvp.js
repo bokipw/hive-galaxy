@@ -263,8 +263,8 @@ function finishPvpBattle() {
   var opp    = window._pvpBattleOpp;
   if (!result || !opp) return;
   var isVictory = result.status === 'victory';
-  var ratingChange = calcRatingChange(pvp.rating||1000, opp.rating, isVictory);
-  pvp.rating = Math.max(0, (pvp.rating||1000) + ratingChange);
+  var ratingChange = calcRatingChange(pvp.rating ?? 1000, opp.rating, isVictory);
+  pvp.rating = Math.max(0, (pvp.rating ?? 1000) + ratingChange);
   // Commander galactic presence — rating floor
   if (typeof getCmdPvpRatingFloor === 'function') {
     pvp.rating = Math.max(pvp.rating, getCmdPvpRatingFloor());
@@ -274,6 +274,8 @@ function finishPvpBattle() {
     pvp.winStreak = (pvp.winStreak || 0) + 1;
   } else if (result.status==='defeat') {
     pvp.losses = (pvp.losses||0)+1;
+    pvp.winStreak = 0;
+  } else {
     pvp.winStreak = 0;
   }
   if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
@@ -303,8 +305,8 @@ function finishPvpBattle() {
 // 4. ELO RATING
 // ============================================================
 function calcRatingChange(myRating, oppRating, won) {
-  var my = myRating  || 1000;
-  var op = oppRating || 1000;
+  var my = myRating  ?? 1000;
+  var op = oppRating ?? 1000;
   var K = 32, expected = 1 / (1 + Math.pow(10, (op - my) / 400));
   return Math.round(K * ((won ? 1 : 0) - expected));
 }

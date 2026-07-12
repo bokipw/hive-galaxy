@@ -99,10 +99,11 @@ let colonies = [];
 
 // PvP
 const pvp = {
-  wins:    0,
-  losses:  0,
-  rating:  1000,
-  history: [],
+  wins:      0,
+  losses:    0,
+  rating:    1000,
+  winStreak: 0,
+  history:   [],
 };
 
 // ŠPIJUNAŽA
