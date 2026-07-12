@@ -64,7 +64,7 @@ Deno.serve(async (req: Request) => {
       uu('player_jump_gate_cooldowns', { player_id, cooldowns: data.jumpGateCooldowns });
       uu('player_boss_cooldowns', { player_id, cooldowns: data.bossCooldowns });
       uu('player_drop_pity', { player_id, pity: data.dropPity });
-      uu('player_misc_state', { player_id, starter_given: data.starterGiven, fleet_position: data.fleetPosition, viewing_cmd_id: data.viewingCmdId, card_ability_cooldowns: data.cardAbilityCooldowns });
+      uu('player_misc_state', { player_id, starter_given: data.starterGiven, fleet_position: data.fleetPosition, viewing_cmd_id: data.viewingCmdId, card_ability_cooldowns: data.cardAbilityCooldowns, cmd_cooldowns: data.cmdCooldowns });
       uu('player_defenses', { player_id, defenses: data.defenses });
       await Promise.all(upserts);
 

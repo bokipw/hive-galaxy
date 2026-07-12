@@ -63,7 +63,7 @@ async function _emailSave(payload) {
       u('player_jump_gate_cooldowns', { player_id: pid, cooldowns: payload.jumpGateCooldowns }),
       u('player_boss_cooldowns', { player_id: pid, cooldowns: payload.bossCooldowns }),
       u('player_drop_pity', { player_id: pid, pity: payload.dropPity }),
-      u('player_misc_state', { player_id: pid, starter_given: payload.starterGiven, fleet_position: payload.fleetPosition, viewing_cmd_id: payload.viewingCmdId, card_ability_cooldowns: payload.cardAbilityCooldowns }),
+      u('player_misc_state', { player_id: pid, starter_given: payload.starterGiven, fleet_position: payload.fleetPosition, viewing_cmd_id: payload.viewingCmdId, card_ability_cooldowns: payload.cardAbilityCooldowns, cmd_cooldowns: payload.cmdCooldowns }),
       u('player_defenses', { player_id: pid, defenses: payload.defenses }),
     ]);
   } catch(e) { console.error('[emailSave] exception:', e); }
@@ -273,6 +273,7 @@ function _applyGameState(s) {
     if (s.packPity)           window._packPity          = s.packPity;
     if (s.packPulls)          window._packPulls         = s.packPulls;
     if (s.cardAbilityCooldowns) Object.assign(window, s.cardAbilityCooldowns);
+    if (s.cmdCooldowns)         window._cmdCooldowns         = s.cmdCooldowns;
     if (!window._deployedCommanders) window._deployedCommanders = [];
     if (!window._formationSlots) window._formationSlots = Array(9).fill(null);
     if (s.conqueredPlanets)      window._conqueredPlanets     = s.conqueredPlanets;
@@ -416,6 +417,7 @@ function _buildSaveFromTables(tables) {
     packPity: ppp.pity || {},
     packPulls: ppp.pulls || {},
     cardAbilityCooldowns: pms.card_ability_cooldowns || {},
+    cmdCooldowns:         pms.cmd_cooldowns         || {},
   };
   return saveData;
 }
@@ -507,6 +509,7 @@ function saveGame() {
       packPulls: window._packPulls || {},
       cardAbilityCooldowns: Object.keys(window).filter(k=>k.startsWith('_cardAbility_'))
         .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
+      cmdCooldowns: window._cmdCooldowns || {},
     };
     _cloudSave(saveData);
     const btn = document.getElementById('saveBtn');

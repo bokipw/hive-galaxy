@@ -232,6 +232,7 @@ CREATE TABLE player_misc_state (
   fleet_position   JSONB,
   viewing_cmd_id   TEXT,
   card_ability_cooldowns JSONB DEFAULT '{}',
+  cmd_cooldowns         JSONB DEFAULT '{}',
   updated_at       TIMESTAMPTZ DEFAULT now()
 );
 

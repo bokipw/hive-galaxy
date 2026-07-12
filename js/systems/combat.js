@@ -1624,20 +1624,6 @@ function addBlueprintFragment(itemId, count = 1, silent = false) {
 }
 
 // ── CRAFT BLUEPRINT IZ FRAGMENATA ──
-function craftBlueprint(itemId) {
-  const needed = getBpFragmentCost(getBlueprintRarity(itemId));
-  if ((blueprintFragments[itemId] || 0) < needed) {
-    toast('❌ Nedovoljno fragmenata!', 'err');
-    return false;
-  }
-  blueprintFragments[itemId] -= needed;
-  unlockBlueprint(itemId);
-  toast(`✅ Blueprint craftovan: ${getBpName(itemId)}!`, 'ok');
-  addLog(`✅ Blueprint craftovan iz fragmenata: ${getBpName(itemId)}`);
-  saveGame();
-  return true;
-}
-
 // ── GARANT FRAGMENT — po broju pokušaja ──
 function getGuaranteedFragment(instance, prog) {
   const clearCount = prog?.clear_count || 0;
@@ -1990,13 +1976,20 @@ function applyPlayerLosses(battle) {
     // Nađi najveći fleet_recovery% među svim deployovanim komandirima
     let recoveryPct = 0;
     let recoveryCmd = null;
+    const allCmds = [
+      ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
+      ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
+      ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
+    ];
     const deployed = window._deployedCommanders || [];
-    deployed.forEach(cmd => {
-      if (!cmd) return;
-      const passive = cmd.passive;
+    deployed.forEach(cmdId => {
+      if (!cmdId) return;
+      const def = allCmds.find(c => c.id === cmdId);
+      if (!def) return;
+      const passive = def.passive;
       if (passive && passive.fleet_recovery && passive.fleet_recovery > recoveryPct) {
         recoveryPct = passive.fleet_recovery;
-        recoveryCmd = cmd;
+        recoveryCmd = def;
       }
     });
     // Dodaj faction synergy fleet_recovery bonus (od calcFleetBonuses)
