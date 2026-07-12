@@ -422,7 +422,6 @@ function _finishResearch(branch, def, lvl) {
 
   addLog(`🔬 ${def.name} unaprijeđen na Lv.${newLvl}`);
   if (typeof trackDailyResearch  === 'function') trackDailyResearch();
-  if (typeof trackWeeklyResearch === 'function') trackWeeklyResearch();
   R.score += newLvl * 30;
   updateResUI();
   renderResearch();

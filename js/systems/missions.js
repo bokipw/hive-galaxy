@@ -768,7 +768,20 @@ function generateWeeklyMissions() {
   const week = getWeekStr();
   const existing = window.missionState.weekly;
   // Regeneriši ako je novi tjedan ILI ako ima premalo misija (stari save)
-  if (existing.week === week && (existing.missions?.length || 0) >= 7) return;
+  if (existing.week === week && (existing.missions?.length || 0) >= 7) {
+    // Stara save migracija: generiši target-e ako nedostaju (prije prvog save-a sa missionTargets)
+    if (window._weeklyInstTarget == null && window._weeklyPvpTarget == null &&
+        window._weeklyResTarget == null && window._weeklyBuildTarget == null &&
+        window._weeklyShipTarget == null && window._weeklyEspTarget == null &&
+        window._weeklyPowerTarget == null) {
+      existing.missions.forEach(id => {
+        const m = WEEKLY_MISSION_POOL.find(x => x.id === id);
+        if (m?.target) m.target();
+      });
+      saveGame();
+    }
+    return;
+  }
   // Zadrži bonusClaimed ako je ista sedmica (samo dopunjavanje misija)
   const keepBonus = existing.week === week;
 
@@ -874,7 +887,8 @@ function claimDailyBonus() {
   if (window.missionState.daily.bonusClaimed) return;
   const activeMissions = getActiveDailyMissions();
   const completed = activeMissions.filter(m => {
-    try { if (window.missionState.daily.claimed.includes(m.id)) return true; return m.check(); } catch(e) { return false; }
+    if (window.missionState.daily.claimed.includes(m.id)) return true;
+    try { return m.check(); } catch(e) { return false; }
   }).length;
   if (completed < activeMissions.length) { toast(`⚠️ Završi svih ${activeMissions.length} dnevnih misija!`, 'warn'); return; }
 
@@ -900,6 +914,7 @@ function claimWeeklyBonus() {
   if (window.missionState.weekly.bonusClaimed) return;
   const activeMissions = getActiveWeeklyMissions();
   const completed = activeMissions.filter(m => {
+    if (window.missionState.weekly.claimed.includes(m.id)) return true;
     try { return m.check(); } catch(e) { return false; }
   }).length;
   if (completed < activeMissions.length) {
@@ -939,8 +954,8 @@ function trackDailyShips(n)     {
 }
 function trackDailyPvp(win)     {
   window._dailyPvpCount  = (window._dailyPvpCount  || 0) + 1;
-  window._weeklyPvpCount = (window._weeklyPvpCount || 0) + 1;
   if (win) {
+    window._weeklyPvpCount  = (window._weeklyPvpCount  || 0) + 1;
     window._dailyPvpWinCount  = (window._dailyPvpWinCount  || 0) + 1;
   }
 }
@@ -1040,11 +1055,11 @@ function updateMissionsBadge() {
   const activeWeeklyList = getActiveWeeklyMissions();
   let count = 0;
   activeDailyList.forEach(m => {
-    if (window.missionState.daily.claimed.includes(m.id)) return;
+    if (window.missionState.daily.claimed.includes(m.id)) { count++; return; }
     try { if (m.check()) count++; } catch(e) {}
   });
   activeWeeklyList.forEach(m => {
-    if (window.missionState.weekly.claimed.includes(m.id)) return;
+    if (window.missionState.weekly.claimed.includes(m.id)) { count++; return; }
     try { if (m.check()) count++; } catch(e) {}
   });
   STORYLINE_MISSIONS.forEach(m => {
@@ -1224,7 +1239,10 @@ function renderDailyMissions(completedCount, activeMissions) {
 function renderWeeklyMissions(activeMissions) {
   activeMissions = activeMissions || getActiveWeeklyMissions();
   const total          = activeMissions.length;
-  const weeklyCompleted = activeMissions.filter(m => { try { return m.check(); } catch(e){ return false; } }).length;
+  const weeklyCompleted = activeMissions.filter(m => {
+    if (window.missionState.weekly.claimed.includes(m.id)) return true;
+    try { return m.check(); } catch(e){ return false; }
+  }).length;
   const bonusReady     = weeklyCompleted >= total;
   const bonusClaimed   = window.missionState.weekly.bonusClaimed;
   return `

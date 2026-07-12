@@ -200,17 +200,37 @@ function _applyGameState(s) {
     }
     if (s.missionCounters) {
       const mc = s.missionCounters;
-      window._dailyInstCount  = mc.dailyInst  || 0;
-      window._dailyDepotCount = mc.dailyDepot || 0;
-      window._dailyResCount   = mc.dailyRes   || 0;
-      window._dailyShipCount  = mc.dailyShip  || 0;
-      window._dailyPvpCount   = mc.dailyPvp   || 0;
-      window._dailyEspCount   = mc.dailyEsp   || 0;
-      window._dailyBuildCount = mc.dailyBuild || 0;
-      window._dailyArtCount   = mc.dailyArt   || 0;
-      window._weeklyInstCount = mc.weeklyInst || 0;
-      window._weeklyPvpCount  = mc.weeklyPvp  || 0;
-      window._weeklyResCount  = mc.weeklyRes  || 0;
+      window._dailyInstCount    = mc.dailyInst    || 0;
+      window._dailyDepotCount   = mc.dailyDepot   || 0;
+      window._dailyResCount     = mc.dailyRes     || 0;
+      window._dailyShipCount    = mc.dailyShip    || 0;
+      window._dailyPvpCount     = mc.dailyPvp     || 0;
+      window._dailyPvpWinCount  = mc.dailyPvpWin  || 0;
+      window._dailyEspCount     = mc.dailyEsp     || 0;
+      window._dailyBuildCount   = mc.dailyBuild   || 0;
+      window._dailyArtCount     = mc.dailyArt     || 0;
+      window._weeklyInstCount   = mc.weeklyInst   || 0;
+      window._weeklyPvpCount    = mc.weeklyPvp    || 0;
+      window._weeklyResCount    = mc.weeklyRes    || 0;
+      window._weeklyBuildCount  = mc.weeklyBuild  || 0;
+      window._weeklyShipCount   = mc.weeklyShip   || 0;
+      window._weeklyEspCount    = mc.weeklyEsp    || 0;
+    }
+    if (s.missionTargets) {
+      const mt = s.missionTargets;
+      if (mt.weeklyInstTarget     != null) window._weeklyInstTarget     = mt.weeklyInstTarget;
+      if (mt.weeklyInstHardTarget != null) window._weeklyInstHardTarget = mt.weeklyInstHardTarget;
+      if (mt.weeklyPvpTarget      != null) window._weeklyPvpTarget      = mt.weeklyPvpTarget;
+      if (mt.weeklyPvpHardTarget  != null) window._weeklyPvpHardTarget  = mt.weeklyPvpHardTarget;
+      if (mt.weeklyResTarget      != null) window._weeklyResTarget      = mt.weeklyResTarget;
+      if (mt.weeklyResHardTarget  != null) window._weeklyResHardTarget  = mt.weeklyResHardTarget;
+      if (mt.weeklyBuildTarget    != null) window._weeklyBuildTarget    = mt.weeklyBuildTarget;
+      if (mt.weeklyBuildHardTarget != null) window._weeklyBuildHardTarget = mt.weeklyBuildHardTarget;
+      if (mt.weeklyShipTarget     != null) window._weeklyShipTarget     = mt.weeklyShipTarget;
+      if (mt.weeklyShipHardTarget != null) window._weeklyShipHardTarget = mt.weeklyShipHardTarget;
+      if (mt.weeklyEspTarget      != null) window._weeklyEspTarget      = mt.weeklyEspTarget;
+      if (mt.weeklyEspHardTarget  != null) window._weeklyEspHardTarget  = mt.weeklyEspHardTarget;
+      if (mt.weeklyPowerTarget    != null) window._weeklyPowerTarget    = mt.weeklyPowerTarget;
     }
     if (s.totalMetalMined != null) window._totalMetalMined = s.totalMetalMined;
     if (s.totalDepotPickups != null) window._totalDepotPickups = s.totalDepotPickups;
@@ -348,6 +368,7 @@ function _buildSaveFromTables(tables) {
     achievementState: pach.state || {},
     missionState: pm.mission_state || {},
     missionCounters: pm.mission_counters || {},
+    missionTargets: pm.mission_targets || {},
     totalMetalMined: pr.total_metal_mined || 0,
     totalDepotPickups: pr.total_depot_pickups || 0,
     storageBuffer: pr.storage_buffer || {metal:0,crystal:0,he3:0},
@@ -397,10 +418,27 @@ function saveGame() {
       missionCounters: {
         dailyInst: window._dailyInstCount||0, dailyDepot: window._dailyDepotCount||0,
         dailyRes: window._dailyResCount||0, dailyShip: window._dailyShipCount||0,
-        dailyPvp: window._dailyPvpCount||0, dailyEsp: window._dailyEspCount||0,
-        dailyBuild: window._dailyBuildCount||0, dailyArt: window._dailyArtCount||0,
+        dailyPvp: window._dailyPvpCount||0, dailyPvpWin: window._dailyPvpWinCount||0,
+        dailyEsp: window._dailyEspCount||0, dailyBuild: window._dailyBuildCount||0,
+        dailyArt: window._dailyArtCount||0,
         weeklyInst: window._weeklyInstCount||0, weeklyPvp: window._weeklyPvpCount||0,
-        weeklyRes: window._weeklyResCount||0,
+        weeklyRes: window._weeklyResCount||0, weeklyBuild: window._weeklyBuildCount||0,
+        weeklyShip: window._weeklyShipCount||0, weeklyEsp: window._weeklyEspCount||0,
+      },
+      missionTargets: {
+        weeklyInstTarget: window._weeklyInstTarget || null,
+        weeklyInstHardTarget: window._weeklyInstHardTarget || null,
+        weeklyPvpTarget: window._weeklyPvpTarget || null,
+        weeklyPvpHardTarget: window._weeklyPvpHardTarget || null,
+        weeklyResTarget: window._weeklyResTarget || null,
+        weeklyResHardTarget: window._weeklyResHardTarget || null,
+        weeklyBuildTarget: window._weeklyBuildTarget || null,
+        weeklyBuildHardTarget: window._weeklyBuildHardTarget || null,
+        weeklyShipTarget: window._weeklyShipTarget || null,
+        weeklyShipHardTarget: window._weeklyShipHardTarget || null,
+        weeklyEspTarget: window._weeklyEspTarget || null,
+        weeklyEspHardTarget: window._weeklyEspHardTarget || null,
+        weeklyPowerTarget: window._weeklyPowerTarget || null,
       },
       totalMetalMined: window._totalMetalMined,
       totalDepotPickups: window._totalDepotPickups,

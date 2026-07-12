@@ -1190,7 +1190,6 @@ function openBuildModal(designId) {
         closeModal();
         updateResUI();
         if (typeof trackDailyShips === 'function') trackDailyShips(count);
-        window._totalShipsBuilt = (window._totalShipsBuilt || 0) + count;
         addLog(`🏭 Izgrađeno ${count}x ${design.name} → Hangar.`);
         toast(`✅ ${fmt(count)}x ${design.name} dodano u hangar!`, 'ok');
         saveGame();

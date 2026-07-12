@@ -138,6 +138,7 @@ CREATE TABLE player_missions (
   player_id        TEXT PRIMARY KEY REFERENCES players(id) ON DELETE CASCADE,
   mission_state    JSONB NOT NULL DEFAULT '{}',
   mission_counters JSONB NOT NULL DEFAULT '{}',  -- dailyInst, dailyPvp, weeklyPvp, itd.
+  mission_targets  JSONB NOT NULL DEFAULT '{}',  -- weekly mission target values
   story_missions   JSONB NOT NULL DEFAULT '[]',
   updated_at       TIMESTAMPTZ DEFAULT now()
 );

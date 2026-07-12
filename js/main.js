@@ -75,7 +75,7 @@ function ensureNavGroupVisible(panel) {
 // ── BCM DAILY SNAPSHOT ──
 function checkBcmDailyReward() {
   const now      = new Date();
-  const todayKey = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+  const todayKey = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
   const lastPaid = localStorage.getItem('bcm_last_paid');
 
   if (lastPaid === todayKey) return; // već isplaćeno danas
