@@ -1264,6 +1264,11 @@ function calcFleetBonuses() {
     if (shipSynergy) bonuses[slot.bonus] += 5;
   });
 
+  // Rally Cry bonus (+25% napad flote 60s)
+  if (typeof getRallyCryBonus === 'function') {
+    bonuses.attack += getRallyCryBonus();
+  }
+
   // Faction synergy: broji samo deployovane komandire (izbegni duplo brojanje sa slotovima)
   const factionCount = {};
   const countFaction = id => {

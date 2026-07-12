@@ -450,11 +450,12 @@ function getColonyProduction(colony) {
   const distMult = COLONY_DIST_MULT[colony.distance] || 1.0;
   const base     = lvl * 0.005 * distMult;
   const bEff     = getColonyBuildingEffect(colony);
+  const admiralsMult = typeof getAdmiralsWillBonus === 'function' ? (1 + getAdmiralsWillBonus() / 100) : 1;
 
   return {
-    metal:   parseFloat((base * (1 + pType.metalBonus   / 100) * bEff.metalMult).toFixed(4)),
-    crystal: parseFloat((base * (1 + pType.crystalBonus / 100) * bEff.crystalMult).toFixed(4)),
-    he3:     parseFloat((base * (1 + pType.he3Bonus     / 100) * bEff.he3Mult).toFixed(4)),
+    metal:   parseFloat((base * (1 + pType.metalBonus   / 100) * bEff.metalMult * admiralsMult).toFixed(4)),
+    crystal: parseFloat((base * (1 + pType.crystalBonus / 100) * bEff.crystalMult * admiralsMult).toFixed(4)),
+    he3:     parseFloat((base * (1 + pType.he3Bonus     / 100) * bEff.he3Mult * admiralsMult).toFixed(4)),
   };
 }
 

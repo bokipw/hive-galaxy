@@ -1891,6 +1891,16 @@ function calculateRewards(battle, instanceData, prog) {
 function applyRewards(rewards) {
   if (!rewards) return;
 
+  // God mode (Osvajač Galaksije) — x3 nagrade
+  if (typeof isGodModeActive === 'function' && isGodModeActive()) {
+    rewards.metal        = Math.floor((rewards.metal        || 0) * 3);
+    rewards.crystal      = Math.floor((rewards.crystal      || 0) * 3);
+    rewards.he3          = Math.floor((rewards.he3          || 0) * 3);
+    rewards.xp           = Math.floor((rewards.xp           || 0) * 3);
+    rewards.instanceKeys = Math.floor((rewards.instanceKeys || 0) * 3);
+    rewards.commanderKeys = Math.floor((rewards.commanderKeys || 0) * 3);
+  }
+
   R.metal   += rewards.metal;
   R.crystal += rewards.crystal;
   R.he3     += rewards.he3;
