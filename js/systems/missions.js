@@ -1055,11 +1055,11 @@ function updateMissionsBadge() {
   const activeWeeklyList = getActiveWeeklyMissions();
   let count = 0;
   activeDailyList.forEach(m => {
-    if (window.missionState.daily.claimed.includes(m.id)) { count++; return; }
+    if (window.missionState.daily.claimed.includes(m.id)) return;
     try { if (m.check()) count++; } catch(e) {}
   });
   activeWeeklyList.forEach(m => {
-    if (window.missionState.weekly.claimed.includes(m.id)) { count++; return; }
+    if (window.missionState.weekly.claimed.includes(m.id)) return;
     try { if (m.check()) count++; } catch(e) {}
   });
   STORYLINE_MISSIONS.forEach(m => {
