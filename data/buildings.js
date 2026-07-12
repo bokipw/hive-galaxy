@@ -445,6 +445,10 @@ function getDepotCapacity() {
       capBonus += data.capBonus;
     }
   });
+  // Commander resource_mastery bonus (+10% depot kapacitet)
+  if (typeof getCmdDepotBonus === 'function') {
+    capBonus += getCmdDepotBonus();
+  }
   return Math.floor(base * (1 + capBonus / 100));
 }
 

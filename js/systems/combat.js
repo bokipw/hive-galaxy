@@ -1671,6 +1671,7 @@ function calculateRewards(battle, instanceData, prog) {
   const modeName = (typeof _instDifficultyMode !== 'undefined' ? _instDifficultyMode : 'easy');
   const MODE_XP_MULT = { easy: 1.0, normal: 3.0, nightmare: 10.0, hell: 30.0 };
   const xpMult = MODE_XP_MULT[modeName] || 1.0;
+  const instBonus = typeof getCmdInstanceBonus === 'function' ? (1 + getCmdInstanceBonus() / 100) : 1;
 
   // Koje rarity blueprinte/fragmente ovaj mod dozvoljava
   const MODE_ALLOWED_RARITY = {
@@ -1701,12 +1702,12 @@ function calculateRewards(battle, instanceData, prog) {
 
   const baseXp = instance.xp || instance.difficulty * 100;
   const rewards = {
-    metal:      randomRange(instance.resources.metal[0],   instance.resources.metal[1]),
-    crystal:    randomRange(instance.resources.crystal[0], instance.resources.crystal[1]),
-    he3:        randomRange(instance.resources.he3[0],     instance.resources.he3[1]),
+    metal:      Math.floor(randomRange(instance.resources.metal[0],   instance.resources.metal[1]) * instBonus),
+    crystal:    Math.floor(randomRange(instance.resources.crystal[0], instance.resources.crystal[1]) * instBonus),
+    he3:        Math.floor(randomRange(instance.resources.he3[0],     instance.resources.he3[1]) * instBonus),
     blueprints: [],
     fragments:  [],
-    xp:         Math.floor(baseXp * xpMult),
+    xp:         Math.floor(baseXp * xpMult * instBonus),
   };
 
   // ── CARGO BONUS (modul na brodu povećava resurse) ──

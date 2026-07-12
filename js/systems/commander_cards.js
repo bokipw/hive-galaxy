@@ -1268,6 +1268,14 @@ function calcFleetBonuses() {
   if (typeof getRallyCryBonus === 'function') {
     bonuses.attack += getRallyCryBonus();
   }
+  // Commander fleet discipline (+1% napad po levelu)
+  if (typeof getCmdFleetAttackBonus === 'function') {
+    bonuses.attack += getCmdFleetAttackBonus();
+  }
+  // Commander tactical shield (+1% odbrana po levelu)
+  if (typeof getCmdBaseDefenseBonus === 'function') {
+    bonuses.defense += getCmdBaseDefenseBonus();
+  }
 
   // Faction synergy: broji samo deployovane komandire (izbegni duplo brojanje sa slotovima)
   const factionCount = {};

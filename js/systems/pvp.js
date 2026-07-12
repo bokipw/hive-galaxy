@@ -265,6 +265,10 @@ function finishPvpBattle() {
   var isVictory = result.status === 'victory';
   var ratingChange = calcRatingChange(pvp.rating||1000, opp.rating, isVictory);
   pvp.rating = Math.max(0, (pvp.rating||1000) + ratingChange);
+  // Commander galactic presence — rating floor
+  if (typeof getCmdPvpRatingFloor === 'function') {
+    pvp.rating = Math.max(pvp.rating, getCmdPvpRatingFloor());
+  }
   if (isVictory) pvp.wins = (pvp.wins||0)+1;
   else if (result.status==='defeat') pvp.losses = (pvp.losses||0)+1;
   if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
