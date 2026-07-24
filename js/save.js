@@ -135,7 +135,7 @@ async function _savePvpSnapshot(saveData) {
 
 async function _cloudSave(saveData) {
   if (!window._supa) return;
-  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number' || saveData.R.metal <= 0) return;
+  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number') return;
   if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
 
   const pid = _getPlayerId();
