@@ -675,8 +675,9 @@
 <script src="js/systems/formations.js?v=20260630200000"></script>
 <script src="js/systems/events.js?v=20260630200000"></script>
 
-<script src="js/mobile-hamburger.js?v=20260724000000"></script>
+<script src="js/mobile-hamburger.js?v=20260724000001"></script>
 <script>
+function logoutGame() {
   if (!confirm('Sigurno se želiš odjaviti?')) return;
   saveGame();
   localStorage.removeItem('hg_hive_user');
