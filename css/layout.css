@@ -210,3 +210,79 @@
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+
+/* ── Hamburger dugme (sakriveno na desktopu) ── */
+#hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ── Mobile overlay za nav ── */
+#navOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0,0,0,0.6);
+}
+
+@media (max-width: 768px) {
+  #header h1 { font-size: 0.85rem; letter-spacing: 2px; }
+  #header { padding: 0 10px; gap: 8px; }
+  .res-bar { gap: 4px; flex: 1; }
+  .res-item { font-size: 0.6rem; padding: 3px 6px; }
+  .rval  { font-size: 0.7rem; }
+  .rprod { font-size: 0.5rem; }
+  #hamburger { display: block; flex-shrink: 0; }
+
+  #main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #nav {
+    position: fixed;
+    top: 56px;
+    left: -260px;
+    width: 260px;
+    height: calc(100vh - 56px);
+    z-index: 99;
+    transition: left 0.25s ease;
+    border-right: 1px solid var(--border2);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.6);
+  }
+  #nav.open { left: 0; }
+  #navOverlay.open { display: block; }
+
+  #content {
+    padding: 12px;
+  }
+  #content::before {
+    left: 0; right: 0;
+  }
+
+  #rightPanel {
+    display: none;
+  }
+
+  .page-title { font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 12px; }
+}
+
+@media (max-width: 480px) {
+  #header h1 { font-size: 0.7rem; letter-spacing: 1px; }
+  .res-item { font-size: 0.5rem; padding: 2px 4px; }
+  .rval  { font-size: 0.6rem; }
+  .rprod { display: none; }
+  #content { padding: 8px; }
+  .page-title { font-size: 0.75rem; }
+}

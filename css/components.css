@@ -139,6 +139,25 @@ select:focus {
 select option { background: var(--bg2); }
 
 /* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .card { padding: 10px; }
+  .card-title { font-size: 0.75rem; }
+  #saveBtn { font-size: 0.65rem; padding: 3px 8px; }
+  input[type="text"], input[type="number"], select { font-size: 0.75rem; padding: 5px 8px; }
+  .btn { font-size: 0.7rem; padding: 5px 10px; }
+}
+
+@media (max-width: 480px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 6px; }
+  .card { padding: 8px; }
+  .card-title { font-size: 0.7rem; }
+  .card-icon { font-size: 1.5rem; }
+}
+
+/* ============================================================
    GALAXY ONLINE 2 — dodatak
    ============================================================ */
 
