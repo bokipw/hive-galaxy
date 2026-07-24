@@ -236,6 +236,7 @@
   z-index: 90;
   background: rgba(0,0,0,0.6);
 }
+#navOverlay.open { display: block; }
 
 @media (max-width: 768px) {
   #header h1 { font-size: 0.85rem; letter-spacing: 2px; }
@@ -262,7 +263,6 @@
     box-shadow: 4px 0 24px rgba(0,0,0,0.6);
   }
   #nav.open { left: 0; }
-  #navOverlay.open { display: block; }
 
   #content {
     padding: 12px;

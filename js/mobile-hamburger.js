@@ -25,7 +25,6 @@
     // zatvori kad se klikne na nav-btn
     nav.querySelectorAll('.nav-btn').forEach(function(btn) {
       btn.addEventListener('click', close);
-      btn.addEventListener('touchstart', function(e) { close(); }, { passive: true });
     });
   }
 
