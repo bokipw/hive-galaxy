@@ -240,8 +240,8 @@
 @media (max-width: 768px) {
   #header h1 { font-size: 0.85rem; letter-spacing: 2px; }
   #header { padding: 0 10px; gap: 8px; }
-  .res-bar { gap: 4px; flex: 1; }
-  .res-item { font-size: 0.6rem; padding: 3px 6px; }
+  .res-bar { gap: 4px; flex: 1; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+  .res-item { font-size: 0.6rem; padding: 3px 6px; flex-shrink: 0; }
   .rval  { font-size: 0.7rem; }
   .rprod { font-size: 0.5rem; }
   #hamburger { display: block; flex-shrink: 0; }
