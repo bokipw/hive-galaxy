@@ -10,11 +10,17 @@ Deno.serve(async (req: Request) => {
     const { username } = await req.json();
     if (!username) return err('Nedostaje username', 400);
 
+    if (!SUPA_URL || !SERVICE_KEY) {
+      console.error('[hive-auth] SUPABASE_URL ili SERVICE_KEY nije postavljen');
+      return err('Server nije konfigurisan', 500);
+    }
+
     const supa = createClient(SUPA_URL, SERVICE_KEY);
     const email = `${username}@hive.local`;
     const password = Array.from({ length: 24 }, () => Math.random().toString(36)[2]).join('');
 
-    const { data: users } = await supa.auth.admin.listUsers();
+    const { data: users, error: listErr } = await supa.auth.admin.listUsers();
+    if (listErr) return err(listErr.message, 500);
     let user = users?.users?.find((u: any) => u.email === email);
 
     if (!user) {
@@ -28,16 +34,19 @@ Deno.serve(async (req: Request) => {
       user = data.user;
     }
 
-    await supa.from('players').upsert({ id: username, player_type: 'hive', username }, { onConflict: 'id' });
-    await supa.from('hive_profiles').upsert({
+    const { error: playersErr } = await supa.from('players').upsert({ id: username, player_type: 'hive', username }, { onConflict: 'id' });
+    if (playersErr) return err('players: ' + playersErr.message, 500);
+    const { error: profileErr } = await supa.from('hive_profiles').upsert({
       id: username,
       last_seen: new Date().toISOString()
     }, { onConflict: 'id' });
+    if (profileErr) return err('hive_profiles: ' + profileErr.message, 500);
 
     return new Response(JSON.stringify({ email, password }), {
       headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
     });
   } catch (e) {
+    console.error('[hive-auth] UNCAUGHT:', e);
     return err((e as Error).message, 500);
   }
 });

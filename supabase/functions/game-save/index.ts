@@ -69,19 +69,26 @@ Deno.serve(async (req: Request) => {
       await Promise.all(upserts);
 
       if (data._clear_boosters) {
-        try { await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id); }
-        catch (ex: unknown) { errors.push(`hive_profiles: ${(ex as Error).message}`); }
+        try {
+          const { error } = await supa.from('hive_profiles').update({ boosters: {} }).eq('id', player_id);
+          if (error) errors.push(`hive_profiles: ${error.message}`);
+        } catch (ex: unknown) { errors.push(`hive_profiles: ${(ex as Error).message}`); }
       }
       if (data._leaderboard) {
-        try { await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() }); }
-        catch (ex: unknown) { errors.push(`leaderboard: ${(ex as Error).message}`); }
+        try {
+          const { error } = await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() });
+          if (error) errors.push(`leaderboard: ${error.message}`);
+        } catch (ex: unknown) { errors.push(`leaderboard: ${(ex as Error).message}`); }
       }
       if (data._pvp_snapshot) {
-        try { await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot }); }
-        catch (ex: unknown) { errors.push(`pvp_snapshots: ${(ex as Error).message}`); }
+        try {
+          const { error } = await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot });
+          if (error) errors.push(`pvp_snapshots: ${error.message}`);
+        } catch (ex: unknown) { errors.push(`pvp_snapshots: ${(ex as Error).message}`); }
       }
 
-      return new Response(JSON.stringify({ success: true, errors }), {
+      if (errors.length) console.error('[game-save] save errors:', errors);
+      return new Response(JSON.stringify({ success: errors.length === 0, errors }), {
         headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });
     }
@@ -89,9 +96,20 @@ Deno.serve(async (req: Request) => {
     if (action === 'load') {
       const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
       const results: Record<string, unknown> = {};
+      const loadErrors: string[] = [];
       for (const tbl of tables) {
         const { data, error } = await supa.from(tbl).select('*').eq('player_id', player_id).maybeSingle();
+        if (error) { loadErrors.push(`${tbl}: ${error.message}`); continue; }
         if (data) results[tbl] = data;
+      }
+      // Djelimičan load se NE smije prijaviti kao uspjeh — klijent bi učitao
+      // nepotpuno stanje i sljedećim save-om prebrisao podatke igrača.
+      if (loadErrors.length) {
+        console.error('[game-save] load errors:', loadErrors);
+        return new Response(JSON.stringify({ success: false, errors: loadErrors }), {
+          status: 500,
+          headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+        });
       }
       return new Response(JSON.stringify({ success: true, data: results }), {
         headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
@@ -105,6 +123,7 @@ Deno.serve(async (req: Request) => {
         const { error } = await supa.from(tbl).delete().eq('player_id', player_id);
         if (error) errors.push(`${tbl}: ${error.message}`);
       }
+      if (errors.length) console.error('[game-save] reset errors:', errors);
       return new Response(JSON.stringify({ success: errors.length === 0, errors }), {
         headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });

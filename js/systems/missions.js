@@ -848,7 +848,12 @@ function claimMissionReward(missionId, type) {
 
   // Validacija: provjeri da je misija zaista završena
   let isComplete = false;
-  try { isComplete = mission.check(); } catch(e) {}
+  try { isComplete = mission.check(); }
+  catch(e) {
+    console.error(`[missions] check() pukao za misiju ${missionId}:`, e);
+    toast('⚠️ Greška pri provjeri misije — pokušaj ponovo.', 'err');
+    return;
+  }
   if (!isComplete) { toast('⚠️ Misija još nije završena!', 'warn'); return; }
 
   const r = mission.reward;
@@ -1056,17 +1061,17 @@ function updateMissionsBadge() {
   let count = 0;
   activeDailyList.forEach(m => {
     if (window.missionState.daily.claimed.includes(m.id)) return;
-    try { if (m.check()) count++; } catch(e) {}
+    try { if (m.check()) count++; } catch(e) { console.error(`[missions] check() pukao za daily ${m.id}:`, e); }
   });
   activeWeeklyList.forEach(m => {
     if (window.missionState.weekly.claimed.includes(m.id)) return;
-    try { if (m.check()) count++; } catch(e) {}
+    try { if (m.check()) count++; } catch(e) { console.error(`[missions] check() pukao za weekly ${m.id}:`, e); }
   });
   STORYLINE_MISSIONS.forEach(m => {
     if (window.missionState.storyline.claimed.includes(m.id)) return;
     const locked = m.requires && !window.missionState.storyline.completed.includes(m.requires);
     if (locked) return;
-    try { if (m.check()) count++; } catch(e) {}
+    try { if (m.check()) count++; } catch(e) { console.error(`[missions] check() pukao za storyline ${m.id}:`, e); }
   });
   if (count > 0) {
     el.textContent = count;
@@ -1186,7 +1191,7 @@ function renderDailyMissions(completedCount, activeMissions) {
     <div class="grid-2">
       ${activeMissions.map(m => {
         let completed = false;
-        try { completed = m.check(); } catch(e){}
+        try { completed = m.check(); } catch(e){ console.error(`[missions] check() pukao za daily ${m.id}:`, e); }
         const claimed  = window.missionState.daily.claimed.includes(m.id);
         const desc     = typeof m.desc === 'function' ? m.desc() : m.desc;
         const r        = m.reward;
@@ -1278,7 +1283,7 @@ function renderWeeklyMissions(activeMissions) {
     <div style="display:flex;flex-direction:column;gap:10px">
       ${activeMissions.map(m => {
         let completed = false;
-        try { completed = m.check(); } catch(e){}
+        try { completed = m.check(); } catch(e){ console.error(`[missions] check() pukao za weekly ${m.id}:`, e); }
         const claimed = window.missionState.weekly.claimed.includes(m.id);
         const desc    = typeof m.desc === 'function' ? m.desc() : m.desc;
         const r       = m.reward;
@@ -1343,7 +1348,7 @@ function renderStorylineMissions() {
       ${STORYLINE_MISSIONS.map(m => {
         const locked   = m.requires && !window.missionState.storyline.completed.includes(m.requires);
         let completed  = false;
-        try { completed = !locked && m.check(); } catch(e){}
+        try { completed = !locked && m.check(); } catch(e){ console.error(`[missions] check() pukao za storyline ${m.id}:`, e); }
         const claimed  = window.missionState.storyline.claimed.includes(m.id);
         const r        = m.reward;
         const tierColor = m.tier <= 3 ? '#ffdd00' : m.tier <= 6 ? '#4488ff' : m.tier <= 8 ? '#aa44ff' : '#ffaa00';

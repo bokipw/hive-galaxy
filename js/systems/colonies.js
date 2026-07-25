@@ -201,7 +201,9 @@ function sensorPhalanxScan(colonyId) {
   // Učitaj igrače ako još nisu učitani
   if (typeof loadGalaxyPlayerBases === 'function' &&
       (typeof _galaxyPlayerBases === 'undefined' || _galaxyPlayerBases.length === 0)) {
-    loadGalaxyPlayerBases().catch(() => {}).finally(_doScan);
+    loadGalaxyPlayerBases()
+      .catch(e => console.error('[colonies] učitavanje baza igrača nije uspjelo:', e))
+      .finally(_doScan);
   } else {
     _doScan();
   }

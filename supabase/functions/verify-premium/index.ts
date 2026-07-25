@@ -34,7 +34,8 @@ Deno.serve(async (req: Request) => {
 
     // Parsiraj logs da nađemo token transfer
     let logs: any[] = [];
-    try { logs = JSON.parse(tx.logs || '{}').events || []; } catch {}
+    try { logs = JSON.parse(tx.logs || '{}').events || []; }
+    catch (ex) { console.error('[verify-premium] neispravan tx.logs JSON:', ex); }
 
     const transferEvent = logs.find((e: any) =>
       e.contract === 'tokens' &&

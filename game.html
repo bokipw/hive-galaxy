@@ -63,6 +63,7 @@
   // Poll svakih 30s da provjeri da li je tajmer postavljen
   _maintPollInterval = setInterval(function() {
     _sb.from('hive_profiles').select('is_premium, boosters').eq('id', '__system__').maybeSingle().then(function(res) {
+      if (res.error) { console.error('[maint] provjera maintenance statusa nije uspjela:', res.error); return; }
       var d = res.data;
       if (!d) return;
       if (d.is_premium) { window.location.replace('maintenance.html'); return; }
@@ -84,20 +85,26 @@
 
     (async () => {
       // Očisti staru sesiju iz localStorage (npr. od admin logina)
-      await _sb.auth.signOut({ scope: 'local' }).catch(() => {});
+      await _sb.auth.signOut({ scope: 'local' }).catch(e => console.error('[hive] signOut failed:', e));
 
       console.log('[hive] upsert players + hive_profiles');
       fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: hiveUser })
-      }).catch(() => {});
+      }).then(async resp => {
+        if (!resp.ok) {
+          const body = await resp.text().catch(() => '');
+          console.error('[hive] hive-auth failed:', resp.status, body);
+        }
+      }).catch(e => console.error('[hive] hive-auth request failed:', e));
 
       // Dohvati profil
-      const { data } = await _sb.from('hive_profiles')
+      const { data, error: profileErr } = await _sb.from('hive_profiles')
         .select('is_premium, boosters')
         .eq('id', hiveUser)
         .maybeSingle();
+      if (profileErr) console.error('[hive] hive_profiles load failed:', profileErr);
       window._hiveProfile   = data || {};
       window._playerPremium = (data && data.is_premium) || false;
 
@@ -113,6 +120,8 @@
             _sb.from('player_resources').select('bcm, bocrypto, spcard, keys_cmd, keys_inst').eq('player_id', hiveUser).maybeSingle(),
             _sb.from('hive_profiles').select('boosters').eq('id', hiveUser).maybeSingle()
           ]);
+          if (resPR.error) console.error('[hive] player_resources load failed:', resPR.error);
+          if (resHP.error) console.error('[hive] hive_profiles boosters load failed:', resHP.error);
           const hpPR = resPR.data;
           const hp   = resHP.data;
           if (hpPR) {
@@ -133,7 +142,7 @@
             if(pending.bocrypto> 0) { R.bocrypto = (R.bocrypto || 0) + pending.bocrypto; msgs.push('+' + pending.bocrypto + ' BOCRYPTO'); }
             if(pending.bpw     > 0) { R.spCard   = (R.spCard   || 0) + Math.round(pending.bpw * 100000000); msgs.push('+' + pending.bpw + ' BPW'); }
             if(msgs.length > 0) {
-              await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+              const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -141,7 +150,12 @@
                   player_id: hiveUser,
                   data: { R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys }, _clear_boosters: true }
                 })
-              }).catch(() => {});
+              });
+              const saveRes = await resp.json().catch(() => null);
+              if (!resp.ok || !saveRes || !saveRes.success) {
+                console.error('[hive] boosters save failed:', (saveRes && (saveRes.error || saveRes.errors)) || resp.status);
+                if(typeof toast === 'function') toast('⚠️ Admin bonus nije snimljen — pokušaj ponovo.', 'err');
+              }
               if(typeof updateResUI === 'function') updateResUI();
               if(typeof toast === 'function') toast('Admin: ' + msgs.join(', '), 'ok');
             }
@@ -160,7 +174,7 @@
         window._chainBCM = get('BCM', 0);
         window._chainBOC = get('BOCRYPTO', 3);
         window._chainBPW = get('BPW', 8);
-      }).catch(() => {});
+      }).catch(e => console.error('[hive] hive-engine balances load failed:', e));
     })();
   }
 
@@ -172,9 +186,12 @@
         const uid = data.session.user.id;
         const email = data.session.user.email?.toLowerCase();
         // Osiguraj da players red postoji (FK za sve player_* tabele)
-        await _sb.from('players').upsert({ id: uid, player_type: 'email', username: email?.split('@')[0] || uid }).catch(() => {});
+        const { error: playersErr } = await _sb.from('players')
+          .upsert({ id: uid, player_type: 'email', username: email?.split('@')[0] || uid });
+        if (playersErr) console.error('[auth] players upsert failed:', playersErr);
         if (email) {
-          const { data: pu } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();
+          const { data: pu, error: premErr } = await _sb.from('premium_users').select('is_premium').eq('email', email).maybeSingle();
+          if (premErr) console.error('[auth] premium_users load failed:', premErr);
           window._playerPremium = !!(pu && pu.is_premium);
         }
       } else { window.location.href = 'index.html'; }
@@ -1066,7 +1083,12 @@ function walletWithdraw(symbol) {
 async function openLeaderboard() {
   infoModal('🏆 Leaderboard', '<div style="text-align:center;color:#6a90b8;padding:20px">Učitavam...</div>');
   if (!window._supa) return;
-  const { data } = await window._supa.from('leaderboard').select('username,score,level,is_premium').order('score', { ascending: false }).limit(50);
+  const { data, error } = await window._supa.from('leaderboard').select('username,score,level,is_premium').order('score', { ascending: false }).limit(50);
+  if (error) {
+    console.error('[leaderboard] load failed:', error);
+    infoModal('🏆 Leaderboard', '<div style="color:#ff3355;text-align:center;padding:20px">Greška pri učitavanju leaderboarda.</div>');
+    return;
+  }
   if (!data || data.length === 0) { infoModal('🏆 Leaderboard', '<div style="color:#6a90b8;text-align:center;padding:20px">Nema igrača.</div>'); return; }
   const rows = data.map((p, i) => {
     const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';

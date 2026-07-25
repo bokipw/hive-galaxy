@@ -7,8 +7,25 @@
 // ── INICIJALIZACIJA ──
 async function init() {
   // Cloud load ako je email igrač sa Supabase sesijom, inače localStorage
-  const loaded = (window._supaSession || window._hiveUser) ? await loadGameCloud() : loadGame();
+  const isCloudPlayer = !!(window._supaSession || window._hiveUser);
+  const result = isCloudPlayer ? await loadGameCloud() : (loadGame() ? 'loaded' : 'new');
   window._gameLoaded = true;
+
+  // Učitavanje nije uspjelo — ne pokreći igru sa praznim stanjem jer bi
+  // auto-save prebrisao postojeći cloud save.
+  if (result === 'error') {
+    addLog('⛔ Učitavanje igre nije uspjelo. Snimanje je blokirano dok ne osvježiš stranicu.');
+    toast('⛔ Učitavanje igre nije uspjelo — osvježi stranicu.', 'err');
+    if (typeof openModal === 'function') {
+      openModal('⛔ Greška pri učitavanju',
+        '<p>Nismo mogli učitati tvoj save sa servera. Da tvoj napredak ne bi bio prebrisan, snimanje je onemogućeno.</p>' +
+        '<p style="color:#6a90b8;font-size:0.75rem">Provjeri internet konekciju i osvježi stranicu.</p>',
+        [{ label: '🔄 Osvježi', cls: 'btn-g', fn: () => location.reload() }]);
+    }
+    return;
+  }
+
+  const loaded = result === 'loaded';
 
   // Inicijalizacija energije na max ako je novi igrač
   if (!loaded) {
