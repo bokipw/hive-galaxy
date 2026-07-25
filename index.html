@@ -556,10 +556,33 @@ function hiveLogin() {
   }
   const username = prompt('Unesi tvoje HIVE korisnicko ime (@bez oznake):');
   if(!username || !username.trim()) return;
-  const uname = username.trim().replace('@','');
-  window.hive_keychain.requestSignBuffer(uname, 'GalaxyCommand_Login_' + Date.now(), 'Posting', async (response) => {
+  const uname = username.trim().replace('@','').toLowerCase();
+  const challenge = 'HIVEGALAXY_LOGIN:' + uname + ':' + Date.now();
+  window.hive_keychain.requestSignBuffer(uname, challenge, 'Posting', async (response) => {
     if(response.success) {
       openMod('Prijava...', 'Verifikacija HIVE naloga...', []);
+      // Potpis se verifikuje na serveru; tek onda dobijamo pravu Supabase sesiju.
+      const signature = response.result;
+      try {
+        const res = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: uname, message: challenge, signature })
+        });
+        const out = await res.json();
+        if(!res.ok || !out.email || !out.password) {
+          openMod('Prijava neuspjesna', out.error || 'Verifikacija HIVE naloga nije uspjela.', [{label:'OK',sec:true,fn:closeMod}]);
+          return;
+        }
+        const { error } = await _supa.auth.signInWithPassword({ email: out.email, password: out.password });
+        if(error) {
+          openMod('Prijava neuspjesna', error.message, [{label:'OK',sec:true,fn:closeMod}]);
+          return;
+        }
+      } catch(e) {
+        openMod('Prijava neuspjesna', 'Server nije dostupan, pokusaj ponovo.', [{label:'OK',sec:true,fn:closeMod}]);
+        return;
+      }
       localStorage.setItem('hg_hive_user', uname);
       localStorage.setItem('hg_login_type', 'hive');
       openMod('Uspjesna prijava!', 'Dobrodosao, @' + uname + '! Preusmjeravamo te na igru...', []);

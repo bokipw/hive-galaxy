@@ -83,15 +83,16 @@
     window._supaSession = null;
 
     (async () => {
-      // Očisti staru sesiju iz localStorage (npr. od admin logina)
-      await _sb.auth.signOut({ scope: 'local' }).catch(() => {});
-
-      console.log('[hive] upsert players + hive_profiles');
-      fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/hive-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: hiveUser })
-      }).catch(() => {});
+      // HIVE nalog vrijedi samo uz Supabase sesiju izdatu nakon verifikacije Keychain potpisa.
+      const { data: sess } = await _sb.auth.getSession();
+      const sessionUser = sess && sess.session && sess.session.user;
+      if (!sessionUser || sessionUser.user_metadata?.hive_user !== hiveUser) {
+        localStorage.removeItem('hg_hive_user');
+        localStorage.removeItem('hg_login_type');
+        window.location.replace('index.html');
+        return;
+      }
+      window._supaSession = sess.session;
 
       // Dohvati profil
       const { data } = await _sb.from('hive_profiles')
@@ -135,10 +136,9 @@
             if(msgs.length > 0) {
               await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + sess.session.access_token },
                 body: JSON.stringify({
                   action: 'save',
-                  player_id: hiveUser,
                   data: { R: { bcm: R.bcm, bocrypto: R.bocrypto, spcard: R.spCard, keys_cmd: R.keys, keys_inst: R.instanceKeys }, _clear_boosters: true }
                 })
               }).catch(() => {});
@@ -1073,7 +1073,7 @@ async function openLeaderboard() {
     const prem  = p.is_premium ? ' <span style="color:#ffcc44;font-size:0.6rem">★</span>' : '';
     const isMe  = p.username === (window._hiveUser || '');
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)' + (isMe ? ';background:rgba(0,212,255,0.05);border-radius:4px;padding:7px 6px' : '') + '">' +
-      '<div><span style="color:#6a90b8;font-size:0.7rem;margin-right:8px">' + medal + '</span><span style="color:' + (isMe ? '#00d4ff' : '#fff') + ';font-size:0.78rem;font-weight:600">' + p.username + '</span>' + prem + '<span style="color:#4a6a8a;font-size:0.6rem;margin-left:6px">Lv.' + (p.level||1) + '</span></div>' +
+      '<div><span style="color:#6a90b8;font-size:0.7rem;margin-right:8px">' + medal + '</span><span style="color:' + (isMe ? '#00d4ff' : '#fff') + ';font-size:0.78rem;font-weight:600">' + escHtml(p.username) + '</span>' + prem + '<span style="color:#4a6a8a;font-size:0.6rem;margin-left:6px">Lv.' + (p.level||1) + '</span></div>' +
       '<span style="color:#ffcc44;font-size:0.72rem;font-family:Orbitron,monospace">' + fmt(p.score||0) + '</span>' +
       '</div>';
   }).join('');

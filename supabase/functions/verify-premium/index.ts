@@ -1,20 +1,28 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { corsHeaders } from '../_shared/cors.ts';
+import { authenticate } from '../_shared/auth.ts';
 
 const GAME_ACCOUNT  = 'bokica80';
 const REQUIRED_AMOUNT = 1.0;
 const REQUIRED_SYMBOL = 'BCM';
 const HE_API = 'https://api.hive-engine.com/rpc/blockchain';
 
+const supa = createClient(
+  Deno.env.get('SUPABASE_URL')!,
+  Deno.env.get('SERVICE_KEY')!
+);
+
 Deno.serve(async (req: Request) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders() });
-  }
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders(req) });
+  if (req.method !== 'POST') return err(req, 'Method not allowed', 405);
 
   try {
-    const { username, txid } = await req.json();
-    if (!username || !txid) {
-      return err('Nedostaje username ili txid', 400);
-    }
+    const caller = await authenticate(req, supa);
+    if (!caller) return err(req, 'Neautorizovan zahtjev', 401);
+
+    const { txid } = await req.json();
+    if (!txid || typeof txid !== 'string') return err(req, 'Nedostaje txid', 400);
+    const username = caller.playerId;
 
     // Verifikuj transakciju na Hive-Engine
     const heRes = await fetch(HE_API, {
@@ -30,13 +38,13 @@ Deno.serve(async (req: Request) => {
     const heData = await heRes.json();
     const tx = heData?.result;
 
-    if (!tx) return err('Transakcija nije pronađena na Hive-Engine', 404);
+    if (!tx) return err(req, 'Transakcija nije pronađena na Hive-Engine', 404);
 
     // Parsiraj logs da nađemo token transfer
-    let logs: any[] = [];
-    try { logs = JSON.parse(tx.logs || '{}').events || []; } catch {}
+    let logs: Array<Record<string, any>> = [];
+    try { logs = JSON.parse(tx.logs || '{}').events || []; } catch { /* ignore */ }
 
-    const transferEvent = logs.find((e: any) =>
+    const transferEvent = logs.find((e) =>
       e.contract === 'tokens' &&
       e.event === 'transfer' &&
       e.data?.from?.toLowerCase() === username.toLowerCase() &&
@@ -46,41 +54,29 @@ Deno.serve(async (req: Request) => {
     );
 
     if (!transferEvent) {
-      return err('Transakcija nije validna (pogrešan iznos, token ili primalac)', 403);
+      return err(req, 'Transakcija nije validna (pogrešan iznos, token ili primalac)', 403);
     }
-
-    // Setuj is_premium = true u hive_profiles
-    const supa = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SERVICE_KEY')!
-    );
 
     const { error } = await supa
       .from('hive_profiles')
       .update({ is_premium: true })
       .eq('id', username);
 
-    if (error) return err('Greška pri ažuriranju baze: ' + error.message, 500);
+    if (error) return err(req, 'Greška pri ažuriranju baze', 500);
 
     return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+      headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
     });
 
   } catch (e) {
-    return err('Server greška: ' + (e as Error).message, 500);
+    console.error('[verify-premium] UNCAUGHT:', (e as Error).message);
+    return err(req, 'Server greška', 500);
   }
 });
 
-function err(msg: string, status: number) {
+function err(req: Request, msg: string, status: number) {
   return new Response(JSON.stringify({ success: false, error: msg }), {
     status,
-    headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+    headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
   });
-}
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
-  };
 }

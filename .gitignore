@@ -10,3 +10,8 @@ tmp_*
 lang/index_en_map.json
 
 admin.html
+
+.env
+.env.*
+supabase/.temp/
+supabase/supabase/

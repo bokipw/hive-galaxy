@@ -12,6 +12,16 @@ function _getUsername() {
   return 'Unknown';
 }
 
+// game-save edge funkcija autorizuje isključivo preko Supabase access tokena.
+async function _authHeaders() {
+  const headers = { 'Content-Type': 'application/json' };
+  if (!window._supa) return headers;
+  const { data } = await window._supa.auth.getSession();
+  const token = data?.session?.access_token;
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  return headers;
+}
+
 async function _hiveSave(payload) {
   try {
     const cmdrs = payload.ownedCommanders || [];
@@ -19,8 +29,8 @@ async function _hiveSave(payload) {
     console.log(`[hiveSave] brodova: ${total}, commanders: ${cmdrs.length}`);
     const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'save', player_id: window._hiveUser, data: payload })
+      headers: await _authHeaders(),
+      body: JSON.stringify({ action: 'save', data: payload })
     });
     const text = await resp.text();
     let result;
@@ -79,8 +89,8 @@ async function _saveLeaderboard(score, level) {
     try {
       await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
+        headers: await _authHeaders(),
+        body: JSON.stringify({ action: 'save', data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
       });
     } catch(e) { console.error('[lbSave]', e); }
   } else {
@@ -126,8 +136,8 @@ async function _savePvpSnapshot(saveData) {
     const { error } = await window._supa.from('pvp_snapshots').upsert(payload);
     if (error && (error.status === 401 || error.status === 403)) {
       await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+        method: 'POST', headers: await _authHeaders(),
+        body: JSON.stringify({ action: 'save', data: { _pvp_snapshot: payload } })
       });
     }
   } catch(e) { console.error('[pvpSave] exception:', e); }
@@ -310,8 +320,8 @@ async function _loadFromTables() {
     try {
       const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'load', player_id: pid })
+        headers: await _authHeaders(),
+        body: JSON.stringify({ action: 'load' })
       });
       const result = await resp.json();
       if (!result.success || !result.data) return null;
@@ -549,11 +559,11 @@ function resetGame() {
     const pid = _getPlayerId();
     if (pid) {
       if (window._loginType === 'hive') {
-        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+        _authHeaders().then(headers => fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'reset', player_id: pid })
-        }).then(() => location.reload()).catch(() => location.reload());
+          headers,
+          body: JSON.stringify({ action: 'reset' })
+        })).then(() => location.reload()).catch(() => location.reload());
       } else if (window._supa) {
         const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
         Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());

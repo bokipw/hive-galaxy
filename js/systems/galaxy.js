@@ -169,7 +169,7 @@ function updateGalaxyDetails(sys){
       <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
         <div style="font-size:2.4rem">🔴</div>
         <div style="flex:1">
-          <div style="font-weight:700;color:#ff3355;font-size:0.95rem">${p.username}</div>
+          <div style="font-weight:700;color:#ff3355;font-size:0.95rem">${escHtml(p.username)}</div>
           <div style="font-size:0.65rem;color:#6a90b8;margin-top:2px">⭐ Rating: ${p.rating || 1000} · 💪 Moć: ${fmt(p.power || 0)}</div>
         </div>
       </div>
@@ -655,12 +655,12 @@ function galaxyAttackBase(playerId) {
     R.crystal += 50000;
     R.he3     += 50000;
     toast(`🏆 Pobjeda nad ${p.username}! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating`, 'ok');
-    addLog(`⚔️ Napad na bazu ${p.username} — POBJEDA! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating.`);
+    addLog(`⚔️ Napad na bazu ${escHtml(p.username)} — POBJEDA! +50k resursa, ${ratingChange > 0 ? '+' : ''}${ratingChange} rating.`);
   } else if (battle.status === 'defeat') {
     pvp.losses = (pvp.losses || 0) + 1;
     pvp.winStreak = 0;
     toast(`💀 Poraz od ${p.username}. ${ratingChange} rating.`, 'warn');
-    addLog(`⚔️ Napad na bazu ${p.username} — PORAZ. ${ratingChange} rating.`);
+    addLog(`⚔️ Napad na bazu ${escHtml(p.username)} — PORAZ. ${ratingChange} rating.`);
   }
   if (typeof trackDailyPvp === 'function') trackDailyPvp(isVictory);
 

@@ -707,8 +707,8 @@ async function buyPremiumWithBCM() {
         const fnUrl = 'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/bright-handler';
         const res = await fetch(fnUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
-          body: JSON.stringify({ username: window._hiveUser, txid })
+          headers: await _authHeaders(),
+          body: JSON.stringify({ txid })
         });
         const data = await res.json();
         console.log('verify-premium response:', data);
