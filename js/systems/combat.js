@@ -1243,85 +1243,56 @@ function _getInRangeWeapons(weaponRanges, distance) {
 }
 
 function _getWeaponsByIntercept(slot) {
-  const interceptors = [];
-  if (!slot) return interceptors;
-  for (const key of ['weapon_1','weapon_2','weapon_3','weapon_4']) {
-    const wid = slot[key];
-    if (!wid) continue;
-    const wpn = typeof getWeaponById === 'function' ? getWeaponById(wid) : null;
-    if (!wpn) continue;
-    if (wpn.intercept) interceptors.push({ chance: wpn.intercept, id: wpn.id });
-  }
-  return interceptors;
+  return getSlotWeapons(slot)
+    .filter(wpn => wpn.intercept)
+    .map(wpn => ({ chance: wpn.intercept, id: wpn.id }));
 }
 
 // ── TIP ŠTETE NAPADAČA ──
 function getAttackerDmgType(attacker) {
   if (attacker._activeDmgType) return attacker._activeDmgType;
-  if (!attacker.slot) return 'Kinetic';
-  const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
-  for (const w of weapons) {
-    const wid = attacker.slot[w];
-    if (wid) {
-      const wpn = getWeaponById(wid);
-      if (wpn) return wpn.dmgType || 'Kinetic';
-    }
-  }
-  return 'Kinetic';
+  const first = getSlotWeapons(attacker.slot)[0];
+  return first ? (first.dmgType || 'Kinetic') : 'Kinetic';
 }
 
 // ── DA LI NAPADAČ IMA GUIDED ORUŽJE ──
 function getAttackerIsGuided(attacker) {
-  if (!attacker.slot) return false;
-  const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
-  for (const w of weapons) {
-    const wid = attacker.slot[w];
-    if (!wid) continue;
-    const wpn = getWeaponById(wid);
-    const t = wpn?.special?.type;
-    if (t === 'guided' || t === 'guided_dot' || t === 'guided_motor_disable' || t === 'guided_module_destroy') return true;
-  }
-  return false;
+  const guided = ['guided', 'guided_dot', 'guided_motor_disable', 'guided_module_destroy'];
+  return getSlotWeapons(attacker.slot).some(wpn => guided.includes(wpn.special?.type));
 }
 
 // ── HIGH DAMAGE BONUS ──
 function getAttackerHighDamageBonus(attacker) {
-  if (!attacker.slot) return 0;
-  const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
-  let bonus = 0;
-  for (const w of weapons) {
-    const wid = attacker.slot[w];
-    if (!wid) continue;
-    const wpn = getWeaponById(wid);
-    if (wpn?.special?.type === 'high_damage') bonus = Math.max(bonus, wpn.special.bonus || 0);
-  }
-  return bonus;
+  return getMaxWeaponSpecialBonus(attacker.slot, 'high_damage');
 }
 
 // ── CRIT BONUS OD DIRECTIONAL ORUŽJA ──
 function getAttackerCritBonus(attacker) {
-  if (!attacker.slot) return 0;
-  const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
-  let bonus = 0;
-  for (const w of weapons) {
-    const wid = attacker.slot[w];
-    if (!wid) continue;
-    const wpn = getWeaponById(wid);
-    if (wpn?.special?.type === 'crit') bonus = Math.max(bonus, wpn.special.bonus || 0);
-  }
-  return bonus;
+  return getMaxWeaponSpecialBonus(attacker.slot, 'crit');
+}
+
+// ── DODATNE METE (multi napadi) ──
+function _applyExtraTargetDamage(attacker, target, battle, round, extraCount, label) {
+  if (extraCount <= 0) return;
+  const extraTargets = (attacker.side === 'player' ? battle.enemy : battle.player)
+    .filter(e => e.alive && e.id !== target.id).slice(0, extraCount);
+  extraTargets.forEach(t => {
+    let mDmg = attacker.dps;
+    if (t.shield > 0) {
+      const sa = Math.min(t.shield, mDmg); t.shield -= sa; mDmg -= sa;
+    }
+    t.hp = Math.max(0, t.hp - mDmg);
+    battle.log.push({ round, type: 'effect', msg: `✈️ ${label}: ${t.name} -${attacker.dps} štete` });
+    if (t.hp <= 0) { t.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${t.name} UNIŠTEN!` }); }
+  });
 }
 
 // ── SPECIJALNI EFEKTI ORUŽJA ──
 function applyWeaponEffect(attacker, target, battle, round) {
   if (!attacker.slot) return;
 
-  const weapons = ['weapon_1','weapon_2','weapon_3','weapon_4'];
-  for (const w of weapons) {
-    const wid = attacker.slot[w];
-    if (!wid) continue;
-    const wpn = getWeaponById(wid);
-    if (!wpn?.special) continue;
+  for (const wpn of getSlotWeapons(attacker.slot)) {
+    if (!wpn.special) continue;
 
     const spec = wpn.special;
     const roll = Math.random() * 100;
@@ -1450,37 +1421,12 @@ function applyWeaponEffect(attacker, target, battle, round) {
 
     // MULTI_TARGET — napada više meta (FighterBay Light/Heavy)
     if (spec.type === 'multi_target') {
-      const extraCount = (spec.targets || 1) - 1;
-      if (extraCount > 0) {
-        const extraTargets = (attacker.side === 'player' ? battle.enemy : battle.player)
-          .filter(e => e.alive && e.id !== target.id).slice(0, extraCount);
-        extraTargets.forEach(t => {
-          let mDmg = attacker.dps;
-          if (t.shield > 0) {
-            const sa = Math.min(t.shield, mDmg); t.shield -= sa; mDmg -= sa;
-          }
-          t.hp = Math.max(0, t.hp - mDmg);
-          battle.log.push({ round, type: 'effect', msg: `✈️ Multi napad: ${t.name} -${attacker.dps} štete` });
-          if (t.hp <= 0) { t.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${t.name} UNIŠTEN!` }); }
-        });
-      }
+      _applyExtraTargetDamage(attacker, target, battle, round, (spec.targets || 1) - 1, 'Multi napad');
     }
 
     // MULTI_MIXED — napada više meta s miješanom štetom (Elite Squadron)
     if (spec.type === 'multi_mixed') {
-      const extraCount = (spec.targets || 2) - 1;
-      const extraTargets = (attacker.side === 'player' ? battle.enemy : battle.player)
-        .filter(e => e.alive && e.id !== target.id).slice(0, extraCount);
-      extraTargets.forEach(t => {
-        // Bira optimalnu štetu prema oklop tipu
-        let mDmg = attacker.dps;
-        if (t.shield > 0) {
-          const sa = Math.min(t.shield, mDmg); t.shield -= sa; mDmg -= sa;
-        }
-        t.hp = Math.max(0, t.hp - mDmg);
-        battle.log.push({ round, type: 'effect', msg: `✈️ Elite mixed napad: ${t.name} -${attacker.dps} štete` });
-        if (t.hp <= 0) { t.alive = false; battle.log.push({ round, type: 'destroy', msg: `💀 ${t.name} UNIŠTEN!` }); }
-      });
+      _applyExtraTargetDamage(attacker, target, battle, round, (spec.targets || 2) - 1, 'Elite mixed napad');
     }
 
     // AREA_MULTI — bombarder napada N random meta (Bomber Squadron)
@@ -1976,11 +1922,7 @@ function applyPlayerLosses(battle) {
     // Nađi najveći fleet_recovery% među svim deployovanim komandirima
     let recoveryPct = 0;
     let recoveryCmd = null;
-    const allCmds = [
-      ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-      ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-      ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-    ];
+    const allCmds = getAllCommanders();
     const deployed = window._deployedCommanders || [];
     deployed.forEach(cmdId => {
       if (!cmdId) return;
@@ -2046,7 +1988,6 @@ function renderBattleResult(battle, rewards) {
   // Enemy komandiri (postavlja generateEnemies) — može biti više
   const eCmds = window._lastEnemyCommanders || (window._lastEnemyCommander ? [window._lastEnemyCommander] : []);
   const eCmdHtml = eCmds.length > 0 ? (() => {
-    const rarColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ff8800' };
     const bonuses   = window._lastEnemyCommander?.bonuses || { atk:0, hp:0, shield:0 };
     return `
     <div style="background:rgba(255,100,0,0.06);border:1px solid rgba(255,100,0,0.25);
@@ -2058,7 +1999,7 @@ function renderBattleResult(battle, rewards) {
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:4px">
         ${eCmds.map(cmd => {
-          const col = rarColors[cmd.rarity] || '#aaa';
+          const col = enemyRarityHexColor(cmd.rarity);
           return `<span style="background:${col}15;border:1px solid ${col}44;border-radius:4px;
             padding:2px 7px;font-size:0.6rem;color:${col}">
             ${cmd.icon} ${cmd.name}

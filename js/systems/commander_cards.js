@@ -253,12 +253,7 @@ function getActiveCommanderData() {
   if (!owned) return null;
 
   // Traži u obje serije
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
-  const def = allCmds.find(c => c.id === owned.id);
+  const def = getCommanderDef(owned.id);
   if (!def) return null;
   return { def, owned };
 }
@@ -318,12 +313,7 @@ function renderCardMini(cmd, owned, isActive) {
   const isL = cmd.rarity === 'L';
   const isE = cmd.rarity === 'E';
 
-  const allFactions = {
-    ...(typeof FACTIONS !== 'undefined' ? FACTIONS : {}),
-    ...(typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {}),
-    ...(typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {}),
-  };
-  const fac = allFactions[cmd.faction] || { name: cmd.faction, icon: '?' };
+  const fac = getFactionInfo(cmd.faction);
 
   // Border: pun ako owned, providan ako ne
   const borderStyle = owned
@@ -474,12 +464,7 @@ function renderCardMini(cmd, owned, isActive) {
 
 // ── DETALJ KARTICE ──
 function showCardDetail(cmdId) {
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
-  const def = allCmds.find(c => c.id === cmdId);
+  const def = getCommanderDef(cmdId);
   if (!def) return;
   // Pokusaj pronaci owned entry — provjeri i lowercase/trim varijante
   let owned = (window.ownedCommanders || []).find(o => o.id === cmdId);
@@ -489,12 +474,7 @@ function showCardDetail(cmdId) {
   const rc = rarityColor(def.rarity);
   const rg = rarityGlow(def.rarity);
   const isActive = window._activeCommander === cmdId;
-  const factions = {
-    ...(typeof FACTIONS !== 'undefined' ? FACTIONS : {}),
-    ...(typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {}),
-    ...(typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {}),
-  };
-  const fac = factions[def.faction] || { name: def.faction, icon: '?' };
+  const fac = getFactionInfo(def.faction);
 
   // Mastery prikaz
   let masteryHtml = '';
@@ -667,12 +647,7 @@ function setActiveCommander(cmdId) {
 
   window._activeCommander = cmdId;
 
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
-  const def = allCmds.find(c => c.id === cmdId);
+  const def = getCommanderDef(cmdId);
   toast(`✅ ${def ? def.icon+' '+def.name : cmdId} je sada aktivan komandir!`, 'ok');
   saveGame();
   renderCommanderCards();
@@ -684,11 +659,7 @@ function destroyCommander(cmdId) {
   const idx = window.ownedCommanders.findIndex(o => o.id === cmdId);
   if (idx === -1) { toast('❌ Nemaš ovog komandira!', 'err'); return; }
 
-  const def = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ].find(c => c.id === cmdId) || null;
+  const def = getCommanderDef(cmdId);
 
   // Skini sa deploymenta ako je deployovan
   if (window._deployedCommanders?.includes(cmdId)) {
@@ -734,11 +705,7 @@ function doPullAndShow(packId, count) {
   const results = doPull(packId, count);
   if (!results.length) return;
 
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds = getAllCommanders();
 
   const cardsHtml = results.map(({ cmd, duplicate, leveled, shardsNow, cost }) => {
     const rc = rarityColor(cmd.rarity);
@@ -834,11 +801,7 @@ function renderCommanderCards() {
   try {
   initCardState();
 
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds = getAllCommanders();
 
   const owned = window.ownedCommanders || [];
   const ownedIds = new Set(owned.map(o => o.id));
@@ -853,12 +816,7 @@ function renderCommanderCards() {
     const { def, owned: ownedCmd } = activeCmdData;
     const rc = rarityColor(def.rarity);
     const rg = rarityGlow(def.rarity);
-    const factions = {
-      ...(typeof FACTIONS !== 'undefined' ? FACTIONS : {}),
-      ...(typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {}),
-    ...(typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {}),
-    };
-    const fac = factions[def.faction] || { name: def.faction, icon: '?' };
+    const fac = getFactionInfo(def.faction);
     const xpNeed = getCardXpForLevel(ownedCmd.level);
     const xpPct = Math.min(100, (ownedCmd.xp / xpNeed) * 100);
     activeHeader = `
@@ -956,12 +914,6 @@ function renderCommanderCards() {
     undead: (typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
   };
 
-  const factions = {
-    ...(typeof FACTIONS !== 'undefined' ? FACTIONS : {}),
-    ...(typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {}),
-    ...(typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {}),
-  };
-
   let displayCmds = [...allCmds];
   if (filterState.series !== 'all') {
     const pool = seriesMap[filterState.series] || [];
@@ -991,7 +943,7 @@ function renderCommanderCards() {
   // Faction options
   const allFactions = [...new Set(allCmds.map(c => c.faction))];
   const factionOpts = allFactions.map(f => {
-    const fDef = factions[f] || { name: f, icon: '?' };
+    const fDef = getFactionInfo(f);
     return `<option value="${f}" ${filterState.faction===f?'selected':''}>${fDef.icon} ${fDef.name}</option>`;
   }).join('');
 
@@ -1231,11 +1183,7 @@ function getNextFleetUnlock() {
 function calcFleetBonuses() {
   initFleetState();
   const bonuses = { attack: 0, defense: 0, speed: 0, shield: 0, economy: 0, evasion: 0, crit: 0 };
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds = getAllCommanders();
   const cap = getFleetCapacity();
 
   FLEET_SLOTS.slice(0, cap).forEach(slot => {
@@ -1329,11 +1277,7 @@ function removeCommanderFromSlot(slotId) {
 function openSlotPicker(slotId) {
   const slot = FLEET_SLOTS[slotId];
   const owned = window.ownedCommanders || [];
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds = getAllCommanders();
   const bonusInfo = FLEET_BONUS_LABELS[slot.bonus];
   const cap = getFleetCapacity();
 
@@ -1424,11 +1368,7 @@ function renderFleetCommanders() {
   const maxDeploy = typeof getMaxDeployedCommanders === 'function' ? getMaxDeployedCommanders() : 1;
   const deployed  = window._deployedCommanders || [];
   const owned     = window.ownedCommanders || [];
-  const allCmds   = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds   = getAllCommanders();
   const isFull = deployed.length >= maxDeploy;
 
   // ── KAPACITET HEADER ──
@@ -1500,10 +1440,7 @@ function renderFleetCommanders() {
       ${factionCt.length > 0 ? `
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:${noDeploy ? '0' : '6px'}">
           ${factionCt.map(([f, c]) => {
-            const ff = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[f]
-              || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[f]
-              || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[f]
-              || null;
+            const ff = getAllFactions()[f] || null;
             const icon = (ff?.icon && ff.icon !== '??' && ff.icon !== '???' ? ff.icon : '');
             const isTarget = c >= 3 || nearSyn?.[0] === f;
             return `<span style="font-size:0.8rem;background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;
@@ -1563,10 +1500,7 @@ function renderFleetCommanders() {
           const isLead = cmdId === window._activeCommander;
           const cFleet = typeof getCmdFleet === 'function' ? getCmdFleet(cmdId) : [];
           const filled = cFleet.filter(Boolean).length;
-          const fDef = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[def.faction]
-            || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[def.faction]
-            || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[def.faction]
-            || null;
+          const fDef = getAllFactions()[def.faction] || null;
           return `
             <div style="flex:1;min-width:120px;max-width:180px;border-radius:8px;
               border:1px solid ${rc}55;background:rgba(0,0,0,0.3);padding:10px;
@@ -1605,13 +1539,8 @@ function renderFleetCommanders() {
   if (!window._ownedCmdFilter) window._ownedCmdFilter = { series: 'all', faction: 'all', rarity: 'all', show: 'all' };
   const ownFlt = window._ownedCmdFilter;
 
-  const fleetFactions = {
-    ...(typeof FACTIONS !== 'undefined' ? FACTIONS : {}),
-    ...(typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {}),
-    ...(typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {}),
-  };
   const fleetFactionOpts = [...new Set(allCmds.map(c => c.faction))].map(f => {
-    const fDef = fleetFactions[f] || { name: f, icon: '?' };
+    const fDef = getFactionInfo(f);
     return `<option value="${f}" ${ownFlt.faction===f?'selected':''}>${fDef.icon} ${fDef.name}</option>`;
   }).join('');
 
@@ -1683,10 +1612,7 @@ function renderFleetCommanders() {
           const cFleet     = typeof getCmdFleet === 'function' ? getCmdFleet(def.id) : [];
           const filled     = cFleet.filter(Boolean).length;
           const xpPct      = Math.min(100, ((entry.xp||0) / getCardXpForLevel(entry.level||1)) * 100);
-          const oFdef = (typeof FACTIONS !== 'undefined' ? FACTIONS : {})[def.faction]
-            || (typeof XENOS_FACTIONS !== 'undefined' ? XENOS_FACTIONS : {})[def.faction]
-            || (typeof UNDEAD_FACTIONS !== 'undefined' ? UNDEAD_FACTIONS : {})[def.faction]
-            || null;
+          const oFdef = getAllFactions()[def.faction] || null;
           return `
             <div style="border-radius:8px;border:${isDeployed ? `2px solid ${rc}` : `1px solid rgba(255,255,255,0.07)`};
               background:${isDeployed ? rc+'0d' : 'rgba(0,0,0,0.25)'};
@@ -1747,12 +1673,7 @@ function openFleetSlotMenu(slotId) {
   const cmdId  = window._cmdFleet[slotId];
   if (!cmdId) { openSlotPicker(slotId); return; }
 
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
-  const def = allCmds.find(c => c.id === cmdId);
+  const def = getCommanderDef(cmdId);
   if (!def) return;
   const rc = rarityColor(def.rarity);
 

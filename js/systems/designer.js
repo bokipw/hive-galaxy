@@ -449,115 +449,83 @@ function refreshDesignerSlots() {
 }
 
 // ── INFO KARTICA ZA OPREMU ──
+const EQUIP_RARITY_COLORS = { C:'#aaaaaa', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+
+// Zajednički okvir info kartice — header (ime + rarity) + izvor
+function _equipInfoCard(item, bodyHtml, sourceExtra = '') {
+  const c = EQUIP_RARITY_COLORS[item.rarity] || '#aaaaaa';
+  return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="color:${c};font-weight:700">${item.icon} ${dn(item)}</span>
+        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${item.rarity}</span>
+      </div>
+      ${bodyHtml}
+      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(item.sourceKey || '') || item.source}${sourceExtra}</div>
+    </div>`;
+}
+
 function renderEquipInfo(type, id) {
   if (!id) return '';
-  const rc = { C:'#aaaaaa', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
 
   if (type === 'weapon') {
     const w = (typeof WEAPONS !== 'undefined') ? WEAPONS.find(x => x.id === id) : null;
     if (!w) return '';
     const dt = DAMAGE_TYPES?.[w.dmgType] || {};
     const st = WEAPON_SUBTYPES?.[w.subtype] || {};
-    const c = rc[w.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${w.icon} ${dn(w)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${w.rarity}</span>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+    return _equipInfoCard(w, `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
         <span style="color:#ff4444">⚔️ DPS: <strong>${w.dps}</strong></span>
         <span style="color:${dt.color||'#aaa'}">${dt.icon||''} ${w.dmgType}</span>
         <span style="color:#6a90b8">${st.icon||''} ${w.subtype}</span>
         <span style="color:#6a90b8">📏 Domet: ${w.range?.min}-${w.range?.max}</span>
       </div>
       ${w.special ? `<div style="color:#ffcc44">✨ ${t(w.specialKey || '') || w.special.desc}</div>` : ''}
-      <div style="color:#6a90b8;margin-top:2px">${dd(w)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(w.sourceKey || '') || w.source}</div>
-    </div>`;
+      <div style="color:#6a90b8;margin-top:2px">${dd(w)}</div>`);
   }
 
   if (type === 'shield') {
     const s = (typeof SHIELDS !== 'undefined') ? SHIELDS.find(x => x.id === id) : null;
     if (!s) return '';
-    const c = rc[s.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${s.icon} ${dn(s)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${s.rarity}</span>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+    return _equipInfoCard(s, `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
         <span style="color:#00d4ff">🛡️ Shield: <strong>${s.shield}</strong></span>
         <span style="color:#00ff88">♻️ Regen: <strong>${s.regen}/s</strong></span>
       </div>
       ${s.special ? `<div style="color:#ffcc44">✨ ${t(s.specialKey || '') || s.special.desc || JSON.stringify(s.special)}</div>` : ''}
-      <div style="color:#6a90b8">${dd(s)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(s.sourceKey || '') || s.source}</div>
-    </div>`;
+      <div style="color:#6a90b8">${dd(s)}</div>`);
   }
 
   if (type === 'engine') {
     const e = (typeof ENGINES !== 'undefined') ? ENGINES.find(x => x.id === id) : null;
     if (!e) return '';
-    const c = rc[e.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${e.icon} ${dn(e)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${e.rarity}</span>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+    return _equipInfoCard(e, `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
         <span style="color:#ffcc44">💨 Speed: <strong>+${e.speed}</strong></span>
         ${e.agility_bonus ? `<span style="color:#00ff88">🏃 Agility: <strong>+${e.agility_bonus}</strong></span>` : ''}
         ${e.evasion_bonus ? `<span style="color:#00d4ff">💫 Evasion: <strong>+${e.evasion_bonus}%</strong></span>` : ''}
       </div>
       ${e.special ? `<div style="color:#ffcc44">✨ ${t(e.specialKey || '') || e.special.desc || e.special.type}</div>` : ''}
-      <div style="color:#6a90b8">${dd(e)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(e.sourceKey || '') || e.source}</div>
-    </div>`;
+      <div style="color:#6a90b8">${dd(e)}</div>`);
   }
 
   if (type === 'module') {
     const m = (typeof getModuleById === 'function') ? getModuleById(id) : null;
     if (!m) return '';
-    const c = rc[m.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
-      </div>
-      <div style="color:#aaaaaa;margin-bottom:4px">⚙️ ${t(m.effectKey || '') || m.effect.desc}</div>
-      <div style="color:#6a90b8">${dd(m)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source}</div>
-    </div>`;
+    return _equipInfoCard(m, `<div style="color:#aaaaaa;margin-bottom:4px">⚙️ ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>`);
   }
 
   if (type === 'special') {
     const m = (typeof getModuleById === 'function') ? getModuleById(id) : null;
     if (!m) return '';
-    const c = rc[m.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
-      </div>
-      <div style="color:#aa44ff;margin-bottom:4px">⭐ ${t(m.effectKey || '') || m.effect.desc}</div>
-      <div style="color:#6a90b8">${dd(m)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 ${Array.isArray(m.shipClass) ? m.shipClass.join('/') : m.shipClass || 'special'}</div>
-    </div>`;
+    return _equipInfoCard(m, `<div style="color:#aa44ff;margin-bottom:4px">⭐ ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>`,
+      ` &nbsp;|&nbsp; 🔒 ${Array.isArray(m.shipClass) ? m.shipClass.join('/') : m.shipClass || 'special'}`);
   }
 
   if (type === 'recon') {
     const m = (typeof getModuleById === 'function') ? getModuleById(id) : null;
     if (!m) return '';
-    const c = rc[m.rarity] || '#aaaaaa';
-    return `<div style="background:#070c1a;border:1px solid ${c}44;border-radius:6px;padding:8px 10px;margin-top:4px;font-size:0.68rem;line-height:1.7">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="color:${c};font-weight:700">${m.icon} ${dn(m)}</span>
-        <span style="background:${c}22;border:1px solid ${c}55;border-radius:3px;padding:1px 6px;color:${c}">${m.rarity}</span>
-      </div>
-      <div style="color:#00e5ff;margin-bottom:4px">🛸 ${t(m.effectKey || '') || m.effect.desc}</div>
-      <div style="color:#6a90b8">${dd(m)}</div>
-      <div style="color:#3a5070;margin-top:2px;font-size:0.6rem">📦 Izvor: ${t(m.sourceKey || '') || m.source} &nbsp;|&nbsp; 🔒 Samo Izviđači</div>
-    </div>`;
+    return _equipInfoCard(m, `<div style="color:#00e5ff;margin-bottom:4px">🛸 ${t(m.effectKey || '') || m.effect.desc}</div>
+      <div style="color:#6a90b8">${dd(m)}</div>`,
+      ' &nbsp;|&nbsp; 🔒 Samo Izviđači');
   }
 
   return '';

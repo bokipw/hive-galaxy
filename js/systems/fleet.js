@@ -379,11 +379,7 @@ function renderFleet() {
   const viewingId  = getViewingCmdId();
 
   // Lookup svih komandira
-  const allCmds = [
-    ...(typeof COMMANDERS !== 'undefined' ? COMMANDERS : []),
-    ...(typeof COMMANDERS_XENOS !== 'undefined' ? COMMANDERS_XENOS : []),
-    ...(typeof COMMANDERS_UNDEAD !== 'undefined' ? COMMANDERS_UNDEAD : []),
-  ];
+  const allCmds = getAllCommanders();
   const getCmd = id => allCmds.find(c => c.id === id) || null;
   const getOwned = id => (window.ownedCommanders || []).find(o => o.id === id) || null;
 

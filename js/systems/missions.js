@@ -1077,6 +1077,19 @@ function updateMissionsBadge() {
 }
 
 // ── HELPER: mini progress bar za misije ──
+// ── NAGRADE MISIJE (inline HTML) ──
+function _missionRewardsHtml(r) {
+  return [
+    r.metal        ? `🔩${fmt(r.metal)}`   : '',
+    r.crystal      ? `💎${fmt(r.crystal)}` : '',
+    r.he3          ? `⛽${fmt(r.he3)}`     : '',
+    r.xp           ? `⭐${fmt(r.xp)}XP`    : '',
+    r.instanceKeys ? `<span style="color:#ffcc44">🗝️${r.instanceKeys}</span>` : '',
+    r.bpw          ? `<span style="color:#ffcc44">🐝${r.bpw}BPW</span>`        : '',
+    r.art_fragment ? `<span style="color:#4488ff">🧩${r.art_fragment}</span>`  : '',
+  ].filter(Boolean).join(' ');
+}
+
 function _missionProgress(m, completed) {
   if (completed) return '';
   if (!m.curr || !m.tgt) return '';
@@ -1209,12 +1222,7 @@ function renderDailyMissions(completedCount, activeMissions) {
               </div>
             </div>
             <div style="font-size:0.58rem;color:#6a90b8;margin-bottom:3px;line-height:1.6">
-              ${r.metal        ? `🔩${fmt(r.metal)} `         : ''}
-              ${r.crystal      ? `💎${fmt(r.crystal)} `       : ''}
-              ${r.he3          ? `⛽${fmt(r.he3)} `           : ''}
-              ${r.xp           ? `⭐${fmt(r.xp)}XP `         : ''}
-              ${r.instanceKeys ? `<span style="color:#ffcc44">🗝️${r.instanceKeys}</span> ` : ''}
-              ${r.bpw          ? `<span style="color:#ffcc44">🐝${r.bpw}BPW</span>`        : ''}
+              ${_missionRewardsHtml(r)}
             </div>
             ${_missionProgress(m, completed)}
             ${completed && !claimed ? `
@@ -1297,13 +1305,7 @@ function renderWeeklyMissions(activeMissions) {
                 </div>
                 <div style="font-size:0.68rem;color:#6a90b8;margin-top:2px">${desc}</div>
                 <div style="font-size:0.6rem;color:#6a90b8;margin-top:6px;line-height:1.8">
-                  ${r.metal        ? `🔩${fmt(r.metal)} `         : ''}
-                  ${r.crystal      ? `💎${fmt(r.crystal)} `       : ''}
-                  ${r.he3          ? `⛽${fmt(r.he3)} `           : ''}
-                  ${r.xp           ? `⭐${fmt(r.xp)}XP `         : ''}
-                  ${r.instanceKeys ? `<span style="color:#ffcc44">🗝️${r.instanceKeys}</span> ` : ''}
-                  ${r.bpw          ? `<span style="color:#ffcc44">🐝${r.bpw}BPW</span> `       : ''}
-                  ${r.art_fragment ? `<span style="color:#4488ff">🧩${r.art_fragment}</span>`  : ''}
+                  ${_missionRewardsHtml(r)}
                 </div>
                 ${_missionProgress(m, completed)}
               </div>
@@ -1381,13 +1383,7 @@ function renderStorylineMissions() {
                 </div>
                 <div style="font-size:0.65rem;color:${locked?'#4a6a88':'#8ab0c8'};margin-bottom:6px;line-height:1.5">${m.desc}</div>
                 <div style="font-size:0.6rem;color:#6a90b8;line-height:1.6">
-                  ${r.metal        ? `🔩${fmt(r.metal)} `         : ''}
-                  ${r.crystal      ? `💎${fmt(r.crystal)} `       : ''}
-                  ${r.he3          ? `⛽${fmt(r.he3)} `           : ''}
-                  ${r.xp           ? `⭐${fmt(r.xp)}XP `         : ''}
-                  ${r.instanceKeys ? `<span style="color:#ffcc44">🗝️${r.instanceKeys}</span> ` : ''}
-                  ${r.bpw          ? `<span style="color:#ffcc44">🐝${r.bpw}BPW</span> `       : ''}
-                  ${r.art_fragment ? `<span style="color:#4488ff">🧩${r.art_fragment}</span>`  : ''}
+                  ${_missionRewardsHtml(r)}
                 </div>
               </div>
               <div style="min-width:80px;text-align:right">

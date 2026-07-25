@@ -1,3 +1,24 @@
+const GAME_SAVE_FN_URL = 'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save';
+
+const PLAYER_TABLES = [
+  'player_resources','player_buildings','player_research','player_commander','player_fleet',
+  'player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments',
+  'player_commanders','player_deployed_commanders','player_colonies','player_instance_progress',
+  'player_missions','player_achievements','player_artifacts','player_pvp','player_espionage',
+  'player_formations','player_recycle_queue','player_build_queue','player_pack_pity',
+  'player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns',
+  'player_drop_pity','player_misc_state','player_defenses',
+];
+
+// Poziv game-save edge funkcije (save / load / reset)
+function gameSaveRequest(body) {
+  return fetch(GAME_SAVE_FN_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(body),
+  });
+}
+
 function _getPlayerId() {
   if (window._loginType === 'hive') return window._hiveUser;
   if (window._supaSession) return window._supaSession.user.id;
@@ -15,13 +36,9 @@ function _getUsername() {
 async function _hiveSave(payload) {
   try {
     const cmdrs = payload.ownedCommanders || [];
-    const total = cmdrs.reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+    const total = countCommanderShips(cmdrs);
     console.log(`[hiveSave] brodova: ${total}, commanders: ${cmdrs.length}`);
-    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'save', player_id: window._hiveUser, data: payload })
-    });
+    const resp = await gameSaveRequest({ action: 'save', player_id: window._hiveUser, data: payload });
     const text = await resp.text();
     let result;
     try { result = JSON.parse(text); } catch(e) { result = { success: false, error: text }; }
@@ -77,11 +94,7 @@ async function _saveLeaderboard(score, level) {
   const isPremium = window._playerPremium || false;
   if (isHive) {
     try {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
-      });
+      await gameSaveRequest({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } });
     } catch(e) { console.error('[lbSave]', e); }
   } else {
     try {
@@ -125,10 +138,7 @@ async function _savePvpSnapshot(saveData) {
     };
     const { error } = await window._supa.from('pvp_snapshots').upsert(payload);
     if (error && (error.status === 401 || error.status === 403)) {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
-      });
+      await gameSaveRequest({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } });
     }
   } catch(e) { console.error('[pvpSave] exception:', e); }
 }
@@ -154,6 +164,38 @@ async function _cloudSave(saveData) {
   await _saveLeaderboard(score, level);
   await _savePvpSnapshot(saveData);
 }
+
+// Mapiranja save ključeva → window varijabli
+const MISSION_COUNTER_KEYS = {
+  dailyInst:   '_dailyInstCount',   dailyDepot:  '_dailyDepotCount',  dailyRes:    '_dailyResCount',
+  dailyShip:   '_dailyShipCount',   dailyPvp:    '_dailyPvpCount',    dailyPvpWin: '_dailyPvpWinCount',
+  dailyEsp:    '_dailyEspCount',    dailyBuild:  '_dailyBuildCount',  dailyArt:    '_dailyArtCount',
+  weeklyInst:  '_weeklyInstCount',  weeklyPvp:   '_weeklyPvpCount',   weeklyRes:   '_weeklyResCount',
+  weeklyBuild: '_weeklyBuildCount', weeklyShip:  '_weeklyShipCount',  weeklyEsp:   '_weeklyEspCount',
+};
+
+const MISSION_TARGET_KEYS = {
+  weeklyInstTarget:  '_weeklyInstTarget',  weeklyInstHardTarget:  '_weeklyInstHardTarget',
+  weeklyPvpTarget:   '_weeklyPvpTarget',   weeklyPvpHardTarget:   '_weeklyPvpHardTarget',
+  weeklyResTarget:   '_weeklyResTarget',   weeklyResHardTarget:   '_weeklyResHardTarget',
+  weeklyBuildTarget: '_weeklyBuildTarget', weeklyBuildHardTarget: '_weeklyBuildHardTarget',
+  weeklyShipTarget:  '_weeklyShipTarget',  weeklyShipHardTarget:  '_weeklyShipHardTarget',
+  weeklyEspTarget:   '_weeklyEspTarget',   weeklyEspHardTarget:   '_weeklyEspHardTarget',
+  weeklyPowerTarget: '_weeklyPowerTarget',
+};
+
+const ACHIEVEMENT_TRACKING_KEYS = {
+  totalCrystalMined:   '_totalCrystalMined',   totalHe3Mined:        '_totalHe3Mined',
+  totalShipsBuilt:     '_totalShipsBuilt',     totalShipsDestroyed:  '_totalShipsDestroyed',
+  totalShipsRecycled:  '_totalShipsRecycled',  totalDamageDealt:     '_totalDamageDealt',
+  totalResourcesSpent: '_totalResourcesSpent', totalBpCrafted:       '_totalBpCrafted',
+  flawlessWins:        '_flawlessWins',        instanceStreak:       '_instanceStreak',
+  winsEasy:            '_wins_easy',           winsNormal:           '_wins_normal',
+  winsNightmare:       '_wins_nightmare',      winsHell:             '_wins_hell',
+  energySurplus:       '_energySurplus',       metalPerHour:         '_metalPerHour',
+  crystalPerHour:      '_crystalPerHour',      he3PerHour:           '_he3PerHour',
+  espSuccessfulMissions: '_espSuccessfulMissions', espStealMissions:  '_espStealMissions',
+};
 
 function _applyGameState(s) {
   if (!s) return false;
@@ -198,70 +240,16 @@ function _applyGameState(s) {
       if (!window.missionState) window.missionState = { daily: { date: '' } };
       Object.assign(window.missionState, s.missionState);
     }
-    if (s.missionCounters) {
-      const mc = s.missionCounters;
-      window._dailyInstCount    = mc.dailyInst    || 0;
-      window._dailyDepotCount   = mc.dailyDepot   || 0;
-      window._dailyResCount     = mc.dailyRes     || 0;
-      window._dailyShipCount    = mc.dailyShip    || 0;
-      window._dailyPvpCount     = mc.dailyPvp     || 0;
-      window._dailyPvpWinCount  = mc.dailyPvpWin  || 0;
-      window._dailyEspCount     = mc.dailyEsp     || 0;
-      window._dailyBuildCount   = mc.dailyBuild   || 0;
-      window._dailyArtCount     = mc.dailyArt     || 0;
-      window._weeklyInstCount   = mc.weeklyInst   || 0;
-      window._weeklyPvpCount    = mc.weeklyPvp    || 0;
-      window._weeklyResCount    = mc.weeklyRes    || 0;
-      window._weeklyBuildCount  = mc.weeklyBuild  || 0;
-      window._weeklyShipCount   = mc.weeklyShip   || 0;
-      window._weeklyEspCount    = mc.weeklyEsp    || 0;
-    }
-    if (s.missionTargets) {
-      const mt = s.missionTargets;
-      if (mt.weeklyInstTarget     != null) window._weeklyInstTarget     = mt.weeklyInstTarget;
-      if (mt.weeklyInstHardTarget != null) window._weeklyInstHardTarget = mt.weeklyInstHardTarget;
-      if (mt.weeklyPvpTarget      != null) window._weeklyPvpTarget      = mt.weeklyPvpTarget;
-      if (mt.weeklyPvpHardTarget  != null) window._weeklyPvpHardTarget  = mt.weeklyPvpHardTarget;
-      if (mt.weeklyResTarget      != null) window._weeklyResTarget      = mt.weeklyResTarget;
-      if (mt.weeklyResHardTarget  != null) window._weeklyResHardTarget  = mt.weeklyResHardTarget;
-      if (mt.weeklyBuildTarget    != null) window._weeklyBuildTarget    = mt.weeklyBuildTarget;
-      if (mt.weeklyBuildHardTarget != null) window._weeklyBuildHardTarget = mt.weeklyBuildHardTarget;
-      if (mt.weeklyShipTarget     != null) window._weeklyShipTarget     = mt.weeklyShipTarget;
-      if (mt.weeklyShipHardTarget != null) window._weeklyShipHardTarget = mt.weeklyShipHardTarget;
-      if (mt.weeklyEspTarget      != null) window._weeklyEspTarget      = mt.weeklyEspTarget;
-      if (mt.weeklyEspHardTarget  != null) window._weeklyEspHardTarget  = mt.weeklyEspHardTarget;
-      if (mt.weeklyPowerTarget    != null) window._weeklyPowerTarget    = mt.weeklyPowerTarget;
-    }
+    assignWindowValues(s.missionCounters, MISSION_COUNTER_KEYS, 0);
+    assignWindowValues(s.missionTargets,  MISSION_TARGET_KEYS);
     if (s.totalMetalMined != null) window._totalMetalMined = s.totalMetalMined;
     if (s.totalDepotPickups != null) window._totalDepotPickups = s.totalDepotPickups;
     if (s.ACHIEVES)                ACHIEVES = s.ACHIEVES;
-    if (s.achievementTracking) {
-      const at = s.achievementTracking;
-      if (at.totalCrystalMined   != null) window._totalCrystalMined   = at.totalCrystalMined;
-      if (at.totalHe3Mined       != null) window._totalHe3Mined       = at.totalHe3Mined;
-      if (at.totalShipsBuilt     != null) window._totalShipsBuilt     = at.totalShipsBuilt;
-      if (at.totalShipsDestroyed != null) window._totalShipsDestroyed = at.totalShipsDestroyed;
-      if (at.totalShipsRecycled  != null) window._totalShipsRecycled  = at.totalShipsRecycled;
-      if (at.totalDamageDealt    != null) window._totalDamageDealt    = at.totalDamageDealt;
-      if (at.totalResourcesSpent != null) window._totalResourcesSpent = at.totalResourcesSpent;
-      if (at.totalBpCrafted      != null) window._totalBpCrafted      = at.totalBpCrafted;
-      if (at.flawlessWins        != null) window._flawlessWins        = at.flawlessWins;
-      if (at.instanceStreak      != null) window._instanceStreak      = at.instanceStreak;
-      if (at.winsEasy            != null) window._wins_easy           = at.winsEasy;
-      if (at.winsNormal          != null) window._wins_normal         = at.winsNormal;
-      if (at.winsNightmare       != null) window._wins_nightmare      = at.winsNightmare;
-      if (at.winsHell            != null) window._wins_hell           = at.winsHell;
-      if (at.energySurplus       != null) window._energySurplus       = at.energySurplus;
-      if (at.metalPerHour          != null) window._metalPerHour          = at.metalPerHour;
-      if (at.crystalPerHour        != null) window._crystalPerHour        = at.crystalPerHour;
-      if (at.he3PerHour            != null) window._he3PerHour            = at.he3PerHour;
-      if (at.espSuccessfulMissions != null) window._espSuccessfulMissions = at.espSuccessfulMissions;
-      if (at.espStealMissions      != null) window._espStealMissions      = at.espStealMissions;
-    }
+    assignWindowValues(s.achievementTracking, ACHIEVEMENT_TRACKING_KEYS);
     if (s.ownedCommanders) {
-      const _oldTotal = (window.ownedCommanders || []).reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+      const _oldTotal = countCommanderShips(window.ownedCommanders);
       window.ownedCommanders    = s.ownedCommanders;
-      const _newTotal = (window.ownedCommanders || []).reduce((s, c) => s + ((c.fleet||[]).reduce((a, b) => a + (b?.count||0), 0)), 0);
+      const _newTotal = countCommanderShips(window.ownedCommanders);
       console.log(`[load] ownedCommanders: ${_oldTotal} → ${_newTotal} brodova`, JSON.stringify((window.ownedCommanders||[]).map(c => ({ id: c.id, fleet: (c.fleet||[]).map(s => s ? { id: s.ship_id, count: s.count } : null) }))));
     }
     if (s.activeCommander)    window._activeCommander   = s.activeCommander;
@@ -308,20 +296,15 @@ async function _loadFromTables() {
 
   if (isHive) {
     try {
-      const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'load', player_id: pid })
-      });
+      const resp = await gameSaveRequest({ action: 'load', player_id: pid });
       const result = await resp.json();
       if (!result.success || !result.data) return null;
       return _buildSaveFromTables(result.data);
     } catch(e) { console.error('[hiveLoad]', e); return null; }
   } else {
     try {
-      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
       const results = {};
-      for (const tbl of tables) {
+      for (const tbl of PLAYER_TABLES) {
         const { data } = await window._supa.from(tbl).select('*').eq('player_id', pid).maybeSingle();
         if (data) results[tbl] = data;
       }
@@ -549,14 +532,10 @@ function resetGame() {
     const pid = _getPlayerId();
     if (pid) {
       if (window._loginType === 'hive') {
-        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'reset', player_id: pid })
-        }).then(() => location.reload()).catch(() => location.reload());
+        gameSaveRequest({ action: 'reset', player_id: pid })
+          .then(() => location.reload()).catch(() => location.reload());
       } else if (window._supa) {
-        const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-        Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
+        Promise.all(PLAYER_TABLES.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
       } else { location.reload(); }
     } else { location.reload(); }
   }

@@ -386,15 +386,7 @@ window.launchGalaxyMission = function(sysId){
 
   // ── He3 potrošnja po misiji ──────────────────────────────
   // Svaki brod troši he3_cost svog motora (ili 0.005 fallback)
-  let he3Needed = fleetSlots.reduce((sum, ship) => {
-    let cost = 0.005; // fallback ako motor nema he3_cost
-    if (ship && ship.engine) {
-      const engDef = (typeof ENGINES !== 'undefined' ? ENGINES : [])
-        .find(e => e.id === ship.engine);
-      if (engDef && engDef.he3_cost != null) cost = engDef.he3_cost;
-    }
-    return sum + cost;
-  }, 0);
+  let he3Needed = calcFleetHe3Cost(fleetSlots);
 
   // Jump Gate popust — ako je flota na koloniji blizu mete
   const jumpMult = typeof getJumpGateHe3Mult === 'function'
@@ -421,15 +413,6 @@ window.launchGalaxyMission = function(sysId){
 
   toast(`⚔️ Napad na ${sys.name}...`, 'inf');
 
-  // Fiksne nagrade po sistemu (distanci) — jednom za svaki planet
-  const PLANET_REWARDS = {
-    1: { metal: 10000,  crystal: 10000,  he3: 10000,  instKeys: 10, cmdKeys: 1  },
-    2: { metal: 20000,  crystal: 20000,  he3: 20000,  instKeys: 15, cmdKeys: 2  },
-    3: { metal: 50000,  crystal: 50000,  he3: 50000,  instKeys: 20, cmdKeys: 5  },
-    4: { metal: 100000, crystal: 100000, he3: 100000, instKeys: 50, cmdKeys: 10 },
-    5: { metal: 500000, crystal: 500000, he3: 500000, instKeys: 100,cmdKeys: 50 },
-  };
-
   const instData = {
     name:      sys.name,
     difficulty: planetIdx + 1,
@@ -447,7 +430,7 @@ window.launchGalaxyMission = function(sysId){
 
       // Nagrade samo prvi put
       if(!alreadyConquered){
-        const rw = PLANET_REWARDS[sys.distance || 1] || PLANET_REWARDS[1];
+        const rw = getPlanetRewards(sys.distance || 1);
         rewards = {
           metal:      rw.metal,
           crystal:    rw.crystal,

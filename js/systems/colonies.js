@@ -509,14 +509,7 @@ function spyPlanet(planetId) {
     g.name.includes('Admiral') || g.name.includes('Lord') || g.name.includes('Commander') || g.name.includes('Supreme')
   );
 
-  const PLANET_REWARDS = {
-    1: { metal:10000,  crystal:10000,  he3:10000,  instKeys:10,  cmdKeys:1  },
-    2: { metal:20000,  crystal:20000,  he3:20000,  instKeys:15,  cmdKeys:2  },
-    3: { metal:50000,  crystal:50000,  he3:50000,  instKeys:20,  cmdKeys:5  },
-    4: { metal:100000, crystal:100000, he3:100000, instKeys:50,  cmdKeys:10 },
-    5: { metal:500000, crystal:500000, he3:500000, instKeys:100, cmdKeys:50 },
-  };
-  const rw = PLANET_REWARDS[planet.distance || 1] || PLANET_REWARDS[1];
+  const rw = getPlanetRewards(planet.distance || 1);
   const alreadyConquered = (window._conqueredPlanets || []).includes(planet.id);
 
   const spyHtml = `
