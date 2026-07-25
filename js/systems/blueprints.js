@@ -17,8 +17,7 @@ let _bpSubcat = 'scout';
 let _bpFilter = 'all';
 
 function getRarityColor(rarity) {
-  const map = { C: '#ffdd00', R: '#4488ff', E: '#aa44ff', L: '#ffaa00' };
-  return map[rarity] || '#ffdd00';
+  return RARITY_COLORS[rarity] || '#ffdd00';
 }
 
 // ── MOD LABEL PO RARITY ──

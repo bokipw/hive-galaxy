@@ -5,6 +5,21 @@
 // tab: 'both' = pojavljuje se u oba taba
 // ============================================================
 
+// ── PLAĆANJE: LISTE KRIPTOVALUTA ──
+const CRYPTOS_HIVE = [
+  { name: 'HBD', symbol: 'HBD', icon: '🟡' },
+  { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
+];
+const CRYPTOS_HIVE_BCM = [
+  { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
+  ...CRYPTOS_HIVE,
+];
+const CRYPTOS_EMAIL = [
+  { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
+  { name: 'USDT', symbol: 'USDT', icon: '💵' },
+];
+const CRYPTOS_EMAIL_USDT_FIRST = [...CRYPTOS_EMAIL].reverse();
+
 const SHOP_ITEMS = [
   {
     id: 'premium',
@@ -23,11 +38,7 @@ const SHOP_ITEMS = [
       '✓ +20% XP bonus na sve aktivnosti',
       '✓ Premium badge na leaderboardu',
     ],
-    cryptosHive:  [
-      { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE_BCM,
     cryptosEmail: [
       { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
       { name: 'USDT', symbol: 'USDT', icon: '💵' },
@@ -52,10 +63,7 @@ const SHOP_ITEMS = [
       'Šansa za Legendary komandira',
       'Pity sistem — 90 ključeva garantuje Legendary',
     ],
-    cryptosEmail: [
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-    ],
+    cryptosEmail: CRYPTOS_EMAIL,
     action: 'buyKeys',
     amount: 5,
   },
@@ -76,14 +84,8 @@ const SHOP_ITEMS = [
       'Garantovano 1× Epic ili bolje na 10',
       'Pity sistem aktivniji sa više otvaranja',
     ],
-    cryptosHive:  [
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE,
+    cryptosEmail: CRYPTOS_EMAIL,
     action: 'buyKeys',
     amount: 20,
   },
@@ -104,14 +106,8 @@ const SHOP_ITEMS = [
       'Garantovano 1× Legendary kroz pity',
       'Maksimalna vrijednost za kolekcionare',
     ],
-    cryptosHive:  [
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE,
+    cryptosEmail: CRYPTOS_EMAIL,
     action: 'buyKeys',
     amount: 100,
   },
@@ -136,15 +132,8 @@ const SHOP_ITEMS = [
       '+100% XP iz kolonija',
       'Stacka se sa Premium bonusom',
     ],
-    cryptosHive:  [
-      { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE_BCM,
+    cryptosEmail: CRYPTOS_EMAIL_USDT_FIRST,
     action: 'buyBooster',
   },
   {
@@ -166,15 +155,8 @@ const SHOP_ITEMS = [
       'Važi za bazu i sve kolonije',
       'Stacka se sa building bonusima',
     ],
-    cryptosHive:  [
-      { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE_BCM,
+    cryptosEmail: CRYPTOS_EMAIL_USDT_FIRST,
     action: 'buyBooster',
   },
 
@@ -197,15 +179,8 @@ const SHOP_ITEMS = [
       'Ekskluzivni komandiri nedostupni iz ključeva',
       'Direktno u tvoju kolekciju',
     ],
-    cryptosHive:  [
-      { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE_BCM,
+    cryptosEmail: CRYPTOS_EMAIL_USDT_FIRST,
     action: 'buyPack',
   },
   {
@@ -226,15 +201,8 @@ const SHOP_ITEMS = [
       '2× drop šansa u instancama',
       'Sve tri prednosti odjednom',
     ],
-    cryptosHive:  [
-      { name: 'BCM (HIVE)', symbol: 'BCM', icon: '⛏️' },
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE_BCM,
+    cryptosEmail: CRYPTOS_EMAIL_USDT_FIRST,
     action: 'buyBooster',
   },
 
@@ -254,10 +222,7 @@ const SHOP_ITEMS = [
       'Instance dropaju rijetke blueprinte',
       'Šansa za Epic/Legendary komandira',
     ],
-    cryptosEmail: [
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-    ],
+    cryptosEmail: CRYPTOS_EMAIL,
     action: 'buyIKeys',
     amount: 100,
   },
@@ -278,14 +243,8 @@ const SHOP_ITEMS = [
       'Garantovano više Epic dropova',
       'Idealno za farm blueprintova',
     ],
-    cryptosHive:  [
-      { name: 'HBD', symbol: 'HBD', icon: '🟡' },
-      { name: 'HIVE', symbol: 'HIVE', icon: '⛓️' },
-    ],
-    cryptosEmail: [
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-    ],
+    cryptosHive:  CRYPTOS_HIVE,
+    cryptosEmail: CRYPTOS_EMAIL,
     action: 'buyIKeys',
     amount: 400,
   },
@@ -380,10 +339,7 @@ const SHOP_ITEMS = [
       '⚠️ Nije dostupno za HIVE Keychain igrače',
       '⚠️ HIVE username je permanentan na blockchainu',
     ],
-    cryptosEmail: [
-      { name: 'USDT', symbol: 'USDT', icon: '💵' },
-      { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
-    ],
+    cryptosEmail: CRYPTOS_EMAIL_USDT_FIRST,
     action: 'buyRename',
   },
 ];

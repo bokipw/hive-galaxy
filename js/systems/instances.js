@@ -83,6 +83,16 @@ function isDifficultyModeAvailable(mode) {
 }
 
 // ── ENERGIJA PO INSTANCI (skalirana po modu) ──
+// ── SKALIRANE NAGRADE PO MODU ──
+function getScaledInstanceRewards(inst, mode) {
+  const scale = (arr, i) => Math.floor((arr?.[i] || 0) * mode.rewardMult);
+  return {
+    metalMin:   scale(inst.resources.metal,   0), metalMax:   scale(inst.resources.metal,   1),
+    crystalMin: scale(inst.resources.crystal, 0), crystalMax: scale(inst.resources.crystal, 1),
+    he3Min:     scale(inst.resources.he3,     0), he3Max:     scale(inst.resources.he3,     1),
+  };
+}
+
 function getInstanceEnergyCost(inst) {
   const mode = INST_DIFFICULTY_MODES[_instDifficultyMode] || INST_DIFFICULTY_MODES.easy;
   const diff = inst.difficulty || 1;
@@ -285,10 +295,7 @@ function renderInstanceCard(inst, playerPower) {
   const hasEnergy  = R.energy >= energyCost;
 
   // Nagrade preview skalirane
-  const metalMin   = Math.floor(inst.resources.metal[0]   * mode.rewardMult);
-  const metalMax   = Math.floor(inst.resources.metal[1]   * mode.rewardMult);
-  const crystalMin = Math.floor(inst.resources.crystal[0] * mode.rewardMult);
-  const crystalMax = Math.floor(inst.resources.crystal[1] * mode.rewardMult);
+  const { metalMin, metalMax, crystalMin, crystalMax } = getScaledInstanceRewards(inst, mode);
 
   return `
     <div class="card" style="
@@ -336,29 +343,17 @@ function renderInstanceCard(inst, playerPower) {
       </div>
       <!-- Enemy Komandiri -->
       ${(() => {
-        const cmdRarityMap = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
-        const cmdCountMap  = { easy: 1,   normal: 3,   nightmare: 6,   hell: 9   };
-        const cmdRarity    = cmdRarityMap[_instDifficultyMode] || 'C';
-        const cmdCount     = cmdCountMap[_instDifficultyMode]  || 1;
-        const cmdLevel     = getInstCmdLevel(inst.number);
-        const rarColors    = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ff8800' };
-        const rarCol       = rarColors[cmdRarity] || '#aaa';
-        const stars        = '⭐'.repeat(inst.difficulty || 1);
+        const { picked, cmdLevel, rarCol } = getInstanceEnemyCommanders(inst);
+        const stars = '⭐'.repeat(inst.difficulty || 1);
 
-        // Pokupi sve komandire (izbjegni duplikate)
-        const picked = [];
         let totalAtk = 0, totalHp = 0;
         const lvlMult = Math.min(1.0, cmdLevel / 100);
-        for (let i = 0; i < cmdCount; i++) {
-          const seed = _instHashCode(inst.id + '_cmd_' + _instDifficultyMode + '_' + i);
-          const cmd  = pickEnemyCommander(cmdRarity, seed);
-          if (!cmd || picked.find(c => c.id === cmd.id)) continue;
-          picked.push(cmd);
+        picked.forEach(cmd => {
           const b1 = parsePassiveBonus(cmd.passive?.desc);
           const b2 = parsePassiveBonus(cmd.passive2?.desc);
           totalAtk += b1.atk + b2.atk;
           totalHp  += b1.hp  + b2.hp;
-        }
+        });
         if (!picked.length) return '';
         const atkB = Math.round(totalAtk * lvlMult);
         const hpB  = Math.round(totalHp  * lvlMult);
@@ -471,12 +466,7 @@ function openInstanceModal(instId) {
   const playerPower = calcFleetTotalPower();
   const energyCost = getInstanceEnergyCost(inst);
 
-  const metalMin   = Math.floor(inst.resources.metal[0]   * mode.rewardMult);
-  const metalMax   = Math.floor(inst.resources.metal[1]   * mode.rewardMult);
-  const crystalMin = Math.floor(inst.resources.crystal[0] * mode.rewardMult);
-  const crystalMax = Math.floor(inst.resources.crystal[1] * mode.rewardMult);
-  const he3Min     = Math.floor(inst.resources.he3[0]     * mode.rewardMult);
-  const he3Max     = Math.floor(inst.resources.he3[1]     * mode.rewardMult);
+  const { metalMin, metalMax, crystalMin, crystalMax, he3Min, he3Max } = getScaledInstanceRewards(inst, mode);
 
   const body = `
     <!-- All found upozorenje -->
@@ -528,7 +518,7 @@ function openInstanceModal(instId) {
 
         <!-- Specifični item dropovi -->
         ${(() => {
-          const rarCol = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+          const rarCol = RARITY_COLORS;
           const rarIcons = { C:'⚪', R:'🔵', E:'🟣', L:'🌟' };
           const guaranteed = inst.drops?.guaranteed || [];
           const chance     = inst.drops?.chance     || [];
@@ -618,7 +608,7 @@ function openInstanceModal(instId) {
             const modeRarities = { easy: ['C'], normal: ['C','R'], nightmare: ['R','E'], hell: ['E','L'] };
             const curMode = _instDifficultyMode || 'easy';
             const rars = modeRarities[curMode] || ['C'];
-            const rarityColors = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ffaa00' };
+            const rarityColors = RARITY_COLORS;
             const rarityNames = { C:t('index.instance.rarity_C_name'), R:t('index.instance.rarity_R_name'), E:t('index.instance.rarity_E_name'), L:t('index.instance.rarity_L_name') };
             const FRAG_CHANCE = { easy:{C:60}, normal:{C:70,R:40}, nightmare:{C:80,R:60,E:30}, hell:{C:90,R:75,E:50,L:20} };
             const BP_CHANCE   = { easy:{}, normal:{C:20,R:8}, nightmare:{C:35,R:18,E:6}, hell:{C:50,R:30,E:15,L:5} };
@@ -664,20 +654,7 @@ function openInstanceModal(instId) {
         })()}
       </div>
       ${(() => {
-        const cmdRarityMap = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
-        const cmdCountMap  = { easy: 1,   normal: 3,   nightmare: 6,   hell: 9   };
-        const cmdRarity    = cmdRarityMap[_instDifficultyMode] || 'C';
-        const cmdCount     = cmdCountMap[_instDifficultyMode]  || 1;
-        const cmdLevel     = getInstCmdLevel(inst.number);
-        const rarColors    = { C:'#ffdd00', R:'#4488ff', E:'#aa44ff', L:'#ff8800' };
-        const rarCol       = rarColors[cmdRarity] || '#aaa';
-        const picked = [];
-        for (let i = 0; i < cmdCount; i++) {
-          const seed = _instHashCode(inst.id + '_cmd_' + _instDifficultyMode + '_' + i);
-          const cmd  = pickEnemyCommander(cmdRarity, seed);
-          if (!cmd || picked.find(c => c.id === cmd.id)) continue;
-          picked.push(cmd);
-        }
+        const { picked, cmdLevel, rarCol } = getInstanceEnemyCommanders(inst);
         if (!picked.length) return '';
         return `<div style="margin-top:6px;padding:4px 6px;background:${rarCol}10;border:1px solid ${rarCol}33;border-radius:4px;font-size:0.6rem">
           <span style="color:${rarCol};font-weight:700">⚔️ ${t('index.instance.commanders')} (${picked.length})</span>
@@ -764,15 +741,7 @@ function startBattle(inst, instant = false) {
   // ────────────────────────────────────────────────────────
 
   // ── He3 potrošnja po misiji (računa se ali ne blokira) ────
-  const he3Needed = fleetSlots.reduce((sum, ship) => {
-    let cost = 0.005;
-    if (ship && ship.engine) {
-      const engDef = (typeof ENGINES !== 'undefined' ? ENGINES : [])
-        .find(e => e.id === ship.engine);
-      if (engDef && engDef.he3_cost != null) cost = engDef.he3_cost;
-    }
-    return sum + cost;
-  }, 0);
+  const he3Needed = calcFleetHe3Cost(fleetSlots);
   if (R.he3 < he3Needed) {
     toast(`⚠️ He3 kritično nizak! (${R.he3.toFixed(2)} / ${he3Needed.toFixed(3)})`, 'warn');
   }
@@ -1017,31 +986,39 @@ function getInstCmdLevel(instNumber) {
   return starBase + [1, 5, 10][pos];
 }
 
+// ── ENEMY KOMANDIRI INSTANCE (deterministički po modu) ──
+const INST_CMD_RARITY = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
+const INST_CMD_COUNT  = { easy: 1,   normal: 3,   nightmare: 6,   hell: 9   };
+
+function getInstanceEnemyCommanders(inst) {
+  const cmdRarity = INST_CMD_RARITY[_instDifficultyMode] || 'C';
+  const cmdCount  = INST_CMD_COUNT[_instDifficultyMode]  || 1;
+  const cmdLevel  = getInstCmdLevel(inst.number);
+
+  // Izbjegni duplikate
+  const picked = [];
+  for (let i = 0; i < cmdCount; i++) {
+    const seed = _instHashCode(inst.id + '_cmd_' + _instDifficultyMode + '_' + i);
+    const cmd  = pickEnemyCommander(cmdRarity, seed);
+    if (!cmd || picked.find(c => c.id === cmd.id)) continue;
+    picked.push(cmd);
+  }
+  return { picked, cmdRarity, cmdCount, cmdLevel, rarCol: enemyRarityHexColor(cmdRarity) };
+}
+
 // ── PRIMIJENI ENEMY KOMANDIRE NA GRUPE (višestruki po modu) ──
 function _applyEnemyCommander(inst, groups) {
-  const cmdRarityMap  = { easy: 'C', normal: 'R', nightmare: 'E', hell: 'L' };
-  const cmdCountMap   = { easy: 1,   normal: 3,   nightmare: 6,   hell: 9   };
-  const cmdRarity     = cmdRarityMap[_instDifficultyMode] || 'C';
-  const cmdCount      = cmdCountMap[_instDifficultyMode]  || 1;
-  const cmdLevel      = getInstCmdLevel(inst.number);
-  const lvlMult       = Math.min(1.0, cmdLevel / 100);
+  const { picked: pickedCmds, cmdLevel } = getInstanceEnemyCommanders(inst);
+  const lvlMult = Math.min(1.0, cmdLevel / 100);
 
   let totalAtk = 0, totalHp = 0, totalShield = 0;
-  const pickedCmds = [];
-
-  for (let i = 0; i < cmdCount; i++) {
-    const cmdSeed = _instHashCode(inst.id + '_cmd_' + _instDifficultyMode + '_' + i);
-    const cmd     = pickEnemyCommander(cmdRarity, cmdSeed);
-    if (!cmd) continue;
-    // Izbjegni duplikate
-    if (pickedCmds.find(c => c.id === cmd.id)) continue;
-    pickedCmds.push(cmd);
+  pickedCmds.forEach(cmd => {
     const b1 = parsePassiveBonus(cmd.passive?.desc);
     const b2 = parsePassiveBonus(cmd.passive2?.desc);
     totalAtk    += b1.atk + b2.atk;
     totalHp     += b1.hp  + b2.hp;
     totalShield += b1.shield + b2.shield;
-  }
+  });
 
   if (pickedCmds.length > 0) {
     const atkMult    = 1 + (totalAtk    * lvlMult / 100);
