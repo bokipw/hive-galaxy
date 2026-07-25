@@ -38,7 +38,12 @@ function renderGalaxy(){
     </div>
     <div id="galaxyDetails" style="margin-top:12px"></div>
   `;
-  loadGalaxyPlayerBases().catch(()=>{}).finally(() => setTimeout(initGalaxyEngine, 30));
+  loadGalaxyPlayerBases()
+    .catch(e => {
+      console.error('[galaxy] učitavanje baza igrača nije uspjelo:', e);
+      if (typeof toast === 'function') toast('⚠️ Baze igrača nisu učitane.', 'warn');
+    })
+    .finally(() => setTimeout(initGalaxyEngine, 30));
 }
 
 let _galaxyPlayerBases = [];
@@ -62,7 +67,8 @@ async function loadGalaxyPlayerBases() {
       .order('rating', { ascending: false })
       .limit(25);
   }
-  const { data } = res;
+  const { data, error } = res;
+  if (error) throw new Error('pvp_snapshots: ' + error.message);
   _galaxyPlayerBases = (data || []).filter(p => p.fleet && p.fleet.length > 0);
 }
 

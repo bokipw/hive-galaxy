@@ -328,7 +328,14 @@ async function refreshOpponents() {
     res = await window._supa.from('pvp_snapshots').select('*').neq(colName,myId).order('rating',{ascending:false}).limit(20);
   }
   var data = res.data, error = res.error;
-  if (error || !data || data.length===0) {
+  if (error) {
+    console.error('[pvp] učitavanje protivnika nije uspjelo:', error);
+    window._currentOpponents = [];
+    if (el) el.innerHTML = '<div style="color:#ff3355;padding:20px;text-align:center">'+t('pvp.cannotLoad')+'</div>';
+    if (typeof toast === 'function') toast('⚠️ ' + t('pvp.cannotLoad'), 'err');
+    return;
+  }
+  if (!data || data.length===0) {
     window._currentOpponents = [];
     if (el) el.innerHTML = '<div style="color:#6a90b8;padding:20px;text-align:center">'+t('pvp.noOpponents')+'</div>';
     return;

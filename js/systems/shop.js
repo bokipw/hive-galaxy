@@ -726,6 +726,7 @@ async function buyPremiumWithBCM() {
           toast('⚠️ ' + (data.error || 'Verifikacija nije uspjela. Kontaktuj admina.'), 'err');
         }
       } catch(e) {
+        console.error('[shop] verifikacija premiuma nije uspjela:', e);
         toast('⚠️ Verifikacija nije uspjela. Kontaktuj admina sa txid: ' + txid, 'err');
       }
     }

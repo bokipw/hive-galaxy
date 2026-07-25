@@ -25,15 +25,25 @@ async function _hiveSave(payload) {
     const text = await resp.text();
     let result;
     try { result = JSON.parse(text); } catch(e) { result = { success: false, error: text }; }
+    if (!resp.ok) result = { success: false, error: result.error || `HTTP ${resp.status}: ${text}` };
     if (!result.success) console.error('[hiveSave] error:', JSON.stringify(result.errors || result.error || text));
     return result;
-  } catch(e) { console.error('[hiveSave] exception:', e); }
+  } catch(e) {
+    console.error('[hiveSave] exception:', e);
+    return { success: false, error: e.message || String(e) };
+  }
 }
 
 async function _emailSave(payload) {
-  if (!window._supa) return;
+  if (!window._supa) return { success: false, error: 'Supabase klijent nije dostupan' };
   const pid = _getPlayerId();
-  const u = (table, data) => window._supa.from(table).upsert(data).then(r => { if(r.error) console.error(table, r.error); });
+  const errors = [];
+  const u = (table, data) => window._supa.from(table).upsert(data).then(r => {
+    if (r.error) { console.error(table, r.error); errors.push(`${table}: ${r.error.message}`); }
+  }, e => {
+    console.error(table, e);
+    errors.push(`${table}: ${e.message || e}`);
+  });
   try {
     const R = payload.R || {};
     await Promise.all([
@@ -66,34 +76,46 @@ async function _emailSave(payload) {
       u('player_misc_state', { player_id: pid, starter_given: payload.starterGiven, fleet_position: payload.fleetPosition, viewing_cmd_id: payload.viewingCmdId, card_ability_cooldowns: payload.cardAbilityCooldowns, cmd_cooldowns: payload.cmdCooldowns }),
       u('player_defenses', { player_id: pid, defenses: payload.defenses }),
     ]);
-  } catch(e) { console.error('[emailSave] exception:', e); }
+  } catch(e) {
+    console.error('[emailSave] exception:', e);
+    errors.push(e.message || String(e));
+  }
+  return { success: errors.length === 0, errors };
 }
 
 async function _saveLeaderboard(score, level) {
   const pid = _getPlayerId();
   const username = _getUsername();
-  if (!pid || !window._supa) return;
+  if (!pid || !window._supa) return { success: false, error: 'Nema player_id ili Supabase klijenta' };
   const isHive = window._loginType === 'hive';
   const isPremium = window._playerPremium || false;
   if (isHive) {
     try {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
       });
-    } catch(e) { console.error('[lbSave]', e); }
-  } else {
-    try {
-      await window._supa.from('leaderboard').upsert({ player_id: pid, username, score, level, is_premium: isPremium, updated_at: new Date().toISOString() });
-    } catch(e) { console.error('[lbSave]', e); }
+      const result = await resp.json().catch(() => null);
+      if (!resp.ok || !result || !result.success) {
+        const error = (result && (result.error || JSON.stringify(result.errors))) || `HTTP ${resp.status}`;
+        console.error('[lbSave]', error);
+        return { success: false, error };
+      }
+      return { success: true };
+    } catch(e) { console.error('[lbSave]', e); return { success: false, error: e.message || String(e) }; }
   }
+  try {
+    const { error } = await window._supa.from('leaderboard').upsert({ player_id: pid, username, score, level, is_premium: isPremium, updated_at: new Date().toISOString() });
+    if (error) { console.error('[lbSave]', error); return { success: false, error: error.message }; }
+    return { success: true };
+  } catch(e) { console.error('[lbSave]', e); return { success: false, error: e.message || String(e) }; }
 }
 
 async function _savePvpSnapshot(saveData) {
   const pid = _getPlayerId();
   const username = _getUsername();
-  if (!pid || !window._supa) return;
+  if (!pid || !window._supa) return { success: false, error: 'Nema player_id ili Supabase klijenta' };
   try {
     let deployedFleet = [];
     try {
@@ -105,7 +127,7 @@ async function _savePvpSnapshot(saveData) {
           crit_bonus: u.critBonus || 0, engine_special: u.engineSpecial || null,
         }));
       }
-    } catch(_) {}
+    } catch(e) { console.error('[pvpSave] buildPvpFleetLocal failed:', e); }
     const commanders = (saveData.deployedCommanders || []).map(c => ({
       id: c.id, name: c.name, rarity: c.rarity, faction: c.faction
     }));
@@ -124,35 +146,51 @@ async function _savePvpSnapshot(saveData) {
       updated_at: new Date().toISOString()
     };
     const { error } = await window._supa.from('pvp_snapshots').upsert(payload);
-    if (error && (error.status === 401 || error.status === 403)) {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
-      });
+    if (!error) return { success: true };
+    if (error.status !== 401 && error.status !== 403) {
+      console.error('[pvpSave] upsert error:', error);
+      return { success: false, error: error.message };
     }
-  } catch(e) { console.error('[pvpSave] exception:', e); }
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+    });
+    const result = await resp.json().catch(() => null);
+    if (!resp.ok || !result || !result.success) {
+      const msg = (result && (result.error || JSON.stringify(result.errors))) || `HTTP ${resp.status}`;
+      console.error('[pvpSave] fallback failed:', msg);
+      return { success: false, error: msg };
+    }
+    return { success: true };
+  } catch(e) {
+    console.error('[pvpSave] exception:', e);
+    return { success: false, error: e.message || String(e) };
+  }
 }
 
 async function _cloudSave(saveData) {
-  if (!window._supa) return;
-  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number') return;
-  if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return;
+  if (!window._supa) return { success: false, error: 'Supabase klijent nije dostupan' };
+  if (!saveData || !saveData.R || typeof saveData.R.metal !== 'number') return { success: false, error: 'Nevalidan save (resursi)' };
+  if (!saveData.commander || !saveData.commander.level || saveData.commander.level < 1) return { success: false, error: 'Nevalidan save (komandir)' };
 
   const pid = _getPlayerId();
-  if (!pid) return;
+  if (!pid) return { success: false, error: 'Nema player_id' };
   const isHive = window._loginType === 'hive';
 
   const score = (saveData.R && saveData.R.score) || 0;
   const level = (saveData.commander && saveData.commander.level) || 1;
 
-  if (isHive) {
-    await _hiveSave(saveData);
-  } else {
-    await _emailSave(saveData);
-  }
+  const stateRes = isHive ? await _hiveSave(saveData) : await _emailSave(saveData);
+  const lbRes    = await _saveLeaderboard(score, level);
+  const pvpRes   = await _savePvpSnapshot(saveData);
 
-  await _saveLeaderboard(score, level);
-  await _savePvpSnapshot(saveData);
+  const errors = [stateRes, lbRes, pvpRes]
+    .filter(r => r && !r.success)
+    .map(r => r.error || (r.errors || []).join('; '))
+    .filter(Boolean);
+
+  // Samo neuspjeh glavnog state save-a je fatalan; leaderboard/pvp snapshot su sporedni.
+  return { success: !!(stateRes && stateRes.success), fatal: !(stateRes && stateRes.success), errors };
 }
 
 function _applyGameState(s) {
@@ -301,33 +339,37 @@ function _applyGameState(s) {
   }
 }
 
+// Vraća save objekat, ili null ako igrač nema snimljenu igru.
+// Baca grešku ako učitavanje nije uspjelo — pozivalac NE smije tretirati
+// neuspjelo učitavanje kao "novi igrač", jer bi prvi sljedeći save prebrisao cloud podatke.
 async function _loadFromTables() {
   const pid = _getPlayerId();
-  if (!pid || !window._supa) return null;
+  if (!pid || !window._supa) throw new Error('Nema player_id ili Supabase klijenta');
   const isHive = window._loginType === 'hive';
 
   if (isHive) {
-    try {
-      const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'load', player_id: pid })
-      });
-      const result = await resp.json();
-      if (!result.success || !result.data) return null;
-      return _buildSaveFromTables(result.data);
-    } catch(e) { console.error('[hiveLoad]', e); return null; }
-  } else {
-    try {
-      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-      const results = {};
-      for (const tbl of tables) {
-        const { data } = await window._supa.from(tbl).select('*').eq('player_id', pid).maybeSingle();
-        if (data) results[tbl] = data;
-      }
-      return _buildSaveFromTables(results);
-    } catch(e) { console.error('[emailLoad]', e); return null; }
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'load', player_id: pid })
+    });
+    const result = await resp.json().catch(() => null);
+    if (!resp.ok || !result || !result.success) {
+      const msg = (result && (result.error || JSON.stringify(result.errors))) || `HTTP ${resp.status}`;
+      throw new Error('[hiveLoad] ' + msg);
+    }
+    if (!result.data) return null;
+    return _buildSaveFromTables(result.data);
   }
+
+  const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
+  const results = {};
+  for (const tbl of tables) {
+    const { data, error } = await window._supa.from(tbl).select('*').eq('player_id', pid).maybeSingle();
+    if (error) throw new Error(`[emailLoad] ${tbl}: ${error.message}`);
+    if (data) results[tbl] = data;
+  }
+  return _buildSaveFromTables(results);
 }
 
 function _buildSaveFromTables(tables) {
@@ -425,6 +467,12 @@ function _buildSaveFromTables(tables) {
 function saveGame() {
   try {
     if (typeof commander === 'undefined' || !commander.level) return;
+    // Ako cloud učitavanje nije uspjelo, stanje u memoriji je nepotpuno —
+    // snimanje bi prebrisalo ispravan cloud save.
+    if (window._cloudLoadFailed) {
+      if (typeof toast === 'function') toast('⚠️ Snimanje blokirano: igra nije učitana. Osvježi stranicu.', 'err');
+      return;
+    }
     const { bcm: _bcm, bocrypto: _boc, spCard: _sp, keys: _keys, instanceKeys: _ikeys, D: _defenses, ...RWithoutTokens } = R;
     const saveData = {
       _savedAt: new Date().toISOString(),
@@ -511,32 +559,64 @@ function saveGame() {
         .reduce((acc,k)=>{ acc[k]=window[k]; return acc; }, {}),
       cmdCooldowns: window._cmdCooldowns || {},
     };
-    _cloudSave(saveData);
     const btn = document.getElementById('saveBtn');
-    if (btn) { btn.textContent = t('btn.saved'); setTimeout(() => btn.textContent = t('btn.save'), 1500); }
+    return _cloudSave(saveData).then(res => {
+      if (res && res.success) {
+        if (btn) { btn.textContent = t('btn.saved'); setTimeout(() => btn.textContent = t('btn.save'), 1500); }
+        if (res.errors && res.errors.length) console.warn('[save] djelimične greške:', res.errors);
+      } else {
+        const msg = (res && (res.errors || []).join('; ')) || 'nepoznata greška';
+        console.error('[save] neuspješno:', msg);
+        if (btn) { btn.textContent = '⚠️ Greška'; setTimeout(() => btn.textContent = t('btn.save'), 2500); }
+        if (typeof toast === 'function') toast('⚠️ Snimanje nije uspjelo — provjeri konekciju.', 'err');
+      }
+      return res;
+    }).catch(e => {
+      console.error('Save error:', e);
+      if (btn) { btn.textContent = '⚠️ Greška'; setTimeout(() => btn.textContent = t('btn.save'), 2500); }
+      if (typeof toast === 'function') toast('⚠️ Snimanje nije uspjelo — provjeri konekciju.', 'err');
+      return { success: false, errors: [e.message || String(e)] };
+    });
   } catch(e) {
     console.error('Save error:', e);
+    if (typeof toast === 'function') toast('⚠️ Snimanje nije uspjelo — provjeri konekciju.', 'err');
+    return Promise.resolve({ success: false, errors: [e.message || String(e)] });
   }
 }
 
+// Vraća 'loaded' (postojeći save primijenjen), 'new' (nema save-a — novi igrač)
+// ili 'error' (učitavanje nije uspjelo; snimanje se blokira da se cloud ne prebriše).
 async function loadGameCloud() {
   var serverSeason = 1;
   try {
-    const { data: sys } = await window._supa.from('hive_profiles').select('boosters').eq('id', '__system__').maybeSingle();
+    const { data: sys, error } = await window._supa.from('hive_profiles').select('boosters').eq('id', '__system__').maybeSingle();
+    if (error) throw error;
     if (sys && sys.boosters && sys.boosters.season != null) serverSeason = sys.boosters.season;
-    window._serverSeason = serverSeason;
-  } catch(e) {}
+  } catch(e) {
+    console.warn('loadGameCloud: sezona nije učitana, koristim default 1:', e);
+  }
+  window._serverSeason = serverSeason;
 
   const pid = _getPlayerId();
-  if (!pid) return false;
+  if (!pid) {
+    console.error('loadGameCloud: nema player_id');
+    window._cloudLoadFailed = true;
+    return 'error';
+  }
 
   try {
     const s = await _loadFromTables();
-    if (!s) return false;
-    return _applyGameState(s);
+    if (!s) { window._cloudLoadFailed = false; return 'new'; }
+    if (!_applyGameState(s)) {
+      window._cloudLoadFailed = true;
+      return 'error';
+    }
+    window._cloudLoadFailed = false;
+    return 'loaded';
   } catch(e) {
     console.error('loadGameCloud error:', e);
-    return false;
+    window._cloudLoadFailed = true;
+    return 'error';
   }
 }
 
@@ -548,15 +628,32 @@ function resetGame() {
   if (confirm(t('confirm.resetGame'))) {
     const pid = _getPlayerId();
     if (pid) {
+      const failReset = (msg) => {
+        console.error('[reset]', msg);
+        alert('Reset nije uspio: ' + msg);
+      };
       if (window._loginType === 'hive') {
         fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'reset', player_id: pid })
-        }).then(() => location.reload()).catch(() => location.reload());
+        }).then(async resp => {
+          const result = await resp.json().catch(() => null);
+          if (!resp.ok || !result || !result.success) {
+            failReset((result && (result.error || (result.errors || []).join('; '))) || `HTTP ${resp.status}`);
+            return;
+          }
+          location.reload();
+        }).catch(e => failReset(e.message || String(e)));
       } else if (window._supa) {
         const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-        Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
+        Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid)))
+          .then(results => {
+            const errs = results.filter(r => r && r.error).map(r => r.error.message);
+            if (errs.length) { failReset(errs.join('; ')); return; }
+            location.reload();
+          })
+          .catch(e => failReset(e.message || String(e)));
       } else { location.reload(); }
     } else { location.reload(); }
   }

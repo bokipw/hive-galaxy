@@ -718,7 +718,7 @@ function _pvp3PushLog(entry) {
     list.appendChild(d);
   }
   if (typeof addPvpLog === 'function' && entry.msg && entry.type !== 'attack' && entry.type !== 'miss') {
-    try { addPvpLog(entry.msg, entry.type); } catch (e) {}
+    try { addPvpLog(entry.msg, entry.type); } catch (e) { console.error('[pvp3d] addPvpLog failed:', e); }
   }
 }
 
@@ -770,7 +770,13 @@ function _pvp3Finish() {
 
   window._pvpBattleResult = _pvp3.result;
   window._pvpBattleOpp    = _pvp3.opp;
-  if (typeof finishPvpBattle === 'function') { try { finishPvpBattle(); } catch (e) {} }
+  if (typeof finishPvpBattle === 'function') {
+    try { finishPvpBattle(); }
+    catch (e) {
+      console.error('[pvp3d] finishPvpBattle failed:', e);
+      if (typeof toast === 'function') toast('⚠️ Rezultat borbe nije upisan — osvježi stranicu.', 'err');
+    }
+  }
 }
 
 // ============================================================
@@ -778,9 +784,9 @@ function _pvp3Finish() {
 // ============================================================
 function _pvp3Close() {
   _pvp3Teardown();
-  if (typeof closePvpBattleModal === 'function') { try { closePvpBattleModal(); } catch (e) {} }
-  if (typeof renderPvp === 'function') { try { renderPvp(); } catch (e) {} }
-  else if (typeof renderPvP === 'function') { try { renderPvP(); } catch (e) {} }
+  if (typeof closePvpBattleModal === 'function') { try { closePvpBattleModal(); } catch (e) { console.error('[pvp3d] closePvpBattleModal failed:', e); } }
+  if (typeof renderPvp === 'function') { try { renderPvp(); } catch (e) { console.error('[pvp3d] renderPvp failed:', e); } }
+  else if (typeof renderPvP === 'function') { try { renderPvP(); } catch (e) { console.error('[pvp3d] renderPvP failed:', e); } }
 }
 
 function _pvp3Teardown() {

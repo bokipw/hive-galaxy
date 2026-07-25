@@ -1063,7 +1063,7 @@ function checkAchievements() {
         if (typeof addLog === 'function') addLog(`🏆 Dostignuće otključano: ${ach.name}`);
         anyNew = true;
       }
-    } catch(e) {}
+    } catch(e) { console.error(`[achievements] check() pukao za ${ach.id}:`, e); }
   });
   if (anyNew && typeof saveGame === 'function') saveGame();
 }

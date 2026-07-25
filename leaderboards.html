@@ -1114,9 +1114,12 @@ let _currentSeason = 1;
 
 async function loadSeasonInfo() {
   try {
-    const { data } = await _supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+    const { data, error } = await _supa.from('hive_profiles').select('boosters').eq('id', '__system__').single();
+    if (error) throw error;
     if (data && data.boosters?.season) _currentSeason = data.boosters.season;
-  } catch(e) {}
+  } catch(e) {
+    console.warn('[leaderboards] sezona nije učitana, koristim default:', e);
+  }
   document.getElementById('seasonLabel').textContent = '⚔ SEZONA ' + _currentSeason;
 
   // Kraj tekućeg kvartala (mart, jun, sep, dec)
