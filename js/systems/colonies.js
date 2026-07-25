@@ -310,13 +310,13 @@ function _showScanModal(colony, phalanxLv, data) {
       const res = p.resources || {};
       html += `<div style="background:rgba(255,51,85,0.07);border:1px solid rgba(255,51,85,0.2);border-radius:6px;padding:8px;font-size:0.65rem;color:#6a90b8;line-height:1.8">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="color:white;font-weight:700">🔴 ${p.username}</span>
+          <span style="color:white;font-weight:700">🔴 ${escHtml(p.username)}</span>
           <span style="color:#ffcc44">⭐ ${p.rating || 1000}</span>
         </div>
         💪 Moć: <span style="color:#00d4ff">${fmt(p.power || 0)}</span>
         ${res.metal !== undefined ? `&nbsp;·&nbsp; 🔩${fmt(res.metal)} 💎${fmt(res.crystal)} ⛽${fmt(res.he3)}` : ''}
         <div style="margin-top:6px">
-          <button class="btn btn-danger" style="padding:3px 10px;font-size:0.62rem" onclick="closeModal();galaxyAttackBase('${p.id}')">⚔️ Napadni</button>
+          <button class="btn btn-danger" style="padding:3px 10px;font-size:0.62rem" onclick="closeModal();galaxyAttackBase('${escHtml(p.id)}')">⚔️ Napadni</button>
         </div>
       </div>`;
     });

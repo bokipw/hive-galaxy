@@ -3,6 +3,16 @@
 // Centralni state igre — sve varijable na jednom mjestu
 // ============================================================
 
+// Escape za sve stringove iz baze (imena igrača i sl.) prije ubacivanja u innerHTML.
+function escHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const R = {
   metal:        1000000,
   crystal:      1000000,

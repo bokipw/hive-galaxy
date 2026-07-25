@@ -1,16 +1,23 @@
+// Pokretanje SQL skripte nad bazom.
+// Konekcija se čita iz env varijable, NIKAD hardkodovano:
+//   DATABASE_URL='postgresql://user:pass@host:5432/postgres' node _run_sql.js backup-db/setup_full.sql
 const { Client } = require('pg');
 const fs = require('fs');
 
-const sql = fs.readFileSync('backup-db/setup_full.sql', 'utf8');
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  console.error('ERROR: postavi DATABASE_URL env varijablu.');
+  process.exit(1);
+}
 
-const client = new Client({
-  host: '2a05:d018:cb1:bb00:dc2a:ed26:9c5d:e55f',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: '585MmOAHkEXTpxJm',
-  ssl: { rejectUnauthorized: false }
-});
+const file = process.argv[2];
+if (!file) {
+  console.error('ERROR: navedi SQL fajl, npr. node _run_sql.js backup-db/setup_full.sql');
+  process.exit(1);
+}
+
+const sql = fs.readFileSync(file, 'utf8');
+const client = new Client({ connectionString, ssl: { rejectUnauthorized: false } });
 
 (async () => {
   try {

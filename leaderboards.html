@@ -856,6 +856,16 @@ const DIVISION_REWARDS = {
   ],
 };
 
+// Escape za imena igrača iz baze prije ubacivanja u innerHTML.
+function escHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ── SUPABASE ──
 const _supa = supabase.createClient(
   'https://exmbmwukqssvgmhysamo.supabase.co',
@@ -1002,7 +1012,7 @@ function renderDivisionSection(div, players, compact) {
       html += `<tr class="${rankClass}">
         <td><div class="rank-badge" title="Globalni rank #${globalRank}">${trophy || '#'+globalRank}</div></td>
         <td>
-          <div class="player-name ${nameClass}">${p.name}</div>
+          <div class="player-name ${nameClass}">${escHtml(p.name)}</div>
           <div class="player-level">Lv.${p.level}</div>
         </td>
         <td><span class="rating-val">${(p.rating||0).toLocaleString()}</span></td>
@@ -1101,7 +1111,7 @@ function showArchiveSeason(id, obj) {
   players.slice(0, 100).forEach((p, i) => {
     const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';
     html += `<tr><td style="color:#ffcc44;font-family:Orbitron,monospace;font-size:.7rem">${medal}</td>
-      <td><div class="player-name">${p.username || p.name}</div></td>
+      <td><div class="player-name">${escHtml(p.username || p.name)}</div></td>
       <td><span class="rating-val">${(p.rating||1000).toLocaleString()}</span></td>
       <td style="color:#c0d8f0">Lv.${p.level||1}</td></tr>`;
   });

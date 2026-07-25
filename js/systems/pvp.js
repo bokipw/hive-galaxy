@@ -350,7 +350,7 @@ function renderOpponentListHTML() {
     var prem=opp.isPremium?'<span style="font-size:0.5rem;color:#ffcc44;border:1px solid #ffcc4444;padding:1px 5px;border-radius:3px;margin-left:5px">PREMIUM</span>':'';
     return '<div class="card" style="margin-bottom:10px;border-color:rgba(255,51,85,0.2)">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
-      '<div><div style="font-size:0.8rem;font-weight:700;color:white">'+opp.name+prem+'</div>' +
+      '<div><div style="font-size:0.8rem;font-weight:700;color:white">'+escHtml(opp.name)+prem+'</div>' +
       '<div style="font-size:0.6rem;color:#6a90b8;margin-top:2px">Level '+opp.level+' Rating <span style="color:#ffcc44">'+opp.rating+'</span> <span style="color:'+dc+'">'+(diff>0?'+':'')+diff+'</span></div></div>' +
       '<div style="text-align:right"><div style="font-size:0.65rem;color:#00d4ff;font-family:Orbitron,monospace">'+fmt(opp.power)+'</div>' +
       '<div style="font-size:0.55rem;color:#6a90b8">'+(opp.fleet?opp.fleet.length:0)+' brodova</div></div>' +
@@ -396,7 +396,7 @@ function renderPvpLogHTML() {
     var icon=e.result==='victory'?'🏆':e.result==='draw'?'[=]':'💀';
     var d=new Date(e.time), ts=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">' +
-      '<div><span style="color:'+col+';font-size:0.75rem">'+icon+' '+e.opponent+'</span><span style="color:#6a90b8;font-size:0.6rem;margin-left:8px">'+e.rounds+' rundi</span></div>' +
+      '<div><span style="color:'+col+';font-size:0.75rem">'+icon+' '+escHtml(e.opponent)+'</span><span style="color:#6a90b8;font-size:0.6rem;margin-left:8px">'+e.rounds+' rundi</span></div>' +
       '<div style="text-align:right"><span style="color:'+(e.ratingChange>=0?'#00ff88':'#ff3355')+';font-size:0.7rem">'+(e.ratingChange>=0?'+':'')+e.ratingChange+'</span><span style="color:#6a90b8;font-size:0.55rem;margin-left:6px">'+ts+'</span></div>' +
       '</div>';
   }).join('');

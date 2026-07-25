@@ -83,7 +83,7 @@ function openSendDronesModal(opponentIdx) {
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
       <div style="font-size:2rem">${opp.avatar}</div>
       <div>
-        <div style="font-size:0.9rem;font-weight:700;color:white">${opp.name}</div>
+        <div style="font-size:0.9rem;font-weight:700;color:white">${escHtml(opp.name)}</div>
         <div style="font-size:0.65rem;color:#6a90b8">
           Power: ${fmt(opp.power)} · Rating: ${opp.rating}
           ${targetEspLvl > 0 ? ` · ESP Lv.${targetEspLvl}` : ''}
@@ -194,12 +194,12 @@ function espionageTarget(opponent, numDrones) {
 
   if (success) {
     toast(`✅ Špijunaža uspešna! (${dronesToSend} dronova, ${successChance.toFixed(0)}% šansa)`, 'ok');
-    addLog(`🕵️ Špijunaža uspešna: ${opponent.name} — ${dronesToSend} dronova potrošeno`);
+    addLog(`🕵️ Špijunaža uspešna: ${escHtml(opponent.name)} — ${dronesToSend} dronova potrošeno`);
     window._espSuccessfulMissions = (window._espSuccessfulMissions || 0) + 1;
     if (typeof trackDailyEsp === 'function') trackDailyEsp();;
   } else {
     toast(`❌ Špijunaža neuspešna! ${dronesToSend} dronova izgubljeno.`, 'err');
-    addLog(`❌ Špijunaža neuspešna: ${opponent.name} — ${dronesToSend} dronova izgubljeno`);
+    addLog(`❌ Špijunaža neuspešna: ${escHtml(opponent.name)} — ${dronesToSend} dronova izgubljeno`);
   }
 
   updateResUI();
@@ -245,7 +245,7 @@ function showEspReport(report) {
     <div style="margin-bottom:12px;display:flex;align-items:center;gap:12px">
       <div style="font-size:2rem">${report.avatar}</div>
       <div>
-        <div style="font-size:0.9rem;font-weight:700;color:white">${report.opponent}</div>
+        <div style="font-size:0.9rem;font-weight:700;color:white">${escHtml(report.opponent)}</div>
         <div style="font-size:0.65rem;color:#6a90b8">
           ${report.date} · ${report.dronesSent} dronova · ${report.chance?.toFixed(0)}% šansa
         </div>
@@ -402,7 +402,7 @@ function renderEspionage() {
                 padding:6px 8px;background:rgba(0,0,0,0.3);border-radius:4px;margin-bottom:4px">
                 <div>
                   <span style="font-size:0.8rem">${opp.avatar}</span>
-                  <span style="font-size:0.72rem;color:white;margin-left:6px">${opp.name}</span>
+                  <span style="font-size:0.72rem;color:white;margin-left:6px">${escHtml(opp.name)}</span>
                   <span style="font-size:0.6rem;color:#6a90b8;margin-left:4px">(${fmt(opp.power)})</span>
                 </div>
                 <button class="btn btn-gold" style="font-size:0.62rem;padding:2px 8px"
@@ -433,7 +433,7 @@ function renderEspionage() {
                 <div style="flex:1">
                   <div style="font-size:0.78rem;font-weight:700;
                     color:${r.success ? '#00ff88' : '#ff3355'}">
-                    ${r.success ? '✅' : '❌'} ${r.opponent}
+                    ${r.success ? '✅' : '❌'} ${escHtml(r.opponent)}
                   </div>
                   <div style="font-size:0.6rem;color:#6a90b8">
                     ${r.date} · ${r.dronesSent || 1} dronova · ${r.chance?.toFixed(0) || '?'}%

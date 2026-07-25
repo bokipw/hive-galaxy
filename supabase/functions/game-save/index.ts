@@ -1,4 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { corsHeaders } from '../_shared/cors.ts';
+import { authenticate } from '../_shared/auth.ts';
 
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || Deno.env.get('SERVICE_KEY') || '';
 const SUPA_URL    = Deno.env.get('SUPABASE_URL') || 'https://exmbmwukqssvgmhysamo.supabase.co';
@@ -7,15 +9,21 @@ if (!SERVICE_KEY) console.error('[game-save] SERVICE_KEY is missing!');
 const supa = createClient(SUPA_URL, SERVICE_KEY);
 
 Deno.serve(async (req: Request) => {
-  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders() });
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders(req) });
+  if (req.method !== 'POST') return err(req, 'Method not allowed', 405);
 
   try {
+    const caller = await authenticate(req, supa);
+    if (!caller) return err(req, 'Neautorizovan zahtjev', 401);
+
     const body = await req.json();
-    const { action, player_id, data } = body;
-    if (!action || !player_id) return err('Nedostaje action ili player_id', 400);
+    const { action, data } = body;
+    if (!action) return err(req, 'Nedostaje action', 400);
+    // The player is always taken from the verified token, never from the request body.
+    const player_id = caller.playerId;
 
     if (action === 'save') {
-      if (!data) return err('Nedostaje data', 400);
+      if (!data) return err(req, 'Nedostaje data', 400);
       const errors: string[] = [];
       const u = async (table: string, payload: Record<string, unknown>) => {
         try {
@@ -73,16 +81,16 @@ Deno.serve(async (req: Request) => {
         catch (ex: unknown) { errors.push(`hive_profiles: ${(ex as Error).message}`); }
       }
       if (data._leaderboard) {
-        try { await supa.from('leaderboard').upsert({ player_id, ...data._leaderboard, updated_at: new Date().toISOString() }); }
+        try { await supa.from('leaderboard').upsert({ ...data._leaderboard, player_id, updated_at: new Date().toISOString() }); }
         catch (ex: unknown) { errors.push(`leaderboard: ${(ex as Error).message}`); }
       }
       if (data._pvp_snapshot) {
-        try { await supa.from('pvp_snapshots').upsert({ player_id, ...data._pvp_snapshot }); }
+        try { await supa.from('pvp_snapshots').upsert({ ...data._pvp_snapshot, player_id }); }
         catch (ex: unknown) { errors.push(`pvp_snapshots: ${(ex as Error).message}`); }
       }
 
       return new Response(JSON.stringify({ success: true, errors }), {
-        headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
       });
     }
 
@@ -94,7 +102,7 @@ Deno.serve(async (req: Request) => {
         if (data) results[tbl] = data;
       }
       return new Response(JSON.stringify({ success: true, data: results }), {
-        headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
       });
     }
 
@@ -106,28 +114,20 @@ Deno.serve(async (req: Request) => {
         if (error) errors.push(`${tbl}: ${error.message}`);
       }
       return new Response(JSON.stringify({ success: errors.length === 0, errors }), {
-        headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
       });
     }
 
-    return err('Nepoznata akcija', 400);
+    return err(req, 'Nepoznata akcija', 400);
   } catch (e) {
-    const msg = (e as Error).message + ' | ' + ((e as Error).stack || '');
-    console.error('[game-save] UNCAUGHT:', msg);
-    return err('Server error: ' + msg, 500);
+    console.error('[game-save] UNCAUGHT:', (e as Error).message, (e as Error).stack || '');
+    return err(req, 'Server error', 500);
   }
 });
 
-function err(msg: string, status: number) {
+function err(req: Request, msg: string, status: number) {
   return new Response(JSON.stringify({ success: false, error: msg }), {
     status,
-    headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
+    headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
   });
-}
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
-  };
 }
