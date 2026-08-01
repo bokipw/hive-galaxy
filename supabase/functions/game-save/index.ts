@@ -136,10 +136,33 @@ Deno.serve(async (req: Request) => {
 
       const exCmdrs = existing.player_commanders?.owned || [];
       const inCmdrs = data.ownedCommanders || [];
-      const mergedCmdrs = [...exCmdrs];
-      for (const c of inCmdrs) {
-        if (!mergedCmdrs.some((e: any) => e?.id === c?.id)) mergedCmdrs.push(c);
+      const mergedCmdrs: any[] = [];
+      const allCmdIds = new Set<string>([...exCmdrs.map((c: any) => c?.id), ...inCmdrs.map((c: any) => c?.id)]);
+      for (const id of allCmdIds) {
+        const ex  = exCmdrs.find((c: any) => c?.id === id) || {};
+        const inc = inCmdrs.find((c: any) => c?.id === id) || {};
+        let fleet = Array.isArray(inc.fleet) ? inc.fleet : undefined;
+        if (fleet === undefined || !fleet.some((s: any) => s && (s.count || 0) > 0)) {
+          if (Array.isArray(ex.fleet)) fleet = ex.fleet;
+        }
+        mergedCmdrs.push({
+          ...ex, ...inc,
+          level: Math.max(ex.level || 1, inc.level || 1),
+          xp: Math.max(ex.xp || 0, inc.xp || 0),
+          fleet,
+        });
       }
+
+      // Deploy state: prazna lista/bez selekcije ne smije obrisati postojeći deployment
+      let mergedDeployed = data.deployedCommanders;
+      if (Array.isArray(mergedDeployed) && mergedDeployed.length === 0 &&
+          (existing.player_deployed_commanders?.deployed || []).length > 0) {
+        mergedDeployed = existing.player_deployed_commanders.deployed;
+      }
+      let mergedActive = data.activeCommander;
+      if (!mergedActive && existing.player_commanders?.active_id) mergedActive = existing.player_commanders.active_id;
+      let mergedViewing = data.viewingCmdId;
+      if (!mergedViewing && existing.player_misc_state?.viewing_cmd_id) mergedViewing = existing.player_misc_state.viewing_cmd_id;
 
       // ── 4) Upsert (sa merged vrijednostima) ──
       const upserts: Promise<void>[] = [];
@@ -172,8 +195,8 @@ Deno.serve(async (req: Request) => {
       uu('player_ship_designs', { player_id, designs: data.shipDesigns, extra_slots: data.designExtraSlots, slots_bought: data.designSlotsBought });
       uu('player_blueprints', { player_id, owned: data.ownedBlueprints ? mergedBlueprints : undefined });
       uu('player_blueprint_fragments', { player_id, fragments: data.blueprintFragments });
-      uu('player_commanders', { player_id, owned: data.ownedCommanders ? mergedCmdrs : undefined, active_id: data.activeCommander });
-      uu('player_deployed_commanders', { player_id, deployed: data.deployedCommanders });
+      uu('player_commanders', { player_id, owned: data.ownedCommanders ? mergedCmdrs : undefined, active_id: mergedActive });
+      uu('player_deployed_commanders', { player_id, deployed: mergedDeployed });
       uu('player_colonies', { player_id, colonies: data.colonies });
       uu('player_instance_progress', { player_id, progress: data.instProgress });
       uu('player_missions', { player_id, mission_state: data.missionState, mission_counters: data.missionCounters, mission_targets: data.missionTargets, story_missions: data.dynamicStoryMissions });
@@ -189,7 +212,7 @@ Deno.serve(async (req: Request) => {
       uu('player_jump_gate_cooldowns', { player_id, cooldowns: data.jumpGateCooldowns });
       uu('player_boss_cooldowns', { player_id, cooldowns: data.bossCooldowns });
       uu('player_drop_pity', { player_id, pity: data.dropPity });
-      uu('player_misc_state', { player_id, starter_given: data.starterGiven, fleet_position: data.fleetPosition, viewing_cmd_id: data.viewingCmdId, card_ability_cooldowns: data.cardAbilityCooldowns, cmd_cooldowns: data.cmdCooldowns });
+      uu('player_misc_state', { player_id, starter_given: data.starterGiven, fleet_position: data.fleetPosition, viewing_cmd_id: mergedViewing, card_ability_cooldowns: data.cardAbilityCooldowns, cmd_cooldowns: data.cmdCooldowns });
       uu('player_defenses', { player_id, defenses: data.defenses });
       await Promise.all(upserts);
 
