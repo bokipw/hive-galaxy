@@ -2,6 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || Deno.env.get('SERVICE_KEY') || '';
 const SUPA_URL    = Deno.env.get('SUPABASE_URL') || 'https://exmbmwukqssvgmhysamo.supabase.co';
+const ADMIN_KEY   = Deno.env.get('ADMIN_KEY') || '';
 
 if (!SERVICE_KEY) console.error('[game-save] SERVICE_KEY is missing!');
 const supa = createClient(SUPA_URL, SERVICE_KEY);
@@ -99,6 +100,10 @@ Deno.serve(async (req: Request) => {
     }
 
     if (action === 'reset') {
+      const supplied = (body.admin_key as string) || req.headers.get('x-admin-key') || '';
+      if (!ADMIN_KEY || supplied !== ADMIN_KEY) {
+        return err('Reset zahtijeva ADMIN_KEY', 403);
+      }
       const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
       const errors: string[] = [];
       for (const tbl of tables) {
