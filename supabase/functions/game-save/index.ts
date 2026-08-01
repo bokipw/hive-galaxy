@@ -38,7 +38,7 @@ Deno.serve(async (req: Request) => {
       } catch(pe) {
         errors.push(`players exception: ${(pe as Error).message}`);
       }
-      uu('player_resources', { player_id, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: data.bcm, bocrypto: data.bocrypto, spcard: data.spCard, keys_cmd: data.keys_cmd, keys_inst: data.keys_inst, storage_buffer: data.storageBuffer, total_metal_mined: data.totalMetalMined, total_depot_pickups: data.totalDepotPickups });
+      uu('player_resources', { player_id, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: data.bcm ?? R.bcm, bocrypto: data.bocrypto ?? R.bocrypto, spcard: data.spCard ?? R.spCard, keys_cmd: data.keys_cmd ?? R.keys_cmd ?? R.keys, keys_inst: data.keys_inst ?? R.keys_inst ?? R.instanceKeys, storage_buffer: data.storageBuffer, total_metal_mined: data.totalMetalMined, total_depot_pickups: data.totalDepotPickups });
       uu('player_buildings', { player_id, buildings: data.buildings });
       uu('player_research', { player_id, research: data.research });
       uu('player_commander', { player_id, level: data.commander?.level, exp: data.commander?.exp, next_exp: data.commander?.nextExp, title: data.commander?.title });

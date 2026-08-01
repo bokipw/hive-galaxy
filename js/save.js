@@ -12,6 +12,13 @@ function _getUsername() {
   return 'Unknown';
 }
 
+// Zaštita od brisanja: prati stanje cloud load-a da prazna/fresh igra ne bi
+// prepisala postojeće cloud podatke (npr. kad load padne zbog mreže).
+let _cloudState = null;        // null | 'loaded' | 'empty' | 'error'
+let _cloudLoadFailed = false;
+let _cloudSaveVerified = false;
+let _cloudSaveAllowed = true;
+
 async function _hiveSave(payload) {
   try {
     const cmdrs = payload.ownedCommanders || [];
@@ -33,39 +40,17 @@ async function _hiveSave(payload) {
 async function _emailSave(payload) {
   if (!window._supa) return;
   const pid = _getPlayerId();
-  const u = (table, data) => window._supa.from(table).upsert(data).then(r => { if(r.error) console.error(table, r.error); });
+  if (!pid) return;
   try {
-    const R = payload.R || {};
-    await Promise.all([
-      u('player_resources', { player_id: pid, metal: R.metal, crystal: R.crystal, he3: R.he3, energy: R.energy, score: R.score, bcm: payload.bcm, bocrypto: payload.bocrypto, spcard: payload.spcard, keys_cmd: payload.keys_cmd, keys_inst: payload.keys_inst, storage_buffer: payload.storageBuffer, total_metal_mined: payload.totalMetalMined, total_depot_pickups: payload.totalDepotPickups }),
-      u('player_buildings', { player_id: pid, buildings: payload.buildings }),
-      u('player_research', { player_id: pid, research: payload.research }),
-      u('player_commander', { player_id: pid, level: payload.commander?.level, exp: payload.commander?.exp, next_exp: payload.commander?.nextExp, title: payload.commander?.title }),
-      u('player_fleet', { player_id: pid, fleet: payload.fleet }),
-      u('player_hangar', { player_id: pid, hangar: payload.hangar }),
-      u('player_ship_designs', { player_id: pid, designs: payload.shipDesigns, extra_slots: payload.designExtraSlots, slots_bought: payload.designSlotsBought }),
-      u('player_blueprints', { player_id: pid, owned: payload.ownedBlueprints }),
-      u('player_blueprint_fragments', { player_id: pid, fragments: payload.blueprintFragments }),
-      u('player_commanders', { player_id: pid, owned: payload.ownedCommanders, active_id: payload.activeCommander }),
-      u('player_deployed_commanders', { player_id: pid, deployed: payload.deployedCommanders }),
-      u('player_colonies', { player_id: pid, colonies: payload.colonies }),
-      u('player_instance_progress', { player_id: pid, progress: payload.instProgress }),
-      u('player_missions', { player_id: pid, mission_state: payload.missionState, mission_counters: payload.missionCounters, story_missions: payload.dynamicStoryMissions }),
-      u('player_achievements', { player_id: pid, achieves: payload.ACHIEVES, state: payload.achievementState, tracking: payload.achievementTracking }),
-      u('player_artifacts', { player_id: pid, fragments: payload.artifactFragments, state: payload.artifactState }),
-      u('player_pvp', { player_id: pid, wins: payload.pvp?.wins, losses: payload.pvp?.losses, rating: payload.pvp?.rating, win_streak: payload.pvp?.winStreak, history: payload.pvp?.history, shield: payload.pvpShield }),
-      u('player_espionage', { player_id: pid, drones: payload.espDrones, reports: payload.espReports }),
-      u('player_formations', { player_id: pid, active_formation: payload.activeFormation, formation_slots: payload.formationSlots }),
-      u('player_recycle_queue', { player_id: pid, queue: payload.recycleQueue }),
-      u('player_build_queue', { player_id: pid, queue: payload.buildQueue }),
-      u('player_pack_pity', { player_id: pid, pity: payload.packPity, pulls: payload.packPulls }),
-      u('player_conquered_planets', { player_id: pid, planets: payload.conqueredPlanets, fleet_reward: payload.colonyFleetReward }),
-      u('player_jump_gate_cooldowns', { player_id: pid, cooldowns: payload.jumpGateCooldowns }),
-      u('player_boss_cooldowns', { player_id: pid, cooldowns: payload.bossCooldowns }),
-      u('player_drop_pity', { player_id: pid, pity: payload.dropPity }),
-      u('player_misc_state', { player_id: pid, starter_given: payload.starterGiven, fleet_position: payload.fleetPosition, viewing_cmd_id: payload.viewingCmdId, card_ability_cooldowns: payload.cardAbilityCooldowns, cmd_cooldowns: payload.cmdCooldowns }),
-      u('player_defenses', { player_id: pid, defenses: payload.defenses }),
-    ]);
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: pid, data: payload })
+    });
+    const text = await resp.text();
+    let result;
+    try { result = JSON.parse(text); } catch(e) { result = { success: false, error: text }; }
+    if (!result.success) console.error('[emailSave] error:', JSON.stringify(result.errors || result.error || text));
   } catch(e) { console.error('[emailSave] exception:', e); }
 }
 
@@ -73,21 +58,14 @@ async function _saveLeaderboard(score, level) {
   const pid = _getPlayerId();
   const username = _getUsername();
   if (!pid || !window._supa) return;
-  const isHive = window._loginType === 'hive';
   const isPremium = window._playerPremium || false;
-  if (isHive) {
-    try {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
-      });
-    } catch(e) { console.error('[lbSave]', e); }
-  } else {
-    try {
-      await window._supa.from('leaderboard').upsert({ player_id: pid, username, score, level, is_premium: isPremium, updated_at: new Date().toISOString() });
-    } catch(e) { console.error('[lbSave]', e); }
-  }
+  try {
+    await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: pid, data: { _leaderboard: { username, score, level, is_premium: isPremium } } })
+    });
+  } catch(e) { console.error('[lbSave]', e); }
 }
 
 async function _savePvpSnapshot(saveData) {
@@ -123,13 +101,10 @@ async function _savePvpSnapshot(saveData) {
       },
       updated_at: new Date().toISOString()
     };
-    const { error } = await window._supa.from('pvp_snapshots').upsert(payload);
-    if (error && (error.status === 401 || error.status === 403)) {
-      await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
-      });
-    }
+    await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'save', player_id: pid, data: { _pvp_snapshot: payload } })
+    });
   } catch(e) { console.error('[pvpSave] exception:', e); }
 }
 
@@ -142,6 +117,15 @@ async function _cloudSave(saveData) {
   if (!pid) return;
   const isHive = window._loginType === 'hive';
 
+  if (!_cloudSaveVerified) {
+    _cloudSaveVerified = true;
+    _cloudSaveAllowed = await _verifyCloudSaveAllowed(pid);
+  }
+  if (!_cloudSaveAllowed) {
+    console.warn('[cloudSave] Blokiran upis: cloud save postoji, ali nije učitan u ovu sesiju (zaštita od brisanja).');
+    return;
+  }
+
   const score = (saveData.R && saveData.R.score) || 0;
   const level = (saveData.commander && saveData.commander.level) || 1;
 
@@ -153,6 +137,25 @@ async function _cloudSave(saveData) {
 
   await _saveLeaderboard(score, level);
   await _savePvpSnapshot(saveData);
+}
+
+async function _verifyCloudSaveAllowed(pid) {
+  if (_cloudState === 'loaded') return true;
+  try {
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'load', player_id: pid })
+    });
+    const result = await resp.json();
+    const hasData = result && result.success && result.data && Object.keys(result.data).length > 0;
+    if (!hasData) return true;
+    console.warn('[cloudSave] Zaštita: cloud save postoji, ali igra nije uspješno učitana — upis blokiran.');
+    return false;
+  } catch(e) {
+    console.error('[verifyCloudSaveAllowed]', e);
+    return _cloudState === 'empty';
+  }
 }
 
 function _applyGameState(s) {
@@ -304,30 +307,17 @@ function _applyGameState(s) {
 async function _loadFromTables() {
   const pid = _getPlayerId();
   if (!pid || !window._supa) return null;
-  const isHive = window._loginType === 'hive';
 
-  if (isHive) {
-    try {
-      const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'load', player_id: pid })
-      });
-      const result = await resp.json();
-      if (!result.success || !result.data) return null;
-      return _buildSaveFromTables(result.data);
-    } catch(e) { console.error('[hiveLoad]', e); return null; }
-  } else {
-    try {
-      const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-      const results = {};
-      for (const tbl of tables) {
-        const { data } = await window._supa.from(tbl).select('*').eq('player_id', pid).maybeSingle();
-        if (data) results[tbl] = data;
-      }
-      return _buildSaveFromTables(results);
-    } catch(e) { console.error('[emailLoad]', e); return null; }
-  }
+  try {
+    const resp = await fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'load', player_id: pid })
+    });
+    const result = await resp.json();
+    if (!result.success || !result.data) return null;
+    return _buildSaveFromTables(result.data);
+  } catch(e) { console.error('[loadFromTables]', e); _cloudLoadFailed = true; return null; }
 }
 
 function _buildSaveFromTables(tables) {
@@ -532,10 +522,14 @@ async function loadGameCloud() {
 
   try {
     const s = await _loadFromTables();
-    if (!s) return false;
-    return _applyGameState(s);
+    if (_cloudLoadFailed) { _cloudState = 'error'; return false; }
+    if (!s) { _cloudState = 'empty'; return false; }
+    const ok = _applyGameState(s);
+    _cloudState = ok ? 'loaded' : 'error';
+    return ok;
   } catch(e) {
     console.error('loadGameCloud error:', e);
+    _cloudState = 'error';
     return false;
   }
 }
@@ -555,8 +549,11 @@ function resetGame() {
           body: JSON.stringify({ action: 'reset', player_id: pid })
         }).then(() => location.reload()).catch(() => location.reload());
       } else if (window._supa) {
-        const tables = ['player_resources','player_buildings','player_research','player_commander','player_fleet','player_hangar','player_ship_designs','player_blueprints','player_blueprint_fragments','player_commanders','player_deployed_commanders','player_colonies','player_instance_progress','player_missions','player_achievements','player_artifacts','player_pvp','player_espionage','player_formations','player_recycle_queue','player_build_queue','player_pack_pity','player_conquered_planets','player_jump_gate_cooldowns','player_boss_cooldowns','player_drop_pity','player_misc_state','player_defenses'];
-        Promise.all(tables.map(t => window._supa.from(t).delete().eq('player_id', pid))).then(() => location.reload());
+        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'reset', player_id: pid })
+        }).then(() => location.reload()).catch(() => location.reload());
       } else { location.reload(); }
     } else { location.reload(); }
   }
