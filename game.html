@@ -994,11 +994,9 @@ async function submitWithdraw(symbol) {
   const { error } = await window._supa.from('withdrawals').insert({
     player_id: uid,
     username,
-    hive_account: window._hiveUser || null,
     token: symbol,
-    amount: cfg.satoshi ? amtRaw : amtRaw,
+    amount: net,
     gas_amount: gas,
-    net_amount: net,
     status: 'pending',
     requested_at: new Date().toISOString(),
   });
@@ -1021,46 +1019,49 @@ async function submitWithdraw(symbol) {
 
 function walletDeposit(symbol) {
   if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
-  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];
+  if (!window._hiveUser) { alert('Prijavi se sa HIVE nalogom!'); return; }
+  const cfg = { BCM: { key:'bcm' }, BOCRYPTO: { key:'bocrypto' }, BPW: { key:'spCard' } }[symbol];
   if (!cfg) return;
   const amtStr = prompt('Koliko ' + symbol + ' da depositiraš u igru?', '1');
   if (!amtStr) return;
   const amt = parseFloat(amtStr);
   if (isNaN(amt) || amt <= 0) return;
-  const method = 'requestSendToken';
   const amtFormatted = symbol === 'BPW' ? amt.toFixed(8) : amt.toFixed(3);
-  window.hive_keychain[method](
+  window.hive_keychain.requestSendToken(
     window._hiveUser, 'bokica80', amtFormatted,
     'HIVEGALAXY_deposit_' + symbol + '_' + window._hiveUser, symbol,
-    function(resp) {
-      if (resp.success) {
-        R[cfg.key] = (R[cfg.key] || 0) + (cfg.div > 1 ? Math.round(amt * cfg.div) : amt);
-        if (typeof updateResUI === 'function') updateResUI();
-        if (typeof saveGame === 'function') saveGame();
-        if (typeof toast === 'function') toast('✅ Deposit ' + amtFormatted + ' ' + symbol + ' uspešan!', 'ok');
-        refreshHiveWallet();
-      } else {
+    async function(resp) {
+      if (!resp.success) {
         alert('Transakcija odbijena: ' + (resp.message || 'Greška'));
+        return;
+      }
+      let txid = '';
+      if (typeof resp.result === 'string') txid = resp.result;
+      else if (resp.result) txid = resp.result.trx_id || resp.result.id || resp.result.tx_id || '';
+      if (!txid) txid = resp.trx_id || '';
+      if (typeof toast === 'function') toast('⏳ Potvrđujem transakciju na blockchainu...', 'info');
+      try {
+        const fnUrl = 'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/deposit-verify';
+        const res = await fetch(fnUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
+          body: JSON.stringify({ username: window._hiveUser, symbol, txid })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          R[cfg.key] = (R[cfg.key] || 0) + data.amount;
+          if (typeof updateResUI === 'function') updateResUI();
+          if (typeof saveGame === 'function') saveGame();
+          if (typeof toast === 'function') toast('✅ Deposit ' + symbol + ' verifikovan i dodan u igru!', 'ok');
+          refreshHiveWallet();
+        } else {
+          alert('⚠️ Depozit NIJE kreditiran: ' + (data && data.error ? data.error : 'Greška pri verifikaciji') + (txid ? '\nTxID: ' + txid : ''));
+        }
+      } catch(e) {
+        alert('⚠️ Greška pri verifikaciji. Depozit NIJE kreditiran.\nTxID: ' + (txid || 'nema') + '\nKontaktiraj admina ako je token stigao.');
       }
     }
   );
-}
-
-function walletWithdraw(symbol) {
-  const cfg = { BCM: { key:'bcm', div:1 }, BOCRYPTO: { key:'bocrypto', div:1 }, BPW: { key:'spCard', div:100000000 } }[symbol];
-  if (!cfg) return;
-  const gameAmt = cfg.div > 1 ? ((R[cfg.key] || 0) / cfg.div).toFixed(3) : (R[cfg.key] || 0).toFixed(3);
-  const amtStr = prompt('Koliko ' + symbol + ' da povučeš iz igre?\n(Imaš: ' + gameAmt + ' ' + symbol + ')', '1');
-  if (!amtStr) return;
-  const amt = parseFloat(amtStr);
-  if (isNaN(amt) || amt <= 0) return;
-  const deduct = cfg.div > 1 ? Math.round(amt * cfg.div) : amt;
-  if (deduct > (R[cfg.key] || 0)) { alert('Nemaš dovoljno ' + symbol + ' u igri!'); return; }
-  R[cfg.key] = (R[cfg.key] || 0) - deduct;
-  if (typeof updateResUI === 'function') updateResUI();
-  if (typeof saveGame === 'function') saveGame();
-  if (typeof toast === 'function') toast('⏳ Withdraw ' + amt.toFixed(3) + ' ' + symbol + ' zahtjev primljen. Isplata do 24h.', 'inf');
-  refreshHiveWallet();
 }
 
 async function openLeaderboard() {
