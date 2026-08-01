@@ -540,22 +540,7 @@ function loadGame() {
 
 function resetGame() {
   if (confirm(t('confirm.resetGame'))) {
-    const pid = _getPlayerId();
-    if (pid) {
-      if (window._loginType === 'hive') {
-        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'reset', player_id: pid })
-        }).then(() => location.reload()).catch(() => location.reload());
-      } else if (window._supa) {
-        fetch('https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/game-save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'reset', player_id: pid })
-        }).then(() => location.reload()).catch(() => location.reload());
-      } else { location.reload(); }
-    } else { location.reload(); }
+    location.reload();
   }
 }
 

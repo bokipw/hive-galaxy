@@ -225,7 +225,7 @@
     "featureWip": "🚧 Uskoro..."
   },
   "confirm": {
-    "resetGame": "⚠️ SIGURNO? Ovo će obrisati SAV napredak!",
+    "resetGame": "⚠️ Cloud save je zaštićen i ne može se obrisati. Ponovo učitavam tvoj napredak.",
     "buyItem": "Kupiti {name} za {cost}?",
     "attack": "Napasti {name}? Cena: {cost}"
   },

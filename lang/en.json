@@ -225,7 +225,7 @@
     "featureWip": "🚧 Coming soon..."
   },
   "confirm": {
-    "resetGame": "⚠️ ARE YOU SURE? This will delete ALL progress!",
+    "resetGame": "⚠️ Cloud save is protected and cannot be deleted. Reloading your progress.",
     "buyItem": "Buy {name} for {cost}?",
     "attack": "Attack {name}? Cost: {cost}"
   },
