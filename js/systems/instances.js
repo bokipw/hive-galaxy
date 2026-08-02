@@ -865,6 +865,7 @@ function startBattle(inst, instant = false) {
 
       addLog(`⚡ ${dn(inst)} [${mode.label}] Završena! +${fmt(rewards.metal)} metal`);
       if (typeof trackDailyInstance  === 'function') trackDailyInstance();
+      if (inst.type === 'restricted' && typeof trackDailyRestricted === 'function') trackDailyRestricted();
       // Komandir XP se daje automatski kroz addExp() hook u commander.js
 
       // ── ACHIEVEMENT TRACKING: pobjede po težini ──

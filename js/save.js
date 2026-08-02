@@ -204,6 +204,7 @@ function _applyGameState(s) {
     if (s.missionCounters) {
       const mc = s.missionCounters;
       window._dailyInstCount    = mc.dailyInst    || 0;
+      window._dailyRestrictedCount = mc.dailyRestricted || 0;
       window._dailyDepotCount   = mc.dailyDepot   || 0;
       window._dailyResCount     = mc.dailyRes     || 0;
       window._dailyShipCount    = mc.dailyShip    || 0;
@@ -213,6 +214,7 @@ function _applyGameState(s) {
       window._dailyBuildCount   = mc.dailyBuild   || 0;
       window._dailyArtCount     = mc.dailyArt     || 0;
       window._weeklyInstCount   = mc.weeklyInst   || 0;
+      window._weeklyRestrictedCount = mc.weeklyRestricted || 0;
       window._weeklyPvpCount    = mc.weeklyPvp    || 0;
       window._weeklyResCount    = mc.weeklyRes    || 0;
       window._weeklyBuildCount  = mc.weeklyBuild  || 0;
@@ -441,11 +443,13 @@ function saveGame() {
       missionState: window.missionState,
       missionCounters: {
         dailyInst: window._dailyInstCount||0, dailyDepot: window._dailyDepotCount||0,
+        dailyRestricted: window._dailyRestrictedCount||0,
         dailyRes: window._dailyResCount||0, dailyShip: window._dailyShipCount||0,
         dailyPvp: window._dailyPvpCount||0, dailyPvpWin: window._dailyPvpWinCount||0,
         dailyEsp: window._dailyEspCount||0, dailyBuild: window._dailyBuildCount||0,
         dailyArt: window._dailyArtCount||0,
         weeklyInst: window._weeklyInstCount||0, weeklyPvp: window._weeklyPvpCount||0,
+        weeklyRestricted: window._weeklyRestrictedCount||0,
         weeklyRes: window._weeklyResCount||0, weeklyBuild: window._weeklyBuildCount||0,
         weeklyShip: window._weeklyShipCount||0, weeklyEsp: window._weeklyEspCount||0,
       },

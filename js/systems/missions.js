@@ -94,6 +94,44 @@ const DAILY_MISSION_POOL = [
     reward: { metal: 20000, crystal: 12000, he3: 6000, xp: 3000, instanceKeys: 8, bpw: 80 },
   },
 
+  // ── RESTRICTED ──
+  {
+    id: 'restricted', diff: 'easy',
+    name: 'Lomilac Zabrana', icon: '🔓',
+    desc:  'Pređi 1 restricted instancu',
+    check: () => (window._dailyRestrictedCount || 0) >= 1,
+    curr:  () => window._dailyRestrictedCount || 0,
+    tgt:   () => 1,
+    reward: { metal: 1500, crystal: 800, he3: 400, xp: 200, instanceKeys: 1 },
+  },
+  {
+    id: 'restricted_3', diff: 'normal',
+    name: 'Prestupnik Zona', icon: '⛓️',
+    desc:  'Pređi 3 restricted instance',
+    check: () => (window._dailyRestrictedCount || 0) >= 3,
+    curr:  () => window._dailyRestrictedCount || 0,
+    tgt:   () => 3,
+    reward: { metal: 4500, crystal: 2500, he3: 1250, xp: 650, instanceKeys: 2 },
+  },
+  {
+    id: 'restricted_5', diff: 'nightmare',
+    name: 'Razbijač Zatvora', icon: '🔓',
+    desc:  'Pređi 5 restricted instanci',
+    check: () => (window._dailyRestrictedCount || 0) >= 5,
+    curr:  () => window._dailyRestrictedCount || 0,
+    tgt:   () => 5,
+    reward: { metal: 10000, crystal: 6000, he3: 3000, xp: 1300, instanceKeys: 4, bpw: 40 },
+  },
+  {
+    id: 'restricted_10', diff: 'hell',
+    name: 'Apsolutni Pobunjenik', icon: '💥',
+    desc:  'Pređi 10 restricted instanci',
+    check: () => (window._dailyRestrictedCount || 0) >= 10,
+    curr:  () => window._dailyRestrictedCount || 0,
+    tgt:   () => 10,
+    reward: { metal: 25000, crystal: 15000, he3: 7500, xp: 3500, instanceKeys: 8, bpw: 90 },
+  },
+
   // ── DEPOT ──
   {
     id: 'depot', diff: 'easy',
@@ -786,6 +824,7 @@ function generateDailyMissions() {
 
   // Reset svih countera
   window._dailyInstCount         = 0;
+  window._dailyRestrictedCount   = 0;
   window._dailyDepotCount        = 0;
   window._dailyResCount          = 0;
   window._dailyShipCount         = 0;
@@ -1003,6 +1042,10 @@ function claimWeeklyBonus() {
 function trackDailyInstance()   {
   window._dailyInstCount  = (window._dailyInstCount  || 0) + 1;
   window._weeklyInstCount = (window._weeklyInstCount || 0) + 1;
+}
+function trackDailyRestricted() {
+  window._dailyRestrictedCount  = (window._dailyRestrictedCount  || 0) + 1;
+  window._weeklyRestrictedCount = (window._weeklyRestrictedCount || 0) + 1;
 }
 function trackDailyDepot()      { window._dailyDepotCount = (window._dailyDepotCount || 0) + 1; }
 function trackDailyResearch()   {
