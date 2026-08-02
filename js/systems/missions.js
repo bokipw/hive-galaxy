@@ -359,7 +359,7 @@ function getActiveDailyMissions() {
 // Randomni pick: 1 pinned + 9 random iz ostatka (bez ponavljanja)
 function pickDailyMissions() {
   const pinned   = DAILY_MISSION_POOL.filter(m => m.pinned).map(m => m.id);
-  const optional = DAILY_MISSION_POOL.filter(m => !m.pinned);
+  const optional = DAILY_MISSION_POOL.filter(m => !m.pinned && !isMissionImpossible(m));
   const shuffled = optional.slice().sort(() => Math.random() - 0.5);
   const picked   = shuffled.slice(0, 10 - pinned.length).map(m => m.id);
   return [...pinned, ...picked];
@@ -544,7 +544,7 @@ function getActiveWeeklyMissions() {
 // Parovi su definirani sufiksom '_hard'
 function pickWeeklyMissions() {
   // Grupiraj u parove: base + hard verzija
-  const baseTypes = WEEKLY_MISSION_POOL.filter(m => !m.id.endsWith('_hard'));
+  const baseTypes = WEEKLY_MISSION_POOL.filter(m => !m.id.endsWith('_hard') && !isMissionImpossible(m));
   const shuffled  = baseTypes.slice().sort(() => Math.random() - 0.5);
   const picked    = [];
 
@@ -558,6 +558,52 @@ function pickWeeklyMissions() {
   }
 
   return picked;
+}
+
+// ── NEMOGUĆE MISIJE ──
+// Misije se ne smiju generisati ako se radnja više ne može izvesti
+// (npr. sva istraživanja / zgrade su na MAX nivou).
+function isAllResearchMaxed() {
+  return Object.values(research).every(b => b && (b.level || 0) >= 100);
+}
+function isAllBuildingsMaxed() {
+  return Object.values(buildings).every(b => b && (b.level || 0) >= 100);
+}
+function isMissionImpossible(m) {
+  if (!m) return false;
+  const id = m.id;
+  if (id.startsWith('research') || id.startsWith('weekly_research')) return isAllResearchMaxed();
+  if (id.startsWith('upgrade') || id.startsWith('weekly_buildings')) return isAllBuildingsMaxed();
+  return false;
+}
+
+// Zamijeni već aktivne misije koje su postale nemoguće (npr. max research usred dana)
+function replaceImpossibleMissions() {
+  if (!window.missionState) return;
+  let changed = false;
+
+  const replaceIn = (state, pool, exclude) => {
+    const ids = state.missions || [];
+    for (let i = 0; i < ids.length; i++) {
+      const m = pool.find(x => x.id === ids[i]);
+      if (!m || !isMissionImpossible(m)) continue;
+      const available = pool.filter(x =>
+        !exclude(x) && !ids.includes(x.id) && !isMissionImpossible(x));
+      if (available.length === 0) continue;
+      const nm = available[Math.floor(Math.random() * available.length)];
+      if (nm.target) nm.target();
+      ids[i] = nm.id;
+      changed = true;
+    }
+  };
+
+  if (window.missionState.daily) {
+    replaceIn(window.missionState.daily, DAILY_MISSION_POOL, x => x.pinned);
+  }
+  if (window.missionState.weekly) {
+    replaceIn(window.missionState.weekly, WEEKLY_MISSION_POOL, x => x.id.endsWith('_hard'));
+  }
+  if (changed) saveGame();
 }
 
 // Backward compat alias
@@ -1029,7 +1075,7 @@ function rerollDailyMission(missionId) {
 
   // Pool iz iste težine ili random — isključi već aktivne
   const available = DAILY_MISSION_POOL.filter(x =>
-    !x.pinned && !activeMissions.includes(x.id) && x.id !== missionId
+    !x.pinned && !activeMissions.includes(x.id) && x.id !== missionId && !isMissionImpossible(x)
   );
   if (available.length === 0) { toast('⚠️ Nema dostupnih misija za zamjenu!', 'warn'); return; }
 
@@ -1106,6 +1152,7 @@ function renderMissions() {
 
   generateDailyMissions();
   generateWeeklyMissions();
+  replaceImpossibleMissions();
   updateMissionsBadge();
 
   const activeDailyList  = getActiveDailyMissions();
