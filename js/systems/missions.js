@@ -302,20 +302,40 @@ const DAILY_MISSION_POOL = [
 
   // ── FLEET POWER ──
   {
+    id: 'fleet_power_easy', diff: 'easy',
+    name: 'Moćna Flota', icon: '💫',
+    desc:  'Dostign 100M Fleet Power',
+    check: () => calcFleetTotalPower() >= 100000000,
+    curr:  () => Math.min(calcFleetTotalPower(), 100000000),
+    tgt:   () => 100000000,
+    reward: { metal: 2800, crystal: 1500, he3: 750, xp: 450, instanceKeys: 1 },
+  },
+  {
     id: 'fleet_power', diff: 'normal',
     name: 'Komandant Galaksije', icon: '💫',
-    desc:   () => `Dostign ${fmt(window._dailyPowerTarget || 1000)} Fleet Power`,
-    target: () => {
-      if (!window._dailyPowerTarget) {
-        const cur = calcFleetTotalPower();
-        window._dailyPowerTarget = Math.max(1000, Math.floor(cur * 1.05));
-      }
-      return window._dailyPowerTarget;
-    },
-    check:  () => calcFleetTotalPower() >= (window._dailyPowerTarget || 1000),
-    curr:   () => Math.min(calcFleetTotalPower(), window._dailyPowerTarget || 1000),
-    tgt:    () => window._dailyPowerTarget || 1000,
-    reward: { metal: 2800, crystal: 1500, he3: 750, xp: 450, instanceKeys: 1 },
+    desc:  'Dostign 500M Fleet Power',
+    check: () => calcFleetTotalPower() >= 500000000,
+    curr:  () => Math.min(calcFleetTotalPower(), 500000000),
+    tgt:   () => 500000000,
+    reward: { metal: 3500, crystal: 1800, he3: 900, xp: 550, instanceKeys: 1 },
+  },
+  {
+    id: 'fleet_power_nightmare', diff: 'nightmare',
+    name: 'Car Flote', icon: '💫',
+    desc:  'Dostign 1B Fleet Power',
+    check: () => calcFleetTotalPower() >= 1000000000,
+    curr:  () => Math.min(calcFleetTotalPower(), 1000000000),
+    tgt:   () => 1000000000,
+    reward: { metal: 6000, crystal: 3000, he3: 1500, xp: 800, instanceKeys: 2, bpw: 30 },
+  },
+  {
+    id: 'fleet_power_hell', diff: 'hell',
+    name: 'Apsolutni Gospodar', icon: '👑',
+    desc:  'Dostign 2B Fleet Power',
+    check: () => calcFleetTotalPower() >= 2000000000,
+    curr:  () => Math.min(calcFleetTotalPower(), 2000000000),
+    tgt:   () => 2000000000,
+    reward: { metal: 12000, crystal: 6000, he3: 3000, xp: 1500, instanceKeys: 3, bpw: 60 },
   },
 
   // ── RESURSI ──
@@ -520,17 +540,10 @@ const WEEKLY_MISSION_POOL = [
     id: 'weekly_fleet_power', diff: 'nightmare',
     name:  'Dominacija Flote',
     icon:  '💫',
-    desc:  () => `Dostign ${fmt(window._weeklyPowerTarget || 50000)} Fleet Power`,
-    target: () => {
-      if (!window._weeklyPowerTarget) {
-        const cur = calcFleetTotalPower();
-        window._weeklyPowerTarget = Math.max(50000, Math.floor(cur * 1.15));
-      }
-      return window._weeklyPowerTarget;
-    },
-    check: () => calcFleetTotalPower() >= (window._weeklyPowerTarget || 50000),
-    curr:  () => Math.min(calcFleetTotalPower(), window._weeklyPowerTarget || 50000),
-    tgt:   () => window._weeklyPowerTarget || 50000,
+    desc:  'Dostign 2B Fleet Power ove sedmice',
+    check: () => calcFleetTotalPower() >= 2000000000,
+    curr:  () => Math.min(calcFleetTotalPower(), 2000000000),
+    tgt:   () => 2000000000,
     reward: { metal: 25000, crystal: 15000, he3: 8000, xp: 3000, instanceKeys: 6, bpw: 200, art_fragment: 'R' },
   },
 ];
