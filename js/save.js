@@ -221,6 +221,14 @@ function _applyGameState(s) {
     }
     if (s.missionTargets) {
       const mt = s.missionTargets;
+      if (mt.dailyInstTarget != null) window._dailyInstTarget = mt.dailyInstTarget;
+      if (mt.dailyDepotTarget != null) window._dailyDepotTarget = mt.dailyDepotTarget;
+      if (mt.dailyResTarget != null) window._dailyResTarget = mt.dailyResTarget;
+      if (mt.dailyShipTarget != null) window._dailyShipTarget = mt.dailyShipTarget;
+      if (mt.dailyPowerTarget != null) window._dailyPowerTarget = mt.dailyPowerTarget;
+      if (mt.dailySpendMetalTarget != null) window._dailySpendMetalTarget = mt.dailySpendMetalTarget;
+      if (mt.dailySpendMetalHellTarget != null) window._dailySpendMetalHellTarget = mt.dailySpendMetalHellTarget;
+      if (mt.dailySpendCrystalTarget != null) window._dailySpendCrystalTarget = mt.dailySpendCrystalTarget;
       if (mt.weeklyInstTarget     != null) window._weeklyInstTarget     = mt.weeklyInstTarget;
       if (mt.weeklyInstHardTarget != null) window._weeklyInstHardTarget = mt.weeklyInstHardTarget;
       if (mt.weeklyPvpTarget      != null) window._weeklyPvpTarget      = mt.weeklyPvpTarget;
@@ -442,6 +450,14 @@ function saveGame() {
         weeklyShip: window._weeklyShipCount||0, weeklyEsp: window._weeklyEspCount||0,
       },
       missionTargets: {
+        dailyInstTarget: window._dailyInstTarget || null,
+        dailyDepotTarget: window._dailyDepotTarget || null,
+        dailyResTarget: window._dailyResTarget || null,
+        dailyShipTarget: window._dailyShipTarget || null,
+        dailyPowerTarget: window._dailyPowerTarget || null,
+        dailySpendMetalTarget: window._dailySpendMetalTarget || null,
+        dailySpendMetalHellTarget: window._dailySpendMetalHellTarget || null,
+        dailySpendCrystalTarget: window._dailySpendCrystalTarget || null,
         weeklyInstTarget: window._weeklyInstTarget || null,
         weeklyInstHardTarget: window._weeklyInstHardTarget || null,
         weeklyPvpTarget: window._weeklyPvpTarget || null,

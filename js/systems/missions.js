@@ -308,7 +308,7 @@ const DAILY_MISSION_POOL = [
     target: () => {
       if (!window._dailyPowerTarget) {
         const cur = calcFleetTotalPower();
-        window._dailyPowerTarget = Math.max(1000, Math.floor(cur * 1.1));
+        window._dailyPowerTarget = Math.max(1000, Math.floor(cur * 1.05));
       }
       return window._dailyPowerTarget;
     },
@@ -524,7 +524,7 @@ const WEEKLY_MISSION_POOL = [
     target: () => {
       if (!window._weeklyPowerTarget) {
         const cur = calcFleetTotalPower();
-        window._weeklyPowerTarget = Math.max(50000, Math.floor(cur * 1.25));
+        window._weeklyPowerTarget = Math.max(50000, Math.floor(cur * 1.15));
       }
       return window._weeklyPowerTarget;
     },
