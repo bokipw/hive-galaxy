@@ -11,6 +11,7 @@ if (!window.missionState) {
       missions:     [],
       claimed:      [],
       bonusClaimed: false,
+      rerolled:     [],
     },
     weekly: {
       week:     null,
@@ -766,7 +767,7 @@ const STORYLINE_MISSIONS = [
 
 // ── GENERIŠI DNEVNE MISIJE ──
 function generateDailyMissions() {
-  if (!window.missionState || !window.missionState.daily) window.missionState = { daily: { date: '', missions: [], claimed: [], bonusClaimed: false }, weekly: { week: null, missions: [], claimed: [] }, storyline: { completed: [], claimed: [] } };
+  if (!window.missionState || !window.missionState.daily) window.missionState = { daily: { date: '', missions: [], claimed: [], bonusClaimed: false, rerolled: [] }, weekly: { week: null, missions: [], claimed: [] }, storyline: { completed: [], claimed: [] } };
   const today = getTodayStr();
   if (window.missionState.daily.date === today) return;
 
@@ -801,6 +802,7 @@ function generateDailyMissions() {
     missions:     selectedIds,
     claimed:      [],
     bonusClaimed: false,
+    rerolled:     [],
   };
 
   addLog('📅 Nove dnevne misije dostupne!');
@@ -1064,14 +1066,24 @@ function rerollDailyMission(missionId) {
   if (!m || m.pinned) { toast('⚠️ Ova misija se ne može zamijeniti!', 'warn'); return; }
   if (window.missionState.daily.claimed.includes(missionId)) return;
 
-  const cost = (MISSION_DIFF[m.diff] || MISSION_DIFF.normal).rerollCost;
-  if ((R.spCard || 0) < cost) {
-    toast(`⚠️ Trebaš ${cost} BPW za swap! Imaš ${R.spCard || 0}.`, 'warn'); return;
-  }
-
   const activeMissions = window.missionState.daily.missions;
   const idx = activeMissions.indexOf(missionId);
   if (idx === -1) return;
+
+  const rerolled   = window.missionState.daily.rerolled || (window.missionState.daily.rerolled = []);
+  const isFirst    = !rerolled.includes(idx);
+  const energyCost = 1000;
+  const bpwCost    = (MISSION_DIFF[m.diff] || MISSION_DIFF.normal).rerollCost;
+
+  if (isFirst) {
+    if ((R.energy || 0) < energyCost) {
+      toast(`⚠️ Prvi swap košta ${energyCost}⚡! Imaš ${Math.floor(R.energy)}⚡.`, 'warn'); return;
+    }
+  } else {
+    if ((R.spCard || 0) < bpwCost) {
+      toast(`⚠️ Trebaš ${bpwCost} BPW za swap! Imaš ${R.spCard || 0}.`, 'warn'); return;
+    }
+  }
 
   // Pool iz iste težine ili random — isključi već aktivne
   const available = DAILY_MISSION_POOL.filter(x =>
@@ -1082,14 +1094,20 @@ function rerollDailyMission(missionId) {
   const newM = available[Math.floor(Math.random() * available.length)];
   if (newM.target) newM.target();
 
-  R.spCard -= cost;
+  if (isFirst) {
+    R.energy -= energyCost;
+    rerolled.push(idx);
+  } else {
+    R.spCard -= bpwCost;
+  }
   activeMissions[idx] = newM.id;
 
   updateResUI();
   saveGame();
   renderMissions();
   const diffLabel = (MISSION_DIFF[newM.diff] || MISSION_DIFF.normal).label;
-  toast(`🎲 Swap: ${m.name} → ${newM.icon} ${newM.name} [${diffLabel}] (-${cost} BPW)`, 'ok');
+  const costStr   = isFirst ? `${energyCost}⚡` : `${bpwCost}🐝`;
+  toast(`🎲 Swap: ${m.name} → ${newM.icon} ${newM.name} [${diffLabel}] (-${costStr})`, 'ok');
   addLog(`🎲 Misija zamijenjena: ${m.name} → ${newM.name}`);
 }
 
@@ -1223,11 +1241,13 @@ function renderDailyMissions(completedCount, activeMissions) {
     <div style="font-size:0.62rem;color:#6a90b8;margin-bottom:10px;padding:4px 8px;
       background:rgba(255,255,255,0.04);border-radius:4px;line-height:1.8">
       🎲 <span style="color:white">Swap misije:</span>
+      <span style="color:#ffcc44">Prvi swap svake misije = 1.000⚡</span> ·
       <span style="color:#00ff88">EASY=50🐝</span> ·
       <span style="color:#00d4ff">NORMAL=100🐝</span> ·
       <span style="color:#aa44ff">NIGHTMARE=200🐝</span> ·
       <span style="color:#ff3355">HELL=350🐝</span>
-      · Imaš: <span style="color:#ffcc44">${fmt(R.spCard || 0)} BPW</span>
+      · Imaš: <span style="color:#ffcc44">${fmt(R.spCard || 0)} BPW</span> ·
+      <span style="color:#ffcc44">${fmt(Math.floor(R.energy || 0))}⚡</span>
     </div>
 
     <div class="grid-2">
@@ -1240,6 +1260,8 @@ function renderDailyMissions(completedCount, activeMissions) {
         const diff     = m.diff || 'normal';
         const dc       = MISSION_DIFF[diff] || MISSION_DIFF.normal;
         const canReroll = !m.pinned && !claimed;
+        const slotIdx   = (window.missionState.daily.missions || []).indexOf(m.id);
+        const firstRoll = !(window.missionState.daily.rerolled || []).includes(slotIdx);
         const bdrColor = claimed ? 'rgba(255,204,68,0.2)' : completed ? 'rgba(0,255,136,0.3)' : `${dc.color}22`;
 
         return `
@@ -1275,7 +1297,7 @@ function renderDailyMissions(completedCount, activeMissions) {
                 ${canReroll ? `
                   <button class="btn" style="font-size:0.58rem;padding:2px 7px;color:${dc.color};
                     border-color:${dc.color}44;background:${dc.bg}"
-                    onclick="rerollDailyMission('${m.id}')">🎲 Swap (${dc.rerollCost}🐝)</button>` : ''}
+                    onclick="rerollDailyMission('${m.id}')">🎲 Swap (${firstRoll ? '1k⚡' : dc.rerollCost + '🐝'})</button>` : ''}
               </div>
             `}
           </div>`;
