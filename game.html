@@ -946,7 +946,7 @@ function updateWitPreview(symbol) {
     ? `<div>Iznos: <strong style="color:white">${symbol === 'BPW' ? amt.toFixed(8)+' BPW' : symbol==='BCM' ? Math.floor(amt)+' BCM' : amt.toFixed(3)+' BoCrypto'}</strong></div>
        <div>Gas fee: <strong style="color:#ff6600">${gasLabel}</strong></div>
        <div>Dobijaš: <strong style="color:#00ff88">${netLabel}</strong></div>
-       <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Zahtev je vidljiv u admin panelu</div>`
+       <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Tokeni se skidaju TEK pri isplati</div>`
     : `<div style="color:#ff3355">⚠ ${errMsg}</div>`;
   document.getElementById('withdrawModal').querySelector('button:last-child').disabled = false;
   document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.75';
@@ -970,20 +970,16 @@ async function submitWithdraw(symbol) {
     gas = 1000; net = Math.floor(amtRaw);
     if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas! (treba 1,000)', 'warn'); return; }
     if (net < 1) { toast('Minimum 1 BCM!', 'warn'); return; }
-    R.bocrypto = (R.bocrypto || 0) - gas;
-    R.bcm = (R.bcm || 0) - net;
   } else if (symbol === 'BOCRYPTO') {
     gas = Math.ceil(amtRaw * 0.01);
     net = amtRaw - gas;
     if ((R.bocrypto || 0) < amtRaw) { toast('Nema dovoljno BoCrypto!', 'warn'); return; }
     if (amtRaw < 1000 || net <= 0) { toast('Minimum 1,000 BoCrypto ili je iznos previše nizak!', 'warn'); return; }
-    R.bocrypto = (R.bocrypto || 0) - amtRaw;
   } else if (symbol === 'BPW') {
     gas = Math.ceil(amtRaw * 0.01);
     net = amtRaw - gas;
     if ((R.spCard || 0) < amtRaw) { toast('Nema dovoljno BPW!', 'warn'); return; }
     if (amtRaw < 1e7 || net <= 0) { toast('Minimum 0.1 BPW ili je iznos previše nizak!', 'warn'); return; }
-    R.spCard = (R.spCard || 0) - amtRaw;
   }
 
   const uid = _getSaveId ? _getSaveId() : (window._hiveUser ? window._hiveUser : window._supaSession?.user?.id);
@@ -1000,10 +996,6 @@ async function submitWithdraw(symbol) {
   });
 
   if (error) {
-    // Vrati resurse ako insert falio
-    if (symbol === 'BCM') { R.bocrypto += 1000; R.bcm += net; }
-    else if (symbol === 'BOCRYPTO') R.bocrypto += amtRaw;
-    else if (symbol === 'BPW') R.spCard += amtRaw;
     toast('Greška pri slanju zahteva: ' + error.message, 'err');
     return;
   }
