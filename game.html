@@ -721,12 +721,8 @@ async function openHiveWalletModal() {
     const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)';
     const labelStyle = 'font-size:0.85rem;color:#6a90b8;font-family:"Share Tech Mono",monospace';
     const valStyle = 'font-size:1rem;font-family:"Orbitron",monospace;color:white';
-    const depBtn = (sym) => isPremium
-      ? `<button onclick="walletDeposit('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`
-      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
-    const witBtn = (sym) => isPremium
-      ? `<button onclick="walletWithdraw('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`
-      : `<span style="color:#444;font-size:0.8rem">🔒</span>`;
+    const depBtn = (sym) => `<button onclick="walletDeposit('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:pointer">⬇ DEP</button>`;
+    const witBtn = (sym) => `<button onclick="walletWithdraw('${sym}')" style="font-size:0.65rem;padding:5px 14px;background:rgba(255,100,0,0.1);border:1px solid rgba(255,100,0,0.3);color:#ff6600;border-radius:4px;cursor:pointer">⬆ WIT</button>`;
 
     modal.innerHTML = `
       <div style="background:linear-gradient(160deg,#050f1e,#0a0018);border:1px solid rgba(255,204,0,0.2);border-radius:14px;
@@ -952,8 +948,8 @@ function updateWitPreview(symbol) {
        <div>Dobijaš: <strong style="color:#00ff88">${netLabel}</strong></div>
        <div style="font-size:0.6rem;color:#6a90b8;margin-top:4px">⏱ Obrada: 24-48h · Zahtev je vidljiv u admin panelu</div>`
     : `<div style="color:#ff3355">⚠ ${errMsg}</div>`;
-  document.getElementById('withdrawModal').querySelector('button:last-child').disabled = !valid;
-  document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.4';
+  document.getElementById('withdrawModal').querySelector('button:last-child').disabled = false;
+  document.getElementById('withdrawModal').querySelector('button:last-child').style.opacity = valid ? '1' : '0.75';
 }
 
 async function submitWithdraw(symbol) {
@@ -972,19 +968,21 @@ async function submitWithdraw(symbol) {
 
   if (symbol === 'BCM') {
     gas = 1000; net = Math.floor(amtRaw);
-    if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas!', 'warn'); return; }
-    if (net < 1) return;
+    if ((R.bocrypto || 0) < gas) { toast('Nema dovoljno BoCrypto za gas! (treba 1,000)', 'warn'); return; }
+    if (net < 1) { toast('Minimum 1 BCM!', 'warn'); return; }
     R.bocrypto = (R.bocrypto || 0) - gas;
     R.bcm = (R.bcm || 0) - net;
   } else if (symbol === 'BOCRYPTO') {
     gas = Math.ceil(amtRaw * 0.01);
     net = amtRaw - gas;
     if ((R.bocrypto || 0) < amtRaw) { toast('Nema dovoljno BoCrypto!', 'warn'); return; }
+    if (amtRaw < 1000 || net <= 0) { toast('Minimum 1,000 BoCrypto ili je iznos previše nizak!', 'warn'); return; }
     R.bocrypto = (R.bocrypto || 0) - amtRaw;
   } else if (symbol === 'BPW') {
     gas = Math.ceil(amtRaw * 0.01);
     net = amtRaw - gas;
     if ((R.spCard || 0) < amtRaw) { toast('Nema dovoljno BPW!', 'warn'); return; }
+    if (amtRaw < 1e7 || net <= 0) { toast('Minimum 0.1 BPW ili je iznos previše nizak!', 'warn'); return; }
     R.spCard = (R.spCard || 0) - amtRaw;
   }
 
@@ -1112,6 +1110,7 @@ async function attemptDepositVerify(fnUrl, username, symbol, txid, attempt, toke
 function walletDeposit(symbol) {
   if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
   if (!window._hiveUser) { alert('Prijavi se sa HIVE nalogom!'); return; }
+  if (!window._playerPremium) { if (typeof toast === 'function') toast('Potreban je Premium za deposit!', 'warn'); return; }
   const cfg = { BCM: { key:'bcm' }, BOCRYPTO: { key:'bocrypto' }, BPW: { key:'spCard' } }[symbol];
   if (!cfg) return;
   const amtStr = prompt('Koliko ' + symbol + ' da depositiraš u igru?', '1');
