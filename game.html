@@ -1017,6 +1017,78 @@ async function submitWithdraw(symbol) {
   toast('✅ Withdraw zahtev poslat! Obrada 24-48h.', 'ok');
 }
 
+// ── SERVER je izvor istine za tokene — preuzmi autoritativan saldo iz player_resources ──
+async function refreshPlayerTokens() {
+  if (!window._hiveUser || typeof _sb === 'undefined') return false;
+  try {
+    const { data } = await _sb
+      .from('player_resources')
+      .select('bcm, bocrypto, spcard, keys_cmd, keys_inst')
+      .eq('player_id', window._hiveUser)
+      .maybeSingle();
+    if (data) {
+      R.bcm          = data.bcm        || 0;
+      R.bocrypto     = data.bocrypto    || 0;
+      R.spCard       = data.spcard      || 0;
+      R.keys         = Math.floor(data.keys_cmd) || 0;
+      R.instanceKeys = Math.floor(data.keys_inst) || 0;
+      return true;
+    }
+  } catch(e) { console.error('refreshPlayerTokens error:', e); }
+  return false;
+}
+
+// ── Verifikacija depozita sa retry-em (Hive-Engine indeksira sa malim zakašnjenjem) ──
+async function attemptDepositVerify(fnUrl, username, symbol, txid, attempt) {
+  const MAX_ATTEMPTS = 6;
+  const applySuccess = async (msg) => {
+    // Server je već kreditirao player_resources — samo preuzmi saldo (bez duplog dodavanja)
+    await refreshPlayerTokens();
+    if (typeof updateResUI === 'function') updateResUI();
+    if (typeof saveGame === 'function') saveGame();
+    if (typeof toast === 'function') toast(msg, 'ok');
+    if (typeof refreshHiveWallet === 'function') refreshHiveWallet();
+  };
+
+  try {
+    const res = await fetch(fnUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
+      body: JSON.stringify({ username, symbol, txid })
+    });
+    const data = await res.json();
+
+    if (data && data.success) {
+      await applySuccess('✅ Deposit ' + symbol + ' verifikovan i dodan u igru!');
+      return;
+    }
+
+    const msg = data && data.error ? data.error : 'Greška pri verifikaciji';
+
+    // 409 = transakcija je već obrađena (npr. izgubljena prva potvrda).
+    // Server je tada već kreditirao balans — dovoljno je osvježiti saldo.
+    if (data && data.error && /već obra/i.test(data.error)) {
+      await applySuccess('✅ Deposit već obrađen — saldo osvježen!');
+      return;
+    }
+
+    // Hive-Engine se još nije sinhronizovao — pokušaj ponovo za par sekundi
+    if (/nije prona/i.test(msg) && attempt < MAX_ATTEMPTS) {
+      if (typeof toast === 'function') toast('⏳ Hive-Engine još obrađuje transakciju (' + attempt + '/' + MAX_ATTEMPTS + ')...', 'info');
+      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1), 5000);
+      return;
+    }
+
+    alert('⚠️ Depozit NIJE kreditiran: ' + msg + (txid ? '\nTxID: ' + txid : ''));
+  } catch(e) {
+    if (attempt < MAX_ATTEMPTS) {
+      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1), 5000);
+      return;
+    }
+    alert('⚠️ Greška pri verifikaciji. Depozit NIJE kreditiran.\nTxID: ' + (txid || 'nema') + '\nKontaktiraj admina ako je token stigao.');
+  }
+}
+
 function walletDeposit(symbol) {
   if (!window.hive_keychain) { alert('HIVE Keychain nije instaliran!'); return; }
   if (!window._hiveUser) { alert('Prijavi se sa HIVE nalogom!'); return; }
@@ -1030,7 +1102,7 @@ function walletDeposit(symbol) {
   window.hive_keychain.requestSendToken(
     window._hiveUser, 'bokica80', amtFormatted,
     'HIVEGALAXY_deposit_' + symbol + '_' + window._hiveUser, symbol,
-    async function(resp) {
+    function(resp) {
       if (!resp.success) {
         alert('Transakcija odbijena: ' + (resp.message || 'Greška'));
         return;
@@ -1040,26 +1112,10 @@ function walletDeposit(symbol) {
       else if (resp.result) txid = resp.result.trx_id || resp.result.id || resp.result.tx_id || '';
       if (!txid) txid = resp.trx_id || '';
       if (typeof toast === 'function') toast('⏳ Potvrđujem transakciju na blockchainu...', 'info');
-      try {
-        const fnUrl = 'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/deposit-verify';
-        const res = await fetch(fnUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'apikey': window._supaAnonKey || '' },
-          body: JSON.stringify({ username: window._hiveUser, symbol, txid })
-        });
-        const data = await res.json();
-        if (data && data.success) {
-          R[cfg.key] = (R[cfg.key] || 0) + data.amount;
-          if (typeof updateResUI === 'function') updateResUI();
-          if (typeof saveGame === 'function') saveGame();
-          if (typeof toast === 'function') toast('✅ Deposit ' + symbol + ' verifikovan i dodan u igru!', 'ok');
-          refreshHiveWallet();
-        } else {
-          alert('⚠️ Depozit NIJE kreditiran: ' + (data && data.error ? data.error : 'Greška pri verifikaciji') + (txid ? '\nTxID: ' + txid : ''));
-        }
-      } catch(e) {
-        alert('⚠️ Greška pri verifikaciji. Depozit NIJE kreditiran.\nTxID: ' + (txid || 'nema') + '\nKontaktiraj admina ako je token stigao.');
-      }
+      attemptDepositVerify(
+        'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/deposit-verify',
+        window._hiveUser, symbol, txid, 1
+      );
     }
   );
 }

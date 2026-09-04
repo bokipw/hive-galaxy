@@ -61,20 +61,30 @@ Deno.serve(async (req: Request) => {
       return err('Memo transakcije nije ispravan za depozit', 403);
     }
 
-    // ── 3) Zapiši depozit (kompletiran) — UNIQUE(tx_id) štiti od duplog kreditiranja ──
+    // ── 3) ATOMIČNO zapiši depozit + kredituj player_resources ──
+    // credit_deposit() radi u jednoj SQL transakciji:
+    //   insert deposits (UNIQUE(tx_id) štiti od duplog kreditiranja)
+    //   + player_resources.bcm/bocrypto/spcard += iznos
+    //   + transactions (audit)
+    // Server je sada jedini izvor istine — kredit preživi i ako klijent
+    // nikad ne savlada stanje (mreža, zatvoren tab, blokiran cloud save).
     const baseAmount = symbol === 'BOCRYPTO' ? Math.round(qty * 1000) / 1000 : Math.floor(qty * cfg.mult);
-    const { error: insErr } = await supa.from('deposits').insert({
-      player_id: username,
-      token: symbol,
-      amount: baseAmount,
-      tx_id: txid,
-      status: 'completed',
-      memo,
-      created_at: new Date().toISOString(),
+    const { data: credit, error: creditErr } = await supa.rpc('credit_deposit', {
+      p_player_id: username,
+      p_token: symbol,
+      p_amount: baseAmount,
+      p_tx_id: txid,
+      p_memo: memo,
     });
-    if (insErr) return err('Greška pri upisu depozita: ' + insErr.message, 500);
+    if (creditErr || !credit || !credit.success) {
+      const code = credit?.code;
+      if (code === 'ALREADY_PROCESSED' || (creditErr && /duplicate/.test(creditErr.message))) {
+        return err('Transakcija je već obrađena', 409);
+      }
+      return err('Greška pri upisu depozita: ' + (creditErr?.message || credit?.error || 'nepoznata'), 500);
+    }
 
-    return new Response(JSON.stringify({ success: true, symbol, amount: baseAmount }), {
+    return new Response(JSON.stringify({ success: true, symbol, amount: credit.amount ?? baseAmount }), {
       headers: { ...corsHeaders(), 'Content-Type': 'application/json' },
     });
   } catch (e) {
