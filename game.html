@@ -1039,14 +1039,34 @@ async function refreshPlayerTokens() {
 }
 
 // ── Verifikacija depozita sa retry-em (Hive-Engine indeksira sa malim zakašnjenjem) ──
-async function attemptDepositVerify(fnUrl, username, symbol, txid, attempt) {
+// Hibridni tok:
+//  - Nova deposit-verify (nakon migracije) kredituje player_resources na serveru
+//    → refresh salda to pokaže, ništa se ne dodaje lokalno (nema duplog kredita).
+//  - Stara funkcija (prije redeploya) NIJE kreditirala server → detektujemo da
+//    saldo nije porastao za očekivani iznos i dodajemo lokalno + saveGame.
+async function attemptDepositVerify(fnUrl, username, symbol, txid, attempt, tokenAmt, preBalance) {
   const MAX_ATTEMPTS = 6;
-  const applySuccess = async (msg) => {
-    // Server je već kreditirao player_resources — samo preuzmi saldo (bez duplog dodavanja)
-    await refreshPlayerTokens();
+  const rKey = { BCM:'bcm', BOCRYPTO:'bocrypto', BPW:'spCard' }[symbol] || 'bcm';
+  const calcExpected = (dataAmt) => {
+    if (typeof dataAmt === 'number' && dataAmt > 0) return dataAmt;
+    if (symbol === 'BPW') return Math.round((tokenAmt || 0) * 100000000);
+    if (symbol === 'BOCRYPTO') return Math.round((tokenAmt || 0) * 1000) / 1000;
+    return Math.floor(tokenAmt || 0);
+  };
+  const applySuccess = async (msg, dataAmt) => {
+    const expected = calcExpected(dataAmt);
+    const before = preBalance || 0;
+    const refreshed = await refreshPlayerTokens();
+    const current = R[rKey] || 0;
+    let localAdded = false;
+    // Server nije odrazio kredit (stara funkcija) → lokalna nadoknada + save
+    if (refreshed && expected > 0 && current < before + expected - 0.001) {
+      R[rKey] = current + expected;
+      localAdded = true;
+    }
     if (typeof updateResUI === 'function') updateResUI();
     if (typeof saveGame === 'function') saveGame();
-    if (typeof toast === 'function') toast(msg, 'ok');
+    if (typeof toast === 'function') toast(msg + (localAdded ? ' (balans dopunjen lokalno)' : ''), 'ok');
     if (typeof refreshHiveWallet === 'function') refreshHiveWallet();
   };
 
@@ -1059,30 +1079,30 @@ async function attemptDepositVerify(fnUrl, username, symbol, txid, attempt) {
     const data = await res.json();
 
     if (data && data.success) {
-      await applySuccess('✅ Deposit ' + symbol + ' verifikovan i dodan u igru!');
+      await applySuccess('✅ Deposit ' + symbol + ' verifikovan i dodan u igru!', data.amount);
       return;
     }
 
     const msg = data && data.error ? data.error : 'Greška pri verifikaciji';
 
     // 409 = transakcija je već obrađena (npr. izgubljena prva potvrda).
-    // Server je tada već kreditirao balans — dovoljno je osvježiti saldo.
+    // Server je tada obično već kreditirao balans — osvježimo saldo (fallback ga dopunjava ako nije).
     if (data && data.error && /već obra/i.test(data.error)) {
-      await applySuccess('✅ Deposit već obrađen — saldo osvježen!');
+      await applySuccess('✅ Deposit već obrađen — saldo osvježen!', undefined);
       return;
     }
 
     // Hive-Engine se još nije sinhronizovao — pokušaj ponovo za par sekundi
     if (/nije prona/i.test(msg) && attempt < MAX_ATTEMPTS) {
       if (typeof toast === 'function') toast('⏳ Hive-Engine još obrađuje transakciju (' + attempt + '/' + MAX_ATTEMPTS + ')...', 'info');
-      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1), 5000);
+      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1, tokenAmt, preBalance), 5000);
       return;
     }
 
     alert('⚠️ Depozit NIJE kreditiran: ' + msg + (txid ? '\nTxID: ' + txid : ''));
   } catch(e) {
     if (attempt < MAX_ATTEMPTS) {
-      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1), 5000);
+      setTimeout(() => attemptDepositVerify(fnUrl, username, symbol, txid, attempt + 1, tokenAmt, preBalance), 5000);
       return;
     }
     alert('⚠️ Greška pri verifikaciji. Depozit NIJE kreditiran.\nTxID: ' + (txid || 'nema') + '\nKontaktiraj admina ako je token stigao.');
@@ -1098,6 +1118,7 @@ function walletDeposit(symbol) {
   if (!amtStr) return;
   const amt = parseFloat(amtStr);
   if (isNaN(amt) || amt <= 0) return;
+  const preBalance = R[cfg.key] || 0;
   const amtFormatted = symbol === 'BPW' ? amt.toFixed(8) : amt.toFixed(3);
   window.hive_keychain.requestSendToken(
     window._hiveUser, 'bokica80', amtFormatted,
@@ -1114,7 +1135,7 @@ function walletDeposit(symbol) {
       if (typeof toast === 'function') toast('⏳ Potvrđujem transakciju na blockchainu...', 'info');
       attemptDepositVerify(
         'https://exmbmwukqssvgmhysamo.supabase.co/functions/v1/deposit-verify',
-        window._hiveUser, symbol, txid, 1
+        window._hiveUser, symbol, txid, 1, amt, preBalance
       );
     }
   );
